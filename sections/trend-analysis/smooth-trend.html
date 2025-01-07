@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>16&nbsp; Smooth trends – The openair book</title>
@@ -89,10 +89,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -145,7 +145,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -465,7 +465,7 @@ div.csl-indent {
 <li><a href="#sec-SmoothTrendInfo" id="toc-sec-SmoothTrendInfo" class="nav-link active" data-scroll-target="#sec-SmoothTrendInfo"><span class="header-section-number">16.1</span> Background</a></li>
   <li><a href="#examples-of-trend-analysis" id="toc-examples-of-trend-analysis" class="nav-link" data-scroll-target="#examples-of-trend-analysis"><span class="header-section-number">16.2</span> Examples of trend analysis</a></li>
   <li><a href="#seasonal-averages" id="toc-seasonal-averages" class="nav-link" data-scroll-target="#seasonal-averages"><span class="header-section-number">16.3</span> Seasonal averages</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/smooth-trend.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/smooth-trend.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/smooth-trend.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Smooth trends</span></a></li></ol></nav><div class="quarto-title">
@@ -501,16 +501,16 @@ Carslaw, D.C., Beevers, S.D., Tate, J.E., 2007. Modelling and assessing trends i
 <p>We apply the function to concentrations of O<sub>3</sub> and NO<sub>2</sub> using the code below. The first plot shows the smooth trend in raw O<sub>3</sub> concentrations, which shows a very clear seasonal cycle. By removing the seasonal cycle of O<sub>3</sub>, a better indication of the trend is given, shown in the second plot. Removing the seasonal cycle is more effective for pollutants (or locations) where the seasonal cycle is stronger e.g.&nbsp;for ozone and background sites. <a href="#fig-smoothTrendComp" class="quarto-xref">Figure&nbsp;<span>16.1</span></a> shows the results of the simulations for NO<sub>2</sub> without the seasonal cycle removed. It is clear from this plot that there is little evidence of a seasonal cycle. The principal advantage of the smoothing approach compared with the Theil-Sen method is also clearly shown in this plot. Concentrations of NO<sub>2</sub> first decrease, then increase strongly. The trend is therefore not monotonic, violating the Theil-Sen assumptions. Finally, the last plot shows the effects of first deseasonalising the data: in this case with little effect.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load the package</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
 <span>            main <span class="op">=</span> <span class="st">"monthly mean o3"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
 <span>            main <span class="op">=</span> <span class="st">"monthly mean deseasonalised o3"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, simulate <span class="op">=</span> <span class="cn">TRUE</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, simulate <span class="op">=</span> <span class="cn">TRUE</span>, ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
 <span>            main <span class="op">=</span> <span class="st">"monthly mean no2 (bootstrap uncertainties)"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, simulate <span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, simulate <span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>            ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
 <span>            main <span class="op">=</span> <span class="st">"monthly mean deseasonalised no2 (bootstrap uncertainties)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-smoothTrendComp" class="quarto-layout-panel">
@@ -566,7 +566,7 @@ Figure&nbsp;16.1: Examples of the <code>smoothTrend</code> function applied to M
 </div>
 <p>The <code>smoothTrend</code> function share many of the functionalities of the <code>TheilSen</code> function. <a href="#fig-smoothwd" class="quarto-xref">Figure&nbsp;<span>16.2</span></a> shows the result of applying this function to O<sub>3</sub> concentrations. The code that produced <a href="#fig-smoothwd" class="quarto-xref">Figure&nbsp;<span>16.2</span></a> was:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>             type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-smoothwd" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -581,7 +581,7 @@ Figure&nbsp;16.2: Trends in O<sub>3</sub> using the <code>smoothTrend</code> fun
 </div>
 <p>The <code>smoothTrend</code> function can easily be used to gain a large amount of information on trends easily. For example, how do trends in NO<sub>2</sub>, O<sub>3</sub> and PM<sub>10</sub> vary by season and wind sector. There are 8 wind sectors and four seasons i.e.&nbsp;32 plots. In <a href="#fig-smoothwdSeason" class="quarto-xref">Figure&nbsp;<span>16.3</span></a> all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2"</span>, <span class="st">"pm10"</span>, <span class="st">"o3"</span><span class="op">)</span>, </span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2"</span>, <span class="st">"pm10"</span>, <span class="st">"o3"</span><span class="op">)</span>, </span>
 <span>            type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wd"</span>, <span class="st">"season"</span><span class="op">)</span>,</span>
 <span>            date.breaks <span class="op">=</span> <span class="fl">3</span>, lty <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -599,10 +599,10 @@ Figure&nbsp;16.3: The <code>smoothTrend</code> function applied to three polluta
 <span class="header-section-number">16.3</span> Seasonal averages</h2>
 <p>If the interest is in considering seasonal trends, it makes sense to set the averaging time to ‘season’ and also show each season in a separate panel. In <a href="#fig-smoothTrendSeason" class="quarto-xref">Figure&nbsp;<span>16.4</span></a> some data is imported for O<sub>3</sub> from Lullington Heath on the south coast of England. This plot shows there is strongest evidence for an increase in O<sub>3</sub> concentrations during springtime from about 2012 onwards. A probable reason for this increase is a general reduction in NO<sub>x</sub> concentrations.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"lh"</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"lh"</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">lh</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/smoothTrend.html">smoothTrend</a></span><span class="op">(</span><span class="va">lh</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>            avg.time <span class="op">=</span> <span class="st">"season"</span>,</span>
 <span>            type <span class="op">=</span> <span class="st">"season"</span>,</span>
 <span>            date.breaks <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -702,8 +702,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -712,7 +710,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -819,7 +817,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1056,7 +1053,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/smooth-trend.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/smooth-trend.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

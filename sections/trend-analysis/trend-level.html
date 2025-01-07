@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>18&nbsp; Trend heat maps – The openair book</title>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -150,7 +150,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -469,7 +469,7 @@ window.Quarto = {
   <ul>
 <li><a href="#another-way-of-representing-trends" id="toc-another-way-of-representing-trends" class="nav-link active" data-scroll-target="#another-way-of-representing-trends"><span class="header-section-number">18.1</span> Another way of representing trends</a></li>
   <li><a href="#sec-TrendLevelEx" id="toc-sec-TrendLevelEx" class="nav-link" data-scroll-target="#sec-TrendLevelEx"><span class="header-section-number">18.2</span> Examples</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/trend-level.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/trend-level.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/trend-level.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></a></li></ol></nav><div class="quarto-title">
@@ -505,7 +505,7 @@ window.Quarto = {
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-trendLevel1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevel1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -518,7 +518,7 @@ Figure&nbsp;18.1: Example output from <code>trendLevel</code>.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
 <span>           border <span class="op">=</span> <span class="st">"white"</span>, </span>
 <span>           cols <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -538,7 +538,7 @@ Figure&nbsp;18.2: <code>trendLevel</code> output with wind direction as <code>y<
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mydata</span>, ratio <span class="op">=</span>  <span class="va">so2</span> <span class="op">/</span> <span class="va">nox</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## condition by mydata$ratio</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, x <span class="op">=</span> <span class="st">"year"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, x <span class="op">=</span> <span class="st">"year"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
 <span>           type <span class="op">=</span> <span class="st">"ratio"</span>,</span>
 <span>           cols <span class="op">=</span> <span class="st">"inferno"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -555,17 +555,17 @@ Figure&nbsp;18.3: <code>trendLevel</code> output with SO<sub>2</sub> : NO<sub>x<
 <p>The plot can be used in much more flexible ways. Here are some examples (not plotted):</p>
 <p>A plot of mean O<sub>3</sub> concentration shown by season and by daylight/nighttime hours.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"season"</span>, y <span class="op">=</span> <span class="st">"daylight"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"season"</span>, y <span class="op">=</span> <span class="st">"daylight"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or by season and hour of the day:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>    <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"season"</span>, y <span class="op">=</span> <span class="st">"hour"</span>, </span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>    <span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"season"</span>, y <span class="op">=</span> <span class="st">"hour"</span>, </span>
 <span>               pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>               cols <span class="op">=</span> <span class="st">"increment"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How about NO<sub>x</sub> versus NO<sub>2</sub> coloured by the concentration of O<sub>3</sub>? <code>scatterPlot</code> could also be used to produce such a plot. However, one interesting difference with using <code>trendLevel</code> is that the data are split into quantiles where equal numbers of data exist in each interval. This approach can make it a bit easier to see the underlying relationship between variables. A scatter plot may have too much data to be clear and also outliers (or regions with relatively few data) that make it harder to see what is going on. The plot generated by the command below makes it a bit easier to see that it is the higher quantiles of NO<sub>2</sub> that are associated with higher O<sub>3</sub> concentration (as well as low NO<sub>x</sub> and NO<sub>2</sub> concentrations).</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>           border <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>           n.levels <span class="op">=</span> <span class="fl">30</span>, statistic <span class="op">=</span> <span class="st">"max"</span>, </span>
 <span>           limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -582,7 +582,7 @@ Figure&nbsp;18.4: <code>trendLevel</code> showing NO<sub>x</sub> against NO<sub>
 </div>
 <p>The plot can also be shown by wind direction sector, this time showing how O<sub>3</sub> varies by weekday, wind direction sector and NO<sub>x</sub> quantile.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"weekday"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"weekday"</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>           border <span class="op">=</span> <span class="st">"white"</span>, n.levels <span class="op">=</span> <span class="fl">10</span>, statistic <span class="op">=</span> <span class="st">"max"</span>,</span>
 <span>           limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -593,7 +593,7 @@ Figure&nbsp;18.4: <code>trendLevel</code> showing NO<sub>x</sub> against NO<sub>
 <span><span class="va">percentile</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, probs <span class="op">=</span> <span class="fl">0.95</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## apply to present plot</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, x <span class="op">=</span> <span class="st">"year"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, x <span class="op">=</span> <span class="st">"year"</span>, y <span class="op">=</span> <span class="st">"wd"</span>, </span>
 <span>           type <span class="op">=</span> <span class="st">"ratio"</span>,</span>
 <span>           cols <span class="op">=</span> <span class="st">"viridis"</span>,</span>
 <span>           statistic <span class="op">=</span> <span class="va">percentile</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -611,7 +611,7 @@ Figure&nbsp;18.5: <code>trendLevel</code> using locally defined <code>statistic<
 <p>This type of flexibility really opens up the potential of the function as a screening tool for the early stages of data analysis. Increased control of <code>x</code>, <code>y</code>, <code>type</code> and <code>statistic</code> allow you to very quick explore your data and develop an understanding of how different parameters interact. Patterns in <code>trendLevel</code> plots can also help to direct your <span class="pkg">openair</span> analysis. For example, possible trends in data conditioned by year would suggest that functions like <code>smoothTrend</code> or <code>TheilSen</code> could provide further insight. Likewise, <code>windRose</code> or <code>polarPlot</code> could be useful next steps if wind speed and direct conditioning produces interesting features. However, perhaps most interestingly, novel conditioning or the incorporation of novel parameters in this type of highly flexible function provides a means of developing new data visualisation and analysis methods.</p>
 <p><code>trendLevel</code> can also be used with user defined discrete colour scales as shown in <a href="#fig-trendLevelDiscete" class="quarto-xref">Figure&nbsp;<span>18.6</span></a>. In this case the default <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are chosen (week and hour) split by <code>type</code> (year).</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>           x <span class="op">=</span> <span class="st">"week"</span>,</span>
 <span>           border <span class="op">=</span> <span class="st">"white"</span>,  statistic <span class="op">=</span> <span class="st">"max"</span>,</span>
 <span>           breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">500</span><span class="op">)</span>,</span>
@@ -713,8 +713,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -723,7 +721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -830,7 +828,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1067,7 +1064,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/trend-level.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/trend-level.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

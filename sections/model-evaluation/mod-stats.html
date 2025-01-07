@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>19&nbsp; Model evaluation – The openair book</title>
@@ -89,10 +89,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -167,7 +167,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -486,7 +486,7 @@ window.Quarto = {
   <ul>
 <li><a href="#sec-ModBack" id="toc-sec-ModBack" class="nav-link active" data-scroll-target="#sec-ModBack"><span class="header-section-number">19.1</span> Background</a></li>
   <li><a href="#ModEx" id="toc-ModEx" class="nav-link" data-scroll-target="#ModEx"><span class="header-section-number">19.2</span> Example of use</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/model-evaluation/mod-stats.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/model-evaluation/mod-stats.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></a></li></ol></nav><div class="quarto-title">
@@ -606,7 +606,7 @@ IOA = \left\{
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load package</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>, obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>, obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 12
   model       n  FAC2      MB   MGE     NMB  NMGE  RMSE     r         P      COE
@@ -621,7 +621,7 @@ IOA = \left\{
 </div>
 <p>It is possible to rank the statistics based on the , which is a good general indicator of model performance.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>, obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span>, </span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>, obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span>, </span>
 <span>         rank.name <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 12
@@ -653,7 +653,7 @@ IOA = \left\{
 <p>There are columns representing the receptor location (<code>site</code>), the date, measured values (<code>o3</code>), model predictions (<code>mod</code>) and the model itself (<code>group</code>). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O<sub>3</sub> is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the <code>type</code> option is used to split the calculations by season and model. Finally, the statistics are grouped by the <span class="math inline">\(IOA\)</span> for each season. It is now very easy how model performance changes by season and which models perform best in each season.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">## don't display too many decimal places</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/modStats.html">modStats</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>, </span>
 <span>         obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>         type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"group"</span><span class="op">)</span>, rank <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -677,7 +677,7 @@ IOA = \left\{
 <p>Note that it is possible to read the results of the <code>modStats</code> function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.</p>
 <p>The <code>modStats</code> function is much more flexible than indicated above and can be used in lots of interesting ways. The <code>type</code> option in particular makes it possible to split the statistics in numerous ways. For example, to summarise the performance of models by site, model and day of the week:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modStats</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modStats</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>         type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"weekday"</span>, <span class="st">"group"</span><span class="op">)</span>, </span>
 <span>         rank <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -767,8 +767,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -777,7 +775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -884,7 +882,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1124,4 +1121,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/model-evaluation/mod-stats.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/model-evaluation/mod-stats.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

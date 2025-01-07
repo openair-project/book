@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>4&nbsp; Access meteorological data – The openair book</title>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -450,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#the-worldmet-package" id="toc-the-worldmet-package" class="nav-link active" data-scroll-target="#the-worldmet-package"><span class="header-section-number">4.1</span> The worldmet package</a></li>
   <li><a href="#sec-link-aq" id="toc-sec-link-aq" class="nav-link" data-scroll-target="#sec-link-aq"><span class="header-section-number">4.2</span> Linking with air quality data</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html">Data Access</a></li><li class="breadcrumb-item"><a href="../../sections/data-access/access-met-data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></a></li></ol></nav><div class="quarto-title">
@@ -483,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="the-worldmet-package" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="the-worldmet-package">
 <span class="header-section-number">4.1</span> The worldmet package</h2>
 <p>Most of the import functions described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a> return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that Ricardo runs to provide the data.</p>
-<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg">worldmet</span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/davidcarslaw/worldmet" class="uri">https://github.com/davidcarslaw/worldmet</a> and <a href="https://www.ncdc.noaa.gov/isd" class="uri">https://www.ncdc.noaa.gov/isd</a> for further information.</p>
+<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg">worldmet</span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/openair-project/worldmet" class="uri">https://github.com/openair-project/worldmet</a> and <a href="https://www.ncdc.noaa.gov/isd" class="uri">https://www.ncdc.noaa.gov/isd</a> for further information.</p>
 <p>Access to surface meteorological data is very useful in general but is especially useful when using <span class="pkg">openair</span> and functions such as <code>polarPlot</code>. To install the package, type:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"worldmet"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -497,11 +497,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/worldmet/reference/getMeta.html">getMeta</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/getMeta.html">getMeta</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-worldmet" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-d331147d2ae64d4d05aa" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-d331147d2ae64d4d05aa">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.302,53.421,52.85,53.533,54.233,54.05,52.283,53.248,53.017,52.783],[-6.451,-6.27,-6.9,-7.367,-6.5,-7.3,-6.483,-4.535,-8,-4.733],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>CASEMENT<\/b><br/><hr><b>Code:<\/b> 039670-99999<br/><b>Start:<\/b> 1987-02-01<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 10 km","<b>DUBLIN<\/b><br/><hr><b>Code:<\/b> 039690-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 13.6 km","<b>OAK PARK - CARLOW<\/b><br/><hr><b>Code:<\/b> 039610-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 64.1 km","<b>MULLINGAR<\/b><br/><hr><b>Code:<\/b> 039710-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 75.3 km","<b>GLENANNE NO2<\/b><br/><hr><b>Code:<\/b> 039230-99999<br/><b>Start:<\/b> 1985-02-07<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 104.6 km","<b>BALLYHAISE<\/b><br/><hr><b>Code:<\/b> 039790-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 106.3 km","<b>JOHNSTOWN CASTLE<\/b><br/><hr><b>Code:<\/b> 039560-99999<br/><b>Start:<\/b> 2007-08-06<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 113.8 km","<b>VALLEY<\/b><br/><hr><b>Code:<\/b> 033020-99999<br/><b>Start:<\/b> 1926-06-06<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 117.5 km","<b>GURTEEN<\/b><br/><hr><b>Code:<\/b> 039660-99999<br/><b>Start:<\/b> 1929-10-01<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 117.6 km","<b>ABERDARON<\/b><br/><hr><b>Code:<\/b> 034050-99999<br/><b>Start:<\/b> 1994-10-01<br/><b>End:<\/b> 2024-11-15<br/><b>Distance:<\/b> 119.5 km"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircles","args":[53.3,-6.3,200,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":20,"opacity":0.5,"fill":true,"fillColor":"red","fillOpacity":0.2},["Search location<br/>Lat = 53.302<br/>Lon = -6.451","Search location<br/>Lat = 53.421<br/>Lon = -6.27","Search location<br/>Lat = 52.85<br/>Lon = -6.9","Search location<br/>Lat = 53.533<br/>Lon = -7.367","Search location<br/>Lat = 54.233<br/>Lon = -6.5","Search location<br/>Lat = 54.05<br/>Lon = -7.3","Search location<br/>Lat = 52.283<br/>Lon = -6.483","Search location<br/>Lat = 53.248<br/>Lon = -4.535","Search location<br/>Lat = 53.017<br/>Lon = -8","Search location<br/>Lat = 52.783<br/>Lon = -4.733"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLayersControl","args":[["OpenStreetMap","Esri.WorldImagery"],[],{"collapsed":false,"autoZIndex":false,"position":"topright"}]}],"limits":{"lat":[52.283,54.233],"lng":[-8,-4.535]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-53334fbc732f37cdfb48" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-53334fbc732f37cdfb48">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.302,53.421,52.85,53.533,54.233,54.05,52.283,53.248,53.017,52.783],[-6.451,-6.27,-6.9,-7.367,-6.5,-7.3,-6.483,-4.535,-8,-4.733],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>CASEMENT<\/b><br/><hr><b>Code:<\/b> 039670-99999<br/><b>Start:<\/b> 1987-02-01<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 10 km","<b>DUBLIN<\/b><br/><hr><b>Code:<\/b> 039690-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 13.6 km","<b>OAK PARK - CARLOW<\/b><br/><hr><b>Code:<\/b> 039610-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 64.1 km","<b>MULLINGAR<\/b><br/><hr><b>Code:<\/b> 039710-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 75.3 km","<b>GLENANNE NO2<\/b><br/><hr><b>Code:<\/b> 039230-99999<br/><b>Start:<\/b> 1985-02-07<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 104.6 km","<b>BALLYHAISE<\/b><br/><hr><b>Code:<\/b> 039790-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 106.3 km","<b>JOHNSTOWN CASTLE<\/b><br/><hr><b>Code:<\/b> 039560-99999<br/><b>Start:<\/b> 2007-08-06<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 113.8 km","<b>VALLEY<\/b><br/><hr><b>Code:<\/b> 033020-99999<br/><b>Start:<\/b> 1926-06-06<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 117.5 km","<b>GURTEEN<\/b><br/><hr><b>Code:<\/b> 039660-99999<br/><b>Start:<\/b> 1929-10-01<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 117.6 km","<b>ABERDARON<\/b><br/><hr><b>Code:<\/b> 034050-99999<br/><b>Start:<\/b> 1994-10-01<br/><b>End:<\/b> 2024-12-31<br/><b>Distance:<\/b> 119.5 km"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircles","args":[53.3,-6.3,200,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":20,"opacity":0.5,"fill":true,"fillColor":"red","fillOpacity":0.2},["Search location<br/>Lat = 53.302<br/>Lon = -6.451","Search location<br/>Lat = 53.421<br/>Lon = -6.27","Search location<br/>Lat = 52.85<br/>Lon = -6.9","Search location<br/>Lat = 53.533<br/>Lon = -7.367","Search location<br/>Lat = 54.233<br/>Lon = -6.5","Search location<br/>Lat = 54.05<br/>Lon = -7.3","Search location<br/>Lat = 52.283<br/>Lon = -6.483","Search location<br/>Lat = 53.248<br/>Lon = -4.535","Search location<br/>Lat = 53.017<br/>Lon = -8","Search location<br/>Lat = 52.783<br/>Lon = -4.733"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLayersControl","args":[["OpenStreetMap","Esri.WorldImagery"],[],{"collapsed":false,"autoZIndex":false,"position":"topright"}]}],"limits":{"lat":[52.283,54.233],"lng":[-8,-4.535]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Map of returned area of interest. The user can interactively select a site of interest and find its code to import data.
@@ -510,11 +510,11 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 </div>
 <p>Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code i.e.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/worldmet/reference/getMeta.html">getMeta</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/getMeta.html">getMeta</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use the map that is produced to select a site of interest and import the data. For example, to import data for Dublin Airport and look at some of the data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/worldmet/reference/importNOAA.html">importNOAA</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"039690-99999"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/importNOAA.html">importNOAA</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"039690-99999"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># first few lines of data</span></span>
 <span><span class="va">dublin_met</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -541,7 +541,7 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 </div>
 <p>Plot a wind rose.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">dublin_met</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/windRose.html">windRose</a></span><span class="op">(</span><span class="va">dublin_met</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-dublin-rose" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dublin-rose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -559,7 +559,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some air quality data and check the variables that exist</span></span>
 <span></span>
-<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq_2019</span><span class="op">)</span> <span class="co"># ws, wd, air_temp already exist from WRF model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "source"   "site"     "code"     "date"     "co"       "nox"     
@@ -567,7 +567,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 [13] "ws"       "wd"       "air_temp"</code></pre>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some met data - default is London Heathrow</span></span>
-<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/worldmet/reference/importNOAA.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/importNOAA.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># merge the two data sets but not ws, wd, air_temp from aq data</span></span>
 <span><span class="va">aq_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span></span>
@@ -675,8 +675,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -685,7 +683,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -792,7 +790,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1029,7 +1026,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>26&nbsp; Utility functions – The openair book</title>
@@ -89,10 +89,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -145,7 +145,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -469,7 +469,7 @@ div.csl-indent {
   <li><a href="#sec-timeAverage" id="toc-sec-timeAverage" class="nav-link" data-scroll-target="#sec-timeAverage"><span class="header-section-number">26.5</span> Aggregating data by different time intervals</a></li>
   <li><a href="#sec-calcPercentile" id="toc-sec-calcPercentile" class="nav-link" data-scroll-target="#sec-calcPercentile"><span class="header-section-number">26.6</span> Calculating percentiles</a></li>
   <li><a href="#sec-corPlot" id="toc-sec-corPlot" class="nav-link" data-scroll-target="#sec-corPlot"><span class="header-section-number">26.7</span> Correlation matrices</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></a></li></ol></nav><div class="quarto-title">
@@ -503,7 +503,7 @@ div.csl-indent {
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select all of 1999</span></span>
-<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/1/1999"</span>, end <span class="op">=</span> <span class="st">"31/12/1999"</span><span class="op">)</span></span>
+<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/1/1999"</span>, end <span class="op">=</span> <span class="st">"31/12/1999"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data.1999</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
@@ -529,18 +529,18 @@ div.csl-indent {
 6 1999-12-31 23:00:00  3.24   200   181    37    NA    28  3.48  1.78    22</code></pre>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## easier way</span></span>
-<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span>
+<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## more complex use: select weekdays between the hours of 7 am to 7 pm</span></span>
-<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekday"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span></span>
+<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekday"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## select weekends between the hours of 7 am to 7 pm in winter (Dec, Jan, Feb)</span></span>
-<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekend"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span>,</span>
+<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekend"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span>,</span>
 <span>                           month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function can be used directly in other functions. For example, to make a polar plot using year 2000 data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-cutData" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="sec-cutData">
 <span class="header-section-number">26.2</span> Making intervals — cutData</h2>
@@ -548,7 +548,7 @@ div.csl-indent {
 <p>Note that all the date-based types e.g.&nbsp;month/year are derived from a column <code>date</code>. If a user already has a column with a name of one of the date-based types it will not be used.</p>
 <p>For example, to cut data into seasons:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
@@ -566,7 +566,7 @@ div.csl-indent {
 <p>This adds a new field <code>season</code> that is split into four seasons. There is an option <code>hemisphere</code> that can be used to use southern hemisphere seasons when set as <code>hemisphere = "southern"</code>.</p>
 <p>The <code>type</code> can also be another field in a data frame e.g.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
@@ -585,7 +585,7 @@ div.csl-indent {
 <p>This divides PM<sub>10</sub> concentrations into four <em>quantiles</em> — roughly equal numbers of PM<sub>10</sub> concentrations in four levels.</p>
 <p>Most of the time users do not have to call <code>cutData</code> directly because most functions have a <code>type</code> option that is used to call <code>cutData</code> directly e.g.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, it can be useful to call <code>cutData</code> <em>before</em> supplying the data to a function in a few cases. First, if one wants to set seasons to the southern hemisphere as above. Second, it is possible to override the division of a numeric variable into four quantiles by using the option <code>n.levels</code>. More details can be found in the <code>cutData</code> help file.</p>
 </section><section id="sec-selectRunning" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="sec-selectRunning">
@@ -598,7 +598,7 @@ div.csl-indent {
 </ul>
 <p>As an example we are going to consider O<sub>3</sub> concentrations at a semi-rural site in south-west London (Teddington). The data can be downloaded as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/importKCL.html">importKCL</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"td0"</span>, year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2009</span>, met <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importKCL.html">importKCL</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"td0"</span>, year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2009</span>, met <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## see how many rows there are</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ted</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -607,7 +607,7 @@ div.csl-indent {
 </div>
 <p>We are going to contrast two pollution roses of O<sub>3</sub> concentration. The first shows hours where the criterion is not met, and the second where it is met. The subset of hours is defined by O<sub>3</sub> concentrations above 90 ppb for periods of at least 8-hours i.e.&nbsp;what might be considered as ozone episode conditions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>                         threshold <span class="op">=</span> <span class="fl">90</span>, </span>
 <span>                         run.len <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -622,7 +622,7 @@ div.csl-indent {
 </div>
 <p>Now we are going to produce two pollution roses shown in <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>. Note, however that many other types of analysis could be carried out now the data have been partitioned.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>          type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-RunningRes" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -638,25 +638,25 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>The results are shown in <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>. The pollution rose for the “no” criterion (left plot of <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>) shows that the highest O<sub>3</sub> concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>) is very different. In this case there is a clear set of conditions where these criteria are met i.e.&nbsp;lengths of at least 8-hours where the O<sub>3</sub> concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e.&nbsp;corresponding to easterly flow from continental Europe where there has been time to the O<sub>3</sub> chemistry to take place.</p>
 <p>The code below shows (as an example), that the summer of 2006 had a high proportion of conditions where the criterion was met.</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeProp.html">timeProp</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeProp.html">timeProp</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>         proportion <span class="op">=</span> <span class="st">"criterion"</span>, </span>
 <span>         avg.time <span class="op">=</span> <span class="st">"month"</span>, </span>
 <span>         cols <span class="op">=</span> <span class="st">"viridis"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also useful to consider what controls the highest NO<sub>x</sub> concentrations at a central London roadside site. For example, the code below (not plotted) shows very strongly that the persistently highest NO<sub>x</sub> concentrations are dominated by south-westerly winds. As mentioned earlier, there are many other types of analysis that can be carried out now the data set identifies where the criterion is or is not met.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">episode</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, </span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">episode</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, </span>
 <span>                         threshold <span class="op">=</span> <span class="fl">500</span>, </span>
 <span>                         run.len <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">episode</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">episode</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-rollingMean" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="sec-rollingMean">
 <span class="header-section-number">26.4</span> Calculating rolling means</h2>
 <p>Some air pollution statistics such as for O<sub>3</sub> and particulate matter are expressed as rolling means and it is useful to be able to calculate these. It can also be useful to help smooth-out data for clearer plotting. The <code>rollingMean</code> function makes these calculations. One detail that can be important is that for some statistics a mean is only considered valid if there are a sufficient number of valid readings over the averaging period. Often there is a requirement for at least 75% data capture. For example, with an averaging period of 8 hours and a data capture threshold of 75%, at least 6 hours are required to calculate the mean.</p>
 <p>The function is called as follows; in this case to calculate 8-hour rolling mean concentrations of O<sub>3</sub>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, width <span class="op">=</span> <span class="fl">8</span>,</span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, width <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>                       new.name <span class="op">=</span> <span class="st">"rollingo3"</span>, data.thresh <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -673,7 +673,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 </div>
 <p>Note that calculating rolling means shortens the length of the data set. In the case of O<sub>3</sub>, no calculations are made for the last 7 hours.</p>
-<p>Type <code><a href="https://davidcarslaw.github.io/openair/reference/rollingMean.html">?rollingMean</a></code> into R for more details. Note that the function currently only works with a single site.</p>
+<p>Type <code><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">?rollingMean</a></code> into R for more details. Note that the function currently only works with a single site.</p>
 </section><section id="sec-timeAverage" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="sec-timeAverage">
 <span class="header-section-number">26.5</span> Aggregating data by different time intervals</h2>
 <p>Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:</p>
@@ -689,7 +689,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>All these issues are (hopefully) dealt with by the <code>timeAverage</code> function. The options are shown below, but as ever it is best to check the help that comes with the <span class="pkg">openair</span> package.</p>
 <p>To calculate daily means from hourly (or higher resolution) data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
 <span><span class="va">daily</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,731 × 11
@@ -711,7 +711,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>Monthly 95th percentile values:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>, </span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>, </span>
 <span>                       statistic <span class="op">=</span> <span class="st">"percentile"</span>,</span>
 <span>                       percentile <span class="op">=</span> <span class="fl">95</span><span class="op">)</span></span>
 <span><span class="va">monthly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -735,7 +735,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>2-week averages but only calculate if at least 75% of the data are available:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>, </span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>, </span>
 <span>                       data.thresh <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="va">twoweek</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -760,10 +760,10 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>First, retaining by site averages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some data for two sites</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2011</span><span class="op">:</span><span class="fl">2013</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2011</span><span class="op">:</span><span class="fl">2013</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># annual averages by site</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 17
   site       date                   co   nox   no2    no    o3   so2  pm10 pm2.5
@@ -781,7 +781,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>Retain site name and site code:</p>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># can also retain site code</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 18
   site       code  date                   co   nox   no2    no    o3   so2  pm10
@@ -798,7 +798,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>Average all data across sites (drops site and code):</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 16
   date                   co   nox   no2    no    o3   so2  pm10 pm2.5   v10
@@ -812,7 +812,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p><code>timeAverage</code> also works the other way in that it can be used to derive higher temporal resolution data e.g.&nbsp;hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The <code>timeAverage</code> function when used to ‘expand’ data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
 <span>                      avg.time <span class="op">=</span> <span class="st">"15 min"</span>, </span>
 <span>                      fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data15</span>, <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -849,7 +849,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p><code>calcPercentile</code> makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds — see <a href="#sec-timeAverage" class="quarto-xref"><span>Section 26.5</span></a> for more details.</p>
 <p>For example, to calculate the 25, 50, 75 and 95th percentiles of O<sub>3</sub> concentration by year:</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/calcPercentile.html">calcPercentile</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant  <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calcPercentile.html">calcPercentile</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant  <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>               percentile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>               avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -875,7 +875,7 @@ Sarkar, D., 2007. Lattice multivariate data visualization with <span>R</span>. S
 <p>With many variables it can be difficult to see relationships between variables i.e.&nbsp;which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if <code>cluster = TRUE</code>.)</p>
 <p>An example of the <code>corPlot</code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.2</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.2</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-corPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -889,14 +889,14 @@ Figure&nbsp;26.2: Example of a correlation matrix showing the relationships betw
 </div>
 <p>Note also that the <code>corPlot</code> accepts a <code>type</code> option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When there are a very large number of variables present, the <code>corPlot</code> is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## now it is possible to see the hydrocarbons that behave most</span></span>
 <span><span class="co">## similarly to one another</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -983,8 +983,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -993,7 +991,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1100,7 +1098,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1337,7 +1334,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

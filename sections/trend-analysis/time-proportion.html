@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>14&nbsp; Time proportion plots – The openair book</title>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -444,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#sec-timePropBack" id="toc-sec-timePropBack" class="nav-link active" data-scroll-target="#sec-timePropBack"><span class="header-section-number">14.1</span> Background</a></li>
   <li><a href="#sec-timePropEx" id="toc-sec-timePropEx" class="nav-link" data-scroll-target="#sec-timePropEx"><span class="header-section-number">14.2</span> Examples</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/time-proportion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/time-proportion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-proportion.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Time proportion plots</span></a></li></ol></nav><div class="quarto-title">
@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell page-columns page-full">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load the package</span></span>
 <span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeProp.html">timeProp</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeProp.html">timeProp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
 <span>         pollutant <span class="op">=</span> <span class="st">"so2"</span>, avg.time <span class="op">=</span> <span class="st">"3 day"</span>,</span>
 <span>         proportion <span class="op">=</span> <span class="st">"wd"</span>, </span>
 <span>         date.breaks <span class="op">=</span> <span class="fl">10</span>, key.position <span class="op">=</span> <span class="st">"top"</span>,</span>
@@ -497,7 +497,7 @@ Figure&nbsp;14.1: <code>timeProp</code> plot for SO<sub>2</sub> concentrations i
 <p>Note that <code>proportion</code> can be an existing categorical (i.e.&nbsp;factor or character) variable in a data frame. If a numeric variable is supplied, then it is typically cut into four quantile levels. So, for example, the plot below would show intervals of wind speed, which would help show the wind speed conditions that control high SO<sub>2</sub> concentration — and importantly, when they occur.</p>
 <p>An example of using <code>timeProp</code> with a continuous variable is shown in <a href="#fig-timePropws" class="quarto-xref">Figure&nbsp;<span>14.2</span></a>. In this case the wind speed values are split into 3 quantile levels. The number of quantiles used is determined by the option <code>n.levels</code>. This approach can be used for any numeric variables.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeProp.html">timeProp</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeProp.html">timeProp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
 <span>         pollutant <span class="op">=</span> <span class="st">"so2"</span>,</span>
 <span>         avg.time <span class="op">=</span> <span class="st">"3 day"</span>,</span>
 <span>         n.levels <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -600,8 +600,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -610,7 +608,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -717,7 +715,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -954,7 +951,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/trend-analysis/time-proportion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/trend-analysis/time-proportion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

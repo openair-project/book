@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>Appendix A — Annotating openair plots – The openair book</title>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#add-air-quality-bands-as-polygons" id="toc-add-air-quality-bands-as-polygons" class="nav-link" data-scroll-target="#add-air-quality-bands-as-polygons"><span class="header-section-number">A.7</span> Add air quality bands as polygons</a></li>
   <li><a href="#polar-plot-examples" id="toc-polar-plot-examples" class="nav-link" data-scroll-target="#polar-plot-examples"><span class="header-section-number">A.8</span> Polar plot examples</a></li>
   <li><a href="#using-grid-graphics-identify-locations-interactively" id="toc-using-grid-graphics-identify-locations-interactively" class="nav-link" data-scroll-target="#using-grid-graphics-identify-locations-interactively"><span class="header-section-number">A.9</span> Using grid graphics — identify locations interactively</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></a></li></ol></nav><div class="quarto-title">
@@ -500,7 +500,7 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://latticeextra.r-forge.r-project.org/">latticeExtra</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="st">"aug"</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="st">"aug"</span><span class="op">)</span>,</span>
 <span>         pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span>, <span class="st">"pm25"</span>, <span class="st">"pm10"</span>, <span class="st">"ws"</span><span class="op">)</span>,</span>
 <span>         y.relation <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -665,7 +665,7 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 </div>
 <p>Following on from the previous examples, some annotations have been added to the basic polar plot for SO<sub>2</sub> as shown in <a href="#fig-annonatePolar" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>. Note that in these plots (0, 0) is the middle of the plot and the radial distance will be determined by the wind speed — or whatever the radial variable is. This way of plotting arcs can also be applied to other functions that show directional data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">12</span>, <span class="st">"A"</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="st">"B"</span>, cex <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lsegments</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">11.5</span>, <span class="op">-</span><span class="fl">11.5</span>, lty <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
@@ -682,7 +682,7 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 <p>Given a a basic <code>timeVariation</code> plot, how could texts be added at any location — say in the middle monthly plot? One very useful function for this type of annotation that allows the user to interactively choose a location is the <code><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator()</a></code> function in the <code>grid</code> package. That function can be called with different coordinate systems — but the one we want defines the bottom-left corner as (0, 0) and the top right as (1, 1).</p>
 <p>First, make a <code>timeVariation</code> plot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s choose a location on the plot interactively using the mouse and selecting somewhere in the middle of the monthly plot.</p>
 <div class="cell">
@@ -785,8 +785,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -795,7 +793,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -902,7 +900,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1139,7 +1136,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

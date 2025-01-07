@@ -1,1 +1,1 @@
-Sitemap: https://bookdown.org/david_carslaw/openair/sitemap.xml
+Sitemap: https://openair-project.github.io/book/sitemap.xml

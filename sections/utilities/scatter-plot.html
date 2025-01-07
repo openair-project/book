@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.32">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>27&nbsp; Scatter plots – The openair book</title>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fb2157d75a233bbd51d4804bd13b65d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6f1668ce94382950e705e780c49fb9e5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c841c8f0a7e1fd8fb56bff28de91d1fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -150,7 +150,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/davidcarslaw/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -474,7 +474,7 @@ window.Quarto = {
 <li><a href="#sec-hexbin" id="toc-sec-hexbin" class="nav-link" data-scroll-target="#sec-hexbin"><span class="header-section-number">27.2.1</span> Hexaganol binning</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/scatter-plot.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></a></li></ol></nav><div class="quarto-title">
@@ -513,13 +513,13 @@ window.Quarto = {
 <p>The <code>scatterPlot</code> function isn’t really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other <span class="pkg">openair</span> functions. Nevertheless, along with the <code>timePlot</code> function they do form an important part of <span class="pkg">openair</span> because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.</p>
 </section><section id="sec-ScatterEx" class="level2" data-number="27.2"><h2 data-number="27.2" class="anchored" data-anchor-id="sec-ScatterEx">
 <span class="header-section-number">27.2</span> Examples</h2>
-<p>We provide a few examples of use and as usual, users are directed towards the help pages (type <code><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">?scatterPlot</a></code>) for more extensive examples.</p>
+<p>We provide a few examples of use and as usual, users are directed towards the help pages (type <code><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">?scatterPlot</a></code>) for more extensive examples.</p>
 <p>First we select a subset of data (2003) using the <span class="pkg">openair</span> <code>selectByDate</code> function and plot NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub></p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load the package</span></span>
 <span></span>
-<span><span class="va">data2003</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">data2003</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-scatterPlot1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -536,7 +536,7 @@ Figure&nbsp;27.1: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <span class="header-section-number">27.2.1</span> Hexaganol binning</h3>
 <p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), <code>trans = function(x) log(x)</code> and <code>inv = function(x) exp(x)</code>. For a square root transform use <code>trans = sqrt</code> and <code>inv =  function(x) x^2</code>. To not apply any transformation <code>trans = NULL</code> and <code>inv = NULL</code> should be used.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, method <span class="op">=</span> <span class="st">"hexbin"</span>, col<span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, method <span class="op">=</span> <span class="st">"hexbin"</span>, col<span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-scatterPlot2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -550,13 +550,13 @@ Figure&nbsp;27.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 </div>
 <p>Note that when <code>method = "hexbin"</code> there are various options that are useful e.g.&nbsp;a border around each bin and the number of bins. For example, to place a grey border around each bin and set the bin size try:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, </span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, </span>
 <span>            method <span class="op">=</span> <span class="st">"hexbin"</span>, col <span class="op">=</span> <span class="st">"turbo"</span>,</span>
 <span>            border <span class="op">=</span> <span class="st">"grey"</span>, xbin <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in <code>scatterPlot</code> with the <code>method =   "density"</code> option. Such a plot is shown in <a href="#fig-scatterPlotDens" class="quarto-xref">Figure&nbsp;<span>27.3</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
 <span>            x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>            method <span class="op">=</span> <span class="st">"density"</span>, </span>
 <span>            cols <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -573,7 +573,7 @@ Figure&nbsp;27.3: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 </div>
 <p>Sometimes it is useful to consider how the relationship between two variables varies by levels of a third. In <span class="pkg">openair</span> this approach is possible by setting the option <code>type</code>. When <code>type</code> is another numeric variables, four plots are produced for different quantiles of that variable. We illustrate this point by considering how the relationship between NO<sub>x</sub> and NO<sub>2</sub> varies with different levels of O<sub>3</sub>. We also take the opportunity to not plot the smooth line, but plot a linear fit instead and force the layout to be a 2 by 2 grid.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, </span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, </span>
 <span>            type <span class="op">=</span> <span class="st">"o3"</span>, smooth <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>            linear <span class="op">=</span> <span class="cn">TRUE</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -594,7 +594,7 @@ Figure&nbsp;27.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <span></span>
 <span><span class="co"># select the variables of interest</span></span>
 <span><span class="va">subdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">date</span>, <span class="va">nox</span>, <span class="va">pm10</span>, <span class="va">pm25</span><span class="op">)</span> <span class="co"># calculate weekly averages</span></span>
-<span><span class="va">subdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">subdat</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span></span>
+<span><span class="va">subdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">subdat</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># reshape so we have two variable columns</span></span>
 <span><span class="va">subdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">subdat</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">pm10</span>, <span class="va">pm25</span><span class="op">)</span>, </span>
@@ -614,7 +614,7 @@ Figure&nbsp;27.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 </div>
 <p>Now we will plot weekly NO<sub>x</sub> versus PM<sub>10</sub> and PM<sub>2.5</sub> and fit a linear equation to both — and adjust some of the symbols (shown in <a href="#fig-scatterPlotTwo" class="quarto-xref">Figure&nbsp;<span>27.5</span></a>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
 <span>            group <span class="op">=</span> <span class="st">"pollutant"</span>, </span>
 <span>            pch <span class="op">=</span> <span class="fl">21</span><span class="op">:</span><span class="fl">22</span>, cex <span class="op">=</span> <span class="fl">1.6</span>, </span>
 <span>            fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dodgerblue"</span>, <span class="st">"tomato"</span><span class="op">)</span>, </span>
@@ -635,7 +635,7 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 </div>
 <p>To gain a better idea of where the data lie and the linear fits, adding some transparency helps:</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
 <span>            group <span class="op">=</span> <span class="st">"variable"</span>, </span>
 <span>            pch <span class="op">=</span> <span class="fl">21</span><span class="op">:</span><span class="fl">22</span>, cex <span class="op">=</span> <span class="fl">1.6</span>, </span>
 <span>            fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dodgerblue"</span>, <span class="st">"tomato"</span><span class="op">)</span>, </span>
@@ -647,7 +647,7 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 </div>
 <p>The above example will also work with <code>type</code>. For example, to consider how NO<sub>x</sub> againts PM<sub>10</sub> and PM<sub>2.5</sub> varies by season:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>, </span>
 <span>            group <span class="op">=</span> <span class="st">"variable"</span>, </span>
 <span>            pch <span class="op">=</span> <span class="fl">21</span><span class="op">:</span><span class="fl">22</span>, cex <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>            fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dodgerblue"</span>, <span class="st">"tomato"</span><span class="op">)</span>, </span>
@@ -659,7 +659,7 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 <p>Finally, we show how to plot a continuous colour scale for a third <em>numeric</em> variable setting the value of <code>z</code> to the third variable. <a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>27.6</span></a> shows again the relationship between NO<sub>x</sub> and NO<sub>2</sub> but this time colour-coded by the concentration of O<sub>3</sub>. We also take the opportunity to split the data into seasons and weekday/weekend by setting <code>type =   c("season", "weekend")</code>. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O<sub>3</sub> and colouring the data by the concentration of O<sub>3</sub> helps to show how O<sub>3</sub> concentrations affect NO<sub>2</sub> concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO<sub>2</sub> concentrations are associated with high O<sub>3</sub> concentrations. Indeed there are some hours where NO<sub>2</sub> is &gt;100 ppb at quite low concentrations of NO<sub>x</sub> (<span class="math inline">\(\approx\)</span> 200 ppb). It would also be interesting instead of using O<sub>3</sub> concentrations from Marylebone Road to use O<sub>3</sub> from a background site.</p>
 <p><a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>27.6</span></a> was very easily produced but contains a huge amount of useful information showing the relationship between NO<sub>x</sub> and NO<sub>2</sub> dependent upon the concentration of O<sub>3</sub>, the season and the day of the week. There are of course numerous other plots that are equally easily produced.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, </span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, </span>
 <span>            x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, z <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>            type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"weekend"</span><span class="op">)</span>,</span>
 <span>            limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -676,7 +676,7 @@ Figure&nbsp;27.6: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 </div>
 <p><a href="#fig-scatterPlot5" class="quarto-xref">Figure&nbsp;<span>27.7</span></a> shows that <code>scatterPlot</code> can also handle dates on the x-axis; in this case shown for SO<sub>2</sub> concentrations coloured by wind direction for August 2003.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">data2003</span>, month <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>, </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">data2003</span>, month <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>, </span>
 <span>            x <span class="op">=</span> <span class="st">"date"</span>, y <span class="op">=</span> <span class="st">"so2"</span>,</span>
 <span>             z <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -692,7 +692,7 @@ Figure&nbsp;27.7: Scatter plot of date vs.&nbsp;SO<sub>2</sub>- at Marylebone Ro
 </div>
 <p>Similar to <a href="../trend-analysis/time-plot.html" class="quarto-xref"><span>Chapter 11</span></a>, <code>scatterPlot</code> can also plot wind vector arrows if wind speed and wind direction are available in the data frame. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>27.8</span></a> shows an example of using the <code>windflow</code> option. The Figure also sets many other options including showing the concentration of O<sub>3</sub> as a colour, setting the colour scale used and selecting a few days of interest using the <code>selectByDate</code> function. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>27.8</span></a> shows that when the wind direction changes to northerly, the concentration of NO<sub>2</sub> decreases and that of O<sub>3</sub> increases.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/6/2001"</span>, </span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/6/2001"</span>, </span>
 <span>                         end <span class="op">=</span> <span class="st">"5/6/2001"</span><span class="op">)</span>, </span>
 <span>            x <span class="op">=</span> <span class="st">"date"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, z <span class="op">=</span> <span class="st">"o3"</span>, </span>
 <span>            col <span class="op">=</span> <span class="st">"increment"</span>, </span>
@@ -797,8 +797,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -807,7 +805,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bookdown\.org\/david_carslaw\/openair\/");
+      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -914,7 +912,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1151,7 +1148,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/davidcarslaw/openair-book/edit/master/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -1,135 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/index.html</loc>
-    <lastmod>2024-11-18T21:07:50.715Z</lastmod>
+    <loc>https://openair-project.github.io/book/index.html</loc>
+    <lastmod>2025-01-07T13:25:05.909Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/intro/intro.html</loc>
-    <lastmod>2024-11-18T20:14:15.856Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/intro/intro.html</loc>
+    <lastmod>2025-01-07T13:25:42.288Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/intro/openair-package.html</loc>
-    <lastmod>2024-11-18T20:32:00.687Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/intro/openair-package.html</loc>
+    <lastmod>2025-01-07T13:25:48.322Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/data-access/UK-air-quality-data.html</loc>
-    <lastmod>2024-11-18T20:14:45.345Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/data-access/UK-air-quality-data.html</loc>
+    <lastmod>2025-01-07T13:26:53.954Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/data-access/access-met-data.html</loc>
-    <lastmod>2024-11-18T20:14:45.345Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/data-access/access-met-data.html</loc>
+    <lastmod>2025-01-07T13:25:34.645Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/wind-roses.html</loc>
-    <lastmod>2024-11-18T20:14:45.417Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/wind-roses.html</loc>
+    <lastmod>2025-01-07T13:23:53.725Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/polar-freq.html</loc>
-    <lastmod>2024-11-18T20:14:15.854Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-freq.html</loc>
+    <lastmod>2025-01-07T13:23:53.724Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/percentile-roses.html</loc>
-    <lastmod>2024-11-18T20:14:15.852Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/percentile-roses.html</loc>
+    <lastmod>2025-01-07T13:23:53.723Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/polar-plots.html</loc>
-    <lastmod>2024-11-18T20:32:01.828Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-plots.html</loc>
+    <lastmod>2025-01-07T13:23:53.724Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/polar-annulus.html</loc>
-    <lastmod>2024-11-18T20:14:15.854Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-annulus.html</loc>
+    <lastmod>2025-01-07T13:23:53.723Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/directional-analysis/trajectory-analysis.html</loc>
-    <lastmod>2024-11-18T20:35:08.939Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/directional-analysis/trajectory-analysis.html</loc>
+    <lastmod>2025-01-07T13:23:53.725Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/time-plot.html</loc>
-    <lastmod>2024-11-18T20:14:45.425Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/time-plot.html</loc>
+    <lastmod>2025-01-07T13:23:53.749Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/time-variation.html</loc>
-    <lastmod>2024-11-18T20:14:15.920Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/time-variation.html</loc>
+    <lastmod>2025-01-07T13:23:53.750Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/calendar-plot.html</loc>
-    <lastmod>2024-11-18T20:14:45.425Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/calendar-plot.html</loc>
+    <lastmod>2025-01-07T13:23:53.747Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/time-proportion.html</loc>
-    <lastmod>2024-11-18T20:14:45.433Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/time-proportion.html</loc>
+    <lastmod>2025-01-07T13:23:53.749Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/theil-sen.html</loc>
-    <lastmod>2024-11-18T20:14:45.425Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/theil-sen.html</loc>
+    <lastmod>2025-01-07T13:23:53.748Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/smooth-trend.html</loc>
-    <lastmod>2024-11-18T20:14:45.425Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/smooth-trend.html</loc>
+    <lastmod>2025-01-07T13:23:53.748Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/run-regression.html</loc>
-    <lastmod>2024-11-18T20:35:06.228Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/run-regression.html</loc>
+    <lastmod>2025-01-07T13:23:53.747Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/trend-analysis/trend-level.html</loc>
-    <lastmod>2024-11-18T20:14:15.920Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/trend-analysis/trend-level.html</loc>
+    <lastmod>2025-01-07T13:23:53.750Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/model-evaluation/mod-stats.html</loc>
-    <lastmod>2024-11-18T20:35:17.064Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/model-evaluation/mod-stats.html</loc>
+    <lastmod>2025-01-07T13:23:53.746Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/model-evaluation/taylor-diagram.html</loc>
-    <lastmod>2024-11-18T20:35:29.070Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/model-evaluation/taylor-diagram.html</loc>
+    <lastmod>2025-01-07T13:23:53.746Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/model-evaluation/conditional-quantiles.html</loc>
-    <lastmod>2024-11-18T20:35:14.463Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/model-evaluation/conditional-quantiles.html</loc>
+    <lastmod>2025-01-07T13:23:53.745Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/maps/maps-overview.html</loc>
-    <lastmod>2024-11-18T20:14:45.417Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/maps/maps-overview.html</loc>
+    <lastmod>2025-01-07T13:25:52.768Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/maps/maps-network.html</loc>
-    <lastmod>2024-11-18T20:14:45.417Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/maps/maps-network.html</loc>
+    <lastmod>2025-01-07T13:23:53.726Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/maps/maps-polar.html</loc>
-    <lastmod>2024-11-18T20:14:45.417Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/maps/maps-polar.html</loc>
+    <lastmod>2025-01-07T13:23:53.728Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/maps/maps-traj.html</loc>
-    <lastmod>2024-11-18T20:14:45.425Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/maps/maps-traj.html</loc>
+    <lastmod>2025-01-07T13:23:53.728Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/utilities/utility-functions.html</loc>
-    <lastmod>2024-11-18T20:14:45.433Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/utilities/utility-functions.html</loc>
+    <lastmod>2025-01-07T13:23:53.751Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/utilities/scatter-plot.html</loc>
-    <lastmod>2024-11-18T20:14:45.433Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/utilities/scatter-plot.html</loc>
+    <lastmod>2025-01-07T13:23:53.750Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/references.html</loc>
-    <lastmod>2024-11-18T20:14:15.912Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/references.html</loc>
+    <lastmod>2025-01-07T13:23:53.747Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/appendices/appendix-annotate.html</loc>
-    <lastmod>2024-11-18T20:14:45.337Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/appendices/appendix-annotate.html</loc>
+    <lastmod>2025-01-07T13:23:53.719Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/appendices/appendix-hysplit.html</loc>
-    <lastmod>2024-11-18T20:14:15.818Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/appendices/appendix-hysplit.html</loc>
+    <lastmod>2025-01-07T13:25:25.315Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/appendices/appendix-trends.html</loc>
-    <lastmod>2024-11-18T20:35:20.104Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/appendices/appendix-trends.html</loc>
+    <lastmod>2025-01-07T13:23:53.722Z</lastmod>
   </url>
   <url>
-    <loc>https://bookdown.org/david_carslaw/openair/sections/appendices/appendix-gethelp.html</loc>
-    <lastmod>2024-11-18T20:14:45.337Z</lastmod>
+    <loc>https://openair-project.github.io/book/sections/appendices/appendix-gethelp.html</loc>
+    <lastmod>2025-01-07T13:25:15.285Z</lastmod>
   </url>
 </urlset>
