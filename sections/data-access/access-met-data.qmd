@@ -9,7 +9,7 @@ abstract: Meteorological data is key to understanding air quality measurements. 
 
 Most of the import functions described in @sec-importUKAQ return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that Ricardo runs to provide the data.
 
-Alternatively it may be advantageous to use surface measurements. [worldmet]{.pkg} provides an easy way in which to access surface meteorological data from \>30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <https://github.com/davidcarslaw/worldmet> and <https://www.ncdc.noaa.gov/isd> for further information.
+Alternatively it may be advantageous to use surface measurements. [worldmet]{.pkg} provides an easy way in which to access surface meteorological data from \>30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <https://github.com/openair-project/worldmet> and <https://www.ncdc.noaa.gov/isd> for further information.
 
 Access to surface meteorological data is very useful in general but is especially useful when using [openair]{.pkg} and functions such as `polarPlot`. To install the package, type:
 

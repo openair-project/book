@@ -6,7 +6,7 @@ The amount of monitoring data available is substantial and increasing. In the UK
 
 While many of the options in these functions allow quite a sophisticated analysis to be undertaken, the defaults generally use the simplest (and fastest) assumptions. A more detailed analysis can refine these assumptions e.g. by accounting for autocorrelation, or fine-control over the appearance of a plot.
 
-It should be noted that while the aim is to keep this documentation up to date, the primary source of information related to the different functions is contained within the package itself. Once loaded, type `?openair` to see all the help pages associated with the package. The website for [openair]{.pkg} is <https://davidcarslaw.github.io/openair/>.
+It should be noted that while the aim is to keep this documentation up to date, the primary source of information related to the different functions is contained within the package itself. Once loaded, type `?openair` to see all the help pages associated with the package. The website for [openair]{.pkg} is <https://openair-project.github.io/openair/>.
 
 ::: callout-tip
 ## Note!

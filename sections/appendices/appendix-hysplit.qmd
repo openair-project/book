@@ -54,8 +54,10 @@ It is first necessary on ensure that the [devtools]{.pkg} package is installed, 
 ```{r}
 #| label: getGist
 library(devtools)
-source_gist("https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5",
-            filename = "run_hysplit.R")
+source_gist(
+  "https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5",
+  filename = "run_hysplit.R"
+)
 ```
 
 Now there should be several loaded functions, including `run_hysplit`. To run Hysplit, have a look at the examples [here](https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5).

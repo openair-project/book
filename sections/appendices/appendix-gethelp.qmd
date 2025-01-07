@@ -10,11 +10,13 @@ The [openair]{.pkg} family was written to be as easy as possible to use for peop
 
 The best place to ask for help is by posting an issue on GitHub. Don't worry if you haven't used it before - simply sign up, navigate to one of the repositories, and then click "Issues". There'll be a big green "New Issue" button that'll present you with a box to fill in to ask your questions. The GitHub repositories for the [openair]{.pkg} family of packages can be found at:
 
-* <https://github.com/davidcarslaw/openair>
+* <https://github.com/openair-project/openair>
 
-* <https://github.com/davidcarslaw/openairmaps>
+* <https://github.com/openair-project/openairmaps>
 
-* <https://github.com/davidcarslaw/worldmet>
+* <https://github.com/openair-project/worldmet>
+
+* <https://github.com/openair-project/deweather>
 
 If your problems are with R more generally rather than being specific to [openair]{.pkg}, you might also consider posting to these other communities. Users there will be much less familiar with [openair]{.pkg} and air quality, but they are much greater in number. 
 

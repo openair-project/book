@@ -23,7 +23,7 @@ If you would like to access new features and bug fixes before they're pushed to 
 #| label: pak
 #| eval: false
 # install.packages("pak")
-pak::pak("davidcarslaw/openairmaps")
+pak::pak("openair-project/openairmaps")
 ```
 
 If you would like to use [openairmaps]{.pkg} in your analysis, don't forget to load it using the `library()` function.

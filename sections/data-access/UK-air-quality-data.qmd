@@ -259,7 +259,6 @@ types, shown below).
 #| label: fig-openairmapsNetworkMap
 #| cache: false
 #| fig-cap: Plotting the AURN using the `openairmaps` package.
-#| results: asis
 library(openairmaps)
 networkMap(source = "aurn", control = "site_type")
 ```

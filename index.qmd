@@ -25,7 +25,7 @@ The book is split into broad sections that cover common aspects of air quality d
 
 [openair]{.pkg} does not of course cover every conceivable analysis that users might be interested in, but a selection of flexible methods that should have wide appeal. However, by using R as the basis of development, users can greatly extend the types of analysis in many powerful and innovative ways.
 
-[openair]{.pkg} is a product of the time it was started and used the highly capable [lattice]{.pkg} package for plotting. This was a time before [ggplot2]{.pkg} and the ['tidyverse'](https://www.tidyverse.org). Nevertheless, the package is used extensively around the world (see downloads [here](https://davidcarslaw.github.io/openair/)) and if anything, growing in popularity and use. The original aims of the project have been met in providing tools for academia, the private and public sectors --- all of which continue to use the software.
+[openair]{.pkg} is a product of the time it was started and used the highly capable [lattice]{.pkg} package for plotting. This was a time before [ggplot2]{.pkg} and the ['tidyverse'](https://www.tidyverse.org). Nevertheless, the package is used extensively around the world (see downloads [here](https://openair-project.github.io/openair/)) and if anything, growing in popularity and use. The original aims of the project have been met in providing tools for academia, the private and public sectors --- all of which continue to use the software.
 
 At some point there will need to be a transition to [ggplot2]{.pkg}; in particular to capitalise on the many extensions available and which [openair]{.pkg} can benefit from.
 
