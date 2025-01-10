@@ -12,7 +12,7 @@ book:
   date: today
   date-format: long
   site-url: "https://openair-project.github.io/book/"
-  repo-url: https://github.com/openair-project/openair-book/
+  repo-url: https://github.com/openair-project/book/
   repo-branch: master
   repo-actions: [edit]
   favicon: assets/media/favicon.png
