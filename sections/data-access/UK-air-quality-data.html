@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/openair-project/openair-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   <li><a href="#plot-sites-on-a-map" id="toc-plot-sites-on-a-map" class="nav-link" data-scroll-target="#plot-sites-on-a-map"><span class="header-section-number">3.3</span> Plot Sites on a Map</a></li>
   <li><a href="#annual-and-other-statistics" id="toc-annual-and-other-statistics" class="nav-link" data-scroll-target="#annual-and-other-statistics"><span class="header-section-number">3.4</span> Annual and other statistics</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/data-access/UK-air-quality-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/master/sections/data-access/UK-air-quality-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html">Data Access</a></li><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></a></li></ol></nav><div class="quarto-title">
@@ -704,10 +704,10 @@ $ site_type &lt;chr&gt; "Urban Background", "Urban Background", "Urban Backgroun
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This package contains the <code><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
+<p>This package contains the <code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, control <span class="op">=</span> <span class="st">"site_type"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, control <span class="op">=</span> <span class="st">"site_type"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-openairmapsNetworkMap" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-openairmapsNetworkMap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-86046b4255041f387df1" style="width:100%;height:464px;"></div>
@@ -1283,4 +1283,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/openair-book/edit/master/sections/data-access/UK-air-quality-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/master/sections/data-access/UK-air-quality-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
