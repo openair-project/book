@@ -17,9 +17,21 @@ book:
   repo-actions: [edit]
   favicon: assets/media/favicon.png
   sharing: [twitter, facebook, linkedin]
+  reader-mode: true
+  
+  page-footer:
+    border: true
+    left: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>
+    center: |
+      Part of the <a href='https://github.com/openair-project'>openair project</a>
+    right: |
+      This work is licensed under a [CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/).
+
   sidebar: 
     search: true
     logo: assets/media/plume.png
+    
   chapters:
     - index.qmd
     - sections/intro/intro.qmd
@@ -68,7 +80,9 @@ book:
    - sections/appendices/appendix-trends.qmd
    - sections/appendices/appendix-gethelp.qmd
 
-bibliography: [assets/bib/DCC-refs.bib, assets/bib/packages.bib]
+bibliography: 
+ - assets/bib/DCC-refs.bib
+ - assets/bib/packages.bib
 csl: assets/bib/atmospheric-environment.csl
 
 execute: 
@@ -83,8 +97,10 @@ execute:
 
 format:
   html:
-    theme: lumen
-    highlight-style: pygments
+    theme: 
+      light: lumen
+      dark: darkly
+    highlight-style: a11y
     fig-align: center
     code-link: true
     code-copy: true
@@ -93,6 +109,9 @@ format:
     css: assets/style/style.css
     lightbox: true
     html-table-processing: none
-    
+    mainfont: "Nunito Sans"
+    monofont: "JetBrains Mono"
+    html-table-processing: none
+
 editor_options: 
   chunk_output_type: console

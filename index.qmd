@@ -33,9 +33,23 @@ The reason for writing this book (or manual) in this form i.e. a website rather 
 
 To cite [openair]{.pkg} please use:
 
-Carslaw, D. C., and K. Ropkins. 2012. "openair --- An R package for air quality data analysis." *Environmental Modelling & Software* 27--28 (0): 52--61. <https://doi.org/10.1016/j.envsoft.2011.09.008>.
+> Carslaw, D. C., and K. Ropkins. 2012. "openair --- An R package for air quality data analysis." *Environmental Modelling & Software* 27--28 (0): 52--61. <https://doi.org/10.1016/j.envsoft.2011.09.008>.
 
-This document was produced using R version `r getRversion()` and [openair]{.pkg} version `r packageDescription("openair", field = "Version")`.
+::: {.callout-note appearance="simple"}
+
+This book was authored on `r Sys.Date()` using:
+
+* [R]{.pkg} version `r getRversion()`.
+
+* [openair]{.pkg} version `r packageDescription("openair", field = "Version")`.
+
+* [openairmaps]{.pkg} version `r packageDescription("openairmaps", field = "Version")`.
+
+* [worldmet]{.pkg} version `r packageDescription("worldmet", field = "Version")`.
+
+* [deweather]{.pkg} version `r packageDescription("deweather", field = "Version")`.
+
+:::
 
 ```{r}
 #| label: bibmake
