@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 .rmdcomment {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
@@ -14,7 +18,7 @@
     font-size: 45px;
  }
  
- .question {
+.question {
   padding: 1em 1em 1em 5em;
   margin-bottom: px;
   background: #ecf0f9   ;
@@ -25,18 +29,17 @@
 }
 
 .question:before {
-    font-family: "FontAwesome";
-    content: "\f19d";
-    left:5px;
-    right:1px;
-    font-weight: 900;
-    position:absolute;
-    top:0px;
-    font-size: 45px;
- }
+  font-family: "FontAwesome";
+  content: "\f19d";
+  left:5px;
+  right:1px;
+  font-weight: 900;
+  position:absolute;
+  top:0px;
+  font-size: 45px;
+}
  
- .pkg {
-  color: #4a5858;
+.pkg {
   padding: 0 2px;
   margin: 0 1px;
   border: 1px solid #7c9393;
