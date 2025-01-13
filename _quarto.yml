@@ -111,7 +111,6 @@ format:
     html-table-processing: none
     mainfont: "Nunito Sans"
     monofont: "JetBrains Mono"
-    html-table-processing: none
 
 editor_options: 
   chunk_output_type: console
