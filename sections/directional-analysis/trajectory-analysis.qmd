@@ -10,7 +10,7 @@ Back trajectories are extremely useful in air pollution and can provide importan
 
 Perhaps one of the reasons why back trajectory analysis is not carried out more often is that it can be time consuming to do. This is particularly so if one wants to consider several years at several sites. It can also be difficult to access back trajectory data. In an attempt to overcome some of these issues and expand the possibilities for data analysis, [openair]{.pkg} makes several functions available to access and analyse pre-calculated back trajectories.
 
-Currently these functions allow for the import of pre-calculated back trajectories are several pre-define locations and some trajectory plotting functions. In time all of these functions will be developed to allow more sophisticated analyses to be undertaken. .
+Currently these functions allow for the import of pre-calculated back trajectories at several pre-defined locations and some trajectory plotting functions. In time, all of these functions will be developed to allow more sophisticated analyses to be undertaken.
 
 The `importTraj()` function imports pre-calculated back trajectories using the Hysplit trajectory model [Hybrid Single Particle Lagrangian Integrated Trajectory Model](https://ready.arl.noaa.gov/HYSPLIT.php) [@stein2015]. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at Ricardo Energy & Environment similar to that for [importUKAQ](#sec-importUKAQ), which makes it very easy to import pre-processed trajectory data for a range of locations and years. [^trajectory-analysis-1]
 
