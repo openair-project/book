@@ -499,13 +499,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There are two main functions in the package: <code>getMeta</code> and <code>importNOAA</code>. The former helps the user find meteorological sites by name, country and proximity to a location based on the latitude and longitude. <code>getMeta</code> will also return a code that can be supplied to <code>importNOAA</code>, which then imports the data.</p>
 <p>Probably the most common use of <code>getMeta</code> is to search around a location of interest based on its latitude and longitude. First we will load the <span class="pkg">worldmet</span> (and other packages we use later):</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/worldmet/index.html">worldmet</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/worldmet/">worldmet</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/getMeta.html">getMeta</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/getMeta.html">getMeta</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-worldmet" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-53334fbc732f37cdfb48" style="width:100%;height:464px;"></div>
@@ -518,11 +518,11 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 </div>
 <p>Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code i.e.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/getMeta.html">getMeta</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/getMeta.html">getMeta</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use the map that is produced to select a site of interest and import the data. For example, to import data for Dublin Airport and look at some of the data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/importNOAA.html">importNOAA</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"039690-99999"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/importNOAA.html">importNOAA</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"039690-99999"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># first few lines of data</span></span>
 <span><span class="va">dublin_met</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -549,7 +549,7 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 </div>
 <p>Plot a wind rose.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/windRose.html">windRose</a></span><span class="op">(</span><span class="va">dublin_met</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">dublin_met</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-dublin-rose" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dublin-rose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -567,7 +567,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some air quality data and check the variables that exist</span></span>
 <span></span>
-<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq_2019</span><span class="op">)</span> <span class="co"># ws, wd, air_temp already exist from WRF model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "source"   "site"     "code"     "date"     "co"       "nox"     
@@ -575,7 +575,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 [13] "ws"       "wd"       "air_temp"</code></pre>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some met data - default is London Heathrow</span></span>
-<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldmet/man/importNOAA.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/importNOAA.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># merge the two data sets but not ws, wd, air_temp from aq data</span></span>
 <span><span class="va">aq_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span></span>

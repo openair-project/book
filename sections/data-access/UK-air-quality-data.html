@@ -498,7 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="accessing-data" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="accessing-data">
 <span class="header-section-number">3.1</span> Accessing data</h2>
 <p>The UK has a surprisingly large amount of air quality data that is publicly accessible. The main UK AURN archive and regional (England, Scotland, Wales and Northern Ireland) together with Imperial College London’s London Air Quality Network (LAQN) are important and large databases of information that allow free public access. Storing and managing data in this way has many advantages including consistent data format, and underlying high quality methods to process and store the data.</p>
-<p><span class="pkg">openair</span> has a core function that provides users with extensive access to UK air quality data; <code><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ()</a></code>. Ricardo has provided <code>.RData</code> files (R workspaces) for several important air quality networks in the UK. These files are updated on a daily basis. This approach requires a link to the Internet to work. The work of Trevor Davies at Ricardo is greatly appreciated in making all the data available. The networks available through <code><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ()</a></code> include:</p>
+<p><span class="pkg">openair</span> has a core function that provides users with extensive access to UK air quality data; <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code>. Ricardo has provided <code>.RData</code> files (R workspaces) for several important air quality networks in the UK. These files are updated on a daily basis. This approach requires a link to the Internet to work. The work of Trevor Davies at Ricardo is greatly appreciated in making all the data available. The networks available through <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code> include:</p>
 <ul>
 <li><p>The UK national network, the <a href="https://uk-air.defra.gov.uk/networks/network-info?view=aurn">Automatic Urban and Rural Network</a>. This is the main UK network.</p></li>
 <li>
@@ -512,22 +512,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li><p>Locally managed AQ networks in England. These are sites operated in most cases by Local Authorities but may also include monitoring from other programmes, industry and airports. The location and purpose of these sites differs from the national network which is governed by strict rules of the air quality directives. As a result there is a broad range of site types, equipment and data quality practices. For more information see <a href="https://uk-air.defra.gov.uk/networks/network-info?view=nondefraaqmon">here</a>. These data represent information from about 15 different local air quality networks.</p></li>
 </ul>
-<p>Also available is <code><a href="https://rdrr.io/pkg/openair/man/importKCL.html">importKCL()</a></code> for accessing data from the sites operated by Imperial College London<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, primarily including the <a href="https://www.londonair.org.uk/LondonAir/Default.aspx">The London Air Quality Network</a>.</p>
+<p>Also available is <code><a href="https://openair-project.github.io/openair/reference/importKCL.html">importKCL()</a></code> for accessing data from the sites operated by Imperial College London<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, primarily including the <a href="https://www.londonair.org.uk/LondonAir/Default.aspx">The London Air Quality Network</a>.</p>
 <p>Many users download hourly data from <a href="https://uk-air.defra.gov.uk/data/">UK AIR</a>. Most commonly, the data are emailed to the user as .csv files and have a fixed format as shown below. This is a useful facility but does have some limitations and frustrations, many of which have been overcome using a new way of storing and downloading the data described below.</p>
 <p>There are several advantages over the web portal approach where .csv files are downloaded. First, it is quick to select a range of sites, pollutants and periods (see examples below). Second, storing the data as .RData objects is very efficient as they are about four times smaller than .csv files (which are already small) — which means the data downloads quickly and saves bandwidth. Third, the function completely avoids any need for data manipulation or setting time formats, time zones etc. Finally, it is easy to import many years of data. The final point makes it possible to download several long time series in one go.</p>
 <p>The site codes and pollutant names can be upper or lower case.</p>
 <p>Some examples of usage are shown below. First load the packages we need.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="site-meta-data" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="site-meta-data">
 <span class="header-section-number">3.2</span> Site Meta Data</h2>
 <section id="national-networks" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="national-networks">
 <span class="header-section-number">3.2.1</span> National networks</h3>
-<p>The first question is, what sites are available and what do they measure? Users can access the details of air pollution monitoring sites using the <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> function. The user only needs to provide the network name and (optionally) whether all data should be returned and whether certain periods should be considered. By default only site type, latitude and longitude are returned.</p>
+<p>The first question is, what sites are available and what do they measure? Users can access the details of air pollution monitoring sites using the <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> function. The user only needs to provide the network name and (optionally) whether all data should be returned and whether certain periods should be considered. By default only site type, latitude and longitude are returned.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span><span class="op">)</span></span>
 <span><span class="va">aurn_meta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 297 × 6
@@ -548,7 +548,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Or return much more detailed data that includes which pollutants are measured at each site and site start / end dates. The option <code>all = TRUE</code> should be added.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># what comes back?</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">aurn_meta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -571,11 +571,11 @@ $ agglomeration   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
 $ local_authority &lt;chr&gt; "Aberdeen City", "Aberdeen City", "Aberdeen City", "Ab…</code></pre>
 </div>
 </div>
-<p>Note that <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> can import information for several networks at once e.g.&nbsp;<code>source = c("aurn", "saqn")</code>.</p>
+<p>Note that <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> can import information for several networks at once e.g.&nbsp;<code>source = c("aurn", "saqn")</code>.</p>
 <p>Often it is useful to consider sites that were open in a particular year or were open for a duration of years. This can be done using the <code>year</code> argument. When <code>year</code> is a range such as <code>year = 2010:2020</code>, only sites that were open across that range of years will be returned. This option is especially useful for trend analysis when there might be an interest in extracting only sites that were measuring over the period of interest. Furthermore, if <code>all = TRUE</code> is used, supplying a year (or years) will select only specific pollutants that were measured during the period of interest.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>For example, to check the number of sites that were open from 2010 to 2022 in the AURN and SAQN combined:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sites_2010_2022</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sites_2010_2022</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span></span>
 <span>  source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aurn"</span>, <span class="st">"saqn"</span><span class="op">)</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2022</span></span>
 <span><span class="op">)</span></span>
@@ -588,7 +588,7 @@ $ local_authority &lt;chr&gt; "Aberdeen City", "Aberdeen City", "Aberdeen City",
 <p>The example below uses sites on the AURN that measure NO<sub>2</sub>, but can easily be extended to the other data sources.</p>
 <p>To see how many sites measure NO<sub>2</sub> in the AURN that are ‘urban traffic’:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_detailed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aurn_detailed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">no2_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">aurn_detailed</span>,</span>
@@ -607,50 +607,50 @@ $ local_authority &lt;chr&gt; "Aberdeen City", "Aberdeen City", "Aberdeen City",
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Use <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> as a way to select sites to import
+Use <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> as a way to select sites to import
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One of the most useful aspects of <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> is to use it as a basis to identify site codes to then import data. For example, to import data from the AURN for sites that have been in operation from 2005 to 2020:</p>
+<p>One of the most useful aspects of <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> is to use it as a basis to identify site codes to then import data. For example, to import data from the AURN for sites that have been in operation from 2005 to 2020:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sites_2005_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sites_2005_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span></span>
 <span>  source <span class="op">=</span> <span class="st">"aurn"</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2020</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">all_aq_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<span><span class="va">all_aq_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>  site <span class="op">=</span> <span class="va">sites_2005_2020</span><span class="op">$</span><span class="va">code</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2020</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<p>To import data, you can use the different versions of <code><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ()</a></code>. Some examples are below.</p>
+<p>To import data, you can use the different versions of <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code>. Some examples are below.</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import all pollutants from Marylebone Rd from 2000:2005</span></span>
-<span><span class="va">mary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2005</span><span class="op">)</span></span>
+<span><span class="va">mary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2005</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## import nox, no2, o3 from Marylebone Road and Nottingham Centre for 2000</span></span>
-<span><span class="va">thedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<span><span class="va">thedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>  site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"my1"</span>, <span class="st">"nott"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span>, <span class="st">"o3"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## import over 30 years of Mace Head O3 data!</span></span>
-<span><span class="va">o3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"mh"</span>, year <span class="op">=</span> <span class="fl">1987</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">o3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"mh"</span>, year <span class="op">=</span> <span class="fl">1987</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## import hydrocarbon data from Marylebone Road</span></span>
-<span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2008</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2008</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Import data from the AQE network (York data in this case)</span></span>
-<span><span class="va">yk13</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"yk13"</span>, year <span class="op">=</span> <span class="fl">2018</span>, source <span class="op">=</span> <span class="st">"aqe"</span><span class="op">)</span></span>
+<span><span class="va">yk13</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"yk13"</span>, year <span class="op">=</span> <span class="fl">2018</span>, source <span class="op">=</span> <span class="st">"aqe"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Import data from the AURN *and* AQE network!</span></span>
-<span><span class="va">duo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"my1"</span>, <span class="st">"yk13"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aurn"</span>, <span class="st">"aqe"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">duo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"my1"</span>, <span class="st">"yk13"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aurn"</span>, <span class="st">"aqe"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And to include basic meta data when importing air pollution data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2018</span>, meta <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2018</span>, meta <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">kc1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -678,7 +678,7 @@ $ site_type &lt;chr&gt; "Urban Background", "Urban Background", "Urban Backgroun
 </div>
 <p>By default, the function returns data where each pollutant is in a separate column. However, it is possible to return the data in a <em>tidy</em> format (column for pollutant name, column for value) by using the option <code>to_narrow</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2018</span>, to_narrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2018</span>, to_narrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also possible to return information on whether the data have been ratified or not using the option <code>ratified</code> (<code>FALSE</code> by default). So, add the option <code>ratified = TRUE</code> if you want this information.</p>
 </section><section id="local-networks" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="local-networks">
@@ -686,7 +686,7 @@ $ site_type &lt;chr&gt; "Urban Background", "Urban Background", "Urban Backgroun
 <p>In the case of <strong>locally available data</strong>, it is useful to know who the data providers are, which are shown below.</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># access local meta data to get provider</span></span>
-<span><span class="va">meta_local</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta</a></span><span class="op">(</span><span class="st">"local"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">meta_local</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta</a></span><span class="op">(</span><span class="st">"local"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">meta_local</span><span class="op">$</span><span class="va">provider</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Sussex Air Quality Network"                         
@@ -712,7 +712,7 @@ $ site_type &lt;chr&gt; "Urban Background", "Urban Background", "Urban Backgroun
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This package contains the <code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://rdrr.io/pkg/openair/man/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
+<p>This package contains the <code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, control <span class="op">=</span> <span class="st">"site_type"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -729,7 +729,7 @@ Figure&nbsp;3.1: Plotting the AURN using the <code>openairmaps</code> package.
 <p>For more information about using <span class="pkg">openairmaps</span> to build maps of monitoring networks, please refer to the <a href="../../sections/maps/maps-network.html">Network Visualisation Page</a>.</p>
 </section><section id="annual-and-other-statistics" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="annual-and-other-statistics">
 <span class="header-section-number">3.4</span> Annual and other statistics</h2>
-<p>By default, all the functions above return hourly data. However, often there is a need to return data such as annual means of a long period of time. <code><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ()</a></code> (but not <code><a href="https://rdrr.io/pkg/openair/man/importKCL.html">importKCL()</a></code>) can return data for averaging times: annual, monthly, daily and for SO<sub>2</sub> 15-minute. The annual and monthly data also provide valuable information on data capture rates. The averaging statistic is selected with the <code>data_type</code> option. The values <code>data_type</code> can take include:</p>
+<p>By default, all the functions above return hourly data. However, often there is a need to return data such as annual means of a long period of time. <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code> (but not <code><a href="https://openair-project.github.io/openair/reference/importKCL.html">importKCL()</a></code>) can return data for averaging times: annual, monthly, daily and for SO<sub>2</sub> 15-minute. The annual and monthly data also provide valuable information on data capture rates. The averaging statistic is selected with the <code>data_type</code> option. The values <code>data_type</code> can take include:</p>
 <ul>
 <li>
 <strong>“hourly”</strong> This is the default and specific site(s) must be provided.</li>
@@ -753,12 +753,12 @@ Figure&nbsp;3.1: Plotting the AURN using the <code>openairmaps</code> package.
 <p>Note that for annual and monthly statistics all network data is returned and the <code>site</code> option has no effect.</p>
 <p>As an example, to import 5 years of annual mean data from the AURN:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">uk_annual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2020</span>, data_type <span class="op">=</span> <span class="st">"annual"</span>, source <span class="op">=</span> <span class="st">"AURN"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">uk_annual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2020</span>, data_type <span class="op">=</span> <span class="st">"annual"</span>, source <span class="op">=</span> <span class="st">"AURN"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>By default, this will return data in “wide” format with a pollutant and its data capture rate in separate columns. Often it is more useful to have “narrow” format data, which is possible to select with the <code>to_narrow</code> option. Furthermore, it is also possible to return site meta data (site type, latitude and longitude) at the same time.</p>
 <p>Below is an example of obtaining annual mean data for 2020.</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">uk_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">uk_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"aurn"</span>,</span>
 <span>  data_type <span class="op">=</span> <span class="st">"annual"</span>,</span>
@@ -822,7 +822,7 @@ Figure&nbsp;3.1: Plotting the AURN using the <code>openairmaps</code> package.
 </div>
 <p>For the AURN, it is also possible to return the DAQI (Daily Air Quality Index) by pollutant to save deriving it.</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daqi_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daqi_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"aurn"</span>,</span>
 <span>  data_type <span class="op">=</span> <span class="st">"daqi"</span>,</span>

@@ -491,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><section id="data" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="data">
 <span class="header-section-number">25.1</span> Data</h2>
-<p><span class="pkg">openairmaps</span> contains the <code>traj_data</code> dataset to allow users to test the directional analysis functions. The structure of this data set is provided below. This was obtained using the <code><a href="https://rdrr.io/pkg/openair/man/importTraj.html">importTraj()</a></code> function in <span class="pkg">openair</span>; if you are using your own trajectory data, try to match this structure (including column names) so that the <span class="pkg">openairmaps</span> functions will work correctly.</p>
+<p><span class="pkg">openairmaps</span> contains the <code>traj_data</code> dataset to allow users to test the directional analysis functions. The structure of this data set is provided below. This was obtained using the <code><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj()</a></code> function in <span class="pkg">openair</span>; if you are using your own trajectory data, try to match this structure (including column names) so that the <span class="pkg">openairmaps</span> functions will work correctly.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">traj_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -521,8 +521,8 @@ $ pm10     &lt;dbl&gt; 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 2
 <span class="header-section-number">25.2</span> Overview</h2>
 <p>There are two all-in-one mapping functions for trajectory analysis in <span class="pkg">openairmaps</span>, which will be discussed in turn.</p>
 <ol type="1">
-<li><p><code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code>, which is an analogue to <code><a href="https://rdrr.io/pkg/openair/man/trajPlot.html">openair::trajPlot()</a></code>.</p></li>
-<li><p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code>, which is an analogue to <code><a href="https://rdrr.io/pkg/openair/man/trajLevel.html">openair::trajLevel()</a></code>.</p></li>
+<li><p><code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code>, which is an analogue to <code><a href="https://openair-project.github.io/openair/reference/trajPlot.html">openair::trajPlot()</a></code>.</p></li>
+<li><p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code>, which is an analogue to <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">openair::trajLevel()</a></code>.</p></li>
 </ol>
 <p>Both of these functions require the data to be in the structure shown in the previous section.</p>
 </section><section id="mapping-trajectory-paths" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="mapping-trajectory-paths">
@@ -559,9 +559,9 @@ Figure&nbsp;25.2: A more thorough application of <code>trajMap</code>, this time
 </figcaption></figure>
 </div>
 </div>
-<p>There is a <code>type</code> option in <code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code> which allows for a layer control menu to be generated. This might be useful if you have a lot of trajectory paths and want to let users reduce the clutter. It also pairs nicely with clustered trajectories returned by <code><a href="https://rdrr.io/pkg/openair/man/trajCluster.html">openair::trajCluster()</a></code>. An example of this is given below, in <a href="#fig-trajNeon" class="quarto-xref">Figure&nbsp;<span>25.3</span></a>.</p>
+<p>There is a <code>type</code> option in <code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code> which allows for a layer control menu to be generated. This might be useful if you have a lot of trajectory paths and want to let users reduce the clutter. It also pairs nicely with clustered trajectories returned by <code><a href="https://openair-project.github.io/openair/reference/trajCluster.html">openair::trajCluster()</a></code>. An example of this is given below, in <a href="#fig-trajNeon" class="quarto-xref">Figure&nbsp;<span>25.3</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clustdata</span> <span class="op">&lt;-</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/trajCluster.html">trajCluster</a></span><span class="op">(</span><span class="va">traj_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clustdata</span> <span class="op">&lt;-</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trajCluster.html">trajCluster</a></span><span class="op">(</span><span class="va">traj_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap</a></span><span class="op">(</span></span>
@@ -583,7 +583,7 @@ Figure&nbsp;25.3: Interactive map of clustered trajectories, with a cool neon co
 </div>
 </section><section id="mapping-gridded-trajectories" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="mapping-gridded-trajectories">
 <span class="header-section-number">25.4</span> Mapping Gridded Trajectories</h2>
-<p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> is the other all-in-one trajectory function and is, in many ways, simpler than <code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code>. Think of <code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> as you do <code><a href="https://rdrr.io/pkg/openair/man/trajLevel.html">openair::trajLevel()</a></code> — it has many of the same arguments and does effectively the same thing, but returns an interactive map. In <a href="#fig-trajLevel" class="quarto-xref">Figure&nbsp;<span>25.4</span></a>, try hovering over and clicking each of the tiles to learn more specific details about each bin.</p>
+<p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> is the other all-in-one trajectory function and is, in many ways, simpler than <code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code>. Think of <code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> as you do <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">openair::trajLevel()</a></code> — it has many of the same arguments and does effectively the same thing, but returns an interactive map. In <a href="#fig-trajLevel" class="quarto-xref">Figure&nbsp;<span>25.4</span></a>, try hovering over and clicking each of the tiles to learn more specific details about each bin.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap</a></span><span class="op">(</span></span>
 <span>  <span class="va">traj_data</span>,</span>
@@ -602,7 +602,7 @@ Figure&nbsp;25.4: An interactive ‘frequency’ map plotted by <code><a href="h
 </figcaption></figure>
 </div>
 </div>
-<p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> also supports the <code>smooth</code> argument from <code><a href="https://rdrr.io/pkg/openair/man/trajLevel.html">trajLevel()</a></code>.</p>
+<p><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code> also supports the <code>smooth</code> argument from <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">trajLevel()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap</a></span><span class="op">(</span></span>
 <span>  <span class="va">traj_data</span>,</span>
@@ -620,22 +620,22 @@ Figure&nbsp;25.5: A smoothed frqeuency map plotted by <code><a href="https://ope
 </figcaption></figure>
 </div>
 </div>
-<p>At time of writing, all of the different <code><a href="https://rdrr.io/pkg/openair/man/trajLevel.html">trajLevel()</a></code> statistics are supported in <code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code>.</p>
+<p>At time of writing, all of the different <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">trajLevel()</a></code> statistics are supported in <code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code>.</p>
 </section><section id="marker-function" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="marker-function">
 <span class="header-section-number">25.5</span> Marker Function</h2>
 <p>The marker function equivalent of <code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code> is <code><a href="https://openair-project.github.io/openairmaps/reference/addTrajPaths.html">addTrajPaths()</a></code> which, much like <code><a href="https://openair-project.github.io/openairmaps/reference/addPolarMarkers.html">addPolarMarkers()</a></code>, allows you to customise your trajectory maps. For example, <a href="#fig-trajMarker" class="quarto-xref">Figure&nbsp;<span>25.6</span></a> shows a way to plot multiple sets of trajectory data on one map (in this case, one arriving in London and the other in Paris).</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/">leaflet</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">france</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importTraj.html">importTraj</a></span><span class="op">(</span><span class="st">"paris"</span>, year <span class="op">=</span> <span class="fl">2009</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span></span>
+<span><span class="va">france</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj</a></span><span class="op">(</span><span class="st">"paris"</span>, year <span class="op">=</span> <span class="fl">2009</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span></span>
 <span>    start <span class="op">=</span> <span class="st">"15/4/2009"</span>,</span>
 <span>    end <span class="op">=</span> <span class="st">"21/4/2009"</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="va">uk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importTraj.html">importTraj</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2009</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span></span>
+<span><span class="va">uk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2009</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span></span>
 <span>    start <span class="op">=</span> <span class="st">"15/4/2009"</span>,</span>
 <span>    end <span class="op">=</span> <span class="st">"21/4/2009"</span></span>
 <span>  <span class="op">)</span></span>
