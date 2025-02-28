@@ -513,7 +513,7 @@ window.Quarto = {
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>Because the <span class="pkg">openair</span> package (and R itself) are continually updated, it will be useful to know this document was produced using R version 4.3.3 and <span class="pkg">openair</span> version 2.18.2.9004.</p>
+<p>Because the <span class="pkg">openair</span> package (and R itself) are continually updated, it will be useful to know this document was produced using R version 4.4.2 and <span class="pkg">openair</span> version 2.18.2.9007.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -778,11 +778,14 @@ Table&nbsp;2.2: Built-in ways of splitting data in <span class="pkg">openair</sp
 <span class="header-section-number">2.5.1</span> Make your own type</h3>
 <p>In some cases it is useful to categorise numeric variables according to one’s own intervals. One example is air quality bands where concentrations might be described as “good”, “fair”, “bad”. For this situation we can use the <code>cut</code> function. In the example below, concentrations of NO<sub>2</sub> are divided into intervals 0-50, 50-100, 100-150 and &gt;150 using the <code>breaks</code> option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, <code>include.lowest = TRUE</code> ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">intervals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">no2</span>, </span>
-<span>                        breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>, </span>
-<span>                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>,</span>
-<span>                                   <span class="st">"Very High"</span><span class="op">)</span>, </span>
-<span>                        include.lowest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">intervals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">no2</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>,</span>
+<span>    <span class="st">"Very High"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  include.lowest <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># look at the data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div>
@@ -842,14 +845,18 @@ Table&nbsp;2.2: Built-in ways of splitting data in <span class="pkg">openair</sp
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="co">## small function for plotting</span></span>
 <span><span class="va">printCols</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">col</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/rect.html">rect</a></span><span class="op">(</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span> <span class="op">/</span> <span class="fl">200</span>, <span class="va">y</span>, <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">201</span><span class="op">)</span> <span class="op">/</span> <span class="fl">200</span>, <span class="va">y</span> <span class="op">+</span> <span class="fl">0.1</span>, col <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="va">col</span>, n <span class="op">=</span> <span class="fl">201</span><span class="op">)</span>,</span>
-<span>       border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/rect.html">rect</a></span><span class="op">(</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span> <span class="op">/</span> <span class="fl">200</span>, <span class="va">y</span>, <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">201</span><span class="op">)</span> <span class="op">/</span> <span class="fl">200</span>, <span class="va">y</span> <span class="op">+</span> <span class="fl">0.1</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="va">col</span>, n <span class="op">=</span> <span class="fl">201</span><span class="op">)</span>,</span>
+<span>    border <span class="op">=</span> <span class="cn">NA</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="va">y</span> <span class="op">+</span> <span class="fl">0.15</span>, <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">col</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co">## plot an empty plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.6</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>,</span>
-<span>     axes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.6</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  axes <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"default"</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"increment"</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"heat"</span>, <span class="fl">0.4</span><span class="op">)</span></span>
@@ -857,7 +864,7 @@ Table&nbsp;2.2: Built-in ways of splitting data in <span class="pkg">openair</sp
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"viridis"</span>, <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"inferno"</span>, <span class="fl">1.0</span><span class="op">)</span></span>
 <span><span class="fu">printCols</span><span class="op">(</span><span class="st">"greyscale"</span>, <span class="fl">1.2</span><span class="op">)</span></span>
-<span><span class="fu">printCols</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"white"</span>, <span class="st">"forestgreen"</span> <span class="op">)</span>, <span class="fl">1.4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">printCols</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"white"</span>, <span class="st">"forestgreen"</span><span class="op">)</span>, <span class="fl">1.4</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div id="fig-colours" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-colours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -938,11 +945,13 @@ Figure&nbsp;2.2: A demonstration of the <span class="pkg">colorspace</span> pack
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">marylebone</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>,</span>
-<span>             year <span class="op">=</span> <span class="fl">2022</span>,</span>
-<span>             source <span class="op">=</span> <span class="st">"aurn"</span>,</span>
-<span>             data_type <span class="op">=</span> <span class="st">"annual"</span>, </span>
-<span>             to_narrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<span>    site <span class="op">=</span> <span class="st">"my1"</span>,</span>
+<span>    year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>    source <span class="op">=</span> <span class="st">"aurn"</span>,</span>
+<span>    data_type <span class="op">=</span> <span class="st">"annual"</span>,</span>
+<span>    to_narrow <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">marylebone</span>, file <span class="op">=</span> <span class="st">"my1_annual-stats_2022.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -973,8 +982,10 @@ Figure&nbsp;2.3: A screenshot of the ‘Export’ menu of the RStudio plots pane
 <span><span class="va">polar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># STEP 2: Open a graphics device</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"polarplot_marylebone_nox.png"</span>,</span>
-<span>    width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">6</span>, units <span class="op">=</span> <span class="st">"in"</span>, res <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"polarplot_marylebone_nox.png"</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">6</span>, units <span class="op">=</span> <span class="st">"in"</span>, res <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># STEP 3: Print the plot</span></span>
 <span><span class="va">polar</span></span>

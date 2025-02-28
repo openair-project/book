@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This chapter was produced using R version 4.3.3 and <span class="pkg">openairmaps</span> version 0.9.1.</p>
+<p>This chapter was produced using R version 4.4.2 and <span class="pkg">openairmaps</span> version 0.9.1.</p>
 </div>
 </div>
 </div>
@@ -543,13 +543,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    group <span class="op">=</span> <span class="st">"Marker"</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html">addLayersControl</a></span><span class="op">(</span></span>
-<span>    baseGroups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CartoDB.Positron"</span>, <span class="st">"OSM"</span><span class="op">)</span>, </span>
+<span>    baseGroups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CartoDB.Positron"</span>, <span class="st">"OSM"</span><span class="op">)</span>,</span>
 <span>    overlayGroups <span class="op">=</span> <span class="st">"Marker"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-leafletdemo" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-7e48e32d85a247cee630" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-7e48e32d85a247cee630">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-9366735fa313f1fc475b" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-9366735fa313f1fc475b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;22.1: An example of a leaflet map.
@@ -833,23 +833,23 @@ View Providers
 Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 </figcaption><div aria-describedby="tbl-openairmaps-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="gybmuyrqvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gybmuyrqvl table {
+<div id="stnfvlmmcr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#stnfvlmmcr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gybmuyrqvl thead, #gybmuyrqvl tbody, #gybmuyrqvl tfoot, #gybmuyrqvl tr, #gybmuyrqvl td, #gybmuyrqvl th {
+#stnfvlmmcr thead, #stnfvlmmcr tbody, #stnfvlmmcr tfoot, #stnfvlmmcr tr, #stnfvlmmcr td, #stnfvlmmcr th {
   border-style: none;
 }
 
-#gybmuyrqvl p {
+#stnfvlmmcr p {
   margin: 0;
   padding: 0;
 }
 
-#gybmuyrqvl .gt_table {
+#stnfvlmmcr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -875,12 +875,12 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-left-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_caption {
+#stnfvlmmcr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gybmuyrqvl .gt_title {
+#stnfvlmmcr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -892,7 +892,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-width: 0;
 }
 
-#gybmuyrqvl .gt_subtitle {
+#stnfvlmmcr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -904,7 +904,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-width: 0;
 }
 
-#gybmuyrqvl .gt_heading {
+#stnfvlmmcr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -916,13 +916,13 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_bottom_border {
+#stnfvlmmcr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_col_headings {
+#stnfvlmmcr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -937,7 +937,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_col_heading {
+#stnfvlmmcr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -957,7 +957,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#gybmuyrqvl .gt_column_spanner_outer {
+#stnfvlmmcr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -969,15 +969,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 4px;
 }
 
-#gybmuyrqvl .gt_column_spanner_outer:first-child {
+#stnfvlmmcr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gybmuyrqvl .gt_column_spanner_outer:last-child {
+#stnfvlmmcr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gybmuyrqvl .gt_column_spanner {
+#stnfvlmmcr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -989,11 +989,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   width: 100%;
 }
 
-#gybmuyrqvl .gt_spanner_row {
+#stnfvlmmcr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gybmuyrqvl .gt_group_heading {
+#stnfvlmmcr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1019,7 +1019,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   text-align: left;
 }
 
-#gybmuyrqvl .gt_empty_group_heading {
+#stnfvlmmcr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1034,15 +1034,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: middle;
 }
 
-#gybmuyrqvl .gt_from_md > :first-child {
+#stnfvlmmcr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gybmuyrqvl .gt_from_md > :last-child {
+#stnfvlmmcr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gybmuyrqvl .gt_row {
+#stnfvlmmcr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1061,7 +1061,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#gybmuyrqvl .gt_stub {
+#stnfvlmmcr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,7 +1074,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#gybmuyrqvl .gt_stub_row_group {
+#stnfvlmmcr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1088,15 +1088,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: top;
 }
 
-#gybmuyrqvl .gt_row_group_first td {
+#stnfvlmmcr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gybmuyrqvl .gt_row_group_first th {
+#stnfvlmmcr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gybmuyrqvl .gt_summary_row {
+#stnfvlmmcr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1106,16 +1106,16 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#gybmuyrqvl .gt_first_summary_row {
+#stnfvlmmcr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_first_summary_row.thick {
+#stnfvlmmcr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gybmuyrqvl .gt_last_summary_row {
+#stnfvlmmcr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1125,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_grand_summary_row {
+#stnfvlmmcr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1135,7 +1135,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#gybmuyrqvl .gt_first_grand_summary_row {
+#stnfvlmmcr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1145,7 +1145,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_last_grand_summary_row_top {
+#stnfvlmmcr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1155,11 +1155,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_striped {
+#stnfvlmmcr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gybmuyrqvl .gt_table_body {
+#stnfvlmmcr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1168,7 +1168,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_footnotes {
+#stnfvlmmcr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1182,7 +1182,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_footnote {
+#stnfvlmmcr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1191,7 +1191,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#gybmuyrqvl .gt_sourcenotes {
+#stnfvlmmcr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1205,7 +1205,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#gybmuyrqvl .gt_sourcenote {
+#stnfvlmmcr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1213,72 +1213,72 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#gybmuyrqvl .gt_left {
+#stnfvlmmcr .gt_left {
   text-align: left;
 }
 
-#gybmuyrqvl .gt_center {
+#stnfvlmmcr .gt_center {
   text-align: center;
 }
 
-#gybmuyrqvl .gt_right {
+#stnfvlmmcr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gybmuyrqvl .gt_font_normal {
+#stnfvlmmcr .gt_font_normal {
   font-weight: normal;
 }
 
-#gybmuyrqvl .gt_font_bold {
+#stnfvlmmcr .gt_font_bold {
   font-weight: bold;
 }
 
-#gybmuyrqvl .gt_font_italic {
+#stnfvlmmcr .gt_font_italic {
   font-style: italic;
 }
 
-#gybmuyrqvl .gt_super {
+#stnfvlmmcr .gt_super {
   font-size: 65%;
 }
 
-#gybmuyrqvl .gt_footnote_marks {
+#stnfvlmmcr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gybmuyrqvl .gt_asterisk {
+#stnfvlmmcr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gybmuyrqvl .gt_indent_1 {
+#stnfvlmmcr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gybmuyrqvl .gt_indent_2 {
+#stnfvlmmcr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gybmuyrqvl .gt_indent_3 {
+#stnfvlmmcr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gybmuyrqvl .gt_indent_4 {
+#stnfvlmmcr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gybmuyrqvl .gt_indent_5 {
+#stnfvlmmcr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gybmuyrqvl .katex-display {
+#stnfvlmmcr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gybmuyrqvl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#stnfvlmmcr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

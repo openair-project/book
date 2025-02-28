@@ -514,10 +514,12 @@ Figure&nbsp;6.2: Use of <code>polarFreq</code> function to plot wind speed/direc
 <p>These plots when applied to other locations can reveal some useful features about different sources. For example, it may be that the highest concentrations measured only occur infrequently, and the weighted mean plot can help show this.</p>
 <p>The code required to make <a href="#fig-polarFreqMean" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> and <a href="#fig-polarFreqWeightedMean" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> is shown below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, </span>
-<span>          type <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span>           statistic <span class="op">=</span> <span class="st">"mean"</span>, </span>
-<span>          min.bin <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"so2"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span>  statistic <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>  min.bin <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polarFreqMean" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarFreqMean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -531,10 +533,12 @@ Figure&nbsp;6.3: Use of <code>polarFreq</code> function to plot mean SO2 concent
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># weighted mean SO2 concentrations</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, </span>
-<span>          type <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span>           statistic <span class="op">=</span> <span class="st">"weighted.mean"</span>, </span>
-<span>          min.bin <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"so2"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span>  statistic <span class="op">=</span> <span class="st">"weighted.mean"</span>,</span>
+<span>  min.bin <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polarFreqWeightedMean" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarFreqWeightedMean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -550,16 +554,19 @@ Figure&nbsp;6.4: Use of <code>polarFreq</code> function to plot weighted mean SO
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># wind rose for just 2000 and 2003</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2003</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>          cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
-<span>          type <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"year"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>polarFreq</code> function can also be used to gain an idea about the wind directions that contribute most to the overall mean concentrations. As already shown, use of the option <code>statistic =   "weighted.mean"</code> will show the percentage contribution by wind direction and wind speed bin. However, often it is unnecessary to consider different wind speed intervals. To make the plot more effective, a few options are set as shown in <a href="#fig-polarFreqAttr" class="quarto-xref">Figure&nbsp;<span>6.5</span></a>. First, the <code>statistic = "weighted.mean"</code> is chosen to ensure that the plot shows concentrations weighted by their frequency of occurrence of wind direction. For this plot, we are mostly interested in just the contribution by wind direction and not wind speed. Setting the <code>ws.int</code> to be above the maximum wind speed in the data set ensures that all data are shown in one interval. Rather than having a square-root transform applied to the colour scale, we choose to have a linear scale by setting <code>trans = FALSE</code>. Finally, to show a ‘disk’, the <code>offset</code> is set at 80. Increasing the value of the offset will narrow the disk.</p>
 <p>While <a href="#fig-polarFreqAttr" class="quarto-xref">Figure&nbsp;<span>6.5</span></a> is useful — e.g.&nbsp;it clearly shows that concentrations of NO<sub>x</sub> at this site are totally dominated by south-westerly winds, the use of <code>pollutionRose</code> for this type of plot is more effective, as shown in <a href="wind-roses.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, ws.int <span class="op">=</span> <span class="fl">30</span>, </span>
-<span>          statistic <span class="op">=</span> <span class="st">"weighted.mean"</span>,</span>
-<span>          offset <span class="op">=</span> <span class="fl">80</span>, trans <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>          col <span class="op">=</span> <span class="st">"heat"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"nox"</span>, ws.int <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  statistic <span class="op">=</span> <span class="st">"weighted.mean"</span>,</span>
+<span>  offset <span class="op">=</span> <span class="fl">80</span>, trans <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"heat"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polarFreqAttr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarFreqAttr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

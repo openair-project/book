@@ -485,25 +485,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We apply the four variations of the <code>polarAnnulus</code> plot to PM<sub>10</sub> concentrations at Marylebone Road. <a href="#fig-polarAnnulus" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> shows the different temporal components. Similar to other analyses for PM<sub>10</sub>, the trend plot show that concentrations are dominated by southerly winds and there is little overall change in concentrations from 1998 to 2005, as shown by the red colouring over the period. The seasonal plot shows that February/March is important for easterly winds, while the summer/late summer period is more important for southerly and south-westerly winds. The day of the week plot clearly shows concentrations to be elevated for during weekdays but not weekends — for all wind directions. Finally, the diurnal plot highlights that higher concentrations are observed from 6 am to 6 pm.</p>
 <p>Interestingly, the plot for NO<sub>x</sub> and CO (not shown, but easily produced) did not show such a strong contribution for south-easterly winds. This raises the question whether the higher particle concentrations seen for these wind directions are dominated by different sources (i.e.&nbsp;not the road itself). One explanation is that during easterly flow, concentrations are strongly affected by long-range transport. However, as shown in the diurnal plot in <a href="#fig-polarAnnulus" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>, the contribution from the south-east also has a sharply defined profile — showing very low concentrations at night, similar to the likely contribution from the road. This type of profile might not be expected from a long-range source where emissions are well-mixed and secondary particle formation has had time to occur. The same is also true for the day of the week plot, where there is little evidence of ‘smeared-out’ long-range transport sources. These findings may suggest a different, local source of PM<sub>10</sub> that is not the road itself. Clearly, a more detailed analysis would be required to confirm the patterns shown; but it does highlight the benefit of being able to analyse data in different ways.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load openair</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
-<span>             pollutant <span class="op">=</span> <span class="st">"pm10"</span>, </span>
-<span>             period <span class="op">=</span> <span class="st">"trend"</span>, </span>
-<span>             main <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  period <span class="op">=</span> <span class="st">"trend"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Trend"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
-<span>             pollutant <span class="op">=</span> <span class="st">"pm10"</span>, </span>
-<span>             period <span class="op">=</span> <span class="st">"season"</span>, </span>
-<span>             main <span class="op">=</span> <span class="st">"Season"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  period <span class="op">=</span> <span class="st">"season"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Season"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
-<span>             pollutant <span class="op">=</span> <span class="st">"pm10"</span>, </span>
-<span>             period <span class="op">=</span> <span class="st">"weekday"</span>, </span>
-<span>             main <span class="op">=</span> <span class="st">"Weekday"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  period <span class="op">=</span> <span class="st">"weekday"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Weekday"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
-<span>             pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
-<span>             period <span class="op">=</span> <span class="st">"hour"</span>, </span>
-<span>             main <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  period <span class="op">=</span> <span class="st">"hour"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Hour"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-polarAnnulus" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarAnnulus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
@@ -558,17 +562,20 @@ Figure&nbsp;9.1: Examples of the <code>polarAnnulus</code> function applied to M
 <p>Where there is interest in considering the wind direction dependence of concentrations, it can be worth filtering for wind speeds. At low wind speed with wind direction becomes highly variable (and is often associated with high pollutant concentrations). Therefore, for some situations it might be worth considering removing the very low wind speeds. The code below provides two ways of doing this using the <span class="pkg">dplyr</span> <code>filter</code> function. The first selects data where the wind speed is &gt;2 m s<sup>-1</sup>. The second part shows how to select wind speeds greater than the 10th percentile, using the <code>quantile</code> function. The latter way of selecting is quite useful, because it is known how much data are selected i.e.&nbsp;in this case 90%. It is worth experimenting with different values because it is also important not to lose information by ignoring wind speeds that provide useful information.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## wind speed &gt;2</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">ws</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>, </span>
-<span>             pollutant <span class="op">=</span> <span class="st">"pm10"</span>, </span>
-<span>             type <span class="op">=</span> <span class="st">"hour"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">ws</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"hour"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## wind speed &gt; 10th percentile</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span></span>
-<span>  <span class="va">mydata</span>, </span>
-<span>  <span class="va">ws</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">ws</span>, probs <span class="op">=</span> <span class="fl">0.1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span></span>
+<span>    <span class="va">mydata</span>,</span>
+<span>    <span class="va">ws</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">ws</span>, probs <span class="op">=</span> <span class="fl">0.1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  pollutant <span class="op">=</span><span class="st">"pm10"</span>, </span>
-<span>  type <span class="op">=</span> <span class="st">"hour"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"hour"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

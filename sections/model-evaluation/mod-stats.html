@@ -630,8 +630,10 @@ IOA = \left\{
 </div>
 <p>It is possible to rank the statistics based on the , which is a good general indicator of model performance.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>, obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span>, </span>
-<span>         rank.name <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modData</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"obs"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"model"</span>,</span>
+<span>  rank.name <span class="op">=</span> <span class="st">"model"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 12
   model       n  FAC2      MB   MGE     NMB  NMGE  RMSE     r         P      COE
@@ -662,9 +664,10 @@ IOA = \left\{
 <p>There are columns representing the receptor location (<code>site</code>), the date, measured values (<code>o3</code>), model predictions (<code>mod</code>) and the model itself (<code>group</code>). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O<sub>3</sub> is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the <code>type</code> option is used to split the calculations by season and model. Finally, the statistics are grouped by the <span class="math inline">\(IOA\)</span> for each season. It is now very easy how model performance changes by season and which models perform best in each season.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">## don't display too many decimal places</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>, </span>
-<span>         obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
-<span>         type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"group"</span><span class="op">)</span>, rank <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"group"</span><span class="op">)</span>, rank <span class="op">=</span> <span class="st">"group"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 36 × 13
    season     group     n  FAC2     MB   MGE     NMB  NMGE  RMSE     r         P
@@ -686,9 +689,11 @@ IOA = \left\{
 <p>Note that it is possible to read the results of the <code>modStats</code> function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.</p>
 <p>The <code>modStats</code> function is much more flexible than indicated above and can be used in lots of interesting ways. The <code>type</code> option in particular makes it possible to split the statistics in numerous ways. For example, to summarise the performance of models by site, model and day of the week:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modStats</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
-<span>         type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"weekday"</span>, <span class="st">"group"</span><span class="op">)</span>, </span>
-<span>         rank <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/modStats.html">modStats</a></span><span class="op">(</span><span class="va">modStats</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"weekday"</span>, <span class="st">"group"</span><span class="op">)</span>,</span>
+<span>  rank <span class="op">=</span> <span class="st">"group"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Similarly, if other data are available e.g.&nbsp;meteorological data or other pollutant species then these variables can also be used to test models against ranges in their values. This capability is potentially very useful because it allows for a much more probing analysis into model evaluation. For example, with wind speed and direction it is easy to consider how model performance varies by wind speed intervals or wind sectors, both of which could reveal important performance characteristics.</p>
 

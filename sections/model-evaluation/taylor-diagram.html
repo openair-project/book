@@ -547,10 +547,11 @@ Taylor, K.E., 2001. Summarizing multiple aspects of model performance in a singl
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>, </span>
-<span>              obs <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>              mod <span class="op">=</span> <span class="st">"mod"</span>, </span>
-<span>              group <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"group"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-TaylorExam" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorExam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -614,8 +615,10 @@ Figure&nbsp;20.2: Taylor Diagrams broken down to highlight how to interpret the 
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select a single site</span></span>
 <span><span class="va">LH</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Lullington.Heath"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">LH</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, </span>
-<span>              group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">LH</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"season"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-TaylorSeas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorSeas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -632,26 +635,32 @@ Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model pe
 <p>There are many other useful comparisons that can be undertaken easily. A few of these are shown below, but not plotted.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## by receptor comparison</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, </span>
-<span>              group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"site"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## by month comparison for a SINGLE site</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>, </span>
-<span>              obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
-<span>              group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"month"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## By season AND daylight/nighttime</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>, </span>
-<span>              obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
-<span>              group <span class="op">=</span> <span class="st">"group"</span>, </span>
-<span>              type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"daylight"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Harwell"</span><span class="op">)</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"group"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"daylight"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also possible to combine different groups of model results. For example, rather than plot how the models perform at a single site it can be useful to show how they compare at all sites. To do this it is necessary to normalise the data because there will be different values of the observed variable across different sites. In this case we can supply the option <code>group = c("group", "site")</code>. This will show the variation by model for <em>all</em> sites. The results are shown in <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>. These results show that in general models tend to predict in similarly good (or bad) ways across all sites as shown by the grouping of points on <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>, </span>
-<span>              group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"site"</span><span class="op">)</span>, </span>
-<span>              normalise <span class="op">=</span> <span class="cn">TRUE</span>, cex <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>              pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
+<span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
+<span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"site"</span><span class="op">)</span>,</span>
+<span>  normalise <span class="op">=</span> <span class="cn">TRUE</span>, cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-Taylor2Grp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-Taylor2Grp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

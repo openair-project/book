@@ -553,10 +553,12 @@ Kunsch, H.R., 1989. The jackknife and the bootstrap for general stationary obser
 <p>The plot shows the deseasonalised monthly mean concentrations of O<sub>3</sub>. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The <span class="math inline">\(\ast\ast\ast\)</span> show that the trend is significant to the 0.001 level.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>         ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, </span>
-<span>         deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>         date.format <span class="op">=</span> <span class="st">"%Y"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>,</span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  date.format <span class="op">=</span> <span class="st">"%Y"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-TheilSen1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -574,16 +576,19 @@ Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseaso
 </div>
 <p>Sometimes it is useful to consider a subset of data, perhaps by excluding some years. This is easy with the <code>filter</code> function. The following code calculates trends for years greater than 1999 i.e.&nbsp;from 2000 onward.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>, </span>
-<span>         pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
-<span>         ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also possible to calculate trends in many other ways e.g.&nbsp;by wind direction. Considering how trends vary by wind direction can be extremely useful because the influence of different sources invariably depends on the direction of the wind. The <code>TheilSen</code> function splits the wind direction into 8 sectors i.e.&nbsp;N, NE, E etc. The Theil-Sen slopes are then calculated for each direction in turn. This function takes rather longer to run because the simulations need to be run eight times in total. Considering concentrations of O<sub>3</sub> again, the output is shown in <a href="#fig-TheilSen2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>. Note that this plot is specifically laid out to assist interpretation, with each panel located at the correct point on the compass. This makes it easy to see immediately that there is essentially no trend in O<sub>3</sub> for southerly winds i.e.&nbsp;where the road itself has the strongest influence. On the other hand the strongest evidence of increasing O<sub>3</sub> are for northerly winds, where the influence of the road is much less. The reason that there is no trend in O<sub>3</sub> for southerly winds is that there is always a great excess of NO, which reacts with O<sub>3</sub> to form NO<sub>2</sub>. At this particular location it will probably take many more years before O<sub>3</sub> concentrations start to increase when the wind direction is southerly. Nevertheless, there will always be <em>some</em> hours that do not have such high concentrations of NO.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, type <span class="op">=</span> <span class="st">"wd"</span>, </span>
-<span>         deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>         date.format <span class="op">=</span> <span class="st">"%Y"</span>,</span>
-<span>         ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, type <span class="op">=</span> <span class="st">"wd"</span>,</span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  date.format <span class="op">=</span> <span class="st">"%Y"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-TheilSen2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -603,8 +608,10 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 \]</span></p>
 <p>where <span class="math inline">\(C_{End}\)</span> and <span class="math inline">\(C_{Start}\)</span> are the mean concentrations for the end and start date, respectively. <span class="math inline">\(N_{years}\)</span> is the number of years (or fractions of) the time series spans.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            slope.percent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  slope.percent <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -621,7 +628,7 @@ Careful with percentages!
 </div>
 <p>The <code>TheilSen</code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly. <em>However, it is necessary to ensure the date field is in the correct format</em>. Assuming data in an Excel file in the format dd/mm/YYYY (e.g. 23/11/2008), it is necessary to convert this to a date format understood by R, as shown below. Similarly, if annual data were available, get the dates in formats like ‘2005-01-01’, ‘2006-01-01’ … and make sure the date is again formatted using <code>as.Date</code>. Note that if dates are pre-formatted as YYYY-mm-dd, then it is sufficient to use <code>as.Date</code> without providing any format information because it is already in the correct format.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, the <code>TheilSen</code> function can consider trends at different sites, provided the input data are correctly formatted. For input, a data frame with three columns is required: date, pollutant and <em>site</em>. The call would then be, for example:</p>
 <div class="cell">
@@ -631,10 +638,11 @@ Careful with percentages!
 <span class="header-section-number">15.2.1</span> Output</h3>
 <p>The <code>TheilSen</code> function provides lots of output data for further analysis or adding to a report. To obtain it, it is necessary to read it into a variable:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, </span>
-<span>                       pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>                       deseason <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                       type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"wd"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This returns a list of two data frames containing all the monthly mean values and trend statistics and an aggregated summary. The first 6 lines are shown next:</p>
 <div class="cell">
