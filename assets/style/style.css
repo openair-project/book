@@ -50,3 +50,7 @@
   border: none;
   padding: 0 2px !important;
 }
+
+figure.quarto-float div.leaflet-control {
+  text-align: left;
+}

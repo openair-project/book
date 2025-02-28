@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.13">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David C Carslaw">
 <meta name="author" content="Jack Davison">
-<meta name="dcterms.date" content="2025-01-22">
+<meta name="dcterms.date" content="2025-02-28">
 <title>The openair book</title>
 <style>
 code{white-space: pre-wrap;}
@@ -31,20 +31,18 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <link href="./sections/intro/intro.html" rel="next">
 <link href="./assets/media/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-3e476e15ae565c222d94875412ae43a1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d3043699f4f525e226433170f63674df.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-956927e86c41ce4880e87387fca38fc6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d191db7fc3c3d9a11a0015f971215285.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e992864f65000e465f13673e1229d3a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-00ef5a51e99a0e2594108084ba4ddfc0.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark-00ef5a51e99a0e2594108084ba4ddfc0.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -446,7 +444,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 22, 2025</p>
+      <p class="date">February 28, 2025</p>
     </div>
   </div>
   
@@ -455,8 +453,8 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header><p><a href="assets/media/plume.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assets/media/plume.png" title="The openair book" class="quarto-cover-image img-fluid"></a></p>
-<section id="preface" class="level1 unnumbered"><h1 class="unnumbered">Preface</h1>
+</header>
+<section id="preface" class="level1 unnumbered"><h1 class="unnumbered">Preface</h1><p><img src="assets/media/plume.png" title="The openair book" class="quarto-cover-image nolightbox img-fluid"></p>
 <section id="hello-and-welcome" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="hello-and-welcome">Hello and welcome</h2>
 <p>This document has been a long time coming. The <span class="pkg">openair</span> project started with funding from the UK Natural Environment Research Council (NERC) over 10 years ago. The main aim was to fill a perceived gap in that there was a lack of a dedicated set of <em>easily accessible, open source</em> tools for analysing air quality data. At that time R was becoming increasingly popular but far, far less than it is today.</p>
 <p>The book is split into broad sections that cover common aspects of air quality data analysis.</p>
@@ -1080,38 +1078,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
+</footer>
 
 
 </body></html>

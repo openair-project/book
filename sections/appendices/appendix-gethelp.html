@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.13">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Jack Davison">
 <title>Appendix D — Getting help – The openair book</title>
@@ -63,13 +63,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/appendices/appendix-trends.html" rel="prev">
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3e476e15ae565c222d94875412ae43a1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d3043699f4f525e226433170f63674df.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-956927e86c41ce4880e87387fca38fc6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d191db7fc3c3d9a11a0015f971215285.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-e992864f65000e465f13673e1229d3a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -526,7 +527,7 @@ The <a href="https://reprex.tidyverse.org">reprex</a> package
 <span class="header-section-number">D.3</span> Providing data</h2>
 <p>Sometimes the hardest thing about producing a reproducible example is providing data. There are many different ways of doing so when getting help with <a href="https://openair-project.github.io/openair/">openair</a>:</p>
 <ul>
-<li><p><strong>Write your example with <code><a href="https://openair-project.github.io/openair/reference/mydata.html">openair::mydata</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/polar_data.html">openairmaps::polar_data</a></code> or <code><a href="https://openair-project.github.io/openairmaps/reference/traj_data.html">openairmaps::traj_data</a></code>.</strong> These data are built in to their respective packages so are easily accessible to anyone.</p></li>
+<li><p><strong>Write your example with <code><a href="https://openair-project.github.io/openair/reference/mydata.html">openair::mydata</a></code>, <code><a href="https://rdrr.io/pkg/openairmaps/man/polar_data.html">openairmaps::polar_data</a></code> or <code><a href="https://rdrr.io/pkg/openairmaps/man/traj_data.html">openairmaps::traj_data</a></code>.</strong> These data are built in to their respective packages so are easily accessible to anyone.</p></li>
 <li><p><strong>Obtain data through <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">openair::importUKAQ()</a></code> or <code><a href="https://openair-project.github.io/worldmet/reference/importNOAA.html">worldmet::importNOAA()</a></code>.</strong> These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.</p></li>
 <li><p><strong>Attach your data (e.g., as a .csv file).</strong> If your problem is specific to your data, you can attach your data to your GitHub issue. Remember that reproducible examples are <em>minimal</em> so you don’t need to provide literally every column or row, only enough to recreate your issue. This also means you can remove private/personal data if it is a concern (e.g., we don’t need real site names or locations, or even the specific species being measured).</p></li>
 <li><p><strong>Use <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code></strong>. If your data is quite small, you can use the <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code> function to generate a line of code that will recreate your data in someone else’s R session.</p></li>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.13">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>3&nbsp; Accessing UK Air Quality Data – The openair book</title>
@@ -64,13 +64,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../sections/data-access/access-met-data.html" rel="next">
 <link href="../../sections/intro/openair-package.html" rel="prev">
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3e476e15ae565c222d94875412ae43a1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d3043699f4f525e226433170f63674df.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-956927e86c41ce4880e87387fca38fc6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d191db7fc3c3d9a11a0015f971215285.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-e992864f65000e465f13673e1229d3a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -712,10 +713,10 @@ $ site_type &lt;chr&gt; "Urban Background", "Urban Background", "Urban Backgroun
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This package contains the <code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
+<p>This package contains the <code><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap()</a></code> function which acts as a wrapper around <code><a href="https://openair-project.github.io/openair/reference/importMeta.html">importMeta()</a></code> and returns a detailed map similar to the one produced below, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional “control menu” can be added to filter for certain sites (e.g., different site types, shown below).</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, control <span class="op">=</span> <span class="st">"site_type"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"aurn"</span>, control <span class="op">=</span> <span class="st">"site_type"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-openairmapsNetworkMap" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-openairmapsNetworkMap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-86046b4255041f387df1" style="width:100%;height:464px;"></div>
