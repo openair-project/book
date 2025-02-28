@@ -30,8 +30,10 @@ data.1999 <- selectByDate(mydata, year = 1999)
 sub.data <- selectByDate(mydata, day = "weekday", hour = 7:19)
 
 ## select weekends between the hours of 7 am to 7 pm in winter (Dec, Jan, Feb)
-sub.data <- selectByDate(mydata, day = "weekend", hour = 7:19,
-                           month = c(12, 1, 2))
+sub.data <- selectByDate(mydata,
+  day = "weekend", hour = 7:19,
+  month = c(12, 1, 2)
+)
 ```
 
 The function can be used directly in other functions. For example, to make a polar plot using year 2000 data:
@@ -100,9 +102,11 @@ We are going to contrast two pollution roses of O~3~ concentration. The first sh
 
 ```{r}
 #| label: episodeSelect
-ted <- selectRunning(ted, pollutant = "o3", 
-                         threshold = 90, 
-                         run.len = 8)
+ted <- selectRunning(ted,
+  pollutant = "o3",
+  threshold = 90,
+  run.len = 8
+)
 ```
 
 The `selectRunning` function returns a new column `criterion` that flags whether the condition is met or not. The user can control the text provided, which by default is "yes" and "no".
@@ -120,8 +124,10 @@ Now we are going to produce two pollution roses shown in @fig-RunningRes. Note, 
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 90%
-pollutionRose(ted, pollutant = "o3", 
-          type = "criterion")
+pollutionRose(ted,
+  pollutant = "o3",
+  type = "criterion"
+)
 ```
 
 The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time to the O~3~ chemistry to take place.
@@ -130,10 +136,12 @@ The code below shows (as an example), that the summer of 2006 had a high proport
 
 ```{r}
 #| eval: false
-timeProp(ted, pollutant = "o3", 
-         proportion = "criterion", 
-         avg.time = "month", 
-         cols = "viridis")
+timeProp(ted,
+  pollutant = "o3",
+  proportion = "criterion",
+  avg.time = "month",
+  cols = "viridis"
+)
 ```
 
 It is also useful to consider what controls the highest NO~x~ concentrations at a central London roadside site. For example, the code below (not plotted) shows very strongly that the persistently highest NO~x~ concentrations are dominated by south-westerly winds. As mentioned earlier, there are many other types of analysis that can be carried out now the data set identifies where the criterion is or is not met.
@@ -141,9 +149,11 @@ It is also useful to consider what controls the highest NO~x~ concentrations at 
 ```{r}
 #| label: runningNOx
 #| eval: false
-episode <- selectRunning(mydata, pollutant = "nox", 
-                         threshold = 500, 
-                         run.len = 5)
+episode <- selectRunning(mydata,
+  pollutant = "nox",
+  threshold = 500,
+  run.len = 5
+)
 
 pollutionRose(episode, pollutant = "nox", type = "criterion")
 ```
@@ -156,8 +166,10 @@ The function is called as follows; in this case to calculate 8-hour rolling mean
 
 ```{r}
 #| label: selectBydate
-mydata <- rollingMean(mydata, pollutant = "o3", width = 8,
-                       new.name = "rollingo3", data.thresh = 75)
+mydata <- rollingMean(mydata,
+  pollutant = "o3", width = 8,
+  new.name = "rollingo3", data.thresh = 75
+)
 tail(mydata)
 ```
 
@@ -197,9 +209,11 @@ Monthly 95th percentile values:
 
 ```{r}
 #| label: percentile95
-monthly <- timeAverage(mydata, avg.time = "month", 
-                       statistic = "percentile",
-                       percentile = 95)
+monthly <- timeAverage(mydata,
+  avg.time = "month",
+  statistic = "percentile",
+  percentile = 95
+)
 monthly
 ```
 
@@ -207,8 +221,10 @@ monthly
 
 ```{r}
 #| label: twoweek
-twoweek <- timeAverage(mydata, avg.time = "2 week", 
-                       data.thresh = 75)
+twoweek <- timeAverage(mydata,
+  avg.time = "2 week",
+  data.thresh = 75
+)
 twoweek
 ```
 
@@ -244,9 +260,10 @@ timeAverage(dat, avg.time = "year")
 
 ```{r}
 #| label: timeAvgFill
-data15 <- timeAverage(mydata, 
-                      avg.time = "15 min", 
-                      fill = TRUE)
+data15 <- timeAverage(mydata,
+  avg.time = "15 min",
+  fill = TRUE
+)
 head(data15, 20)
 ```
 
@@ -260,9 +277,11 @@ For example, to calculate the 25, 50, 75 and 95th percentiles of O~3~ concentrat
 
 ```{r}
 #| label: calcpercentile
-calcPercentile(mydata, pollutant  = "o3", 
-               percentile = c(25, 50, 75, 95),
-               avg.time = "year")
+calcPercentile(mydata,
+  pollutant = "o3",
+  percentile = c(25, 50, 75, 95),
+  avg.time = "year"
+)
 ```
 
 ## Correlation matrices {#sec-corPlot}

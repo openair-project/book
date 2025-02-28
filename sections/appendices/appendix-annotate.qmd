@@ -19,12 +19,15 @@ The basis of [openair]{.pkg} annotations is through the use of the [latticeExtra
 #| fig-width: 10
 library(openair)
 library(lubridate)
-poly.na <- function(x1, y1, x2, y2, col = "black", alpha= 0.2) {
-  for(i in seq(2, length(x1)))
-    if (!any(is.na(y2[c(i - 1, i)])))
+poly.na <- function(x1, y1, x2, y2, col = "black", alpha = 0.2) {
+  for (i in seq(2, length(x1))) {
+    if (!any(is.na(y2[c(i - 1, i)]))) {
       lpolygon(c(x1[i - 1], x1[i], x2[i], x2[i - 1]),
-               c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
-               col = col, border = NA, alpha = alpha)
+        c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
+        col = col, border = NA, alpha = alpha
+      )
+    }
+  }
 }
 
 
@@ -32,65 +35,105 @@ library(latticeExtra)
 
 ## multi-panel time plot
 plt <- timePlot(selectByDate(mydata, year = 2003, month = 8),
-         pollutant = c("nox", "o3", "pm25", "pm10", "ws"), y.relation = "free")$plot
+  pollutant = c("nox", "o3", "pm25", "pm10", "ws"), y.relation = "free"
+)$plot
 
 ## [1]
-plt <- plt + layer(lpolygon(x = c(ymd("2003-08-07", tz = "GMT"), ymd("2003-08-07", tz = "GMT"),
-                                              ymd("2003-08-12", tz = "GMT"), 
-                                  ymd("2003-08-12", tz = "GMT")),
-                                        y = c(-20, 600, 600, -20), col = "grey", border = NA),
-                               under = TRUE, rows = 2)
+plt <- plt + layer(
+  lpolygon(
+    x = c(
+      ymd("2003-08-07", tz = "GMT"), ymd("2003-08-07", tz = "GMT"),
+      ymd("2003-08-12", tz = "GMT"),
+      ymd("2003-08-12", tz = "GMT")
+    ),
+    y = c(-20, 600, 600, -20), col = "grey", border = NA
+  ),
+  under = TRUE, rows = 2
+)
 
 ## [2]
 ## add text in specific rows
-plt <- plt + layer(ltext(x = ymd_hm("2003-08-09 12:00"), y = 50, labels = "!!episode!!",
-                                    col = "yellow", font = 2, cex = 1.5), rows = 2)
+plt <- plt + layer(ltext(
+  x = ymd_hm("2003-08-09 12:00"), y = 50, labels = "!!episode!!",
+  col = "yellow", font = 2, cex = 1.5
+), rows = 2)
 ## [3]
 ## small rectangle in one panel with semi-transparency
-plt <- plt + layer(lpolygon(x = c(ymd("2003-08-21", tz = "GMT"), ymd("2003-08-21", tz = "GMT"),
-                                             ymd("2003-08-23", tz = "GMT"), 
-                                  ymd("2003-08-23", tz = "GMT")),
-                                       y = c(4, 8, 8, 4), col = "blue", border = NA,
-                                       alpha = 0.2), rows = 5)
+plt <- plt + layer(lpolygon(
+  x = c(
+    ymd("2003-08-21", tz = "GMT"), ymd("2003-08-21", tz = "GMT"),
+    ymd("2003-08-23", tz = "GMT"),
+    ymd("2003-08-23", tz = "GMT")
+  ),
+  y = c(4, 8, 8, 4), col = "blue", border = NA,
+  alpha = 0.2
+), rows = 5)
 ## [4]
 ## arrows and text
 plt <- plt + layer(larrows(ymd_hm("2003-08-01 00:00"), 100, ymd_hm("2003-08-08 14:00"), 100,
-                                     code = 3), rows = 1)
+  code = 3
+), rows = 1)
 
 plt <- plt + layer(ltext(x = ymd("2003-08-04", tz = "GMT"), y = 200, labels = "some missing data"),
-                              rows = 1)
+  rows = 1
+)
 ## [5]
 ## reference line in one panel, with text
 plt <- plt + layer(panel.abline(v = ymd("2003-08-25", tz = "GMT"), lty = 5), rows = 4)
-plt <- plt + layer(ltext(x = ymd_hm("2003-08-25 08:00"), y = 60,
-                                    labels = "reference line", srt = 90), rows = 4)
+plt <- plt + layer(ltext(
+  x = ymd_hm("2003-08-25 08:00"), y = 60,
+  labels = "reference line", srt = 90
+), rows = 4)
 ## [6]
 ## add a specific point
 plt <- plt + layer(lpoints(x[200], y[200], pch = 16, cex = 1.5), rows = 4)
 
 ## [7]
 ## label max ozone
-plt <- plt + layer({maxy <- which.max(y);
-                               ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
-                                                           pos = 4)}, rows = 2)
+plt <- plt + layer(
+  {
+    maxy <- which.max(y)
+    ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
+      pos = 4
+    )
+  },
+  rows = 2
+)
 
-plt <- plt + layer({maxy <- which.max(y); lpoints(x[maxy], y[maxy],
-                                                             col = "black", pch = 16)}, rows = 2)
+plt <- plt + layer(
+  {
+    maxy <- which.max(y)
+    lpoints(x[maxy], y[maxy],
+      col = "black", pch = 16
+    )
+  },
+  rows = 2
+)
 
 ## [8] fill polygon below data; deal with gaps...
-plt <- plt + layer({id <- which(x >= ymd("2003-08-11", tz = "GMT") & 
-                                  x <= ymd("2003-08-25", tz = "GMT"));
-                               poly.na(x[id], y[id], x[id], rep(0, length(id)), col = "darkorange")}, rows = 1)
+plt <- plt + layer(
+  {
+    id <- which(x >= ymd("2003-08-11", tz = "GMT") &
+      x <= ymd("2003-08-25", tz = "GMT"))
+    poly.na(x[id], y[id], x[id], rep(0, length(id)), col = "darkorange")
+  },
+  rows = 1
+)
 
 ## [8] fill polygon below data; deal with gaps - bands
 plt <- plt + layer(poly.na(x, y, x, rep(0, length(x)), col = "green", alpha = 1),
-                              rows = 3)
-plt <- plt + layer(poly.na(x, ifelse(y <20, NA, y), x,
-                                      rep(20, length(x)), col = "yellow", alpha = 1), rows = 3)
-plt <- plt + layer(poly.na(x, ifelse(y <30, NA, y), x, rep(30, length(x)), col = "orange", alpha = 1),
-                              rows = 3)
-plt <- plt + layer(poly.na(x, ifelse(y <40, NA, y), x, rep(40, length(x)), col = "red", alpha = 1),
-                              rows = 3)
+  rows = 3
+)
+plt <- plt + layer(poly.na(x, ifelse(y < 20, NA, y), x,
+  rep(20, length(x)),
+  col = "yellow", alpha = 1
+), rows = 3)
+plt <- plt + layer(poly.na(x, ifelse(y < 30, NA, y), x, rep(30, length(x)), col = "orange", alpha = 1),
+  rows = 3
+)
+plt <- plt + layer(poly.na(x, ifelse(y < 40, NA, y), x, rep(40, length(x)), col = "red", alpha = 1),
+  rows = 3
+)
 plt
 ```
 
@@ -110,8 +153,9 @@ library(openair)
 library(lubridate)
 library(latticeExtra)
 timePlot(selectByDate(mydata, year = 2003, month = "aug"),
-         pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
-         y.relation = "free")
+  pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
+  y.relation = "free"
+)
 ```
 
 So, considering @fig-timePlotAnnotate , this is how the text 'some missing data' was added to the top panel.
@@ -120,8 +164,10 @@ So, considering @fig-timePlotAnnotate , this is how the text 'some missing data'
 #| label: annotateP1
 #| eval: false
 trellis.last.object() +
-    layer(ltext(x = ymd_hm("2003-08-04 12:00"), y = 200,
-                labels = "some missing data"), rows = 1)
+  layer(ltext(
+    x = ymd_hm("2003-08-04 12:00"), y = 200,
+    labels = "some missing data"
+  ), rows = 1)
 ```
 
 So what does this do? First, the `trellis.last.object()` is simply the last plot that was plotted. Next the `layer` function is used to add some text. The text itself is added using the `ltext` [lattice]{.pkg} function. It is worth having a look at the help for `ltext` as that gives an overview of all the common annotations and other options. We have chosen to plot the text at position x = '2003-08-04' and y = 200 and the label itself. A useful option to `ltext` is `pos`. Values can be 1, 2, 3 and 4, and indicate positions below (the default), to the left of, above and to the right of the specified coordinates
@@ -137,15 +183,21 @@ The polygon could of course be horizontal and more than one producing a series o
 #| eval: false
 ## add shaded polygon
 trellis.last.object() +
-    layer(lpolygon(x = c(ymd_hm("2003-08-07 00:00"),
-                   ymd_hm("2003-08-07 00:00"), ymd_hm("2003-08-12 00:00"),
-                   ymd_hm("2003-08-12 00:00")), y = c(-20, 600, 600, -20),
-                   col = "grey", border = NA), under = TRUE, rows = 2)
+  layer(lpolygon(
+    x = c(
+      ymd_hm("2003-08-07 00:00"),
+      ymd_hm("2003-08-07 00:00"), ymd_hm("2003-08-12 00:00"),
+      ymd_hm("2003-08-12 00:00")
+    ), y = c(-20, 600, 600, -20),
+    col = "grey", border = NA
+  ), under = TRUE, rows = 2)
 ## add text
 trellis.last.object() +
-    layer(ltext(x = ymd_hm("2003-08-09 12:00"), y = 50,
-                labels = "!!episode!!", col = "yellow",
-                font = 2, cex = 1.5), rows = 2)
+  layer(ltext(
+    x = ymd_hm("2003-08-09 12:00"), y = 50,
+    labels = "!!episode!!", col = "yellow",
+    font = 2, cex = 1.5
+  ), rows = 2)
 ```
 
 The small shaded, semi-transparent area shown in the bottom panel was added as follows:
@@ -155,10 +207,14 @@ The small shaded, semi-transparent area shown in the bottom panel was added as f
 #| eval: false
 ## add shaded polygon
 plt <- plt +
-    layer(lpolygon(x = c(ymd("2003-08-21"), ymd("2003-08-21"),
-                   ymd_hm("2003-08-23 00:00"), ymd_hm("2003-08-23 00:00")),
-                   y = c(4, 8, 8, 4), col = "blue", border = NA,
-                   alpha = 0.2), rows = 5)
+  layer(lpolygon(
+    x = c(
+      ymd("2003-08-21"), ymd("2003-08-21"),
+      ymd_hm("2003-08-23 00:00"), ymd_hm("2003-08-23 00:00")
+    ),
+    y = c(4, 8, 8, 4), col = "blue", border = NA,
+    alpha = 0.2
+  ), rows = 5)
 ```
 
 ## Adding an arrow
@@ -169,9 +225,11 @@ The arrow shown on the first panel of @fig-timePlotAnnotate was added as follows
 #| label: annotateP3
 #| eval: false
 trellis.last.object() +
-    layer(larrows(ymd_hm("2003-08-01 00:00"), 100,
-                  ymd_hm("2003-08-08 14:00"),
-                  100, code = 3, angle = 30), rows = 1)
+  layer(larrows(ymd_hm("2003-08-01 00:00"), 100,
+    ymd_hm("2003-08-08 14:00"),
+    100,
+    code = 3, angle = 30
+  ), rows = 1)
 ```
 
 ## Adding a reference line and text
@@ -182,11 +240,14 @@ This code adds a vertical dashed reference line shown in the 4th panel (PM~10~) 
 #| label: annotateP4
 #| eval: false
 trellis.last.object() +
-    layer(panel.abline(v = ymd_hm("2003-08-25 00:00"), lty = 5),
-          rows = 4)
+  layer(panel.abline(v = ymd_hm("2003-08-25 00:00"), lty = 5),
+    rows = 4
+  )
 trellis.last.object() +
-    layer(ltext(x = ymd_hm("2003-08-25 08:00"), y = 60,
-                labels = "reference line", srt = 90), rows = 4)
+  layer(ltext(
+    x = ymd_hm("2003-08-25 08:00"), y = 60,
+    labels = "reference line", srt = 90
+  ), rows = 4)
 ```
 
 ## Highlight a specific point
@@ -200,8 +261,9 @@ It is possible to refer to a specific point in a panel simply by indexing the po
 #| eval: false
 ## add a specific point
 trellis.last.object() +
-    layer(lpoints(x[200], y[200], pch = 16, cex = 1.5),
-          rows = 4)
+  layer(lpoints(x[200], y[200], pch = 16, cex = 1.5),
+    rows = 4
+  )
 ```
 
 What if we wanted to highlight the maximum O~3~ concentration? It is possible to work out the index first and then use that to refer to that point. Note the `}` to allow for the code to span multiple commands.
@@ -211,15 +273,25 @@ What if we wanted to highlight the maximum O~3~ concentration? It is possible to
 #| eval: false
 ## add a point to the max O3 concentration
 trellis.last.object() +
-    layer({maxy <- which.max(y);
-           lpoints(x[maxy], y[maxy], col = "black", pch = 16)},
-          rows = 2)
+  layer(
+    {
+      maxy <- which.max(y)
+      lpoints(x[maxy], y[maxy], col = "black", pch = 16)
+    },
+    rows = 2
+  )
 
 ## label max ozone
 trellis.last.object() +
-    layer({maxy <- which.max(y);
-           ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
-                 pos = 4)}, rows = 2)
+  layer(
+    {
+      maxy <- which.max(y)
+      ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
+        pos = 4
+      )
+    },
+    rows = 2
+  )
 ```
 
 ## Add a filled polygon
@@ -230,11 +302,14 @@ It can be seen in the top panel of @fig-timePlotAnnotate that some data are high
 #| label: polyNA
 #| eval: false
 poly.na <- function(x1, y1, x2, y2, col = "black", alpha = 0.2) {
-  for(i in seq(2, length(x1)))
-    if (!any(is.na(y2[c(i - 1, i)])))
+  for (i in seq(2, length(x1))) {
+    if (!any(is.na(y2[c(i - 1, i)]))) {
       lpolygon(c(x1[i - 1], x1[i], x2[i], x2[i - 1]),
-               c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
-               col = col, border = NA, alpha = alpha)
+        c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
+        col = col, border = NA, alpha = alpha
+      )
+    }
+  }
 }
 ```
 
@@ -244,10 +319,16 @@ This time we work out the ids of the data spanning an area of interest. Then the
 #| label: annotateP7
 #| eval: false
 trellis.last.object() +
-    layer({id <- which(x >= ymd_hm("2003-08-11 00:00") &
-                       x <= ymd_hm("2003-08-25 00:00"));
-           poly.na(x[id], y[id], x[id], rep(0, length(id)),
-                   col = "darkorange")}, rows = 1)
+  layer(
+    {
+      id <- which(x >= ymd_hm("2003-08-11 00:00") &
+        x <= ymd_hm("2003-08-25 00:00"))
+      poly.na(x[id], y[id], x[id], rep(0, length(id)),
+        col = "darkorange"
+      )
+    },
+    rows = 1
+  )
 ```
 
 ## Add air quality bands as polygons
@@ -258,20 +339,27 @@ It is a simple extension to go from using a polygon below the data to polygons a
 #| label: annotateP8
 #| eval: false
 trellis.last.object() +
-    layer(poly.na(x, y, x, rep(0, length(x)),
-                  col = "green", alpha = 1), rows = 3)
+  layer(poly.na(x, y, x, rep(0, length(x)),
+    col = "green", alpha = 1
+  ), rows = 3)
 trellis.last.object() +
-    layer(poly.na(x, ifelse(y <20, NA, y), x,
-                  rep(20, length(x)), col = "yellow", alpha = 1),
-          rows = 3)
+  layer(
+    poly.na(x, ifelse(y < 20, NA, y), x,
+      rep(20, length(x)),
+      col = "yellow", alpha = 1
+    ),
+    rows = 3
+  )
 trellis.last.object() +
-    layer(poly.na(x, ifelse(y <30, NA, y),
-                  x, rep(30, length(x)),
-                  col = "orange", alpha = 1), rows = 3)
+  layer(poly.na(x, ifelse(y < 30, NA, y),
+    x, rep(30, length(x)),
+    col = "orange", alpha = 1
+  ), rows = 3)
 trellis.last.object() +
-    layer(poly.na(x, ifelse(y <40, NA, y),
-                  x, rep(40, length(x)),
-                  col = "red", alpha = 1), rows = 3)
+  layer(poly.na(x, ifelse(y < 40, NA, y),
+    x, rep(40, length(x)),
+    col = "red", alpha = 1
+  ), rows = 3)
 ```
 
 ## Polar plot examples
@@ -283,7 +371,7 @@ One useful approach is to be able to draw an arc, perhaps highlighting an area o
 ```{r}
 #| label: arcCode
 arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
-                lower = 1, upper = 10){
+                lower = 1, upper = 10) {
   ## function to work out coordinates for an arc sector
   if (theta2 < theta1) {
     ang1 <- seq(theta1, 360, length = abs(theta2 - theta1))
@@ -294,7 +382,6 @@ arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
     ang1 <- seq(theta1, 360, length = abs(theta4 - theta3))
     ang2 <- seq(0, theta2, length = abs(theta4 - theta3))
     angles.high <- c(ang1, ang2)
-
   } else {
     angles.low <- seq(theta1, theta2, length = abs(theta2 - theta1))
     angles.high <- seq(theta3, theta4, length = abs(theta4 - theta3))
@@ -304,7 +391,6 @@ arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
   x2 <- rev(upper * sin(pi * angles.high / 180))
   y2 <- rev(upper * cos(pi * angles.high / 180))
   data.frame(x = c(x1, x2), y = c(y1, y2))
-
 }
 ```
 
@@ -316,11 +402,11 @@ arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
 #| out-width: 60%
 #| fig-keep: last
 #| echo: false
-arc <- function(theta1 = 30, theta2 = 60, theta3 =theta1, theta4 = theta2,
-                lower = 1, upper = 10){
+arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
+                lower = 1, upper = 10) {
   ## function to work out coordinates for an arc sector
   if (theta2 < theta1) {
-    ang1 <- seq(theta1, 360, length= abs(theta2 - theta1))
+    ang1 <- seq(theta1, 360, length = abs(theta2 - theta1))
     ang2 <- seq(0, theta2, length = abs(theta2 - theta1))
     angles.low <- c(ang1, ang2)
 
@@ -328,7 +414,6 @@ arc <- function(theta1 = 30, theta2 = 60, theta3 =theta1, theta4 = theta2,
     ang1 <- seq(theta1, 360, length = abs(theta4 - theta3))
     ang2 <- seq(0, theta2, length = abs(theta4 - theta3))
     angles.high <- c(ang1, ang2)
-
   } else {
     angles.low <- seq(theta1, theta2, length = abs(theta2 - theta1))
     angles.high <- seq(theta3, theta4, length = abs(theta4 - theta3))
@@ -338,18 +423,23 @@ arc <- function(theta1 = 30, theta2 = 60, theta3 =theta1, theta4 = theta2,
   x2 <- rev(upper * sin(pi * angles.high / 180))
   y2 <- rev(upper * cos(pi * angles.high / 180))
   data.frame(x = c(x1, x2), y = c(y1, y2))
-
 }
 
 plt <- polarPlot(mydata, pollutant = "so2", col = "turbo")$plot
 plt <- plt + layer(ltext(-12, -12, "A", cex = 2))
-plt <- plt + layer(ltext(10, 1, "B", cex = 2, col= "white"))
+plt <- plt + layer(ltext(10, 1, "B", cex = 2, col = "white"))
 plt <- plt + layer(lsegments(0, 0, -11.5, -11.5, lty = 5))
 plt <- plt +
-    layer(lpolygon(x = arc(theta1 = 60, theta2 = 120,
-                   lower = 2, upper = 15)$x,
-                   y = arc(theta1 = 60, theta2 = 120,
-                   lower = 2, upper = 15)$y, lty = 1, lwd = 2))
+  layer(lpolygon(
+    x = arc(
+      theta1 = 60, theta2 = 120,
+      lower = 2, upper = 15
+    )$x,
+    y = arc(
+      theta1 = 60, theta2 = 120,
+      lower = 2, upper = 15
+    )$y, lty = 1, lwd = 2
+  ))
 plt
 ```
 
@@ -364,10 +454,14 @@ trellis.last.object() + layer(ltext(10, 2, "B", cex = 2, col = "white"))
 trellis.last.object() + layer(lsegments(0, 0, -11.5, -11.5, lty = 5))
 ## add and arc to highlight area of interest
 trellis.last.object() +
-    layer(lpolygon(x = arc(theta1 = 60, theta2 = 120, lower = 2,
-                   upper = 15)$x, y = arc(theta1 = 60,
-                                  theta2 = 120, lower = 2,
-                                  upper = 15)$y, lty = 1, lwd = 2))
+  layer(lpolygon(x = arc(
+    theta1 = 60, theta2 = 120, lower = 2,
+    upper = 15
+  )$x, y = arc(
+    theta1 = 60,
+    theta2 = 120, lower = 2,
+    upper = 15
+  )$y, lty = 1, lwd = 2))
 ```
 
 ## Using grid graphics --- identify locations interactively
@@ -399,8 +493,10 @@ What should happen is that in the R console the coordinates are given for that p
 ```{r}
 #| label: addGridText
 #| eval: false
-grid.text(x = 0.503, y = 0.338, label = "here!",
-          gp = gpar(cex = 2, font = 2, col = "blue"))
+grid.text(
+  x = 0.503, y = 0.338, label = "here!",
+  gp = gpar(cex = 2, font = 2, col = "blue")
+)
 ```
 
 Even with this basic approach, some sophisticated annotation is possible with *any* [openair]{.pkg} plot. There are many other functions that can be used from the grid package that would allow for polygons, segments and other features to be drawn is a similar way to the examples earlier in this section. Continuing with the same example, here is how to add an arrow pointing to the maximum \nox concentration shown on the top plot for Saturday (again using the `grid.locator` function).
@@ -408,7 +504,9 @@ Even with this basic approach, some sophisticated annotation is possible with *a
 ```{r}
 #| label: addGridArrow
 #| eval: false
-grid.lines(x = c(0.736, 0.760), y = c(0.560, 0.778),
-           arrow = arrow())
+grid.lines(
+  x = c(0.736, 0.760), y = c(0.560, 0.778),
+  arrow = arrow()
+)
 grid.text(x = 0.736, y = 0.560, label = "maximum", just = "left")
 ```

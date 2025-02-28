@@ -56,7 +56,7 @@ Now it should be possible to make the plot by setting the method option to `meth
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-scatterPlot(data2003, x = "nox", y = "no2", method = "hexbin", col= "turbo")
+scatterPlot(data2003, x = "nox", y = "no2", method = "hexbin", col = "turbo")
 ```
 
 Note that when `method = "hexbin"` there are various options that are useful e.g. a border around each bin and the number of bins. For example, to place a grey border around each bin and set the bin size try:
@@ -64,9 +64,11 @@ Note that when `method = "hexbin"` there are various options that are useful e.g
 ```{r}
 #| label: hexbinAlt
 #| eval: false
-scatterPlot(mydata, x = "nox", y = "no2", 
-            method = "hexbin", col = "turbo",
-            border = "grey", xbin = 15)
+scatterPlot(mydata,
+  x = "nox", y = "no2",
+  method = "hexbin", col = "turbo",
+  border = "grey", xbin = 15
+)
 ```
 
 The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in `scatterPlot` with the `method =   "density"` option. Such a plot is shown in @fig-scatterPlotDens.
@@ -78,9 +80,10 @@ The hexagonal binning and other binning methods are useful but often the choice 
 #| fig-height: 4
 #| out-width: 60%
 scatterPlot(selectByDate(mydata, year = 2003),
-            x = "nox", y = "no2",
-            method = "density", 
-            cols = "turbo")
+  x = "nox", y = "no2",
+  method = "density",
+  cols = "turbo"
+)
 ```
 
 Sometimes it is useful to consider how the relationship between two variables varies by levels of a third. In [openair]{.pkg} this approach is possible by setting the option `type`. When `type` is another numeric variables, four plots are produced for different quantiles of that variable. We illustrate this point by considering how the relationship between NO~x~ and NO~2~ varies with different levels of O~3~. We also take the opportunity to not plot the smooth line, but plot a linear fit instead and force the layout to be a 2 by 2 grid.
@@ -91,9 +94,11 @@ Sometimes it is useful to consider how the relationship between two variables va
 #| fig-width: 6
 #| fig-height: 6
 #| out-width: 65%
-scatterPlot(data2003, x = "nox", y = "no2", 
-            type = "o3", smooth = FALSE,
-            linear = TRUE, layout = c(2, 2))
+scatterPlot(data2003,
+  x = "nox", y = "no2",
+  type = "o3", smooth = FALSE,
+  linear = TRUE, layout = c(2, 2)
+)
 ```
 
 Below is an extended example that brings together data manipulation, refined plot options and linear fitting of two variables with NO~x~. The aim is to plot the weekly concentration of NO~x~ against PM~10~ and PM~2.5~ and fit linear equations to both relationships. To do this we need the $x$ variable as NO~x~ and the $y$ variable as PM~10~ or PM~2.5~, which means we also need a column that will act as a grouping column i.e. identifies whether the $y$ is PM~10~ or PM~2.5~.
@@ -108,8 +113,10 @@ subdat <- select(mydata, date, nox, pm10, pm25) # calculate weekly averages
 subdat <- timeAverage(subdat, avg.time = "week")
 
 # reshape so we have two variable columns
-subdat <- pivot_longer(subdat, cols = c(pm10, pm25), 
-                       names_to = "pollutant")
+subdat <- pivot_longer(subdat,
+  cols = c(pm10, pm25),
+  names_to = "pollutant"
+)
 head(subdat)
 ```
 
@@ -121,14 +128,16 @@ Now we will plot weekly NO~x~ versus PM~10~ and PM~2.5~ and fit a linear equatio
 #| fig-width: 6
 #| fig-height: 4.5
 #| out-width: 67%
-scatterPlot(subdat, x = "nox", y = "value", 
-            group = "pollutant", 
-            pch = 21:22, cex = 1.6, 
-            fill = c("dodgerblue", "tomato"), 
-            col = "white", 
-            linear = TRUE, 
-            xlab = "nox (ppb)", 
-            ylab = "PM concentration (ug/m3)")
+scatterPlot(subdat,
+  x = "nox", y = "value",
+  group = "pollutant",
+  pch = 21:22, cex = 1.6,
+  fill = c("dodgerblue", "tomato"),
+  col = "white",
+  linear = TRUE,
+  xlab = "nox (ppb)",
+  ylab = "PM concentration (ug/m3)"
+)
 ```
 
 To gain a better idea of where the data lie and the linear fits, adding some transparency helps:
@@ -136,15 +145,17 @@ To gain a better idea of where the data lie and the linear fits, adding some tra
 ```{r}
 #| label: scatterPlotTwoAlpha
 #| eval: false
-scatterPlot(subdat, x = "nox", y = "value", 
-            group = "variable", 
-            pch = 21:22, cex = 1.6, 
-            fill = c("dodgerblue", "tomato"), 
-            col = "white", 
-            linear = TRUE, 
-            xlab = "nox (ppb)", 
-            ylab = "PM concentration (ug/m3)",
-            alpha = 0.2)
+scatterPlot(subdat,
+  x = "nox", y = "value",
+  group = "variable",
+  pch = 21:22, cex = 1.6,
+  fill = c("dodgerblue", "tomato"),
+  col = "white",
+  linear = TRUE,
+  xlab = "nox (ppb)",
+  ylab = "PM concentration (ug/m3)",
+  alpha = 0.2
+)
 ```
 
 The above example will also work with `type`. For example, to consider how NO~x~ againts PM~10~ and PM~2.5~ varies by season:
@@ -152,14 +163,16 @@ The above example will also work with `type`. For example, to consider how NO~x~
 ```{r}
 #| label: scatterTwoSeas
 #| eval: false
-scatterPlot(subdat, x = "nox", y = "value", 
-            group = "variable", 
-            pch = 21:22, cex = 2, 
-            fill = c("dodgerblue", "tomato"), 
-            col = "white", linear = TRUE, 
-            xlab = "nox (ppb)", 
-            ylab = "PM concentration (ug/m3)", 
-            type = "season")
+scatterPlot(subdat,
+  x = "nox", y = "value",
+  group = "variable",
+  pch = 21:22, cex = 2,
+  fill = c("dodgerblue", "tomato"),
+  col = "white", linear = TRUE,
+  xlab = "nox (ppb)",
+  ylab = "PM concentration (ug/m3)",
+  type = "season"
+)
 ```
 
 Finally, we show how to plot a continuous colour scale for a third *numeric* variable setting the value of `z` to the third variable. @fig-scatterPlot4 shows again the relationship between NO~x~ and NO~2~ but this time colour-coded by the concentration of O~3~. We also take the opportunity to split the data into seasons and weekday/weekend by setting `type =   c("season", "weekend")`. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O~3~ and colouring the data by the concentration of O~3~ helps to show how O~3~ concentrations affect NO~2~ concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO~2~ concentrations are associated with high O~3~ concentrations. Indeed there are some hours where NO~2~ is \>100 ppb at quite low concentrations of NO~x~ ($\approx$ 200 ppb). It would also be interesting instead of using O~3~ concentrations from Marylebone Road to use O~3~ from a background site.
@@ -171,10 +184,11 @@ Finally, we show how to plot a continuous colour scale for a third *numeric* var
 #| fig-cap: Scatter plot of hourly NO~x~ vs. NO~2~ at Marylebone Road by different levels of O~3~ split by season and weekday-weekend.
 #| fig-width: 10
 #| fig-height: 5
-scatterPlot(data2003, 
-            x = "nox", y = "no2", z = "o3", 
-            type = c("season", "weekend"),
-            limits = c(0, 30))
+scatterPlot(data2003,
+  x = "nox", y = "no2", z = "o3",
+  type = c("season", "weekend"),
+  limits = c(0, 30)
+)
 ```
 
 @fig-scatterPlot5 shows that `scatterPlot` can also handle dates on the x-axis; in this case shown for SO~2~ concentrations coloured by wind direction for August 2003.
@@ -185,9 +199,10 @@ scatterPlot(data2003,
 #| fig-width: 6
 #| fig-height: 4
 #| out-width: 65%
-scatterPlot(selectByDate(data2003, month = 8), 
-            x = "date", y = "so2",
-             z = "wd")
+scatterPlot(selectByDate(data2003, month = 8),
+  x = "date", y = "so2",
+  z = "wd"
+)
 ```
 
 Similar to @sec-timePlot, `scatterPlot` can also plot wind vector arrows if wind speed and wind direction are available in the data frame. @fig-scatterPlotwswd shows an example of using the `windflow` option. The Figure also sets many other options including showing the concentration of O~3~ as a colour, setting the colour scale used and selecting a few days of interest using the `selectByDate` function. @fig-scatterPlotwswd shows that when the wind direction changes to northerly, the concentration of NO~2~ decreases and that of O~3~ increases.
@@ -198,11 +213,15 @@ Similar to @sec-timePlot, `scatterPlot` can also plot wind vector arrows if wind
 #| fig-height: 4
 #| fig-width: 6
 #| out-width: 65%
-scatterPlot(selectByDate(mydata, start = "1/6/2001", 
-                         end = "5/6/2001"), 
-            x = "date", y = "no2", z = "o3", 
-            col = "increment", 
-            windflow = list(scale = 0.15), 
-            key.footer = "o3\n (ppb)", 
-            main = NULL, ylab = "no2 (ppb)")
+scatterPlot(
+  selectByDate(mydata,
+    start = "1/6/2001",
+    end = "5/6/2001"
+  ),
+  x = "date", y = "no2", z = "o3",
+  col = "increment",
+  windflow = list(scale = 0.15),
+  key.footer = "o3\n (ppb)",
+  main = NULL, ylab = "no2 (ppb)"
+)
 ```

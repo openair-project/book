@@ -12,7 +12,7 @@ This section shows an example output and use, using our data frame `mydata`. The
 
 ```{r}
 #| label: fig-polarFreqa
-#| fig-cap: Use of `polarFreq` function to plot wind speed/directions. Each cell gives the total number of hours the wind was from that wind speed/direction in a particular year. The number of hours is coded as a colour scale shown to the right. The scale itself is non-linear to help show the overall distribution. The dashed circular grey lines show the wind speed scale. 
+#| fig-cap: Use of `polarFreq` function to plot wind speed/directions. Each cell gives the total number of hours the wind was from that wind speed/direction in a particular year. The number of hours is coded as a colour scale shown to the right. The scale itself is non-linear to help show the overall distribution. The dashed circular grey lines show the wind speed scale.
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
@@ -44,10 +44,12 @@ The code required to make @fig-polarFreqMean and @fig-polarFreqWeightedMean is s
 #| fig-cap: Use of `polarFreq` function to plot mean SO2 concentrations (ppb) by wind speed/directions and year.
 #| fig-width: 8
 #| fig-height: 8
-polarFreq(mydata, pollutant = "so2", 
-          type = "year",
-           statistic = "mean", 
-          min.bin = 2)
+polarFreq(mydata,
+  pollutant = "so2",
+  type = "year",
+  statistic = "mean",
+  min.bin = 2
+)
 ```
 
 ```{r}
@@ -56,10 +58,12 @@ polarFreq(mydata, pollutant = "so2",
 #| fig-width: 8
 #| fig-height: 8
 # weighted mean SO2 concentrations
-polarFreq(mydata, pollutant = "so2", 
-          type = "year",
-           statistic = "weighted.mean", 
-          min.bin = 2)
+polarFreq(mydata,
+  pollutant = "so2",
+  type = "year",
+  statistic = "weighted.mean",
+  min.bin = 2
+)
 ```
 
 Users are encouraged to try out other plot options. However, one potentially useful plot is to select a few specific years of user interest. For example, what if you just wanted to compare two years e.g. 2000 and 2003? This is easy to do by sending a subset of data to the function. Use here can be made of the [openair]{.pkg} `selectByDate` function (see @sec-selectByDate).
@@ -68,8 +72,9 @@ Users are encouraged to try out other plot options. However, one potentially use
 #| eval: false
 # wind rose for just 2000 and 2003
 polarFreq(selectByDate(mydata, year = c(2000, 2003)),
-          cols = "turbo",
-          type = "year")
+  cols = "turbo",
+  type = "year"
+)
 ```
 
 The `polarFreq` function can also be used to gain an idea about the wind directions that contribute most to the overall mean concentrations. As already shown, use of the option `statistic =   "weighted.mean"` will show the percentage contribution by wind direction and wind speed bin. However, often it is unnecessary to consider different wind speed intervals. To make the plot more effective, a few options are set as shown in @fig-polarFreqAttr. First, the `statistic = "weighted.mean"` is chosen to ensure that the plot shows concentrations weighted by their frequency of occurrence of wind direction. For this plot, we are mostly interested in just the contribution by wind direction and not wind speed. Setting the `ws.int` to be above the maximum wind speed in the data set ensures that all data are shown in one interval. Rather than having a square-root transform applied to the colour scale, we choose to have a linear scale by setting `trans = FALSE`. Finally, to show a 'disk', the `offset` is set at 80. Increasing the value of the offset will narrow the disk.
@@ -82,8 +87,10 @@ While @fig-polarFreqAttr is useful --- e.g. it clearly shows that concentrations
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-polarFreq(mydata, pollutant = "nox", ws.int = 30, 
-          statistic = "weighted.mean",
-          offset = 80, trans = FALSE, 
-          col = "heat")
+polarFreq(mydata,
+  pollutant = "nox", ws.int = 30,
+  statistic = "weighted.mean",
+  offset = 80, trans = FALSE,
+  col = "heat"
+)
 ```

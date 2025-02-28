@@ -36,9 +36,11 @@ A slightly more interesting plot is shown in @fig-percentileRoseSO2 for SO~2~ co
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-percentileRose(mydata, pollutant = "so2",
-               percentile = c(25, 50, 75, 90, 95, 99, 99.9),
-               col = "brewer1", key.position = "right", smooth = TRUE)
+percentileRose(mydata,
+  pollutant = "so2",
+  percentile = c(25, 50, 75, 90, 95, 99, 99.9),
+  col = "brewer1", key.position = "right", smooth = TRUE
+)
 ```
 
 Lots more insight can be gained by considering how percentile values vary by other factors i.e. conditioning. For example, what do O~3~ concentrations look like split by season and whether it is daylight or nighttime hours? We can set the type to consider season *and* whether it is daylight or nighttime.[^percentile-roses-1] This Figure reveals some interesting features. First, O~3~ concentrations are higher in the spring and summer and when the wind is from the north. O~3~ concentrations are higher on average at this site in spring due to the peak of northern hemispheric O~3~ and to some extent local production. This may also explain why O~3~ concentrations are somewhat higher at nighttime in spring compared with summer. Second, peak O~3~ concentrations are higher during daylight hours in summer when the wind is from the south-east. This will be due to more local (UK/European) production that is photochemically driven --- and hence more important during daylight hours.
@@ -50,9 +52,11 @@ Lots more insight can be gained by considering how percentile values vary by oth
 #| fig-cap: A `percentileRose` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction.The plot shows the variation by season and whether  it is nighttime or daylight hours.
 #| fig-width: 10
 #| fig-height: 6
-percentileRose(mydata, type = c("season", "daylight"), 
-               pollutant = "o3",
-               col = "Set3", mean.col = "black")
+percentileRose(mydata,
+  type = c("season", "daylight"),
+  pollutant = "o3",
+  col = "Set3", mean.col = "black"
+)
 ```
 
 ## Condtional probability function {#sec-CPF}
@@ -65,9 +69,11 @@ The `percentileRose` function can also plot conditional probability functions (C
 #| fig-height: 4.5
 #| fig-width: 4.5
 #| out-width: 60%
-percentileRose(mydata, poll="so2", percentile = 95, 
-               method = "cpf",
-               col = "darkorange", smooth = TRUE)
+percentileRose(mydata,
+  poll = "so2", percentile = 95,
+  method = "cpf",
+  col = "darkorange", smooth = TRUE
+)
 ```
 
 It is easy to plot several species on the same plot and this works well because they all have the same probability scale (i.e. 0 to 1). In the example below @fig-CPFExample it is easy to see for each pollutant the wind directions that dominate the contributions to the highest (95th percentile) concentrations. For example, the highest CO and NO~x~ concentrations are totally dominated by south/south-westerly winds and the probability of their being such high concentrations from other wind directions is effectively zero.
@@ -77,8 +83,9 @@ It is easy to plot several species on the same plot and this works well because 
 #| fig-cap: A CPF plot of many pollutants  at Marylebone Road.
 #| fig-width: 7
 #| fig-height: 5
-percentileRose(mydata, 
-               pollutant = c("nox", "so2", "o3", "co", "pm10", "pm25"),
-               percentile = 95, method = "cpf", col = "darkorange",
-               layout = c(3, 2))
+percentileRose(mydata,
+  pollutant = c("nox", "so2", "o3", "co", "pm10", "pm25"),
+  percentile = 95, method = "cpf", col = "darkorange",
+  layout = c(3, 2)
+)
 ```

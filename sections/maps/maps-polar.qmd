@@ -24,7 +24,7 @@ dplyr::glimpse(polar_data)
 polar_data %>%
   dplyr::select(-site_type) %>%
   gtsummary::tbl_summary(
-    missing = "no", 
+    missing = "no",
     by = "site",
     type = list(lat ~ "continuous", lon ~ "continuous"),
     statistic = list(lat ~ "{median}", lon ~ "{median}")
@@ -48,14 +48,14 @@ The easiest way to get polar plots on a map is through the use of the all-in-one
 #| echo: false
 #| tbl-cap: "A reference table for `openairmaps` directional analysis mapping functions."
 dplyr::tribble(
-  ~ openair,          ~ openairmaps,     ~`scale arguments`, ~ `unique arguments`,
-  "`polarAnnulus()`",   "`annulusMap()`",    "`limits`",         "`period`",
-  "`polarFreq()`",      "`freqMap()`",       "`breaks`",         "`statistic`",
-  "`percentileRose()`", "`percentileMap()`", "`percentile`",     "--",
-  "`polarPlot()`",      "`polarMap()`",      "`limits`",         "`x`",
-  "`pollutionRose()`",  "`pollroseMap()`",   "`breaks`",         "`statistic`",
-  "`windRose()`",       "`windroseMap()`",   "`ws.int`, `breaks`",  "--",
-  "`polarDiff()`",      "`diffMap()`",        "`limits`",         "`x`"
+  ~openair, ~openairmaps, ~`scale arguments`, ~`unique arguments`,
+  "`polarAnnulus()`", "`annulusMap()`", "`limits`", "`period`",
+  "`polarFreq()`", "`freqMap()`", "`breaks`", "`statistic`",
+  "`percentileRose()`", "`percentileMap()`", "`percentile`", "--",
+  "`polarPlot()`", "`polarMap()`", "`limits`", "`x`",
+  "`pollutionRose()`", "`pollroseMap()`", "`breaks`", "`statistic`",
+  "`windRose()`", "`windroseMap()`", "`ws.int`, `breaks`", "--",
+  "`polarDiff()`", "`diffMap()`", "`limits`", "`x`"
 ) %>%
   gt::gt() %>%
   gt::fmt_markdown(everything())
@@ -116,7 +116,7 @@ Another example, this time using `annulusMap()`, is given in @fig-annulusMap. No
 #| fig-cap: "A more complex demonstration, this time using `annulusMap()`."
 annulusMap(
   polar_data,
-  pollutant = c("nox", "no2"), 
+  pollutant = c("nox", "no2"),
   provider = "CartoDB.Positron",
   latitude = "lat",
   longitude = "lon"
@@ -175,7 +175,7 @@ percentileMap(
   pollutant = "nox",
   type = "weekend",
   latitude = "lat",
-  longitude = "lon", 
+  longitude = "lon",
   provider = "Esri.WorldTopoMap",
   cols = "viridis",
   popup = "site",
@@ -195,16 +195,20 @@ Note that, here, the `sources` data frame only has one row, but there is nothing
 #| fig-cap: "Adding a `{leaflet}` marker to show nearby sources."
 # data frame of lat/lon
 sources <-
-  data.frame(lat = 51.5167,
-             lng = -0.1769,
-             site = "Paddington Station")
+  data.frame(
+    lat = 51.5167,
+    lng = -0.1769,
+    site = "Paddington Station"
+  )
 
 # make map
 polarMap(polar_data, "nox") %>%
   # add markers
-  leaflet::addMarkers(data = sources,
-                      popup = ~ site,
-                      label = ~ site)
+  leaflet::addMarkers(
+    data = sources,
+    popup = ~site,
+    label = ~site
+  )
 ```
 
 `{leaflet}` is well documented [here](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() %>% addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
@@ -241,10 +245,12 @@ polar_data %>%
     ),
     type = "weekend"
   ) %>%
-  pollroseMap(pollutant = "nox",
-              popup = "popup",
-              breaks = 6,
-              type = "weekend")
+  pollroseMap(
+    pollutant = "nox",
+    popup = "popup",
+    breaks = 6,
+    type = "weekend"
+  )
 ```
 
 ## Marker Function
@@ -261,7 +267,7 @@ To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` 
 library(leaflet)
 library(openair)
 leaflet() %>%
-  addProviderTiles("CartoDB.Voyager") %>% 
+  addProviderTiles("CartoDB.Voyager") %>%
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",
@@ -269,7 +275,7 @@ leaflet() %>%
     data = polar_data,
     fun = polarFreq,
     statistic = "mean"
-  ) %>% 
+  ) %>%
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",
@@ -277,7 +283,7 @@ leaflet() %>%
     data = polar_data,
     fun = polarFreq,
     statistic = "median"
-  ) %>% 
+  ) %>%
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",

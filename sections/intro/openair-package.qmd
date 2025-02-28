@@ -161,14 +161,17 @@ Also there are many common options available in functions that are not explicitl
 #| echo: false
 
 tab_dat <- tibble(
-  option = c("xlab", "ylab", "main", "pch", "cex", "lty", 
-             "lwd", "layout"),
-  description = c("x-axis label", "y-axis label", "title of the plot",
-                  "plotting symbol used for points",
-                  "size of symbol plotted",
-                  "line type",
-                  "line width",
-                  "the plot layout e.g. c(2, 2) "
+  option = c(
+    "xlab", "ylab", "main", "pch", "cex", "lty",
+    "lwd", "layout"
+  ),
+  description = c(
+    "x-axis label", "y-axis label", "title of the plot",
+    "plotting symbol used for points",
+    "size of symbol plotted",
+    "line type",
+    "line width",
+    "the plot layout e.g. c(2, 2) "
   )
 )
 ```
@@ -192,20 +195,22 @@ There are a series of pre-defined values that `type` can take related to the tem
 #| echo: false
 
 tab_type <- tibble(
-  option = c("'year'", "'month'", "'week'", "'monthyear'", "'season'", 
-             "'weekday'", "'weekend'", "'daylight'", "'dst'", "'wd'", "'seasonyear'"
+  option = c(
+    "'year'", "'month'", "'week'", "'monthyear'", "'season'",
+    "'weekday'", "'weekend'", "'daylight'", "'dst'", "'wd'", "'seasonyear'"
   ),
-  description = c("splits data by year", 
-                  "splits data by month of the year", 
-                  "splits data by week of the year",
-                  "splits data by year *and* month",
-                  "splits data by season. Note in this case the user can also supply a `hemisphere` option that can be either 'northern' (default) or 'southern'",
-                  "splits data by day of the week",
-                  "splits data by Saturday, Sunday, weekday",
-                  " splits data by nighttime/daytime. Note the user must supply a `longitude` and `latitude`",
-                  "splits data by daylight saving time and non-daylight saving time",
-                  "if wind direction (`wd`) is available `type = 'wd'` will split the data into 8 sectors: N, NE, E, SE, S, SW, W, NW",
-                  " will split the data into year-season intervals, keeping the months of a season together. For example, December 2010 is considered as part of winter 2011 (with January and February 2011). This makes it easier to consider contiguous seasons. In contrast, `type = 'season'` will just split  the data into four seasons regardless of the year."
+  description = c(
+    "splits data by year",
+    "splits data by month of the year",
+    "splits data by week of the year",
+    "splits data by year *and* month",
+    "splits data by season. Note in this case the user can also supply a `hemisphere` option that can be either 'northern' (default) or 'southern'",
+    "splits data by day of the week",
+    "splits data by Saturday, Sunday, weekday",
+    " splits data by nighttime/daytime. Note the user must supply a `longitude` and `latitude`",
+    "splits data by daylight saving time and non-daylight saving time",
+    "if wind direction (`wd`) is available `type = 'wd'` will split the data into 8 sectors: N, NE, E, SE, S, SW, W, NW",
+    " will split the data into year-season intervals, keeping the months of a season together. For example, December 2010 is considered as part of winter 2011 (with January and February 2011). This makes it easier to consider contiguous seasons. In contrast, `type = 'season'` will just split  the data into four seasons regardless of the year."
   )
 )
 ```
@@ -215,7 +220,8 @@ tab_type <- tibble(
 #| tbl-cap: 'Built-in ways of splitting data in [openair]{.pkg} using the `type` option that is available for most functions.'
 #| echo: false
 knitr::kable(
-  tab_type, booktabs = TRUE
+  tab_type,
+  booktabs = TRUE
 )
 ```
 
@@ -226,11 +232,14 @@ If a categorical variable is present in a data frame e.g. `site` then that vari
 In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
 
 ```{r}
-mydata$intervals <- cut(mydata$no2, 
-                        breaks = c(0, 50, 100, 150, 1000), 
-                        labels = c("Very low", "Low", "High",
-                                   "Very High"), 
-                        include.lowest = TRUE)
+mydata$intervals <- cut(mydata$no2,
+  breaks = c(0, 50, 100, 150, 1000),
+  labels = c(
+    "Very low", "Low", "High",
+    "Very High"
+  ),
+  include.lowest = TRUE
+)
 
 # look at the data
 head(mydata)
@@ -278,14 +287,18 @@ Several pre-defined colour schemes are available to make it easy to plot data. I
 library(openair)
 ## small function for plotting
 printCols <- function(col, y) {
-  rect((0:200) / 200, y, (1:201) / 200, y + 0.1, col = openColours(col, n = 201),
-       border = NA)
+  rect((0:200) / 200, y, (1:201) / 200, y + 0.1,
+    col = openColours(col, n = 201),
+    border = NA
+  )
   text(0.5, y + 0.15, deparse(substitute(col)))
 }
 
 ## plot an empty plot
-plot(1, xlim = c(0, 1), ylim = c(0, 1.6), type = "n", xlab = "", ylab = "",
-     axes = FALSE)
+plot(1,
+  xlim = c(0, 1), ylim = c(0, 1.6), type = "n", xlab = "", ylab = "",
+  axes = FALSE
+)
 printCols("default", 0)
 printCols("increment", 0.2)
 printCols("heat", 0.4)
@@ -293,7 +306,7 @@ printCols("turbo", 0.6)
 printCols("viridis", 0.8)
 printCols("inferno", 1.0)
 printCols("greyscale", 1.2)
-printCols(c("tomato", "white", "forestgreen" ), 1.4)
+printCols(c("tomato", "white", "forestgreen"), 1.4)
 ```
 
 The user-defined scheme is very flexible and the following provides examples of its use. In the examples shown next, the `polarPlot` function is used as a demonstration of their use.
@@ -388,14 +401,15 @@ For data, this is relatively straightforward. The `write.csv()` function will wr
 library(openair)
 
 marylebone <-
-  importUKAQ(site = "my1",
-             year = 2022,
-             source = "aurn",
-             data_type = "annual", 
-             to_narrow = TRUE)
+  importUKAQ(
+    site = "my1",
+    year = 2022,
+    source = "aurn",
+    data_type = "annual",
+    to_narrow = TRUE
+  )
 
 write.csv(x = marylebone, file = "my1_annual-stats_2022.csv")
-
 ```
 
 Plots are slightly more complicated. If you do use RStudio, the simplest way to save an openair plot is to use the plots pane, visualised in @fig-rstudiosave. This menu will allow you to copy your plot to the clipboard, or save it as an image or PDF.
@@ -427,8 +441,10 @@ library(openair)
 polar <- polarPlot(mydata, "nox")
 
 # STEP 2: Open a graphics device
-png(filename = "polarplot_marylebone_nox.png",
-    width = 6, height = 6, units = "in", res = 300)
+png(
+  filename = "polarplot_marylebone_nox.png",
+  width = 6, height = 6, units = "in", res = 300
+)
 
 # STEP 3: Print the plot
 polar

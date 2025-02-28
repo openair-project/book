@@ -27,7 +27,6 @@ library(worldmet)
 aq <- importUKAQ("my1", year = 2022, meteo = FALSE)
 met <- importNOAA(year = 2022)
 aq <- left_join(aq, met, by = "date")
-
 ```
 
 ```{r}
@@ -73,13 +72,14 @@ Another step that is useful is to identify the filtered data (`out_filter`) in t
 #| label: selectaq
 # original data in selection
 aq_select <-
-  map(1:nrow(out_filter), function (i)
+  map(1:nrow(out_filter), function(i) {
     filter(
       aq,
       date >= out_filter$date_start[i],
       date <= out_filter$date_end[i]
     ) %>%
-      mutate(slope = out_filter$slope[i])) %>%
+      mutate(slope = out_filter$slope[i])
+  }) %>%
   list_rbind()
 ```
 
@@ -94,7 +94,7 @@ The next few plots should make the purpose of this analysis clearer. @fig-nox-pm
 # use a light theme
 theme_set(theme_light())
 
-ggplot(aq_select, aes(.data[[x]], .data[[y]])) + 
+ggplot(aq_select, aes(.data[[x]], .data[[y]])) +
   geom_point() +
   ylab(quickText("pm2.5 (ug/m3)")) +
   xlab(quickText("nox (ug/m3)"))
@@ -120,7 +120,7 @@ ggplot(out_filter, aes(
   x = .data[[x1]],
   y = .data[[y1]],
   xend = .data[[x2]],
-  yend = .data[[y2]], 
+  yend = .data[[y2]],
   colour = .data[[y1]]
 )) +
   geom_segment() +
@@ -150,9 +150,11 @@ mode_value <- density_estimate$x[which.max(density_estimate$y)]
 ggplot(out_filter, aes(x = slope)) +
   geom_density() +
   theme_minimal() +
-  geom_vline(xintercept = mode_value,
-             lty = 5,
-             colour = "tomato") +
+  geom_vline(
+    xintercept = mode_value,
+    lty = 5,
+    colour = "tomato"
+  ) +
   geom_text(
     x = 0.11,
     y = 8,
@@ -161,14 +163,13 @@ ggplot(out_filter, aes(x = slope)) +
     size = 4
   ) +
   coord_cartesian(xlim = c(0, 0.2))
-
 ```
 
 As a final step, we can explore the filtered data further. For example, we might want to explore the extent to which the ratio of PM~2.5~/NO~x~ varies by wind direction and wind speed. A polar plot of NO~x~ concentrations (not shown for 2022 data but easily plotted), shows the dominance of southerly winds and the influence of vehicles on Marylebone Road. This is shown in @fig-polar-slope, which highlights that there is quite a lot of variation in the slope value by wind direction. Focusing only on southerly winds (where there is a dominant traffic effect), the ratio of PM~2.5~/NO~x~ is lower in the south-west quadrant than the south-east quadrant, which might reflect different vehicle emissions behaviour along the road. Note that in plotting @fig-polar-slope, Nonparametric Wind Regression (see @sec-polar-NWR) was used because the filtered data does not contain enough information to use a GAM.
 
 ```{r}
 #| label: fig-polar-slope
-#| fig-cap: Polar plot of the slope of PM~2.5~/NO~x~ from the run-regression analysis using filtered data. Note that 
+#| fig-cap: Polar plot of the slope of PM~2.5~/NO~x~ from the run-regression analysis using filtered data. Note that
 #| cache: false
 #| fig-width: 4.5
 #| fig-height: 4.5

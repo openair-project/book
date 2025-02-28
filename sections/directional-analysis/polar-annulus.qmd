@@ -17,7 +17,7 @@ Interestingly, the plot for NO~x~ and CO (not shown, but easily produced) did no
 ```{r}
 #| label: fig-polarAnnulus
 #| fig-cap: Examples of the `polarAnnulus` function applied to Marylebone Road.
-#| fig-subcap: 
+#| fig-subcap:
 #|   - "By trend."
 #|   - "By season."
 #|   - "By weekday."
@@ -27,25 +27,29 @@ Interestingly, the plot for NO~x~ and CO (not shown, but easily produced) did no
 #| fig-height: 4.2
 #| fig-show: hold
 library(openair) # load openair
-polarAnnulus(mydata, 
-             pollutant = "pm10", 
-             period = "trend", 
-             main = "Trend")
+polarAnnulus(mydata,
+  pollutant = "pm10",
+  period = "trend",
+  main = "Trend"
+)
 
-polarAnnulus(mydata, 
-             pollutant = "pm10", 
-             period = "season", 
-             main = "Season")
+polarAnnulus(mydata,
+  pollutant = "pm10",
+  period = "season",
+  main = "Season"
+)
 
-polarAnnulus(mydata, 
-             pollutant = "pm10", 
-             period = "weekday", 
-             main = "Weekday")
+polarAnnulus(mydata,
+  pollutant = "pm10",
+  period = "weekday",
+  main = "Weekday"
+)
 
-polarAnnulus(mydata, 
-             pollutant = "pm10",
-             period = "hour", 
-             main = "Hour")
+polarAnnulus(mydata,
+  pollutant = "pm10",
+  period = "hour",
+  main = "Hour"
+)
 ```
 
 Where there is interest in considering the wind direction dependence of concentrations, it can be worth filtering for wind speeds. At low wind speed with wind direction becomes highly variable (and is often associated with high pollutant concentrations). Therefore, for some situations it might be worth considering removing the very low wind speeds. The code below provides two ways of doing this using the [dplyr]{.pkg} `filter` function. The first selects data where the wind speed is \>2 m s^-1^. The second part shows how to select wind speeds greater than the 10th percentile, using the `quantile` function. The latter way of selecting is quite useful, because it is known how much data are selected i.e. in this case 90%. It is worth experimenting with different values because it is also important not to lose information by ignoring wind speeds that provide useful information.
@@ -54,15 +58,18 @@ Where there is interest in considering the wind direction dependence of concentr
 #| label: polarAnnSub
 #| eval: false
 ## wind speed >2
-polarAnnulus(filter(mydata, ws > 2), 
-             pollutant = "pm10", 
-             type = "hour")
+polarAnnulus(filter(mydata, ws > 2),
+  pollutant = "pm10",
+  type = "hour"
+)
 
 ## wind speed > 10th percentile
-polarAnnulus(filter(
-  mydata, 
-  ws > quantile(ws, probs = 0.1, na.rm = TRUE)
+polarAnnulus(
+  filter(
+    mydata,
+    ws > quantile(ws, probs = 0.1, na.rm = TRUE)
   ),
-  pollutant ="pm10", 
-  type = "hour")
+  pollutant = "pm10",
+  type = "hour"
+)
 ```

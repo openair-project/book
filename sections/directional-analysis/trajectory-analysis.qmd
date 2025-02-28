@@ -157,10 +157,12 @@ However, it is possible to account for the PM that is local to some extent by co
 
 ```{r}
 #| eval: false
-scatterPlot(kc1, x = "nox", 
-            y = "pm2.5", 
-            avg = "day", 
-            linear = TRUE)
+scatterPlot(kc1,
+  x = "nox",
+  y = "pm2.5",
+  avg = "day",
+  linear = TRUE
+)
 ```
 
 which suggests a gradient of 0.084. Therefore, we can remove the PM~10~ that is associated NO~x~ in `kc1` data, making a new column `pm.new`:
@@ -235,13 +237,15 @@ A useful analysis to undertake is to consider the pattern of frequencies for two
 #| fig-cap: Gridded back trajectory frequencies showing the percentage difference in occurrence for high PM~10~ concentrations (90th percentile) compared with conditions over the full year.
 #| fig-width: 10
 #| fig-height: 6
-trajLevel(traj, pollutant = "pm10", 
-          statistic = "difference",
-          col = c("skyblue", "white", "tomato"), 
-          min.bin = 50, 
-          border = NA, 
-          xlim = c(-20, 20), 
-          ylim = c(40, 70))
+trajLevel(traj,
+  pollutant = "pm10",
+  statistic = "difference",
+  col = c("skyblue", "white", "tomato"),
+  min.bin = 50,
+  border = NA,
+  xlim = c(-20, 20),
+  ylim = c(40, 70)
+)
 ```
 
 Note that it is also possible to use conditioning with these plots. For example to split the frequency results by season:
@@ -249,11 +253,12 @@ Note that it is also possible to use conditioning with these plots. For example 
 ```{r}
 #| label: trajFreq2
 #| eval: false
-trajLevel(traj, 
-          pollutant = "pm10", 
-          statistic = "frequency", 
-          col = "heat",
-          type = "season")
+trajLevel(traj,
+  pollutant = "pm10",
+  statistic = "frequency",
+  col = "heat",
+  type = "season"
+)
 ```
 
 ### Allocating trajectories to different wind sectors
@@ -277,30 +282,33 @@ traj <- importTraj(site = "london", year = 2010)
 #| label: allocateTraj
 alloc <- traj
 
-id <- which(alloc$hour.inc == 0) 
+id <- which(alloc$hour.inc == 0)
 y0 <- alloc$lat[id[1]]
 x0 <- alloc$lon[id[1]]
 
 ## calculate angle and then assign sector
 alloc <- mutate(
-  alloc, 
+  alloc,
   angle = atan2(lon - x0, lat - y0) * 360 / 2 / pi,
-  angle = ifelse(angle < 0, angle + 360 , angle),
-  sector = cut(angle, 
-               breaks = seq(22.5, 382.5, 45),
-               labels = c("NE", "E", "SE", 
-                          "S", "SW", "W",
-                          "NW", "N")),
+  angle = ifelse(angle < 0, angle + 360, angle),
+  sector = cut(angle,
+    breaks = seq(22.5, 382.5, 45),
+    labels = c(
+      "NE", "E", "SE",
+      "S", "SW", "W",
+      "NW", "N"
+    )
+  ),
   sector = as.character(sector),
   sector = ifelse(is.na(sector), "N", sector)
-) 
+)
 
-alloc <- group_by(alloc, date, sector) %>% 
-  mutate(n = n()) %>% 
-  group_by(date) %>% 
-  arrange(date, n) %>% 
-  slice_tail(n = 1) %>% 
-  mutate(sector = ifelse(n > 50, sector, "unallocated")) %>% 
+alloc <- group_by(alloc, date, sector) %>%
+  mutate(n = n()) %>%
+  group_by(date) %>%
+  arrange(date, n) %>%
+  slice_tail(n = 1) %>%
+  mutate(sector = ifelse(n > 50, sector, "unallocated")) %>%
   select(date, sector, n)
 
 # combine with trajectories
@@ -325,7 +333,7 @@ We can work out the mean concentration by allocation, which shows the clear impo
 
 ```{r}
 #| label: meanAlloc
-group_by(traj, sector) %>% 
+group_by(traj, sector) %>%
   summarise(PM2.5 = mean(pm2.5, na.rm = TRUE))
 ```
 
@@ -333,8 +341,8 @@ Finally, the percentage of the year in each sector can be calculated as follows:
 
 ```{r}
 #| label: percentAlloc
-group_by(traj, sector) %>% 
-  summarise(n = n()) %>% 
+group_by(traj, sector) %>%
+  summarise(n = n()) %>%
   mutate(percent = 100 * n / nrow(traj))
 ```
 
@@ -474,7 +482,7 @@ As an example, consideration is given to PM~2.5~ concentrations in a similar way
 trajLevel(
   dplyr::slice_sample(traj, prop = 0.1),
   pollutant = "pm2.5",
-  statistic =  "sqtba",
+  statistic = "sqtba",
   map.fill = FALSE,
   cols = "default",
   lat.inc = 0.5,
@@ -496,13 +504,13 @@ Some further analysis can be carried out on the TEOM FDMS measurements, which se
 ```{r}
 #| eval: false
 trajLevel(traj,
-          pollutant = "v2.5",
-          statistic =  "sqtba",
-          map.fill = FALSE,
-          cols = "default",
-          lat.inc = 0.5,
-          lon.inc = 0.5
-          )
+  pollutant = "v2.5",
+  statistic = "sqtba",
+  map.fill = FALSE,
+  cols = "default",
+  lat.inc = 0.5,
+  lon.inc = 0.5
+)
 ```
 
 ```{r}
@@ -521,7 +529,7 @@ On the other hand, @fig-SQTBA-PMnv shows the non-volatile PM~2.5~ component, whi
 trajLevel(
   traj,
   pollutant = "nv2.5",
-  statistic =  "sqtba",
+  statistic = "sqtba",
   map.fill = FALSE,
   cols = "default",
   lat.inc = 0.5,
@@ -598,10 +606,12 @@ The clusters are straightforward to calculate. In this case the back trajectory 
 #| fig-cap: The 6-cluster solution to back trajectories calculated for the London North Kensington site for 2011 showing the mean trajectory for each cluster.
 #| fig-width: 6
 #| fig-height: 5
-clust <- trajCluster(traj, method = "Angle", 
-                     n.cluster = 6, 
-                     col = "Set2",
-                     map.cols = openColours("Paired", 10))
+clust <- trajCluster(traj,
+  method = "Angle",
+  n.cluster = 6,
+  col = "Set2",
+  map.cols = openColours("Paired", 10)
+)
 ```
 
 `clust` returns all the back trajectory information together with the cluster (as a character). This data can now be used together with other data to analyse results further. However, first it is possible to show all trajectories coloured by cluster, although for a year of data there is significant overlap and it is difficult to tell them apart.
@@ -615,9 +625,11 @@ A useful way in which to see where these air masses come from by trajectory is t
 
 ```{r}
 #| eval: false
-trajLevel(clust$data$traj, type = "cluster", 
-          col = "increment", 
-          border = NA)
+trajLevel(clust$data$traj,
+  type = "cluster",
+  col = "increment",
+  border = NA
+)
 ```
 
 Perhaps more useful is to merge the cluster data with measurement data. In this case the data at North Kensington site are used. Note that in merging these two data frames it is not necessary to retain all 96 back trajectory hours and for this reason we extract only the first hour.
@@ -625,9 +637,10 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 ```{r}
 #| label: mergeClustTraj
 # use inner join - so only where we have data in each
-kc1 <- inner_join(kc1, 
-                  filter(clust$data$traj, hour.inc == 0), 
-                  by = "date")
+kc1 <- inner_join(kc1,
+  filter(clust$data$traj, hour.inc == 0),
+  by = "date"
+)
 ```
 
 Now `kc1` contains air pollution data identified by cluster. The size of this data frame is about a third of the original size because back trajectories are only run every 3 hours.
@@ -645,7 +658,7 @@ Now it is possible to analyse the concentration data according to the cluster. T
 
 ```{r}
 #| label: clustMeans
-group_by(kc1, cluster) %>% 
+group_by(kc1, cluster) %>%
   summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
 ```
 
@@ -657,9 +670,11 @@ Simple plots can be generated from these results too. For example, it is easy to
 #| fig-width: 13
 #| fig-height: 3
 #| column: screen-inset-right
-trendLevel(kc1, pollutant = "v2.5", type = "cluster", 
-           layout = c(6, 1),
-               cols = "increment")
+trendLevel(kc1,
+  pollutant = "v2.5", type = "cluster",
+  layout = c(6, 1),
+  cols = "increment"
+)
 ```
 
 Similarly, as considered in @sec-polarCluster, the `timeVariation` function can also be used to consider the temporal components.
@@ -672,10 +687,12 @@ Another useful plot to consider is `timeProp` (see @sec-timeProp), which can sho
 #| fig-width: 15
 #| fig-height: 5
 #| column: screen-inset-right
-timeProp(kc1, pollutant = "pm2.5", 
-         avg.time = "day", proportion = "cluster",
-         cols = "Set2", 
-         key.position = "top", key.columns = 6)
+timeProp(kc1,
+  pollutant = "pm2.5",
+  avg.time = "day", proportion = "cluster",
+  cols = "Set2",
+  key.position = "top", key.columns = 6
+)
 ```
 
 ## Trajectories on an interactive map

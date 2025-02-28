@@ -62,8 +62,10 @@ Some of these arguments are demonstrated in @fig-networkMap2, which shows the AU
 ```{r}
 #| label: fig-networkMap2
 #| fig-cap: "Demonstrating more features of `networkMap()`."
-networkMap(source = c("aurn", "aqe", "local"),
-           control = "site_type")
+networkMap(
+  source = c("aurn", "aqe", "local"),
+  control = "site_type"
+)
 ```
 
 ### "Do It Yourself" Network Maps
@@ -81,10 +83,10 @@ library(stringr)
 aurn_meta <- openair::importMeta("aurn", all = TRUE)
 
 # prep data for leaflet
-map_data <- 
+map_data <-
   aurn_meta %>%
   # get sites in York
-  filter(local_authority == "York") %>% 
+  filter(local_authority == "York") %>%
   # build a popup
   buildPopup(
     latitude = "latitude",
@@ -168,9 +170,11 @@ hospital_meta
 #| label: fig-hospitalread
 #| fig-cap: A timeplot of air quality near Great Ormond Street Hospital.
 hospital_aq <-
-  openair::importUKAQ(site = hospital_meta$code,
-                      year = 2022,
-                      source = hospital_meta$source)
+  openair::importUKAQ(
+    site = hospital_meta$code,
+    year = 2022,
+    source = hospital_meta$source
+  )
 
 openair::timePlot(
   hospital_aq,

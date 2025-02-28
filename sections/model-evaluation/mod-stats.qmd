@@ -130,8 +130,10 @@ It is possible to rank the statistics based on the \emph{Coefficient
 
 ```{r}
 #| label: evalModStatsRank
-modStats(modData, obs = "obs", mod = "mod", type = "model", 
-         rank.name = "model")
+modStats(modData,
+  obs = "obs", mod = "mod", type = "model",
+  rank.name = "model"
+)
 ```
 
 The `modStats` function is however much more flexible than indicated above. While it is useful to calculate model evaluation statistics in a straightforward way it can be much more informative to consider the statistics split by different periods.
@@ -149,9 +151,10 @@ There are columns representing the receptor location (`site`), the date, measure
 ```{r}
 #| label: modStatsDefra
 options(digits = 2) ## don't display too many decimal places
-modStats(subset(modTest, site == "Harwell"), 
-         obs = "o3", mod = "mod",
-         type = c("season", "group"), rank = "group")
+modStats(subset(modTest, site == "Harwell"),
+  obs = "o3", mod = "mod",
+  type = c("season", "group"), rank = "group"
+)
 ```
 
 Note that it is possible to read the results of the `modStats` function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.
@@ -161,9 +164,11 @@ The `modStats` function is much more flexible than indicated above and can be us
 ```{r}
 #| label: modStatsEx
 #| eval: false
-modStats(modStats, obs = "o3", mod = "mod",
-         type = c("site", "weekday", "group"), 
-         rank = "group")
+modStats(modStats,
+  obs = "o3", mod = "mod",
+  type = c("site", "weekday", "group"),
+  rank = "group"
+)
 ```
 
 Similarly, if other data are available e.g. meteorological data or other pollutant species then these variables can also be used to test models against ranges in their values. This capability is potentially very useful because it allows for a much more probing analysis into model evaluation. For example, with wind speed and direction it is easy to consider how model performance varies by wind speed intervals or wind sectors, both of which could reveal important performance characteristics.

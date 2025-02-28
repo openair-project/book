@@ -29,10 +29,11 @@ head(modTest)
 #| fig-width: 6
 #| fig-height: 5
 #| out-width: 75%
-TaylorDiagram(modTest, 
-              obs = "o3", 
-              mod = "mod", 
-              group = "group")
+TaylorDiagram(modTest,
+  obs = "o3",
+  mod = "mod",
+  group = "group"
+)
 ```
 
 The plots shown in @fig-TaylorPlots break the Taylor Diagrams into three components to aid interpretation. The first plot (top left) highlights the comparison of variability in for each model compared with the measurements. The variability is represented by the standard deviation of the observed and modelled values. The plot shows that the observed variability (given by the standard deviation) is about 27 (μg m^-3^) and is marked as 'observed' on the x-axis. The magnitude of the variability is measured as the **radial** distance from the origin of the plot (the red line with the arrow shows the standard deviation for model $g$, which is about 25\~μg m^-3^). To aid interpretation the radial dashed line is shown from the 'observed' point. Each model is shown in this case by the position of the letters a to i. On this basis it can be seen that models 1, $a$, $b$ have more variability than the measurements (because they extend beyond the dashed line), whereas the others have less variability than the measurements. Models $a$ and $b$ are also closed to the dashed line and therefore have the closest variability compared with the observations.
@@ -48,15 +49,17 @@ Note that in cases where there is a column `site` it makes sense to use `type = 
 ```{r}
 #| label: fig-TaylorPlots
 #| echo: false
-#| fig-cap: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to read interpret each of the three statistics. 
-#| fig-subcap: 
+#| fig-cap: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to read interpret each of the three statistics.
+#| fig-subcap:
 #|   - "Standard deviation."
 #|   - "Correlation coefficient."
 #|   - "Centred RMS."
 #| layout-ncol: 2
-knitr::include_graphics(c('../../assets/media/TaylorExplainSD.png',
-                          '../../assets/media/TaylorExplainR.png',
-                          '../../assets/media/TaylorExplainRMS.png'))
+knitr::include_graphics(c(
+  "../../assets/media/TaylorExplainSD.png",
+  "../../assets/media/TaylorExplainR.png",
+  "../../assets/media/TaylorExplainRMS.png"
+))
 ```
 
 ## Examples of Taylor Diagrams
@@ -70,8 +73,10 @@ The example used here carries on from the previous section using data from a Def
 #| fig-height: 8
 ## select a single site
 LH <- filter(modTest, site == "Lullington.Heath")
-TaylorDiagram(LH, obs = "o3", mod = "mod", 
-              group = "group", type = "season")
+TaylorDiagram(LH,
+  obs = "o3", mod = "mod",
+  group = "group", type = "season"
+)
 ```
 
 @fig-TaylorSeas contains a lot of useful information. Consider the summer comparison first. All models tend to underestimate the variability of O~3~ concentrations because they all lies within the black dashed line. However, models 7 and 9 are close to the observed variability. The general underestimate of the variability for summer conditions might reflect that the models do not adequately capture regional O~3~ episodes when concentrations are high. Models 7 and 8 do best in terms of high correlation with the measurements (around 0.8) and lowest RMS error (around 20--22 μg m^-3^). Models 3, 5 and 6 tend to do worse on all three statistics during the summer.
@@ -84,19 +89,23 @@ There are many other useful comparisons that can be undertaken easily. A few of 
 #| label: TaylorExamples
 #| eval: false
 ## by receptor comparison
-TaylorDiagram(modTest, obs = "o3", mod = "mod", 
-              group = "group", type = "site")
+TaylorDiagram(modTest,
+  obs = "o3", mod = "mod",
+  group = "group", type = "site"
+)
 
 ## by month comparison for a SINGLE site
-TaylorDiagram(subset(modTest, site == "Harwell"), 
-              obs = "o3", mod = "mod",
-              group = "group", type = "month")
+TaylorDiagram(subset(modTest, site == "Harwell"),
+  obs = "o3", mod = "mod",
+  group = "group", type = "month"
+)
 
 ## By season AND daylight/nighttime
-TaylorDiagram(subset(modTest, site == "Harwell"), 
-              obs = "o3", mod = "mod",
-              group = "group", 
-              type = c("season", "daylight"))
+TaylorDiagram(subset(modTest, site == "Harwell"),
+  obs = "o3", mod = "mod",
+  group = "group",
+  type = c("season", "daylight")
+)
 ```
 
 It is also possible to combine different groups of model results. For example, rather than plot how the models perform at a single site it can be useful to show how they compare at all sites. To do this it is necessary to normalise the data because there will be different values of the observed variable across different sites. In this case we can supply the option `group = c("group", "site")`. This will show the variation by model for *all* sites. The results are shown in @fig-Taylor2Grp. These results show that in general models tend to predict in similarly good (or bad) ways across all sites as shown by the grouping of points on @fig-Taylor2Grp.
@@ -107,8 +116,10 @@ It is also possible to combine different groups of model results. For example, r
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 70%
-TaylorDiagram(modTest, obs = "o3", mod = "mod", 
-              group = c("group", "site"), 
-              normalise = TRUE, cex = 1, 
-              pch = c(15:19, 15:18))
+TaylorDiagram(modTest,
+  obs = "o3", mod = "mod",
+  group = c("group", "site"),
+  normalise = TRUE, cex = 1,
+  pch = c(15:19, 15:18)
+)
 ```

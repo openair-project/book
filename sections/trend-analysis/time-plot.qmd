@@ -22,9 +22,10 @@ A full set of examples is shown in the help pages --- see `?timePlot` for detail
 
 ```{r}
 #| eval: false
-timePlot(mydata, 
-         pollutant = c("nox", "o3"), 
-         y.relation = "free")
+timePlot(mydata,
+  pollutant = c("nox", "o3"),
+  y.relation = "free"
+)
 ```
 
 Often it is necessary to only consider part of a time series and using the [openair]{.pkg} function `selectByDate()` makes it easy to do this. Some examples are shown below.
@@ -33,9 +34,10 @@ To plot data only for 2003:
 
 ```{r}
 #| eval: false
-timePlot(selectByDate(mydata, year = 2003), 
-         pollutant = c("nox", "o3"), 
-         y.relation = "free")
+timePlot(selectByDate(mydata, year = 2003),
+  pollutant = c("nox", "o3"),
+  y.relation = "free"
+)
 ```
 
 Plots for several pollutants for August 2003, are shown in @fig-timePlot.
@@ -49,8 +51,9 @@ library(openair)
 library(tidyverse)
 
 timePlot(selectByDate(mydata, year = 2003, month = "aug"),
-         pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
-         y.relation = "free")
+  pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
+  y.relation = "free"
+)
 ```
 
 Some other examples (not plotted) are:
@@ -58,17 +61,23 @@ Some other examples (not plotted) are:
 ```{r}
 #| eval: false
 ## plot monthly means of ozone and no2
-timePlot(mydata, pollutant = c("o3", "no2"), avg.time = "month",
-         y.relation = "free")
+timePlot(mydata,
+  pollutant = c("o3", "no2"), avg.time = "month",
+  y.relation = "free"
+)
 
 ## plor 95th percentile monthly concentrations
-timePlot(mydata, pollutant = c("o3", "no2"), avg.time = "month",
-         statistic = "percentile", percentile = 95,
-         y.relation = "free")
+timePlot(mydata,
+  pollutant = c("o3", "no2"), avg.time = "month",
+  statistic = "percentile", percentile = 95,
+  y.relation = "free"
+)
 
 ## plot the number of valid records in each 2-week period
-timePlot(mydata, pollutant = c("o3", "no2"), avg.time = "2 week",
-         statistic = "frequency", y.relation = "free")
+timePlot(mydata,
+  pollutant = c("o3", "no2"), avg.time = "2 week",
+  statistic = "frequency", y.relation = "free"
+)
 ```
 
 An example of normalising data is shown in @fig-timePlotNorm. In this plot we have:
@@ -89,11 +98,12 @@ An example of normalising data is shown in @fig-timePlotNorm. In this plot we ha
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 70%
-timePlot(mydata, 
-         pollutant = c("nox", "no2", "co", "so2", "pm10"),
-         avg.time = "year", normalise = "1/1/1998", 
-         lwd = 4, lty = 1,
-         group = TRUE, ylim = c(0, 120))
+timePlot(mydata,
+  pollutant = c("nox", "no2", "co", "so2", "pm10"),
+  avg.time = "year", normalise = "1/1/1998",
+  lwd = 4, lty = 1,
+  group = TRUE, ylim = c(0, 120)
+)
 ```
 
 Another example is grouping pollutants from *several sites* on one plot. It is easy to import data from several sites and to plot the data in separate panels e.g.
@@ -104,13 +114,17 @@ Another example is grouping pollutants from *several sites* on one plot. It is e
 #| fig-width: 7
 #| fig-height: 4
 ## import data from 3 sites
-aq <- importUKAQ(site = c("kc1", "my1", "nott"), 
-                      year = 2005:2010)
+aq <- importUKAQ(
+  site = c("kc1", "my1", "nott"),
+  year = 2005:2010
+)
 
 ## plot it
-timePlot(aq, pollutant = "nox", 
-         type = "site", 
-         avg.time = "month")
+timePlot(aq,
+  pollutant = "nox",
+  type = "site",
+  avg.time = "month"
+)
 ```
 
 Using the code above it is also possible to include several species. But what if we wanted to plot NO~x~ concentrations across all sites in one panel? An example of how to do this is shown below. Note, in order to make referring to the columns easier, we will drop the full (long) site name and use the site code instead.
@@ -121,9 +135,11 @@ Using the code above it is also possible to include several species. But what if
 aq <- select(aq, -site)
 
 ## now reshape the data using the tidyr package
-aq <- pivot_wider(aq, id_cols = date, 
-                       names_from = code, 
-                       values_from = co:air_temp)
+aq <- pivot_wider(aq,
+  id_cols = date,
+  names_from = code,
+  values_from = co:air_temp
+)
 
 names(aq)
 ```
@@ -136,21 +152,25 @@ The final step will make columns of each site/pollutant combination e.g. `nox_KC
 #| fig-width: 7
 #| fig-height: 5
 #| out-width: 70%
-timePlot(aq, 
-         pollutant = c("nox_KC1", "nox_MY1", "nox_NOTT"),
-         avg.time = "month", group = TRUE,
-         lty = 1, lwd = c(1, 3, 5),
-         ylab = "nox (ug/m3)"
-         )
+timePlot(aq,
+  pollutant = c("nox_KC1", "nox_MY1", "nox_NOTT"),
+  avg.time = "month", group = TRUE,
+  lty = 1, lwd = c(1, 3, 5),
+  ylab = "nox (ug/m3)"
+)
 ```
 
 An alternative way of selecting all columns containing the character 'nox' is to use the `grep` command. For example:
 
 ```{r}
 #| eval: false
-timePlot(thedata, pollutant = names(thedata)[grep(pattern = "nox", 
-                                                  names(thedata))],
-         avg.time = "month", group = TRUE)
+timePlot(thedata,
+  pollutant = names(thedata)[grep(
+    pattern = "nox",
+    names(thedata)
+  )],
+  avg.time = "month", group = TRUE
+)
 ```
 
 If wind speed `ws` and wind direction `wd` are available they can be used in plots and shown as 'wind vectors'. Plotting data in this way conveys more information in an easy-to-understand way, which works best for relatively short time periods e.g. a pollution episode lasting a few days. As an example @fig-timePlotwswd shows the first 48 hours of NO~x~ and NO~2~ data with wind arrows shown. The arrows are controlled by a list of option that control the length, shape and colour of the arrows. The maximum length of the arrow plotted is a fraction of the plot dimension with the longest arrow being `scale` of the plot x-y dimension. Note, if the plot size is adjusted manually by the user it should be re-plotted to ensure the correct wind angle. The list may contain other options to `panel.arrows` in the [lattice]{.pkg} package. Other useful options include `length`, which controls the length of the arrow head and `angle`, which controls the angle of the arrow head. Wind vector arrows can also be used with the `scatterPlot` function.
@@ -161,9 +181,13 @@ If wind speed `ws` and wind direction `wd` are available they can be used in plo
 #| fig-width: 9
 #| fig-height: 5
 #| out-width: 90%
-timePlot(head(mydata, 48), pollutant = c("nox", "no2"), 
-         windflow = list(scale = 0.1, lwd = 2, 
-                         col = "turquoise4"), 
-         lwd = 3, group = FALSE, 
-         ylab = "concentration (ug/m3)")
+timePlot(head(mydata, 48),
+  pollutant = c("nox", "no2"),
+  windflow = list(
+    scale = 0.1, lwd = 2,
+    col = "turquoise4"
+  ),
+  lwd = 3, group = FALSE,
+  ylab = "concentration (ug/m3)"
+)
 ```

@@ -145,10 +145,12 @@ The default however is to down-weight the bins with few data points when fitting
 #| fig-width: 5
 #| out-width: 50%
 ## NOx plot
-polarPlot(mydata, pollutant = "nox", col = "turbo", 
-          key.position = "bottom",
-          key.header = "mean nox (ug/m3)", 
-          key.footer = NULL)
+polarPlot(mydata,
+  pollutant = "nox", col = "turbo",
+  key.position = "bottom",
+  key.header = "mean nox (ug/m3)",
+  key.footer = NULL
+)
 ```
 
 ```{r}
@@ -259,7 +261,7 @@ The polar CPF plot is therefore potentially very useful for source identificatio
 #| fig-height: 4
 #| out-width: 100%
 #| fig-show: hold
-#| fig-subcap: 
+#| fig-subcap:
 #|   - "Percentile 0-10%."
 #|   - "Percentile 10-20%."
 #|   - "Percentile 20-30%."
@@ -314,7 +316,7 @@ As an example of usage we will consider the relationship between PM~2.5~ and PM~
 ```{r}
 #| label: importPolarData
 library(worldmet) # to access met data
-library(tidyverse) 
+library(tidyverse)
 
 har <- importUKAQ("har", year = 2013)
 
@@ -371,7 +373,7 @@ polarPlot(har,
   limits = c(0, 1),
   ws_spread = 1.5,
   wd_spread = 10,
-  x_error = "pm10_error", 
+  x_error = "pm10_error",
   y_error = "pm2.5_error"
 )
 ```
@@ -400,9 +402,11 @@ We can now generate a polar plot of the difference between the two years (2019 w
 #| fig-height: 4.5
 #| out-width: 60%
 #| fig.keep: 'last'
-polarDiff(before = selectByDate(port_talbot, year = 2012), 
-          after = selectByDate(port_talbot, year = 2019), 
-          pollutant = "so2")
+polarDiff(
+  before = selectByDate(port_talbot, year = 2012),
+  after = selectByDate(port_talbot, year = 2019),
+  pollutant = "so2"
+)
 ```
 
 @fig-polarDiff-SO2 shows very clearly an area to the south-west where concentrations of SO~2~ have decreased considerably between 2012 and 2019, perhaps due to mitigation measures on the steelworks. Interestingly, the analysis for PM~10~ shown in @fig-polarDiff-PM10 shows a distinct area of increased concentration to the WSW, which would merit further investigation.
@@ -414,9 +418,11 @@ polarDiff(before = selectByDate(port_talbot, year = 2012),
 #| fig-height: 4.5
 #| out-width: 60%
 #| fig.keep: 'last'
-polarDiff(before = selectByDate(port_talbot, year = 2012), 
-          after = selectByDate(port_talbot, year = 2019), 
-          pollutant = "pm10")
+polarDiff(
+  before = selectByDate(port_talbot, year = 2012),
+  after = selectByDate(port_talbot, year = 2019),
+  pollutant = "pm10"
+)
 ```
 
 When selecting the periods, it is possible to refine the specific periods of interest using the `selectByDate` function described in @sec-selectByDate. For example, a comparison might usefully consider weekdays only, or certain hours of the year, and so on. Such time period selections can quickly 'home in' on specific source types by focusing on the periods they are likely to be most active.
@@ -436,12 +442,14 @@ Using the example of SO~2~ we can consider the probability that 10 μg m^-3^ (cl
 #| fig-height: 5
 #| out-width: 60%
 #| fig.keep: 'last'
-polarDiff(before = selectByDate(port_talbot, year = 2012), 
-          after = selectByDate(port_talbot, year = 2019), 
-          pollutant = "so2", 
-          statistic = "cpf", 
-          percentile = c(10, 100, -1), 
-          limits = c(-0.5, 0.5))
+polarDiff(
+  before = selectByDate(port_talbot, year = 2012),
+  after = selectByDate(port_talbot, year = 2019),
+  pollutant = "so2",
+  statistic = "cpf",
+  percentile = c(10, 100, -1),
+  limits = c(-0.5, 0.5)
+)
 ```
 
 @fig-polarPlotCPFDiff effectively shows there has been a clear reduction in the probability that 10 μg m^-3^ is exceeded between 2012 and 2019 when the wind is from the south-west.
@@ -498,7 +506,7 @@ The example given below is for concentrations of SO~2~, shown in @fig-polarPlot3
 #| fig-width: 7
 #| fig-height: 7
 #| fig-keep: 'last'
-polarCluster(mydata, pollutant="so2", n.clusters=2:10, cols= "Set2")
+polarCluster(mydata, pollutant = "so2", n.clusters = 2:10, cols = "Set2")
 ```
 
 ```{r}
@@ -544,9 +552,11 @@ Now other [openair]{.pkg} analysis functions can be used to analyse the results.
 #| fig-cap: Temporal variation in SO~2~ split by cluster.
 #| fig-width: 9
 #| fig-height: 7
-timeVariation(results, pollutant = "so2", group = "cluster",
-              key.columns = 4,
-              col = "Set2", ci = FALSE, lwd = 3)
+timeVariation(results,
+  pollutant = "so2", group = "cluster",
+  key.columns = 4,
+  col = "Set2", ci = FALSE, lwd = 3
+)
 ```
 
 Or if we just want to plot a couple of clusters (5 and 6) *using the same colours* as in @fig-polarClustn6:
@@ -614,7 +624,7 @@ The `clust_out` usefully contains the two original data sets that were used to m
 clust_data <- bind_rows(clust_out$data, clust_out$after)
 
 # consider mean SO2 by cluster
-group_by(clust_data, cluster) %>% 
+group_by(clust_data, cluster) %>%
   summarise(mean_so2 = mean(so2, na.rm = TRUE))
 ```
 
@@ -661,11 +671,12 @@ The `polarMap` function allows for control of many parts of the [leaflet]{.pkg} 
 #| cache: false
 #| fig-cap: Interactive map of polar plots for multiple pollutants with a different base map.
 #| column: screen-inset-shaded
-polarMap(openairmaps::polar_data, 
-         pollutant = c("nox", "no2"),
-         latitude = "lat",
-         longitude = "lon",
-         provider = "CartoDB.Positron")
+polarMap(openairmaps::polar_data,
+  pollutant = c("nox", "no2"),
+  latitude = "lat",
+  longitude = "lon",
+  provider = "CartoDB.Positron"
+)
 ```
 
 Note that if you are using the `importUKAQ()` function it is useful to add the option `meta = TRUE`, which will return the latitude and longitude of the site together with the air quality data.

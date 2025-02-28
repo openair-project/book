@@ -62,10 +62,10 @@ library(openair)
 knitr::write_bib(
   c(
     .packages(),
-    'knitr',
-    'openair',
-    'worldmet'
+    "knitr",
+    "openair",
+    "worldmet"
   ),
-  'assets/bib/packages.bib'
+  "assets/bib/packages.bib"
 )
 ```

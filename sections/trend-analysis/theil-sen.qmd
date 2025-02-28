@@ -126,10 +126,12 @@ ppb/year. The $\ast\ast\ast$ show that the trend is significant to the
 #| fig-height: 4
 #| out-width: 70%
 library(openair)
-TheilSen(mydata, pollutant = "o3", 
-         ylab = "ozone (ppb)", 
-         deseason = TRUE,
-         date.format = "%Y")
+TheilSen(mydata,
+  pollutant = "o3",
+  ylab = "ozone (ppb)",
+  deseason = TRUE,
+  date.format = "%Y"
+)
 ```
 
 Because the function runs simulations to estimate the uncertainty in the
@@ -156,9 +158,10 @@ following code calculates trends for years greater than 1999 i.e. from
 
 ```{r}
 #| eval: false
-TheilSen(filter(mydata, format(date, "%Y") > 1999), 
-         pollutant = "o3",
-         ylab = "ozone (ppb)")
+TheilSen(filter(mydata, format(date, "%Y") > 1999),
+  pollutant = "o3",
+  ylab = "ozone (ppb)"
+)
 ```
 
 It is also possible to calculate trends in many other ways e.g. by wind
@@ -187,10 +190,12 @@ always be *some* hours that do not have such high concentrations of NO.
 #| fig-cap: Trends in ozone at Marylebone Road split by eight wind sectors. The `TheilSen` function will automatically organise the separate panels by the different compass directions.
 #| fig-width: 10
 #| fig-height: 10
-TheilSen(mydata, pollutant = "o3", type = "wd", 
-         deseason = TRUE,
-         date.format = "%Y",
-         ylab = "ozone (ppb)")
+TheilSen(mydata,
+  pollutant = "o3", type = "wd",
+  deseason = TRUE,
+  date.format = "%Y",
+  ylab = "ozone (ppb)"
+)
 ```
 
 The option `slope.percent` can be set to express slope estimates as a
@@ -213,8 +218,10 @@ fractions of) the time series spans.
 ```{r}
 #| label: MannKen
 #| eval: false
-TheilSen(mydata, pollutant = "o3", deseason = TRUE,
-            slope.percent = TRUE)
+TheilSen(mydata,
+  pollutant = "o3", deseason = TRUE,
+  slope.percent = TRUE
+)
 ```
 
 ::: callout-important
@@ -242,7 +249,7 @@ correct format.
 
 ```{r}
 #| eval: false
-mydata$date = as.Date(mydata$date, format = "%d/%m/%Y")
+mydata$date <- as.Date(mydata$date, format = "%d/%m/%Y")
 ```
 
 Finally, the `TheilSen` function can consider trends at different sites,
@@ -264,10 +271,11 @@ into a variable:
 ```{r}
 #| label: MKout
 #| fig.keep: none
-MKresults <-  TheilSen(mydata, 
-                       pollutant = "o3", 
-                       deseason = TRUE, 
-                       type = "wd")
+MKresults <- TheilSen(mydata,
+  pollutant = "o3",
+  deseason = TRUE,
+  type = "wd"
+)
 ```
 
 This returns a list of two data frames containing all the monthly mean

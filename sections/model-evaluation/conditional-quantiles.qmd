@@ -46,10 +46,11 @@ A more informative analysis can be undertaken by considering conditional quantil
 #| fig-cap: Conditional quantiles by site for 15 O~3~ monitoring sites in the UK.
 #| fig-width: 12
 #| fig-height: 12
-conditionalQuantile(CMAQ.KCL, 
-                    obs = "o3", 
-                    mod = "mod", 
-                    type = "site")
+conditionalQuantile(CMAQ.KCL,
+  obs = "o3",
+  mod = "mod",
+  type = "site"
+)
 ```
 
 As with other [openair]{.pkg} functions, the ability to consider conditioning can really help with interpretation. For example, what do the conditional quantiles at Lullington Heath (in south-east England) look like by season? This is easily done by subsetting the data to select that site and setting `type = "season"`, as shown in @fig-conditionalSeas. These results show that winter predictions have good coverage i.e. with width of the blue \`perfect model' line is the same as the observations. However, the predictions tend to be somewhat lower than observations for most concentrations (the median line is below the blue line) --- and the width of the 10/75th and 10/90th percentiles is quite broad. However, the area where the model is less good is in summer and autumn because the predictions have low coverage (the red line only covers less than half of the observation line and the width of the percentiles is wide).
@@ -62,9 +63,10 @@ Of course, it is also easy to plot by hour of the day, day of the week, by dayli
 #| fig-width: 8
 #| fig-height: 8
 #| out-width: 75%
-conditionalQuantile(subset(CMAQ.KCL, site == "Lullington.Heath"), 
-                    obs = "o3",
-                    mod = "mod", type = "season")
+conditionalQuantile(subset(CMAQ.KCL, site == "Lullington.Heath"),
+  obs = "o3",
+  mod = "mod", type = "season"
+)
 ```
 
 ## Conditional evaluation {#sec-conditionalEval}
@@ -111,9 +113,11 @@ The `conditionalEval` function can be used straightforwardly to provide informat
 #| fig-height: 5
 #| fig-keep: last
 #| column: screen-inset-right
-conditionalEval(condDat, obs = "O3.obs", mod = "O3.mod",
-                statistic = "ws.obs",
-                col.var = "Set3")
+conditionalEval(condDat,
+  obs = "O3.obs", mod = "O3.mod",
+  statistic = "ws.obs",
+  col.var = "Set3"
+)
 ```
 
 In an extension to @fig-condDatWS it is possible to derive information on the simultaneous model performance of other variables. @fig-condDat shows the conditional quantile plot for hourly O~3~ predictions. This shows among other things that concentrations of O~3~ tend to be under-predicted for concentrations less than about 20 ppb. The Figure on the right shows the simultaneous *model performance* for wind speed and NO~x~ for the *same* prediction intervals as shown in the conditional quantile plot. The plot on the right shows that for low concentrations of predicted O~3~ there is a tendency for NO~x~ concentrations to be overestimated (NMB $\approx$ 0.2 to 0.4) and wind speeds to be underestimated (NMB $\approx$ -0.2 to -0.3). One possible explanation for this behaviour is that the meteorological model tends to produce wind speeds that are too low, which would result in higher concentrations of NO~x~, which in turn would result in lower concentrations of O~3~. Note that it is possible to include more than one statistic, which would be plotted in a new panel e.g. `statistic = c("NMB", "r")`.
@@ -131,11 +135,13 @@ In essence the `conditionalEval` function provides more information on model per
 #| fig-height: 7
 #| fig-keep: last
 #| column: screen-inset-right
-conditionalEval(condDat, obs = "O3.obs", mod = "O3.mod",
-                var.obs = c("NOx.obs", "ws.obs"),
-                var.mod = c("NOx.mod", "ws.mod"),
-                statistic = "NMB",
-                var.names = c("nox", "wind speed"))
+conditionalEval(condDat,
+  obs = "O3.obs", mod = "O3.mod",
+  var.obs = c("NOx.obs", "ws.obs"),
+  var.mod = c("NOx.mod", "ws.mod"),
+  statistic = "NMB",
+  var.names = c("nox", "wind speed")
+)
 ```
 
 A plot using temperature predictions shows that for most of the range in O~3~ predictions there is very little bias in temperature (although there is some negative bias in temperature for very low concentration O~3~ predictions):
@@ -143,10 +149,12 @@ A plot using temperature predictions shows that for most of the range in O~3~ pr
 ```{r}
 #| label: condDatTemp
 #| eval: false
- conditionalEval(condDat, obs = "O3.obs", mod = "O3.mod",
-                var.obs = c("temp.obs", "ws.obs"),
-                var.mod = c("temp.mod", "ws.mod"),
-                statistic = "NMB", var.names = c("temperature", "wind speed"))
+conditionalEval(condDat,
+  obs = "O3.obs", mod = "O3.mod",
+  var.obs = c("temp.obs", "ws.obs"),
+  var.mod = c("temp.mod", "ws.mod"),
+  statistic = "NMB", var.names = c("temperature", "wind speed")
+)
 ```
 
 Finally, (but not shown) it can be very useful to consider model performance in terms of air mass origin. In the example below, trajectories are imported, a cluster analysis undertaken and then evaluated using `conditionalEval`.
@@ -164,7 +172,9 @@ cl <- trajCluster(traj, method = "Angle", n.cluster = 5)
 condDat <- merge(condDat, cl, by = "date")
 
 ## plot it
-conditionalEval(condDat, obs = "O3.obs", mod = "O3.mod",
-                statistic = "cluster",
-                col.var = "Set3")
+conditionalEval(condDat,
+  obs = "O3.obs", mod = "O3.mod",
+  statistic = "cluster",
+  col.var = "Set3"
+)
 ```

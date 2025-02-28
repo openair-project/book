@@ -68,17 +68,18 @@ For example
 #| label: run_hysplit
 #| eval: false
 data_out <- run_hysplit(
-latitude = 36.134, 
- longitude = -5.347, 
-  runtime = -96, 
-  start_height = 10, 
-  model_height = 10000, 
+  latitude = 36.134,
+  longitude = -5.347,
+  runtime = -96,
+  start_height = 10,
+  model_height = 10000,
   start = 2015,
   end = "2015-01-10",
-  hysplit_exec = "~/hysplit/exec", 
-  hysplit_input = "~/trajData", 
+  hysplit_exec = "~/hysplit/exec",
+  hysplit_input = "~/trajData",
   hysplit_output = "~/temp",
-  site = "gibraltar")
+  site = "gibraltar"
+)
 ```
 
 The `data_out` can then be used directly in [openair]{.pkg} trajectory functions. The code will also return information from Hysplit such as pressure, temperature, terrain and boundary layer height.

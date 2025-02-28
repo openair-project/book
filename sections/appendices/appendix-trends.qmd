@@ -114,9 +114,10 @@ Further tests, also considering the partial autocorrelation function (PACF) sugg
 
 ```{r}
 #| label: M3mod
-M2 <- gamm(o3 ~ s(month, bs = "cc")  + s(trend), 
-           data = monthly,
-           correlation = corAR1(form = ~ month | year))
+M2 <- gamm(o3 ~ s(month, bs = "cc") + s(trend),
+  data = monthly,
+  correlation = corAR1(form = ~ month | year)
+)
 summary(M2$gam)
 ```
 
@@ -136,9 +137,12 @@ Note that model M2 assumes that the trend and seasonal terms vary independently 
 ```{r}
 #| label: M3modGAMM
 #| cache: false
-M3 <- gamm(o3 ~ s(month, bs = "cc")  + 
-             te(trend, month), data = monthly,
-           correlation = corAR1(form = ~ month | year))
+M3 <- gamm(
+  o3 ~ s(month, bs = "cc") +
+    te(trend, month),
+  data = monthly,
+  correlation = corAR1(form = ~ month | year)
+)
 summary(M3$gam)
 ```
 
@@ -150,7 +154,7 @@ It becomes a bit more difficult to plot the two-way interaction between the tren
 #| fig-width: 7
 #| fig-height: 7
 #| out-width: 75%
-plot(M3$gam, select = 2, scheme = 1, theta = 225, phi = 10,ticktype = "detailed")
+plot(M3$gam, select = 2, scheme = 1, theta = 225, phi = 10, ticktype = "detailed")
 ```
 
 While there have been many steps involved in this short analysis, the data at Mace Head are not typical of most air quality data observed, say in urban areas. Much of the data considered in these areas does not appear to have significant autocorrelation in the residuals once the seasonal variation has been accounted for, therefore avoiding the complexities of taking account of the correlation structure of the data. It may be for example that sites like Mace Head and a pollutant such as O~3~ are much more prone to larger scale atmospheric processes that are not captured by these models.

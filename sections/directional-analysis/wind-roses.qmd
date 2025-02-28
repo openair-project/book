@@ -314,5 +314,5 @@ pollutionRose(mydata,
   breaks = c(-11, -2, -1, -0.5, 0.5, 1, 2, 11),
   cols = c("dodgerblue4", "white", "firebrick"),
   type = "daylight"
-  )
+)
 ```

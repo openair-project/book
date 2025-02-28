@@ -19,7 +19,7 @@ We apply the function to concentrations of O~3~ and NO~2~ using the code below. 
 ```{r}
 #| label: fig-smoothTrendComp
 #| fig-cap: Examples of the `smoothTrend` function applied to Marylebone Road.'
-#| fig-subcap: 
+#| fig-subcap:
 #|   - "Monthly mean O~3~."
 #|   - "Deseasonalised O~3~."
 #|   - "Monthly mean NO~2~ with bootstrap uncertainties."
@@ -30,18 +30,26 @@ We apply the function to concentrations of O~3~ and NO~2~ using the code below. 
 #| layout-ncol: 2
 library(openair) # load the package
 
-smoothTrend(mydata, pollutant = "o3", ylab = "concentration (ppb)",
-            main = "monthly mean o3")
+smoothTrend(mydata,
+  pollutant = "o3", ylab = "concentration (ppb)",
+  main = "monthly mean o3"
+)
 
-smoothTrend(mydata, pollutant = "o3", deseason = TRUE, ylab = "concentration (ppb)",
-            main = "monthly mean deseasonalised o3")
+smoothTrend(mydata,
+  pollutant = "o3", deseason = TRUE, ylab = "concentration (ppb)",
+  main = "monthly mean deseasonalised o3"
+)
 
-smoothTrend(mydata, pollutant = "no2", simulate = TRUE, ylab = "concentration (ppb)",
-            main = "monthly mean no2 (bootstrap uncertainties)")
+smoothTrend(mydata,
+  pollutant = "no2", simulate = TRUE, ylab = "concentration (ppb)",
+  main = "monthly mean no2 (bootstrap uncertainties)"
+)
 
-smoothTrend(mydata, pollutant = "no2", deseason = TRUE, simulate =TRUE,
-            ylab = "concentration (ppb)",
-            main = "monthly mean deseasonalised no2 (bootstrap uncertainties)")
+smoothTrend(mydata,
+  pollutant = "no2", deseason = TRUE, simulate = TRUE,
+  ylab = "concentration (ppb)",
+  main = "monthly mean deseasonalised no2 (bootstrap uncertainties)"
+)
 ```
 
 The `smoothTrend` function share many of the functionalities of the `TheilSen` function. @fig-smoothwd shows the result of applying this function to O~3~ concentrations. The code that produced @fig-smoothwd was:
@@ -51,8 +59,10 @@ The `smoothTrend` function share many of the functionalities of the `TheilSen` f
 #| fig-cap: Trends in O~3~ using the `smoothTrend` function applied to Marylebone Road. The shading shows the estimated 95% confidence intervals.
 #| fig-width: 10
 #| fig-height: 12
-smoothTrend(mydata, pollutant = "o3", deseason = TRUE,
-             type = "wd")
+smoothTrend(mydata,
+  pollutant = "o3", deseason = TRUE,
+  type = "wd"
+)
 ```
 
 The `smoothTrend` function can easily be used to gain a large amount of information on trends easily. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
@@ -62,9 +72,11 @@ The `smoothTrend` function can easily be used to gain a large amount of informat
 #| fig-cap: The `smoothTrend` function applied to three pollutants,  split by wind sector and season.
 #| fig-width: 14
 #| fig-height: 12
-smoothTrend(mydata, pollutant = c("no2", "pm10", "o3"), 
-            type = c("wd", "season"),
-            date.breaks = 3, lty = 0)
+smoothTrend(mydata,
+  pollutant = c("no2", "pm10", "o3"),
+  type = c("wd", "season"),
+  date.breaks = 3, lty = 0
+)
 ```
 
 ## Seasonal averages
@@ -81,8 +93,10 @@ lh <- importUKAQ(site = "lh", year = 2000:2019)
 #| fig-cap: Trends in O~3~ by season at the Lullington Heath site with a seasonal averaging time and panel for each season.
 #| fig-width: 6
 #| fig-height: 5
-smoothTrend(lh, pollutant = "o3",
-            avg.time = "season",
-            type = "season",
-            date.breaks = 4)
+smoothTrend(lh,
+  pollutant = "o3",
+  avg.time = "season",
+  type = "season",
+  date.breaks = 4
+)
 ```

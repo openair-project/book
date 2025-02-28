@@ -23,10 +23,11 @@ An example of the `timeProp` function is shown in @fig-timeProp. In this example
 library(openair) # load the package
 
 timeProp(selectByDate(mydata, year = 2003),
-         pollutant = "so2", avg.time = "3 day",
-         proportion = "wd", 
-         date.breaks = 10, key.position = "top",
-         key.columns = 8, ylab = "so2 (ug/m3)")
+  pollutant = "so2", avg.time = "3 day",
+  proportion = "wd",
+  date.breaks = 10, key.position = "top",
+  key.columns = 8, ylab = "so2 (ug/m3)"
+)
 ```
 
 Note that `proportion` can be an existing categorical (i.e. factor or character) variable in a data frame. If a numeric variable is supplied, then it is typically cut into four quantile levels. So, for example, the plot below would show intervals of wind speed, which would help show the wind speed conditions that control high SO~2~ concentration --- and importantly, when they occur.
@@ -40,12 +41,13 @@ An example of using `timeProp` with a continuous variable is shown in @fig-timeP
 #| fig-height: 4
 #| column: screen-inset-right
 timeProp(selectByDate(mydata, year = 2003),
-         pollutant = "so2",
-         avg.time = "3 day",
-         n.levels = 3,
-         cols = "viridis",
-         proportion = "ws", date.breaks = 10,
-         key.position = "top", key.columns = 3)
+  pollutant = "so2",
+  avg.time = "3 day",
+  n.levels = 3,
+  cols = "viridis",
+  proportion = "ws", date.breaks = 10,
+  key.position = "top", key.columns = 3
+)
 ```
 
 One of the key uses of `timeProp` is to post-process cluster analysis data. Users should consider the uses of `timeProp` for cluster analysis shown in @sec-polarCluster and @sec-trajCluster-trajectory-analysis. In both these cases the cluster analysis yields a categorical output directly i.e. cluster, which lends itself to analysis using `timeProp`.

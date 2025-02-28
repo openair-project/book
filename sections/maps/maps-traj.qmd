@@ -126,24 +126,31 @@ uk <- importTraj(year = 2009) %>%
 
 leaflet() %>%
   addTiles() %>%
-  addTrajPaths(data = uk,
-               color = "blue",
-               group = "London, UK", 
-               opacity = .25) %>%
-  addMarkers(data = dplyr::slice_head(uk, n = 1),
-             lat = ~lat, lng = ~lon,
-             group = "London, UK", 
-             label = "UK",
-             layerId = "uk") %>%
-  addTrajPaths(data = france,
-               color = "red",
-               group = "Paris, France", 
-               opacity = .25, 
-               layerId = "france") %>%
-  addMarkers(data = dplyr::slice_head(france, n = 1), 
-             lat = ~lat, lng = ~lon,
-             group = "Paris, France", label = "FR") %>%
+  addTrajPaths(
+    data = uk,
+    color = "blue",
+    group = "London, UK",
+    opacity = .25
+  ) %>%
+  addMarkers(
+    data = dplyr::slice_head(uk, n = 1),
+    lat = ~lat, lng = ~lon,
+    group = "London, UK",
+    label = "UK",
+    layerId = "uk"
+  ) %>%
+  addTrajPaths(
+    data = france,
+    color = "red",
+    group = "Paris, France",
+    opacity = .25,
+    layerId = "france"
+  ) %>%
+  addMarkers(
+    data = dplyr::slice_head(france, n = 1),
+    lat = ~lat, lng = ~lon,
+    group = "Paris, France", label = "FR"
+  ) %>%
   addLayersControl(overlayGroups = c("Paris, France", "London, UK"))
-
 ```
 

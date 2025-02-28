@@ -46,8 +46,9 @@ We apply the `timeVariation` function to PM~10~ concentrations and take the oppo
 library(openair)
 library(tidyverse)
 
-timeVariation(filter(mydata, ws > 3,  wd > 100, wd < 270),
-              pollutant = "pm10", ylab = "pm10 (ug/m3)")
+timeVariation(filter(mydata, ws > 3, wd > 100, wd < 270),
+  pollutant = "pm10", ylab = "pm10 (ug/m3)"
+)
 ```
 
 The results are shown in @fig-timeVar1. The plot shown at the bottom-left shows the diurnal variation of concentrations for all days. It shows for example that PM~10~ concentrations tend to peak around 9 am. The shading shows the 95% confidence intervals of the mean. The plot at the bottom-right shows how PM~10~ concentrations vary by day of the week. Here there is strong evidence that PM~10~ is much lower at the weekends and that there is a significant difference compared with weekdays. It also shows that concentrations tend to increase during the weekdays. Finally, the plot at the top shows both sets of information together to provide an overview of how concentrations vary.
@@ -65,9 +66,10 @@ Also shown in the very different behaviour of O~3~. Because O~3~ reacts with NO,
 #| fig-cap: Example plot using the `timeVariation` function to plot NO~x~, CO, NO~2~ and O~3~ concentrations at Marylebone Road. In this plot, the concentrations are normalised.
 #| fig-width: 12
 #| fig-height: 7
-timeVariation(mydata, 
-              pollutant = c("nox", "co", "no2", "o3"), 
-              normalise = TRUE)
+timeVariation(mydata,
+  pollutant = c("nox", "co", "no2", "o3"),
+  normalise = TRUE
+)
 ```
 
 Another example is splitting the data set by time. We use the `splitByDate` function to divide up the data into dates before January 2003 and after January 2003. This time the option `difference` is used to highlight how NO~2~ concentrations have changed over these two periods. The results are shown in @fig-timeVar3. There is some indication in this plot that data after 2003 seem to show more of a double peak in the diurnal plots; particularly in the morning rush hour. Also, the difference line does more clearly highlight a more substantial change over weekdays and weekends. Given that cars are approximately constant at this site each day, the change may indicate a change in vehicle emissions from other vehicle types. Given that it is known that primary NO~2~ emissions are known to have increased sharply from the beginning of 2003 onwards, this perhaps provides clues as to the principal cause.
@@ -78,12 +80,16 @@ Another example is splitting the data set by time. We use the `splitByDate` func
 #| fig-width: 12
 #| fig-height: 7
 ## split data into two periods (see Utlities section for more details)
-mydata <- splitByDate(mydata, dates= "1/1/2003",
-                        labels = c("before Jan. 2003", "After Jan. 2003"))
+mydata <- splitByDate(mydata,
+  dates = "1/1/2003",
+  labels = c("before Jan. 2003", "After Jan. 2003")
+)
 
-timeVariation(mydata, pollutant = "no2", 
-              group = "split.by", 
-              difference = TRUE)
+timeVariation(mydata,
+  pollutant = "no2",
+  group = "split.by",
+  difference = TRUE
+)
 ```
 
 In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the `polarPlot` function where a 'feature' of interest has been identified---maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available. This is an area that will be developed.
@@ -98,11 +104,14 @@ There are a couple of things to note in @fig-timeVar4. There seems to be evidenc
 #| fig-width: 12
 #| fig-height: 7
 ## make a field called "feature" and fill: make all values = "other"
-mydata <- mutate(mydata, 
-                 feature = ifelse(ws > 4 & wd > 0 & wd <= 180, "easterly", "other"))
+mydata <- mutate(mydata,
+  feature = ifelse(ws > 4 & wd > 0 & wd <= 180, "easterly", "other")
+)
 
-timeVariation(mydata, pollutant ="so2", group = "feature",  ylab = "so2 (ppb)",
-              difference = TRUE)
+timeVariation(mydata,
+  pollutant = "so2", group = "feature", ylab = "so2 (ppb)",
+  difference = TRUE
+)
 ```
 
 By default `timeVariation` shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for `statistic`. When `statistic = "median"` the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown be setting the `conf.int`. For example, `conf.int =   c(0.25, 0.99)` will show the median, 25/75th and 1/99th quantile values. The `statistic = "median"` option is therefore very useful for showing how the data are distributed --- somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when `statistic = "median"` is used due to potential over-plotting; although the function will display several species of required. An example is shown in @fig-timeVarMedian for PM~10~ concentrations.
@@ -112,9 +121,11 @@ By default `timeVariation` shows the mean variation in different temporal compon
 #| fig-cap: Example plot using the `timeVariation` function to show the variation in the median. The shading shows the extent to the 25/75th and 5/95th  quantiles.
 #| fig-width: 12
 #| fig-height: 7
-timeVariation(mydata, pollutant = "pm10", 
-              statistic = "median",
-              col = "firebrick")
+timeVariation(mydata,
+  pollutant = "pm10",
+  statistic = "median",
+  col = "firebrick"
+)
 ```
 
 ## Output
