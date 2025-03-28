@@ -8,7 +8,7 @@ author: David Carslaw
 
 Scatter plots are extremely useful and a very commonly used analysis technique for considering how variables relate to one another. R does of course have many capabilities for plotting data in this way. However, it can be tricky to add linear relationships, or split scatter plots by levels of other variables etc. The purpose of the `scatterPlot` function is to make it straightforward to consider how variables are related to one another in a way consistent with other [openair]{.pkg} functions. We have added several capabilities that can be used just by setting different options, some of which are shown below.
 
-There is less need for this function now that [ggplot2]{.pkg} is available, but it still has some benefits for intercative use.
+There is less need for this function now that [ggplot2]{.pkg} is available, but it still has some benefits for interactive use.
 
 -   A smooth fit is automatically added to help reveal the underlying relationship between two variables together with the estimated 95% confidence intervals of the fit. This is in general an extremely useful thing to do because it helps to show the (possibly) non-linear relationship between variables in a very robust way --- or indeed whether the relationship is linear.
 
@@ -46,7 +46,7 @@ Often with several years of data, points are over-plotted and it can be very dif
 
 [^scatter-plot-1]: In fact it is not possible to have a shape with more than 6 sides that can be used to forma a lattice without gaps.
 
-### Hexaganol binning {#sec-hexbin}
+### Hexagonal binning {#sec-hexbin}
 
 Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that For `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), `trans = function(x) log(x)` and `inv = function(x) exp(x)`. For a square root transform use `trans = sqrt` and `inv =  function(x) x^2`. To not apply any transformation `trans = NULL` and `inv = NULL` should be used.
 
@@ -158,7 +158,7 @@ scatterPlot(subdat,
 )
 ```
 
-The above example will also work with `type`. For example, to consider how NO~x~ againts PM~10~ and PM~2.5~ varies by season:
+The above example will also work with `type`. For example, to consider how NO~x~ against PM~10~ and PM~2.5~ varies by season:
 
 ```{r}
 #| label: scatterTwoSeas

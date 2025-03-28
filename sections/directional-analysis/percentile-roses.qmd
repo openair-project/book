@@ -59,7 +59,7 @@ percentileRose(mydata,
 )
 ```
 
-## Condtional probability function {#sec-CPF}
+## Conditional probability function {#sec-CPF}
 
 The `percentileRose` function can also plot conditional probability functions (CPF) [@Ashbaugh1985]. The CPF is defined as CPF = $m_\theta/n_\theta$, where $m_\theta$ is the number of samples in the wind sector $\theta$ with mixing ratios greater than some *high* concentration, and $n_\theta$ is the total number of samples in the same wind sector. CPF analysis is very useful for showing which wind directions are dominated by high concentrations and give the probability of doing so. In [openair]{.pkg}, a CPF plot can be produced as shown in @fig-percentileRoseCPF. Note that in these plots only one percentile is provided and the method must be supplied. In @fig-percentileRoseCPF it is clear that the high concentrations (greater than the 95th percentile of *all* observations) is dominated by easterly wind directions. There are very low conditional probabilities of these concentrations being experienced for other wind directions.
 

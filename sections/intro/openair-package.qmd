@@ -26,7 +26,7 @@ Where code is shown in this document, function names are hyper-linked and will t
 
 ## Installation and code access
 
-[openair]{.pkg} is avaiable on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive network) which means it can be installed easily from R. I would recommend re-starting R and then type `install.packages("openair")`. If you use [RStudio](https://rstudio.com/products/rstudio/) (which is *highly* recommended), you can just choose the 'packages' tab on the bottom-right, and then select 'Install'. Simply start typing openair and you will find the package.
+[openair]{.pkg} is available on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive network) which means it can be installed easily from R. I would recommend re-starting R and then type `install.packages("openair")`. If you use [RStudio](https://rstudio.com/products/rstudio/) (which is *highly* recommended), you can just choose the 'packages' tab on the bottom-right, and then select 'Install'. Simply start typing openair and you will find the package.
 
 For [openair]{.pkg} all development is carried out using Github for version control. Users can access all code used in openair at (<https://github.com/openair-project/openair>).
 

@@ -2,7 +2,7 @@
 author: David Carslaw
 ---
 
-# Taylor Diagam {#sec-TaylorDiagram}
+# Taylor Diagram {#sec-TaylorDiagram}
 
 ## Background {#sec-TaylorBack}
 
