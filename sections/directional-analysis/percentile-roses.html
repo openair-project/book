@@ -378,7 +378,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagam</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -498,7 +498,7 @@ window.Quarto = {
   <ul>
 <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">7.2</span> Examples</a></li>
-  <li><a href="#sec-CPF" id="toc-sec-CPF" class="nav-link" data-scroll-target="#sec-CPF"><span class="header-section-number">7.3</span> Condtional probability function</a></li>
+  <li><a href="#sec-CPF" id="toc-sec-CPF" class="nav-link" data-scroll-target="#sec-CPF"><span class="header-section-number">7.3</span> Conditional probability function</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/master/sections/directional-analysis/percentile-roses.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -583,7 +583,7 @@ Figure&nbsp;7.3: A <code>percentileRose</code> plot of O<sub>3</sub> concentrati
 </div>
 </div>
 </section><section id="sec-CPF" class="level2 page-columns page-full" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-CPF">
-<span class="header-section-number">7.3</span> Condtional probability function</h2>
+<span class="header-section-number">7.3</span> Conditional probability function</h2>
 <p>The <code>percentileRose</code> function can also plot conditional probability functions (CPF) <span class="citation" data-cites="Ashbaugh1985">(<a href="../references.html#ref-Ashbaugh1985" role="doc-biblioref">Ashbaugh et al., 1985</a>)</span>. The CPF is defined as CPF = <span class="math inline">\(m_\theta/n_\theta\)</span>, where <span class="math inline">\(m_\theta\)</span> is the number of samples in the wind sector <span class="math inline">\(\theta\)</span> with mixing ratios greater than some <em>high</em> concentration, and <span class="math inline">\(n_\theta\)</span> is the total number of samples in the same wind sector. CPF analysis is very useful for showing which wind directions are dominated by high concentrations and give the probability of doing so. In <span class="pkg">openair</span>, a CPF plot can be produced as shown in <a href="#fig-percentileRoseCPF" class="quarto-xref">Figure&nbsp;<span>7.4</span></a>. Note that in these plots only one percentile is provided and the method must be supplied. In <a href="#fig-percentileRoseCPF" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> it is clear that the high concentrations (greater than the 95th percentile of <em>all</em> observations) is dominated by easterly wind directions. There are very low conditional probabilities of these concentrations being experienced for other wind directions.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Ashbaugh1985" class="csl-entry" role="listitem">
 Ashbaugh, L.L., Malm, W.C., Sadeh, W.Z., 1985. <span class="nocase">A residence time probability analysis of sulfur concentrations at grand Canyon National Park</span>. Atmospheric Environment (1967) 19, 1263–1270. <a href="https://doi.org/10.1016/0004-6981(85)90256-2">https://doi.org/10.1016/0004-6981(85)90256-2</a>

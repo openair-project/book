@@ -358,7 +358,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagam</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -480,7 +480,7 @@ window.Quarto = {
   <li>
 <a href="#sec-ScatterEx" id="toc-sec-ScatterEx" class="nav-link" data-scroll-target="#sec-ScatterEx"><span class="header-section-number">27.2</span> Examples</a>
   <ul class="collapse">
-<li><a href="#sec-hexbin" id="toc-sec-hexbin" class="nav-link" data-scroll-target="#sec-hexbin"><span class="header-section-number">27.2.1</span> Hexaganol binning</a></li>
+<li><a href="#sec-hexbin" id="toc-sec-hexbin" class="nav-link" data-scroll-target="#sec-hexbin"><span class="header-section-number">27.2.1</span> Hexagonal binning</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/master/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -510,7 +510,7 @@ window.Quarto = {
 </header><section id="sec-ScatterPurpose" class="level2" data-number="27.1"><h2 data-number="27.1" class="anchored" data-anchor-id="sec-ScatterPurpose">
 <span class="header-section-number">27.1</span> Purpose</h2>
 <p>Scatter plots are extremely useful and a very commonly used analysis technique for considering how variables relate to one another. R does of course have many capabilities for plotting data in this way. However, it can be tricky to add linear relationships, or split scatter plots by levels of other variables etc. The purpose of the <code>scatterPlot</code> function is to make it straightforward to consider how variables are related to one another in a way consistent with other <span class="pkg">openair</span> functions. We have added several capabilities that can be used just by setting different options, some of which are shown below.</p>
-<p>There is less need for this function now that <span class="pkg">ggplot2</span> is available, but it still has some benefits for intercative use.</p>
+<p>There is less need for this function now that <span class="pkg">ggplot2</span> is available, but it still has some benefits for interactive use.</p>
 <ul>
 <li><p>A smooth fit is automatically added to help reveal the underlying relationship between two variables together with the estimated 95% confidence intervals of the fit. This is in general an extremely useful thing to do because it helps to show the (possibly) non-linear relationship between variables in a very robust way — or indeed whether the relationship is linear.</p></li>
 <li><p>It is easy to add a linear regression line. The resulting equation is shown on the plot together with the R<span class="math inline">\(^2\)</span> value.</p></li>
@@ -542,7 +542,7 @@ Figure&nbsp;27.1: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 </div>
 <p>Often with several years of data, points are over-plotted and it can be very difficult to see what the underlying relationship looks like. One very effective method to use in these situations is to ‘bin’ the data and to colour the intervals by the number of counts of occurrences in each bin. There are various ways of doing this, but ‘hexagonal binning’ is particularly effective because of the way hexagons can be placed next to one another.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> To use hexagonal binning it will be necessary to install the <span class="pkg">hexbin</span> package:</p>
 <section id="sec-hexbin" class="level3" data-number="27.2.1"><h3 data-number="27.2.1" class="anchored" data-anchor-id="sec-hexbin">
-<span class="header-section-number">27.2.1</span> Hexaganol binning</h3>
+<span class="header-section-number">27.2.1</span> Hexagonal binning</h3>
 <p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), <code>trans = function(x) log(x)</code> and <code>inv = function(x) exp(x)</code>. For a square root transform use <code>trans = sqrt</code> and <code>inv =  function(x) x^2</code>. To not apply any transformation <code>trans = NULL</code> and <code>inv = NULL</code> should be used.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">data2003</span>, x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"no2"</span>, method <span class="op">=</span> <span class="st">"hexbin"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -665,7 +665,7 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 <span>  alpha <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The above example will also work with <code>type</code>. For example, to consider how NO<sub>x</sub> againts PM<sub>10</sub> and PM<sub>2.5</sub> varies by season:</p>
+<p>The above example will also work with <code>type</code>. For example, to consider how NO<sub>x</sub> against PM<sub>10</sub> and PM<sub>2.5</sub> varies by season:</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">subdat</span>,</span>
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>, y <span class="op">=</span> <span class="st">"value"</span>,</span>
