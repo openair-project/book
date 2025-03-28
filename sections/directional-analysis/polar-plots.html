@@ -1405,7 +1405,7 @@ Figure&nbsp;8.22: Clustering differences in polar plot concentrations of SO<sub>
 <p>The function <code>polarMap</code> requires information on the site (name or code), latitude and longitude in addition to the usual information required by the <code>polarPlot</code> function. The package comes with some example data (<code>polar_data</code>) that can be used as a template for using different data. This function can plot <em>any</em> type of polar plot, e.g., with different options for <code>statistic</code>.</p>
 <p>First, load the package and check out the data format.</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">polar_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1428,7 +1428,7 @@ $ air_temp   &lt;dbl&gt; 0.8666667, 0.8666667, 0.8000000, 0.8500000, 0.8666667, 
 </div>
 <p>Plot an interactive map.</p>
 <div class="cell column-screen-inset-shaded">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openairmaps/man/polarMap.html">polarMap</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap</a></span><span class="op">(</span></span>
 <span>  <span class="va">polar_data</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="st">"lat"</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="st">"lon"</span>,</span>
@@ -1439,7 +1439,7 @@ $ air_temp   &lt;dbl&gt; 0.8666667, 0.8666667, 0.8000000, 0.8500000, 0.8666667, 
 </div>
 <p>The <code>polarMap</code> function allows for control of many parts of the <span class="pkg">leaflet</span> map. For example, you can provide one (or more) different base map(s) — there are many! You may also visualise multiple pollutants at once which can then be toggled between.</p>
 <div class="cell column-screen-inset-shaded">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openairmaps/man/polarMap.html">polarMap</a></span><span class="op">(</span><span class="fu">openairmaps</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/openairmaps/man/polar_data.html">polar_data</a></span>,</span>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap</a></span><span class="op">(</span><span class="fu">openairmaps</span><span class="fu">::</span><span class="va"><a href="https://openair-project.github.io/openairmaps/reference/polar_data.html">polar_data</a></span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="st">"lat"</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="st">"lon"</span>,</span>
