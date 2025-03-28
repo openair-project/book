@@ -40,7 +40,7 @@ making all the data available. The networks available through `importUKAQ()` inc
 
 -   Locally managed AQ networks in England. These are sites operated in most cases by Local Authorities but may also include monitoring from other programmes, industry and airports. The location and purpose of these sites differs from the national network which is governed by strict rules of the air quality directives. As a result there is a broad range of site types, equipment and data quality practices. For more information see [here](https://uk-air.defra.gov.uk/networks/network-info?view=nondefraaqmon). These data represent information from about 15 different local air quality networks.
 
-Also available is `importKCL()` for accessing data from the sites operated by Imperial College London[^uk-air-quality-data-1], primarily including the [The London Air Quality Network](https://www.londonair.org.uk/LondonAir/Default.aspx).
+Also available is `importImperial()` for accessing data from the sites operated by Imperial College London[^uk-air-quality-data-1], primarily including the [The London Air Quality Network](https://www.londonair.org.uk/LondonAir/Default.aspx).
 
 [^uk-air-quality-data-1]: The data were first accessible when the
     Environmental Research Group was based at King's College London.
@@ -271,7 +271,7 @@ Page](../maps/maps-network.qmd).
 
 By default, all the functions above return hourly data. However, often
 there is a need to return data such as annual means of a long period of
-time. `importUKAQ()` (but not `importKCL()`) can return data
+time. `importUKAQ()` (but not `importImperial()`) can return data
 for averaging times: annual, monthly, daily and for SO~2~ 15-minute. The
 annual and monthly data also provide valuable information on data
 capture rates. The averaging statistic is selected with the `data_type`

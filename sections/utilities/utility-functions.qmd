@@ -93,7 +93,7 @@ As an example we are going to consider O~3~ concentrations at a semi-rural site 
 
 ```{r}
 #| label: importTed
-ted <- importKCL(site = "td0", year = 2005:2009, met = TRUE)
+ted <- openair::importImperial(site = "td0", year = 2005:2009, meteo = TRUE)
 ## see how many rows there are
 nrow(ted)
 ```
