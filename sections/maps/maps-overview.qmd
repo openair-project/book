@@ -135,7 +135,7 @@ desc <-
 
 tribble(
   ~Family, ~`All-in-one`, ~Markers,
-  "Network Visualisation", "`networkMap()`", "",
+  "Network Visualisation", "`networkMap()`", "`leaflet::addMarkers()`",
   "Directional Analysis", paste(c("`annulusMap()`", "`freqMap()`", "`percentileMap()`", "`polarMap()`", "`pollroseMap()`", "`windroseMap()`"), collapse = "<br>"), "`addPolarMarkers()`",
   "Trajectory Analysis", paste(c("`trajMap()`", "`trajLevelMap()`"), collapse = "<br>"), "`addTrajPaths()`"
 ) |>
