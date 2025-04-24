@@ -77,9 +77,9 @@ aq_select <-
       aq,
       date >= out_filter$date_start[i],
       date <= out_filter$date_end[i]
-    ) %>%
+    ) |>
       mutate(slope = out_filter$slope[i])
-  }) %>%
+  }) |>
   list_rbind()
 ```
 

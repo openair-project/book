@@ -84,9 +84,9 @@ aurn_meta <- openair::importMeta("aurn", all = TRUE)
 
 # prep data for leaflet
 map_data <-
-  aurn_meta %>%
+  aurn_meta |>
   # get sites in York
-  filter(local_authority == "York") %>%
+  filter(local_authority == "York") |>
   # build a popup
   buildPopup(
     latitude = "latitude",
@@ -98,13 +98,13 @@ map_data <-
       "Zone" = "zone",
       "LA" = "local_authority"
     )
-  ) %>%
+  ) |>
   # get unique sites
   distinct(site, .keep_all = TRUE)
 
 # create a basic leaflet map
-leaflet(map_data) %>%
-  addTiles() %>%
+leaflet(map_data) |>
+  addTiles() |>
   addMarkers(popup = ~popup)
 ```
 

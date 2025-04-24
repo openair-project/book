@@ -344,7 +344,7 @@ NO~2~ with a data capture rate of at least 80%:
 
 ```{r}
 #| label: filterNO2
-uk_2020 %>%
+uk_2020 |>
   filter(species == "no2", data_capture >= 0.8)
 ```
 

@@ -624,7 +624,7 @@ The `clust_out` usefully contains the two original data sets that were used to m
 clust_data <- bind_rows(clust_out$data, clust_out$after)
 
 # consider mean SO2 by cluster
-group_by(clust_data, cluster) %>%
+group_by(clust_data, cluster) |>
   summarise(mean_so2 = mean(so2, na.rm = TRUE))
 ```
 

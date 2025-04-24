@@ -75,7 +75,7 @@ Next, we consider how to plot back trajectories with a few simple examples. The 
 selectByDate(traj,
   start = "15/4/2010",
   end = "21/4/2010"
-) %>%
+) |>
   trajPlot(
     map.cols = openColours("hue", 10),
     col = "grey30"
@@ -98,7 +98,7 @@ traj$day <- as.Date(traj$date)
 selectByDate(traj,
   start = "15/4/2010",
   end = "21/4/2010"
-) %>%
+) |>
   trajPlot(
     type = "day",
     layout = c(7, 1)
@@ -115,7 +115,7 @@ Another way of plotting the data is to group the trajectories by day and colour 
 selectByDate(traj,
   start = "15/4/2010",
   end = "21/4/2010"
-) %>%
+) |>
   trajPlot(
     group = "day", col = "turbo",
     lwd = 2, key.pos = "top",
@@ -146,7 +146,7 @@ This time we can use the option `pollutant` in the function `trajPlot`, which wi
 selectByDate(traj,
   start = "15/4/2010",
   end = "21/4/2010"
-) %>%
+) |>
   trajPlot(
     pollutant = "pm10",
     col = "turbo", lwd = 2
@@ -187,7 +187,7 @@ Now it is possible to plot the trajectories:
 selectByDate(traj,
   start = "15/4/2010",
   end = "21/4/2010"
-) %>%
+) |>
   trajPlot(
     pollutant = "pm.new",
     col = "turbo", lwd = 2
@@ -215,7 +215,7 @@ It is also possible to use hexagonal binning to gain an idea about trajectory fr
 #| fig-cap: Gridded back trajectory frequencies with hexagonal binning.
 #| fig-width: 8
 #| fig-height: 5
-filter(traj, lat > 30, lat < 70, lon > -30, lon < 20) %>%
+filter(traj, lat > 30, lat < 70, lon > -30, lon < 20) |>
   trajLevel(
     method = "hexbin", col = "turbo",
     xbin = 40
@@ -303,12 +303,12 @@ alloc <- mutate(
   sector = ifelse(is.na(sector), "N", sector)
 )
 
-alloc <- group_by(alloc, date, sector) %>%
-  mutate(n = n()) %>%
-  group_by(date) %>%
-  arrange(date, n) %>%
-  slice_tail(n = 1) %>%
-  mutate(sector = ifelse(n > 50, sector, "unallocated")) %>%
+alloc <- group_by(alloc, date, sector) |>
+  mutate(n = n()) |>
+  group_by(date) |>
+  arrange(date, n) |>
+  slice_tail(n = 1) |>
+  mutate(sector = ifelse(n > 50, sector, "unallocated")) |>
   select(date, sector, n)
 
 # combine with trajectories
@@ -333,7 +333,7 @@ We can work out the mean concentration by allocation, which shows the clear impo
 
 ```{r}
 #| label: meanAlloc
-group_by(traj, sector) %>%
+group_by(traj, sector) |>
   summarise(PM2.5 = mean(pm2.5, na.rm = TRUE))
 ```
 
@@ -341,8 +341,8 @@ Finally, the percentage of the year in each sector can be calculated as follows:
 
 ```{r}
 #| label: percentAlloc
-group_by(traj, sector) %>%
-  summarise(n = n()) %>%
+group_by(traj, sector) |>
+  summarise(n = n()) |>
   mutate(percent = 100 * n / nrow(traj))
 ```
 
@@ -363,7 +363,7 @@ An example of a PSCF plot is shown in @fig-PSCF for PM~2.5~ for concentrations 9
 #| fig-cap: PSCF probabilities for PM~2.5~ concentrations (90th percentile).
 #| fig-height: 6
 #| fig-width: 10
-filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) %>%
+filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   trajLevel(
     pollutant = "pm2.5", statistic = "pscf",
     col = "increment",
@@ -388,7 +388,7 @@ where $i$ and $j$ are the indices of grid, $k$ the index of trajectory, $N$ the 
 #| fig-cap: Gridded back trajectory concentrations showing mean PM~2.5~ concentrations using the CWT approach.
 #| fig-width: 10
 #| fig-height: 6
-filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) %>%
+filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   trajLevel(
     pollutant = "pm2.5",
     statistic = "cwt",
@@ -404,7 +404,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) %>%
 #| fig-cap: Gridded and smoothed back trajectory concentrations showing mean PM~2.5~ concentrations using the CWT approach.
 #| fig-width: 10
 #| fig-height: 6
-filter(traj, lat > 45 & lat < 60 & lon > -20 & lon < 20) %>%
+filter(traj, lat > 45 & lat < 60 & lon > -20 & lon < 20) |>
   trajLevel(
     pollutant = "pm2.5",
     statistic = "cwt",
@@ -418,7 +418,7 @@ In common with most other [openair]{.pkg} functions, the flexible `type` option 
 ```{r}
 #| label: traj7
 #| eval: false
-filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) %>%
+filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) |>
   trajLevel(
     pollutant = "pm2.5",
     type = "season",
@@ -658,7 +658,7 @@ Now it is possible to analyse the concentration data according to the cluster. T
 
 ```{r}
 #| label: clustMeans
-group_by(kc1, cluster) %>%
+group_by(kc1, cluster) |>
   summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
 ```
 

@@ -64,16 +64,16 @@ While [openairmaps]{.pkg} can be used without a thorough understanding of the [l
 #| fig-cap: "An example of a leaflet map."
 library(leaflet)
 
-leaflet() %>%
-  addTiles(group = "OSM") %>%
-  addProviderTiles("CartoDB.Positron", group = "CartoDB.Positron") %>%
+leaflet() |>
+  addTiles(group = "OSM") |>
+  addProviderTiles("CartoDB.Positron", group = "CartoDB.Positron") |>
   addMarkers(
     lat = 51.5034,
     lng = -0.1276,
     label = "10 Downing Street",
     popup = "This is where the UK Prime Minister lives!",
     group = "Marker"
-  ) %>%
+  ) |>
   addLayersControl(
     baseGroups = c("CartoDB.Positron", "OSM"),
     overlayGroups = "Marker"
@@ -138,10 +138,10 @@ tribble(
   "Network Visualisation", "`networkMap()`", "",
   "Directional Analysis", paste(c("`annulusMap()`", "`freqMap()`", "`percentileMap()`", "`polarMap()`", "`pollroseMap()`", "`windroseMap()`"), collapse = "<br>"), "`addPolarMarkers()`",
   "Trajectory Analysis", paste(c("`trajMap()`", "`trajLevelMap()`"), collapse = "<br>"), "`addTrajPaths()`"
-) %>%
-  mutate(Description = desc) %>%
-  gt() %>%
-  fmt_markdown(columns = everything()) %>%
+) |>
+  mutate(Description = desc) |>
+  gt() |>
+  fmt_markdown(columns = everything()) |>
   cols_move_to_start(c(Family, Description))
 ```
 

@@ -112,45 +112,45 @@ The marker function equivalent of `trajMap()` is `addTrajPaths()` which, much li
 library(leaflet)
 library(openair)
 
-france <- importTraj("paris", year = 2009) %>%
+france <- importTraj("paris", year = 2009) |>
   selectByDate(
     start = "15/4/2009",
     end = "21/4/2009"
   )
 
-uk <- importTraj(year = 2009) %>%
+uk <- importTraj(year = 2009) |>
   selectByDate(
     start = "15/4/2009",
     end = "21/4/2009"
   )
 
-leaflet() %>%
-  addTiles() %>%
+leaflet() |>
+  addTiles() |>
   addTrajPaths(
     data = uk,
     color = "blue",
     group = "London, UK",
     opacity = .25
-  ) %>%
+  ) |>
   addMarkers(
     data = dplyr::slice_head(uk, n = 1),
     lat = ~lat, lng = ~lon,
     group = "London, UK",
     label = "UK",
     layerId = "uk"
-  ) %>%
+  ) |>
   addTrajPaths(
     data = france,
     color = "red",
     group = "Paris, France",
     opacity = .25,
     layerId = "france"
-  ) %>%
+  ) |>
   addMarkers(
     data = dplyr::slice_head(france, n = 1),
     lat = ~lat, lng = ~lon,
     group = "Paris, France", label = "FR"
-  ) %>%
+  ) |>
   addLayersControl(overlayGroups = c("Paris, France", "London, UK"))
 ```
 

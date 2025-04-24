@@ -21,8 +21,8 @@ dplyr::glimpse(polar_data)
 #| label: tbl-polardata
 #| echo: false
 #| tbl-cap: "A statistical summary of the `polar_data` dataset."
-polar_data %>%
-  dplyr::select(-site_type) %>%
+polar_data |>
+  dplyr::select(-site_type) |>
   gtsummary::tbl_summary(
     missing = "no",
     by = "site",
@@ -56,8 +56,8 @@ dplyr::tribble(
   "`pollutionRose()`", "`pollroseMap()`", "`breaks`", "`statistic`",
   "`windRose()`", "`windroseMap()`", "`ws.int`, `breaks`", "--",
   "`polarDiff()`", "`diffMap()`", "`limits`", "`x`"
-) %>%
-  gt::gt() %>%
+) |>
+  gt::gt() |>
   gt::fmt_markdown(everything())
 ```
 
@@ -202,7 +202,7 @@ sources <-
   )
 
 # make map
-polarMap(polar_data, "nox") %>%
+polarMap(polar_data, "nox") |>
   # add markers
   leaflet::addMarkers(
     data = sources,
@@ -211,7 +211,7 @@ polarMap(polar_data, "nox") %>%
   )
 ```
 
-`{leaflet}` is well documented [here](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() %>% addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
+`{leaflet}` is well documented [here](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() |> addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
 
 ## Building Popups
 
@@ -234,8 +234,8 @@ Think of `buildPopup()` as an intermediate between your data and the polar mappi
 #| fig-cap: "A demonstration of the `buildPopup()` function."
 #| message: false
 #| warning: false
-polar_data %>%
-  openair::cutData("weekend") %>%
+polar_data |>
+  openair::cutData("weekend") |>
   buildPopup(
     columns = c(
       "Site" = "site",
@@ -244,7 +244,7 @@ polar_data %>%
       "Average nox" = "nox"
     ),
     type = "weekend"
-  ) %>%
+  ) |>
   pollroseMap(
     pollutant = "nox",
     popup = "popup",
@@ -266,8 +266,8 @@ To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` 
 #| fig-cap: "Using `addPolarMarkers` to create a more complex map."
 library(leaflet)
 library(openair)
-leaflet() %>%
-  addProviderTiles("CartoDB.Voyager") %>%
+leaflet() |>
+  addProviderTiles("CartoDB.Voyager") |>
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",
@@ -275,7 +275,7 @@ leaflet() %>%
     data = polar_data,
     fun = polarFreq,
     statistic = "mean"
-  ) %>%
+  ) |>
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",
@@ -283,7 +283,7 @@ leaflet() %>%
     data = polar_data,
     fun = polarFreq,
     statistic = "median"
-  ) %>%
+  ) |>
   addPolarMarkers(
     lng = "lon", lat = "lat",
     pollutant = "nox",
@@ -291,7 +291,7 @@ leaflet() %>%
     data = polar_data,
     fun = polarFreq,
     statistic = "max"
-  ) %>%
+  ) |>
   addLayersControl(
     baseGroups = c("Mean", "Median", "Max")
   )
