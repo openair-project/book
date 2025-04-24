@@ -43,7 +43,7 @@ networkMap(source = "aurn")
 
 `networkMap()` is a quite simple function, with the following arguments for customisation:
 
--   `source`: Any number of the `importMeta()` sources --- can be "aurn", "saqn" (or "saqd"), "aqe", "waqn", "ni", "local", "kcl" or "europe".
+-   `source`: Any number of the `importMeta()` sources --- can be "aurn", "saqn" (or "saqd"), "aqe", "waqn", "ni", "local", "imperial" or "europe".
 
 -   `control`: Any column of the equivalent `importMeta()` dataset, which is used to create a "layer control" menu to allow readers to filter for certain sites. The `control` option is quite opinionated, and selects an appropriate style of layer control depending on the column selected (e.g., pollutants are switched between, whereas multiple site types can be selected at once)
 
