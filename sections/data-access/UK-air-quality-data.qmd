@@ -45,6 +45,14 @@ Also available is `importImperial()` for accessing data from the sites operated 
 [^uk-air-quality-data-1]: The data were first accessible when the
     Environmental Research Group was based at King's College London.
 
+::: {.callout-tip}
+## What about Europe?
+
+When analysing UK air quality data, it may be useful to compare it to data from the UK's neighbours in Europe. Historically, the [saqgetr]{.pkg} allowed for access to European monitoring data, and [openair]{.pkg} provided the `importEurope()` function for a simplified interface for the same data source. Unfortunately, as of February 2024, this service is no longer supported.
+
+The European Environment Agency (EEA) now provides an air quality download service (<https://eeadmz1-downloads-webapp.azurewebsites.net/>), which includes an API. The `openair` family now includes the [euroaq]{.pkg} package, which allows you to easily access this through R - see <https://openair-project.github.io/euroaq/> for more information.
+:::
+
 Many users download hourly data from [UK
 AIR](https://uk-air.defra.gov.uk/data/). Most commonly, the data are emailed to
 the user as .csv files and have a fixed format as shown below. This is a useful
