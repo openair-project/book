@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.13">
+<meta name="generator" content="quarto-1.7.31">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>26&nbsp; Utility functions – The openair book</title>
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +32,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -90,12 +91,14 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-956927e86c41ce4880e87387fca38fc6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d191db7fc3c3d9a11a0015f971215285.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e992864f65000e465f13673e1229d3a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-00ef5a51e99a0e2594108084ba4ddfc0.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -126,7 +129,169 @@ div.csl-indent {
   }
 }</script><link rel="stylesheet" href="../../assets/style/style.css">
 </head>
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -507,12 +672,12 @@ div.csl-indent {
 <p>Selecting by date/time in R can be intimidating for new users—and time-consuming for all users. The <code>selectByDate</code> function aims to make this easier by allowing users to select data based on the British way of expressing date i.e.&nbsp;d/m/y. This function should be very useful in circumstances where it is necessary to select only part of a data frame.</p>
 <p>First load the packages we need.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select all of 1999</span></span>
-<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/1/1999"</span>, end <span class="op">=</span> <span class="st">"31/12/1999"</span><span class="op">)</span></span>
+<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/1/1999"</span>, end <span class="op">=</span> <span class="st">"31/12/1999"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data.1999</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
@@ -538,20 +703,20 @@ div.csl-indent {
 6 1999-12-31 23:00:00  3.24   200   181    37    NA    28  3.48  1.78    22</code></pre>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## easier way</span></span>
-<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span>
+<span><span class="va">data.1999</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## more complex use: select weekdays between the hours of 7 am to 7 pm</span></span>
-<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekday"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span></span>
+<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, day <span class="op">=</span> <span class="st">"weekday"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## select weekends between the hours of 7 am to 7 pm in winter (Dec, Jan, Feb)</span></span>
-<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span><span class="va">sub.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  day <span class="op">=</span> <span class="st">"weekend"</span>, hour <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">19</span>,</span>
 <span>  month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function can be used directly in other functions. For example, to make a polar plot using year 2000 data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-cutData" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="sec-cutData">
 <span class="header-section-number">26.2</span> Making intervals — cutData</h2>
@@ -559,7 +724,7 @@ div.csl-indent {
 <p>Note that all the date-based types e.g.&nbsp;month/year are derived from a column <code>date</code>. If a user already has a column with a name of one of the date-based types it will not be used.</p>
 <p>For example, to cut data into seasons:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
@@ -577,7 +742,7 @@ div.csl-indent {
 <p>This adds a new field <code>season</code> that is split into four seasons. There is an option <code>hemisphere</code> that can be used to use southern hemisphere seasons when set as <code>hemisphere = "southern"</code>.</p>
 <p>The <code>type</code> can also be another field in a data frame e.g.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/cutData.html">cutData</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
@@ -596,7 +761,7 @@ div.csl-indent {
 <p>This divides PM<sub>10</sub> concentrations into four <em>quantiles</em> — roughly equal numbers of PM<sub>10</sub> concentrations in four levels.</p>
 <p>Most of the time users do not have to call <code>cutData</code> directly because most functions have a <code>type</code> option that is used to call <code>cutData</code> directly e.g.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, it can be useful to call <code>cutData</code> <em>before</em> supplying the data to a function in a few cases. First, if one wants to set seasons to the southern hemisphere as above. Second, it is possible to override the division of a numeric variable into four quantiles by using the option <code>n.levels</code>. More details can be found in the <code>cutData</code> help file.</p>
 </section><section id="sec-selectRunning" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="sec-selectRunning">
@@ -609,7 +774,7 @@ div.csl-indent {
 </ul>
 <p>As an example we are going to consider O<sub>3</sub> concentrations at a semi-rural site in south-west London (Teddington). The data can be downloaded as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/importImperial.html">importImperial</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"td0"</span>, year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2009</span>, meteo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu">importImperial</span><span class="op">(</span>site <span class="op">=</span> <span class="st">"td0"</span>, year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2009</span>, meteo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## see how many rows there are</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ted</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -618,7 +783,7 @@ div.csl-indent {
 </div>
 <p>We are going to contrast two pollution roses of O<sub>3</sub> concentration. The first shows hours where the criterion is not met, and the second where it is met. The subset of hours is defined by O<sub>3</sub> concentrations above 90 ppb for periods of at least 8-hours i.e.&nbsp;what might be considered as ozone episode conditions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">ted</span>,</span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">ted</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="fl">90</span>,</span>
 <span>  run.len <span class="op">=</span> <span class="fl">8</span></span>
@@ -635,7 +800,7 @@ div.csl-indent {
 </div>
 <p>Now we are going to produce two pollution roses shown in <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>. Note, however that many other types of analysis could be carried out now the data have been partitioned.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">ted</span>,</span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">ted</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"criterion"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -653,7 +818,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>The results are shown in <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>. The pollution rose for the “no” criterion (left plot of <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>) shows that the highest O<sub>3</sub> concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>) is very different. In this case there is a clear set of conditions where these criteria are met i.e.&nbsp;lengths of at least 8-hours where the O<sub>3</sub> concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e.&nbsp;corresponding to easterly flow from continental Europe where there has been time to the O<sub>3</sub> chemistry to take place.</p>
 <p>The code below shows (as an example), that the summer of 2006 had a high proportion of conditions where the criterion was met.</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeProp.html">timeProp</a></span><span class="op">(</span><span class="va">ted</span>,</span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeProp.html">timeProp</a></span><span class="op">(</span><span class="va">ted</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  proportion <span class="op">=</span> <span class="st">"criterion"</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
@@ -662,20 +827,20 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>It is also useful to consider what controls the highest NO<sub>x</sub> concentrations at a central London roadside site. For example, the code below (not plotted) shows very strongly that the persistently highest NO<sub>x</sub> concentrations are dominated by south-westerly winds. As mentioned earlier, there are many other types of analysis that can be carried out now the data set identifies where the criterion is or is not met.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">episode</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">episode</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectRunning.html">selectRunning</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>  run.len <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">episode</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">episode</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span>, type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-rollingMean" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="sec-rollingMean">
 <span class="header-section-number">26.4</span> Calculating rolling means</h2>
 <p>Some air pollution statistics such as for O<sub>3</sub> and particulate matter are expressed as rolling means and it is useful to be able to calculate these. It can also be useful to help smooth-out data for clearer plotting. The <code>rollingMean</code> function makes these calculations. One detail that can be important is that for some statistics a mean is only considered valid if there are a sufficient number of valid readings over the averaging period. Often there is a requirement for at least 75% data capture. For example, with an averaging period of 8 hours and a data capture threshold of 75%, at least 6 hours are required to calculate the mean.</p>
 <p>The function is called as follows; in this case to calculate 8-hour rolling mean concentrations of O<sub>3</sub>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, width <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>  new.name <span class="op">=</span> <span class="st">"rollingo3"</span>, data.thresh <span class="op">=</span> <span class="fl">75</span></span>
 <span><span class="op">)</span></span>
@@ -694,7 +859,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 </div>
 <p>Note that calculating rolling means shortens the length of the data set. In the case of O<sub>3</sub>, no calculations are made for the last 7 hours.</p>
-<p>Type <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">?rollingMean</a></code> into R for more details. Note that the function currently only works with a single site.</p>
+<p>Type <code><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">?rollingMean</a></code> into R for more details. Note that the function currently only works with a single site.</p>
 </section><section id="sec-timeAverage" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="sec-timeAverage">
 <span class="header-section-number">26.5</span> Aggregating data by different time intervals</h2>
 <p>Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:</p>
@@ -710,7 +875,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>All these issues are (hopefully) dealt with by the <code>timeAverage</code> function. The options are shown below, but as ever it is best to check the help that comes with the <span class="pkg">openair</span> package.</p>
 <p>To calculate daily means from hourly (or higher resolution) data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
 <span><span class="va">daily</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,731 × 11
@@ -732,7 +897,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>Monthly 95th percentile values:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"percentile"</span>,</span>
 <span>  percentile <span class="op">=</span> <span class="fl">95</span></span>
@@ -758,7 +923,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>2-week averages but only calculate if at least 75% of the data are available:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"2 week"</span>,</span>
 <span>  data.thresh <span class="op">=</span> <span class="fl">75</span></span>
 <span><span class="op">)</span></span>
@@ -785,10 +950,10 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>First, retaining by site averages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some data for two sites</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2011</span><span class="op">:</span><span class="fl">2013</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2011</span><span class="op">:</span><span class="fl">2013</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># annual averages by site</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 17
   site       date                   co   nox   no2    no    o3   so2  pm10 pm2.5
@@ -806,7 +971,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>Retain site name and site code:</p>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># can also retain site code</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 18
   site       code  date                   co   nox   no2    no    o3   so2  pm10
@@ -823,7 +988,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p>Average all data across sites (drops site and code):</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 16
   date                   co   nox   no2    no    o3   so2  pm10 pm2.5   v10
@@ -837,7 +1002,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 </div>
 <p><code>timeAverage</code> also works the other way in that it can be used to derive higher temporal resolution data e.g.&nbsp;hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The <code>timeAverage</code> function when used to ‘expand’ data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"15 min"</span>,</span>
 <span>  fill <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -875,7 +1040,7 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p><code>calcPercentile</code> makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds — see <a href="#sec-timeAverage" class="quarto-xref"><span>Section 26.5</span></a> for more details.</p>
 <p>For example, to calculate the 25, 50, 75 and 95th percentiles of O<sub>3</sub> concentration by year:</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calcPercentile.html">calcPercentile</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  percentile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"year"</span></span>
@@ -903,7 +1068,7 @@ Sarkar, D., 2007. Lattice multivariate data visualization with <span>R</span>. S
 <p>With many variables it can be difficult to see relationships between variables i.e.&nbsp;which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if <code>cluster = TRUE</code>.)</p>
 <p>An example of the <code>corPlot</code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.2</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.2</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-corPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -917,398 +1082,273 @@ Figure&nbsp;26.2: Example of a correlation matrix showing the relationships betw
 </div>
 <p>Note also that the <code>corPlot</code> accepts a <code>type</code> option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When there are a very large number of variables present, the <code>corPlot</code> is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## now it is possible to see the hydrocarbons that behave most</span></span>
 <span><span class="co">## similarly to one another</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
         } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
           }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
+          return note.innerHTML;
+        }
       } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
         }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1316,185 +1356,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../sections/maps/maps-traj.html" class="pagination-link" aria-label="Trajectory Analysis">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span>
       </a>          
