@@ -184,7 +184,7 @@ all_aq_data <- importUKAQ(
 ```
 :::
 
-To import data, you can use the different versions of `importUKAQ()`. Some
+To import data, you can use the `importUKAQ()` function. Some
 examples are below.
 
 ```{r}
@@ -207,17 +207,28 @@ hc <- importUKAQ(site = "my1", year = 2008, hc = TRUE)
 ## Import data from the AQE network (York data in this case)
 yk13 <- importUKAQ(site = "yk13", year = 2018, source = "aqe")
 
-## Import data from the AURN *and* AQE network!
-duo <- importUKAQ(site = c("my1", "yk13"), year = 2020, source = c("aurn", "aqe"))
+## Import data from the AURN *and* AQE network! Different networks are
+## automatically detected
+duo <- importUKAQ(site = c("my1", "yk13"), year = 2020)
+
+## Or, `source` can be specified - useful for ambiguous codes (some 'locally
+## managed' sites may have overlapping site codes w/ nationally managed sites -
+## e.g., "AD1")
+ad1_saqn <- importUKAQ(site = "ad1", year = 2020, source = "saqn")
+ad1_eng <- importUKAQ(site = "ad1", year = 2020, source = "local")
 ```
 
 And to include basic meta data when importing air pollution data:
 
 ```{r}
 #| label: importWithMeta
+## default metadata
 kc1 <- importUKAQ(site = "kc1", year = 2018, meta = TRUE)
-
 glimpse(kc1)
+
+## custom metadata - anything in `importMeta()`
+kc1_zagglom <- importUKAQ(site = "kc1", year = 2018, meta = TRUE, meta_columns = c("zone", "agglomeration"))
+glimpse(kc1_zagglom)
 ```
 
 By default, the function returns data where each pollutant is in a

@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Selecting data by date {#sec-selectByDate}
 
-Selecting by date/time in R can be intimidating for new users---and time-consuming for all users. The `selectByDate` function aims to make this easier by allowing users to select data based on the British way of expressing date i.e. d/m/y. This function should be very useful in circumstances where it is necessary to select only part of a data frame.
+Selecting by date/time in R can be intimidating for new users---and time-consuming for all users. The `selectByDate()` function aims to make this easier by allowing users to select data based on the British way of expressing date i.e. d/m/y. This function should be very useful in circumstances where it is necessary to select only part of a data frame.
 
 First load the packages we need.
 
@@ -45,7 +45,7 @@ polarPlot(selectByDate(mydata, year = 2000), pollutant = "so2")
 
 ## Making intervals --- cutData {#sec-cutData}
 
-The `cutData` function is a utility function that is called by most other functions but is useful in its own right. Its main use is to partition data in many ways, many of which are built-in to [openair]{.pkg}
+The `cutData()` function is a utility function that is called by most other functions but is useful in its own right. Its main use is to partition data in many ways, many of which are built-in to [openair]{.pkg}
 
 Note that all the date-based types e.g. month/year are derived from a column `date`. If a user already has a column with a name of one of the date-based types it will not be used.
 
@@ -53,31 +53,42 @@ For example, to cut data into seasons:
 
 ```{r}
 #| label: cutdataexam
-mydata <- cutData(mydata, type = "season")
-head(mydata)
+newdata <- cutData(mydata, type = "season")
+head(newdata)
 ```
 
-This adds a new field `season` that is split into four seasons. There is an option `hemisphere` that can be used to use southern hemisphere seasons when set as `hemisphere = "southern"`.
+This adds a new column `season` that is split into four seasons. There is an option `hemisphere` that can be used to use southern hemisphere seasons when set as `hemisphere = "southern"`.
 
-The `type` can also be another field in a data frame e.g.
+The `type` can also be another column in a data frame. If this column is numeric, it is divided into `n.levels` *quantiles* (defaulting to four), which is to say bins of roughly equal numbers of PM~10~ concentrations.
 
 ```{r}
 #| label: cutdata2
-mydata <- cutData(mydata, type = "pm10")
-head(mydata)
-data(mydata) ## re-load mydata fresh
+newdata <- cutData(mydata, type = "pm10", n.levels = 5)
+head(newdata)
 ```
 
-This divides PM~10~ concentrations into four *quantiles* --- roughly equal numbers of PM~10~ concentrations in four levels.
+This use of `cutData()` is quite destructive --- the PM concentraitons are no longer in the data frame. You can use either the `names` or `suffix` arguments to get around this.
 
-Most of the time users do not have to call `cutData` directly because most functions have a `type` option that is used to call `cutData` directly e.g.
+```{r}
+#| label: cutdata3
+
+# set names manually
+newdata <- cutData(mydata, type = "pm10", names = "pollution_bins")
+dplyr::glimpse(newdata)
+
+# set a 'suffix' to avoid any columns that would be overlapped
+newdata <- cutData(mydata, type = c("o3", "pm10", "so2"), suffix = "_cuts")
+dplyr::glimpse(newdata)
+```
+
+Most of the time users do not have to call `cutData()` directly because most functions have a `type` option that is used to call `cutData()` directly, e.g.,
 
 ```{r}
 #| eval: false
 polarPlot(mydata, pollutant = "so2", type = "season")
 ```
 
-However, it can be useful to call `cutData` *before* supplying the data to a function in a few cases. First, if one wants to set seasons to the southern hemisphere as above. Second, it is possible to override the division of a numeric variable into four quantiles by using the option `n.levels`. More details can be found in the `cutData` help file.
+However, it can be useful to call `cutData()` *before* supplying the data to a function in a few cases. Commonly, this is to have more control over how the data is conditioned - e.g., to use the `hemisphere` or `n.levels` arguments of `cutData()` directly. More details can be found in the `cutData()` help file.
 
 ## Selecting run lengths of values above a threshold --- pollution episodes {#sec-selectRunning}
 
@@ -109,7 +120,7 @@ ted <- selectRunning(ted,
 )
 ```
 
-The `selectRunning` function returns a new column `criterion` that flags whether the condition is met or not. The user can control the text provided, which by default is "yes" and "no".
+The `selectRunning()` function returns a new column that flags whether the condition is met or not. The user can control the text provided, which by default is "yes" and "no", as well as the name of the column that is appended (defaulting to `"criterion"`).
 
 ```{r}
 #| label: criterion
@@ -158,9 +169,11 @@ episode <- selectRunning(mydata,
 pollutionRose(episode, pollutant = "nox", type = "criterion")
 ```
 
+Note that `selectRunning()` will fail if there are duplicate dates within the data frame. If multiple sites worth of data are contained within a single data frame, use `type = "site"` (or whatever column identifies different sites).
+
 ## Calculating rolling means {#sec-rollingMean}
 
-Some air pollution statistics such as for O~3~ and particulate matter are expressed as rolling means and it is useful to be able to calculate these. It can also be useful to help smooth-out data for clearer plotting. The `rollingMean` function makes these calculations. One detail that can be important is that for some statistics a mean is only considered valid if there are a sufficient number of valid readings over the averaging period. Often there is a requirement for at least 75% data capture. For example, with an averaging period of 8 hours and a data capture threshold of 75%, at least 6 hours are required to calculate the mean.
+Some air pollution statistics such as for O~3~ and particulate matter are expressed as rolling means and it is useful to be able to calculate these. It can also be useful to help smooth-out data for clearer plotting. The `rollingMean()` function makes these calculations. One detail that can be important is that for some statistics a mean is only considered valid if there are a sufficient number of valid readings over the averaging period. Often there is a requirement for at least 75% data capture. For example, with an averaging period of 8 hours and a data capture threshold of 75%, at least 6 hours are required to calculate the mean.
 
 The function is called as follows; in this case to calculate 8-hour rolling mean concentrations of O~3~.
 
@@ -175,7 +188,9 @@ tail(mydata)
 
 Note that calculating rolling means shortens the length of the data set. In the case of O~3~, no calculations are made for the last 7 hours.
 
-Type `?rollingMean` into R for more details. Note that the function currently only works with a single site.
+Like `selectRunning()`, `rollingMean()` will fail if there are duplicate dates within the data frame; users can again use `type = "site"` or similar to calculate rolling means for different monitoring stations.
+
+Type `?rollingMean` into R for more details.
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
@@ -193,9 +208,9 @@ Aggregating data by different averaging periods is a common and important task. 
 
 In aggregating data in this way, there are a couple of other issues that can be useful to deal with at the same time. First, the calculation of proper vector-averaged wind direction is essential. Second, sometimes it is useful to set a minimum number of data points that must be present before the averaging is done. For example, in calculating monthly averages, it may be unwise to not account for data capture if some months only have a few valid points.
 
-When a data capture threshold is set through `data.thresh` it is necessary for `timeAverage` to know what the original time interval of the input time series is. The function will try and calculate this interval based on the most common time gap (and will print the assumed time gap to the screen). This works fine most of the time but there are occasions where it may not e.g. when very few data exist in a data frame. In this case the user can explicitly specify the interval through `interval` in the same format as `avg.time` e.g. `interval = "month"`. It may also be useful to set `start.date` and `end.date` if the time series do not span the entire period of interest. For example, if a time series ended in October and annual means are required, setting `end.date` to the end of the year will ensure that the whole period is covered and that `data.thresh` is correctly calculated. The same also goes for a time series that starts later in the year where `start.date` should be set to the beginning of the year.
+When a data capture threshold is set through `data.thresh` it is necessary for `timeAverage()` to know what the original time interval of the input time series is. The function will try and calculate this interval based on the most common time gap (and will print the assumed time gap to the screen). This works fine most of the time but there are occasions where it may not e.g. when very few data exist in a data frame. In this case the user can explicitly specify the interval through `interval` in the same format as `avg.time` e.g. `interval = "month"`. It may also be useful to set `start.date` and `end.date` if the time series do not span the entire period of interest. For example, if a time series ended in October and annual means are required, setting `end.date` to the end of the year will ensure that the whole period is covered and that `data.thresh` is correctly calculated. The same also goes for a time series that starts later in the year where `start.date` should be set to the beginning of the year.
 
-All these issues are (hopefully) dealt with by the `timeAverage` function. The options are shown below, but as ever it is best to check the help that comes with the [openair]{.pkg} package.
+All these issues are (hopefully) dealt with by the `timeAverage()` function. The options are shown below, but as ever it is best to check the help that comes with the [openair]{.pkg} package.
 
 To calculate daily means from hourly (or higher resolution) data:
 
@@ -228,7 +243,7 @@ twoweek <- timeAverage(mydata,
 twoweek
 ```
 
-Note that `timeAverage` has a `type` option to allow for the splitting of variables by a grouping variable. The most common use for `type` is when data are available for different sites and the averaging needs to be done on a per site basis.
+Note that `timeAverage()` has a `type` option to allow for the splitting of variables by a grouping variable. The most common use for `type` is when data are available for different sites and the averaging needs to be done on a per site basis. That being said, unlike other data utility functions, `timeAverage()` will *warn* if there are duplicate dates in the input data frame but still allow the calculation to continue; occasionally averaging across multiple sites may be a legitimate thing to do (e.g., averaging across many low-cost air quality sensors to calculate a more accurate 'consensus' time series).
 
 First, retaining by site averages:
 
@@ -249,14 +264,14 @@ Retain site name and site code:
 timeAverage(dat, avg.time = "year", type = c("site", "code"))
 ```
 
-Average all data across sites (drops site and code):
+Average all data across sites (drops site and code).
 
 ```{r}
 #| label: timeAvNoType
 timeAverage(dat, avg.time = "year")
 ```
 
-`timeAverage` also works the other way in that it can be used to derive higher temporal resolution data e.g. hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The `timeAverage` function when used to 'expand' data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.
+`timeAverage()` also works the other way in that it can be used to derive higher temporal resolution data e.g. hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The `timeAverage()` function when used to 'expand' data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.
 
 ```{r}
 #| label: timeAvgFill
@@ -267,11 +282,13 @@ data15 <- timeAverage(mydata,
 head(data15, 20)
 ```
 
-The `timePlot` can apply this function directly to make it very easy to plot data with different averaging times and statistics.
+The `timePlot()` function can apply this function directly to make it very easy to plot data with different averaging times and statistics.
 
 ## Calculating percentiles {#sec-calcPercentile}
 
-`calcPercentile` makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds --- see @sec-timeAverage for more details.
+`calcPercentile()` makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds --- see @sec-timeAverage for more details. 
+
+`calcPercentile()` shares many of its arguments with `timeAverage()`, such as `type`, `data.thresh`, `start.date`, and `end.date`. It also has the argument `prefix` to define how the columns it creates are labelled.
 
 For example, to calculate the 25, 50, 75 and 95th percentiles of O~3~ concentration by year:
 
@@ -288,11 +305,11 @@ calcPercentile(mydata,
 
 Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a *correlation matrix*, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by [@friendly2002] and [@Sarkar2008].
 
-The `corPlot` shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle --- imagine a 'fuzz' of points with no relationship between them.
+The `corPlot()` function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle --- imagine a 'fuzz' of points with no relationship between them.
 
 With many variables it can be difficult to see relationships between variables i.e. which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if `cluster = TRUE`.)
 
-An example of the `corPlot` function is shown in @fig-corPlot. In this Figure it can be seen the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0. 84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e. for a single panel plot.
+An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure it can be seen the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0. 84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e. for a single panel plot.
 
 ```{r}
 #| label: fig-corPlot
@@ -303,14 +320,14 @@ An example of the `corPlot` function is shown in @fig-corPlot. In this Figure it
 corPlot(mydata, dendrogram = TRUE)
 ```
 
-Note also that the `corPlot` accepts a `type` option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
+Note also that the `corPlot()` accepts a `type` option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
 
 ```{r}
 #| eval: false
 corPlot(mydata, type = "season")
 ```
 
-When there are a very large number of variables present, the `corPlot` is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.
+When there are a very large number of variables present, the `corPlot()` function is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.
 
 ```{r}
 #| eval: false

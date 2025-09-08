@@ -276,7 +276,7 @@ The font size will be reset to the default sizes once the plot is complete. Fine
 
 Many of the functions described require that colour scales are used; particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme, shown at the top of @fig-colours. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the `RColorBrewer` package.
 
-Several pre-defined colour schemes are available to make it easy to plot data. In fact, for most situations the default colour schemes should be adequate. The choice of colours can easily be set; either by using one of the pre-defined schemes or through a user-defined scheme. More details can be found in the [openair]{.pkg} `openColours` function. Some defined colours are shown in @fig-colours, together with an example of a user defined scale that provides a smooth transition from red to green.
+Several pre-defined colour schemes are available to make it easy to plot data. In fact, for most situations the default colour schemes should be adequate. The choice of colours can easily be set; either by using one of the pre-defined schemes or through a user-defined scheme. More details can be found in the [openair]{.pkg} `openColours()` function. Some defined colours are shown in @fig-colours, together with an example of a user defined scale that provides a smooth transition from red to green.
 
 ```{r}
 #| label: fig-colours
