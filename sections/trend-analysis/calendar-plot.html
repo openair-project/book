@@ -671,15 +671,15 @@ div.csl-indent {
 <span class="header-section-number">13.2</span> Calendar examples</h2>
 <p>The function is called in the usual way. As a minimum, a data frame, pollutant and year is required. So to show O<sub>3</sub> concentrations for each day in 2003 (<a href="#fig-calendarPlot" class="quarto-xref">Figure&nbsp;<span>13.1</span></a>). Note that if <code>year</code> is not supplied the full data set will be used.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openair/">openair</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-calendarPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="calendar-plot_files/figure-html/fig-calendarPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;13.1: A calendarPlot() for O3 concentrations in 2003."><img src="calendar-plot_files/figure-html/fig-calendarPlot-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.1: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003.
+Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003.
 </figcaption></figure>
 </div>
 </div>
@@ -688,7 +688,7 @@ Figure&nbsp;13.1: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <p><a href="#fig-calendarPlotExceed" class="quarto-xref">Figure&nbsp;<span>13.2</span></a> highlights those days where PM<sub>10</sub> concentrations exceed 50 μg m<sup>-3</sup> by making the annotation for those days bigger, bold and orange. Plotting the data in this way clearly shows the days where PM<sub>10</sub> &gt; 50 μg m<sup>-3</sup>.</p>
 <p>Other <span class="pkg">openair</span> functions can be used to plot other statistics. For example, <code>rollingMean</code> could be used to calculate rolling 8-hour mean O<sub>3</sub> concentrations. Then, <code>calendarPlot</code> could be used with <code>statistic = "max"</code> to show days where the maximum daily rolling 8-hour mean O<sub>3</sub> concentration is greater than a certain threshold e.g.&nbsp;100 or 120 μg m<sup>-3</sup>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  annotate <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>  lim <span class="op">=</span> <span class="fl">50</span>,</span>
@@ -702,14 +702,14 @@ Figure&nbsp;13.1: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <a href="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;13.2: A calendarPlot() for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM10 >50 μg m-3. The numbers show the PM10 concentration in μg m-3."><img src="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlotExceed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.2: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code> for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM<sub>10</sub> &gt;50 μg m<sup>-3</sup>. The numbers show the PM<sub>10</sub> concentration in μg m<sup>-3</sup>.
+Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM<sub>10</sub> &gt;50 μg m<sup>-3</sup>. The numbers show the PM<sub>10</sub> concentration in μg m<sup>-3</sup>.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>To show wind angle, scaled to wind speed (<a href="#fig-calendarPlot2" class="quarto-xref">Figure&nbsp;<span>13.3</span></a>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  annotate <span class="op">=</span> <span class="st">"ws"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -719,15 +719,15 @@ Figure&nbsp;13.2: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <a href="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;13.3: A calendarPlot() for O3 concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O3 concentrations on the 18 and 19th of April were associated with strong north-easterly winds."><img src="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="img-fluid figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.3: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O<sub>3</sub> concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
+Figure&nbsp;13.3: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O<sub>3</sub> concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Note again that <code>selectByDate</code> can be useful. For example, to plot select months:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/openair/man/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>    year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>    month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
@@ -736,7 +736,7 @@ Figure&nbsp;13.3: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 </div>
 <p><a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> shows an example of plotting data with a categorical scale. In this case the options <code>labels</code> and <code>breaks</code> have been used to define concentration intervals and their descriptions. Note that <code>breaks</code> needs to be one longer than <code>labels</code>. In the example in <a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> the first interval (‘Very low’) is defined as concentrations from 0 to 50 (ppb), ‘Low’ is 50 to 100 and so on. Note that the upper value of <code>breaks</code> should be a number greater than the maximum value contained in the data to ensure that it is encompassed. In the example given in <a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> the maximum daily concentration is plotted. These types of plots are very useful for considering national or international air quality indexes.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span><span class="op">)</span>,</span>
@@ -748,14 +748,14 @@ Figure&nbsp;13.3: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <a href="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;13.4: A calendarPlot() for NO2 concentrations in 2003 with a user-defined categorical scale."><img src="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlotCategor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.4: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code> for NO<sub>2</sub> concentrations in 2003 with a user-defined categorical scale.
+Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for NO<sub>2</sub> concentrations in 2003 with a user-defined categorical scale.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>The user can explicitly set each colour interval:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span><span class="op">)</span>,</span>
@@ -771,23 +771,23 @@ Figure&nbsp;13.4: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <span>  <span class="st">"High.7"</span>, <span class="st">"High.8"</span>, <span class="st">"High.9"</span>, <span class="st">"Very High.10"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="va">breaks</span>, labels <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>  cols <span class="op">=</span> <span class="st">"turbo"</span>, statistic <span class="op">=</span> <span class="st">"max"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>It is also possible to first use <code><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">rollingMean()</a></code> to calculate statistics. For example, if one was interested in plotting the maximum daily rolling 8-hour mean concentration, the data could be prepared and plotted as follows.</p>
+<p>It is also possible to first use <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> to calculate statistics. For example, if one was interested in plotting the maximum daily rolling 8-hour mean concentration, the data could be prepared and plotted as follows.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## makes a new field 'rolling8o3'</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/openair/man/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, hours <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, hours <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">34</span>, <span class="fl">66</span>, <span class="fl">100</span>, <span class="fl">121</span>, <span class="fl">141</span>, <span class="fl">160</span>, <span class="fl">188</span>, <span class="fl">214</span>, <span class="fl">240</span>, <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Low.1"</span>, <span class="st">"Low.2"</span>, <span class="st">"Low.3"</span>, <span class="st">"Moderate.4"</span>, <span class="st">"Moderate.5"</span>, <span class="st">"Moderate.6"</span>,</span>
 <span>  <span class="st">"High.7"</span>, <span class="st">"High.8"</span>, <span class="st">"High.9"</span>, <span class="st">"Very High.10"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">dat</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"rolling8o3"</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2003</span>,</span>
@@ -800,11 +800,11 @@ Figure&nbsp;13.4: A <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.
 <p>The UK has an air quality index for O<sub>3</sub>, NO<sub>2</sub>, PM<sub>10</sub> and PM<sub>2.5</sub> described in detail at <a href="http://uk-air.defra.gov.uk/air-pollution/daqi" class="uri">http://uk-air.defra.gov.uk/air-pollution/daqi</a> and <span class="citation" data-cites="COMEAP2011">COMEAP (<a href="../references.html#ref-COMEAP2011" role="doc-biblioref">2011</a>)</span>. The index is most relevant to air quality forecasting, but is used widely for public information. Most other countries have similar indexes. Note that the indexes are calculated for different averaging times dependent on the pollutant: rolling 8-hour mean for O<sub>3</sub>, hourly means for NO<sub>2</sub> and a fixed 24-hour mean for PM<sub>10</sub> and PM<sub>2.5</sub>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-COMEAP2011" class="csl-entry" role="listitem">
 COMEAP, 2011. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html">Review of the UK air quality index: A report by the committee on the medical effects of air pollutants</a>.
-</div></div><p>In the code below the labels and breaks are defined for each pollutant to make it easier to use the index in the <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code> function.</p>
+</div></div><p>In the code below the labels and breaks are defined for each pollutant to make it easier to use the index in the <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import UK daily air quality info</span></span>
 <span><span class="va">pt4_daqi</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/openair/man/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>    site <span class="op">=</span> <span class="st">"pt4"</span>,</span>
 <span>    year <span class="op">=</span> <span class="fl">2021</span>,</span>
 <span>    data_type <span class="op">=</span> <span class="st">"daqi"</span></span>
@@ -825,7 +825,7 @@ COMEAP, 2011. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># make calendar plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
 <span>  <span class="co"># just get pm10 data</span></span>
 <span>  mydata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">pt4_daqi</span>, <span class="va">pollutant</span> <span class="op">==</span> <span class="st">"pm10"</span><span class="op">)</span>,</span>
 <span>  <span class="co"># out "pollutant" is the poll_index column</span></span>
@@ -843,7 +843,7 @@ COMEAP, 2011. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-
 <a href="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;13.5: A DAQI calendarPlot()"><img src="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AQIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.5: A DAQI <code><a href="https://rdrr.io/pkg/openair/man/calendarPlot.html">calendarPlot()</a></code>
+Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code>
 </figcaption></figure>
 </div>
 </div>
