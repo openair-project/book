@@ -30,8 +30,10 @@ data.1999 <- selectByDate(mydata, year = 1999)
 sub.data <- selectByDate(mydata, day = "weekday", hour = 7:19)
 
 ## select weekends between the hours of 7 am to 7 pm in winter (Dec, Jan, Feb)
-sub.data <- selectByDate(mydata,
-  day = "weekend", hour = 7:19,
+sub.data <- selectByDate(
+  mydata,
+  day = "weekend",
+  hour = 7:19,
   month = c(12, 1, 2)
 )
 ```
@@ -113,11 +115,7 @@ We are going to contrast two pollution roses of O~3~ concentration. The first sh
 
 ```{r}
 #| label: episodeSelect
-ted <- selectRunning(ted,
-  pollutant = "o3",
-  threshold = 90,
-  run.len = 8
-)
+ted <- selectRunning(ted, pollutant = "o3", threshold = 90, run.len = 8)
 ```
 
 The `selectRunning()` function returns a new column that flags whether the condition is met or not. The user can control the text provided, which by default is "yes" and "no", as well as the name of the column that is appended (defaulting to `"criterion"`).
@@ -135,10 +133,7 @@ Now we are going to produce two pollution roses shown in @fig-RunningRes. Note, 
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 90%
-pollutionRose(ted,
-  pollutant = "o3",
-  type = "criterion"
-)
+pollutionRose(ted, pollutant = "o3", type = "criterion")
 ```
 
 The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time to the O~3~ chemistry to take place.
@@ -147,7 +142,8 @@ The code below shows (as an example), that the summer of 2006 had a high proport
 
 ```{r}
 #| eval: false
-timeProp(ted,
+timeProp(
+  ted,
   pollutant = "o3",
   proportion = "criterion",
   avg.time = "month",
@@ -160,7 +156,8 @@ It is also useful to consider what controls the highest NO~x~ concentrations at 
 ```{r}
 #| label: runningNOx
 #| eval: false
-episode <- selectRunning(mydata,
+episode <- selectRunning(
+  mydata,
   pollutant = "nox",
   threshold = 500,
   run.len = 5
@@ -179,9 +176,12 @@ The function is called as follows; in this case to calculate 8-hour rolling mean
 
 ```{r}
 #| label: selectBydate
-mydata <- rollingMean(mydata,
-  pollutant = "o3", width = 8,
-  new.name = "rollingo3", data.thresh = 75
+mydata <- rollingMean(
+  mydata,
+  pollutant = "o3",
+  width = 8,
+  new.name = "rollingo3",
+  data.thresh = 75
 )
 tail(mydata)
 ```
@@ -191,6 +191,81 @@ Note that calculating rolling means shortens the length of the data set. In the 
 Like `selectRunning()`, `rollingMean()` will fail if there are duplicate dates within the data frame; users can again use `type = "site"` or similar to calculate rolling means for different monitoring stations.
 
 Type `?rollingMean` into R for more details.
+
+## Calculating rolling quantiles (percentiles) {#sec-rollingQuantile}
+
+There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a 'background' concentration. For example, for fast reponse measurements (e.g. at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement [@Padilla2021; @Farren2024].
+
+The `rollingQuantile` function provides a fast way of calculating one or more quantiles in a rime series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.
+
+An example is shown below and plotted in @fig-rollingQuant. In this example, we choose a rolling window width of 744 (about a month) and calculate quantile levels at 0.05 and 0.95. @fig-rollingQuant shows the jump in NO~2~ concentrations at the start of 2003 for the high quantile level but not the lower one. As mentioned elsewhere, this increase in NO~2~ was related to an increase in primary NO~2~ emissions related to bus aftertreatment technology.
+
+```{r}
+#| label: fig-rollingQuant
+#| fig-cap: Example of using the `rollingQuantile` function to calculate low (0.05) and high (0.95) rolling quantiles.
+#| fig-width: 6
+#| fig-height: 4
+data(mydata) # reload the original data
+
+# calculate quantiles
+quantile_data <- rollingQuantile(
+  mydata,
+  pollutant = "no2",
+  width = 744,
+  data.thresh = 75,
+  probs = c(0.05, 0.95)
+)
+
+# look at the data
+dplyr::glimpse(quantile_data)
+
+# plot it
+timePlot(
+  quantile_data,
+  pollutant = c("q_no2_0.05", "q_no2_0.95"),
+  group = TRUE,
+  lty = 1,
+  cols = c("tomato", "turquoise4"),
+  ylab = "no2 (ug/m3)"
+)
+```
+
+## Gaussian smoothing {#sec-gauss-smooth}
+
+There are numerous ways of smoothing and aggregating time series (and other data). One common and powerful technique is *Gaussian smoothing* where a Gaussian window slides along the data for each time step and smooths the data. The basic idea is that the smoothing process puts more weight on data close to the time in question and less further away with the weighting being determined by the σ value in the Gaussian equation.
+
+Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, and better preserves trends, and reduced edge artefacts. 
+
+In the example shown in @fig-gauss-smooth, the data have been plotted as weekly averages to make the raw data easier to see. The smoothed line provides a clear indication of how NO~2~ concentrations have varied over many years. In this case `sigma` was set to 744, which corresponds to about one month.
+
+It should be noted `GassianSmooth` will work with any time series data e.g. at 1 Hz so should be useful for processing noisy fast response data.
+
+```{r}
+#| label: fig-gauss-smooth
+#| fig-cap: Example of using the `GassianSmooth` function to smooth NO~2~ concentrations with sigma set at about 1 month.
+#| fig-width: 6
+#| fig-height: 4
+data(mydata) # reload the original data
+
+gauss_smooth <- GaussianSmooth(
+    mydata, 
+    pollutant = "no2", 
+    sigma = 744)
+
+# show the data
+dplyr::glimpse(gauss_smooth)
+
+# plot weekly means of orginal data and smoothed
+timePlot(
+    timeAverage(gauss_smooth, avg.time = "week"), 
+    pollutant = c("no2", "smooth_no2"), 
+    group = TRUE, 
+    lty = 1, 
+    cols = c("tomato", "turquoise4"), 
+    lwd = c(1, 3),
+    ylab = "no2 (ug/m3)"
+)
+```
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
@@ -224,7 +299,8 @@ Monthly 95th percentile values:
 
 ```{r}
 #| label: percentile95
-monthly <- timeAverage(mydata,
+monthly <- timeAverage(
+  mydata,
   avg.time = "month",
   statistic = "percentile",
   percentile = 95
@@ -236,10 +312,7 @@ monthly
 
 ```{r}
 #| label: twoweek
-twoweek <- timeAverage(mydata,
-  avg.time = "2 week",
-  data.thresh = 75
-)
+twoweek <- timeAverage(mydata, avg.time = "2 week", data.thresh = 75)
 twoweek
 ```
 
@@ -275,10 +348,7 @@ timeAverage(dat, avg.time = "year")
 
 ```{r}
 #| label: timeAvgFill
-data15 <- timeAverage(mydata,
-  avg.time = "15 min",
-  fill = TRUE
-)
+data15 <- timeAverage(mydata, avg.time = "15 min", fill = TRUE)
 head(data15, 20)
 ```
 
@@ -286,7 +356,7 @@ The `timePlot()` function can apply this function directly to make it very easy 
 
 ## Calculating percentiles {#sec-calcPercentile}
 
-`calcPercentile()` makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds --- see @sec-timeAverage for more details. 
+`calcPercentile()` makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds --- see @sec-timeAverage for more details.
 
 `calcPercentile()` shares many of its arguments with `timeAverage()`, such as `type`, `data.thresh`, `start.date`, and `end.date`. It also has the argument `prefix` to define how the columns it creates are labelled.
 
@@ -294,7 +364,8 @@ For example, to calculate the 25, 50, 75 and 95th percentiles of O~3~ concentrat
 
 ```{r}
 #| label: calcpercentile
-calcPercentile(mydata,
+calcPercentile(
+  mydata,
   pollutant = "o3",
   percentile = c(25, 50, 75, 95),
   avg.time = "year"

@@ -14,3 +14,5 @@ _bookdown_files/
 *_files/
 _freeze/
 /.quarto/
+
+**/*.quarto_ipynb
