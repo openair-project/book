@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>20&nbsp; Taylor Diagram – The openair book</title>
@@ -87,18 +87,19 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -138,7 +139,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -334,7 +335,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -695,12 +696,12 @@ Taylor, K.E., 2001. Summarizing multiple aspects of model performance in a singl
 </div></div><p>The <span class="pkg">openair</span> version of the Taylor Diagram has several enhancements that increase its flexibility. In particular, the straightforward way of producing conditioning plots should prove valuable under many circumstances (using the <code>type</code> option). Many examples of Taylor Diagrams focus on model-observation comparisons for several models using all the available data. However, more insight can be gained into model performance by partitioning the data in various ways e.g.&nbsp;by season, daylight/nighttime, day of the week, by levels of a numeric variable e.g.&nbsp;wind speed or by land-use type etc.</p>
 <p>We first show a diagram and then pick apart the different components to understand how to interpret it. The diagram can look overly complex but once it is understood how to interpret the three main characteristics it becomes much easier to understand. A typical diagram is shown in <a href="#fig-TaylorExam" class="quarto-xref">Figure&nbsp;<span>20.1</span></a> for nine anonymised models used for predicting hourly O<sub>3</sub> concentrations at 15 sites around the UK.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../../assets/data/modelData.RData"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">modTest</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../../assets/data/modelData.RData"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">modTest</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        site                date o3   mod   group
 1 Aston.Hill 2006-01-01 00:00:00 NA    NA model 1
@@ -712,11 +713,11 @@ Taylor, K.E., 2001. Summarizing multiple aspects of model performance in a singl
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"group"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-TaylorExam" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorExam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -778,12 +779,12 @@ Figure&nbsp;20.2: Taylor Diagrams broken down to highlight how to interpret the 
 <span class="header-section-number">20.2</span> Examples of Taylor Diagrams</h2>
 <p>The example used here carries on from the previous section using data from a Defra model evaluation exercise. As mentioned previously, the use of the <code>type</code> option offers enormous flexibility for comparing models. However, we will only focus on the seasonal evaluation of the models. In the call below, <code>group</code> is the column that identified the model and <code>type</code> is the conditioning variable that produces in this case four panels — one for each season. Note that in this case we focus on a single site.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select a single site</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select a single site</span></span>
 <span><span class="va">LH</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">modTest</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Lullington.Heath"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">LH</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"season"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-TaylorSeas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorSeas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -799,7 +800,7 @@ Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model pe
 <p>By contrast, during wintertime conditions models 1 and 3 are clearly best. From an evaluation perspective it would be useful to understand why some models are better for wintertime conditions and others better in summer and this is clearly something that could be investigated further.</p>
 <p>There are many other useful comparisons that can be undertaken easily. A few of these are shown below, but not plotted.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## by receptor comparison</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## by receptor comparison</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"group"</span>, type <span class="op">=</span> <span class="st">"site"</span></span>
@@ -816,16 +817,16 @@ Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model pe
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"group"</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"daylight"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It is also possible to combine different groups of model results. For example, rather than plot how the models perform at a single site it can be useful to show how they compare at all sites. To do this it is necessary to normalise the data because there will be different values of the observed variable across different sites. In this case we can supply the option <code>group = c("group", "site")</code>. This will show the variation by model for <em>all</em> sites. The results are shown in <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>. These results show that in general models tend to predict in similarly good (or bad) ways across all sites as shown by the grouping of points on <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span><span class="va">modTest</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"site"</span><span class="op">)</span>,</span>
 <span>  normalise <span class="op">=</span> <span class="cn">TRUE</span>, cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-Taylor2Grp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-Taylor2Grp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -904,13 +905,14 @@ Figure&nbsp;20.4: Use of the <code>TaylorDiagam</code> function to show model pe
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

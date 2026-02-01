@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>21&nbsp; Conditional quantiles – The openair book</title>
@@ -87,18 +87,19 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -138,7 +139,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -334,7 +335,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -697,9 +698,9 @@ Wilks, D.S., 2005. <span class="nocase">Statistical Methods in the Atmospheric S
 <p>To make things more interesting we will use data from a model evaluation exercise organised by Defra in 2010/2011. Many models were evaluated but we only consider hourly ozone predictions from the CMAQ model being used at King’s College London.</p>
 <p>First the data are loaded:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../../assets/data/CMAQozone.RData"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../../assets/data/CMAQozone.RData"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span><span class="op">$</span><span class="va">date</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"POSIXct"</span>, <span class="st">"POSIXt"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        site                date o3 rollingO3Meas   mod rollingO3Mod    group
 1 Aston.Hill 2006-01-01 00:00:00 NA            NA 92.80           NA CMAQ.KCL
@@ -713,8 +714,8 @@ Wilks, D.S., 2005. <span class="nocase">Statistical Methods in the Atmospheric S
 <p>The data consists of hourly observations of O<sub>3</sub> in μg m<sup>-3</sup> at 15 rural O<sub>3</sub> sites in the UK together with predicted values.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> First, we consider O<sub>3</sub> predictions across all sites to help illustrate the purpose of the function. The results are shown in <a href="#fig-conditionaQ1" class="quarto-xref">Figure&nbsp;<span>21.1</span></a>. An explanation of the Figure is given in its caption.</p>
 <p>We firs consider an example of the use of conditional quantiles applied to the KCL CMAQ model for 15 rural O<sub>3</sub> monitoring sites in 2006, for hourly data. The blue line shows the results for a perfect model. In this case the observations cover a range from 0 to 270 μg m<sup>-3</sup>. The red line shows the median values of the predictions and corresponding observations. The maximum predicted value is 125 μg m<sup>-3</sup>, somewhat less than the maximum observed value. The shading shows the predicted quantile intervals i.e.&nbsp;the 25/75th and the 10/90th. A perfect model would lie on the blue line and have a very narrow spread. There is still some spread because even for a perfect model a specific quantile interval will contain a range of values. However, for the number of bins used in this plot the spread will be very narrow. Finally, the histogram shows the counts of predicted values.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load the package</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span> <span class="co"># load the package</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>, obs <span class="op">=</span> <span class="st">"o3"</span>, mod <span class="op">=</span> <span class="st">"mod"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-conditionaQ1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-conditionaQ1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -728,11 +729,11 @@ Figure&nbsp;21.1: Example of the use of conditional quantiles applied to the KCL
 </div>
 <p>A more informative analysis can be undertaken by considering conditional quantiles separately by site, which is easily done using the <code>type</code> option. The results are shown in <a href="#fig-condQall" class="quarto-xref">Figure&nbsp;<span>21.2</span></a>. It is now easier to see where the model performs best and how it varies by site type. For example, at a remote site in Scotland like Strath Vaich it is clear that the model does not capture either the lowest or highest O<sub>3</sub> concentrations very well.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"site"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-condQall" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-condQall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -747,10 +748,10 @@ Figure&nbsp;21.2: Conditional quantiles by site for 15 O<sub>3</sub> monitoring 
 <p>As with other <span class="pkg">openair</span> functions, the ability to consider conditioning can really help with interpretation. For example, what do the conditional quantiles at Lullington Heath (in south-east England) look like by season? This is easily done by subsetting the data to select that site and setting <code>type = "season"</code>, as shown in <a href="#fig-conditionalSeas" class="quarto-xref">Figure&nbsp;<span>21.3</span></a>. These results show that winter predictions have good coverage i.e.&nbsp;with width of the blue `perfect model’ line is the same as the observations. However, the predictions tend to be somewhat lower than observations for most concentrations (the median line is below the blue line) — and the width of the 10/75th and 10/90th percentiles is quite broad. However, the area where the model is less good is in summer and autumn because the predictions have low coverage (the red line only covers less than half of the observation line and the width of the percentiles is wide).</p>
 <p>Of course, it is also easy to plot by hour of the day, day of the week, by daylight/nighttime and so on — easily. All these approaches can help better understand <em>why</em> a model does not perform very well rather than just quantifying its performance. Also, these types of analysis are particularly useful when more than one model is involved in a comparison as in the recent Defra model evaluation exercise, which we will come back to later when some results are published.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Lullington.Heath"</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalQuantile.html">conditionalQuantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">CMAQ.KCL</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Lullington.Heath"</span><span class="op">)</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  mod <span class="op">=</span> <span class="st">"mod"</span>, type <span class="op">=</span> <span class="st">"season"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-conditionalSeas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-conditionalSeas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -773,11 +774,11 @@ Figure&nbsp;21.3: Conditional quantiles at Lullington Heath conditioned by seaso
 <p>As an example, similar data to that described above from CMAQ have been used as an example.</p>
 <p>A subset of the data for the North Kensington site can be imported as shown below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">condDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://davidcarslaw.com/data/openair/condDat.rds"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">condDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://davidcarslaw.com/data/openair/condDat.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The file contains observed and modelled hourly values for O<sub>3</sub>, NO<sub>x</sub>, wind speed, wind direction, temperature and relative humidity.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">condDat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">condDat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  date O3.obs  NOx.obs ws.obs wd.obs temp.obs rh.obs O3.mod
 5  2006-01-01 00:00:00     10 29.43665 4.6296    190      4.9     89  14.80
@@ -797,11 +798,11 @@ Figure&nbsp;21.3: Conditional quantiles at Lullington Heath conditioned by seaso
 </div>
 <p>The <code>conditionalEval</code> function can be used straightforwardly to provide information on how predictions depend on another variable in general. In this case the option <code>statistic</code> can refer to another variable in the data frame to see how the quality of predictions depend on values of that variable. For example, in <a href="#fig-condDatWS" class="quarto-xref">Figure&nbsp;<span>21.4</span></a> it can be seen how wind speed varies across the O<sub>3</sub> prediction intervals. At low predicted concentrations of O<sub>3</sub> there is a high proportion of low wind speed conditions (0 to 2.57 m s<sup>-1</sup>). When O<sub>3</sub> is predicted to be around 40 ppb the wind speed tends to be higher — and finally at higher predicted concentrations of O<sub>3</sub> the wind speed tends to decrease again. The important aspect of plotting data in this way is that it can directly relate the prediction performance to values of other variables, which should help develop a much better idea of the conditions that matter most. The user can therefore develop a good feel for the types of conditions where a model performs well or poorly and this might provide clues as to the underlying reasons for specific model behaviour.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"O3.obs"</span>, mod <span class="op">=</span> <span class="st">"O3.mod"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"ws.obs"</span>,</span>
 <span>  col.var <span class="op">=</span> <span class="st">"Set3"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-condDatWS" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full"><div aria-describedby="fig-condDatWS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
@@ -816,13 +817,13 @@ Figure&nbsp;21.4: Conditional quantiles at for O<sub>3</sub> concentrations (lef
 <p>In an extension to <a href="#fig-condDatWS" class="quarto-xref">Figure&nbsp;<span>21.4</span></a> it is possible to derive information on the simultaneous model performance of other variables. <a href="#fig-condDat" class="quarto-xref">Figure&nbsp;<span>21.5</span></a> shows the conditional quantile plot for hourly O<sub>3</sub> predictions. This shows among other things that concentrations of O<sub>3</sub> tend to be under-predicted for concentrations less than about 20 ppb. The Figure on the right shows the simultaneous <em>model performance</em> for wind speed and NO<sub>x</sub> for the <em>same</em> prediction intervals as shown in the conditional quantile plot. The plot on the right shows that for low concentrations of predicted O<sub>3</sub> there is a tendency for NO<sub>x</sub> concentrations to be overestimated (NMB <span class="math inline">\(\approx\)</span> 0.2 to 0.4) and wind speeds to be underestimated (NMB <span class="math inline">\(\approx\)</span> -0.2 to -0.3). One possible explanation for this behaviour is that the meteorological model tends to produce wind speeds that are too low, which would result in higher concentrations of NO<sub>x</sub>, which in turn would result in lower concentrations of O<sub>3</sub>. Note that it is possible to include more than one statistic, which would be plotted in a new panel e.g.&nbsp;<code>statistic = c("NMB", "r")</code>.</p>
 <p>In essence the <code>conditionalEval</code> function provides more information on model performance that can help better diagnose potential problems. Clearly, there are many other ways in which the results can be analysed, which will depend on the data available.</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"O3.obs"</span>, mod <span class="op">=</span> <span class="st">"O3.mod"</span>,</span>
 <span>  var.obs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NOx.obs"</span>, <span class="st">"ws.obs"</span><span class="op">)</span>,</span>
 <span>  var.mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NOx.mod"</span>, <span class="st">"ws.mod"</span><span class="op">)</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"NMB"</span>,</span>
 <span>  var.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"wind speed"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-condDat" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full"><div aria-describedby="fig-condDat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
@@ -836,16 +837,16 @@ Figure&nbsp;21.5: Conditional quantiles at for O<sub>3</sub> concentrations (lef
 </div>
 <p>A plot using temperature predictions shows that for most of the range in O<sub>3</sub> predictions there is very little bias in temperature (although there is some negative bias in temperature for very low concentration O<sub>3</sub> predictions):</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval</a></span><span class="op">(</span><span class="va">condDat</span>,</span>
 <span>  obs <span class="op">=</span> <span class="st">"O3.obs"</span>, mod <span class="op">=</span> <span class="st">"O3.mod"</span>,</span>
 <span>  var.obs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"temp.obs"</span>, <span class="st">"ws.obs"</span><span class="op">)</span>,</span>
 <span>  var.mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"temp.mod"</span>, <span class="st">"ws.mod"</span><span class="op">)</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"NMB"</span>, var.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"temperature"</span>, <span class="st">"wind speed"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Finally, (but not shown) it can be very useful to consider model performance in terms of air mass origin. In the example below, trajectories are imported, a cluster analysis undertaken and then evaluated using <code>conditionalEval</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import trajectories for 2006</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import trajectories for 2006</span></span>
 <span><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj</a></span><span class="op">(</span><span class="st">"london"</span>, <span class="fl">2006</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## carry out a cluster analysis</span></span>
@@ -859,7 +860,7 @@ Figure&nbsp;21.5: Conditional quantiles at for O<sub>3</sub> concentrations (lef
 <span>  obs <span class="op">=</span> <span class="st">"O3.obs"</span>, mod <span class="op">=</span> <span class="st">"O3.mod"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"cluster"</span>,</span>
 <span>  col.var <span class="op">=</span> <span class="st">"Set3"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -931,13 +932,14 @@ Figure&nbsp;21.5: Conditional quantiles at for O<sub>3</sub> concentrations (lef
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

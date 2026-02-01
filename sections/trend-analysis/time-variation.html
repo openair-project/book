@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>12&nbsp; Temporal variations – The openair book</title>
@@ -67,18 +67,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -118,7 +119,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -314,7 +315,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -679,7 +680,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note!
+<span class="screen-reader-only">Tip</span>Note!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -699,12 +700,12 @@ Note!
 <span class="header-section-number">12.2</span> Applications</h2>
 <p>We apply the <code>timeVariation</code> function to PM<sub>10</sub> concentrations and take the opportunity to filter the data to maximise the signal from the road. The <code>polarPlot</code> function described in Section (<a href="../directional-analysis/polar-plots.html" class="quarto-xref"><span>Chapter 8</span></a>) is very useful in this respect in highlighting the conditions under which different sources have their greatest impact. A subset of data is used filtering for wind speeds &gt; 3 m s<sup>-1</sup> and wind directions from 100–270 degrees. The code used is:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="va">ws</span> <span class="op">&gt;</span> <span class="fl">3</span>, <span class="va">wd</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="va">wd</span> <span class="op">&lt;</span> <span class="fl">270</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>, ylab <span class="op">=</span> <span class="st">"pm10 (ug/m3)"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVar1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -722,10 +723,10 @@ Figure&nbsp;12.1: Example plot using the <code>timeVariation</code> function to 
 <p><a href="#fig-timeVar2" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows the function applied to concentrations of NO<sub>x</sub>, CO, NO<sub>2</sub> and O<sub>3</sub> concentrations. In this case the concentrations have been normalised. The plot clearly shows the markedly different temporal trends in concentration. For CO, there is a very pronounced increase in concentrations during the peak pm rush hour. The other important difference is on Sundays when CO concentrations are relatively much higher than NO<sub>x</sub>. This is because flows of cars (mostly petrol) do not change that much by day of the week, but flows of vans and HGVs (diesel vehicles) are much less on Sundays. Note, however, that the monthly trend is very similar in each case — which indicates very similar source origins. Taken together, the plots highlight that traffic emissions dominate this site for CO and NO<sub>x</sub>, but there are important difference in how these emissions vary by hour of day and day of week.</p>
 <p>Also shown in the very different behaviour of O<sub>3</sub>. Because O<sub>3</sub> reacts with NO, concentrations of NO<sub>x</sub> and O<sub>3</sub> tend to be anti-correlated. Note also the clear peak in O<sub>3</sub> in April/May, which is due to higher northern hemispheric background concentrations in the spring. Even at a busy roadside site in central London this influence is clear to see.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"co"</span>, <span class="st">"no2"</span>, <span class="st">"o3"</span><span class="op">)</span>,</span>
 <span>  normalise <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVar2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -739,7 +740,7 @@ Figure&nbsp;12.2: Example plot using the <code>timeVariation</code> function to 
 </div>
 <p>Another example is splitting the data set by time. We use the <code>splitByDate</code> function to divide up the data into dates before January 2003 and after January 2003. This time the option <code>difference</code> is used to highlight how NO<sub>2</sub> concentrations have changed over these two periods. The results are shown in <a href="#fig-timeVar3" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>. There is some indication in this plot that data after 2003 seem to show more of a double peak in the diurnal plots; particularly in the morning rush hour. Also, the difference line does more clearly highlight a more substantial change over weekdays and weekends. Given that cars are approximately constant at this site each day, the change may indicate a change in vehicle emissions from other vehicle types. Given that it is known that primary NO<sub>2</sub> emissions are known to have increased sharply from the beginning of 2003 onwards, this perhaps provides clues as to the principal cause.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## split data into two periods (see Utlities section for more details)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## split data into two periods (see Utlities section for more details)</span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/splitByDate.html">splitByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  dates <span class="op">=</span> <span class="st">"1/1/2003"</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before Jan. 2003"</span>, <span class="st">"After Jan. 2003"</span><span class="op">)</span></span>
@@ -749,7 +750,7 @@ Figure&nbsp;12.2: Example plot using the <code>timeVariation</code> function to 
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"split.by"</span>,</span>
 <span>  difference <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVar3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -765,7 +766,7 @@ Figure&nbsp;12.3: Example plot using the <code>timeVariation</code> function to 
 <p>The approach here is to first make a new variable called ‘feature’ and fill it with the value ‘other’. A subset of data is defined and the associated locations in the data frame identified. The subset of data is then used to update the ‘feature’ field with a new description. This approach could be extended to some quite complex situations.</p>
 <p>There are a couple of things to note in <a href="#fig-timeVar4" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>. There seems to be evidence that for easterly winds &gt; 4 m s<sup>-1</sup> that concentrations of SO<sub>2</sub> are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This <em>might</em> reflect that SO<sub>2</sub> concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources. This technique will be returned to with different data sets in future.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make a field called "feature" and fill: make all values = "other"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make a field called "feature" and fill: make all values = "other"</span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">ws</span> <span class="op">&gt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">wd</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">wd</span> <span class="op">&lt;=</span> <span class="fl">180</span>, <span class="st">"easterly"</span>, <span class="st">"other"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -773,7 +774,7 @@ Figure&nbsp;12.3: Example plot using the <code>timeVariation</code> function to 
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"so2"</span>, group <span class="op">=</span> <span class="st">"feature"</span>, ylab <span class="op">=</span> <span class="st">"so2 (ppb)"</span>,</span>
 <span>  difference <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVar4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -787,11 +788,11 @@ Figure&nbsp;12.4: Example plot using the <code>timeVariation</code> function to 
 </div>
 <p>By default <code>timeVariation</code> shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for <code>statistic</code>. When <code>statistic = "median"</code> the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown be setting the <code>conf.int</code>. For example, <code>conf.int =   c(0.25, 0.99)</code> will show the median, 25/75th and 1/99th quantile values. The <code>statistic = "median"</code> option is therefore very useful for showing how the data are distributed — somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when <code>statistic = "median"</code> is used due to potential over-plotting; although the function will display several species of required. An example is shown in <a href="#fig-timeVarMedian" class="quarto-xref">Figure&nbsp;<span>12.5</span></a> for PM<sub>10</sub> concentrations.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"median"</span>,</span>
 <span>  col <span class="op">=</span> <span class="st">"firebrick"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVarMedian" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVarMedian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -807,57 +808,39 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
 <span class="header-section-number">12.3</span> Output</h2>
 <p>The <code>timeVariation</code> function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and the code shows how to access them.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myOutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myOutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span><span class="op">)</span></span>
 <span><span class="co">## show the first part of the day/hour variation</span></span>
 <span><span class="co">## note that value = mean, and Upper/Lower the 95% confid. intervals</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day.hour</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day.hour</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-# Groups:   ci [1]
-  variable wkday      hour default                        Mean Lower Upper    ci
-  &lt;fct&gt;    &lt;ord&gt;     &lt;int&gt; &lt;fct&gt;                         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 so2      Monday        0 01 January 1998 to 23 June 2…  2.93  2.70  3.27  0.95
-2 so2      Tuesday       0 01 January 1998 to 23 June 2…  3.21  2.98  3.52  0.95
-3 so2      Wednesday     0 01 January 1998 to 23 June 2…  3.35  3.12  3.59  0.95
-4 so2      Thursday      0 01 January 1998 to 23 June 2…  3.22  3.00  3.53  0.95
-5 so2      Friday        0 01 January 1998 to 23 June 2…  3.64  3.31  3.89  0.95
-6 so2      Saturday      0 01 January 1998 to 23 June 2…  4.25  3.94  4.56  0.95</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## can make a new data frame of this data e.g.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## can make a new data frame of this data e.g.</span></span>
 <span><span class="va">day.hour</span> <span class="op">&lt;-</span> <span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day.hour</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">day.hour</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">day.hour</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-# Groups:   ci [1]
-  variable wkday      hour default                        Mean Lower Upper    ci
-  &lt;fct&gt;    &lt;ord&gt;     &lt;int&gt; &lt;fct&gt;                         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 so2      Monday        0 01 January 1998 to 23 June 2…  2.93  2.70  3.27  0.95
-2 so2      Tuesday       0 01 January 1998 to 23 June 2…  3.21  2.98  3.52  0.95
-3 so2      Wednesday     0 01 January 1998 to 23 June 2…  3.35  3.12  3.59  0.95
-4 so2      Thursday      0 01 January 1998 to 23 June 2…  3.22  3.00  3.53  0.95
-5 so2      Friday        0 01 January 1998 to 23 June 2…  3.64  3.31  3.89  0.95
-6 so2      Saturday      0 01 January 1998 to 23 June 2…  4.25  3.94  4.56  0.95</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p>All the numerical results are given by:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day.hour</span> <span class="co">## are the weekday and hour results</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day.hour</span> <span class="co">## are the weekday and hour results</span></span>
 <span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">hour</span> <span class="co">## are the diurnal results</span></span>
 <span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">day</span> <span class="co">## are the weekday results</span></span>
-<span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">month</span> <span class="co">## are the monthly results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">myOutput</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">month</span> <span class="co">## are the monthly results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It is also possible to plot the individual plots that make up the (four) plots produced by <code>timeVariation</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## just the diurnal variation</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## just the diurnal variation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myOutput</span>, subset <span class="op">=</span> <span class="st">"hour"</span><span class="op">)</span></span>
 <span><span class="co">## day and hour</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myOutput</span>, subset <span class="op">=</span> <span class="st">"day.hour"</span><span class="op">)</span></span>
 <span><span class="co">## weekday variation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myOutput</span>, subset <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
 <span><span class="co">## monthly variation</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myOutput</span>, subset <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myOutput</span>, subset <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -925,13 +908,14 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

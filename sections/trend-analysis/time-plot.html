@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>11&nbsp; Time series plots – The openair book</title>
@@ -67,18 +67,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -289,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -648,33 +649,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With packages such as <span class="pkg">ggplot2</span> it is very easy to plot time series. However, there are a few enhancements in <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> such as flexible time-averaging and adding annotations for wind speed and direction that make it useful in some situations.</p>
 <p>The function offers fine control over many of the plot settings such as line type, colour and width. If more than one pollutant is selected, then the time series are shown compactly in different panels with different scales. Sometimes it is useful to get and idea of whether different variables ‘go up and down’ together. Such comparisons in <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> are made easy by setting <code>group = TRUE</code>, and maybe also <code>normalise = "mean"</code>. The latter setting divides each variable by its mean value, thus enabling several variables to be plotted together using <em>the same scale</em>. The <code>normalise</code> option will also take a date as a string (in British format dd/mm/YYYY), in which case all data are normalise to equal 100 at that time. Normalising data like this makes it easy to compare time series on different scales e.g.&nbsp;emissions and ambient measurements.</p>
 <p><code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> works very well in conjunction with <code><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate()</a></code>, which makes it easy to select specific time series intervals. See <a href="../utilities/utility-functions.html#sec-selectByDate" class="quarto-xref"><span>Section 26.1</span></a> for examples of how to select parts of a data frame based on the date.</p>
-<p>Another useful feature of <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> is the ability to average the data in several ways. This makes it easy, for example, to plot daily or monthly means from hourly data, or hourly means from 15-minute data. See the option <code>avg.time</code> for more details and <a href="../utilities/utility-functions.html#sec-timeAverage" class="quarto-xref"><span>Section 26.5</span></a> where a full description of time averaging of data frames is given.</p>
+<p>Another useful feature of <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> is the ability to average the data in several ways. This makes it easy, for example, to plot daily or monthly means from hourly data, or hourly means from 15-minute data. See the option <code>avg.time</code> for more details and <a href="../utilities/utility-functions.html#sec-timeAverage" class="quarto-xref"><span>Section 26.7</span></a> where a full description of time averaging of data frames is given.</p>
 </section><section id="examples-of-time-series-plotting" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="examples-of-time-series-plotting">
 <span class="header-section-number">11.2</span> Examples of time series plotting</h2>
 <p>A full set of examples is shown in the help pages — see <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">?timePlot</a></code> for details. At the basic level, concentrations are shown using a simple call e.g.&nbsp;to plot time series of NO<sub>x</sub> and O<sub>3</sub> in separate panels with their own scales.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">timePlot</span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">timePlot</span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span><span class="op">)</span>,</span>
 <span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Often it is necessary to only consider part of a time series and using the <span class="pkg">openair</span> function <code><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate()</a></code> makes it easy to do this. Some examples are shown below.</p>
 <p>To plot data only for 2003:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">timePlot</span><span class="op">(</span><span class="fu">selectByDate</span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">timePlot</span><span class="op">(</span><span class="fu">selectByDate</span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span><span class="op">)</span>,</span>
 <span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Plots for several pollutants for August 2003, are shown in <a href="#fig-timePlot" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="st">"aug"</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span>, <span class="st">"pm25"</span>, <span class="st">"pm10"</span>, <span class="st">"ws"</span><span class="op">)</span>,</span>
 <span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timePlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timePlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -688,7 +689,7 @@ Figure&nbsp;11.1: Time series for several variables using the <code><a href="htt
 </div>
 <p>Some other examples (not plotted) are:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## plot monthly means of ozone and no2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## plot monthly means of ozone and no2</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"o3"</span>, <span class="st">"no2"</span><span class="op">)</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
 <span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
@@ -705,7 +706,7 @@ Figure&nbsp;11.1: Time series for several variables using the <code><a href="htt
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"o3"</span>, <span class="st">"no2"</span><span class="op">)</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"frequency"</span>, y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>An example of normalising data is shown in <a href="#fig-timePlotNorm" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>. In this plot we have:</p>
 <ul>
@@ -716,12 +717,12 @@ Figure&nbsp;11.1: Time series for several variables using the <code><a href="htt
 </ul>
 <p><a href="#fig-timePlotNorm" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> shows that concentrations of NO<sub>2</sub> and O<sub>3</sub> have increased over the period 1998–2005; SO<sub>2</sub> and CO have shown the greatest reductions (by about 60%), whereas NO<sub>x</sub> concentrations have decreased by about 20%.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span>, <span class="st">"co"</span>, <span class="st">"so2"</span>, <span class="st">"pm10"</span><span class="op">)</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"year"</span>, normalise <span class="op">=</span> <span class="st">"1/1/1998"</span>,</span>
 <span>  lwd <span class="op">=</span> <span class="fl">4</span>, lty <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">TRUE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timePlotNorm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timePlotNorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -735,7 +736,7 @@ Figure&nbsp;11.2: An example of normalising time series data to fix values to eq
 </div>
 <p>Another example is grouping pollutants from <em>several sites</em> on one plot. It is easy to import data from several sites and to plot the data in separate panels e.g.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import data from 3 sites</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import data from 3 sites</span></span>
 <span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span></span>
 <span>  site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span>, <span class="st">"nott"</span><span class="op">)</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2010</span></span>
@@ -746,7 +747,7 @@ Figure&nbsp;11.2: An example of normalising time series data to fix values to eq
 <span>  pollutant <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"site"</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-importAQdata" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-importAQdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -760,7 +761,7 @@ Figure&nbsp;11.3: Plot of NO<sub>x</sub> concentrations from three sites in sepa
 </div>
 <p>Using the code above it is also possible to include several species. But what if we wanted to plot NO<sub>x</sub> concentrations across all sites in one panel? An example of how to do this is shown below. Note, in order to make referring to the columns easier, we will drop the full (long) site name and use the site code instead.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## first drop site name</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## first drop site name</span></span>
 <span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">aq</span>, <span class="op">-</span><span class="va">site</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## now reshape the data using the tidyr package</span></span>
@@ -770,7 +771,7 @@ Figure&nbsp;11.3: Plot of NO<sub>x</sub> concentrations from three sites in sepa
 <span>  values_from <span class="op">=</span> <span class="va">co</span><span class="op">:</span><span class="va">air_temp</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "date"          "co_KC1"        "co_MY1"        "co_NOTT"      
  [5] "nox_KC1"       "nox_MY1"       "nox_NOTT"      "no2_KC1"      
@@ -788,12 +789,12 @@ Figure&nbsp;11.3: Plot of NO<sub>x</sub> concentrations from three sites in sepa
 </div>
 <p>The final step will make columns of each site/pollutant combination e.g.&nbsp;<code>nox_KC1</code>, <code>pm10_KC1</code> and so on. It is then easy to use any of these names to make the plot (with a few plotting option enhancements):</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">aq</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">aq</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox_KC1"</span>, <span class="st">"nox_MY1"</span>, <span class="st">"nox_NOTT"</span><span class="op">)</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span>, group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"nox (ug/m3)"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-plotGroup" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plotGroup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -807,17 +808,17 @@ Figure&nbsp;11.4: Plot of NO<sub>x</sub> concentrations from three sites grouped
 </div>
 <p>An alternative way of selecting all columns containing the character ‘nox’ is to use the <code>grep</code> command. For example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">thedata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">thedata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">thedata</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span></span>
 <span>    pattern <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">thedata</span><span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">]</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span>, group <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If wind speed <code>ws</code> and wind direction <code>wd</code> are available they can be used in plots and shown as ‘wind vectors’. Plotting data in this way conveys more information in an easy-to-understand way, which works best for relatively short time periods e.g.&nbsp;a pollution episode lasting a few days. As an example <a href="#fig-timePlotwswd" class="quarto-xref">Figure&nbsp;<span>11.5</span></a> shows the first 48 hours of NO<sub>x</sub> and NO<sub>2</sub> data with wind arrows shown. The arrows are controlled by a list of option that control the length, shape and colour of the arrows. The maximum length of the arrow plotted is a fraction of the plot dimension with the longest arrow being <code>scale</code> of the plot x-y dimension. Note, if the plot size is adjusted manually by the user it should be re-plotted to ensure the correct wind angle. The list may contain other options to <code>panel.arrows</code> in the <span class="pkg">lattice</span> package. Other useful options include <code>length</code>, which controls the length of the arrow head and <code>angle</code>, which controls the angle of the arrow head. Wind vector arrows can also be used with the <code>scatterPlot</code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fl">48</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fl">48</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
 <span>  windflow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>    scale <span class="op">=</span> <span class="fl">0.1</span>, lwd <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -825,7 +826,7 @@ Figure&nbsp;11.4: Plot of NO<sub>x</sub> concentrations from three sites grouped
 <span>  <span class="op">)</span>,</span>
 <span>  lwd <span class="op">=</span> <span class="fl">3</span>, group <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"concentration (ug/m3)"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timePlotwswd" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timePlotwswd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -903,13 +904,14 @@ Figure&nbsp;11.5: An example of using the <code>windflow</code> option in <code>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

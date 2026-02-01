@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Jack Davison">
 <title>22&nbsp; openairmaps primer – The openair book</title>
@@ -67,18 +67,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -104,11 +105,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+}</script><link href="../../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script><link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script><script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="../../site_libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="../../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link rel="stylesheet" href="../../assets/style/style.css">
+<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><link rel="stylesheet" href="../../assets/style/style.css">
 </head>
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -290,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -658,17 +659,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">22.1</span> Installation</h2>
 <p><span class="pkg">openairmaps</span> is on CRAN, so can be simply downloaded using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you would like to access new features and bug fixes before they’re pushed to CRAN, the development version of <span class="pkg">openairmaps</span> can be downloaded directly from GitHub.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you would like to use <span class="pkg">openairmaps</span> in your analysis, don’t forget to load it using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -676,7 +677,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This chapter was produced using R version 4.5.0 and <span class="pkg">openairmaps</span> version 0.9.1.</p>
+<p>This chapter was produced using R version 4.5.1 and <span class="pkg">openairmaps</span> version 0.9.1.</p>
 </div>
 </div>
 </div>
@@ -695,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Use the “layer control” menu (top right) to show and hide the marker, and swap between base maps.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/">leaflet</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/">leaflet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html">addTiles</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"OSM"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -710,11 +711,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html">addLayersControl</a></span><span class="op">(</span></span>
 <span>    baseGroups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CartoDB.Positron"</span>, <span class="st">"OSM"</span><span class="op">)</span>,</span>
 <span>    overlayGroups <span class="op">=</span> <span class="st">"Marker"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-leafletdemo" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-4ecbef8600250d55eed7" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-4ecbef8600250d55eed7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-e541d6ed34af0acaadef" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e541d6ed34af0acaadef">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;22.1: An example of a leaflet map.
@@ -730,19 +731,19 @@ Figure&nbsp;22.1: An example of a leaflet map.
 </ul>
 <p>Don’t worry if you don’t fully understand all of this — the “all-in-one” functions in <span class="pkg">openairmaps</span> deal with much of this for you! The only <span class="pkg">leaflet</span> awareness you’ll need to use these functions is knowledge of the available base map providers, which can be accessed using <code><a href="https://rstudio.github.io/leaflet/reference/providers.html">leaflet::providers</a></code>. These are shown in the collapsible below (the list is very long!).</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-View Providers
+<span class="screen-reader-only">Note</span>View Providers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">leaflet</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/leaflet/reference/providers.html">providers</a></span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">leaflet</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/leaflet/reference/providers.html">providers</a></span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -998,23 +999,23 @@ View Providers
 Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 </figcaption><div aria-describedby="tbl-openairmaps-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="csgzvpjghi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#csgzvpjghi table {
+<div id="wnwtjlxqux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wnwtjlxqux table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#csgzvpjghi thead, #csgzvpjghi tbody, #csgzvpjghi tfoot, #csgzvpjghi tr, #csgzvpjghi td, #csgzvpjghi th {
+#wnwtjlxqux thead, #wnwtjlxqux tbody, #wnwtjlxqux tfoot, #wnwtjlxqux tr, #wnwtjlxqux td, #wnwtjlxqux th {
   border-style: none;
 }
 
-#csgzvpjghi p {
+#wnwtjlxqux p {
   margin: 0;
   padding: 0;
 }
 
-#csgzvpjghi .gt_table {
+#wnwtjlxqux .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1040,12 +1041,12 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-left-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_caption {
+#wnwtjlxqux .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#csgzvpjghi .gt_title {
+#wnwtjlxqux .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1057,7 +1058,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-width: 0;
 }
 
-#csgzvpjghi .gt_subtitle {
+#wnwtjlxqux .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1069,7 +1070,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-width: 0;
 }
 
-#csgzvpjghi .gt_heading {
+#wnwtjlxqux .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1081,13 +1082,13 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_bottom_border {
+#wnwtjlxqux .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_col_headings {
+#wnwtjlxqux .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1102,7 +1103,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_col_heading {
+#wnwtjlxqux .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1122,7 +1123,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#csgzvpjghi .gt_column_spanner_outer {
+#wnwtjlxqux .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1134,15 +1135,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 4px;
 }
 
-#csgzvpjghi .gt_column_spanner_outer:first-child {
+#wnwtjlxqux .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#csgzvpjghi .gt_column_spanner_outer:last-child {
+#wnwtjlxqux .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#csgzvpjghi .gt_column_spanner {
+#wnwtjlxqux .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1154,11 +1155,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   width: 100%;
 }
 
-#csgzvpjghi .gt_spanner_row {
+#wnwtjlxqux .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#csgzvpjghi .gt_group_heading {
+#wnwtjlxqux .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1184,7 +1185,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   text-align: left;
 }
 
-#csgzvpjghi .gt_empty_group_heading {
+#wnwtjlxqux .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1199,15 +1200,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: middle;
 }
 
-#csgzvpjghi .gt_from_md > :first-child {
+#wnwtjlxqux .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#csgzvpjghi .gt_from_md > :last-child {
+#wnwtjlxqux .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#csgzvpjghi .gt_row {
+#wnwtjlxqux .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1226,7 +1227,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#csgzvpjghi .gt_stub {
+#wnwtjlxqux .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1239,7 +1240,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#csgzvpjghi .gt_stub_row_group {
+#wnwtjlxqux .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1253,15 +1254,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: top;
 }
 
-#csgzvpjghi .gt_row_group_first td {
+#wnwtjlxqux .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#csgzvpjghi .gt_row_group_first th {
+#wnwtjlxqux .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#csgzvpjghi .gt_summary_row {
+#wnwtjlxqux .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1271,16 +1272,16 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#csgzvpjghi .gt_first_summary_row {
+#wnwtjlxqux .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_first_summary_row.thick {
+#wnwtjlxqux .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#csgzvpjghi .gt_last_summary_row {
+#wnwtjlxqux .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1290,7 +1291,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_grand_summary_row {
+#wnwtjlxqux .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1300,7 +1301,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#csgzvpjghi .gt_first_grand_summary_row {
+#wnwtjlxqux .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1310,7 +1311,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_last_grand_summary_row_top {
+#wnwtjlxqux .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1320,11 +1321,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_striped {
+#wnwtjlxqux .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#csgzvpjghi .gt_table_body {
+#wnwtjlxqux .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1333,7 +1334,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_footnotes {
+#wnwtjlxqux .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1347,7 +1348,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_footnote {
+#wnwtjlxqux .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1356,7 +1357,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#csgzvpjghi .gt_sourcenotes {
+#wnwtjlxqux .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1370,7 +1371,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#csgzvpjghi .gt_sourcenote {
+#wnwtjlxqux .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1378,72 +1379,72 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#csgzvpjghi .gt_left {
+#wnwtjlxqux .gt_left {
   text-align: left;
 }
 
-#csgzvpjghi .gt_center {
+#wnwtjlxqux .gt_center {
   text-align: center;
 }
 
-#csgzvpjghi .gt_right {
+#wnwtjlxqux .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#csgzvpjghi .gt_font_normal {
+#wnwtjlxqux .gt_font_normal {
   font-weight: normal;
 }
 
-#csgzvpjghi .gt_font_bold {
+#wnwtjlxqux .gt_font_bold {
   font-weight: bold;
 }
 
-#csgzvpjghi .gt_font_italic {
+#wnwtjlxqux .gt_font_italic {
   font-style: italic;
 }
 
-#csgzvpjghi .gt_super {
+#wnwtjlxqux .gt_super {
   font-size: 65%;
 }
 
-#csgzvpjghi .gt_footnote_marks {
+#wnwtjlxqux .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#csgzvpjghi .gt_asterisk {
+#wnwtjlxqux .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#csgzvpjghi .gt_indent_1 {
+#wnwtjlxqux .gt_indent_1 {
   text-indent: 5px;
 }
 
-#csgzvpjghi .gt_indent_2 {
+#wnwtjlxqux .gt_indent_2 {
   text-indent: 10px;
 }
 
-#csgzvpjghi .gt_indent_3 {
+#wnwtjlxqux .gt_indent_3 {
   text-indent: 15px;
 }
 
-#csgzvpjghi .gt_indent_4 {
+#wnwtjlxqux .gt_indent_4 {
   text-indent: 20px;
 }
 
-#csgzvpjghi .gt_indent_5 {
+#wnwtjlxqux .gt_indent_5 {
   text-indent: 25px;
 }
 
-#csgzvpjghi .katex-display {
+#wnwtjlxqux .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#csgzvpjghi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wnwtjlxqux div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1458,20 +1459,20 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="TmV0d29yayBWaXN1YWxpc2F0aW9u"><span class="gt_from_md">Network Visualisation</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="VmlzdWFsaXNlcyBhbnkgb2YgdGhlIG5ldHdvcmtzIG1hZGUgYXZhaWxhYmxlIGJ5IGBpbXBvcnRNZXRhKClgLg=="><span class="gt_from_md">Visualises any of the networks made available by <code>importMeta()</code>.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YG5ldHdvcmtNYXAoKWA="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YG5ldHdvcmtNYXAoKWA="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap()</a></code></span></span></td>
 <td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGxlYWZsZXQ6OmFkZE1hcmtlcnMoKWA="><span class="gt_from_md"><code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html">leaflet::addMarkers()</a></code></span></span></td>
 </tr>
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="RGlyZWN0aW9uYWwgQW5hbHlzaXM="><span class="gt_from_md">Directional Analysis</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="VXNlcyBhbnkgb2YgdGhlIGBvcGVuYWlyYCBkaXJlY3Rpb25hbCBhbmFseXNpcyBwbG90cyAoZS5nLiwgYHBvbGFyUGxvdCgpYCkgYXMgbWFya2VycywgYWxsb3dpbmcgdGhlbSB0byBiZSB2aWV3ZWQgaW4gdGhlaXIgZ2Vvc3BhdGlhbCBjb250ZXh0Lg=="><span class="gt_from_md">Uses any of the <code>openair</code> directional analysis plots (e.g., <code>polarPlot()</code>) as markers, allowing them to be viewed in their geospatial context.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YGFubnVsdXNNYXAoKWA8YnI+YGZyZXFNYXAoKWA8YnI+YHBlcmNlbnRpbGVNYXAoKWA8YnI+YHBvbGFyTWFwKClgPGJyPmBwb2xscm9zZU1hcCgpYDxicj5gd2luZHJvc2VNYXAoKWA="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/annulusMap.html">annulusMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/freqMap.html">freqMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/percentileMap.html">percentileMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/pollroseMap.html">pollroseMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/windroseMap.html">windroseMap()</a></code></span></span></td>
-<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFBvbGFyTWFya2VycygpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/addPolarMarkers.html">addPolarMarkers()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YGFubnVsdXNNYXAoKWA8YnI+YGZyZXFNYXAoKWA8YnI+YHBlcmNlbnRpbGVNYXAoKWA8YnI+YHBvbGFyTWFwKClgPGJyPmBwb2xscm9zZU1hcCgpYDxicj5gd2luZHJvc2VNYXAoKWA="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/annulusMap.html">annulusMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/freqMap.html">freqMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/percentileMap.html">percentileMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/polarMap.html">polarMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/pollroseMap.html">pollroseMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/windroseMap.html">windroseMap()</a></code></span></span></td>
+<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFBvbGFyTWFya2VycygpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/addPolarMarkers.html">addPolarMarkers()</a></code></span></span></td>
 </tr>
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="VHJhamVjdG9yeSBBbmFseXNpcw=="><span class="gt_from_md">Trajectory Analysis</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="Q3JlYXRlcyBpbnRlcmFjdGl2ZSB2aXN1YWxpc2F0aW9ucyBvZiBIWVNQTElUIHRyYWplY3RvcmllcywgYWxsb3dpbmcgZm9yIGZpbmVyIGludmVzdGlnYXRpb25zIHdoZW4gY29tcGFyZWQgd2l0aCB0aGVpciBzdGF0aWMgYG9wZW5haXJgIGNvdW50ZXJwYXJ0cy4="><span class="gt_from_md">Creates interactive visualisations of HYSPLIT trajectories, allowing for finer investigations when compared with their static <code>openair</code> counterparts.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YHRyYWpNYXAoKWA8YnI+YHRyYWpMZXZlbE1hcCgpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code></span></span></td>
-<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFRyYWpQYXRocygpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/addTrajPaths.html">addTrajPaths()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YHRyYWpNYXAoKWA8YnI+YHRyYWpMZXZlbE1hcCgpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/trajMap.html">trajMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/trajLevelMap.html">trajLevelMap()</a></code></span></span></td>
+<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFRyYWpQYXRocygpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/addTrajPaths.html">addTrajPaths()</a></code></span></span></td>
 </tr>
 </tbody>
 </table>
@@ -1548,13 +1549,14 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

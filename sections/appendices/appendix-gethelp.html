@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Jack Davison">
 <title>Appendix D — Getting help – The openair book</title>
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -285,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -680,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The <a href="https://reprex.tidyverse.org">reprex</a> package
+<span class="screen-reader-only">Tip</span>The <a href="https://reprex.tidyverse.org">reprex</a> package
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -692,13 +693,13 @@ The <a href="https://reprex.tidyverse.org">reprex</a> package
 <span class="header-section-number">D.3</span> Providing data</h2>
 <p>Sometimes the hardest thing about producing a reproducible example is providing data. There are many different ways of doing so when getting help with <a href="https://openair-project.github.io/openair/">openair</a>:</p>
 <ul>
-<li><p><strong>Write your example with <code><a href="https://openair-project.github.io/openair/reference/mydata.html">openair::mydata</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/polar_data.html">openairmaps::polar_data</a></code> or <code><a href="https://openair-project.github.io/openairmaps/reference/traj_data.html">openairmaps::traj_data</a></code>.</strong> These data are built in to their respective packages so are easily accessible to anyone.</p></li>
-<li><p><strong>Obtain data through <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">openair::importUKAQ()</a></code> or <code><a href="https://openair-project.github.io/worldmet/reference/importNOAA.html">worldmet::importNOAA()</a></code>.</strong> These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.</p></li>
+<li><p><strong>Write your example with <code><a href="https://openair-project.github.io/openair/reference/mydata.html">openair::mydata</a></code>, <code><a href="https://rdrr.io/pkg/openairmaps/man/polar_data.html">openairmaps::polar_data</a></code> or <code><a href="https://rdrr.io/pkg/openairmaps/man/traj_data.html">openairmaps::traj_data</a></code>.</strong> These data are built in to their respective packages so are easily accessible to anyone.</p></li>
+<li><p><strong>Obtain data through <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">openair::importUKAQ()</a></code> or <code><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">worldmet::importNOAA()</a></code>.</strong> These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.</p></li>
 <li><p><strong>Attach your data (e.g., as a .csv file).</strong> If your problem is specific to your data, you can attach your data to your GitHub issue. Remember that reproducible examples are <em>minimal</em> so you don’t need to provide literally every column or row, only enough to recreate your issue. This also means you can remove private/personal data if it is a concern (e.g., we don’t need real site names or locations, or even the specific species being measured).</p></li>
 <li><p><strong>Use <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code></strong>. If your data is quite small, you can use the <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code> function to generate a line of code that will recreate your data in someone else’s R session.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html">dput</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">openair</span><span class="fu">::</span><span class="va"><a href="https://openair-project.github.io/openair/reference/mydata.html">mydata</a></span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html">dput</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">openair</span><span class="fu">::</span><span class="va"><a href="https://openair-project.github.io/openair/reference/mydata.html">mydata</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>structure(list(date = structure(c(883612800, 883616400, 883620000, 
 883623600, 883627200, 883630800), tzone = "GMT", class = c("POSIXct", 
@@ -778,13 +779,14 @@ NA_integer_, NA_integer_, NA_integer_)), row.names = c(NA, -6L
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

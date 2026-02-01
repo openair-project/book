@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>15&nbsp; Theil-Sen trends – The openair book</title>
@@ -87,18 +87,19 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -138,7 +139,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -334,7 +335,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -717,13 +718,13 @@ Kunsch, H.R., 1989. The jackknife and the bootstrap for general stationary obser
 <p>We first show the use of the <code>TheilSen</code> function by applying it to concentrations of O<sub>3</sub>. The function is called as shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>.</p>
 <p>The plot shows the deseasonalised monthly mean concentrations of O<sub>3</sub>. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The <span class="math inline">\(\ast\ast\ast\)</span> show that the trend is significant to the 0.001 level.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>,</span>
 <span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  date.format <span class="op">=</span> <span class="st">"%Y"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-TheilSen1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -737,23 +738,23 @@ Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseaso
 </div>
 <p>Because the function runs simulations to estimate the uncertainty in the slope, it can take a little time for all the calculations to finish. These printed results show that in this case the trend in O<sub>3</sub> was +0.37 units (i.e.&nbsp;ppb) per year as an average over the entire period. It also shows the 95% confidence intervals in the trend ranged between 0.22 to 0.50 ppb/year. Finally, the significance level in this case is very high; providing very strong evidence that concentrations of O<sub>3</sub> increased over the period. The plot together with the summary results is shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>. Note that if one wanted to display the confidence intervals in the slope at the 99% confidence intervals, the code would be as follows.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Sometimes it is useful to consider a subset of data, perhaps by excluding some years. This is easy with the <code>filter</code> function. The following code calculates trends for years greater than 1999 i.e.&nbsp;from 2000 onward.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It is also possible to calculate trends in many other ways e.g.&nbsp;by wind direction. Considering how trends vary by wind direction can be extremely useful because the influence of different sources invariably depends on the direction of the wind. The <code>TheilSen</code> function splits the wind direction into 8 sectors i.e.&nbsp;N, NE, E etc. The Theil-Sen slopes are then calculated for each direction in turn. This function takes rather longer to run because the simulations need to be run eight times in total. Considering concentrations of O<sub>3</sub> again, the output is shown in <a href="#fig-TheilSen2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>. Note that this plot is specifically laid out to assist interpretation, with each panel located at the correct point on the compass. This makes it easy to see immediately that there is essentially no trend in O<sub>3</sub> for southerly winds i.e.&nbsp;where the road itself has the strongest influence. On the other hand the strongest evidence of increasing O<sub>3</sub> are for northerly winds, where the influence of the road is much less. The reason that there is no trend in O<sub>3</sub> for southerly winds is that there is always a great excess of NO, which reacts with O<sub>3</sub> to form NO<sub>2</sub>. At this particular location it will probably take many more years before O<sub>3</sub> concentrations start to increase when the wind direction is southerly. Nevertheless, there will always be <em>some</em> hours that do not have such high concentrations of NO.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, type <span class="op">=</span> <span class="st">"wd"</span>,</span>
 <span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  date.format <span class="op">=</span> <span class="st">"%Y"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-TheilSen2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -773,10 +774,10 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 \]</span></p>
 <p>where <span class="math inline">\(C_{End}\)</span> and <span class="math inline">\(C_{Start}\)</span> are the mean concentrations for the end and start date, respectively. <span class="math inline">\(N_{years}\)</span> is the number of years (or fractions of) the time series spans.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  slope.percent <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -784,7 +785,7 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Careful with percentages!
+<span class="screen-reader-only">Important</span>Careful with percentages!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -793,35 +794,35 @@ Careful with percentages!
 </div>
 <p>The <code>TheilSen</code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly. <em>However, it is necessary to ensure the date field is in the correct format</em>. Assuming data in an Excel file in the format dd/mm/YYYY (e.g. 23/11/2008), it is necessary to convert this to a date format understood by R, as shown below. Similarly, if annual data were available, get the dates in formats like ‘2005-01-01’, ‘2006-01-01’ … and make sure the date is again formatted using <code>as.Date</code>. Note that if dates are pre-formatted as YYYY-mm-dd, then it is sufficient to use <code>as.Date</code> without providing any format information because it is already in the correct format.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Finally, the <code>TheilSen</code> function can consider trends at different sites, provided the input data are correctly formatted. For input, a data frame with three columns is required: date, pollutant and <em>site</em>. The call would then be, for example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="output" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="output">
 <span class="header-section-number">15.2.1</span> Output</h3>
 <p>The <code>TheilSen</code> function provides lots of output data for further analysis or adding to a report. To obtain it, it is necessary to read it into a variable:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"wd"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This returns a list of two data frames containing all the monthly mean values and trend statistics and an aggregated summary. The first 6 lines are shown next:</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">MKresults</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">MKresults</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 20
   wd    date         conc     a       b upper.a upper.b lower.a  lower.b     p
   &lt;ord&gt; &lt;date&gt;      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-1 E     1998-01-01  5.10  -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
-2 E     1998-02-01  3.39  -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
-3 E     1998-03-01  5.23  -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
-4 E     1998-04-01  4.67  -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
-5 E     1998-05-01 -0.652 -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
-6 E     1998-06-01  5.21  -7.19 0.00113   -12.2 0.00154   -1.37 0.000612     0
+1 E     1998-01-01  5.10  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+2 E     1998-02-01  3.39  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+3 E     1998-03-01  5.23  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+4 E     1998-04-01  4.67  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+5 E     1998-05-01 -0.652 -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+6 E     1998-06-01  5.21  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
 # ℹ 10 more variables: p.stars &lt;chr&gt;, slope &lt;dbl&gt;, intercept &lt;dbl&gt;,
 #   intercept.lower &lt;dbl&gt;, intercept.upper &lt;dbl&gt;, lower &lt;dbl&gt;, upper &lt;dbl&gt;,
 #   slope.percent &lt;dbl&gt;, lower.percent &lt;dbl&gt;, upper.percent &lt;dbl&gt;</code></pre>
@@ -829,15 +830,15 @@ Careful with percentages!
 </div>
 <p>Often only the trend statistics are required and not all the monthly values. These can be obtained by:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 20
   wd    p.stars date        conc       a        b upper.a  upper.b lower.a
   &lt;ord&gt; &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 E     "***"   2001-09-15  6.08  -7.19  0.00113  -12.2   0.00154   -1.37 
+1 E     "***"   2001-09-15  6.08  -7.20  0.00113  -12.2   0.00154   -1.37 
 2 N     "***"   2001-09-15  9.82 -18.1   0.00240  -24.1   0.00294  -11.4  
 3 NE    "***"   2001-09-15  9.77 -13.6   0.00198  -24.3   0.00297   -0.125
-4 NW    "***"   2001-09-15  9.79 -10.1   0.00168  -17.5   0.00234   -4.79 
+4 NW    "***"   2001-09-15  9.79  -9.94  0.00167  -17.6   0.00233   -4.80 
 5 S     ""      2001-09-15  5.06   3.44  0.000118   1.44  0.000294   5.53 
 6 SE    ""      2001-09-15  5.79   4.38  0.000125   1.47  0.000385   7.78 
 7 SW    "*"     2001-09-15  4.77   2.15  0.000225  -0.587 0.000459   4.59 
@@ -915,13 +916,14 @@ Careful with percentages!
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

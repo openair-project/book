@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw">
 <title>Appendix A — Annotating openair plots – The openair book</title>
@@ -67,18 +67,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-732fb9ccd080a018ca85ca5d15770f52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-817a6ddaea726be0d6df624b2e9cb2d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-850732025780adc306f53bb2c71941d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -289,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -670,22 +671,22 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <p>There are various ways that annotations can be added, but the method used here is to add to the previous plot using a function called <code><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object()</a></code> to which we want to add a later. This may seem complicated, but once a few examples are considered, the method becomes very powerful, flexible and straightforward. In a multi-panel plot such as <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> it is also useful to specify which rows/columns should be added to. If they are not specified then the annotation will appear in all panels.</p>
 <p>First, a plot should be produced to which we wish to add some text.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make sure latticeExtra is loaded</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make sure latticeExtra is loaded</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://latticeextra.r-forge.r-project.org/">latticeExtra</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="st">"aug"</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span>, <span class="st">"pm25"</span>, <span class="st">"pm10"</span>, <span class="st">"ws"</span><span class="op">)</span>,</span>
 <span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So, considering <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> , this is how the text ‘some missing data’ was added to the top panel.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-04 12:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>    labels <span class="op">=</span> <span class="st">"some missing data"</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So what does this do? First, the <code><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object()</a></code> is simply the last plot that was plotted. Next the <code>layer</code> function is used to add some text. The text itself is added using the <code>ltext</code> <span class="pkg">lattice</span> function. It is worth having a look at the help for <code>ltext</code> as that gives an overview of all the common annotations and other options. We have chosen to plot the text at position x = ‘2003-08-04’ and y = 200 and the label itself. A useful option to <code>ltext</code> is <code>pos</code>. Values can be 1, 2, 3 and 4, and indicate positions below (the default), to the left of, above and to the right of the specified coordinates</p>
 </section><section id="adding-text-and-a-shaded-area" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="adding-text-and-a-shaded-area">
@@ -693,7 +694,7 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <p>This time we will highlight an interval in row 2 (O<sub>3</sub>) and write some text on top. Note that this time we use the <code>lpolygon</code> function and choose to put it under everything else on the plot. For the text, we have chosen a colour (yellow) font type 2 (bold) and made it a bit bigger (<code>cex = 1.5</code>). Note also the <code>y</code> values extend beyond the actual limits shown on the plot — just to make sure they cover the whole region.</p>
 <p>The polygon could of course be horizontal and more than one producing a series of ‘bands’ e.g.&nbsp;air quality indexes. A more sophisticated approach is shown later for PM<sub>2.5</sub></p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -709,11 +710,11 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-09 12:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>    labels <span class="op">=</span> <span class="st">"!!episode!!"</span>, col <span class="op">=</span> <span class="st">"yellow"</span>,</span>
 <span>    font <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.5</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The small shaded, semi-transparent area shown in the bottom panel was added as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
 <span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="va">plt</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -722,24 +723,24 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>    <span class="op">)</span>,</span>
 <span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span>, border <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>    alpha <span class="op">=</span> <span class="fl">0.2</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="adding-an-arrow" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="adding-an-arrow">
 <span class="header-section-number">A.3</span> Adding an arrow</h2>
 <p>The arrow shown on the first panel of <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> was added as follows. Note the <code>code = 3</code> placed arrows at both ends. Note that <code>angle</code> is the angle from the shaft of the arrow to the edge of the arrow head.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">larrows</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-01 00:00"</span><span class="op">)</span>, <span class="fl">100</span>,</span>
 <span>    <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-08 14:00"</span><span class="op">)</span>,</span>
 <span>    <span class="fl">100</span>,</span>
 <span>    code <span class="op">=</span> <span class="fl">3</span>, angle <span class="op">=</span> <span class="fl">30</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="adding-a-reference-line-and-text" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="adding-a-reference-line-and-text">
 <span class="header-section-number">A.4</span> Adding a reference line and text</h2>
 <p>This code adds a vertical dashed reference line shown in the 4th panel (PM<sub>10</sub>) along with some text aligned at 90 degrees using the <code>srt</code> option of <code>ltext</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/panel.functions.html">panel.abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-25 00:00"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span>
 <span>    rows <span class="op">=</span> <span class="fl">4</span></span>
 <span>  <span class="op">)</span></span>
@@ -747,22 +748,22 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-25 08:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>    labels <span class="op">=</span> <span class="st">"reference line"</span>, srt <span class="op">=</span> <span class="fl">90</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="highlight-a-specific-point" class="level2" data-number="A.5"><h2 data-number="A.5" class="anchored" data-anchor-id="highlight-a-specific-point">
 <span class="header-section-number">A.5</span> Highlight a specific point</h2>
 <p>Up until now annotations have been added using arbitrary coordinates in each panel. What if we wanted to highlight a particular point, or more generally work with the actual data that are plotted. Knowing how to refer to existing data greatly extends the power of these functions.</p>
 <p>It is possible to refer to a specific point in a panel simply by indexing the point of interest i.e.&nbsp;<code>x</code>, <code>y</code>. For example, to mark the 200th PM<sub>10</sub> concentration (without knowing the actual date or value):</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a specific point</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a specific point</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">16</span>, cex <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
 <span>    rows <span class="op">=</span> <span class="fl">4</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What if we wanted to highlight the maximum O<sub>3</sub> concentration? It is possible to work out the index first and then use that to refer to that point. Note the <code>}</code> to allow for the code to span multiple commands.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a point to the max O3 concentration</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a point to the max O3 concentration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
 <span>    <span class="op">{</span></span>
@@ -782,13 +783,13 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    rows <span class="op">=</span> <span class="fl">2</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="add-a-filled-polygon" class="level2" data-number="A.6"><h2 data-number="A.6" class="anchored" data-anchor-id="add-a-filled-polygon">
 <span class="header-section-number">A.6</span> Add a filled polygon</h2>
 <p>It can be seen in the top panel of <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> that some data are highlighted by filling the area below the line. This approach can be useful more generally in plotting. While it is possible to draw polygons easily and refer to the data itself, there needs to be a way for dealing with gaps in data, otherwise these gaps could be filled in perhaps unpredictable ways. A function has been written to draw a polygon taking into account gaps (<code>poly.na</code>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poly.na</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x1</span>, <span class="va">y1</span>, <span class="va">x2</span>, <span class="va">y2</span>, <span class="va">col</span> <span class="op">=</span> <span class="st">"black"</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poly.na</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x1</span>, <span class="va">y1</span>, <span class="va">x2</span>, <span class="va">y2</span>, <span class="va">col</span> <span class="op">=</span> <span class="st">"black"</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">y2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">i</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span>, <span class="va">x1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">x2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">x2</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
@@ -797,11 +798,11 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This time we work out the ids of the data spanning an area of interest. Then the <code>poly.na</code> function is used. Note that the alpha transparency is by default 0.2 but another value can easily be supplied, as shown in the air quality ‘bands’ example.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
 <span>    <span class="op">{</span></span>
 <span>      <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-11 00:00"</span><span class="op">)</span> <span class="op">&amp;</span></span>
@@ -811,13 +812,13 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    rows <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="add-air-quality-bands-as-polygons" class="level2" data-number="A.7"><h2 data-number="A.7" class="anchored" data-anchor-id="add-air-quality-bands-as-polygons">
 <span class="header-section-number">A.7</span> Add air quality bands as polygons</h2>
 <p>It is a simple extension to go from using a polygon below the data to polygons at certain intervals e.g.&nbsp;air quality indexes. These are shown for PM<sub>2.5</sub> and the bands considered are 0–20, 20–30, 30–40 and &gt;40.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    col <span class="op">=</span> <span class="st">"green"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
@@ -838,14 +839,14 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">40</span>, <span class="cn">NA</span>, <span class="va">y</span><span class="op">)</span>,</span>
 <span>    <span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    col <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="polar-plot-examples" class="level2" data-number="A.8"><h2 data-number="A.8" class="anchored" data-anchor-id="polar-plot-examples">
 <span class="header-section-number">A.8</span> Polar plot examples</h2>
 <p>Many of the examples considered above are relevant to all other functions e.g.&nbsp;how to add text, choosing rows and columns to plot in. Polar coordinate plots are different because of the coordinate system used and this section considers a few examples.</p>
 <p>One useful approach is to be able to draw an arc, perhaps highlighting an area of interest. A simple, but flexible function has been written to do this. It takes arguments <code>theta1</code> and <code>theta2</code> that define the angular area of interest and <code>lower</code> and <code>upper</code> to set the lower and upper wind speed, respectively. It also has additional arguments <code>theta3</code> and <code>theta4</code> which optionally set the angles for the ‘upper’ wind speed.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta1</span> <span class="op">=</span> <span class="fl">30</span>, <span class="va">theta2</span> <span class="op">=</span> <span class="fl">60</span>, <span class="va">theta3</span> <span class="op">=</span> <span class="va">theta1</span>, <span class="va">theta4</span> <span class="op">=</span> <span class="va">theta2</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta1</span> <span class="op">=</span> <span class="fl">30</span>, <span class="va">theta2</span> <span class="op">=</span> <span class="fl">60</span>, <span class="va">theta3</span> <span class="op">=</span> <span class="va">theta1</span>, <span class="va">theta4</span> <span class="op">=</span> <span class="va">theta2</span>,</span>
 <span>                <span class="va">lower</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">upper</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co">## function to work out coordinates for an arc sector</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">theta2</span> <span class="op">&lt;</span> <span class="va">theta1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -866,7 +867,7 @@ Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
 <span>  <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.high</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.high</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -882,7 +883,7 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 </div>
 <p>Following on from the previous examples, some annotations have been added to the basic polar plot for SO<sub>2</sub> as shown in <a href="#fig-annonatePolar" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>. Note that in these plots (0, 0) is the middle of the plot and the radial distance will be determined by the wind speed — or whatever the radial variable is. This way of plotting arcs can also be applied to other functions that show directional data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">12</span>, <span class="st">"A"</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="st">"B"</span>, cex <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lsegments</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">11.5</span>, <span class="op">-</span><span class="fl">11.5</span>, lty <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
@@ -895,7 +896,7 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 <span>    theta1 <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>    theta2 <span class="op">=</span> <span class="fl">120</span>, lower <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>    upper <span class="op">=</span> <span class="fl">15</span></span>
-<span>  <span class="op">)</span><span class="op">$</span><span class="va">y</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span><span class="op">$</span><span class="va">y</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="using-grid-graphics-identify-locations-interactively" class="level2" data-number="A.9"><h2 data-number="A.9" class="anchored" data-anchor-id="using-grid-graphics-identify-locations-interactively">
 <span class="header-section-number">A.9</span> Using grid graphics — identify locations interactively</h2>
@@ -903,28 +904,28 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 <p>Given a a basic <code>timeVariation</code> plot, how could texts be added at any location — say in the middle monthly plot? One very useful function for this type of annotation that allows the user to interactively choose a location is the <code><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator()</a></code> function in the <code>grid</code> package. That function can be called with different coordinate systems — but the one we want defines the bottom-left corner as (0, 0) and the top right as (1, 1).</p>
 <p>First, make a <code>timeVariation</code> plot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now let’s choose a location on the plot interactively using the mouse and selecting somewhere in the middle of the monthly plot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
 <span><span class="co">## bring up the interactive location chooser</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator</a></span><span class="op">(</span>unit <span class="op">=</span> <span class="st">"npc"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator</a></span><span class="op">(</span>unit <span class="op">=</span> <span class="st">"npc"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What should happen is that in the R console the coordinates are given for that point. In my case these were x = 0.503 and y = 0.338. These coordinates can now be used as the basis of adding some text or other annotation. In the example below, the <code>grid.text</code> function is used to add some text for these coordinates making the font bigger (<code>cex = 2</code>), bold (<code>font = 2</code>) and blue (<code>col = "blue"</code>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fl">0.503</span>, y <span class="op">=</span> <span class="fl">0.338</span>, label <span class="op">=</span> <span class="st">"here!"</span>,</span>
 <span>  gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>cex <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Even with this basic approach, some sophisticated annotation is possible with <em>any</em> <span class="pkg">openair</span> plot. There are many other functions that can be used from the grid package that would allow for polygons, segments and other features to be drawn is a similar way to the examples earlier in this section. Continuing with the same example, here is how to add an arrow pointing to the maximum concentration shown on the top plot for Saturday (again using the <code>grid.locator</code> function).</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.lines.html">grid.lines</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.lines.html">grid.lines</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.736</span>, <span class="fl">0.760</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.560</span>, <span class="fl">0.778</span><span class="op">)</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.736</span>, y <span class="op">=</span> <span class="fl">0.560</span>, label <span class="op">=</span> <span class="st">"maximum"</span>, just <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.736</span>, y <span class="op">=</span> <span class="fl">0.560</span>, label <span class="op">=</span> <span class="st">"maximum"</span>, just <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -992,13 +993,14 @@ Figure&nbsp;A.2: Annotations on a polar plot.
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

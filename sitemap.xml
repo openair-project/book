@@ -2,134 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://openair-project.github.io/book/index.html</loc>
-    <lastmod>2025-02-28T17:36:20.515Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.143Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/intro/intro.html</loc>
-    <lastmod>2025-07-25T13:30:48.024Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.148Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/intro/openair-package.html</loc>
-    <lastmod>2025-09-08T13:34:23.555Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.148Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/data-access/UK-air-quality-data.html</loc>
-    <lastmod>2025-09-08T12:17:06.639Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.145Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/data-access/access-met-data.html</loc>
-    <lastmod>2025-07-25T13:32:21.690Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.146Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/wind-roses.html</loc>
-    <lastmod>2025-07-25T13:33:30.976Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.147Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-freq.html</loc>
-    <lastmod>2025-07-25T13:33:30.967Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.146Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/percentile-roses.html</loc>
-    <lastmod>2025-07-25T13:33:30.964Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.146Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-plots.html</loc>
-    <lastmod>2025-07-25T13:33:30.971Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.147Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/polar-annulus.html</loc>
-    <lastmod>2025-07-25T13:33:30.966Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.146Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/trajectory-analysis.html</loc>
-    <lastmod>2025-07-25T13:33:30.974Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.147Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/time-plot.html</loc>
-    <lastmod>2025-07-25T13:33:30.998Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.158Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/time-variation.html</loc>
-    <lastmod>2025-07-25T13:33:31.000Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.158Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/calendar-plot.html</loc>
-    <lastmod>2025-07-25T13:33:30.993Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.152Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/time-proportion.html</loc>
-    <lastmod>2025-07-25T13:33:30.998Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.158Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/theil-sen.html</loc>
-    <lastmod>2025-07-25T13:33:30.997Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.157Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/smooth-trend.html</loc>
-    <lastmod>2025-07-25T13:33:30.996Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.157Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/run-regression.html</loc>
-    <lastmod>2025-07-25T13:33:30.994Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.152Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/trend-level.html</loc>
-    <lastmod>2025-07-25T13:33:31.002Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.158Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/model-evaluation/mod-stats.html</loc>
-    <lastmod>2025-07-25T13:33:30.990Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.151Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/model-evaluation/taylor-diagram.html</loc>
-    <lastmod>2025-07-25T13:33:30.991Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.151Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/model-evaluation/conditional-quantiles.html</loc>
-    <lastmod>2025-07-25T13:33:30.986Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.150Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-overview.html</loc>
-    <lastmod>2025-07-25T13:33:30.978Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.149Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-network.html</loc>
-    <lastmod>2025-07-25T13:32:39.611Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.149Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-polar.html</loc>
-    <lastmod>2025-07-25T13:33:30.981Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.150Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-traj.html</loc>
-    <lastmod>2025-07-25T13:33:30.983Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.150Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/utilities/utility-functions.html</loc>
-    <lastmod>2025-09-08T13:55:06.971Z</lastmod>
+    <lastmod>2026-01-30T16:44:56.943Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/utilities/scatter-plot.html</loc>
-    <lastmod>2025-07-25T13:33:31.005Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.159Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/references.html</loc>
-    <lastmod>2025-07-25T13:29:24.808Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.151Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-annotate.html</loc>
-    <lastmod>2025-07-25T13:33:30.957Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.144Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-hysplit.html</loc>
-    <lastmod>2025-07-25T13:33:30.959Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.144Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-trends.html</loc>
-    <lastmod>2025-07-25T13:33:30.961Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.144Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-gethelp.html</loc>
-    <lastmod>2025-07-25T13:32:19.617Z</lastmod>
+    <lastmod>2026-01-30T15:31:16.144Z</lastmod>
   </url>
 </urlset>
