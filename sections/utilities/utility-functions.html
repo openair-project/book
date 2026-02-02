@@ -905,11 +905,11 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <p>Type <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">?rollingMean</a></code> into R for more details.</p>
 </section><section id="sec-rollingQuantile" class="level2 page-columns page-full" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="sec-rollingQuantile">
 <span class="header-section-number">26.5</span> Calculating rolling quantiles (percentiles)</h2>
-<p>There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a ‘background’ concentration. For example, for fast reponse measurements (e.g.&nbsp;at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement <span class="citation" data-cites="Padilla2021 Farren2024">(<a href="../references.html#ref-Farren2024" role="doc-biblioref">Farren et al., 2024</a>; <a href="../references.html#ref-Padilla2021" role="doc-biblioref">Padilla et al., 2022</a>)</span>.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-Farren2024" class="csl-entry" role="listitem">
-Farren, N.J., Wilson, S., Bernard, Y., Shaw, M.D., Lee, K., Crowe, M., Carslaw, D.C., 2024. An ambient measurement technique for vehicle emission quantification and concentration source apportionment. Environmental Science &amp; Technology. https://doi.org/<a href="https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf">https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf</a>
-</div><div id="ref-Padilla2021" class="csl-entry" role="listitem">
-Padilla, L.E., Ma, G.Q., Peters, D., Dupuy-Todd, M., Forsyth, E., Stidworthy, A., Mills, J., Bell, S., Hayward, I., Coppin, G., Moore, K., Fonseca, E., Popoola, O.A.M., Douglas, F., Slater, G., Tuxen-Bettman, K., Carruthers, D., Martin, N.A., Jones, R.L., Alvarez, R.A., 2022. New methods to derive street-scale spatial patterns of air pollution from mobile monitoring. Atmospheric Environment 270, 118851. https://doi.org/<a href="https://doi.org/10.1016/j.atmosenv.2021.118851">https://doi.org/10.1016/j.atmosenv.2021.118851</a>
+<p>There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a ‘background’ concentration. For example, for fast reponse measurements (e.g.&nbsp;at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement <span class="citation" data-cites="Padilla2021 Farren2024">(<a href="../references.html#ref-Padilla2021" role="doc-biblioref">Padilla et al. 2022</a>; <a href="../references.html#ref-Farren2024" role="doc-biblioref">Farren et al. 2024</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Padilla2021" class="csl-entry" role="listitem">
+Padilla, Lauren E., Geoffrey Q. Ma, Daniel Peters, Megan Dupuy-Todd, Ella Forsyth, Amy Stidworthy, Jim Mills, et al. 2022. <span>“New Methods to Derive Street-Scale Spatial Patterns of Air Pollution from Mobile Monitoring.”</span> <em>Atmospheric Environment</em> 270: 118851. https://doi.org/<a href="https://doi.org/10.1016/j.atmosenv.2021.118851">https://doi.org/10.1016/j.atmosenv.2021.118851</a>.
+</div><div id="ref-Farren2024" class="csl-entry" role="listitem">
+Farren, Naomi J., Sam Wilson, Yoann Bernard, Marvin D. Shaw, K. Lee, M. Crowe, and David C. Carslaw. 2024. <span>“An Ambient Measurement Technique for Vehicle Emission Quantification and Concentration Source Apportionment.”</span> <em>Environmental Science &amp; Technology</em>. https://doi.org/<a href="https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf">https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf</a>.
 </div></div><p>The <code>rollingQuantile</code> function provides a fast way of calculating one or more quantiles in a rime series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.</p>
 <p>An example is shown below and plotted in <a href="#fig-rollingQuant" class="quarto-xref">Figure&nbsp;<span>26.2</span></a>. In this example, we choose a rolling window width of 744 (about a month) and calculate quantile levels at 0.05 and 0.95. <a href="#fig-rollingQuant" class="quarto-xref">Figure&nbsp;<span>26.2</span></a> shows the jump in NO<sub>2</sub> concentrations at the start of 2003 for the high quantile level but not the lower one. As mentioned elsewhere, this increase in NO<sub>2</sub> was related to an increase in primary NO<sub>2</sub> emissions related to bus aftertreatment technology.</p>
 <div class="cell">
@@ -992,7 +992,7 @@ $ pm10       &lt;int&gt; 29, 37, 34, 35, 34, 16, 11, 12, 12, 12, 10, 11, 13, 17,
 $ so2        &lt;dbl&gt; 4.7225, NA, 6.8300, 7.6625, 8.0700, 5.5050, 4.2300, 3.8750,…
 $ co         &lt;dbl&gt; 3.3725, NA, 9.6025, 10.2175, 8.9125, 3.0525, 2.2650, 1.9950…
 $ pm25       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ smooth_no2 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ smooth_no2 &lt;dbl&gt; 46.71299, 46.71691, 46.72072, 46.72449, 46.72833, 46.73229,…
 $ n_no2      &lt;int&gt; 2149, 2150, 2151, 2152, 2153, 2154, 2155, 2156, 2157, 2158,…</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot weekly means of orginal data and smoothed</span></span>
@@ -1034,21 +1034,20 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
 <span><span class="va">daily</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,731 × 12
+<pre><code># A tibble: 2,731 × 10
    date                   ws    wd   nox   no2    o3  pm10   so2    co  pm25
    &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 1998-01-01 00:00:00  6.84  188.  154.  39.4 6.87   18.2  3.15  2.70    NA
- 2 1998-01-02 00:00:00  7.07  223.  132.  39.5 6.48   27.8  3.94  1.77    NA
- 3 1998-01-03 00:00:00 11.0   226.  120.  38.0 8.41   20.2  3.20  1.74    NA
- 4 1998-01-04 00:00:00 11.5   223.  105.  35.3 9.61   21.0  2.96  1.62    NA
- 5 1998-01-05 00:00:00  6.61  237.  175.  46.0 4.96   24.2  4.52  2.13    NA
- 6 1998-01-06 00:00:00  4.38  197.  214.  45.3 1.35   34.6  5.70  2.53    NA
- 7 1998-01-07 00:00:00  7.61  219.  193.  44.9 4.42   31.0  5.67  2.48    NA
- 8 1998-01-08 00:00:00  8.58  216.  161.  43.1 4.96   36    4.68  2.10    NA
- 9 1998-01-09 00:00:00  6.7   206.  163.  38   3.62   38.0  5.13  2.36    NA
-10 1998-01-10 00:00:00  2.98  167.  219.  44.9 0.375  37.0  4.91  2.23    NA
-# ℹ 2,721 more rows
-# ℹ 2 more variables: rollingo3 &lt;dbl&gt;, n_o3 &lt;dbl&gt;</code></pre>
+ 1 1998-01-01 00:00:00  6.84  190.  154.  39.4 6.87   18.2  3.15  2.70    NA
+ 2 1998-01-02 00:00:00  7.07  226.  132.  39.5 6.48   27.8  3.94  1.77    NA
+ 3 1998-01-03 00:00:00 11.0   221.  120.  38.0 8.41   20.2  3.20  1.74    NA
+ 4 1998-01-04 00:00:00 11.5   219.  105.  35.3 9.61   21.0  2.96  1.62    NA
+ 5 1998-01-05 00:00:00  6.61  238.  175.  46.0 4.96   24.2  4.52  2.13    NA
+ 6 1998-01-06 00:00:00  4.38  196.  214.  45.3 1.35   34.6  5.70  2.53    NA
+ 7 1998-01-07 00:00:00  7.61  218.  193.  44.9 4.42   31.0  5.67  2.48    NA
+ 8 1998-01-08 00:00:00  8.58  215.  161.  43.1 4.96   36    4.68  2.10    NA
+ 9 1998-01-09 00:00:00  6.7   202.  163.  38   3.62   38.0  5.13  2.36    NA
+10 1998-01-10 00:00:00  2.98  164.  219.  44.9 0.375  37.0  4.91  2.23    NA
+# ℹ 2,721 more rows</code></pre>
 </div>
 </div>
 <p>Monthly 95th percentile values:</p>
@@ -1061,21 +1060,20 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <span><span class="op">)</span></span>
 <span><span class="va">monthly</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 90 × 12
+<pre><code># A tibble: 90 × 10
    date                   ws    wd   nox   no2    o3  pm10   so2    co  pm25
    &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 1998-01-01 00:00:00 11.2   45    371   68.6  14    53    11.1  3.99  NA  
- 2 1998-02-01 00:00:00  8.16  16.7  524.  92     7    68.9  17.5  5.63  NA  
- 3 1998-03-01 00:00:00 10.6   37.6  417.  85    15    61    18.4  4.85  NA  
- 4 1998-04-01 00:00:00  8.16  44.4  384   81.5  20    52    14.6  4.17  NA  
- 5 1998-05-01 00:00:00  7.56  40.6  300   80    25    61    12.7  3.55  40  
- 6 1998-06-01 00:00:00  8.47  50.7  377   74.2  15    53    12.2  4.28  33.9
- 7 1998-07-01 00:00:00  9.22  36.7  386.  80.0  NA    52.4  13.9  4.52  32  
- 8 1998-08-01 00:00:00  7.92  48.4  337.  87.0  16    58.2  13.0  3.78  38  
- 9 1998-09-01 00:00:00  6     66.7  334.  81.3  14    64    18.2  4.25  47  
-10 1998-10-01 00:00:00 12     33.9  439.  84    15.1  54    12.0  4.81  33  
-# ℹ 80 more rows
-# ℹ 2 more variables: rollingo3 &lt;dbl&gt;, n_o3 &lt;dbl&gt;</code></pre>
+ 1 1998-01-01 00:00:00 11.2   41.3  371   68.6  14    53    11.1  3.99  NA  
+ 2 1998-02-01 00:00:00  8.16  10.5  524.  92     7    68.9  17.5  5.63  NA  
+ 3 1998-03-01 00:00:00 10.6   37.9  417.  85    15    61    18.4  4.85  NA  
+ 4 1998-04-01 00:00:00  8.16  43.6  384   81.5  20    52    14.6  4.17  NA  
+ 5 1998-05-01 00:00:00  7.56  43.2  300   80    25    61    12.7  3.55  40  
+ 6 1998-06-01 00:00:00  8.47  42.7  377   74.2  15    53    12.2  4.28  33.9
+ 7 1998-07-01 00:00:00  9.22  34.4  386.  80.0  NA    52.4  13.9  4.52  32  
+ 8 1998-08-01 00:00:00  7.92  43.7  337.  87.0  16    58.2  13.0  3.78  38  
+ 9 1998-09-01 00:00:00  6     46.3  334.  81.3  14    64    18.2  4.25  47  
+10 1998-10-01 00:00:00 12     37.9  439.  84    15.1  54    12.0  4.81  33  
+# ℹ 80 more rows</code></pre>
 </div>
 </div>
 <p>2-week averages but only calculate if at least 75% of the data are available:</p>
@@ -1083,21 +1081,20 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>, data.thresh <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="va">twoweek</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 196 × 12
-   date                   ws    wd   nox   no2    o3  pm10   so2    co  pm25
-   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 1997-12-29 00:00:00  6.98  212.  167.  41.4  4.63  29.3  4.47  2.17  NA  
- 2 1998-01-12 00:00:00  4.91  221.  173.  42.1  4.70  28.8  5.07  1.86  NA  
- 3 1998-01-26 00:00:00  2.78  242.  233.  51.4  2.30  34.9  8.07  2.45  NA  
- 4 1998-02-09 00:00:00  4.43  215.  276.  57.1  2.63  43.7  8.98  2.94  NA  
- 5 1998-02-23 00:00:00  6.89  237.  248.  56.7  4.99  28.8  9.79  2.57  NA  
- 6 1998-03-09 00:00:00  2.97  288.  160.  44.8  5.64  32.7  8.65  1.62  NA  
- 7 1998-03-23 00:00:00  4.87  192.  224.  53.6  5.52  35.9 10.2   2.34  NA  
- 8 1998-04-06 00:00:00  3.24  294.  144.  43.4 10.1   23.8  5.48  1.40  NA  
- 9 1998-04-20 00:00:00  4.38  195.  177.  47.6 10.5   31.4  5.54  1.73  NA  
-10 1998-05-04 00:00:00  3.97  285.  134.  45.5 10.2   38.6  5.49  1.41  24.6
-# ℹ 186 more rows
-# ℹ 2 more variables: rollingo3 &lt;dbl&gt;, n_o3 &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 196 × 10
+   date                   ws     wd   nox   no2    o3  pm10   so2    co  pm25
+   &lt;dttm&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 1997-12-29 00:00:00  6.98 204.    167.  41.4  4.63  29.3  4.47  2.17  NA  
+ 2 1998-01-12 00:00:00  4.91 207.    173.  42.1  4.70  28.8  5.07  1.86  NA  
+ 3 1998-01-26 00:00:00  2.78 330.    233.  51.4  2.30  34.9  8.07  2.45  NA  
+ 4 1998-02-09 00:00:00  4.43 216.    276.  57.1  2.63  43.7  8.98  2.94  NA  
+ 5 1998-02-23 00:00:00  6.89 243.    248.  56.7  4.99  28.8  9.79  2.57  NA  
+ 6 1998-03-09 00:00:00  2.97 309.    160.  44.8  5.64  32.7  8.65  1.62  NA  
+ 7 1998-03-23 00:00:00  4.87 185.    224.  53.6  5.52  35.9 10.2   2.34  NA  
+ 8 1998-04-06 00:00:00  3.24 306.    144.  43.4 10.1   23.8  5.48  1.40  NA  
+ 9 1998-04-20 00:00:00  4.38 199.    177.  47.6 10.5   31.4  5.54  1.73  NA  
+10 1998-05-04 00:00:00  3.97   4.23  134.  45.5 10.2   38.6  5.49  1.41  24.6
+# ℹ 186 more rows</code></pre>
 </div>
 </div>
 <p>Note that <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> has a <code>type</code> option to allow for the splitting of variables by a grouping variable. The most common use for <code>type</code> is when data are available for different sites and the averaging needs to be done on a per site basis. That being said, unlike other data utility functions, <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> will <em>warn</em> if there are duplicate dates in the input data frame but still allow the calculation to continue; occasionally averaging across multiple sites may be a legitimate thing to do (e.g., averaging across many low-cost air quality sensors to calculate a more accurate ‘consensus’ time series).</p>
@@ -1110,7 +1107,6 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 17
-# Groups:   site [2]
   site       date                   co   nox   no2    no    o3   so2  pm10 pm2.5
   &lt;fct&gt;      &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 London Ma… 2011-01-01 00:00:00 0.656 306.   97.2 137.   18.5  6.86  38.4  24.5
@@ -1129,7 +1125,6 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 18
-# Groups:   site, code [2]
   site       code  date                   co   nox   no2    no    o3   so2  pm10
   &lt;fct&gt;      &lt;fct&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 London N.… KC1   2011-01-01 00:00:00 0.225  53.8  36.1  11.6  39.4  2.06  23.7
@@ -1161,7 +1156,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"15 min"</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data15</span>, <span class="fl">20</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 12
+<pre><code># A tibble: 20 × 10
    date                   ws    wd   nox   no2    o3  pm10   so2    co  pm25
    &lt;dttm&gt;              &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
  1 1998-01-01 00:00:00  0.6    280   285    39     1    29  4.72  3.37    NA
@@ -1183,8 +1178,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 17 1998-01-01 04:00:00  2.4    180   468    78     2    34  8.07  8.91    NA
 18 1998-01-01 04:15:00  2.4    180   468    78     2    34  8.07  8.91    NA
 19 1998-01-01 04:30:00  2.4    180   468    78     2    34  8.07  8.91    NA
-20 1998-01-01 04:45:00  2.4    180   468    78     2    34  8.07  8.91    NA
-# ℹ 2 more variables: rollingo3 &lt;dbl&gt;, n_o3 &lt;int&gt;</code></pre>
+20 1998-01-01 04:45:00  2.4    180   468    78     2    34  8.07  8.91    NA</code></pre>
 </div>
 </div>
 <p>The <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> function can apply this function directly to make it very easy to plot data with different averaging times and statistics.</p>
@@ -1216,11 +1210,11 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 </section><section id="sec-corPlot" class="level2 page-columns page-full" data-number="26.9"><h2 data-number="26.9" class="anchored" data-anchor-id="sec-corPlot">
 <span class="header-section-number">26.9</span> Correlation matrices</h2>
-<p>Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a <em>correlation matrix</em>, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by <span class="citation" data-cites="friendly2002">(<a href="../references.html#ref-friendly2002" role="doc-biblioref">Friendly, 2002</a>)</span> and <span class="citation" data-cites="Sarkar2008">(<a href="../references.html#ref-Sarkar2008" role="doc-biblioref">Sarkar, 2007</a>)</span>.</p>
+<p>Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a <em>correlation matrix</em>, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by <span class="citation" data-cites="friendly2002">(<a href="../references.html#ref-friendly2002" role="doc-biblioref">Friendly 2002</a>)</span> and <span class="citation" data-cites="Sarkar2008">(<a href="../references.html#ref-Sarkar2008" role="doc-biblioref">Sarkar 2007</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-friendly2002" class="csl-entry" role="listitem">
-Friendly, M., 2002. <span class="nocase">Corrgrams: Exploratory Displays for Correlation Matrices</span>. The American Statistician 56, 316–325.
+Friendly, M. 2002. <span>“<span class="nocase">Corrgrams: Exploratory Displays for Correlation Matrices</span>.”</span> <em>The American Statistician</em> 56 (4): 316–25.
 </div><div id="ref-Sarkar2008" class="csl-entry" role="listitem">
-Sarkar, D., 2007. Lattice multivariate data visualization with <span>R</span>. Springer, New York.
+Sarkar, Deepayan. 2007. <em>Lattice Multivariate Data Visualization with <span>R</span></em>. New York: Springer.
 </div></div><p>The <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle — imagine a ‘fuzz’ of points with no relationship between them.</p>
 <p>With many variables it can be difficult to see relationships between variables i.e.&nbsp;which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if <code>cluster = TRUE</code>.)</p>
 <p>An example of the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.4</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.4</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
