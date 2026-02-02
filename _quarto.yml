@@ -83,7 +83,6 @@ book:
 bibliography: 
  - assets/bib/DCC-refs.bib
  - assets/bib/packages.bib
-csl: assets/bib/atmospheric-environment.csl
 
 execute: 
   warning: false
