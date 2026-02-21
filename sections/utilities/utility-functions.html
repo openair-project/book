@@ -643,9 +643,18 @@ div.csl-indent {
   <li><a href="#sec-rollingMean" id="toc-sec-rollingMean" class="nav-link" data-scroll-target="#sec-rollingMean"><span class="header-section-number">26.4</span> Calculating rolling means</a></li>
   <li><a href="#sec-rollingQuantile" id="toc-sec-rollingQuantile" class="nav-link" data-scroll-target="#sec-rollingQuantile"><span class="header-section-number">26.5</span> Calculating rolling quantiles (percentiles)</a></li>
   <li><a href="#sec-gauss-smooth" id="toc-sec-gauss-smooth" class="nav-link" data-scroll-target="#sec-gauss-smooth"><span class="header-section-number">26.6</span> Gaussian smoothing</a></li>
-  <li><a href="#sec-timeAverage" id="toc-sec-timeAverage" class="nav-link" data-scroll-target="#sec-timeAverage"><span class="header-section-number">26.7</span> Aggregating data by different time intervals</a></li>
-  <li><a href="#sec-calcPercentile" id="toc-sec-calcPercentile" class="nav-link" data-scroll-target="#sec-calcPercentile"><span class="header-section-number">26.8</span> Calculating percentiles</a></li>
-  <li><a href="#sec-corPlot" id="toc-sec-corPlot" class="nav-link" data-scroll-target="#sec-corPlot"><span class="header-section-number">26.9</span> Correlation matrices</a></li>
+  <li>
+<a href="#sec-whittaker" id="toc-sec-whittaker" class="nav-link" data-scroll-target="#sec-whittaker"><span class="header-section-number">26.7</span> Whittaker-Eilers smoothing</a>
+  <ul class="collapse">
+<li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">26.7.1</span> Background</a></li>
+  <li><a href="#standard-smoothing" id="toc-standard-smoothing" class="nav-link" data-scroll-target="#standard-smoothing"><span class="header-section-number">26.7.2</span> Standard smoothing</a></li>
+  <li><a href="#baseline-estimation" id="toc-baseline-estimation" class="nav-link" data-scroll-target="#baseline-estimation"><span class="header-section-number">26.7.3</span> Baseline estimation</a></li>
+  <li><a href="#comparison-with-rolling-low-quantiles" id="toc-comparison-with-rolling-low-quantiles" class="nav-link" data-scroll-target="#comparison-with-rolling-low-quantiles"><span class="header-section-number">26.7.4</span> Comparison with rolling low quantiles</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-timeAverage" id="toc-sec-timeAverage" class="nav-link" data-scroll-target="#sec-timeAverage"><span class="header-section-number">26.8</span> Aggregating data by different time intervals</a></li>
+  <li><a href="#sec-calcPercentile" id="toc-sec-calcPercentile" class="nav-link" data-scroll-target="#sec-calcPercentile"><span class="header-section-number">26.9</span> Calculating percentiles</a></li>
+  <li><a href="#sec-corPlot" id="toc-sec-corPlot" class="nav-link" data-scroll-target="#sec-corPlot"><span class="header-section-number">26.10</span> Correlation matrices</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -973,9 +982,10 @@ Figure&nbsp;26.2: Example of using the <code>rollingQuantile</code> function to 
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co"># reload the original data</span></span>
 <span></span>
 <span><span class="va">gauss_smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/GaussianSmooth.html">GaussianSmooth</a></span><span class="op">(</span></span>
-<span>    <span class="va">mydata</span>, </span>
-<span>    pollutant <span class="op">=</span> <span class="st">"no2"</span>, </span>
-<span>    sigma <span class="op">=</span> <span class="fl">744</span><span class="op">)</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  sigma <span class="op">=</span> <span class="fl">744</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># show the data</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">gauss_smooth</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -997,13 +1007,13 @@ $ n_no2      &lt;int&gt; 2149, 2150, 2151, 2152, 2153, 2154, 2155, 2156, 2157, 2
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot weekly means of orginal data and smoothed</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">gauss_smooth</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span>, </span>
-<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2"</span>, <span class="st">"smooth_no2"</span><span class="op">)</span>, </span>
-<span>    group <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>    lty <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"turquoise4"</span><span class="op">)</span>, </span>
-<span>    lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>    ylab <span class="op">=</span> <span class="st">"no2 (ug/m3)"</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">gauss_smooth</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2"</span>, <span class="st">"smooth_no2"</span><span class="op">)</span>,</span>
+<span>  group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"turquoise4"</span><span class="op">)</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"no2 (ug/m3)"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-gauss-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1016,8 +1026,106 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 </div>
 </div>
-</section><section id="sec-timeAverage" class="level2" data-number="26.7"><h2 data-number="26.7" class="anchored" data-anchor-id="sec-timeAverage">
-<span class="header-section-number">26.7</span> Aggregating data by different time intervals</h2>
+</section><section id="sec-whittaker" class="level2 page-columns page-full" data-number="26.7"><h2 data-number="26.7" class="anchored" data-anchor-id="sec-whittaker">
+<span class="header-section-number">26.7</span> Whittaker-Eilers smoothing</h2>
+<section id="background" class="level3 page-columns page-full" data-number="26.7.1"><h3 data-number="26.7.1" class="anchored" data-anchor-id="background">
+<span class="header-section-number">26.7.1</span> Background</h3>
+<p>The Whittaker-Eilers smoother <span class="citation" data-cites="eilers2003">(<a href="../references.html#ref-eilers2003" role="doc-biblioref">Eilers 2003</a>)</span> is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter <code>lambda</code> — larger values produce smoother results.</p>
+<div class="no-row-height column-margin column-container"></div><p>Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:</p>
+<ul>
+<li>It handles missing values (<code>NA</code>) naturally, interpolating across gaps without requiring imputation.</li>
+<li>It is computationally efficient even for long time series <span class="citation" data-cites="eilers2003">(<a href="../references.html#ref-eilers2003" role="doc-biblioref">Eilers 2003</a>)</span>.</li>
+<li>The order of the roughness penalty <code>d</code> can be varied: <code>d = 2</code> (the default) penalises curvature, <code>d = 1</code> penalises slope and effectively performs linear interpolation across gaps.</li>
+<li>The <code>lambda</code> parameter gives direct, intuitive control over the degree of smoothing.</li>
+</ul><div class="no-row-height column-margin column-container"><div id="ref-eilers2003" class="csl-entry" role="listitem">
+Eilers, Paul H. C. 2003. <span>“A Perfect Smoother.”</span> <em>Analytical Chemistry</em> 75 (14): 3631–36. <a href="https://doi.org/10.1021/ac034173t">https://doi.org/10.1021/ac034173t</a>.
+</div></div></section><section id="standard-smoothing" class="level3" data-number="26.7.2"><h3 data-number="26.7.2" class="anchored" data-anchor-id="standard-smoothing">
+<span class="header-section-number">26.7.2</span> Standard smoothing</h3>
+<p>The simplest use of <code><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth()</a></code> is to produce a smoothed version of a pollutant time series. In the example below, NO<sub>2</sub> concentrations are smoothed with <code>lambda = 20</code>. The function adds a new column <code>smooth_no2</code> to the data frame.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, lambda <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">mydata_smooth</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 65,533
+Columns: 11
+$ date       &lt;dttm&gt; 1998-01-01 00:00:00, 1998-01-01 01:00:00, 1998-01-01 02:00…
+$ ws         &lt;dbl&gt; 0.60, 2.16, 2.76, 2.16, 2.40, 3.00, 3.00, 3.00, 3.36, 3.96,…
+$ wd         &lt;int&gt; 280, 230, 190, 170, 180, 190, 140, 170, 170, 170, 180, 190,…
+$ nox        &lt;int&gt; 285, NA, NA, 493, 468, 264, 171, 195, 137, 113, 100, 109, 1…
+$ no2        &lt;int&gt; 39, NA, NA, 52, 78, 42, 38, 51, 42, 39, 34, 38, 41, 42, 49,…
+$ o3         &lt;int&gt; 1, NA, 3, 3, 2, 0, 0, 0, 1, 2, 7, 8, 9, 8, 9, 9, 12, 14, 16…
+$ pm10       &lt;int&gt; 29, 37, 34, 35, 34, 16, 11, 12, 12, 12, 10, 11, 13, 17, 20,…
+$ so2        &lt;dbl&gt; 4.7225, NA, 6.8300, 7.6625, 8.0700, 5.5050, 4.2300, 3.8750,…
+$ co         &lt;dbl&gt; 3.3725, NA, 9.6025, 10.2175, 8.9125, 3.0525, 2.2650, 1.9950…
+$ pm25       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ smooth_no2 &lt;dbl&gt; 46.57912, 48.82263, 50.68718, 51.79381, 51.76358, 50.22784,…</code></pre>
+</div>
+</div>
+<p><a href="#fig-whittaker-smooth" class="quarto-xref">Figure&nbsp;<span>26.4</span></a> shows the first 744 hours (approximately one month) of raw and smoothed NO<sub>2</sub> data. The Whittaker smoother closely tracks the data while removing short-term noise, making the underlying variation much easier to interpret.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_smooth</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">744</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"smooth_no2"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
+<span>    group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"steelblue"</span><span class="op">)</span>,</span>
+<span>    name.pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Whittaker smooth"</span>, <span class="st">"Raw NO2"</span><span class="op">)</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"NO2 (µg/m³)"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-whittaker-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-whittaker-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="utility-functions_files/figure-html/fig-whittaker-smooth-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;26.4: Whittaker-Eilers smoothed NO2 concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of mydata. Lambda was set to 20."><img src="utility-functions_files/figure-html/fig-whittaker-smooth-1.png" class="img-fluid figure-img" width="576"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whittaker-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;26.4: Whittaker-Eilers smoothed NO<sub>2</sub> concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of <code>mydata</code>. Lambda was set to 20.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>The <code>lambda</code> value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range <code>lambda = 1e6</code> to <code>lambda = 1e10</code> are often appropriate. If <code>lambda = NA</code>, Generalised Cross Validation (GCV) is used to choose <code>lambda</code> automatically, though this can be computationally expensive for large datasets.</p>
+</section><section id="baseline-estimation" class="level3" data-number="26.7.3"><h3 data-number="26.7.3" class="anchored" data-anchor-id="baseline-estimation">
+<span class="header-section-number">26.7.3</span> Baseline estimation</h3>
+<p>Beyond smoothing, <code><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth()</a></code> can be used for <em>baseline estimation</em> via Asymmetric Least Squares (ALS) by supplying the <code>p</code> argument. When <code>p</code> is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the <em>lower envelope</em> of the time series — the background or baseline — rather than the central tendency.</p>
+<p>The function returns two new columns:</p>
+<ul>
+<li>
+<code>&lt;pollutant&gt;_baseline</code>: the estimated background concentration.</li>
+<li>
+<code>&lt;pollutant&gt;_increment</code>: the difference between the observed concentration and the baseline, representing the local enhancement above background.</li>
+</ul>
+<p>This decomposition is particularly useful in air pollution studies, where it is common to want to separate a <em>background</em> component (e.g., regional or photochemical NO<sub>2</sub>) from local <em>increments</em> (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.</p>
+</section><section id="comparison-with-rolling-low-quantiles" class="level3" data-number="26.7.4"><h3 data-number="26.7.4" class="anchored" data-anchor-id="comparison-with-rolling-low-quantiles">
+<span class="header-section-number">26.7.4</span> Comparison with rolling low quantiles</h3>
+<p>A common alternative approach for estimating a background is to use a rolling low quantile (e.g., the 1st percentile over a sliding window). <a href="#fig-whittaker-baseline" class="quarto-xref">Figure&nbsp;<span>26.5</span></a> compares the Whittaker baseline with a 1st-percentile rolling quantile computed over a 50-hour window.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, lambda <span class="op">=</span> <span class="fl">20</span>, p <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingQuantile.html">rollingQuantile</a></span><span class="op">(</span>pollutant <span class="op">=</span> <span class="st">"no2"</span>, width <span class="op">=</span> <span class="fl">50</span>, probs <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2_baseline"</span>, <span class="st">"q_no2_0.01"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
+<span>    group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">0.4</span><span class="op">)</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"NO2 (µg/m3)"</span>,</span>
+<span>    cols <span class="op">=</span> <span class="st">"tol.bright"</span>,</span>
+<span>    name.pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Whittaker"</span>, <span class="st">"Rolling Quantile"</span>, <span class="st">"Raw NO2 data"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-whittaker-baseline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-whittaker-baseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="utility-functions_files/figure-html/fig-whittaker-baseline-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO2 data (green) for the first 1000 hours of mydata. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."><img src="utility-functions_files/figure-html/fig-whittaker-baseline-1.png" class="img-fluid figure-img" width="576"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whittaker-baseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO<sub>2</sub> data (green) for the first 1000 hours of <code>mydata</code>. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>As <a href="#fig-whittaker-baseline" class="quarto-xref">Figure&nbsp;<span>26.5</span></a> illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.</p>
+</section></section><section id="sec-timeAverage" class="level2" data-number="26.8"><h2 data-number="26.8" class="anchored" data-anchor-id="sec-timeAverage">
+<span class="header-section-number">26.8</span> Aggregating data by different time intervals</h2>
 <p>Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:</p>
 <ul>
 <li><p>Data sets may have different averaging periods and there is a need to combine them. For example, the task of combining an hourly air quality data set with a 15-minute average meteorological data set. The need here would be to aggregate the 15-minute data to 1-hour before merging.</p></li>
@@ -1031,7 +1139,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <p>All these issues are (hopefully) dealt with by the <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> function. The options are shown below, but as ever it is best to check the help that comes with the <span class="pkg">openair</span> package.</p>
 <p>To calculate daily means from hourly (or higher resolution) data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
 <span><span class="va">daily</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,731 × 10
@@ -1052,7 +1160,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 <p>Monthly 95th percentile values:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
 <span>  statistic <span class="op">=</span> <span class="st">"percentile"</span>,</span>
@@ -1078,7 +1186,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 <p>2-week averages but only calculate if at least 75% of the data are available:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>, data.thresh <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">twoweek</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"2 week"</span>, data.thresh <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="va">twoweek</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 196 × 10
@@ -1100,7 +1208,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 <p>Note that <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> has a <code>type</code> option to allow for the splitting of variables by a grouping variable. The most common use for <code>type</code> is when data are available for different sites and the averaging needs to be done on a per site basis. That being said, unlike other data utility functions, <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> will <em>warn</em> if there are duplicate dates in the input data frame but still allow the calculation to continue; occasionally averaging across multiple sites may be a legitimate thing to do (e.g., averaging across many low-cost air quality sensors to calculate a more accurate ‘consensus’ time series).</p>
 <p>First, retaining by site averages:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some data for two sites</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some data for two sites</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="st">"my1"</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2011</span><span class="op">:</span><span class="fl">2013</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># annual averages by site</span></span>
@@ -1121,7 +1229,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 <p>Retain site name and site code:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># can also retain site code</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># can also retain site code</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"code"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 18
@@ -1139,7 +1247,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 <p>Average all data across sites (drops site and code).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">dat</span>, avg.time <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 16
   date                   co   nox   no2    no    o3   so2  pm10 pm2.5   v10
@@ -1153,7 +1261,7 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 <p><code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> also works the other way in that it can be used to derive higher temporal resolution data e.g.&nbsp;hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code> function when used to ‘expand’ data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"15 min"</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"15 min"</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data15</span>, <span class="fl">20</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 10
@@ -1182,13 +1290,13 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 </div>
 </div>
 <p>The <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> function can apply this function directly to make it very easy to plot data with different averaging times and statistics.</p>
-</section><section id="sec-calcPercentile" class="level2" data-number="26.8"><h2 data-number="26.8" class="anchored" data-anchor-id="sec-calcPercentile">
-<span class="header-section-number">26.8</span> Calculating percentiles</h2>
-<p><code><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile()</a></code> makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds — see <a href="#sec-timeAverage" class="quarto-xref"><span>Section 26.7</span></a> for more details.</p>
+</section><section id="sec-calcPercentile" class="level2" data-number="26.9"><h2 data-number="26.9" class="anchored" data-anchor-id="sec-calcPercentile">
+<span class="header-section-number">26.9</span> Calculating percentiles</h2>
+<p><code><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile()</a></code> makes it straightforward to calculate percentiles for a single pollutant. It can take account of different averaging periods, data capture thresholds — see <a href="#sec-timeAverage" class="quarto-xref"><span>Section 26.8</span></a> for more details.</p>
 <p><code><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile()</a></code> shares many of its arguments with <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code>, such as <code>type</code>, <code>data.thresh</code>, <code>start.date</code>, and <code>end.date</code>. It also has the argument <code>prefix</code> to define how the columns it creates are labelled.</p>
 <p>For example, to calculate the 25, 50, 75 and 95th percentiles of O<sub>3</sub> concentration by year:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calcPercentile.html">calcPercentile</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  percentile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">95</span><span class="op">)</span>,</span>
@@ -1208,8 +1316,8 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 8 2005-01-01 00:00:00             3             7            16            28</code></pre>
 </div>
 </div>
-</section><section id="sec-corPlot" class="level2 page-columns page-full" data-number="26.9"><h2 data-number="26.9" class="anchored" data-anchor-id="sec-corPlot">
-<span class="header-section-number">26.9</span> Correlation matrices</h2>
+</section><section id="sec-corPlot" class="level2 page-columns page-full" data-number="26.10"><h2 data-number="26.10" class="anchored" data-anchor-id="sec-corPlot">
+<span class="header-section-number">26.10</span> Correlation matrices</h2>
 <p>Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a <em>correlation matrix</em>, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by <span class="citation" data-cites="friendly2002">(<a href="../references.html#ref-friendly2002" role="doc-biblioref">Friendly 2002</a>)</span> and <span class="citation" data-cites="Sarkar2008">(<a href="../references.html#ref-Sarkar2008" role="doc-biblioref">Sarkar 2007</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-friendly2002" class="csl-entry" role="listitem">
 Friendly, M. 2002. <span>“<span class="nocase">Corrgrams: Exploratory Displays for Correlation Matrices</span>.”</span> <em>The American Statistician</em> 56 (4): 316–25.
@@ -1217,27 +1325,27 @@ Friendly, M. 2002. <span>“<span class="nocase">Corrgrams: Exploratory Displays
 Sarkar, Deepayan. 2007. <em>Lattice Multivariate Data Visualization with <span>R</span></em>. New York: Springer.
 </div></div><p>The <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle — imagine a ‘fuzz’ of points with no relationship between them.</p>
 <p>With many variables it can be difficult to see relationships between variables i.e.&nbsp;which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if <code>cluster = TRUE</code>.)</p>
-<p>An example of the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.4</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.4</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
+<p>An example of the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.6</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.6</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, dendrogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-corPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-corPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;26.4: Example of a correlation matrix showing the relationships between variables."><img src="utility-functions_files/figure-html/fig-corPlot-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="utility-functions_files/figure-html/fig-corPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;26.6: Example of a correlation matrix showing the relationships between variables."><img src="utility-functions_files/figure-html/fig-corPlot-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;26.4: Example of a correlation matrix showing the relationships between variables.
+Figure&nbsp;26.6: Example of a correlation matrix showing the relationships between variables.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Note also that the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> accepts a <code>type</code> option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"season"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>When there are a very large number of variables present, the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2005</span>, hc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## now it is possible to see the hydrocarbons that behave most</span></span>
 <span><span class="co">## similarly to one another</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
