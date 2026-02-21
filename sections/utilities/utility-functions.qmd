@@ -272,7 +272,7 @@ timePlot(
 
 ### Background
 
-The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` --- larger values produce smoother results.
+The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` — larger values produce smoother results.
 
 Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:
 
@@ -315,7 +315,7 @@ The `lambda` value can be increased substantially for longer time series spannin
 
 ### Baseline estimation
 
-Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series --- the background or baseline --- rather than the central tendency.
+Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series — the background or baseline — rather than the central tendency.
 
 The function returns two new columns:
 
