@@ -248,24 +248,105 @@ It should be noted `GassianSmooth` will work with any time series data e.g. at 1
 data(mydata) # reload the original data
 
 gauss_smooth <- GaussianSmooth(
-    mydata, 
-    pollutant = "no2", 
-    sigma = 744)
+  mydata,
+  pollutant = "no2",
+  sigma = 744
+)
 
 # show the data
 dplyr::glimpse(gauss_smooth)
 
 # plot weekly means of orginal data and smoothed
 timePlot(
-    timeAverage(gauss_smooth, avg.time = "week"), 
-    pollutant = c("no2", "smooth_no2"), 
-    group = TRUE, 
-    lty = 1, 
-    cols = c("tomato", "turquoise4"), 
-    lwd = c(1, 3),
-    ylab = "no2 (ug/m3)"
+  timeAverage(gauss_smooth, avg.time = "week"),
+  pollutant = c("no2", "smooth_no2"),
+  group = TRUE,
+  lty = 1,
+  cols = c("tomato", "turquoise4"),
+  lwd = c(1, 3),
+  ylab = "no2 (ug/m3)"
 )
 ```
+
+## Whittaker-Eilers smoothing {#sec-whittaker}
+
+### Background
+
+The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` --- larger values produce smoother results.
+
+Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:
+
+-   It handles missing values (`NA`) naturally, interpolating across gaps without requiring imputation.
+-   It is computationally efficient even for long time series [@eilers2003].
+-   The order of the roughness penalty `d` can be varied: `d = 2` (the default) penalises curvature, `d = 1` penalises slope and effectively performs linear interpolation across gaps.
+-   The `lambda` parameter gives direct, intuitive control over the degree of smoothing.
+
+### Standard smoothing
+
+The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 20`. The function adds a new column `smooth_no2` to the data frame.
+
+```{r}
+#| label: whittaker-smooth
+mydata_smooth <- WhittakerSmooth(mydata, pollutant = "no2", lambda = 20)
+dplyr::glimpse(mydata_smooth)
+```
+
+@fig-whittaker-smooth shows the first 744 hours (approximately one month) of raw and smoothed NO~2~ data. The Whittaker smoother closely tracks the data while removing short-term noise, making the underlying variation much easier to interpret.
+
+```{r}
+#| label: fig-whittaker-smooth
+#| fig-cap: "Whittaker-Eilers smoothed NO~2~ concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of `mydata`. Lambda was set to 20."
+#| fig-width: 6
+#| fig-height: 4
+mydata_smooth |>
+  slice_head(n = 744) |>
+  timePlot(
+    pollutant = c("smooth_no2", "no2"),
+    group = TRUE,
+    lty = 1,
+    lwd = c(2, 0.3),
+    cols = c("tomato", "steelblue"),
+    name.pol = c("Whittaker smooth", "Raw NO2"),
+    ylab = "NO2 (µg/m³)"
+  )
+```
+
+The `lambda` value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range `lambda = 1e6` to `lambda = 1e10` are often appropriate. If `lambda = NA`, Generalised Cross Validation (GCV) is used to choose `lambda` automatically, though this can be computationally expensive for large datasets.
+
+### Baseline estimation
+
+Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series --- the background or baseline --- rather than the central tendency.
+
+The function returns two new columns:
+
+-   `<pollutant>_baseline`: the estimated background concentration.
+-   `<pollutant>_increment`: the difference between the observed concentration and the baseline, representing the local enhancement above background.
+
+This decomposition is particularly useful in air pollution studies, where it is common to want to separate a *background* component (e.g., regional or photochemical NO~2~) from local *increments* (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.
+
+### Comparison with rolling low quantiles
+
+A common alternative approach for estimating a background is to use a rolling low quantile (e.g., the 1st percentile over a sliding window). @fig-whittaker-baseline compares the Whittaker baseline with a 1st-percentile rolling quantile computed over a 50-hour window.
+
+```{r}
+#| label: fig-whittaker-baseline
+#| fig-cap: "Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO~2~ data (green) for the first 1000 hours of `mydata`. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."
+#| fig-width: 6
+#| fig-height: 4
+WhittakerSmooth(mydata, pollutant = "no2", lambda = 20, p = 0.001) |>
+  rollingQuantile(pollutant = "no2", width = 50, probs = 0.01) |>
+  slice_head(n = 1000) |>
+  timePlot(
+    pollutant = c("no2_baseline", "q_no2_0.01", "no2"),
+    group = TRUE,
+    lwd = c(2, 2, 0.4),
+    ylab = "NO2 (µg/m3)",
+    cols = "tol.bright",
+    name.pol = c("Whittaker", "Rolling Quantile", "Raw NO2 data")
+  )
+```
+
+As @fig-whittaker-baseline illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
