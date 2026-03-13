@@ -19,7 +19,7 @@ library(tidyverse)
 
 ```{r}
 #| label: showModData
-load("../../assets/data/modelData.RData")
+load(url("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/modelData.RData"))
 head(modTest)
 ```
 

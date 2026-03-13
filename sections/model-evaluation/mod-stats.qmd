@@ -142,7 +142,7 @@ Data have been assembled from a Defra model evaluation exercise which consists o
 
 ```{r}
 #| label: showModData
-load("../../assets/data/modelData.RData")
+load(url("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/modelData.RData"))
 head(modTest)
 ```
 
