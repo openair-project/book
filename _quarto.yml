@@ -75,7 +75,7 @@ book:
         - sections/utilities/scatter-plot.qmd
     - sections/references.qmd
   appendices:
-   - sections/appendices/appendix-annotate.qmd
+#   - sections/appendices/appendix-annotate.qmd
    - sections/appendices/appendix-hysplit.qmd
    - sections/appendices/appendix-trends.qmd
    - sections/appendices/appendix-gethelp.qmd

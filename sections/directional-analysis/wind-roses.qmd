@@ -58,7 +58,7 @@ The function is very simply called as shown for @fig-windroseBasic.
 ```{r}
 #| label: fig-windroseBasic
 #| fig-cap: Use of `windRose` function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies.
-#| fig-width: 5
+#| fig-width: 4
 #| fig-height: 5
 #| out-width: 60%
 windRose(mydata)
@@ -74,8 +74,13 @@ of how wind speed and direction vary seasonally.
 #| label: fig-windRoseyear
 #| fig-cap: Use of `windRose` function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies.
 #| fig-width: 8
-#| fig-height: 5
-windRose(mydata, type = "year", layout = c(4, 2))
+#| fig-height: 6
+windRose(
+  mydata,
+  type = "year",
+  layout = c(4, 2),
+  width = 0.5
+)
 ```
 
 The `type` option is very flexible in [openair]{.pkg} and can be used to
@@ -100,8 +105,8 @@ pollutant. Furthermore, the `type` option is available in almost all
 ```{r}
 #| label: fig-windRsPM10
 #| fig-cap: Wind rose for four different levels of PM~10~ concentration. The levels are defined as the four *quantiles* of PM~10~ concentration and the ranges are shown on each of the plot labels.
-#| fig-width: 10
-#| fig-height: 4
+#| fig-width: 11
+#| fig-height: 5
 windRose(mydata, type = "pm10", layout = c(4, 1))
 ```
 
@@ -160,7 +165,8 @@ relatively high NO~x~ background @fig-pollRoseNOxO2.
 #| fig-cap: NO~x~ pollution rose conditioned by SO~2~ concentration.
 #| fig-width: 10
 #| fig-height: 5
-pollutionRose(mydata,
+pollutionRose(
+  mydata,
   pollutant = "nox",
   type = "so2",
   layout = c(4, 1),
@@ -189,7 +195,11 @@ the overall mean concentrations.
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-pollutionRose(mydata, pollutant = "nox", statistic = "prop.mean")
+pollutionRose(
+  mydata,
+  pollutant = "nox",
+  statistic = "prop.mean"
+)
 ```
 
 It is sometimes useful to more clearly understand the contributions from
@@ -218,7 +228,8 @@ from the east occur with a low frequency.
 #| fig-width: 5
 #| fig-height: 4
 #| out-width: 60%
-pollutionRose(mydata,
+pollutionRose(
+  mydata,
   pollutant = "so2",
   normalise = TRUE,
   seg = 1,
@@ -275,7 +286,8 @@ whether there are biases between nighttime and daytime conditions.
 #| out-width: 50%
 ## $example of comparing 2 met sites
 ## first we will make some new ws/wd data with a postive bias
-mydata <- mutate(mydata,
+mydata <- mutate(
+  mydata,
   ws2 = ws + 2 * rnorm(nrow(mydata)) + 1,
   wd2 = wd + 30 * rnorm(nrow(mydata)) + 30
 )
@@ -285,12 +297,7 @@ id <- which(mydata$wd2 < 0)
 mydata$wd2[id] <- mydata$wd2[id] + 360
 
 ## results show postive bias in wd and ws
-pollutionRose(mydata,
-  ws = "ws",
-  wd = "wd",
-  ws2 = "ws2",
-  wd2 = "wd2"
-)
+pollutionRose(mydata, ws = "ws", wd = "wd", ws2 = "ws2", wd2 = "wd2")
 ```
 
 An example of using user-supplied breaks is shown in @fig-pollRoseComp2.
@@ -309,8 +316,12 @@ mydata$wd2[id] <- mydata$wd[id] + 30 * rnorm(length(id)) + 120
 id <- which(mydata$wd2 < 0)
 mydata$wd2[id] <- mydata$wd2[id] + 360
 
-pollutionRose(mydata,
-  ws = "ws", wd = "wd", ws2 = "ws2", wd2 = "wd2",
+pollutionRose(
+  mydata,
+  ws = "ws",
+  wd = "wd",
+  ws2 = "ws2",
+  wd2 = "wd2",
   breaks = c(-11, -2, -1, -0.5, 0.5, 1, 2, 11),
   cols = c("dodgerblue4", "white", "firebrick"),
   type = "daylight"
