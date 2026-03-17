@@ -9,19 +9,15 @@ abstract: Meteorological data is key to understanding air quality measurements. 
 
 Most of the import functions described in @sec-importUKAQ return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that Ricardo runs to provide the data.
 
-Alternatively it may be advantageous to use surface measurements. [worldmet]{.pkg} provides an easy way in which to access surface meteorological data from \>30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <https://github.com/openair-project/worldmet> and <https://www.ncdc.noaa.gov/isd> for further information.
+Alternatively it may be advantageous to use surface measurements. [worldmet]{.pkg} provides an easy way in which to access surface meteorological data from \>30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <https://github.com/openair-project/worldmet> and <https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly> for further information.
 
-Access to surface meteorological data is very useful in general but is especially useful when using [openair]{.pkg} and functions such as `polarPlot`. To install the package, type:
+Access to surface meteorological data is very useful in general but is especially useful when using [openair]{.pkg} and functions such as `polarPlot()`. To install the package, type:
 
 ```{r}
 #| label: install_worldmet
 #| eval: false
 install.packages("worldmet")
 ```
-
-There are two main functions in the package: `getMeta` and `importNOAA`. The former helps the user find meteorological sites by name, country and proximity to a location based on the latitude and longitude. `getMeta` will also return a code that can be supplied to `importNOAA`, which then imports the data.
-
-Probably the most common use of `getMeta` is to search around a location of interest based on its latitude and longitude. First we will load the [worldmet]{.pkg} (and other packages we use later):
 
 ```{r}
 #| label: pkg
@@ -30,29 +26,28 @@ library(openair)
 library(tidyverse)
 ```
 
-As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3)[^access-met-data-1]:
-
-[^access-met-data-1]: Note that `returnMap` was only used to display the map in this document and would not normally be needed.
+To learn which monitoring stations are available, the `import_ghcn_stations()` function is provided. By default, this function returns all data as a `data.frame`, but can usefully also return it as a map using `return = "map"`. As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3).
 
 ```{r}
 #| label: fig-worldmet
+#| warning: false
 #| fig-cap: Map of returned area of interest. The user can interactively select a site of interest and find its code to import data.
-getMeta(lat = 53.3, lon = -6.3, returnMap = TRUE)
+import_ghcn_stations(lat = 53.3, lng = -6.3, return = "map")
 ```
 
-Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code i.e.
+Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code.
 
 ```{r}
 #| label: getMeta-map
 #| eval: false
-getMeta()
+import_ghcn_stations(return = "map")
 ```
 
 We can use the map that is produced to select a site of interest and import the data. For example, to import data for Dublin Airport and look at some of the data:
 
 ```{r}
 #| label: dublin
-dublin_met <- importNOAA(code = "039690-99999", year = 2019)
+dublin_met <- import_ghcn_hourly("EII0000EIDW", year = 2019)
 
 # first few lines of data
 dublin_met
@@ -75,20 +70,30 @@ Having imported some meteorological data it will often be necessary to combine i
 
 ```{r}
 #| label: linkaqmet
+
 # import some air quality data and check the variables that exist
+# `meteo = FALSE` does not import the modelled met data
+aq_2019 <- importUKAQ(site = "kc1", year = 2019, meteo = FALSE)
+names(aq_2019)
 
-aq_2019 <- importUKAQ(site = "kc1", year = 2019)
-names(aq_2019) # ws, wd, air_temp already exist from WRF model
+# import some met data from London City Airport
+met_2019 <- import_ghcn_hourly("UKI0000EGLC", year = 2019)
 
-# import some met data - default is London Heathrow
-met_2019 <- importNOAA(year = 2019)
-
-# merge the two data sets but not ws, wd, air_temp from aq data
+# join the two datasets, selecting a sample of the met data
 aq_met <- left_join(
-  select(aq_2019, -ws, -wd, -air_temp),
-  met_2019,
+  aq_2019,
+  select(met_2019, date, ws, wd, air_temp),
   by = "date"
 )
 
 names(aq_met)
 ```
+
+With joined data, we can now create `openair` plots using measured meteorological data. For example, `polarPlot()` requires both air quality *and* meteorological data in one `data.frame`:
+
+```{r}
+#| label: fig-polarplot-citymet
+#| fig-cap: A `polarPlot()` created using measured met data from London City Airport.
+polarPlot(aq_met)
+```
+
