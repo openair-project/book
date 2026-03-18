@@ -24,7 +24,9 @@ angle and wind speed range.
 The `windRose` function also calculates the percentage of 'calms' i.e.
 when the wind speed is zero. UK Met Office data assigns these periods to
 0 degrees wind direction with valid northerly winds being assigned to
-360$^\circ$. The option `calm.thresh` can be used to assign calms to non-zero wind speeds. For example `calm.thresh = 0.5` will assign wind speeds *below* 0.5 as calm.
+360$^\circ$. The option `calm.thresh` can be used to assign calms to
+non-zero wind speeds. For example `calm.thresh = 0.5` will assign wind
+speeds *below* 0.5 as calm.
 
 The `windRose` function will also correct for bias when wind directions
 are rounded to the nearest 10 degrees but are displayed at angles that
@@ -239,91 +241,89 @@ pollutionRose(
 
 ## Comparing two meteorological data sets {#sec-comp-met}
 
-The `pollutionRose` function is also useful for comparing two
-meteorological data sets. In this case a 'reference' data set is
-compared with a second data set. There are many reasons for doing so
-e.g. to see how one site compares with another or for meteorological
-model evaluation (more on that in later sections). In this case, `ws`
-and `wd` are considered to the the reference data sets with which a
-second set of wind speed and wind directions are to be compared (`ws2`
-and `wd2`). The first set of values is subtracted from the second and
-the differences compared. If for example, `wd2` was biased positive
-compared with `wd` then `pollutionRose` will show the bias in polar
-coordinates. In its default use, wind direction bias is colour-coded to
-show negative bias in one colour and positive bias in another.
+The `windRose` function is also useful for comparing two meteorological
+data sets. In this case a 'reference' data set is compared with a second
+data set. There are many reasons for doing so e.g. to see how one site
+compares with another or for meteorological model evaluation (more on
+that in later sections). In this case, `ws` and `wd` are considered to
+the the reference data sets with which a second set of wind speed and
+wind directions are to be compared (`ws2` and `wd2`).
 
-Note that this plot is mostly aimed at showing wind direction biases. It
-does also show the wind speed bias *but only if there is a wind
-direction bias also*. However, in most practical situations the plot
-should show both wind speed and direction biases together. An example of
-a situation where no wind speed bias would be shown would be for
-westerly winds where there was absolutely no bias between two data sets
-in terms of westerly wind direction but there was a difference in wind
-speed. Users should be aware of this limitation.
-
-In the next example, some artificial wind direction data are generated
-by adding a positive bias of 30\~degrees with some normally distributed
-scatter. Also, the wind speed data are given a positive bias. The
-results are shown in @fig-pollRoseComp. The Figure clearly shows the
-mean positive bias in wind direction i.e. the direction is displaced
-from north (no bias). The colour scale also shows the extent to which
-wind speeds are biased i.e. there is a higher proportion of positively
-biased wind speeds shown by the red colour compared with the negatively
-biased shown in blue. Also shown in @fig-pollRoseComp is the mean wind
-speed and direction bias as numerical values.
-
-Note that the `type` option can be used in @fig-pollRoseComp e.g.
-`type = "month"` to split the analysis in useful ways. This is useful if
-one wanted to see whether a site or the output from a model was biased
-for different periods. For example, `type = "daylight"` would show
-whether there are biases between nighttime and daytime conditions.
+In the next example, data from two data sets from 2024 are imported over
+the Internet. The first is hourly data for a site in London and the
+second is hourly data for a site in Yorkshire. The data are then joined
+together by date to create a single data frame with the two sets of wind
+speed and wind direction data. A more realistic example might be to
+compare a modelled data set with a reference data set, but the principle
+is the same. Such data can be imported using the `{worldmet}` package,
+as described in @sec-worldmet.
 
 ```{r}
-#| label: fig-pollRoseComp
-#| fig-cap: Pollution rose showing the difference between two  meteorological data sets. The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 50%
-## $example of comparing 2 met sites
-## first we will make some new ws/wd data with a postive bias
-mydata <- mutate(
-  mydata,
-  ws2 = ws + 2 * rnorm(nrow(mydata)) + 1,
-  wd2 = wd + 30 * rnorm(nrow(mydata)) + 30
+#| label: fig-imprtMet
+## example of comparing 2 met sites
+
+# london met data
+london_met <- readr::read_rds(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_met.rds"
 )
 
-## need to correct negative wd
-id <- which(mydata$wd2 < 0)
-mydata$wd2[id] <- mydata$wd2[id] + 360
+# data from yorkshire
+yorks_met <- readr::read_rds(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/yorkshire_met.rds"
+)
 
-## results show postive bias in wd and ws
-pollutionRose(mydata, ws = "ws", wd = "wd", ws2 = "ws2", wd2 = "wd2")
+# combine into one data frame and change names - only select ws, wd and date
+met_compare <- inner_join(
+  select(london_met, date, ws, wd),
+  select(yorks_met, date, ws, wd),
+  suffix = c("_lon", "_yor"),
+  by = "date"
+)
 ```
 
-An example of using user-supplied breaks is shown in @fig-pollRoseComp2.
-In this case six intervals are chosen including one that spans -0.5 to
-+0.5 that is useful to show wind speeds that do not change.
+The `windRose` function can then be used to compare the two data sets.
+In this case, the plot shown in @fig-windComp shows the difference
+between the two data sets with respect to the reference data set (in
+this case, the London site). The colours show whether the second data
+set (Yorkshire) tends to be positively or negatively biased with respect
+to the reference data set (London). It shows for example:
+
+-  Wind speeds at the Yorkshire site tend to be higher than at London for wind directions from the north-west and south-east, shown by the red colouring in @fig-windComp.
+
+-  There are slightly slow wind speeds at the Yorkshire site whne the winds are from the WSW, shown by the blue colouring in @fig-windComp.
+
+-  There is a slight bias in the wind direction of -4.3 degrees at the Yorkshire site — shown by both the arrow on the plot and the text.
 
 ```{r}
-#| label: fig-pollRoseComp2
-#| fig-cap: Pollution rose showing the difference between two meteorological data sets. The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. In this case the example shows how to use user-defined breaks and split the data by day/night for a latitude assumed to be London.
+#| label: fig-windComp
+#| fig-cap: Wind rose showing the difference between two meteorological data sets. The first (London) is used to compare against the second (Yorkshire). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrow shows the mean bias in wind direction and the text shows the value of that bias.
+#| fig-width: 4.5
+#| fig-height: 5.5
+#| out-width: 75%
+windRose(
+  met_compare,
+  ws = "ws_lon",
+  wd = "wd_lon",
+  ws2 = "ws_yor",
+  wd2 = "wd_yor"
+)
+```
+
+Like other [openair]{.pkg} functions, the `type` option can be used to compare the two data sets by other variables, as shown in @fig-windCompSeason for seasonal differences.
+
+```{r}
+#| label: fig-windCompSeason
+#| fig-cap: Wind rose showing the difference between two meteorological data sets by season. The first (London) is used to compare against the second (Yorkshire). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows shows the mean bias in wind direction and the text shows the value of that bias.
 #| fig-width: 8
-#| fig-height: 5
-#| out-width: 80%
-## add some wd bias to some nighttime hours
-id <- which(as.numeric(format(mydata$date, "%H")) %in% c(23, 1, 2, 3, 4, 5))
-mydata$wd2[id] <- mydata$wd[id] + 30 * rnorm(length(id)) + 120
-id <- which(mydata$wd2 < 0)
-mydata$wd2[id] <- mydata$wd2[id] + 360
-
-pollutionRose(
-  mydata,
-  ws = "ws",
-  wd = "wd",
-  ws2 = "ws2",
-  wd2 = "wd2",
-  breaks = c(-11, -2, -1, -0.5, 0.5, 1, 2, 11),
-  cols = c("dodgerblue4", "white", "firebrick"),
-  type = "daylight"
+#| fig-height: 9
+#| out-width: 90%
+windRose(
+  met_compare,
+  ws = "ws_lon",
+  wd = "wd_lon",
+  ws2 = "ws_yor",
+  wd2 = "wd_yor",
+  type = "season"
 )
 ```
+
