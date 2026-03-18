@@ -1,512 +1,475 @@
 ---
-author: David Carslaw
+author: Jack Davison
+execute: 
+  warning: false
+  error: false
+  message: false
 ---
 
-# Annotating openair plots {#sec-annotating-openair}
+# Customising openair plots {#sec-annotating-openair}
 
-A frequently asked question about [openair]{.pkg} and requested feature is how to annotate plots. While all [openair]{.pkg} functions could have options to allow annotations to be made, this would make the functions cumbersome and reduce flexibility. Nevertheless, it is useful to be able to annotate plots in lots of different ways. Fortunately there are existing functions in packages such as [lattice]{.pkg} and [latticeExtra]{.pkg} that allow for plots to be updated. An example of the sorts of annotation that are possible is shown in @fig-timePlotAnnotate, which is an enhanced version of a `timePlot` Figure. These annotations have been subsequently added to a basic plot and built up in layers. This section considers how to annotate [openair]{.pkg} plots more generally and uses @fig-timePlotAnnotate as an example of the types of annotation possible. Also considered specifically is the annotation of plots that are in polar coordinates, as these can sometimes benefit from different types of annotation.
+A frequently asked question about [openair]{.pkg} and a commonly requested feature is how to annotate plots. Since all [openair]{.pkg} functions now return [ggplot2]{.pkg} objects, users have considerably more flexibility in adding annotations using the extensive set of tools available in [ggplot2]{.pkg} and its extensions. Embedding annotation options directly inside every [openair]{.pkg} function would make them unnecessarily complex and still not cover every customisation users may want. Instead, because plots are returned as standard [ggplot2]{.pkg} objects, users can build annotations incrementally, adding layers as needed.
 
-There are several types of objects that can be useful to add to plots including text, shapes, lines and other shading. Given that many [openair]{.pkg} plots can consist of multiple panels, it is also useful to think about how to annotate specific panels. The examples given in this section will apply to all [openair]{.pkg} plot, the only difference being the coordinate system used in each case.
+There are several types of annotation that can be useful, including text, shapes, lines, and shading. Because many [openair]{.pkg} plots consist of multiple facets, it is also important to understand how to target specific panels when adding annotations. The approaches described here apply broadly to all [openair]{.pkg} plots - the only differences concern the coordinate system used.
 
-The basis of [openair]{.pkg} annotations is through the use of the [latticeExtra]{.pkg} package, which should already be installed as part of [openair]{.pkg}. In that package there is a function called `layer` that effectively allows annotations to be built up 'layer by layer'.
+The foundation of annotation in the new [openair]{.pkg} is the [ggplot2]{.pkg} layering system. Annotations can be added with standard geoms such as `ggplot2::geom_text()`, `ggplot2::geom_label()`, `ggplot2::geom_rect()`, `ggplot2::geom_segment()`, or using helper functions like ``ggplot2::annotate()`. Since the output is a normal ggplot object, users can modify it by adding layers with the `+` operator, adjusting scales, or adding specialised annotation layers from packages such as [ggrepel]{.pkg}, [ggforce]{.pkg}, or [patchwork]{.pkg} for more complex layouts.
+
+One quirk of [openair]{.pkg} to be aware of is that plotting functions do not return a *plot*, they return an *openair object* which contains the plot, the plot data, and the function call. One tip is to use `plot = FALSE`, which tells the function to not print the plot at time of object creation.
 
 ```{r}
-#| label: fig-timePlotAnnotate
-#| fig-cap: Annotations added to the `timePlot`.
-#| fig-keep: last
-#| echo: false
-#| fig-height: 8
-#| fig-width: 10
+#| label: create-scatter-object
+#| output: false
 library(openair)
-library(lubridate)
-poly.na <- function(x1, y1, x2, y2, col = "black", alpha = 0.2) {
-  for (i in seq(2, length(x1))) {
-    if (!any(is.na(y2[c(i - 1, i)]))) {
-      lpolygon(c(x1[i - 1], x1[i], x2[i], x2[i - 1]),
-        c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
-        col = col, border = NA, alpha = alpha
-      )
-    }
-  }
-}
 
+scatter_object <- scatterPlot(
+  mydata,
+  x = "no2",
+  y = "nox",
+  avg.time = "month",
+  plot = FALSE
+)
 
-library(latticeExtra)
+# extract data
+scatter_object$data
 
-## multi-panel time plot
-plt <- timePlot(selectByDate(mydata, year = 2003, month = 8),
-  pollutant = c("nox", "o3", "pm25", "pm10", "ws"), y.relation = "free"
+# extract plot
+scatter_object$plot
+```
+
+ To make life easier, lets load the [ggplot2]{.pkg} package:
+
+```{r}
+#| label: load-ggplot2
+#| output: false
+library(ggplot2)
+```
+
+A good introduction to tweaking plots is using `labs()` to change the axis labels. With `ggplot2` you simply add (with `+`) new layers. Feel free to use `quickText()` directly here too for automatic formatting.
+
+```{r}
+#| label: fig-scatter-plot-labs
+#| fig-cap: "Using `labs()` to change axis labels and title."
+scatter_object$plot +
+  labs(
+    x = quickText("NO2 (ug/m3)"),
+    y = quickText("NOx (ug/m3)"),
+    title = "Scatter Plot",
+    subtitle = quickText("Monthly NOx roughly correlates with NO2")
+  )
+```
+
+## Annotations
+
+### Adding text
+
+To add text, use `ggplot2::annotate()` with `geom = "text"` and specify the coordinates, colour and label. In this example, the text 'This is high!' is added to the right of the plot at a y-value of 300.
+
+```{r}
+#| label: fig-scatter-plot-annotate-text
+#| fig-cap: "Adding text annotations with `annotate()`."
+scatter_object$plot +
+  annotate(
+    geom = "text",
+    x = 48.5,
+    y = 300,
+    colour = "blue",
+    label = "This is high!"
+  )
+```
+
+### Adding a shaded area
+
+For a shaded area, use `geom = "rect"` and specify the coordinates of the rectangle. In this example, a semi-transparent orange rectangle is added to highlight a region of interest. Note that the `alpha` parameter controls the transparency of the rectangle, with values closer to 0 being more transparent and values closer to 1 being more opaque. We also use `fill` over `colour` to specify the fill colour of the rectangle; `colour` could be used to specify the border colour if desired.
+
+```{r}
+#| label: fig-scatter-plot-annotate-rect
+#| fig-cap: "Adding a shaded area with `annotate()`."
+scatter_object$plot +
+  annotate(
+    geom = "rect",
+    xmin = 40,
+    xmax = 50,
+    ymin = 100,
+    ymax = 200,
+    fill = "orange",
+    alpha = 0.5
+  ) +
+  annotate(
+    geom = "text",
+    x = 45,
+    y = 150,
+    color = "orange4",
+    fontface = "bold",
+    label = "Look at this!"
+  )
+```
+
+### Adding an arrow
+
+To add an arrow, use `geom = "segment"` and specify the coordinates of the start and end points, along with the `arrow` parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that `arrow(ends = "both")` creates arrowheads at both ends of the segment, and `linewidth` controls the thickness of the arrow line. The `arrow()` function also has additional parameters such as `angle` and `length` to further customize the appearance of the arrowheads.
+
+```{r}
+#| label: fig-scatter-plot-annotate-arrow
+#| fig-cap: "Adding an arrow with `annotate()`."
+scatter_object$plot +
+  annotate(
+    geom = "path",
+    x = c(40, 60),
+    y = c(150, 250),
+    linewidth = 1,
+    arrow = arrow(ends = "both")
+  )
+```
+
+### Highlight a specific point
+
+To highlight a point, you can use `geom = "point"` and specify the coordinates of the point you want to highlight. For example, to highlight the point with the maximum NO~2~ concentration, you can first extract that point from the data and then add it as an annotation. Note that different [openair]{.pkg} plots will have different `data` structures, so explore what's available for your specific plot of interest.
+
+```{r}
+#| label: fig-scatter-plot-annotate-point
+#| fig-cap: "Highlighting a specific point with `annotate()`."
+
+# can extract a specific point from the scatterplot data
+max_no2_point <-
+  scatter_object$data[scatter_object$data$no2 == max(scatter_object$data$no2), ]
+
+# add this as an annotation
+scatter_object$plot +
+  annotate(
+    geom = "point",
+    x = max_no2_point$no2,
+    y = max_no2_point$nox,
+    size = 5,
+    shape = 1
+  )
+
+```
+
+### Add a reference line
+
+To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `lty` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the color of the line.
+
+In this case, we set `x = I(0.01)`. The `I()` function tells `ggplot2` to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different `timePlot()` plots with different x-axis scales - `x = I(0.01)` will *always* mean "nudged a little bit from the far left of the plot".
+
+```{r}
+#| label: fig-scatter-plot-annotate-hline
+#| fig-cap: "Adding a reference line with `geom_hline()` and annotating it."
+scatter_object$plot +
+  geom_hline(
+    yintercept = 200,
+    lty = 2,
+    color = "purple"
+  ) +
+  annotate(
+    geom = "text",
+    y = 205,
+    x = I(0.01),
+    vjust = 0,
+    hjust = 0,
+    label = "Limit",
+    color = "purple"
+  )
+```
+
+### Working with dates
+
+Working with dates (e.g., for plots like `timePlot()`) is a step more challenging, but is mostly identical to what has already been covered. `ISOdate()` is convenient way to create date(times) in R to plug into `annotate()` and similar functions. In this example, we add a vertical dashed line at a specific date (June 1, 2002) along with an annotation to label. The `xintercept` parameter specifies the position of the vertical line, and the `annotate()` function is used to add text at a specific date and y-value. The `hjust` and `vjust` parameters control the horizontal and vertical justification of the text, respectively.
+
+```{r}
+#| label: fig-timeplot-annotate-date
+#| fig-cap: "Adding a vertical line at a specific date with `geom_vline()` and annotating it."
+no2_timeplot <- timePlot(mydata, "no2", avg.time = "month", plot = FALSE)$plot
+
+no2_timeplot +
+  geom_vline(
+    xintercept = ISOdate(2002, 6, 1, 0),
+    linetype = 2,
+    color = "grey25"
+  ) +
+  annotate(
+    geom = "text",
+    x = ISOdate(2002, 5, 5, 0),
+    y = I(0.975),
+    label = "What happened\nhere?\n🤔",
+    hjust = 1,
+    vjust = 1,
+    color = "grey25"
+  )
+```
+
+### Working with radial axes
+
+For "radial" plots (e.g., `polarPlot()`) the same principles apply, but the coordinates are different. You simply need to think in "radial" coordinates - the x-axis is the 'compass directions' in degrees (0-360) and the y-axis is the radial axis progressing out from the centre. In this example, a vertical dashed line is added at 225 degrees, along with two rectangles to highlight specific angular regions, and text annotations to label these regions as "A", "B", and "C". The `annotate()` function is used to add both the rectangles and the text, with appropriate coordinates for each annotation.
+
+```{r}
+#| label: fig-polarplot-annotate
+#| fig-cap: "Adding annotations to a polar plot, using radial coordinates."
+no2_polarplot <- polarPlot(mydata, "no2", plot = FALSE)$plot
+
+no2_polarplot +
+  geom_vline(
+    xintercept = 225,
+    linetype = 2,
+    linewidth = 1
+  ) +
+  annotate(
+    geom = "rect",
+    xmin = 60,
+    xmax = 150,
+    ymin = 5,
+    ymax = 20,
+    fill = NA,
+    color = "black",
+    linewidth = 1
+  ) +
+  annotate(
+    geom = "rect",
+    xmin = -20,
+    xmax = 20,
+    ymin = 8,
+    ymax = 18,
+    fill = NA,
+    color = "black",
+    linewidth = 1
+  ) +
+  annotate(
+    geom = "text",
+    x = 0,
+    y = 15,
+    label = "A",
+    size = 8
+  ) +
+  annotate(
+    geom = "text",
+    x = 105,
+    y = 15,
+    label = "B",
+    size = 8
+  ) +
+  annotate(
+    geom = "label",
+    x = 225,
+    y = 15,
+    label = "C",
+    size = 8,
+    linewidth = 1
+  )
+```
+
+### Multi-panel plots
+
+When `type` is used in an `openair` plot, multiple panels ("facets" in [ggplot2]{.pkg} speak) are created. Further, some functions like `calendarPlot()` are automatically faceted. You may wish to annotate only a single panel. Use the `layout` argument to specify the panel of interest. 
+
+Below, we highlight Christmas day on a `calendarPlot()`. Note that `layout = 12` means "the twelfth panel, progressing from left-to-right, top-to-bottom". This argument could take a vector - e.g., `layout = c(5, 12)` - which would annotate the fifth and twelfth panels. 
+
+```{r}
+#| label: fig-calendarplot-annotate
+#| fig-cap: "Annotating a specific panel in a multi-panel plot using the `layout` argument."
+multipanel <- calendarPlot(mydata, "no2", year = 2000, plot = F)$plot
+
+multipanel +
+  annotate(
+    geom = "rect",
+    xmin = 2.5,
+    xmax = 3.5,
+    ymin = 1.5, 
+    ymax = 2.5,
+    layout = 12,
+    color = "black",
+    fill = NA
+  )
+```
+
+### Assembly plots
+
+A few `openair` plots are actually multiple plots in one. You can typically tell this because the different "panels" are arranged on an irregular grid (e.g., `timeVariation()`) or are comprised of very different plot types (e.g., `conditionalEval()`). These plots are powered by the [patchwork]{.pkg} package, which makes it simple to extract and modify sub-panels. For `timeVariation()`, the "top" panel can be accessed with `[[1]]` and the "bottom" three with `[[2]][[1]]`, `[[2]][[2]]`, and `[[2]][[3]]`.^[Note that it may easier to use `variationPlot()` and use [patchwork]{.pkg} directly yourself, depending on your use-case.]
+
+```{r}
+#| label: fig-timevariation-annotate
+#| fig-cap: "Annotating a specific panel in an assembly plot, using `timeVariation()` as an example."
+timevar_no2 <- timeVariation(mydata, "no2", plot = FALSE)
+
+timevar_no2$main.plot[[2]][[1]] <- timevar_no2$main.plot[[2]][[1]] +
+  geom_hline(yintercept = 50)
+
+plot(timevar_no2)
+```
+
+## Themes
+
+With [ggplot2]{.pkg} it is simple to control the "theme" of your plot (i.e., all non-data elements) using the `ggplot2::theme()` function. There is an excellent blog post about [ggplot2]{.pkg} stlying at <https://tidyverse.org/blog/2025/10/ggplot2-styling/>, but below we demonstrate a few examples of tweaking the plot style.
+
+```{r}
+#| label: fig-scatter-plot-theme
+#| fig-cap: "Customising the plot theme with `theme()`."
+scatter_object$plot +
+  theme(
+    text = element_text(size = 15),
+    panel.grid.minor = element_line(
+      linetype = 3,
+      color = "cadetblue2",
+      linewidth = 0.5
+    ),
+    panel.grid.major = element_line(
+      linetype = 2,
+      color = "cadetblue",
+      linewidth = 0.5
+    ),
+    axis.title.y = element_text(
+      angle = 0,
+      vjust = 0.5
+    ),
+    axis.text.x = element_text(
+      angle = 90,
+      vjust = 0.5
+    ),
+    panel.background = element_rect(
+      fill = "grey95"
+    ),
+    axis.line = element_line(
+      linewidth = 3, lineend = "square"
+    )
+  )
+```
+
+It is also possible to set a global 'complete' theme. This could be a default [ggplot2]{.pkg} theme, or one from an extension package. This could be helpful to ensure your [openair]{.pkg} plots align with other plots you're already making in [ggplot2]{.pkg}.
+
+```{r}
+#| label: fig-timeplot-theme
+#| fig-cap: "Setting a global theme to control the styling of all openair plots."
+theme_set(theme_classic())
+timePlot(mydata, avg.time = "week")
+```
+
+To reset this behaviour, reset the global theme to `theme_grey()`. This is the [ggplot2]{.pkg} default, and makes all of the [openair]{.pkg} functions restore their default behaviour. If you'd like to actually use `theme_grey()`, set your global theme to something like `theme_grey(10.01)` which is different *enough* to disable [openair]{.pkg}'s overrides.
+
+```{r}
+#| label: reset-theme
+theme_set(theme_gray())
+```
+
+Note that some functions do their own `theme()` manipulations, so your mileage may vary as to which of your options are honoured - or whether they do unexpected things to your plot!
+
+A related function is `guides()`, which can be useful for controlling how axes and legends behave. These are typically set within `openair` functions, but can be overridden by more advanced users. Useful arguments include `position` and `angle`. For categorical scales, `check.overlap` or `n.dodge` can help mitigate overlapping axis labels.
+
+```{r}
+#| label: fig-scatter-plot-guides
+#| fig-cap: "Customising axes with `guides()`."
+scatter_object$plot +
+  guides(
+    x = guide_axis( 
+      position = "top",
+      angle = 90,
+      minor.ticks = TRUE
+    )
+  )
+```
+
+## Extensions
+
+There are [many `ggplot2` extensions](https://exts.ggplot2.tidyverse.org/) out there which you can take advantage of in extending your [openair]{.pkg} plots.
+
+One useful example is [patchwork]{.pkg}, which provides an elegant API for combining multiple plots together into one assembly. This is how `timeVariaiton()` works under-the-hood, but users should feel free to assemble plots however they see fit.
+
+The package documentation for [patchwork]{.pkg} is excellent and can be found [here](https://patchwork.data-imaginist.com/).
+
+```{r}
+#| label: fig-patchwork-assembly
+#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly."
+library(patchwork)
+
+p_varplot_hour <- variationPlot(
+  mydata,
+  "nox",
+  "hour",
+  sub = "",
+  plot = FALSE
 )$plot
 
-## [1]
-plt <- plt + layer(
-  lpolygon(
-    x = c(
-      ymd("2003-08-07", tz = "GMT"), ymd("2003-08-07", tz = "GMT"),
-      ymd("2003-08-12", tz = "GMT"),
-      ymd("2003-08-12", tz = "GMT")
-    ),
-    y = c(-20, 600, 600, -20), col = "grey", border = NA
-  ),
-  under = TRUE, rows = 2
-)
+p_varplot_weekday <- variationPlot(
+  mydata,
+  "nox",
+  "weekday",
+  sub = "",
+  plot = FALSE
+)$plot
 
-## [2]
-## add text in specific rows
-plt <- plt + layer(ltext(
-  x = ymd_hm("2003-08-09 12:00"), y = 50, labels = "!!episode!!",
-  col = "yellow", font = 2, cex = 1.5
-), rows = 2)
-## [3]
-## small rectangle in one panel with semi-transparency
-plt <- plt + layer(lpolygon(
-  x = c(
-    ymd("2003-08-21", tz = "GMT"), ymd("2003-08-21", tz = "GMT"),
-    ymd("2003-08-23", tz = "GMT"),
-    ymd("2003-08-23", tz = "GMT")
-  ),
-  y = c(4, 8, 8, 4), col = "blue", border = NA,
-  alpha = 0.2
-), rows = 5)
-## [4]
-## arrows and text
-plt <- plt + layer(larrows(ymd_hm("2003-08-01 00:00"), 100, ymd_hm("2003-08-08 14:00"), 100,
-  code = 3
-), rows = 1)
+p_timeplot <- timePlot(mydata, "nox", avg.time = "month", plot = FALSE)$plot
 
-plt <- plt + layer(ltext(x = ymd("2003-08-04", tz = "GMT"), y = 200, labels = "some missing data"),
-  rows = 1
-)
-## [5]
-## reference line in one panel, with text
-plt <- plt + layer(panel.abline(v = ymd("2003-08-25", tz = "GMT"), lty = 5), rows = 4)
-plt <- plt + layer(ltext(
-  x = ymd_hm("2003-08-25 08:00"), y = 60,
-  labels = "reference line", srt = 90
-), rows = 4)
-## [6]
-## add a specific point
-plt <- plt + layer(lpoints(x[200], y[200], pch = 16, cex = 1.5), rows = 4)
+p_heatmap <- trendLevel(mydata, type = "default", plot = FALSE)$plot
 
-## [7]
-## label max ozone
-plt <- plt + layer(
-  {
-    maxy <- which.max(y)
-    ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
-      pos = 4
-    )
-  },
-  rows = 2
-)
-
-plt <- plt + layer(
-  {
-    maxy <- which.max(y)
-    lpoints(x[maxy], y[maxy],
-      col = "black", pch = 16
-    )
-  },
-  rows = 2
-)
-
-## [8] fill polygon below data; deal with gaps...
-plt <- plt + layer(
-  {
-    id <- which(x >= ymd("2003-08-11", tz = "GMT") &
-      x <= ymd("2003-08-25", tz = "GMT"))
-    poly.na(x[id], y[id], x[id], rep(0, length(id)), col = "darkorange")
-  },
-  rows = 1
-)
-
-## [8] fill polygon below data; deal with gaps - bands
-plt <- plt + layer(poly.na(x, y, x, rep(0, length(x)), col = "green", alpha = 1),
-  rows = 3
-)
-plt <- plt + layer(poly.na(x, ifelse(y < 20, NA, y), x,
-  rep(20, length(x)),
-  col = "yellow", alpha = 1
-), rows = 3)
-plt <- plt + layer(poly.na(x, ifelse(y < 30, NA, y), x, rep(30, length(x)), col = "orange", alpha = 1),
-  rows = 3
-)
-plt <- plt + layer(poly.na(x, ifelse(y < 40, NA, y), x, rep(40, length(x)), col = "red", alpha = 1),
-  rows = 3
-)
-plt
+(((p_varplot_hour | p_varplot_weekday) / p_timeplot) | p_heatmap) +
+  plot_layout(widths = c(0.7, 0.3)) &
+  theme(plot.margin = unit(rep(0.1, 4), "cm"))
 ```
 
-## Adding text
-
-To add text (or other annotations) it is necessary to know the coordinates on a plot for where the text will go, which will depend on the data plotted. In this extended example using the `timePlot` function, the y-axis will be in ordinary numerical units, whereas the x-axis will be in a date-time format (`POSIXct`).
-
-There are various ways that annotations can be added, but the method used here is to add to the previous plot using a function called `trellis.last.object()` to which we want to add a later. This may seem complicated, but once a few examples are considered, the method becomes very powerful, flexible and straightforward. In a multi-panel plot such as @fig-timePlotAnnotate it is also useful to specify which rows/columns should be added to. If they are not specified then the annotation will appear in all panels.
-
-First, a plot should be produced to which we wish to add some text.
+Another really useful package is [geomtextpath]{.pkg}, which combines labels and lines and paths for nicer annotations:
 
 ```{r}
-#| label: annotatePbase
-#| eval: false
-## make sure latticeExtra is loaded
-library(openair)
-library(lubridate)
-library(latticeExtra)
-timePlot(selectByDate(mydata, year = 2003, month = "aug"),
-  pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
-  y.relation = "free"
-)
-```
+#| label: geomtextpath-annotation
+#| fig-cap: "Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."
+library(geomtextpath)
 
-So, considering @fig-timePlotAnnotate , this is how the text 'some missing data' was added to the top panel.
-
-```{r}
-#| label: annotateP1
-#| eval: false
-trellis.last.object() +
-  layer(ltext(
-    x = ymd_hm("2003-08-04 12:00"), y = 200,
-    labels = "some missing data"
-  ), rows = 1)
-```
-
-So what does this do? First, the `trellis.last.object()` is simply the last plot that was plotted. Next the `layer` function is used to add some text. The text itself is added using the `ltext` [lattice]{.pkg} function. It is worth having a look at the help for `ltext` as that gives an overview of all the common annotations and other options. We have chosen to plot the text at position x = '2003-08-04' and y = 200 and the label itself. A useful option to `ltext` is `pos`. Values can be 1, 2, 3 and 4, and indicate positions below (the default), to the left of, above and to the right of the specified coordinates
-
-## Adding text and a shaded area
-
-This time we will highlight an interval in row 2 (O~3~) and write some text on top. Note that this time we use the `lpolygon` function and choose to put it under everything else on the plot. For the text, we have chosen a colour (yellow) font type 2 (bold) and made it a bit bigger (`cex = 1.5`). Note also the `y` values extend beyond the actual limits shown on the plot --- just to make sure they cover the whole region.
-
-The polygon could of course be horizontal and more than one producing a series of 'bands' e.g. air quality indexes. A more sophisticated approach is shown later for PM~2.5~
-
-```{r}
-#| label: annotateP2
-#| eval: false
-## add shaded polygon
-trellis.last.object() +
-  layer(lpolygon(
-    x = c(
-      ymd_hm("2003-08-07 00:00"),
-      ymd_hm("2003-08-07 00:00"), ymd_hm("2003-08-12 00:00"),
-      ymd_hm("2003-08-12 00:00")
-    ), y = c(-20, 600, 600, -20),
-    col = "grey", border = NA
-  ), under = TRUE, rows = 2)
-## add text
-trellis.last.object() +
-  layer(ltext(
-    x = ymd_hm("2003-08-09 12:00"), y = 50,
-    labels = "!!episode!!", col = "yellow",
-    font = 2, cex = 1.5
-  ), rows = 2)
-```
-
-The small shaded, semi-transparent area shown in the bottom panel was added as follows:
-
-```{r}
-#| label: annotateP2a
-#| eval: false
-## add shaded polygon
-plt <- plt +
-  layer(lpolygon(
-    x = c(
-      ymd("2003-08-21"), ymd("2003-08-21"),
-      ymd_hm("2003-08-23 00:00"), ymd_hm("2003-08-23 00:00")
-    ),
-    y = c(4, 8, 8, 4), col = "blue", border = NA,
-    alpha = 0.2
-  ), rows = 5)
-```
-
-## Adding an arrow
-
-The arrow shown on the first panel of @fig-timePlotAnnotate was added as follows. Note the `code = 3` placed arrows at both ends. Note that `angle` is the angle from the shaft of the arrow to the edge of the arrow head.
-
-```{r}
-#| label: annotateP3
-#| eval: false
-trellis.last.object() +
-  layer(larrows(ymd_hm("2003-08-01 00:00"), 100,
-    ymd_hm("2003-08-08 14:00"),
-    100,
-    code = 3, angle = 30
-  ), rows = 1)
-```
-
-## Adding a reference line and text
-
-This code adds a vertical dashed reference line shown in the 4th panel (PM~10~) along with some text aligned at 90 degrees using the `srt` option of `ltext`.
-
-```{r}
-#| label: annotateP4
-#| eval: false
-trellis.last.object() +
-  layer(panel.abline(v = ymd_hm("2003-08-25 00:00"), lty = 5),
-    rows = 4
-  )
-trellis.last.object() +
-  layer(ltext(
-    x = ymd_hm("2003-08-25 08:00"), y = 60,
-    labels = "reference line", srt = 90
-  ), rows = 4)
-```
-
-## Highlight a specific point
-
-Up until now annotations have been added using arbitrary coordinates in each panel. What if we wanted to highlight a particular point, or more generally work with the actual data that are plotted. Knowing how to refer to existing data greatly extends the power of these functions.
-
-It is possible to refer to a specific point in a panel simply by indexing the point of interest i.e. `x`, `y`. For example, to mark the 200th PM~10~ concentration (without knowing the actual date or value):
-
-```{r}
-#| label: annotateP5
-#| eval: false
-## add a specific point
-trellis.last.object() +
-  layer(lpoints(x[200], y[200], pch = 16, cex = 1.5),
-    rows = 4
+scatter_object$plot +
+  annotate(
+    geom = "textpath",
+    x = c(40, 60),
+    y = c(100, 300),
+    label = "Things go up!",
+    arrow = arrow()
+  ) +
+  geom_texthline(
+    yintercept = 250, 
+    color = "blue",
+    label = "limit value", 
+    hjust = 0.1,
+    linetype = 2
   )
 ```
 
-What if we wanted to highlight the maximum O~3~ concentration? It is possible to work out the index first and then use that to refer to that point. Note the `}` to allow for the code to span multiple commands.
+An interesting package is [legendry]{.pkg}, which has a lot of different functions for tweaking legends and guides. Of interest may be `legendry::guide_colring()`, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.
+
+This example highlights that sometimes you may need to take on further tweaks as you get deeper into customising your plots. Here, it was necessary to reset the colour scale to set appropriate labels and breaks.
 
 ```{r}
-#| label: annotateP6
-#| eval: false
-## add a point to the max O3 concentration
-trellis.last.object() +
-  layer(
-    {
-      maxy <- which.max(y)
-      lpoints(x[maxy], y[maxy], col = "black", pch = 16)
-    },
-    rows = 2
-  )
-
-## label max ozone
-trellis.last.object() +
-  layer(
-    {
-      maxy <- which.max(y)
-      ltext(x[maxy], y[maxy], paste(y[maxy], "ppb"),
-        pos = 4
-      )
-    },
-    rows = 2
+#| label: fig-legendry-guide
+#| fig-cap: "Using the legendry package to create a custom legend for a scatter plot."
+scatterPlot(mydata, z = "wd", plot = FALSE)$plot +
+  guides(
+    color = legendry::guide_colring()
+  ) +
+  scale_color_gradientn(
+    colours = openair::openColours("hue"),
+    breaks = seq(0, 360, 90),
+    labels = c("N", "E", "S", "W", "N")
   )
 ```
 
-## Add a filled polygon
-
-It can be seen in the top panel of @fig-timePlotAnnotate that some data are highlighted by filling the area below the line. This approach can be useful more generally in plotting. While it is possible to draw polygons easily and refer to the data itself, there needs to be a way for dealing with gaps in data, otherwise these gaps could be filled in perhaps unpredictable ways. A function has been written to draw a polygon taking into account gaps (`poly.na`).
+Many extension packages usefully provide themes that can be easily set globally to apply to [openair]{.pkg} plots. For example, for those working with or for the UK Government, the [afcharts]{.pkg} package exports `afcharts::theme_af()` for accessible, Government Statistical Service-approved plot styling.
 
 ```{r}
-#| label: polyNA
-#| eval: false
-poly.na <- function(x1, y1, x2, y2, col = "black", alpha = 0.2) {
-  for (i in seq(2, length(x1))) {
-    if (!any(is.na(y2[c(i - 1, i)]))) {
-      lpolygon(c(x1[i - 1], x1[i], x2[i], x2[i - 1]),
-        c(y1[i - 1], y1[i], y2[i], y2[i - 1]),
-        col = col, border = NA, alpha = alpha
-      )
-    }
-  }
-}
-```
+#| label: fig-afcharts-theme
+#| fig-cap: "Setting a global theme from an extension package, in this case `afcharts::theme_af()`, and creating a `timePlot()`."
+theme_set(afcharts::theme_af())
 
-This time we work out the ids of the data spanning an area of interest. Then the `poly.na` function is used. Note that the alpha transparency is by default 0.2 but another value can easily be supplied, as shown in the air quality 'bands' example.
-
-```{r}
-#| label: annotateP7
-#| eval: false
-trellis.last.object() +
-  layer(
-    {
-      id <- which(x >= ymd_hm("2003-08-11 00:00") &
-        x <= ymd_hm("2003-08-25 00:00"))
-      poly.na(x[id], y[id], x[id], rep(0, length(id)),
-        col = "darkorange"
-      )
-    },
-    rows = 1
-  )
-```
-
-## Add air quality bands as polygons
-
-It is a simple extension to go from using a polygon below the data to polygons at certain intervals e.g. air quality indexes. These are shown for PM~2.5~ and the bands considered are 0--20, 20--30, 30--40 and \>40.
-
-```{r}
-#| label: annotateP8
-#| eval: false
-trellis.last.object() +
-  layer(poly.na(x, y, x, rep(0, length(x)),
-    col = "green", alpha = 1
-  ), rows = 3)
-trellis.last.object() +
-  layer(
-    poly.na(x, ifelse(y < 20, NA, y), x,
-      rep(20, length(x)),
-      col = "yellow", alpha = 1
-    ),
-    rows = 3
-  )
-trellis.last.object() +
-  layer(poly.na(x, ifelse(y < 30, NA, y),
-    x, rep(30, length(x)),
-    col = "orange", alpha = 1
-  ), rows = 3)
-trellis.last.object() +
-  layer(poly.na(x, ifelse(y < 40, NA, y),
-    x, rep(40, length(x)),
-    col = "red", alpha = 1
-  ), rows = 3)
-```
-
-## Polar plot examples
-
-Many of the examples considered above are relevant to all other functions e.g. how to add text, choosing rows and columns to plot in. Polar coordinate plots are different because of the coordinate system used and this section considers a few examples.
-
-One useful approach is to be able to draw an arc, perhaps highlighting an area of interest. A simple, but flexible function has been written to do this. It takes arguments `theta1` and `theta2` that define the angular area of interest and `lower` and `upper` to set the lower and upper wind speed, respectively. It also has additional arguments `theta3` and `theta4` which optionally set the angles for the 'upper' wind speed.
-
-```{r}
-#| label: arcCode
-arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
-                lower = 1, upper = 10) {
-  ## function to work out coordinates for an arc sector
-  if (theta2 < theta1) {
-    ang1 <- seq(theta1, 360, length = abs(theta2 - theta1))
-    ang2 <- seq(0, theta2, length = abs(theta2 - theta1))
-    angles.low <- c(ang1, ang2)
-
-    ## for upper angles
-    ang1 <- seq(theta1, 360, length = abs(theta4 - theta3))
-    ang2 <- seq(0, theta2, length = abs(theta4 - theta3))
-    angles.high <- c(ang1, ang2)
-  } else {
-    angles.low <- seq(theta1, theta2, length = abs(theta2 - theta1))
-    angles.high <- seq(theta3, theta4, length = abs(theta4 - theta3))
-  }
-  x1 <- lower * sin(pi * angles.low / 180)
-  y1 <- lower * cos(pi * angles.low / 180)
-  x2 <- rev(upper * sin(pi * angles.high / 180))
-  y2 <- rev(upper * cos(pi * angles.high / 180))
-  data.frame(x = c(x1, x2), y = c(y1, y2))
-}
-```
-
-```{r}
-#| label: fig-annonatePolar
-#| fig-cap: Annotations on a polar plot.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 60%
-#| fig-keep: last
-#| echo: false
-arc <- function(theta1 = 30, theta2 = 60, theta3 = theta1, theta4 = theta2,
-                lower = 1, upper = 10) {
-  ## function to work out coordinates for an arc sector
-  if (theta2 < theta1) {
-    ang1 <- seq(theta1, 360, length = abs(theta2 - theta1))
-    ang2 <- seq(0, theta2, length = abs(theta2 - theta1))
-    angles.low <- c(ang1, ang2)
-
-    ## for upper angles
-    ang1 <- seq(theta1, 360, length = abs(theta4 - theta3))
-    ang2 <- seq(0, theta2, length = abs(theta4 - theta3))
-    angles.high <- c(ang1, ang2)
-  } else {
-    angles.low <- seq(theta1, theta2, length = abs(theta2 - theta1))
-    angles.high <- seq(theta3, theta4, length = abs(theta4 - theta3))
-  }
-  x1 <- lower * sin(pi * angles.low / 180)
-  y1 <- lower * cos(pi * angles.low / 180)
-  x2 <- rev(upper * sin(pi * angles.high / 180))
-  y2 <- rev(upper * cos(pi * angles.high / 180))
-  data.frame(x = c(x1, x2), y = c(y1, y2))
-}
-
-plt <- polarPlot(mydata, pollutant = "so2", col = "turbo")$plot
-plt <- plt + layer(ltext(-12, -12, "A", cex = 2))
-plt <- plt + layer(ltext(10, 1, "B", cex = 2, col = "white"))
-plt <- plt + layer(lsegments(0, 0, -11.5, -11.5, lty = 5))
-plt <- plt +
-  layer(lpolygon(
-    x = arc(
-      theta1 = 60, theta2 = 120,
-      lower = 2, upper = 15
-    )$x,
-    y = arc(
-      theta1 = 60, theta2 = 120,
-      lower = 2, upper = 15
-    )$y, lty = 1, lwd = 2
-  ))
-plt
-```
-
-Following on from the previous examples, some annotations have been added to the basic polar plot for SO~2~ as shown in @fig-annonatePolar. Note that in these plots (0, 0) is the middle of the plot and the radial distance will be determined by the wind speed --- or whatever the radial variable is. This way of plotting arcs can also be applied to other functions that show directional data. 
-
-```{r}
-#| label: annotatePolar1
-#| eval: false
-polarPlot(mydata, pollutant = "so2", col = "turbo")
-trellis.last.object() + layer(ltext(-12, -12, "A", cex = 2))
-trellis.last.object() + layer(ltext(10, 2, "B", cex = 2, col = "white"))
-trellis.last.object() + layer(lsegments(0, 0, -11.5, -11.5, lty = 5))
-## add and arc to highlight area of interest
-trellis.last.object() +
-  layer(lpolygon(x = arc(
-    theta1 = 60, theta2 = 120, lower = 2,
-    upper = 15
-  )$x, y = arc(
-    theta1 = 60,
-    theta2 = 120, lower = 2,
-    upper = 15
-  )$y, lty = 1, lwd = 2))
-```
-
-## Using grid graphics --- identify locations interactively
-
-The examples above provide a precise way of annotating plots for single or multi-panels [openair]{.pkg} displays. However, these methods won't work for plots that consist of completely separate plots such as the four plots in `timeVariation`. There are however other methods that can be used to annotate such plots using the package `grid`, which forms the basis of [lattice]{.pkg} graphics. There is enormous capability for annotating plots using the `grid` package and only a few simple examples are given here.
-
-Given a a basic `timeVariation` plot, how could texts be added at any location --- say in the middle monthly plot? One very useful function for this type of annotation that allows the user to interactively choose a location is the `grid.locator()` function in the `grid` package. That function can be called with different coordinate systems --- but the one we want defines the bottom-left corner as (0, 0) and the top right as (1, 1).
-
-First, make a `timeVariation` plot.
-
-```{r}
-#| label: timeVarGrid
-#| eval: false
-timeVariation(mydata)
-```
-
-Now let's choose a location on the plot interactively using the mouse and selecting somewhere in the middle of the monthly plot.
-
-```{r}
-#| label: gridLocate
-#| eval: false
-library(grid)
-## bring up the interactive location chooser
-grid.locator(unit = "npc")
-```
-
-What should happen is that in the R console the coordinates are given for that point. In my case these were x = 0.503 and y = 0.338. These coordinates can now be used as the basis of adding some text or other annotation. In the example below, the `grid.text` function is used to add some text for these coordinates making the font bigger (`cex = 2`), bold (`font = 2`) and blue (`col = "blue"`).
-
-```{r}
-#| label: addGridText
-#| eval: false
-grid.text(
-  x = 0.503, y = 0.338, label = "here!",
-  gp = gpar(cex = 2, font = 2, col = "blue")
+timePlot(
+  mydata,
+  c("nox", "no2"),
+  avg.time = "month",
+  group = TRUE,
+  cols = "gaf.cat"
 )
 ```
 
-Even with this basic approach, some sophisticated annotation is possible with *any* [openair]{.pkg} plot. There are many other functions that can be used from the grid package that would allow for polygons, segments and other features to be drawn is a similar way to the examples earlier in this section. Continuing with the same example, here is how to add an arrow pointing to the maximum \nox concentration shown on the top plot for Saturday (again using the `grid.locator` function).
+```{r}
+#| label: fig-windrose-theme
+#| fig-cap: "Customising the theme of a plot from an extension package, in this case `afcharts::theme_af()`."
+#| fig-height: 6
+windRose(mydata, cols = "gaf.seq")
+```
 
 ```{r}
-#| label: addGridArrow
-#| eval: false
-grid.lines(
-  x = c(0.736, 0.760), y = c(0.560, 0.778),
-  arrow = arrow()
-)
-grid.text(x = 0.736, y = 0.560, label = "maximum", just = "left")
+#| label: reset-theme-again
+theme_set(theme_gray())
 ```
+
