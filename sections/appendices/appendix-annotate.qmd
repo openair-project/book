@@ -32,6 +32,14 @@ scatter_object$data
 scatter_object$plot
 ```
 
+ To make life easier, lets load the [ggplot2]{.pkg} package:
+
+```{r}
+#| label: load-ggplot2
+#| output: false
+library(ggplot2)
+```
+
 A good introduction to tweaking plots is using `labs()` to change the axis labels. With `ggplot2` you simply add (with `+`) new layers. Feel free to use `quickText()` directly here too for automatic formatting.
 
 ```{r}
@@ -46,18 +54,7 @@ scatter_object$plot +
   )
 ```
 
-
 ## Annotations
-
-The easiest way to annotate a [ggplot2]{.pkg} figure is with `ggplot2::annotate()`. To make life easier, lets load the [ggplot2]{.pkg} package:
-
-```{r}
-#| label: load-ggplot2
-#| output: false
-library(ggplot2)
-```
-
-Here are a few recipes for adding different kinds of annotations:
 
 ### Adding text
 
