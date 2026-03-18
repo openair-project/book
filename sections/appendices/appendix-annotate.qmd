@@ -1,5 +1,9 @@
 ---
 author: Jack Davison
+execute: 
+  warning: false
+  error: false
+  message: false
 ---
 
 # Customising openair plots {#sec-annotating-openair}
