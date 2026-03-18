@@ -189,7 +189,6 @@ no2_timeplot +
     label = "What happened\nhere?\n🤔",
     hjust = 1,
     vjust = 1,
-    fontface = "italic",
     color = "grey25"
   )
 ```
