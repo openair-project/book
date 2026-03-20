@@ -250,8 +250,8 @@ the the reference data sets with which a second set of wind speed and
 wind directions are to be compared (`ws2` and `wd2`).
 
 In the next example, data from two data sets from 2024 are imported over
-the Internet. The first is hourly data for a site in London and the
-second is hourly data for a site in Yorkshire. The data are then joined
+the Internet. The first is hourly data measured data for a site in London and the
+second is hourly data modelled data. The data are then joined
 together by date to create a single data frame with the two sets of wind
 speed and wind direction data. A more realistic example might be to
 compare a modelled data set with a reference data set, but the principle
@@ -267,15 +267,13 @@ london_met <- readr::read_rds(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_met.rds"
 )
 
-# data from yorkshire
-yorks_met <- readr::read_rds(
-  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/yorkshire_met.rds"
-)
+# data from model
+mod_met <- importAURN("kc1", 2024)
 
 # combine into one data frame and change names - only select ws, wd and date
 met_compare <- inner_join(
   select(london_met, date, ws, wd),
-  select(yorks_met, date, ws, wd),
+  select(mod_met, date, ws, wd),
   suffix = c("_lon", "_yor"),
   by = "date"
 )
@@ -285,18 +283,20 @@ The `windRose` function can then be used to compare the two data sets.
 In this case, the plot shown in @fig-windComp shows the difference
 between the two data sets with respect to the reference data set (in
 this case, the London site). The colours show whether the second data
-set (Yorkshire) tends to be positively or negatively biased with respect
-to the reference data set (London). It shows for example:
+set (modelled) tends to be positively or negatively biased with respect
+to the reference data set (measured). It shows for example:
 
--  Wind speeds at the Yorkshire site tend to be higher than at London for wind directions from the north-west and south-east, shown by the red colouring in @fig-windComp.
+-  Modelled wind speeds tend to be lower than at measured for wind directions from the south, shown by the blue colouring in @fig-windComp.
 
--  There are slightly slow wind speeds at the Yorkshire site whne the winds are from the WSW, shown by the blue colouring in @fig-windComp.
+-  Wind speeds from the model tend to be slightly higher than measured values when the wind is from the north, shown by the red colouring in @fig-windComp.
 
--  There is a slight bias in the wind direction of -4.3 degrees at the Yorkshire site — shown by both the arrow on the plot and the text.
+- Overall, the modelled wind speeds are 0.67 m s^-1^ lower than the measured values, shown by the text on the plot.
+
+-  There is a bias in the wind direction of +15.9 degrees for the modelled data — shown by both the arrow on the plot and the text.
 
 ```{r}
 #| label: fig-windComp
-#| fig-cap: Wind rose showing the difference between two meteorological data sets. The first (London) is used to compare against the second (Yorkshire). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrow shows the mean bias in wind direction and the text shows the value of that bias.
+#| fig-cap: Wind rose showing the difference between two meteorological data sets. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrow shows the mean bias in wind direction and the text shows the value of that bias.
 #| fig-width: 4.5
 #| fig-height: 5.5
 #| out-width: 75%
@@ -313,7 +313,7 @@ Like other [openair]{.pkg} functions, the `type` option can be used to compare t
 
 ```{r}
 #| label: fig-windCompSeason
-#| fig-cap: Wind rose showing the difference between two meteorological data sets by season. The first (London) is used to compare against the second (Yorkshire). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows shows the mean bias in wind direction and the text shows the value of that bias.
+#| fig-cap: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows shows the mean bias in wind direction and the text shows the value of that bias.
 #| fig-width: 8
 #| fig-height: 9
 #| out-width: 90%
