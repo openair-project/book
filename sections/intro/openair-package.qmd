@@ -162,11 +162,19 @@ Also there are many common options available in functions that are not explicitl
 
 tab_dat <- tibble(
   option = c(
-    "xlab", "ylab", "main", "pch", "cex", "lty",
-    "lwd", "layout"
+    "xlab",
+    "ylab",
+    "main",
+    "pch",
+    "cex",
+    "lty",
+    "lwd",
+    "layout"
   ),
   description = c(
-    "x-axis label", "y-axis label", "title of the plot",
+    "x-axis label",
+    "y-axis label",
+    "title of the plot",
     "plotting symbol used for points",
     "size of symbol plotted",
     "line type",
@@ -196,8 +204,17 @@ There are a series of pre-defined values that `type` can take related to the tem
 
 tab_type <- tibble(
   option = c(
-    "'year'", "'month'", "'week'", "'monthyear'", "'season'",
-    "'weekday'", "'weekend'", "'daylight'", "'dst'", "'wd'", "'seasonyear'"
+    "'year'",
+    "'month'",
+    "'week'",
+    "'monthyear'",
+    "'season'",
+    "'weekday'",
+    "'weekend'",
+    "'daylight'",
+    "'dst'",
+    "'wd'",
+    "'seasonyear'"
   ),
   description = c(
     "splits data by year",
@@ -232,10 +249,13 @@ If a categorical variable is present in a data frame e.g. `site` then that vari
 In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
 
 ```{r}
-mydata$intervals <- cut(mydata$no2,
+mydata$intervals <- cut(
+  mydata$no2,
   breaks = c(0, 50, 100, 150, 1000),
   labels = c(
-    "Very low", "Low", "High",
+    "Very low",
+    "Low",
+    "High",
     "Very High"
   ),
   include.lowest = TRUE
@@ -287,7 +307,11 @@ Several pre-defined colour schemes are available to make it easy to plot data. I
 library(openair)
 ## small function for plotting
 printCols <- function(col, y) {
-  rect((0:200) / 200, y, (1:201) / 200, y + 0.1,
+  rect(
+    (0:200) / 200,
+    y,
+    (1:201) / 200,
+    y + 0.1,
     col = openColours(col, n = 201),
     border = NA
   )
@@ -295,8 +319,13 @@ printCols <- function(col, y) {
 }
 
 ## plot an empty plot
-plot(1,
-  xlim = c(0, 1), ylim = c(0, 1.6), type = "n", xlab = "", ylab = "",
+plot(
+  1,
+  xlim = c(0, 1),
+  ylim = c(0, 1.6),
+  type = "n",
+  xlab = "",
+  ylab = "",
   axes = FALSE
 )
 printCols("default", 0)
@@ -443,7 +472,10 @@ polar <- polarPlot(mydata, "nox")
 # STEP 2: Open a graphics device
 png(
   filename = "polarplot_marylebone_nox.png",
-  width = 6, height = 6, units = "in", res = 300
+  width = 6,
+  height = 6,
+  units = "in",
+  res = 300
 )
 
 # STEP 3: Print the plot
