@@ -272,7 +272,7 @@ multipanel +
     geom = "rect",
     xmin = 2.5,
     xmax = 3.5,
-    ymin = 1.5, 
+    ymin = 1.5,
     ymax = 2.5,
     layout = 12,
     color = "black",
@@ -327,7 +327,8 @@ scatter_object$plot +
       fill = "grey95"
     ),
     axis.line = element_line(
-      linewidth = 3, lineend = "square"
+      linewidth = 3,
+      lineend = "square"
     )
   )
 ```
@@ -357,7 +358,7 @@ A related function is `guides()`, which can be useful for controlling how axes a
 #| fig-cap: "Customising axes with `guides()`."
 scatter_object$plot +
   guides(
-    x = guide_axis( 
+    x = guide_axis(
       position = "top",
       angle = 90,
       minor.ticks = TRUE
@@ -419,9 +420,9 @@ scatter_object$plot +
     arrow = arrow()
   ) +
   geom_texthline(
-    yintercept = 250, 
+    yintercept = 250,
     color = "blue",
-    label = "limit value", 
+    label = "limit value",
     hjust = 0.1,
     linetype = 2
   )
