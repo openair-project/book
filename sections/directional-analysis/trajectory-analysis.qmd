@@ -72,10 +72,7 @@ Next, we consider how to plot back trajectories with a few simple examples. The 
 #| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010. Note the additional option to vary the country colours using `map.cols`. By default the map colours for all countries are grey.
 #| fig-width: 6
 #| fig-height: 6
-selectByDate(traj,
-  start = "15/4/2010",
-  end = "21/4/2010"
-) |>
+selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
     map.cols = openColours("hue", 10),
     col = "grey30"
@@ -95,7 +92,8 @@ There are a few other ways of representing the data shown in @fig-traj1. For exa
 traj$day <- as.Date(traj$date)
 
 ## plot it choosing a specific layout
-selectByDate(traj,
+selectByDate(
+  traj,
   start = "15/4/2010",
   end = "21/4/2010"
 ) |>
@@ -112,13 +110,16 @@ Another way of plotting the data is to group the trajectories by day and colour 
 #| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010, shown grouped for each day and coloured accordingly.
 #| fig-height: 7
 #| fig-width: 6
-selectByDate(traj,
+selectByDate(
+  traj,
   start = "15/4/2010",
   end = "21/4/2010"
 ) |>
   trajPlot(
-    group = "day", col = "turbo",
-    lwd = 2, key.pos = "top",
+    group = "day",
+    col = "turbo",
+    lwd = 1,
+    key.pos = "top",
     key.col = 4,
     ylim = c(50, 79)
   )
@@ -143,13 +144,15 @@ This time we can use the option `pollutant` in the function `trajPlot`, which wi
 #| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010, coloured by the concentration of PM~10~ in μg m^-3^.
 #| fig-height: 6
 #| fig-width: 6
-selectByDate(traj,
+selectByDate(
+  traj,
   start = "15/4/2010",
   end = "21/4/2010"
 ) |>
   trajPlot(
     pollutant = "pm10",
-    col = "turbo", lwd = 2
+    col = "turbo",
+    lwd = 1
   )
 ```
 
@@ -157,12 +160,7 @@ However, it is possible to account for the PM that is local to some extent by co
 
 ```{r}
 #| eval: false
-scatterPlot(kc1,
-  x = "nox",
-  y = "pm2.5",
-  avg = "day",
-  linear = TRUE
-)
+scatterPlot(kc1, x = "nox", y = "pm2.5", avg = "day", linear = TRUE)
 ```
 
 which suggests a gradient of 0.084. Therefore, we can remove the PM~10~ that is associated NO~x~ in `kc1` data, making a new column `pm.new`:
@@ -184,13 +182,11 @@ Now it is possible to plot the trajectories:
 
 ```{r}
 #| eval: false
-selectByDate(traj,
-  start = "15/4/2010",
-  end = "21/4/2010"
-) |>
+selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
     pollutant = "pm.new",
-    col = "turbo", lwd = 2
+    col = "turbo",
+    lwd = 2
   )
 ```
 
@@ -217,7 +213,8 @@ It is also possible to use hexagonal binning to gain an idea about trajectory fr
 #| fig-height: 5
 filter(traj, lat > 30, lat < 70, lon > -30, lon < 20) |>
   trajLevel(
-    method = "hexbin", col = "turbo",
+    method = "hexbin",
+    col = "turbo",
     xbin = 40
   )
 ```
@@ -237,7 +234,8 @@ A useful analysis to undertake is to consider the pattern of frequencies for two
 #| fig-cap: Gridded back trajectory frequencies showing the percentage difference in occurrence for high PM~10~ concentrations (90th percentile) compared with conditions over the full year.
 #| fig-width: 10
 #| fig-height: 6
-trajLevel(traj,
+trajLevel(
+  traj,
   pollutant = "pm10",
   statistic = "difference",
   col = c("skyblue", "white", "tomato"),
@@ -253,7 +251,8 @@ Note that it is also possible to use conditioning with these plots. For example 
 ```{r}
 #| label: trajFreq2
 #| eval: false
-trajLevel(traj,
+trajLevel(
+  traj,
   pollutant = "pm10",
   statistic = "frequency",
   col = "heat",
@@ -291,12 +290,18 @@ alloc <- mutate(
   alloc,
   angle = atan2(lon - x0, lat - y0) * 360 / 2 / pi,
   angle = ifelse(angle < 0, angle + 360, angle),
-  sector = cut(angle,
+  sector = cut(
+    angle,
     breaks = seq(22.5, 382.5, 45),
     labels = c(
-      "NE", "E", "SE",
-      "S", "SW", "W",
-      "NW", "N"
+      "NE",
+      "E",
+      "SE",
+      "S",
+      "SW",
+      "W",
+      "NW",
+      "N"
     )
   ),
   sector = as.character(sector),
@@ -365,7 +370,8 @@ An example of a PSCF plot is shown in @fig-PSCF for PM~2.5~ for concentrations 9
 #| fig-width: 10
 filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   trajLevel(
-    pollutant = "pm2.5", statistic = "pscf",
+    pollutant = "pm2.5",
+    statistic = "pscf",
     col = "increment",
     border = NA
   )
@@ -503,7 +509,8 @@ Some further analysis can be carried out on the TEOM FDMS measurements, which se
 
 ```{r}
 #| eval: false
-trajLevel(traj,
+trajLevel(
+  traj,
   pollutant = "v2.5",
   statistic = "sqtba",
   map.fill = FALSE,
@@ -606,7 +613,8 @@ The clusters are straightforward to calculate. In this case the back trajectory 
 #| fig-cap: The 6-cluster solution to back trajectories calculated for the London North Kensington site for 2011 showing the mean trajectory for each cluster.
 #| fig-width: 6
 #| fig-height: 5
-clust <- trajCluster(traj,
+clust <- trajCluster(
+  traj,
   method = "Angle",
   n.cluster = 6,
   col = "Set2",
@@ -625,11 +633,7 @@ A useful way in which to see where these air masses come from by trajectory is t
 
 ```{r}
 #| eval: false
-trajLevel(clust$data$traj,
-  type = "cluster",
-  col = "increment",
-  border = NA
-)
+trajLevel(clust$data$traj, type = "cluster", col = "increment", border = NA)
 ```
 
 Perhaps more useful is to merge the cluster data with measurement data. In this case the data at North Kensington site are used. Note that in merging these two data frames it is not necessary to retain all 96 back trajectory hours and for this reason we extract only the first hour.
@@ -637,10 +641,7 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 ```{r}
 #| label: mergeClustTraj
 # use inner join - so only where we have data in each
-kc1 <- inner_join(kc1,
-  filter(clust$data$traj, hour.inc == 0),
-  by = "date"
-)
+kc1 <- inner_join(kc1, filter(clust$data$traj, hour.inc == 0), by = "date")
 ```
 
 Now `kc1` contains air pollution data identified by cluster. The size of this data frame is about a third of the original size because back trajectories are only run every 3 hours.
@@ -670,8 +671,10 @@ Simple plots can be generated from these results too. For example, it is easy to
 #| fig-width: 13
 #| fig-height: 3
 #| column: screen-inset-right
-trendLevel(kc1,
-  pollutant = "v2.5", type = "cluster",
+trendLevel(
+  kc1,
+  pollutant = "v2.5",
+  type = "cluster",
   layout = c(6, 1),
   cols = "increment"
 )
@@ -687,11 +690,14 @@ Another useful plot to consider is `timeProp` (see @sec-timeProp), which can sho
 #| fig-width: 15
 #| fig-height: 5
 #| column: screen-inset-right
-timeProp(kc1,
+timeProp(
+  kc1,
   pollutant = "pm2.5",
-  avg.time = "day", proportion = "cluster",
+  avg.time = "day",
+  proportion = "cluster",
   cols = "Set2",
-  key.position = "top", key.columns = 6
+  key.position = "top",
+  key.columns = 6
 )
 ```
 
