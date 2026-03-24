@@ -10,17 +10,19 @@ Scatter plots are extremely useful and a very commonly used analysis technique f
 
 There is less need for this function now that [ggplot2]{.pkg} is available, but it still has some benefits for interactive use.
 
+-  It deals with wind speed and wind direction data correctly. For example `type = "wd"` will produce a 8 panel plot by wind sector. It can also add 'wind flow' arrows to scatter plots.
+
 -   A smooth fit is automatically added to help reveal the underlying relationship between two variables together with the estimated 95% confidence intervals of the fit. This is in general an extremely useful thing to do because it helps to show the (possibly) non-linear relationship between variables in a very robust way --- or indeed whether the relationship is linear.
 
 -   It is easy to add a linear regression line. The resulting equation is shown on the plot together with the R$^2$ value.
 
--   For large data sets there is the possibility to 'bin' the data using hexagonal binning or kernel density estimates. This approach is very useful when there is considerable over-plotting.
+-   For large data sets there is the possibility to 'bin' the data using **hexagonal binning** or **kernel density** estimates. This approach is very useful when there is considerable over-plotting.
 
 -   It is easy to show how two variables are related to one another dependent on levels of a third variable. This capability is very useful for exploring how different variables depend on one another and can help reveal the underlying important relationships.
 
 -   A plot of two variables can be colour-coded by a continuous colour scale of a third variable.
 
--   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable.
+-   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g. hourly, daily, weekly etc. using the `timeAverage` function and the argument `avg.time`.
 
 The `scatterPlot` function isn't really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other [openair]{.pkg} functions. Nevertheless, along with the `timePlot` function they do form an important part of [openair]{.pkg} because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.
 
@@ -78,7 +80,7 @@ scatterPlot(
   method = "hexbin",
   col = "turbo",
   border = "grey",
-  xbin = 15
+  bins = 30
 )
 ```
 
@@ -95,8 +97,6 @@ scatterPlot(
   x = "nox",
   y = "no2",
   method = "density",
-  xlim = c(0, 400),
-  ylim = c(0, 100),
   cols = "turbo"
 )
 ```
@@ -128,11 +128,21 @@ Below is an extended example that brings together data manipulation, refined plo
 library(tidyverse)
 
 # select the variables of interest
-subdat <- select(mydata, date, nox, pm10, pm25) # calculate weekly averages
+subdat <- select(
+  mydata,
+  date,
+  nox,
+  pm10,
+  pm25
+) # calculate weekly averages
 subdat <- timeAverage(subdat, avg.time = "week")
 
 # reshape so we have two variable columns
-subdat <- pivot_longer(subdat, cols = c(pm10, pm25), names_to = "pollutant")
+subdat <- pivot_longer(
+  subdat,
+  cols = c(pm10, pm25),
+  names_to = "pollutant"
+)
 head(subdat)
 ```
 
@@ -166,11 +176,9 @@ scatterPlot(
   subdat,
   x = "nox",
   y = "value",
-  group = "variable",
-  pch = 21:22,
+  group = "pollutant",
+  pch = 16:17,
   cex = 1.6,
-  fill = c("dodgerblue", "tomato"),
-  col = "white",
   linear = TRUE,
   xlab = "nox (ppb)",
   ylab = "PM concentration (ug/m3)",
@@ -187,11 +195,9 @@ scatterPlot(
   subdat,
   x = "nox",
   y = "value",
-  group = "variable",
-  pch = 21:22,
+  group = "pollutant",
+  pch = 16:17,
   cex = 2,
-  fill = c("dodgerblue", "tomato"),
-  col = "white",
   linear = TRUE,
   xlab = "nox (ppb)",
   ylab = "PM concentration (ug/m3)",
