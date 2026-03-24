@@ -248,7 +248,7 @@ Similar to @sec-timePlot, `scatterPlot` can also plot wind vector arrows if wind
 #| fig-cap: Scatter plot of date vs. NO~2~ with the colour scale representing O~3~. The wind flow vectors are also shown.
 #| fig-height: 4
 #| fig-width: 6
-#| out-width: 675%
+#| out-width: 75%
 scatterPlot(
   selectByDate(mydata, start = "1/6/2001", end = "5/6/2001"),
   x = "date",
