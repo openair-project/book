@@ -21,23 +21,47 @@ To run back trajectories it is necessary to download the meteorological data fil
 ```{r}
 #| label: getMet
 #| eval: false
-getMet <- function(year = 2013, month = 1,
-                   path_met = "~/TrajData/") {
+getMet <- function(
+  year = 2013,
+  month = 1,
+  path_met = file.path("~", "TrajData"),
+  skip_existing = TRUE
+) {
+  path_met <- normalizePath(path_met, mustWork = FALSE)
+  if (!dir.exists(path_met)) {
+    dir.create(path_met, recursive = TRUE, showWarnings = FALSE)
+  }
+
+  base_url <- "https://noaa-oar-arl-hysplit-pds.s3.amazonaws.com/reanalysis"
+
   for (i in seq_along(year)) {
     for (j in seq_along(month)) {
-      download.file(
-        url = paste0(
-          "https://www.ready.noaa.gov/data/archives/reanalysis/RP",
-          year[i], sprintf("%02d", month[j]), ".gbl"
-        ),
-        destfile = paste0(
-          path_met, "RP", year[i],
-          sprintf("%02d", month[j]), ".gbl"
-        ),
-        mode = "wb"
+      yr <- year[i]
+      mo <- month[j]
+
+      filename <- sprintf("RP%d%02d.gbl", yr, mo)
+      destfile <- file.path(path_met, filename)
+
+      if (skip_existing && file.exists(destfile)) {
+        message("  Skipping (already exists): ", filename)
+        next
+      }
+
+      # New S3 structure: reanalysis/{year}/{filename}
+      url <- paste0(base_url, "/", yr, "/", filename)
+      message("Downloading ", filename, " ...")
+
+      tryCatch(
+        download.file(url, destfile, mode = "wb", quiet = FALSE),
+        error = function(e) {
+          message("  Failed: ", conditionMessage(e))
+          if (file.exists(destfile)) file.remove(destfile)
+        }
       )
     }
   }
+
+  invisible(path_met)
 }
 ```
 
