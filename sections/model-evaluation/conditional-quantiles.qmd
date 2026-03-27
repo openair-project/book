@@ -168,12 +168,12 @@ traj <- importTraj("london", 2006)
 ## carry out a cluster analysis
 cl <- trajCluster(traj, method = "Angle", n.cluster = 5)
 
-## merge with orginal model eval data
-condDat <- merge(condDat, cl, by = "date")
+## join with orginal model eval data
+out <- inner_join(condDat, cl$data$traj, by = "date")
 
 ## plot it
 conditionalEval(
-  condDat,
+  out,
   obs = "O3.obs",
   mod = "O3.mod",
   statistic = "cluster",
