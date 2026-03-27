@@ -7,7 +7,7 @@ execute:
 
 ## Hello and welcome {.unnumbered}
 
-This document has been a long time coming. The [openair]{.pkg} project started with funding from the UK Natural Environment Research Council (NERC) over 10 years ago. The main aim was to fill a perceived gap in that there was a lack of a dedicated set of *easily accessible, open source* tools for analysing air quality data. At that time R was becoming increasingly popular but far, far less than it is today.
+The [openair]{.pkg} project started with funding from the UK Natural Environment Research Council (NERC) over 10 years ago. The main aim was to fill a perceived gap in that there was a lack of a dedicated set of *easily accessible, open source* tools for analysing air quality data. At that time R was becoming increasingly popular but far, far less than it is today. Earlier pdf versions of the the book tried to minimise the use of R for new users who may not have even heard of R. However, the popularity of R has increased dramatically and it is now the case that many users of [openair]{.pkg} are also using R for other purposes. This has led to a much more integrated use of R in the book. The book is now much more focused on the use of R and how to use it effectively for air quality data analysis. 
 
 The book is split into broad sections that cover common aspects of air quality data analysis.
 
@@ -25,11 +25,7 @@ The book is split into broad sections that cover common aspects of air quality d
 
 [openair]{.pkg} does not of course cover every conceivable analysis that users might be interested in, but a selection of flexible methods that should have wide appeal. However, by using R as the basis of development, users can greatly extend the types of analysis in many powerful and innovative ways.
 
-[openair]{.pkg} is a product of the time it was started and used the highly capable [lattice]{.pkg} package for plotting. This was a time before [ggplot2]{.pkg} and the ['tidyverse'](https://www.tidyverse.org). Nevertheless, the package is used extensively around the world (see downloads [here](https://openair-project.github.io/openair/)) and if anything, growing in popularity and use. The original aims of the project have been met in providing tools for academia, the private and public sectors --- all of which continue to use the software.
-
-At some point there will need to be a transition to [ggplot2]{.pkg}; in particular to capitalise on the many extensions available and which [openair]{.pkg} can benefit from.
-
-The reason for writing this book (or manual) in this form i.e. a website rather than a pdf or Word document is convenience for all involved. For me it makes it much easier to keep the information up to date and ensure that the information is reproducible. For the reader it is something that can easily be read and navigated in a browser. Where code is involved --- as it is heavily in this book --- it is very easy to use the copy icon at the top right of each code block to make it easy to copy into R. Finally, it is increasingly the case that information can be plotted interactively, which is not something that can easily be done in a pdf or Word document.
+The reason for writing this book (or manual) in this form i.e. a website rather than a pdf or Word document is convenience for all involved. For us it makes it much easier to keep the information up to date and ensure that the information is reproducible. For the reader it is something that can easily be read and navigated in a browser. Where code is involved --- as it is heavily in this book --- it is very easy to use the copy icon at the top right of each code block to make it easy to copy into R. Finally, it is increasingly the case that information can be plotted interactively, which is not something that can easily be done in a pdf or Word document.
 
 To cite [openair]{.pkg} please use:
 
