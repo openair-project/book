@@ -130,46 +130,35 @@ timeVariation(mydata,
 
 ## Output
 
-The `timeVariation` function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and the code shows how to access them.
+The `timeVariation()` function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and the code shows how to access them.
+
+The `...$plot` component is a list of individual panels, and the `...$data` component is a list of dataframes. Note that `mid`, `min` and `max` are the mean and upper/lower confidence intervals when `statistic = "mean"` and the median and upper/lower quantiles when `statistic = "median"`. Each part of the list is named after its respective panel.
 
 ```{r}
 #| label: timevarOutput
-#| fig.keep: none
-myOutput <- timeVariation(mydata, pollutant = "so2")
-## show the first part of the day/hour variation
-## note that value = mean, and Upper/Lower the 95% confid. intervals
-head(myOutput$data$day.hour)
+# create plot
+myOutput <- timeVariation(mydata, pollutant = "so2", plot = FALSE)
+
+# see what's available
+myOutput$data$subsets
+
+# get an element of the TV plot
+hour_weekday_df <- myOutput$data$hour.weekday
+
+# print
+head(hour_weekday_df)
 ```
-
-```{r}
-#| label: timevarOutput2
-#| fig.keep: none
-## can make a new data frame of this data e.g.
-day.hour <- myOutput$data$day.hour
-head(day.hour)
-```
-
-All the numerical results are given by:
-
-```{r}
-#| label: timeVarout
-#| eval: false
-myOutput$data$day.hour ## are the weekday and hour results
-myOutput$data$hour ## are the diurnal results
-myOutput$data$day ## are the weekday results
-myOutput$data$month ## are the monthly results
-```
-
-It is also possible to plot the individual plots that make up the (four) plots produced by `timeVariation`:
+It is also possible to plot any of the individual plots that make up `timeVariation()`.
 
 ```{r}
 #| eval: false
-## just the diurnal variation
 plot(myOutput, subset = "hour")
-## day and hour
-plot(myOutput, subset = "day.hour")
-## weekday variation
-plot(myOutput, subset = "day")
-## monthly variation
-plot(myOutput, subset = "month")
+# ...or plot(myOutput$plot$hour)
 ```
+
+Note if you are only interested in one panel, the `variationPlot()` function may be more suitable. It has many of the same arguments as `timeVariation()`, though has the added advantage of being able to take two `type` arguments.
+
+```{r}
+variationPlot(mydata, pollutant = "so2", x = "hour", type = c("weekend", "season"))
+```
+

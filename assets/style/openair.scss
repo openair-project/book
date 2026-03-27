@@ -1,44 +1,18 @@
+/*-- scss:defaults --*/
+
+$primary: #5E4FA2 !default;
+$font-size-root: 18px !default;
+
+/*-- scss:rules --*/
+
 @import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
-.rmdcomment {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
-  background: #f5f5f5;
-  position:relative;
+figure.quarto-float div.leaflet-control {
+  text-align: left;
 }
 
-.rmdcomment:before {
-    content: "\f075";
-    font-family: FontAwesome;
-    left:10px;
-    position:absolute;
-    top:0px;
-    font-size: 45px;
- }
- 
-.question {
-  padding: 1em 1em 1em 5em;
-  margin-bottom: px;
-  background: #ecf0f9   ;
-  border:solid 1.5px #2c4b8f;
-  border-radius: 0px;
-  box-shadow:0px 0px 0px #000;
-  position:relative;
-}
-
-.question:before {
-  font-family: "FontAwesome";
-  content: "\f19d";
-  left:5px;
-  right:1px;
-  font-weight: 900;
-  position:absolute;
-  top:0px;
-  font-size: 45px;
-}
- 
 .pkg {
   padding: 0 2px;
   margin: 0 1px;
@@ -49,8 +23,4 @@
 .pkg a:hover, .pkg a:focus {
   border: none;
   padding: 0 2px !important;
-}
-
-figure.quarto-float div.leaflet-control {
-  text-align: left;
 }

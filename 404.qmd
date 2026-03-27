@@ -26,6 +26,17 @@ You may want to try searching to find the page's new location.
 #| message: false
 #| warning: false
 #| fig-align: center
-#| fig-height: 3
-openair::polarPlot(head(openair::mydata), key = FALSE)
+#| fig-height: 4
+openair::polarPlot(
+  head(openair::mydata, n = 5),
+  key.position = "none",
+  plot = FALSE
+)$plot +
+  ggplot2::annotate(
+    geom = "text",
+    x = I(0.5),
+    y = I(0.5),
+    label = "?",
+    size = 50
+  )
 ```

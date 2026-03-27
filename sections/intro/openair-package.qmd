@@ -360,9 +360,8 @@ For more detailed information on using appropriate colours, have a look at the [
 ```{r}
 #| label: fig-colorspace
 #| fig-cap: A demonstration of the [colorspace]{.pkg} package in use with [openair]{.pkg}.
-#| fig.width: 4.5
-#| fig.height: 4.5
-#| out.width: 50%
+#| fig.width: 6
+#| fig.height: 6
 #| fig-align: center
 library(colorspace)
 library(openair)
@@ -377,46 +376,25 @@ Users can override this option by setting it to FALSE.
 
 ## Multiple plots on a page {#sec-multiple-plots-page}
 
-We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} makes this a bit easier. Note that because [openair]{.pkg} uses [lattice]{.pkg} graphics the base graphics `par` settings will not work.
+We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} makes this a bit easier. As [openair]{.pkg} uses the [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
 
-It is possible to arrange plots based on a column $\times$ row layout. Let's put two plots side by side (2 columns, 1 row). First it is necessary to assign the plots to a variable:
-
-```{r}
-#| eval: false
-a <- windRose(mydata)
-b <- polarPlot(mydata)
-```
-
-Now we can plot them using the `split` option:
+Let's put two plots side by side (2 columns, 1 row). First it is necessary to assign the plots to a variable:
 
 ```{r}
-#| eval: false
-print(a, split = c(1, 1, 2, 1))
-print(b, split = c(2, 1, 2, 1), newpage = FALSE)
+#| include: false
+a <- windRose(mydata, key.position = "bottom")
+b <- polarPlot(mydata, key.position = "bottom")
 ```
 
-In the code above for the `split` option, the last two numbers give the overall layout (2, 1) --- 2 columns, 1 row. The first two numbers give the column/row index for that particular plot. The last two numbers remain constant across the series of plots being plotted.
-
-There is one difficulty with plots that already contain sub-plots such as `timeVariation` where it is necessary to identify the particular plot of interest (see the `timeVariation` help for details). However, say we want a polar plot (`b` above) and a diurnal plot:
+Now let's load [patchwork]{.pkg} and simply add the two plots together.
 
 ```{r}
-#| eval: false
-c <- timeVariation(mydata)
-print(b, split = c(1, 1, 2, 1))
-print(c, split = c(2, 1, 2, 1), subset = "hour", newpage = FALSE)
+library(patchwork)
+
+a$plot + b$plot
 ```
 
-For more control it is possible to use the `position` argument. `position` is a vector of 4 numbers, c(xmin, ymin, xmax, ymax) that give the lower-left and upper-right corners of a rectangle in which the plot is to be positioned. The coordinate system for this rectangle is \[0--1\] in both the x and y directions.
-
-As an example, consider plotting the first plot in the lower left quadrant and the second plot in the upper right quadrant:
-
-```{r}
-#| eval: false
-print(a, position = c(0, 0, 0.5, 0.5), more = TRUE)
-print(b, position = c(0.5, 0.5, 1, 1))
-```
-
-The position argument gives more fine control over the plot location.
+[patchwork]{.pkg} is very powerful package for arranging plots, and actually powers functions like `timeVariation()` under-the-hood. Learn more about this package in its own [package documentation](https://patchwork.data-imaginist.com/). More is also written about arranging plots like this in the [customisation appendix](../appendices/appendix-annotate.qmd).
 
 ## Saving plots and data
 
@@ -445,47 +423,30 @@ Plots are slightly more complicated. If you do use RStudio, the simplest way to 
 
 ![A screenshot of the 'Export' menu of the RStudio plots pane.](../../assets/media/rstudio-saving.png){#fig-rstudiosave}
 
-This may be useful in some scenarios, but using the RStudio GUI is not very reproducible. For sake of example, say you make a new set of plots every week for a weekly report. You may not want to have to repeatedly go into the plots pane, click 'export', set the correct dimensions, and so on every time a new plot needs to be saved. It would be preferable if your script created the plots *and* saved them! 
+This may be useful in some scenarios, but using the RStudio GUI is not very reproducible. For sake of example, say you make a new set of plots every week for a weekly report. You may not want to have to repeatedly go into the plots pane, click 'export', set the correct dimensions, and so on every time a new plot needs to be saved. It would be preferable if your script created the plots *and* saved them!
 
-To write a script to save a plot, use the following approach:
-
-1. **Create your [openair]{.pkg} plot**, making sure to assign it (`<-`) to a variable name.
-
-2. **Open a graphics device**, such as `png()`, `jpeg()`, `png()`, and so on. This is the stage where you'll set parameters like the width, height, and resolution. You'll also need to define a path, much like when you save data. As before, give it an evocative name - `"polarplot_marylebone_nox.png"` is a lot more descriptive than `"myplot.png"`. You'll note that a file is created in your working directory, but it will be blank for the moment.
-
-3. **Print the plot**. In [openair]{.pkg}, this can typically achieved by simply printing the whole [openair]{.pkg} object. Note that the plot will not appear in your plots pane in RStudio - it is being printed to the file you've created.
-
-4. **Close the graphics device**. This is simply achieved using `dev.off()` regardless of your chosen device, and tells R to close the connection to the device. The image of the plot will now appear in the file you created in step 2.
-
-::: {.column-margin}
-Many R users will be familiar with `ggplot2::ggsave()` for saving plots. [openair]{.pkg} predates [ggplot2]{.pkg}, so this function will not work with [openair]{.pkg} plots.
-:::
+The easiest way to save plots is using `ggplot2::ggsave()`.
 
 ```{r}
 #| label: demo-saveplot
 #| eval: false
 library(openair)
+library(ggplot2)
 
-# STEP 1: Make a polarPlot
-polar <- polarPlot(mydata, "nox")
+# Make a polarPlot. Note that `plot = FALSE` stops it from being printed when
+# the object is created, but is optional here
+polar <- polarPlot(mydata, "nox", plot = FALSE)
 
-# STEP 2: Open a graphics device
-png(
-  filename = "polarplot_marylebone_nox.png",
-  width = 6,
+# save to file
+ggsave(
+  filename = "polarplot_marylebone_nox.png", 
+  plot = polar$plot,
+  width = 6, 
   height = 6,
-  units = "in",
-  res = 300
+  dpi = 300,
+  units = "in"
 )
-
-# STEP 3: Print the plot
-polar
-
-# STEP 4: Turn off the graphics device
-dev.off()
 ```
-
-You can read about R's plotting devices by reading the "help" page for the `png()` function - type `?png` into your console to bring it up.
 
 The [openairmaps]{.pkg} package can create interactive HTML maps. To save these, you need to use the `htmlwidgets::saveWidget()` function. This is simpler than saving a static plot as you will not have to worry about resolution or dimensions. 
 

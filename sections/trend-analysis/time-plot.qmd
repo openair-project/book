@@ -197,10 +197,9 @@ If wind speed `ws` and wind direction `wd` are available they can be used in plo
 timePlot(
   head(mydata, 48),
   pollutant = c("nox", "no2"),
-  windflow = list(
-    scale = 0.1,
-    lwd = 2,
-    col = "turquoise4"
+  windflow = windflowOpts(
+    linewidth = 1,
+    colour = "turquoise4"
   ),
   lwd = 3,
   group = FALSE,

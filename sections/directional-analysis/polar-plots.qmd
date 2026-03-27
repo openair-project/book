@@ -124,9 +124,6 @@ library(tidyverse)
 ```{r}
 #| label: fig-polarPlot
 #| fig-cap: Default use of the `polarPlot` function applied to Marylebone Road NO~x~ concentrations.
-#| fig-width: 5
-#| fig-height: 4.5
-#| out-width: 50%
 polarPlot(mydata, pollutant = "nox")
 ```
 
@@ -141,10 +138,6 @@ The default however is to down-weight the bins with few data points when fitting
 ```{r}
 #| label: fig-polarPlot2
 #| fig-cap: Example plots using the `polarPlot` function with different options for the mean concentration of NO~x~.
-#| fig-height: 5
-#| fig-width: 5
-#| out-width: 50%
-## NOx plot
 polarPlot(mydata,
   pollutant = "nox", col = "turbo",
   key.position = "bottom",
@@ -156,9 +149,6 @@ polarPlot(mydata,
 ```{r}
 #| label: fig-polarPlot3
 #| fig-cap: Example plots using the `polarPlot` function for the mean concentration of SO~2~.
-#| fig-height: 5
-#| fig-width: 5
-#| out-width: 50%
 polarPlot(mydata, pollutant = "so2")
 ```
 
@@ -182,9 +172,6 @@ Arguably a better approach would be to calculate the ratio (slope) from a regres
 ```{r}
 #| label: fig-polarRatio
 #| fig-cap: Bivariate polar plot of the ratio of SO~2~/NO~x~.
-#| fig-height: 5
-#| fig-width: 5
-#| out-width: 50%
 polarPlot(mydata, pollutant = "ratio", main = "so2/nox ratio")
 ```
 
@@ -226,9 +213,6 @@ An example for SO~2~ concentrations is shown in @fig-polarNWR, which can be comp
 ```{r}
 #| label: fig-polarNWR
 #| fig-cap: '`polarPlot` of SO~2~ concentrations at Marylebone Road based on the NWR approach.'
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 50%
 polarPlot(mydata, pollutant = "so2", statistic = "nwr")
 ```
 
@@ -239,10 +223,8 @@ The conditional probability functions (CPF) was described in @sec-CPF in the con
 ```{r}
 #| label: fig-polarPlotCPF
 #| fig-cap: '`polarPlot` of SO~2~ concentrations at Marylebone Road based on the CPF function.'
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 50%
-polarPlot(mydata,
+polarPlot(
+  mydata,
   pollutant = "so2",
   statistic = "cpf",
   percentile = 90
@@ -338,10 +320,8 @@ A simple scatter plot between PM~2.5~ and PM~10~ strongly suggests a 1:1 relatio
 ```{r}
 #| label: fig-polarPair
 #| fig-cap: Use of the `polarPlot` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the robust slope is calculated.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 60%
-polarPlot(har,
+polarPlot(
+  har,
   poll = c("pm2.5", "pm10"),
   statistic = "robust_slope",
   col = "turbo",
@@ -358,12 +338,7 @@ The York regression option requires special mention. In ordinary linear regressi
 ```{r}
 #| label: fig-polarPairYork
 #| fig-cap: Use of the `polarPlot` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the York regression slope is calculated.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 60%
-
 # assign simple / fixed uncertainties
-
 har <- mutate(har, pm10_error = 2, pm2.5_error = 2)
 
 polarPlot(har,
@@ -398,10 +373,6 @@ We can now generate a polar plot of the difference between the two years (2019 w
 ```{r}
 #| label: fig-polarDiff-SO2
 #| fig.cap: A difference plot for SO~2~ concentrations at Port Talbot between 2012 and 2019.
-#| fig-width: 5
-#| fig-height: 4.5
-#| out-width: 60%
-#| fig.keep: 'last'
 polarDiff(
   before = selectByDate(port_talbot, year = 2012),
   after = selectByDate(port_talbot, year = 2019),
@@ -414,10 +385,6 @@ polarDiff(
 ```{r}
 #| label: fig-polarDiff-PM10
 #| fig.cap: A difference plot for PM~10~ concentrations at Port Talbot between 2012 and 2019.
-#| fig-width: 5
-#| fig-height: 4.5
-#| out-width: 60%
-#| fig.keep: 'last'
 polarDiff(
   before = selectByDate(port_talbot, year = 2012),
   after = selectByDate(port_talbot, year = 2019),
@@ -505,17 +472,12 @@ The example given below is for concentrations of SO~2~, shown in @fig-polarPlot3
 #| fig.cap: Use of the `polarCluster` function applied to SO~2~ concentrations at Marylebone Road. In this case 2 to 10 clusters have been chosen.
 #| fig-width: 7
 #| fig-height: 7
-#| fig-keep: 'last'
 polarCluster(mydata, pollutant = "so2", n.clusters = 2:10, cols = "Set2")
 ```
 
 ```{r}
 #| label: fig-polarClustn6
 #| fig-cap: Use of the `polarCluster` function applied to SO~2~ concentrations at Marylebone Road. In this case 8 clusters have been chosen.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 60%
-#| fig-keep: 'last'
 results <- polarCluster(mydata,
   pollutant = "so2",
   n.clusters = 8,
@@ -552,10 +514,14 @@ Now other [openair]{.pkg} analysis functions can be used to analyse the results.
 #| fig-cap: Temporal variation in SO~2~ split by cluster.
 #| fig-width: 9
 #| fig-height: 7
-timeVariation(results,
-  pollutant = "so2", group = "cluster",
+timeVariation(
+  results,
+  pollutant = "so2",
+  group = "cluster",
   key.columns = 4,
-  col = "Set2", ci = FALSE, lwd = 3
+  col = "Set2",
+  ci = FALSE,
+  lwd = 3
 )
 ```
 
@@ -681,6 +647,6 @@ polarMap(openairmaps::polar_data,
 
 Note that if you are using the `importUKAQ()` function it is useful to add the option `meta = TRUE`, which will return the latitude and longitude of the site together with the air quality data.
 
-[openairmaps]{.pkg} isn't limited to just `polarMap` --- almost any kind of "directional analysis" plot can be placed on a map. There are many similar functions which correspond to other [openair]{.pkg} plotting functions; `annulusMap`, `freqMap`, `percentileMap`, `polarMap`, `pollroseMap`, and `windroseMap`.
+[openairmaps]{.pkg} isn't limited to just `polarMap()` --- almost any kind of "directional analysis" plot can be placed on a map. There are many similar functions which correspond to other [openair]{.pkg} plotting functions; `annulusMap()`, `freqMap()`, `percentileMap()`, `polarMap()`, `pollroseMap()`, `windroseMap()`, and `diffMap()`.
 
 For more information about using [openairmaps]{.pkg} to create maps with polar plots as markers, please refer to the [Directional Analysis Maps Page](../maps/maps-polar.qmd).

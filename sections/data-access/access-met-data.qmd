@@ -56,11 +56,10 @@ dublin_met
 Plot a wind rose.
 
 ```{r}
-#| out-width: 50%
-#| fig-width: 5
-#| fig-height: 5
 #| label: fig-dublin-rose
 #| fig-cap: Example wind rose for Dublin Airport data.
+#| fig.width: 6
+#| fig.height: 6
 windRose(dublin_met)
 ```
 
