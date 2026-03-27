@@ -18,7 +18,9 @@ First the data are loaded:
 
 ```{r}
 #| label: loadCMAQ
-load(url("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/CMAQozone.RData"))
+load(url(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/CMAQozone.RData"
+))
 class(CMAQ.KCL$date) <- c("POSIXct", "POSIXt")
 head(CMAQ.KCL)
 ```
@@ -27,7 +29,7 @@ The data consists of hourly observations of O~3~ in μg m^-3^ at 15 rural O~3~ s
 
 [^conditional-quantiles-1]: We thank Dr Sean Beevers and Dr Nutthida Kitwiroon for access to these data.
 
-We firs consider an example of the use of conditional quantiles applied to the KCL CMAQ model for 15 rural O~3~ monitoring sites in 2006, for hourly data. The blue line shows the results for a perfect model. In this case the observations cover a range from 0 to 270 μg m^-3^. The red line shows the median values of the predictions and corresponding observations. The maximum predicted value is 125 μg m^-3^, somewhat less than the maximum observed value. The shading shows the predicted quantile intervals i.e. the 25/75th and the 10/90th. A perfect model would lie on the blue line and have a very narrow spread. There is still some spread because even for a perfect model a specific quantile interval will contain a range of values. However, for the number of bins used in this plot the spread will be very narrow. Finally, the histogram shows the counts of predicted values.
+We first consider an example of the use of conditional quantiles applied to the KCL CMAQ model for 15 rural O~3~ monitoring sites in 2006, for hourly data. The blue line shows the results for a perfect model. In this case the observations cover a range from 0 to 270 μg m^-3^. The red line shows the median values of the predictions and corresponding observations. The maximum predicted value is 125 μg m^-3^, somewhat less than the maximum observed value. The shading shows the predicted quantile intervals i.e. the 25/75th and the 10/90th. A perfect model would lie on the blue line and have a very narrow spread. There is still some spread because even for a perfect model a specific quantile interval will contain a range of values. However, for the number of bins used in this plot the spread will be very narrow. Finally, the histogram shows the counts of predicted values.
 
 ```{r}
 #| label: fig-conditionaQ1
@@ -36,6 +38,7 @@ We firs consider an example of the use of conditional quantiles applied to the K
 #| fig-height: 5
 #| out-width: 70%
 library(openair) # load the package
+library(tidyverse) # for data manipulation
 conditionalQuantile(CMAQ.KCL, obs = "o3", mod = "mod")
 ```
 
@@ -46,7 +49,8 @@ A more informative analysis can be undertaken by considering conditional quantil
 #| fig-cap: Conditional quantiles by site for 15 O~3~ monitoring sites in the UK.
 #| fig-width: 12
 #| fig-height: 12
-conditionalQuantile(CMAQ.KCL,
+conditionalQuantile(
+  CMAQ.KCL,
   obs = "o3",
   mod = "mod",
   type = "site"
@@ -63,9 +67,11 @@ Of course, it is also easy to plot by hour of the day, day of the week, by dayli
 #| fig-width: 8
 #| fig-height: 8
 #| out-width: 75%
-conditionalQuantile(subset(CMAQ.KCL, site == "Lullington.Heath"),
+conditionalQuantile(
+  filter(CMAQ.KCL, site == "Lullington.Heath"),
   obs = "o3",
-  mod = "mod", type = "season"
+  mod = "mod",
+  type = "season"
 )
 ```
 
@@ -85,21 +91,13 @@ Far more insight can be gained into model performance through conditioning using
 
 As an example, similar data to that described above from CMAQ have been used as an example.
 
-```{r}
-#| echo: false
-load(url("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/condDat.RData"))
-```
-
-A subset of the data for the North Kensington site can be imported as shown below.
+A subset of the data for the North Kensington site can be imported as shown below. The file contains observed and modelled hourly values for O~3~, NO~x~, wind speed, wind direction, temperature and relative humidity.
 
 ```{r}
-#| eval: false
-load(url("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/condDat.RData"))
+load(url(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/condDat.RData"
+))
 
-The file contains observed and modelled hourly values for O~3~, NO~x~, wind speed, wind direction, temperature and relative humidity.
-
-```{r}
-#| label: headcondDat
 head(condDat)
 ```
 
@@ -108,12 +106,14 @@ The `conditionalEval` function can be used straightforwardly to provide informat
 ```{r}
 #| label: fig-condDatWS
 #| fig-cap: Conditional quantiles at for O~3~ concentrations (left plot). On the right is a plot showing how the wind speed varies across the O~3~ prediction intervals.
-#| fig-width: 15
-#| fig-height: 5
+#| fig-width: 10
+#| fig-height: 6
 #| fig-keep: last
 #| column: screen-inset-right
-conditionalEval(condDat,
-  obs = "O3.obs", mod = "O3.mod",
+conditionalEval(
+  condDat,
+  obs = "O3.obs",
+  mod = "O3.mod",
   statistic = "ws.obs",
   col.var = "Set3"
 )
@@ -124,18 +124,16 @@ In an extension to @fig-condDatWS it is possible to derive information on the si
 In essence the `conditionalEval` function provides more information on model performance that can help better diagnose potential problems. Clearly, there are many other ways in which the results can be analysed, which will depend on the data available.
 
 ```{r}
-#| fig.width: 15.0
-#| fig.height: 7.0
-#| fig.keep: last
-#| fig.cap: ''
 #| label: fig-condDat
 #| fig-cap: Conditional quantiles at for O~3~ concentrations (left plot). On the right is the model performance for wind speed and NO~x~ predictions, which in this case is for the Normalised Mean Bias.
-#| fig-width: 15
-#| fig-height: 7
+#| fig-width: 10
+#| fig-height: 6
 #| fig-keep: last
 #| column: screen-inset-right
-conditionalEval(condDat,
-  obs = "O3.obs", mod = "O3.mod",
+conditionalEval(
+  condDat,
+  obs = "O3.obs",
+  mod = "O3.mod",
   var.obs = c("NOx.obs", "ws.obs"),
   var.mod = c("NOx.mod", "ws.mod"),
   statistic = "NMB",
@@ -148,11 +146,14 @@ A plot using temperature predictions shows that for most of the range in O~3~ pr
 ```{r}
 #| label: condDatTemp
 #| eval: false
-conditionalEval(condDat,
-  obs = "O3.obs", mod = "O3.mod",
+conditionalEval(
+  condDat,
+  obs = "O3.obs",
+  mod = "O3.mod",
   var.obs = c("temp.obs", "ws.obs"),
   var.mod = c("temp.mod", "ws.mod"),
-  statistic = "NMB", var.names = c("temperature", "wind speed")
+  statistic = "NMB",
+  var.names = c("temperature", "wind speed")
 )
 ```
 
@@ -171,8 +172,10 @@ cl <- trajCluster(traj, method = "Angle", n.cluster = 5)
 condDat <- merge(condDat, cl, by = "date")
 
 ## plot it
-conditionalEval(condDat,
-  obs = "O3.obs", mod = "O3.mod",
+conditionalEval(
+  condDat,
+  obs = "O3.obs",
+  mod = "O3.mod",
   statistic = "cluster",
   col.var = "Set3"
 )

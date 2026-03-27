@@ -44,7 +44,8 @@ The code required to make @fig-polarFreqMean and @fig-polarFreqWeightedMean is s
 #| fig-cap: Use of `polarFreq` function to plot mean SO2 concentrations (ppb) by wind speed/directions and year.
 #| fig-width: 8
 #| fig-height: 8
-polarFreq(mydata,
+polarFreq(
+  mydata,
   pollutant = "so2",
   type = "year",
   statistic = "mean",
@@ -58,7 +59,8 @@ polarFreq(mydata,
 #| fig-width: 8
 #| fig-height: 8
 # weighted mean SO2 concentrations
-polarFreq(mydata,
+polarFreq(
+  mydata,
   pollutant = "so2",
   type = "year",
   statistic = "weighted.mean",
@@ -71,7 +73,8 @@ Users are encouraged to try out other plot options. However, one potentially use
 ```{r}
 #| eval: false
 # wind rose for just 2000 and 2003
-polarFreq(selectByDate(mydata, year = c(2000, 2003)),
+polarFreq(
+  selectByDate(mydata, year = c(2000, 2003)),
   cols = "turbo",
   type = "year"
 )
@@ -87,10 +90,13 @@ While @fig-polarFreqAttr is useful --- e.g. it clearly shows that concentrations
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-polarFreq(mydata,
-  pollutant = "nox", ws.int = 30,
+polarFreq(
+  mydata,
+  pollutant = "nox",
+  ws.int = 30,
   statistic = "weighted.mean",
-  offset = 80, trans = FALSE,
+  offset = 60,
+  trans = FALSE,
   col = "heat"
 )
 ```

@@ -36,10 +36,13 @@ A slightly more interesting plot is shown in @fig-percentileRoseSO2 for SO~2~ co
 #| fig-width: 5
 #| fig-height: 5
 #| out-width: 60%
-percentileRose(mydata,
+percentileRose(
+  mydata,
   pollutant = "so2",
   percentile = c(25, 50, 75, 90, 95, 99, 99.9),
-  col = "brewer1", key.position = "right", smooth = TRUE
+  col = "brewer1",
+  key.position = "right",
+  smooth = TRUE
 )
 ```
 
@@ -52,10 +55,12 @@ Lots more insight can be gained by considering how percentile values vary by oth
 #| fig-cap: A `percentileRose` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction.The plot shows the variation by season and whether  it is nighttime or daylight hours.
 #| fig-width: 10
 #| fig-height: 6
-percentileRose(mydata,
-  type = c("season", "daylight"),
+percentileRose(
+  mydata,
+  type = c("daylight", "season"),
   pollutant = "o3",
-  col = "Set3", mean.col = "black"
+  col = "Set3",
+  mean.col = "black"
 )
 ```
 
@@ -69,10 +74,13 @@ The `percentileRose` function can also plot conditional probability functions (C
 #| fig-height: 4.5
 #| fig-width: 4.5
 #| out-width: 60%
-percentileRose(mydata,
-  poll = "so2", percentile = 95,
+percentileRose(
+  mydata,
+  poll = "so2",
+  percentile = 95,
   method = "cpf",
-  col = "darkorange", smooth = TRUE
+  col = "darkorange",
+  smooth = TRUE
 )
 ```
 
@@ -83,9 +91,12 @@ It is easy to plot several species on the same plot and this works well because 
 #| fig-cap: A CPF plot of many pollutants  at Marylebone Road.
 #| fig-width: 7
 #| fig-height: 5
-percentileRose(mydata,
+percentileRose(
+  mydata,
   pollutant = c("nox", "so2", "o3", "co", "pm10", "pm25"),
-  percentile = 95, method = "cpf", col = "darkorange",
+  percentile = 95,
+  method = "cpf",
+  col = "darkorange",
   layout = c(3, 2)
 )
 ```
