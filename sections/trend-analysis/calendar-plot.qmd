@@ -19,8 +19,8 @@ The function is called in the usual way. As a minimum, a data frame, pollutant a
 ```{r}
 #| label: fig-calendarPlot
 #| fig-cap: A `calendarPlot()` for O~3~ concentrations in 2003.
-#| fig-width: 6
-#| fig-height: 8
+#| fig-width: 8
+#| fig-height: 6
 library(openair)
 calendarPlot(mydata, pollutant = "o3", year = 2003)
 ```
@@ -51,16 +51,12 @@ To show wind angle, scaled to wind speed (@fig-calendarPlot2).
 ```{r}
 #| label: fig-calendarPlot2
 #| fig-cap: A `calendarPlot()` for O~3~ concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e. the longer the arrow, the higher the wind speed. It shows for example high O~3~ concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
-#| fig-height: 8
-#| fig-width: 6
-#| out-width: 80%
-calendarPlot(mydata,
-  pollutant = "o3", year = 2003,
-  annotate = "ws"
-)
+#| fig-width: 8
+#| fig-height: 6
+calendarPlot(mydata, pollutant = "o3", year = 2003, windflow = TRUE)
 ```
 
-Note again that `selectByDate` can be useful. For example, to plot select months:
+Note again that `selectByDate()` can be useful. For example, to plot select months:
 
 ```{r}
 #| eval: false
@@ -80,11 +76,14 @@ calendarPlot(
 #| fig-cap: A `calendarPlot()` for NO~2~ concentrations in 2003 with a user-defined categorical scale.
 #| fig-width: 8
 #| fig-height: 6
-calendarPlot(mydata,
-  pollutant = "no2", year = 2003,
+calendarPlot(
+  mydata,
+  pollutant = "no2",
+  year = 2003,
   breaks = c(0, 50, 100, 150, 1000),
   labels = c("Very low", "Low", "High", "Very High"),
-  cols = "increment", statistic = "max"
+  cols = "increment",
+  statistic = "max"
 )
 ```
 
@@ -94,8 +93,10 @@ The user can explicitly set each colour interval:
 #| label: fig-calendarPlotCols
 #| eval: false
 #| fig-cap: A `calendarPlot()` with user-defined colour intervals.
-calendarPlot(mydata,
-  pollutant = "no2", year = 2003,
+calendarPlot(
+  mydata,
+  pollutant = "no2",
+  year = 2003,
   breaks = c(0, 50, 100, 150, 1000),
   labels = c("Very low", "Low", "High", "Very High"),
   cols = c("lightblue", "forestgreen", "yellow", "red"),
@@ -111,14 +112,26 @@ Note that in the case of categorical scales it is possible to define the breaks 
 #| fig-cap: A `calendarPlot()` with user-defined labels.
 breaks <- c(0, 34, 66, 100, 121, 141, 160, 188, 214, 240, 500)
 labels <- c(
-  "Low.1", "Low.2", "Low.3", "Moderate.4", "Moderate.5", "Moderate.6",
-  "High.7", "High.8", "High.9", "Very High.10"
+  "Low.1",
+  "Low.2",
+  "Low.3",
+  "Moderate.4",
+  "Moderate.5",
+  "Moderate.6",
+  "High.7",
+  "High.8",
+  "High.9",
+  "Very High.10"
 )
 
-calendarPlot(mydata,
-  pollutant = "no2", year = 2003,
-  breaks = breaks, labels = labels,
-  cols = "turbo", statistic = "max"
+calendarPlot(
+  mydata,
+  pollutant = "no2",
+  year = 2003,
+  breaks = breaks,
+  labels = labels,
+  cols = "turbo",
+  statistic = "max"
 )
 ```
 
@@ -154,6 +167,8 @@ In the code below the labels and breaks are defined for each pollutant to make i
 ```{r}
 #| label: fig-AQIndex
 #| fig-cap: A DAQI `calendarPlot()`
+#| fig-width: 8
+#| fig-height: 6
 
 ## import UK daily air quality info
 pt4_daqi <-
@@ -188,6 +203,9 @@ calendarPlot(
   # set labels (above)
   labels = labels,
   # built-in DAQI colours
-  cols = "daqi"
+  cols = "daqi",
+  # nicer key title
+  key.header = "PM10",
+  key.footer = "DAQI"
 )
 ```

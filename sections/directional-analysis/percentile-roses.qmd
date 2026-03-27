@@ -21,9 +21,6 @@ The first example is a basic plot of percentiles of O~3~ shown in @fig-percentil
 ```{r}
 #| label: fig-percentileRose1
 #| fig-cap: A `percentileRose` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction. It shows for example that higher concentrations occur for northerly winds, as expected at this location. However, it also shows, for example the actual value of the 95th percentile O~3~ concentration.
-#| fig-width: 5
-#| fig-height: 5
-#| out-width: 60%
 library(openair)
 percentileRose(mydata, pollutant = "o3")
 ```

@@ -710,7 +710,7 @@ An R package called [openairmaps]{.pkg} has been developed to plot trajectories 
 install.packages("openairmaps")
 ```
 
-The function `trajMap` is the [openairmaps]{.pkg} equivalent of the `trajPlot` function. The package comes with some example data (`traj_data`) that can be used as a template for using other `importTraj` outputs.
+The function `trajMap()` is the [openairmaps]{.pkg} equivalent of the `trajPlot()` function. The package comes with some example data (`traj_data`) that can be used as a template for using other `importTraj()` outputs.
 
 First, load the package.
 
@@ -719,17 +719,16 @@ First, load the package.
 library(openairmaps)
 ```
 
-Plot an interactive map. Try clicking on the individual
+Plot an interactive map. Try clicking on the individual points to see information like the air mass height, pressure and PM~10~ concentration.
 
 ```{r}
 #| label: fig-trajInterMap
 #| cache: false
 #| fig-cap: Interactive map of trajectories with the default map.
-#| results: asis
 trajMap(traj_data, colour = "pm10")
 ```
 
-The `trajMap` function allows for control of many parts of the [leaflet]{.pkg} map. For example, you can provide one (or more) different base map(s) --- there are many! You can also specify a "control" column, which will allow you to show and hide certain trajectory paths. This is nicely showcased using output from the `trajCluster` function.
+The `trajMap()` function allows for control of many parts of the [leaflet]{.pkg} map. For example, you can provide one (or more) different base map(s) --- there are many! You can also specify a "control" column, which will allow you to show and hide certain trajectory paths. This is nicely showcased using output from the `trajCluster()` function.
 
 ```{r}
 #| fig-show: hide
@@ -740,7 +739,6 @@ clustdata <- trajCluster(traj_data)
 #| label: fig-trajInterMap2
 #| cache: false
 #| fig-cap: Interactive map of clustered trajectories on a new basemap.
-#| results: asis
 trajMap(
   data = clustdata$data$traj,
   colour = "cluster",
@@ -749,7 +747,7 @@ trajMap(
 )
 ```
 
-[openairmaps]{.pkg} also contains an equivalent to `trajLevel`. `trajlevelMap` takes many of the same arguments as `trajLevel` and works with all `statistic` types, but returns an interactive map. Try hovering over and clicking on the tiles.
+[openairmaps]{.pkg} also contains an equivalent to `trajLevel()`. `trajlevelMap()` takes many of the same arguments as `trajLevel()` and works with all `statistic` types, but returns an interactive map. Try hovering over and clicking on the tiles.
 
 ```{r}
 #| label: fig-trajInterMap3

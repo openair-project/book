@@ -5,41 +5,41 @@ project:
 book:
   title: "The openair book"
   subtitle: "A Guide to the Analysis of Air Pollution Data"
-  cover-image: "assets/media/plume.png"
   author: 
   - David C Carslaw
   - Jack Davison
-  date: today
-  date-format: long
-  site-url: "https://openair-project.github.io/book/"
-  repo-url: https://github.com/openair-project/book/
-  repo-branch: main
-  repo-actions: [edit]
-  favicon: assets/media/favicon.png
-  sharing: [twitter, facebook, linkedin]
   reader-mode: true
   
-  page-footer:
-    border: true
-    left: |
-      This book was built with <a href="https://quarto.org/">Quarto</a>
-    center: |
-      Part of the <a href='https://github.com/openair-project'>openair project</a>
-    right: |
-      This work is licensed under a [CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/).
+  favicon: assets/media/plume.png
+  site-url: https://openair-project.github.io/book/
+  repo-url: https://github.com/openair-project/book/
+  repo-branch: main
+  repo-actions: [edit, issue]
+  sharing: [twitter, facebook, linkedin]
+  date: today
+  date-format: long
 
   sidebar: 
     search: true
     logo: assets/media/plume.png
-    
+    collapse-level: 1
+
+  page-footer:
+    left: |
+      The openair book is part of the <a href='https://github.com/openair-project'>openair project</a>
+    right: |
+      This work is licensed under a [CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/).
+
   chapters:
     - index.qmd
     - sections/intro/intro.qmd
     - sections/intro/openair-package.qmd
+    
     - part: "Data Access"
       chapters:
         - sections/data-access/UK-air-quality-data.qmd
         - sections/data-access/access-met-data.qmd
+        
     - part: "Directional Analysis"
       chapters:
         - sections/directional-analysis/wind-roses.qmd
@@ -48,6 +48,7 @@ book:
         - sections/directional-analysis/polar-plots.qmd
         - sections/directional-analysis/polar-annulus.qmd
         - sections/directional-analysis/trajectory-analysis.qmd
+        
     - part: "Time Series and Trends"
       chapters:
         - sections/trend-analysis/time-plot.qmd
@@ -58,27 +59,33 @@ book:
         - sections/trend-analysis/smooth-trend.qmd
         - sections/trend-analysis/run-regression.qmd
         - sections/trend-analysis/trend-level.qmd
+        
     - part: "Model Evaluation"
       chapters:
         - sections/model-evaluation/mod-stats.qmd
         - sections/model-evaluation/taylor-diagram.qmd
         - sections/model-evaluation/conditional-quantiles.qmd
+        
     - part: "Interactive Maps"
       chapters:
         - sections/maps/maps-overview.qmd
         - sections/maps/maps-network.qmd
         - sections/maps/maps-polar.qmd
         - sections/maps/maps-traj.qmd
+        
     - part: "Utility functions"
       chapters:
         - sections/utilities/utility-functions.qmd
         - sections/utilities/scatter-plot.qmd
+        
     - sections/references.qmd
+    
   appendices:
    - sections/appendices/appendix-annotate.qmd
    - sections/appendices/appendix-hysplit.qmd
    - sections/appendices/appendix-trends.qmd
    - sections/appendices/appendix-gethelp.qmd
+   - v3.qmd
 
 bibliography: 
  - assets/bib/DCC-refs.bib
@@ -97,19 +104,21 @@ execute:
 format:
   html:
     theme: 
-      light: lumen
-      dark: darkly
-    highlight-style: a11y
-    fig-align: center
-    code-link: true
-    code-copy: true
-    link-external-newwindow: true
-    citation-location: margin
-    css: assets/style/style.css
-    lightbox: true
-    html-table-processing: none
+      - lumen
+      - assets/style/openair.scss
     mainfont: "Nunito Sans"
     monofont: "JetBrains Mono"
+    highlight-style: a11y
+    code-link: true
+    code-copy: true
+    fig-align: center
+    author-meta: "David Carslaw and Jack Davison"
+    callout-appearance: simple
+    html-table-processing: none
+    citation-location: margin
+    link-external-newwindow: true
+    lightbox: true
 
+editor: source
 editor_options: 
   chunk_output_type: console
