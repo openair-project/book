@@ -184,12 +184,13 @@ timePlot(
   head(mydata, 48),
   pollutant = c("nox", "no2"),
   windflow = windflowOpts(
-    linewidth = 1,
-    colour = "grey"
+    linewidth = 0.6,
+    colour = "goldenrod"
   ),
   strip.position = "right",
-  lwd = 3,
+  lwd = 2,
   key = FALSE,
+  y.relation = "free",
   ylab = "concentration (ug/m3)"
 )
 ```
