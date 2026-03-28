@@ -44,9 +44,9 @@ data2003 <- selectByDate(mydata, year = 2003)
 scatterPlot(data2003, x = "nox", y = "no2")
 ```
 
-Often with several years of data, points are over-plotted and it can be very difficult to see what the underlying relationship looks like. One very effective method to use in these situations is to 'bin' the data and to colour the intervals by the number of counts of occurrences in each bin. There are various ways of doing this, but 'hexagonal binning' is particularly effective because of the way hexagons can be placed next to one another.[^scatter-plot-1] To use hexagonal binning it will be necessary to install the [hexbin]{.pkg} package:
+Often with several years of data, points are over-plotted and it can be very difficult to see what the underlying relationship looks like. One very effective method to use in these situations is to 'bin' the data and to colour the intervals by the number of counts of occurrences in each bin. There are various ways of doing this, but 'hexagonal binning' is particularly effective because of the way hexagons can be placed next to one another.[^scatter-plot-1]
 
-[^scatter-plot-1]: In fact it is not possible to have a shape with more than 6 sides that can be used to forma a v3 without gaps.
+[^scatter-plot-1]: In fact there are only three regular polygons which can tile in this way; triangles, squares and hexagons. No convex polygon with 7 or more sides can tile the plane.
 
 ### Hexagonal binning {#sec-hexbin}
 
