@@ -28,7 +28,11 @@ A full set of examples is shown in the help pages --- see `?timePlot` for detail
 
 ```{r}
 #| eval: false
-timePlot(mydata, pollutant = c("nox", "o3"), y.relation = "free")
+timePlot(
+  mydata, 
+  pollutant = c("nox", "o3"), 
+  y.relation = "free"
+  )
 ```
 
 Often it is necessary to only consider part of a time series and using the [openair]{.pkg} function `selectByDate()` makes it easy to do this. Some examples are shown below.
