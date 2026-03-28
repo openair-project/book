@@ -102,7 +102,7 @@ While the biggest changes in [openair]{.pkg} 3.0 can be seen in the plotting fun
 
 - `cutData()` now possesses the `drop` argument, which better controls factor levels in the resulting vectors. For example, consider a dataset which only contains data for March, April, and July on which `cutData(type = "month")` has been applied. `drop = "empty"` will return factor levels March, April and July, `drop = "outside"` will return March, April, May, June and July, and `drop = "none"` will contain all twelve months.
 
-- `rollingMean()` is now but one of a small family of 'smoothing' approaches available in [openair]{.pkg}, which now includes rolling quantiles, Gaussian smoothing, and Whittaker-Eilers smoothing.
+- `rollingMean()` is now but one of a small family of 'smoothing' approaches available in [openair]{.pkg}, which now includes rolling quantiles, **Gaussian smoothing**, and **Whittaker-Eilers smoothing**. The latter is of general interest because it can be used to separate a baseline from an incremental component in a time series, which is useful for many different types of analysis e.g. better understanding local sources by considering the increment above a local background.
 
 - `windflow` is now supported by the `windflowOpts()` function, which can heavily customise the appearance of windflow arrows across all functions that support them.
 
