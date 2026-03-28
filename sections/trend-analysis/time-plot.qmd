@@ -61,6 +61,7 @@ library(tidyverse)
 timePlot(
   selectByDate(mydata, year = 2003, month = "aug"),
   pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
+  strip.position = "right",
   y.relation = "free"
 )
 ```
