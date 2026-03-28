@@ -283,11 +283,16 @@ Key advantages of the Whittaker-Eilers approach over simpler methods such as a m
 
 ### Standard smoothing
 
-The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 20`. The function adds a new column `smooth_no2` to the data frame.
+The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 2000`. The function adds a new column `smooth_no2` to the data frame. 
+
+Where the aim is to reduce noise, setting `lambda = NA` will use Generalised Cross Validation (GCV) to choose an optimal `lambda` value automatically, though this can be computationally expensive for large datasets. However, for smoothing purposes, it is often more useful to experiment with a range of `lambda` values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.
 
 ```{r}
 #| label: whittaker-smooth
-mydata_smooth <- WhittakerSmooth(mydata, pollutant = "no2", lambda = 20)
+mydata_smooth <- WhittakerSmooth(
+  mydata, 
+  pollutant = "no2", 
+  lambda = 2000)
 dplyr::glimpse(mydata_smooth)
 ```
 
@@ -312,6 +317,8 @@ mydata_smooth |>
 ```
 
 The `lambda` value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range `lambda = 1e6` to `lambda = 1e10` are often appropriate. If `lambda = NA`, Generalised Cross Validation (GCV) is used to choose `lambda` automatically, though this can be computationally expensive for large datasets.
+
+A major advantage of the Whittaker-Eilers approach is that a user can confidently "set and forget" their `lambda` value. Because `lambda` acts as an absolute penalty, the local smoothing characteristics will remain identical regardless of how much new data is appended to the series; as a time series grows, the Whittaker smooth will always deliver a predictable, consistent outcome. In contrast, methods like LOESS (locally-weighted regression) or GAMs often rely on a relative span or fraction of the total data. To maintain that same visually and mathematically consistent smoothing effect as a dataset expands, users of those methods must constantly recalculate and shrink their smoothing parameters.
 
 ### Baseline estimation
 
