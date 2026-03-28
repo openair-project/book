@@ -89,7 +89,7 @@ While @fig-polarFreqAttr is useful --- e.g. it clearly shows that concentrations
 #| fig-cap: The percentage contribution to overall mean concentrations of NO~x~ at Marylebone Road.
 #| fig-width: 5
 #| fig-height: 5
-#| out-width: 60%
+#| fig-format: svg
 polarFreq(
   mydata,
   pollutant = "nox",

@@ -21,6 +21,7 @@ The first example is a basic plot of percentiles of O~3~ shown in @fig-percentil
 ```{r}
 #| label: fig-percentileRose1
 #| fig-cap: A `percentileRose` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction. It shows for example that higher concentrations occur for northerly winds, as expected at this location. However, it also shows, for example the actual value of the 95th percentile O~3~ concentration.
+#| fig-format: svg
 library(openair)
 percentileRose(mydata, pollutant = "o3")
 ```
@@ -52,6 +53,7 @@ Lots more insight can be gained by considering how percentile values vary by oth
 #| fig-cap: A `percentileRose` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction.The plot shows the variation by season and whether  it is nighttime or daylight hours.
 #| fig-width: 10
 #| fig-height: 6
+#| fig-format: svg
 percentileRose(
   mydata,
   type = c("daylight", "season"),
@@ -88,6 +90,7 @@ It is easy to plot several species on the same plot and this works well because 
 #| fig-cap: A CPF plot of many pollutants  at Marylebone Road.
 #| fig-width: 7
 #| fig-height: 5
+#| fig-format: svg
 percentileRose(
   mydata,
   pollutant = c("nox", "so2", "o3", "co", "pm10", "pm25"),
