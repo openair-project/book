@@ -177,18 +177,19 @@ See help for `windflowOpts()` for more details on the options available to contr
 ```{r}
 #| label: fig-timePlotwswd
 #| fig-cap: An example of using the `windflow` option in `timePlot()`.
-#| fig-width: 7
-#| fig-height: 4.5
+#| fig-width: 6
+#| fig-height: 4
 #| out-width: 90%
 timePlot(
   head(mydata, 48),
   pollutant = c("nox", "no2"),
   windflow = windflowOpts(
     linewidth = 0.6,
-    colour = "goldenrod"
+    colour = "skyblue"
   ),
   strip.position = "right",
   lwd = 2,
+  cols = "tol.bright",
   key = FALSE,
   y.relation = "free",
   ylab = "concentration (ug/m3)"
