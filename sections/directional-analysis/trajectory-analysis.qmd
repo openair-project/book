@@ -211,7 +211,7 @@ It is also possible to use hexagonal binning to gain an idea about trajectory fr
 #| fig-cap: Gridded back trajectory frequencies with hexagonal binning.
 #| fig-width: 8
 #| fig-height: 5
-filter(traj, lat > 30, lat < 70, lon > -30, lon < 20) |>
+filter(traj, lat > 30, lat < 70, lon > -50, lon < 20) |>
   trajLevel(
     method = "hexbin",
     col = "turbo",
