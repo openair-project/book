@@ -91,7 +91,7 @@ bibliography:
  - assets/bib/DCC-refs.bib
  - assets/bib/packages.bib
 
-execute: 
+execute:
   warning: false
   message: false
   echo: true
@@ -100,6 +100,7 @@ execute:
   prompt: false
   freeze: auto
   cache: true
+  fig-format: svg
 
 format:
   html:

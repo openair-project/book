@@ -484,9 +484,12 @@ $$
 As an example, consideration is given to PM~2.5~ concentrations in a similar way as shown for CWT and the PSCF techniques. This plot indicates several potential sources of PM~2.5~ precursors with the Benelux countries and around the Po Valley in Italy (known high NO~x~ emission regions and potential sources of ammonium nitrate), and also a higher source region in eastern Europe across south Poland.
 
 ```{r}
-#| eval: false
+#| label: fig-SQTBA
+#| fig-cap: SQTBA approach applied to PM~2.5~ concentrations at the North Kensington site in London for 2010.
+#| fig-height: 6
+#| fig-width: 8
 trajLevel(
-  dplyr::slice_sample(traj, prop = 0.1),
+  traj,
   pollutant = "pm2.5",
   statistic = "sqtba",
   map.fill = FALSE,
@@ -496,19 +499,13 @@ trajLevel(
 )
 ```
 
-```{r}
-#| echo: false
-#| label: fig-SQTBA
-#| fig-cap: SQTBA approach applied to PM~2.5~ concentrations at the North Kensington site in London for 2010.
-#| fig-height: 6
-#| fig-width: 10
-knitr::include_graphics("../../assets/media/sqtba.png")
-```
-
 Some further analysis can be carried out on the TEOM FDMS measurements, which separately reports the volatile and non-volatile components of PM. @fig-SQTBA-PMv shows the plot for the volatile PM~2.5~ component, which highlights the source regions of the Benelux counties and (likely) northern Italy.
 
 ```{r}
-#| eval: false
+#| label: fig-SQTBA-PMv
+#| fig-cap: SQTBA approach applied to volatile PM~2.5~ concentrations at the North Kensington site in London for 2010.
+#| fig-height: 6
+#| fig-width: 8
 trajLevel(
   traj,
   pollutant = "v2.5",
@@ -520,19 +517,13 @@ trajLevel(
 )
 ```
 
-```{r}
-#| label: fig-SQTBA-PMv
-#| echo: false
-#| fig-cap: SQTBA approach applied to volatile PM~2.5~ concentrations at the North Kensington site in London for 2010.
-#| fig-height: 6
-#| fig-width: 10
-knitr::include_graphics("../../assets/media/sqtba2.png")
-```
-
 On the other hand, @fig-SQTBA-PMnv shows the non-volatile PM~2.5~ component, which more clearly shows eastern Europe as the principal source. This plot differs from @fig-SQTBA-PMv and likely highlights the higher sulphur emissions from power generation in this part of Europe. More detailed analysis can be carried out if the components of PM are available at an hourly or daily resolution e.g. particulate nitrate, sulphate.
 
 ```{r}
-#| eval: false
+#| label: fig-SQTBA-PMnv
+#| fig-cap: SQTBA approach applied to the non-volatile PM~2.5~ concentrations at the North Kensington site in London for 2010.
+#| fig-height: 6
+#| fig-width: 8
 trajLevel(
   traj,
   pollutant = "nv2.5",
@@ -542,15 +533,6 @@ trajLevel(
   lat.inc = 0.5,
   lon.inc = 0.5
 )
-```
-
-```{r}
-#| label: fig-SQTBA-PMnv
-#| echo: false
-#| fig-cap: SQTBA approach applied to the non-volatile PM~2.5~ concentrations at the North Kensington site in London for 2010.
-#| fig-height: 6
-#| fig-width: 10
-knitr::include_graphics("../../assets/media/sqtba3.png")
 ```
 
 The analysis above was demonstrated for a single site. However, to exploit the full potential of the SQTBA approach, multiple receptors should be considered. The reason why multiple sites should be considered is that there will be better geographic coverage of the trajectories and potential for source regions to be sampled multiple times. To conduct an analysis of multiple sites, trajectories linked to pollutant concentrations should be combined into a single data frame in the format similar to `traj` above but with an additional variable that identifies the different sites. When running `trajLevel` the option `.combine` should be used to identify the relevant column e.g. `.combine = "site"`.
