@@ -219,7 +219,7 @@ scatterPlot(
   x = "nox",
   y = "no2",
   z = "o3",
-  type = c("weekend", "season"),
+  type = c("season", "weekend"),
   limits = c(0, 30)
 )
 ```

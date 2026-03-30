@@ -74,7 +74,7 @@ The `smoothTrend` function can easily be used to gain a large amount of informat
 #| fig-height: 12
 smoothTrend(mydata,
   pollutant = c("no2", "pm10", "o3"),
-  type = c("wd", "season"),
+  type = c("season", "wd"),
   date.breaks = 3, lty = 0
 )
 ```

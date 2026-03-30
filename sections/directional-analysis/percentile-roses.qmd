@@ -56,7 +56,7 @@ Lots more insight can be gained by considering how percentile values vary by oth
 #| fig-format: svg
 percentileRose(
   mydata,
-  type = c("daylight", "season"),
+  type = c("season", "daylight"),
   pollutant = "o3",
   col = "Set3",
   mean.col = "black"

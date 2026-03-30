@@ -101,7 +101,7 @@ TaylorDiagram(
   obs = "o3",
   mod = "mod",
   group = "group",
-  type = c("season", "daylight")
+  type = c("daylight", "season")
 )
 ```
 

@@ -159,6 +159,6 @@ plot(myOutput, subset = "hour")
 Note if you are only interested in one panel, the `variationPlot()` function may be more suitable. It has many of the same arguments as `timeVariation()`, though has the added advantage of being able to take two `type` arguments.
 
 ```{r}
-variationPlot(mydata, pollutant = "so2", x = "hour", type = c("weekend", "season"))
+variationPlot(mydata, pollutant = "so2", x = "hour", type = c("season", "weekend"))
 ```
 
