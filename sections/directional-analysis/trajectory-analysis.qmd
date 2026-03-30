@@ -279,44 +279,21 @@ traj <- importTraj(site = "london", year = 2010)
 
 ```{r}
 #| label: allocateTraj
-alloc <- traj
+x0 <- traj$lon[traj$hour.inc == 0][1]
+y0 <- traj$lat[traj$hour.inc == 0][1]
 
-id <- which(alloc$hour.inc == 0)
-y0 <- alloc$lat[id[1]]
-x0 <- alloc$lon[id[1]]
+alloc <- traj |>
+  mutate(
+    angle = (atan2(lon - x0, lat - y0) * 180 / pi) %% 360,
+    sector = cut(angle, breaks = seq(22.5, 382.5, 45),
+                 labels = c("NE", "E", "SE", "S", "SW", "W", "NW", "N")) |>
+      as.character() |>
+      coalesce("N")
+  ) |>
+  count(date, sector) |>
+  slice_max(n, by = date, with_ties = FALSE) |>
+  mutate(sector = if_else(n > 50, sector, "unallocated"))
 
-## calculate angle and then assign sector
-alloc <- mutate(
-  alloc,
-  angle = atan2(lon - x0, lat - y0) * 360 / 2 / pi,
-  angle = ifelse(angle < 0, angle + 360, angle),
-  sector = cut(
-    angle,
-    breaks = seq(22.5, 382.5, 45),
-    labels = c(
-      "NE",
-      "E",
-      "SE",
-      "S",
-      "SW",
-      "W",
-      "NW",
-      "N"
-    )
-  ),
-  sector = as.character(sector),
-  sector = ifelse(is.na(sector), "N", sector)
-)
-
-alloc <- group_by(alloc, date, sector) |>
-  mutate(n = n()) |>
-  group_by(date) |>
-  arrange(date, n) |>
-  slice_tail(n = 1) |>
-  mutate(sector = ifelse(n > 50, sector, "unallocated")) |>
-  select(date, sector, n)
-
-# combine with trajectories
 traj <- left_join(traj, alloc, by = "date")
 ```
 
