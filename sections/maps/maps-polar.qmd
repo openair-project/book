@@ -164,8 +164,7 @@ polarMap(
   popup = "site",
   key = TRUE
 )
-``
-`
+```
 :::
 
 ## Use of `type`
@@ -174,11 +173,7 @@ polarMap(
 
 ```{r}
 #| label: fig-controlMap
-#| fig-cap: "A demonstration of `
-percentileMap()
-` using the 'type' option and passing arguments to `
-openair::percentileRose()
-`."
+#| fig-cap: "A demonstration of `percentileMap()` using the 'type' option and passing arguments to `openair::percentileRose()`."
 percentileMap(
   polar_data,
   pollutant = "nox",
@@ -330,10 +325,10 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 ### View Providers
 
 ```{r}
+
 #| label: rosmproviders
 rosm::osm.types()
-`
-``
+```
 :::
 
 ```{r}
