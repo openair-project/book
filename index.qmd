@@ -3,15 +3,15 @@ execute:
   cache: false
 ---
 
+# Preface {.unnumbered}
+
+## Hello and welcome {.unnumbered}
+
 ::: {.callout-note}
 ## [openair]{.pkg} Version 3 Released
 
 Version 3 of [openair]{.pkg} has been released! This major update converts all plotting functions from [lattice]{.pkg} to [ggplot2]{.pkg}, among other changes. Click [here](v3.qmd) to learn more about why this change has been made and what it means for [openair]{.pkg} users going forward.
 :::
-
-# Preface {.unnumbered}
-
-## Hello and welcome {.unnumbered}
 
 The [openair]{.pkg} project started with funding from the UK Natural Environment Research Council (NERC) over 10 years ago. The main aim was to fill a perceived gap in that there was a lack of a dedicated set of *easily accessible, open source* tools for analysing air quality data. At that time R was becoming increasingly popular but far, far less than it is today. Earlier pdf versions of the the book tried to minimise the use of R for new users who may not have even heard of R. However, the popularity of R has increased dramatically and it is now the case that many users of [openair]{.pkg} are also using R for other purposes. This has led to a much more integrated use of R in the book. The book is now much more focused on the use of R and how to use it effectively for air quality data analysis. 
 
