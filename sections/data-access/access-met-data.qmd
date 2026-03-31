@@ -38,8 +38,9 @@ import_ghcn_stations(lat = 53.3, lng = -6.3, return = "map")
 Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code.
 
 ```{r}
-#| label: getMeta-map
+#| label: fig-ghcn-stations
 #| eval: false
+#| fig-cap: Complete map of Global Historical Climatology Network (GHCN) data.
 import_ghcn_stations(return = "map")
 ```
 
