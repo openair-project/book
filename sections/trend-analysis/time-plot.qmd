@@ -29,10 +29,10 @@ A full set of examples is shown in the help pages --- see `?timePlot` for detail
 ```{r}
 #| eval: false
 timePlot(
-  mydata, 
-  pollutant = c("nox", "o3"), 
+  mydata,
+  pollutant = c("nox", "o3"),
   y.relation = "free"
-  )
+)
 ```
 
 Often it is necessary to only consider part of a time series and using the [openair]{.pkg} function `selectByDate()` makes it easy to do this. Some examples are shown below.
@@ -149,6 +149,7 @@ timePlot(
   avg.time = "month"
 )
 ```
+
 In @fig-importAQdata the y-scale is the same by default for all panels. However, the `y.relation` argument can be used to set the y-scales to be set individually for each panel by setting `y.relation = "free"`. 
 
 Using the code above it is also possible to include several species. But what if we wanted to plot NO~x~ concentrations across all sites in one panel? An example of how to do this is shown below. In this case the `group` argument is used to display the concentrations from multiple sites in one panel.

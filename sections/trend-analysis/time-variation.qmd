@@ -46,8 +46,10 @@ We apply the `timeVariation` function to PM~10~ concentrations and take the oppo
 library(openair)
 library(tidyverse)
 
-timeVariation(filter(mydata, ws > 3, wd > 100, wd < 270),
-  pollutant = "pm10", ylab = "pm10 (ug/m3)"
+timeVariation(
+  filter(mydata, ws > 3, wd > 100, wd < 270),
+  pollutant = "pm10",
+  ylab = "pm10 (ug/m3)"
 )
 ```
 
@@ -66,10 +68,7 @@ Also shown in the very different behaviour of O~3~. Because O~3~ reacts with NO,
 #| fig-cap: Example plot using the `timeVariation` function to plot NO~x~, CO, NO~2~ and O~3~ concentrations at Marylebone Road. In this plot, the concentrations are normalised.
 #| fig-width: 12
 #| fig-height: 7
-timeVariation(mydata,
-  pollutant = c("nox", "co", "no2", "o3"),
-  normalise = TRUE
-)
+timeVariation(mydata, pollutant = c("nox", "co", "no2", "o3"), normalise = TRUE)
 ```
 
 Another example is splitting the data set by time. We use the `splitByDate` function to divide up the data into dates before January 2003 and after January 2003. This time the option `difference` is used to highlight how NO~2~ concentrations have changed over these two periods. The results are shown in @fig-timeVar3. There is some indication in this plot that data after 2003 seem to show more of a double peak in the diurnal plots; particularly in the morning rush hour. Also, the difference line does more clearly highlight a more substantial change over weekdays and weekends. Given that cars are approximately constant at this site each day, the change may indicate a change in vehicle emissions from other vehicle types. Given that it is known that primary NO~2~ emissions are known to have increased sharply from the beginning of 2003 onwards, this perhaps provides clues as to the principal cause.
@@ -80,12 +79,14 @@ Another example is splitting the data set by time. We use the `splitByDate` func
 #| fig-width: 12
 #| fig-height: 7
 ## split data into two periods (see Utlities section for more details)
-mydata <- splitByDate(mydata,
+mydata <- splitByDate(
+  mydata,
   dates = "1/1/2003",
   labels = c("before Jan. 2003", "After Jan. 2003")
 )
 
-timeVariation(mydata,
+timeVariation(
+  mydata,
   pollutant = "no2",
   group = "split.by",
   difference = TRUE
@@ -104,12 +105,16 @@ There are a couple of things to note in @fig-timeVar4. There seems to be evidenc
 #| fig-width: 12
 #| fig-height: 7
 ## make a field called "feature" and fill: make all values = "other"
-mydata <- mutate(mydata,
+mydata <- mutate(
+  mydata,
   feature = ifelse(ws > 4 & wd > 0 & wd <= 180, "easterly", "other")
 )
 
-timeVariation(mydata,
-  pollutant = "so2", group = "feature", ylab = "so2 (ppb)",
+timeVariation(
+  mydata,
+  pollutant = "so2",
+  group = "feature",
+  ylab = "so2 (ppb)",
   difference = TRUE
 )
 ```
@@ -121,7 +126,8 @@ By default `timeVariation` shows the mean variation in different temporal compon
 #| fig-cap: Example plot using the `timeVariation` function to show the variation in the median. The shading shows the extent to the 25/75th and 5/95th  quantiles.
 #| fig-width: 12
 #| fig-height: 7
-timeVariation(mydata,
+timeVariation(
+  mydata,
   pollutant = "pm10",
   statistic = "median",
   col = "firebrick"
@@ -148,6 +154,7 @@ hour_weekday_df <- myOutput$data$hour.weekday
 # print
 head(hour_weekday_df)
 ```
+
 It is also possible to plot any of the individual plots that make up `timeVariation()`.
 
 ```{r}
@@ -159,6 +166,11 @@ plot(myOutput, subset = "hour")
 Note if you are only interested in one panel, the `variationPlot()` function may be more suitable. It has many of the same arguments as `timeVariation()`, though has the added advantage of being able to take two `type` arguments.
 
 ```{r}
-variationPlot(mydata, pollutant = "so2", x = "hour", type = c("season", "weekend"))
+variationPlot(
+  mydata,
+  pollutant = "so2",
+  x = "hour",
+  type = c("season", "weekend")
+)
 ```
 

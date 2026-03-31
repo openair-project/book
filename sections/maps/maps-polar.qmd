@@ -35,7 +35,11 @@ If you would prefer to use data from different sites or years, the `import*()` f
 
 ```{r}
 #| label: importlatlon
-sunderland <- openair::importUKAQ(site = c("sun2", "sunr"), year = 2015, meta = TRUE)
+sunderland <- openair::importUKAQ(
+  site = c("sun2", "sunr"),
+  year = 2015,
+  meta = TRUE
+)
 names(sunderland)
 ```
 
@@ -48,14 +52,14 @@ The easiest way to get polar plots on a map is through the use of the all-in-one
 #| echo: false
 #| tbl-cap: "A reference table for `openairmaps` directional analysis mapping functions."
 dplyr::tribble(
-  ~openair, ~openairmaps, ~`scale arguments`, ~`unique arguments`,
-  "`polarAnnulus()`", "`annulusMap()`", "`limits`", "`period`",
-  "`polarFreq()`", "`freqMap()`", "`breaks`", "`statistic`",
-  "`percentileRose()`", "`percentileMap()`", "`percentile`", "--",
-  "`polarPlot()`", "`polarMap()`", "`limits`", "`x`",
-  "`pollutionRose()`", "`pollroseMap()`", "`breaks`", "`statistic`",
-  "`windRose()`", "`windroseMap()`", "`ws.int`, `breaks`", "--",
-  "`polarDiff()`", "`diffMap()`", "`limits`", "`x`"
+  ~openair             , ~openairmaps        , ~`scale arguments`   , ~`unique arguments` ,
+  "`polarAnnulus()`"   , "`annulusMap()`"    , "`limits`"           , "`period`"          ,
+  "`polarFreq()`"      , "`freqMap()`"       , "`breaks`"           , "`statistic`"       ,
+  "`percentileRose()`" , "`percentileMap()`" , "`percentile`"       , "--"                ,
+  "`polarPlot()`"      , "`polarMap()`"      , "`limits`"           , "`x`"               ,
+  "`pollutionRose()`"  , "`pollroseMap()`"   , "`breaks`"           , "`statistic`"       ,
+  "`windRose()`"       , "`windroseMap()`"   , "`ws.int`, `breaks`" , "--"                ,
+  "`polarDiff()`"      , "`diffMap()`"       , "`limits`"           , "`x`"
 ) |>
   gt::gt() |>
   gt::fmt_markdown(everything())
@@ -160,7 +164,8 @@ polarMap(
   popup = "site",
   key = TRUE
 )
-```
+``
+`
 :::
 
 ## Use of `type`
@@ -169,7 +174,11 @@ polarMap(
 
 ```{r}
 #| label: fig-controlMap
-#| fig-cap: "A demonstration of `percentileMap()` using the 'type' option and passing arguments to `openair::percentileRose()`."
+#| fig-cap: "A demonstration of `
+percentileMap()
+` using the 'type' option and passing arguments to `
+openair::percentileRose()
+`."
 percentileMap(
   polar_data,
   pollutant = "nox",
@@ -263,7 +272,7 @@ To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` 
 
 ```{r}
 #| label: fig-polarFreqMap
-#| fig-cap: "Using `addPolarMarkers` to create a more complex map."
+#| fig-cap: "Using `addPolarMarkers()` to create a more complex map."
 library(leaflet)
 library(openair)
 leaflet() |>
@@ -323,7 +332,8 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 ```{r}
 #| label: rosmproviders
 rosm::osm.types()
-```
+`
+``
 :::
 
 ```{r}
@@ -342,7 +352,7 @@ polarMap(
   longitude = "lon",
   d.icon = 100,
   d.fig = 2.5,
-  alpha = .75,
+  alpha = 0.75,
   static = TRUE
 )
 ```

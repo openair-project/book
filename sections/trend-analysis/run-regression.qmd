@@ -60,8 +60,8 @@ The output contains all regression fits, but it is useful to filter the data to 
 out_filter <- filter(
   out,
   r_squared > 0.95,
-  slope > quantile(slope, probs = .01, na.rm = TRUE),
-  slope < quantile(slope, probs = .99, na.rm = TRUE),
+  slope > quantile(slope, probs = 0.01, na.rm = TRUE),
+  slope < quantile(slope, probs = 0.99, na.rm = TRUE),
   delta_nox > 100
 )
 ```
@@ -72,7 +72,7 @@ Another step that is useful is to identify the filtered data (`out_filter`) in t
 #| label: selectaq
 # original data in selection
 aq_select <-
-  map(1:nrow(out_filter), function(i) {
+  map(seq_len(nrow(out_filter)), function(i) {
     filter(
       aq,
       date >= out_filter$date_start[i],
@@ -116,13 +116,16 @@ x2 <- paste0(x, "_2")
 y1 <- paste0(y, "_1")
 y2 <- paste0(y, "_2")
 
-ggplot(out_filter, aes(
-  x = .data[[x1]],
-  y = .data[[y1]],
-  xend = .data[[x2]],
-  yend = .data[[y2]],
-  colour = .data[[y1]]
-)) +
+ggplot(
+  out_filter,
+  aes(
+    x = .data[[x1]],
+    y = .data[[y1]],
+    xend = .data[[x2]],
+    yend = .data[[y2]],
+    colour = .data[[y1]]
+  )
+) +
   geom_segment() +
   scale_color_gradientn(colours = openColours("turbo", 100)) +
   guides(col = guide_colourbar(title = quickText("Background\nPM2.5"))) +

@@ -36,8 +36,10 @@ Other [openair]{.pkg} functions can be used to plot other statistics. For exampl
 #| fig-cap: A `calendarPlot()` for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM~10~ >50 μg m^-3^. The numbers show the PM~10~ concentration in μg m^-3^.
 #| fig-width: 8
 #| fig-height: 6
-calendarPlot(mydata,
-  pollutant = "pm10", year = 2003,
+calendarPlot(
+  mydata,
+  pollutant = "pm10",
+  year = 2003,
   annotate = "value",
   lim = 50,
   cols = "Purples",
@@ -61,11 +63,9 @@ Note again that `selectByDate()` can be useful. For example, to plot select mont
 ```{r}
 #| eval: false
 calendarPlot(
-  selectByDate(mydata,
-    year = 2003,
-    month = c(6, 7, 8)
-  ),
-  pollutant = "o3", year = 2003
+  selectByDate(mydata, year = 2003, month = c(6, 7, 8)),
+  pollutant = "o3",
+  year = 2003
 )
 ```
 
@@ -145,8 +145,16 @@ It is also possible to first use `rollingMean()` to calculate statistics. For ex
 dat <- rollingMean(mydata, pollutant = "o3", hours = 8)
 breaks <- c(0, 34, 66, 100, 121, 141, 160, 188, 214, 240, 500)
 labels <- c(
-  "Low.1", "Low.2", "Low.3", "Moderate.4", "Moderate.5", "Moderate.6",
-  "High.7", "High.8", "High.9", "Very High.10"
+  "Low.1",
+  "Low.2",
+  "Low.3",
+  "Moderate.4",
+  "Moderate.5",
+  "Moderate.6",
+  "High.7",
+  "High.8",
+  "High.9",
+  "Very High.10"
 )
 
 calendarPlot(

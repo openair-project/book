@@ -130,11 +130,12 @@ leaflet() |>
     data = uk,
     color = "blue",
     group = "London, UK",
-    opacity = .25
+    opacity = 0.25
   ) |>
   addMarkers(
     data = dplyr::slice_head(uk, n = 1),
-    lat = ~lat, lng = ~lon,
+    lat = ~lat,
+    lng = ~lon,
     group = "London, UK",
     label = "UK",
     layerId = "uk"
@@ -143,13 +144,15 @@ leaflet() |>
     data = france,
     color = "red",
     group = "Paris, France",
-    opacity = .25,
+    opacity = 0.25,
     layerId = "france"
   ) |>
   addMarkers(
     data = dplyr::slice_head(france, n = 1),
-    lat = ~lat, lng = ~lon,
-    group = "Paris, France", label = "FR"
+    lat = ~lat,
+    lng = ~lon,
+    group = "Paris, France",
+    label = "FR"
   ) |>
   addLayersControl(overlayGroups = c("Paris, France", "London, UK"))
 ```

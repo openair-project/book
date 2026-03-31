@@ -32,8 +32,10 @@ trendLevel(mydata, pollutant = "nox")
 #| fig-cap: '`trendLevel` output with wind direction as `y`.'
 #| fig-width: 8
 #| fig-height: 8
-trendLevel(mydata,
-  pollutant = "nox", y = "wd",
+trendLevel(
+  mydata,
+  pollutant = "nox",
+  y = "wd",
   border = "white",
   cols = "turbo"
 )
@@ -51,8 +53,11 @@ trendLevel(mydata,
 mydata <- mutate(mydata, ratio = so2 / nox)
 
 ## condition by mydata$ratio
-trendLevel(mydata, "nox",
-  x = "year", y = "wd",
+trendLevel(
+  mydata,
+  "nox",
+  x = "year",
+  y = "wd",
   type = "ratio",
   cols = "inferno"
 )
@@ -73,8 +78,10 @@ Or by season and hour of the day:
 ```{r}
 #| label: trendLevelEx2
 #| eval: false
-trendLevel(mydata,
-  x = "season", y = "hour",
+trendLevel(
+  mydata,
+  x = "season",
+  y = "hour",
   pollutant = "o3",
   cols = "increment"
 )
@@ -87,10 +94,14 @@ How about NO~x~ versus NO~2~ coloured by the concentration of O~3~? `scatterPlot
 #| fig-cap: '`trendLevel` showing NO~x~ against NO~2~, coloured by the concentration of O~3~.'
 #| fig-width: 8
 #| fig-height: 8
-trendLevel(mydata,
-  x = "nox", y = "no2", pollutant = "o3",
+trendLevel(
+  mydata,
+  x = "nox",
+  y = "no2",
+  pollutant = "o3",
   border = "white",
-  n.levels = 30, statistic = "max",
+  n.levels = 30,
+  statistic = "max",
   limits = c(0, 50)
 )
 ```
@@ -100,10 +111,16 @@ The plot can also be shown by wind direction sector, this time showing how O~3~ 
 ```{r}
 #| label: trendLevelEx4
 #| eval: false
-trendLevel(mydata,
-  x = "nox", y = "weekday", pollutant = "o3",
-  border = "white", n.levels = 10, statistic = "max",
-  limits = c(0, 50), type = "wd"
+trendLevel(
+  mydata,
+  x = "nox",
+  y = "weekday",
+  pollutant = "o3",
+  border = "white",
+  n.levels = 10,
+  statistic = "max",
+  limits = c(0, 50),
+  type = "wd"
 )
 ```
 
@@ -121,8 +138,11 @@ As a simple example, consider the above plot which summarises by mean. This tell
 percentile <- function(x) quantile(x, probs = 0.95, na.rm = TRUE)
 
 ## apply to present plot
-trendLevel(mydata, "nox",
-  x = "year", y = "wd",
+trendLevel(
+  mydata,
+  "nox",
+  x = "year",
+  y = "wd",
   type = "ratio",
   cols = "viridis",
   statistic = percentile
@@ -138,10 +158,12 @@ This type of flexibility really opens up the potential of the function as a scre
 #| fig-cap: '`trendLevel` plot for maximum NO~2~ concentrations using a user-defined discrete colour scale.'
 #| fig-height: 8
 #| fig-width: 8
-trendLevel(mydata,
+trendLevel(
+  mydata,
   pollutant = "no2",
   x = "week",
-  border = "white", statistic = "max",
+  border = "white",
+  statistic = "max",
   breaks = c(0, 50, 100, 500),
   labels = c("low", "medium", "high"),
   cols = c("forestgreen", "yellow", "red"),

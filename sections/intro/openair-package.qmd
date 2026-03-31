@@ -439,9 +439,9 @@ polar <- polarPlot(mydata, "nox", plot = FALSE)
 
 # save to file
 ggsave(
-  filename = "polarplot_marylebone_nox.png", 
+  filename = "polarplot_marylebone_nox.png",
   plot = polar$plot,
-  width = 6, 
+  width = 6,
   height = 6,
   dpi = 300,
   units = "in"

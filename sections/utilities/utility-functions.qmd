@@ -290,9 +290,10 @@ Where the aim is to reduce noise, setting `lambda = NA` will use Generalised Cro
 ```{r}
 #| label: whittaker-smooth
 mydata_smooth <- WhittakerSmooth(
-  mydata, 
-  pollutant = "no2", 
-  lambda = 2000)
+  mydata,
+  pollutant = "no2",
+  lambda = 2000
+)
 dplyr::glimpse(mydata_smooth)
 ```
 

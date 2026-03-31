@@ -296,29 +296,14 @@ annual and monthly data also provide valuable information on data
 capture rates. The averaging statistic is selected with the `data_type`
 option. The values `data_type` can take include:
 
--   **"hourly"** This is the default and specific site(s) must be
-    provided.
--   **"daily"** Daily means returned and specific site(s) must be
-    provided. Note that in the case of PM~10~ and PM~2.5~ daily
-    measurements can be available from those derived from hourly
-    measurements (using instruments such as TEOM, BAM and FIDAS) and our
-    daily gravimetric measurements such as from a Partisol. In the
-    returned data the gravimetric daily measurements are shown as
-    `gr_pm10` and `gr_pm2.5`, respectively.
--   **"monthly"** Monthly means returned. No site code is needed because
-    all data for a particular year are returned. Data capture statistics
-    are also given.
--   **"annual"** Annual means returned. No site code is needed because
-    all data for a particular year are returned. Data capture statistics
-    are also given.
--   **"15_min"** 15-minute SO~2~ concentrations returned for a specific
-    site(s).
--   **"8_hour"** Rolling 8-hour concentrations returned for a specific
-    site(s) for O~3~ and CO.
--   **"24_hour"** Rolling 24-hour concentrations returned for a specific
-    site(s) for PM~10~ and PM~2.5~.
--   **"daily_max_8"** Maximum daily rolling 8-hour maximum for O~3~ and
-    CO.
+-   **"hourly"** This is the default and specific site(s) must be provided.
+-   **"daily"** Daily means returned and specific site(s) must be provided. Note that in the case of PM~10~ and PM~2.5~ daily measurements can be available those derived from hourly measurements (using instruments such as TEOM, BAM and FIDAS) and our daily gravimetric measurements such as from a Partisol. In the returned data the gravimetric daily measurements are shown as `gr_pm10` and `gr_pm2.5`, respectively.
+-   **"monthly"** Monthly means returned. No site code is needed because all data for a particular year are returned. Data capture statistics are also given.
+-   **"annual"** Annual means returned. No site code is needed because all data for a particular year are returned. Data capture statistics are also given.
+-   **"15_min"** 15-minute SO~2~ concentrations returned for a specific site(s).
+-   **"8_hour"** Rolling 8-hour concentrations returned for a specific site(s) for O~3~ and CO.
+-   **"24_hour"** Rolling 24-hour concentrations returned for a specific site(s) for PM~10~ and PM~2.5~.
+-   **"daily_max_8"** Maximum daily rolling 8-hour maximum for O~3~ and CO.
 -   **"daqi"** Daily Air Quality Index (DAQI). See [here](https://uk-air.defra.gov.uk/air-pollution/daqi?view=more-info&pollutant=ozone#pollutant) for more details of how the index is defined.
 
 Note that for annual and monthly statistics all network data is returned

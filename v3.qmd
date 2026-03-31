@@ -91,7 +91,7 @@ As with any major software update, there are some 'breaking' changes that may af
 - Trajectory mapping functions have been extensively rewritten, including `trajPlot()`, `trajLevel()` and `trajCluster()`. The long-term home for these functions may be in [openairmaps]{.pkg}, but for the time being they remain in [openair]{.pkg}. The previous method of map projection has been removed and replaced with an [sf]{.pkg}-powerd approach, meaning users only need to provide a "coordinate reference system" number (`crs`). For example, the British National Grid is [ESPG:27700](https://epsg.io/27700). As these functions no longer call `scatterPlot()`, `scatterPlot()` has lost the `map` argument.
 
 ```{r}
-openairmaps::traj_data |> openair:::trajPlot(pollutant = "pm10", crs = 27700)
+openairmaps::traj_data |> openair::trajPlot(pollutant = "pm10", crs = 27700)
 ```
 
 While breaking changes can be frustrating, they were necessary to support the future development and maintainability of [openair]{.pkg}.

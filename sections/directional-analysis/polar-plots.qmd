@@ -138,8 +138,10 @@ The default however is to down-weight the bins with few data points when fitting
 ```{r}
 #| label: fig-polarPlot2
 #| fig-cap: Example plots using the `polarPlot` function with different options for the mean concentration of NO~x~.
-polarPlot(mydata,
-  pollutant = "nox", col = "turbo",
+polarPlot(
+  mydata,
+  pollutant = "nox",
+  col = "turbo",
   key.position = "bottom",
   key.header = "mean nox (ug/m3)",
   key.footer = NULL
@@ -341,7 +343,8 @@ The York regression option requires special mention. In ordinary linear regressi
 # assign simple / fixed uncertainties
 har <- mutate(har, pm10_error = 2, pm2.5_error = 2)
 
-polarPlot(har,
+polarPlot(
+  har,
   poll = c("pm2.5", "pm10"),
   statistic = "york_slope",
   col = "turbo",
@@ -478,7 +481,8 @@ polarCluster(mydata, pollutant = "so2", n.clusters = 2:10, cols = "Set2")
 ```{r}
 #| label: fig-polarClustn6
 #| fig-cap: Use of the `polarCluster` function applied to SO~2~ concentrations at Marylebone Road. In this case 8 clusters have been chosen.
-results <- polarCluster(mydata,
+results <- polarCluster(
+  mydata,
   pollutant = "so2",
   n.clusters = 8,
   cols = "Set2"
@@ -576,7 +580,8 @@ The function is called as shown in @fig-polarClust-diff. Note that the output is
 #| fig-width: 5
 #| fig-height: 4.5
 #| fig-keep: 'last'
-clust_out <- polarCluster(selectByDate(port_talbot, year = 2012),
+clust_out <- polarCluster(
+  selectByDate(port_talbot, year = 2012),
   after = selectByDate(port_talbot, year = 2019),
   pollutant = "so2",
   n.clusters = 5
@@ -637,7 +642,8 @@ The `polarMap` function allows for control of many parts of the [leaflet]{.pkg} 
 #| cache: false
 #| fig-cap: Interactive map of polar plots for multiple pollutants with a different base map.
 #| column: screen-inset-shaded
-polarMap(openairmaps::polar_data,
+polarMap(
+  openairmaps::polar_data,
   pollutant = c("nox", "no2"),
   latitude = "lat",
   longitude = "lon",

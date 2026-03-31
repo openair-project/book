@@ -22,11 +22,15 @@ An example of the `timeProp` function is shown in @fig-timeProp. In this example
 #| column: screen-inset-right
 library(openair) # load the package
 
-timeProp(selectByDate(mydata, year = 2003),
-  pollutant = "so2", avg.time = "3 day",
+timeProp(
+  selectByDate(mydata, year = 2003),
+  pollutant = "so2",
+  avg.time = "3 day",
   proportion = "wd",
-  date.breaks = 10, key.position = "top",
-  key.columns = 8, ylab = "so2 (ug/m3)"
+  date.breaks = 10,
+  key.position = "top",
+  key.columns = 8,
+  ylab = "so2 (ug/m3)"
 )
 ```
 
@@ -40,13 +44,16 @@ An example of using `timeProp` with a continuous variable is shown in @fig-timeP
 #| fig-width: 15
 #| fig-height: 4
 #| column: screen-inset-right
-timeProp(selectByDate(mydata, year = 2003),
+timeProp(
+  selectByDate(mydata, year = 2003),
   pollutant = "so2",
   avg.time = "3 day",
   n.levels = 3,
   cols = "viridis",
-  proportion = "ws", date.breaks = 10,
-  key.position = "top", key.columns = 3
+  proportion = "ws",
+  date.breaks = 10,
+  key.position = "top",
+  key.columns = 3
 )
 ```
 
