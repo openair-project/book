@@ -326,10 +326,10 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 ### View Providers
 
 ```{r}
+
 #| label: rosmproviders
 rosm::osm.types()
-`
-``
+```
 :::
 
 ```{r}
