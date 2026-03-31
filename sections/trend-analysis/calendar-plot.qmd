@@ -213,7 +213,6 @@ calendarPlot(
   # built-in DAQI colours
   cols = "daqi",
   # nicer key title
-  key.header = "PM10",
-  key.footer = "DAQI"
+  key.title = "PM10 DAQI"
 )
 ```

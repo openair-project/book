@@ -84,7 +84,9 @@ As with any major software update, there are some 'breaking' changes that may af
 
 - Any existing [lattice]{.pkg}-based annotations may no longer work, or behave unpredictably. Any annotations are likely possible using [ggplot2]{.pkg} functions such as `ggplot2::annotate()`, `ggplot2::theme()` or `ggplot2::guides()`.
 
-- As [ggplot2]{.pkg} only supports a single title for its guides, `key.header` and `key.footer` are now appended together to form the key title. These arguments are likely to be more formally deprecated in a future update.
+- As [ggplot2]{.pkg} only supports a single title for its guides, `key.header` and `key.footer` are deprecated in favour of a single `key.title`. If these legacy arguments are provided, they will be appended together to form the key title with a warning. This behaviour is likely to be formally removed in future.
+
+- `drawOpenKey()` has been removed from [openair]{.pkg} due to being [lattice]{.pkg}-specific. The `key` argument has therefore also been deprecated. To remove the legend, simply set `key.position = "none"`.
 
 - Some arguments throughout [openair]{.pkg} have been renamed or replaced for internal consistency. For example, `polarAnnulus()` has lost the `width` argument in favour of `offset`, making it consistent with `windRose()`, `percentileRose()` and `polarFreq()`.
 

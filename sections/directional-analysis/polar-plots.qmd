@@ -143,8 +143,7 @@ polarPlot(
   pollutant = "nox",
   col = "turbo",
   key.position = "bottom",
-  key.header = "mean nox (ug/m3)",
-  key.footer = NULL
+  key.title = "mean nox (ug/m3)"
 )
 ```
 

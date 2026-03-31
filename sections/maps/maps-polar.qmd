@@ -133,7 +133,7 @@ annulusMap(
 
 1.  Use the appropriate "scale" argument to set a colour scale that all markers will share. For `polarMap()` (and `annulusMap()`) this is the "limits" argument, which works the same way as in `polarPlot()` (and `annulusPlot()`). In fact, all of the "scales" arguments shown in @tbl-dirAnalysisRef work in the exact same way as their corresponding [openair]{.pkg} function. Setting a shared scale will draw an easy-to-read shared legend, which can be disabled using the `draw.legend` argument.
 
-2.  Set the `key` argument to be `TRUE`, which will draw the colour bar next to each individual marker. This may be advantageous if one site is much more polluted compared to another one, but the individual colour bars can be confusing and difficult to read depending on the chosen base map.
+2.  Set the `key.position` argument to be, for example, `"right"`. This will draw the colour bar next to each individual marker. This may be advantageous if one site is much more polluted compared to another one, but the individual colour bars can be confusing and difficult to read depending on the chosen base map.
 
 ::: panel-tabset
 ### Shared Scale
@@ -162,10 +162,10 @@ polarMap(
   latitude = "lat",
   longitude = "lon",
   popup = "site",
-  key = TRUE
+  key.position = "right"
 )
-``
-`
+```
+
 :::
 
 ## Use of `type`
@@ -174,11 +174,7 @@ polarMap(
 
 ```{r}
 #| label: fig-controlMap
-#| fig-cap: "A demonstration of `
-percentileMap()
-` using the 'type' option and passing arguments to `
-openair::percentileRose()
-`."
+#| fig-cap: "A demonstration of `percentileMap()` using the 'type' option and passing arguments to `openair::percentileRose()`."
 percentileMap(
   polar_data,
   pollutant = "nox",
