@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Jack Davison">
+<meta name="author" content="David Carslaw and Jack Davison">
 <title>22&nbsp; openairmaps primer – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -64,22 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/maps/maps-network.html" rel="next">
 <link href="../../sections/model-evaluation/conditional-quantiles.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -109,171 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script><link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script><script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><link rel="stylesheet" href="../../assets/style/style.css">
+<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
 </head>
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -319,7 +155,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -355,13 +190,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
@@ -378,13 +213,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -425,13 +260,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -484,13 +319,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -548,13 +383,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -577,17 +412,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -608,6 +443,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -622,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">22.2</span> Background</a></li>
   <li><a href="#leaflet-primer" id="toc-leaflet-primer" class="nav-link" data-scroll-target="#leaflet-primer"><span class="header-section-number">22.3</span> <span class="pkg">leaflet</span> Primer</a></li>
   <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">22.4</span> Functions</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/maps/maps-overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/maps/maps-overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html">Interactive Maps</a></li><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></a></li></ol></nav><div class="quarto-title">
@@ -664,11 +505,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you would like to access new features and bug fixes before they’re pushed to CRAN, the development version of <span class="pkg">openairmaps</span> can be downloaded directly from GitHub.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you would like to use <span class="pkg">openairmaps</span> in your analysis, don’t forget to load it using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidcarslaw.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-simple callout-note">
@@ -677,7 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This chapter was produced using R version 4.5.1 and <span class="pkg">openairmaps</span> version 0.9.1.</p>
+<p>This chapter was produced using R version 4.5.3 and <span class="pkg">openairmaps</span> version 0.9.1.9011.</p>
 </div>
 </div>
 </div>
@@ -714,8 +555,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-leafletdemo" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-e541d6ed34af0acaadef" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-e541d6ed34af0acaadef">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6fb99c9394ff981a65c8" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-6fb99c9394ff981a65c8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"OSM",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["CartoDB.Positron","OSM"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;22.1: An example of a leaflet map.
@@ -730,7 +571,7 @@ Figure&nbsp;22.1: An example of a leaflet map.
 <li><p>The <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html">addLayersControl()</a></code> function creates a menu which allows users to show/hide or swap between certain features of the map.</p></li>
 </ul>
 <p>Don’t worry if you don’t fully understand all of this — the “all-in-one” functions in <span class="pkg">openairmaps</span> deal with much of this for you! The only <span class="pkg">leaflet</span> awareness you’ll need to use these functions is knowledge of the available base map providers, which can be accessed using <code><a href="https://rstudio.github.io/leaflet/reference/providers.html">leaflet::providers</a></code>. These are shown in the collapsible below (the list is very long!).</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -754,232 +595,223 @@ Figure&nbsp;22.1: An example of a leaflet map.
   [5] "OpenStreetMap.France"                  
   [6] "OpenStreetMap.HOT"                     
   [7] "OpenStreetMap.BZH"                     
-  [8] "MapTilesAPI"                           
-  [9] "MapTilesAPI.OSMEnglish"                
- [10] "MapTilesAPI.OSMFrancais"               
- [11] "MapTilesAPI.OSMEspagnol"               
- [12] "OpenSeaMap"                            
- [13] "OPNVKarte"                             
- [14] "OpenTopoMap"                           
- [15] "OpenRailwayMap"                        
- [16] "OpenFireMap"                           
- [17] "SafeCast"                              
- [18] "Stadia"                                
- [19] "Stadia.AlidadeSmooth"                  
- [20] "Stadia.AlidadeSmoothDark"              
- [21] "Stadia.OSMBright"                      
- [22] "Stadia.Outdoors"                       
- [23] "Stadia.StamenToner"                    
- [24] "Stadia.StamenTonerBackground"          
- [25] "Stadia.StamenTonerLines"               
- [26] "Stadia.StamenTonerLabels"              
- [27] "Stadia.StamenTonerLite"                
- [28] "Stadia.StamenWatercolor"               
- [29] "Stadia.StamenTerrain"                  
- [30] "Stadia.StamenTerrainBackground"        
- [31] "Stadia.StamenTerrainLabels"            
- [32] "Stadia.StamenTerrainLines"             
- [33] "Thunderforest"                         
- [34] "Thunderforest.OpenCycleMap"            
- [35] "Thunderforest.Transport"               
- [36] "Thunderforest.TransportDark"           
- [37] "Thunderforest.SpinalMap"               
- [38] "Thunderforest.Landscape"               
- [39] "Thunderforest.Outdoors"                
- [40] "Thunderforest.Pioneer"                 
- [41] "Thunderforest.MobileAtlas"             
- [42] "Thunderforest.Neighbourhood"           
- [43] "CyclOSM"                               
- [44] "Jawg"                                  
- [45] "Jawg.Streets"                          
- [46] "Jawg.Terrain"                          
- [47] "Jawg.Sunny"                            
- [48] "Jawg.Dark"                             
- [49] "Jawg.Light"                            
- [50] "Jawg.Matrix"                           
- [51] "MapBox"                                
- [52] "MapTiler"                              
- [53] "MapTiler.Streets"                      
- [54] "MapTiler.Basic"                        
- [55] "MapTiler.Bright"                       
- [56] "MapTiler.Pastel"                       
- [57] "MapTiler.Positron"                     
- [58] "MapTiler.Hybrid"                       
- [59] "MapTiler.Toner"                        
- [60] "MapTiler.Topo"                         
- [61] "MapTiler.Voyager"                      
- [62] "TomTom"                                
- [63] "TomTom.Basic"                          
- [64] "TomTom.Hybrid"                         
- [65] "TomTom.Labels"                         
- [66] "Esri"                                  
- [67] "Esri.WorldStreetMap"                   
- [68] "Esri.DeLorme"                          
- [69] "Esri.WorldTopoMap"                     
- [70] "Esri.WorldImagery"                     
- [71] "Esri.WorldTerrain"                     
- [72] "Esri.WorldShadedRelief"                
- [73] "Esri.WorldPhysical"                    
- [74] "Esri.OceanBasemap"                     
- [75] "Esri.NatGeoWorldMap"                   
- [76] "Esri.WorldGrayCanvas"                  
- [77] "OpenWeatherMap"                        
- [78] "OpenWeatherMap.Clouds"                 
- [79] "OpenWeatherMap.CloudsClassic"          
- [80] "OpenWeatherMap.Precipitation"          
- [81] "OpenWeatherMap.PrecipitationClassic"   
- [82] "OpenWeatherMap.Rain"                   
- [83] "OpenWeatherMap.RainClassic"            
- [84] "OpenWeatherMap.Pressure"               
- [85] "OpenWeatherMap.PressureContour"        
- [86] "OpenWeatherMap.Wind"                   
- [87] "OpenWeatherMap.Temperature"            
- [88] "OpenWeatherMap.Snow"                   
- [89] "HERE"                                  
- [90] "HERE.normalDay"                        
- [91] "HERE.normalDayCustom"                  
- [92] "HERE.normalDayGrey"                    
- [93] "HERE.normalDayMobile"                  
- [94] "HERE.normalDayGreyMobile"              
- [95] "HERE.normalDayTransit"                 
- [96] "HERE.normalDayTransitMobile"           
- [97] "HERE.normalDayTraffic"                 
- [98] "HERE.normalNight"                      
- [99] "HERE.normalNightMobile"                
-[100] "HERE.normalNightGrey"                  
-[101] "HERE.normalNightGreyMobile"            
-[102] "HERE.normalNightTransit"               
-[103] "HERE.normalNightTransitMobile"         
-[104] "HERE.reducedDay"                       
-[105] "HERE.reducedNight"                     
-[106] "HERE.basicMap"                         
-[107] "HERE.mapLabels"                        
-[108] "HERE.trafficFlow"                      
-[109] "HERE.carnavDayGrey"                    
-[110] "HERE.hybridDay"                        
-[111] "HERE.hybridDayMobile"                  
-[112] "HERE.hybridDayTransit"                 
-[113] "HERE.hybridDayGrey"                    
-[114] "HERE.hybridDayTraffic"                 
-[115] "HERE.pedestrianDay"                    
-[116] "HERE.pedestrianNight"                  
-[117] "HERE.satelliteDay"                     
-[118] "HERE.terrainDay"                       
-[119] "HERE.terrainDayMobile"                 
-[120] "HEREv3"                                
-[121] "HEREv3.normalDay"                      
-[122] "HEREv3.normalDayCustom"                
-[123] "HEREv3.normalDayGrey"                  
-[124] "HEREv3.normalDayMobile"                
-[125] "HEREv3.normalDayGreyMobile"            
-[126] "HEREv3.normalDayTransit"               
-[127] "HEREv3.normalDayTransitMobile"         
-[128] "HEREv3.normalNight"                    
-[129] "HEREv3.normalNightMobile"              
-[130] "HEREv3.normalNightGrey"                
-[131] "HEREv3.normalNightGreyMobile"          
-[132] "HEREv3.normalNightTransit"             
-[133] "HEREv3.normalNightTransitMobile"       
-[134] "HEREv3.reducedDay"                     
-[135] "HEREv3.reducedNight"                   
-[136] "HEREv3.basicMap"                       
-[137] "HEREv3.mapLabels"                      
-[138] "HEREv3.trafficFlow"                    
-[139] "HEREv3.carnavDayGrey"                  
-[140] "HEREv3.hybridDay"                      
-[141] "HEREv3.hybridDayMobile"                
-[142] "HEREv3.hybridDayTransit"               
-[143] "HEREv3.hybridDayGrey"                  
-[144] "HEREv3.pedestrianDay"                  
-[145] "HEREv3.pedestrianNight"                
-[146] "HEREv3.satelliteDay"                   
-[147] "HEREv3.terrainDay"                     
-[148] "HEREv3.terrainDayMobile"               
-[149] "FreeMapSK"                             
-[150] "MtbMap"                                
-[151] "CartoDB"                               
-[152] "CartoDB.Positron"                      
-[153] "CartoDB.PositronNoLabels"              
-[154] "CartoDB.PositronOnlyLabels"            
-[155] "CartoDB.DarkMatter"                    
-[156] "CartoDB.DarkMatterNoLabels"            
-[157] "CartoDB.DarkMatterOnlyLabels"          
-[158] "CartoDB.Voyager"                       
-[159] "CartoDB.VoyagerNoLabels"               
-[160] "CartoDB.VoyagerOnlyLabels"             
-[161] "CartoDB.VoyagerLabelsUnder"            
-[162] "HikeBike"                              
-[163] "HikeBike.HikeBike"                     
-[164] "HikeBike.HillShading"                  
-[165] "BasemapAT"                             
-[166] "BasemapAT.basemap"                     
-[167] "BasemapAT.grau"                        
-[168] "BasemapAT.overlay"                     
-[169] "BasemapAT.terrain"                     
-[170] "BasemapAT.surface"                     
-[171] "BasemapAT.highdpi"                     
-[172] "BasemapAT.orthofoto"                   
-[173] "nlmaps"                                
-[174] "nlmaps.standaard"                      
-[175] "nlmaps.pastel"                         
-[176] "nlmaps.grijs"                          
-[177] "nlmaps.water"                          
-[178] "nlmaps.luchtfoto"                      
-[179] "NASAGIBS"                              
-[180] "NASAGIBS.ModisTerraTrueColorCR"        
-[181] "NASAGIBS.ModisTerraBands367CR"         
-[182] "NASAGIBS.ViirsEarthAtNight2012"        
-[183] "NASAGIBS.ModisTerraLSTDay"             
-[184] "NASAGIBS.ModisTerraSnowCover"          
-[185] "NASAGIBS.ModisTerraAOD"                
-[186] "NASAGIBS.ModisTerraChlorophyll"        
-[187] "NLS"                                   
-[188] "JusticeMap"                            
-[189] "JusticeMap.income"                     
-[190] "JusticeMap.americanIndian"             
-[191] "JusticeMap.asian"                      
-[192] "JusticeMap.black"                      
-[193] "JusticeMap.hispanic"                   
-[194] "JusticeMap.multi"                      
-[195] "JusticeMap.nonWhite"                   
-[196] "JusticeMap.white"                      
-[197] "JusticeMap.plurality"                  
-[198] "GeoportailFrance"                      
-[199] "GeoportailFrance.plan"                 
-[200] "GeoportailFrance.parcels"              
-[201] "GeoportailFrance.orthos"               
-[202] "OneMapSG"                              
-[203] "OneMapSG.Default"                      
-[204] "OneMapSG.Night"                        
-[205] "OneMapSG.Original"                     
-[206] "OneMapSG.Grey"                         
-[207] "OneMapSG.LandLot"                      
-[208] "USGS"                                  
-[209] "USGS.USTopo"                           
-[210] "USGS.USImagery"                        
-[211] "USGS.USImageryTopo"                    
-[212] "WaymarkedTrails"                       
-[213] "WaymarkedTrails.hiking"                
-[214] "WaymarkedTrails.cycling"               
-[215] "WaymarkedTrails.mtb"                   
-[216] "WaymarkedTrails.slopes"                
-[217] "WaymarkedTrails.riding"                
-[218] "WaymarkedTrails.skating"               
-[219] "OpenAIP"                               
-[220] "OpenSnowMap"                           
-[221] "OpenSnowMap.pistes"                    
-[222] "AzureMaps"                             
-[223] "AzureMaps.MicrosoftImagery"            
-[224] "AzureMaps.MicrosoftBaseDarkGrey"       
-[225] "AzureMaps.MicrosoftBaseRoad"           
-[226] "AzureMaps.MicrosoftBaseHybridRoad"     
-[227] "AzureMaps.MicrosoftTerraMain"          
-[228] "AzureMaps.MicrosoftWeatherInfraredMain"
-[229] "AzureMaps.MicrosoftWeatherRadarMain"   
-[230] "SwissFederalGeoportal"                 
-[231] "SwissFederalGeoportal.NationalMapColor"
-[232] "SwissFederalGeoportal.NationalMapGrey" 
-[233] "SwissFederalGeoportal.SWISSIMAGE"      </code></pre>
+  [8] "OpenStreetMap.CAT"                     
+  [9] "MapTilesAPI"                           
+ [10] "MapTilesAPI.OSMEnglish"                
+ [11] "MapTilesAPI.OSMFrancais"               
+ [12] "MapTilesAPI.OSMEspagnol"               
+ [13] "OpenSeaMap"                            
+ [14] "OPNVKarte"                             
+ [15] "OpenTopoMap"                           
+ [16] "OpenRailwayMap"                        
+ [17] "OpenFireMap"                           
+ [18] "SafeCast"                              
+ [19] "Stadia"                                
+ [20] "Stadia.AlidadeSmooth"                  
+ [21] "Stadia.AlidadeSmoothDark"              
+ [22] "Stadia.AlidadeSatellite"               
+ [23] "Stadia.OSMBright"                      
+ [24] "Stadia.Outdoors"                       
+ [25] "Stadia.StamenToner"                    
+ [26] "Stadia.StamenTonerBackground"          
+ [27] "Stadia.StamenTonerLines"               
+ [28] "Stadia.StamenTonerLabels"              
+ [29] "Stadia.StamenTonerLite"                
+ [30] "Stadia.StamenWatercolor"               
+ [31] "Stadia.StamenTerrain"                  
+ [32] "Stadia.StamenTerrainBackground"        
+ [33] "Stadia.StamenTerrainLabels"            
+ [34] "Stadia.StamenTerrainLines"             
+ [35] "Thunderforest"                         
+ [36] "Thunderforest.OpenCycleMap"            
+ [37] "Thunderforest.Transport"               
+ [38] "Thunderforest.TransportDark"           
+ [39] "Thunderforest.SpinalMap"               
+ [40] "Thunderforest.Landscape"               
+ [41] "Thunderforest.Outdoors"                
+ [42] "Thunderforest.Pioneer"                 
+ [43] "Thunderforest.MobileAtlas"             
+ [44] "Thunderforest.Neighbourhood"           
+ [45] "BaseMapDE"                             
+ [46] "BaseMapDE.Color"                       
+ [47] "BaseMapDE.Grey"                        
+ [48] "CyclOSM"                               
+ [49] "Jawg"                                  
+ [50] "Jawg.Streets"                          
+ [51] "Jawg.Terrain"                          
+ [52] "Jawg.Lagoon"                           
+ [53] "Jawg.Sunny"                            
+ [54] "Jawg.Dark"                             
+ [55] "Jawg.Light"                            
+ [56] "Jawg.Matrix"                           
+ [57] "MapBox"                                
+ [58] "MapTiler"                              
+ [59] "MapTiler.Streets"                      
+ [60] "MapTiler.Basic"                        
+ [61] "MapTiler.Bright"                       
+ [62] "MapTiler.Pastel"                       
+ [63] "MapTiler.Positron"                     
+ [64] "MapTiler.Hybrid"                       
+ [65] "MapTiler.Toner"                        
+ [66] "MapTiler.Topo"                         
+ [67] "MapTiler.Voyager"                      
+ [68] "MapTiler.Ocean"                        
+ [69] "MapTiler.Backdrop"                     
+ [70] "MapTiler.Dataviz"                      
+ [71] "MapTiler.DatavizLight"                 
+ [72] "MapTiler.DatavizDark"                  
+ [73] "MapTiler.Aquarelle"                    
+ [74] "MapTiler.Landscape"                    
+ [75] "MapTiler.Openstreetmap"                
+ [76] "MapTiler.Outdoor"                      
+ [77] "MapTiler.Satellite"                    
+ [78] "MapTiler.Winter"                       
+ [79] "TomTom"                                
+ [80] "TomTom.Basic"                          
+ [81] "TomTom.Hybrid"                         
+ [82] "TomTom.Labels"                         
+ [83] "Esri"                                  
+ [84] "Esri.WorldStreetMap"                   
+ [85] "Esri.WorldTopoMap"                     
+ [86] "Esri.WorldImagery"                     
+ [87] "Esri.WorldTerrain"                     
+ [88] "Esri.WorldShadedRelief"                
+ [89] "Esri.WorldPhysical"                    
+ [90] "Esri.OceanBasemap"                     
+ [91] "Esri.NatGeoWorldMap"                   
+ [92] "Esri.WorldGrayCanvas"                  
+ [93] "OpenWeatherMap"                        
+ [94] "OpenWeatherMap.Clouds"                 
+ [95] "OpenWeatherMap.CloudsClassic"          
+ [96] "OpenWeatherMap.Precipitation"          
+ [97] "OpenWeatherMap.PrecipitationClassic"   
+ [98] "OpenWeatherMap.Rain"                   
+ [99] "OpenWeatherMap.RainClassic"            
+[100] "OpenWeatherMap.Pressure"               
+[101] "OpenWeatherMap.PressureContour"        
+[102] "OpenWeatherMap.Wind"                   
+[103] "OpenWeatherMap.Temperature"            
+[104] "OpenWeatherMap.Snow"                   
+[105] "HERE"                                  
+[106] "HERE.exploreDay"                       
+[107] "HERE.liteDay"                          
+[108] "HERE.logisticsDay"                     
+[109] "HERE.topoDay"                          
+[110] "HERE.logisticsNight"                   
+[111] "HERE.exploreNight"                     
+[112] "HERE.topoNight"                        
+[113] "HERE.liteNight"                        
+[114] "HERE.exploreSatelliteDay"              
+[115] "HERE.liteSatelliteDay"                 
+[116] "HERE.logisticsSatelliteDay"            
+[117] "HERE.basicMap"                         
+[118] "HERE.mapLabels"                        
+[119] "HERE.trafficFlow"                      
+[120] "HERE.carnavDayGrey"                    
+[121] "HERE.hybridDay"                        
+[122] "HERE.hybridDayMobile"                  
+[123] "HERE.hybridDayTransit"                 
+[124] "HERE.hybridDayGrey"                    
+[125] "HERE.pedestrianDay"                    
+[126] "HERE.pedestrianNight"                  
+[127] "HERE.satelliteDay"                     
+[128] "HERE.terrainDay"                       
+[129] "HERE.terrainDayMobile"                 
+[130] "FreeMapSK"                             
+[131] "MtbMap"                                
+[132] "CartoDB"                               
+[133] "CartoDB.Positron"                      
+[134] "CartoDB.PositronNoLabels"              
+[135] "CartoDB.PositronOnlyLabels"            
+[136] "CartoDB.DarkMatter"                    
+[137] "CartoDB.DarkMatterNoLabels"            
+[138] "CartoDB.DarkMatterOnlyLabels"          
+[139] "CartoDB.Voyager"                       
+[140] "CartoDB.VoyagerNoLabels"               
+[141] "CartoDB.VoyagerOnlyLabels"             
+[142] "CartoDB.VoyagerLabelsUnder"            
+[143] "HikeBike"                              
+[144] "HikeBike.HikeBike"                     
+[145] "HikeBike.HillShading"                  
+[146] "BasemapAT"                             
+[147] "BasemapAT.basemap"                     
+[148] "BasemapAT.grau"                        
+[149] "BasemapAT.overlay"                     
+[150] "BasemapAT.terrain"                     
+[151] "BasemapAT.surface"                     
+[152] "BasemapAT.highdpi"                     
+[153] "BasemapAT.orthofoto"                   
+[154] "nlmaps"                                
+[155] "nlmaps.standaard"                      
+[156] "nlmaps.pastel"                         
+[157] "nlmaps.grijs"                          
+[158] "nlmaps.water"                          
+[159] "nlmaps.luchtfoto"                      
+[160] "NASAGIBS"                              
+[161] "NASAGIBS.ModisTerraTrueColorCR"        
+[162] "NASAGIBS.ModisTerraBands367CR"         
+[163] "NASAGIBS.ViirsEarthAtNight2012"        
+[164] "NASAGIBS.ModisTerraLSTDay"             
+[165] "NASAGIBS.ModisTerraSnowCover"          
+[166] "NASAGIBS.ModisTerraAOD"                
+[167] "NASAGIBS.ModisTerraChlorophyll"        
+[168] "NLS"                                   
+[169] "NLS.osgb63k1885"                       
+[170] "NLS.osgb1888"                          
+[171] "NLS.osgb10k1888"                       
+[172] "NLS.osgb1919"                          
+[173] "NLS.osgb25k1937"                       
+[174] "NLS.osgb63k1955"                       
+[175] "NLS.oslondon1k1893"                    
+[176] "JusticeMap"                            
+[177] "JusticeMap.income"                     
+[178] "JusticeMap.americanIndian"             
+[179] "JusticeMap.asian"                      
+[180] "JusticeMap.black"                      
+[181] "JusticeMap.hispanic"                   
+[182] "JusticeMap.multi"                      
+[183] "JusticeMap.nonWhite"                   
+[184] "JusticeMap.white"                      
+[185] "JusticeMap.plurality"                  
+[186] "GeoportailFrance"                      
+[187] "GeoportailFrance.plan"                 
+[188] "GeoportailFrance.parcels"              
+[189] "GeoportailFrance.orthos"               
+[190] "OneMapSG"                              
+[191] "OneMapSG.Default"                      
+[192] "OneMapSG.Night"                        
+[193] "OneMapSG.Original"                     
+[194] "OneMapSG.Grey"                         
+[195] "OneMapSG.LandLot"                      
+[196] "USGS"                                  
+[197] "USGS.USTopo"                           
+[198] "USGS.USImagery"                        
+[199] "USGS.USImageryTopo"                    
+[200] "WaymarkedTrails"                       
+[201] "WaymarkedTrails.hiking"                
+[202] "WaymarkedTrails.cycling"               
+[203] "WaymarkedTrails.mtb"                   
+[204] "WaymarkedTrails.slopes"                
+[205] "WaymarkedTrails.riding"                
+[206] "WaymarkedTrails.skating"               
+[207] "OpenAIP"                               
+[208] "OpenSnowMap"                           
+[209] "OpenSnowMap.pistes"                    
+[210] "AzureMaps"                             
+[211] "AzureMaps.MicrosoftImagery"            
+[212] "AzureMaps.MicrosoftBaseDarkGrey"       
+[213] "AzureMaps.MicrosoftBaseRoad"           
+[214] "AzureMaps.MicrosoftBaseHybridRoad"     
+[215] "AzureMaps.MicrosoftTerraMain"          
+[216] "AzureMaps.MicrosoftWeatherInfraredMain"
+[217] "AzureMaps.MicrosoftWeatherRadarMain"   
+[218] "SwissFederalGeoportal"                 
+[219] "SwissFederalGeoportal.NationalMapColor"
+[220] "SwissFederalGeoportal.NationalMapGrey" 
+[221] "SwissFederalGeoportal.SWISSIMAGE"      
+[222] "TopPlusOpen"                           
+[223] "TopPlusOpen.Color"                     
+[224] "TopPlusOpen.Grey"                      </code></pre>
 </div>
 </div>
 </div>
@@ -999,23 +831,23 @@ Figure&nbsp;22.1: An example of a leaflet map.
 Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 </figcaption><div aria-describedby="tbl-openairmaps-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="wnwtjlxqux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wnwtjlxqux table {
+<div id="vxmkuyqbtg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vxmkuyqbtg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wnwtjlxqux thead, #wnwtjlxqux tbody, #wnwtjlxqux tfoot, #wnwtjlxqux tr, #wnwtjlxqux td, #wnwtjlxqux th {
+#vxmkuyqbtg thead, #vxmkuyqbtg tbody, #vxmkuyqbtg tfoot, #vxmkuyqbtg tr, #vxmkuyqbtg td, #vxmkuyqbtg th {
   border-style: none;
 }
 
-#wnwtjlxqux p {
+#vxmkuyqbtg p {
   margin: 0;
   padding: 0;
 }
 
-#wnwtjlxqux .gt_table {
+#vxmkuyqbtg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1041,12 +873,12 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-left-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_caption {
+#vxmkuyqbtg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wnwtjlxqux .gt_title {
+#vxmkuyqbtg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1058,7 +890,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-width: 0;
 }
 
-#wnwtjlxqux .gt_subtitle {
+#vxmkuyqbtg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1070,7 +902,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-width: 0;
 }
 
-#wnwtjlxqux .gt_heading {
+#vxmkuyqbtg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1082,13 +914,13 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_bottom_border {
+#vxmkuyqbtg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_col_headings {
+#vxmkuyqbtg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1103,7 +935,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_col_heading {
+#vxmkuyqbtg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1123,7 +955,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#wnwtjlxqux .gt_column_spanner_outer {
+#vxmkuyqbtg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1135,15 +967,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 4px;
 }
 
-#wnwtjlxqux .gt_column_spanner_outer:first-child {
+#vxmkuyqbtg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wnwtjlxqux .gt_column_spanner_outer:last-child {
+#vxmkuyqbtg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wnwtjlxqux .gt_column_spanner {
+#vxmkuyqbtg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1155,11 +987,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   width: 100%;
 }
 
-#wnwtjlxqux .gt_spanner_row {
+#vxmkuyqbtg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wnwtjlxqux .gt_group_heading {
+#vxmkuyqbtg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1185,7 +1017,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   text-align: left;
 }
 
-#wnwtjlxqux .gt_empty_group_heading {
+#vxmkuyqbtg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1200,15 +1032,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: middle;
 }
 
-#wnwtjlxqux .gt_from_md > :first-child {
+#vxmkuyqbtg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wnwtjlxqux .gt_from_md > :last-child {
+#vxmkuyqbtg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wnwtjlxqux .gt_row {
+#vxmkuyqbtg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1227,7 +1059,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#wnwtjlxqux .gt_stub {
+#vxmkuyqbtg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1240,7 +1072,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#wnwtjlxqux .gt_stub_row_group {
+#vxmkuyqbtg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1254,15 +1086,15 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: top;
 }
 
-#wnwtjlxqux .gt_row_group_first td {
+#vxmkuyqbtg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wnwtjlxqux .gt_row_group_first th {
+#vxmkuyqbtg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wnwtjlxqux .gt_summary_row {
+#vxmkuyqbtg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1272,16 +1104,16 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#wnwtjlxqux .gt_first_summary_row {
+#vxmkuyqbtg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_first_summary_row.thick {
+#vxmkuyqbtg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wnwtjlxqux .gt_last_summary_row {
+#vxmkuyqbtg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1291,7 +1123,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_grand_summary_row {
+#vxmkuyqbtg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1301,7 +1133,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#wnwtjlxqux .gt_first_grand_summary_row {
+#vxmkuyqbtg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1311,7 +1143,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_last_grand_summary_row_top {
+#vxmkuyqbtg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1321,11 +1153,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_striped {
+#vxmkuyqbtg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wnwtjlxqux .gt_table_body {
+#vxmkuyqbtg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1334,7 +1166,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_footnotes {
+#vxmkuyqbtg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1348,7 +1180,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_footnote {
+#vxmkuyqbtg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1357,7 +1189,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#wnwtjlxqux .gt_sourcenotes {
+#vxmkuyqbtg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1371,7 +1203,7 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#wnwtjlxqux .gt_sourcenote {
+#vxmkuyqbtg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1379,72 +1211,72 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#wnwtjlxqux .gt_left {
+#vxmkuyqbtg .gt_left {
   text-align: left;
 }
 
-#wnwtjlxqux .gt_center {
+#vxmkuyqbtg .gt_center {
   text-align: center;
 }
 
-#wnwtjlxqux .gt_right {
+#vxmkuyqbtg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wnwtjlxqux .gt_font_normal {
+#vxmkuyqbtg .gt_font_normal {
   font-weight: normal;
 }
 
-#wnwtjlxqux .gt_font_bold {
+#vxmkuyqbtg .gt_font_bold {
   font-weight: bold;
 }
 
-#wnwtjlxqux .gt_font_italic {
+#vxmkuyqbtg .gt_font_italic {
   font-style: italic;
 }
 
-#wnwtjlxqux .gt_super {
+#vxmkuyqbtg .gt_super {
   font-size: 65%;
 }
 
-#wnwtjlxqux .gt_footnote_marks {
+#vxmkuyqbtg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wnwtjlxqux .gt_asterisk {
+#vxmkuyqbtg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wnwtjlxqux .gt_indent_1 {
+#vxmkuyqbtg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wnwtjlxqux .gt_indent_2 {
+#vxmkuyqbtg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wnwtjlxqux .gt_indent_3 {
+#vxmkuyqbtg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wnwtjlxqux .gt_indent_4 {
+#vxmkuyqbtg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wnwtjlxqux .gt_indent_5 {
+#vxmkuyqbtg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wnwtjlxqux .katex-display {
+#vxmkuyqbtg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wnwtjlxqux div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vxmkuyqbtg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1459,20 +1291,20 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="TmV0d29yayBWaXN1YWxpc2F0aW9u"><span class="gt_from_md">Network Visualisation</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="VmlzdWFsaXNlcyBhbnkgb2YgdGhlIG5ldHdvcmtzIG1hZGUgYXZhaWxhYmxlIGJ5IGBpbXBvcnRNZXRhKClgLg=="><span class="gt_from_md">Visualises any of the networks made available by <code>importMeta()</code>.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YG5ldHdvcmtNYXAoKWA="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/networkMap.html">networkMap()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YG5ldHdvcmtNYXAoKWA="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/networkMap.html">networkMap()</a></code></span></span></td>
 <td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGxlYWZsZXQ6OmFkZE1hcmtlcnMoKWA="><span class="gt_from_md"><code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html">leaflet::addMarkers()</a></code></span></span></td>
 </tr>
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="RGlyZWN0aW9uYWwgQW5hbHlzaXM="><span class="gt_from_md">Directional Analysis</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="VXNlcyBhbnkgb2YgdGhlIGBvcGVuYWlyYCBkaXJlY3Rpb25hbCBhbmFseXNpcyBwbG90cyAoZS5nLiwgYHBvbGFyUGxvdCgpYCkgYXMgbWFya2VycywgYWxsb3dpbmcgdGhlbSB0byBiZSB2aWV3ZWQgaW4gdGhlaXIgZ2Vvc3BhdGlhbCBjb250ZXh0Lg=="><span class="gt_from_md">Uses any of the <code>openair</code> directional analysis plots (e.g., <code>polarPlot()</code>) as markers, allowing them to be viewed in their geospatial context.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YGFubnVsdXNNYXAoKWA8YnI+YGZyZXFNYXAoKWA8YnI+YHBlcmNlbnRpbGVNYXAoKWA8YnI+YHBvbGFyTWFwKClgPGJyPmBwb2xscm9zZU1hcCgpYDxicj5gd2luZHJvc2VNYXAoKWA="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/annulusMap.html">annulusMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/freqMap.html">freqMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/percentileMap.html">percentileMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/polarMap.html">polarMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/pollroseMap.html">pollroseMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/windroseMap.html">windroseMap()</a></code></span></span></td>
-<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFBvbGFyTWFya2VycygpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/addPolarMarkers.html">addPolarMarkers()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YGFubnVsdXNNYXAoKWA8YnI+YGZyZXFNYXAoKWA8YnI+YHBlcmNlbnRpbGVNYXAoKWA8YnI+YHBvbGFyTWFwKClgPGJyPmBwb2xscm9zZU1hcCgpYDxicj5gd2luZHJvc2VNYXAoKWA="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/annulusMap.html">annulusMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/freqMap.html">freqMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/percentileMap.html">percentileMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/pollroseMap.html">pollroseMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/windroseMap.html">windroseMap()</a></code></span></span></td>
+<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFBvbGFyTWFya2VycygpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/addPolarMarkers.html">addPolarMarkers()</a></code></span></span></td>
 </tr>
 <tr>
 <td headers="Family" class="gt_row gt_left"><span data-qmd-base64="VHJhamVjdG9yeSBBbmFseXNpcw=="><span class="gt_from_md">Trajectory Analysis</span></span></td>
 <td headers="Description" class="gt_row gt_left"><span data-qmd-base64="Q3JlYXRlcyBpbnRlcmFjdGl2ZSB2aXN1YWxpc2F0aW9ucyBvZiBIWVNQTElUIHRyYWplY3RvcmllcywgYWxsb3dpbmcgZm9yIGZpbmVyIGludmVzdGlnYXRpb25zIHdoZW4gY29tcGFyZWQgd2l0aCB0aGVpciBzdGF0aWMgYG9wZW5haXJgIGNvdW50ZXJwYXJ0cy4="><span class="gt_from_md">Creates interactive visualisations of HYSPLIT trajectories, allowing for finer investigations when compared with their static <code>openair</code> counterparts.</span></span></td>
-<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YHRyYWpNYXAoKWA8YnI+YHRyYWpMZXZlbE1hcCgpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/trajMap.html">trajMap()</a></code><br><code><a href="https://rdrr.io/pkg/openairmaps/man/trajLevelMap.html">trajLevelMap()</a></code></span></span></td>
-<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFRyYWpQYXRocygpYA=="><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/openairmaps/man/addTrajPaths.html">addTrajPaths()</a></code></span></span></td>
+<td headers="All-in-one" class="gt_row gt_left"><span data-qmd-base64="YHRyYWpNYXAoKWA8YnI+YHRyYWpMZXZlbE1hcCgpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/trajMap.html">trajMap()</a></code><br><code><a href="https://openair-project.github.io/openairmaps/reference/trajLevelMap.html">trajLevelMap()</a></code></span></span></td>
+<td headers="Markers" class="gt_row gt_left"><span data-qmd-base64="YGFkZFRyYWpQYXRocygpYA=="><span class="gt_from_md"><code><a href="https://openair-project.github.io/openairmaps/reference/addTrajPaths.html">addTrajPaths()</a></code></span></span></td>
 </tr>
 </tbody>
 </table>
@@ -1487,19 +1319,6 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1916,11 +1735,11 @@ Table&nbsp;22.1: The <span class="pkg">openairmaps</span> toolkit.
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/maps/maps-overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/maps/maps-overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>

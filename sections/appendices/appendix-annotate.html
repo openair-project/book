@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw">
-<title>Appendix A — Annotating openair plots – The openair book</title>
+<meta name="author" content="David Carslaw and Jack Davison">
+<title>Appendix A — Customising openair plots – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -64,22 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/appendices/appendix-hysplit.html" rel="next">
 <link href="../../sections/references.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -108,178 +106,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../../assets/style/style.css">
+}</script>
 </head>
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -318,7 +154,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -354,13 +189,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
@@ -377,13 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -424,13 +259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -483,13 +318,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -512,13 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -547,13 +382,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -586,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -607,6 +442,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -617,20 +458,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#adding-text" id="toc-adding-text" class="nav-link active" data-scroll-target="#adding-text"><span class="header-section-number">A.1</span> Adding text</a></li>
-  <li><a href="#adding-text-and-a-shaded-area" id="toc-adding-text-and-a-shaded-area" class="nav-link" data-scroll-target="#adding-text-and-a-shaded-area"><span class="header-section-number">A.2</span> Adding text and a shaded area</a></li>
-  <li><a href="#adding-an-arrow" id="toc-adding-an-arrow" class="nav-link" data-scroll-target="#adding-an-arrow"><span class="header-section-number">A.3</span> Adding an arrow</a></li>
-  <li><a href="#adding-a-reference-line-and-text" id="toc-adding-a-reference-line-and-text" class="nav-link" data-scroll-target="#adding-a-reference-line-and-text"><span class="header-section-number">A.4</span> Adding a reference line and text</a></li>
-  <li><a href="#highlight-a-specific-point" id="toc-highlight-a-specific-point" class="nav-link" data-scroll-target="#highlight-a-specific-point"><span class="header-section-number">A.5</span> Highlight a specific point</a></li>
-  <li><a href="#add-a-filled-polygon" id="toc-add-a-filled-polygon" class="nav-link" data-scroll-target="#add-a-filled-polygon"><span class="header-section-number">A.6</span> Add a filled polygon</a></li>
-  <li><a href="#add-air-quality-bands-as-polygons" id="toc-add-air-quality-bands-as-polygons" class="nav-link" data-scroll-target="#add-air-quality-bands-as-polygons"><span class="header-section-number">A.7</span> Add air quality bands as polygons</a></li>
-  <li><a href="#polar-plot-examples" id="toc-polar-plot-examples" class="nav-link" data-scroll-target="#polar-plot-examples"><span class="header-section-number">A.8</span> Polar plot examples</a></li>
-  <li><a href="#using-grid-graphics-identify-locations-interactively" id="toc-using-grid-graphics-identify-locations-interactively" class="nav-link" data-scroll-target="#using-grid-graphics-identify-locations-interactively"><span class="header-section-number">A.9</span> Using grid graphics — identify locations interactively</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<li>
+<a href="#annotations" id="toc-annotations" class="nav-link active" data-scroll-target="#annotations"><span class="header-section-number">A.1</span> Annotations</a>
+  <ul class="collapse">
+<li><a href="#adding-text" id="toc-adding-text" class="nav-link" data-scroll-target="#adding-text"><span class="header-section-number">A.1.1</span> Adding text</a></li>
+  <li><a href="#adding-a-shaded-area" id="toc-adding-a-shaded-area" class="nav-link" data-scroll-target="#adding-a-shaded-area"><span class="header-section-number">A.1.2</span> Adding a shaded area</a></li>
+  <li><a href="#adding-an-arrow" id="toc-adding-an-arrow" class="nav-link" data-scroll-target="#adding-an-arrow"><span class="header-section-number">A.1.3</span> Adding an arrow</a></li>
+  <li><a href="#highlight-a-specific-point" id="toc-highlight-a-specific-point" class="nav-link" data-scroll-target="#highlight-a-specific-point"><span class="header-section-number">A.1.4</span> Highlight a specific point</a></li>
+  <li><a href="#add-a-reference-line" id="toc-add-a-reference-line" class="nav-link" data-scroll-target="#add-a-reference-line"><span class="header-section-number">A.1.5</span> Add a reference line</a></li>
+  <li><a href="#working-with-dates" id="toc-working-with-dates" class="nav-link" data-scroll-target="#working-with-dates"><span class="header-section-number">A.1.6</span> Working with dates</a></li>
+  <li><a href="#working-with-radial-axes" id="toc-working-with-radial-axes" class="nav-link" data-scroll-target="#working-with-radial-axes"><span class="header-section-number">A.1.7</span> Working with radial axes</a></li>
+  <li><a href="#multi-panel-plots" id="toc-multi-panel-plots" class="nav-link" data-scroll-target="#multi-panel-plots"><span class="header-section-number">A.1.8</span> Multi-panel plots</a></li>
+  <li><a href="#assembly-plots" id="toc-assembly-plots" class="nav-link" data-scroll-target="#assembly-plots"><span class="header-section-number">A.1.9</span> Assembly plots</a></li>
+  </ul>
+</li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">A.2</span> Themes</a></li>
+  <li><a href="#extensions" id="toc-extensions" class="nav-link" data-scroll-target="#extensions"><span class="header-section-number">A.3</span> Extensions</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-annotating-openair" class="quarto-section-identifier">Appendix A — Annotating openair plots</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-annotating-openair" class="quarto-section-identifier">Appendix A — Customising openair plots</span></h1>
 </div>
 
 
@@ -640,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
+             <p>Jack Davison </p>
           </div>
   </div>
     
@@ -650,300 +498,559 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>A frequently asked question about <span class="pkg">openair</span> and requested feature is how to annotate plots. While all <span class="pkg">openair</span> functions could have options to allow annotations to be made, this would make the functions cumbersome and reduce flexibility. Nevertheless, it is useful to be able to annotate plots in lots of different ways. Fortunately there are existing functions in packages such as <span class="pkg">lattice</span> and <span class="pkg">latticeExtra</span> that allow for plots to be updated. An example of the sorts of annotation that are possible is shown in <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a>, which is an enhanced version of a <code>timePlot</code> Figure. These annotations have been subsequently added to a basic plot and built up in layers. This section considers how to annotate <span class="pkg">openair</span> plots more generally and uses <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> as an example of the types of annotation possible. Also considered specifically is the annotation of plots that are in polar coordinates, as these can sometimes benefit from different types of annotation.</p>
-<p>There are several types of objects that can be useful to add to plots including text, shapes, lines and other shading. Given that many <span class="pkg">openair</span> plots can consist of multiple panels, it is also useful to think about how to annotate specific panels. The examples given in this section will apply to all <span class="pkg">openair</span> plot, the only difference being the coordinate system used in each case.</p>
-<p>The basis of <span class="pkg">openair</span> annotations is through the use of the <span class="pkg">latticeExtra</span> package, which should already be installed as part of <span class="pkg">openair</span>. In that package there is a function called <code>layer</code> that effectively allows annotations to be built up ‘layer by layer’.</p>
+</header><p>A frequently asked question about <span class="pkg">openair</span> and a commonly requested feature is how to annotate plots. Since all <span class="pkg">openair</span> functions now return <span class="pkg">ggplot2</span> objects, users have considerably more flexibility in adding annotations using the extensive set of tools available in <span class="pkg">ggplot2</span> and its extensions. Embedding annotation options directly inside every <span class="pkg">openair</span> function would make them unnecessarily complex and still not cover every customisation users may want. Instead, because plots are returned as standard <span class="pkg">ggplot2</span> objects, users can build annotations incrementally, adding layers as needed.</p>
+<p>There are several types of annotation that can be useful, including text, shapes, lines, and shading. Because many <span class="pkg">openair</span> plots consist of multiple facets, it is also important to understand how to target specific panels when adding annotations. The approaches described here apply broadly to all <span class="pkg">openair</span> plots - the only differences concern the coordinate system used.</p>
+<p>The foundation of annotation in the new <span class="pkg">openair</span> is the <span class="pkg">ggplot2</span> layering system. Annotations can be added with standard geoms such as <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_label()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">ggplot2::geom_rect()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">ggplot2::geom_segment()</a></code>, or using helper functions like `<code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">ggplot2::annotate()</a></code>. Since the output is a normal ggplot object, users can modify it by adding layers with the <code>+</code> operator, adjusting scales, or adding specialised annotation layers from packages such as <span class="pkg">ggrepel</span>, <span class="pkg">ggforce</span>, or <span class="pkg">patchwork</span> for more complex layouts.</p>
+<p>One quirk of <span class="pkg">openair</span> to be aware of is that plotting functions do not return a <em>plot</em>, they return an <em>openair object</em> which contains the plot, the plot data, and the function call. One tip is to use <code>plot = FALSE</code>, which tells the function to not print the plot at time of object creation.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div id="fig-timePlotAnnotate" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timePlotAnnotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-timePlotAnnotate-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;A.1: Annotations added to the timePlot."><img src="appendix-annotate_files/figure-html/fig-timePlotAnnotate-1.png" class="img-fluid figure-img" width="960"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timePlotAnnotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.1: Annotations added to the <code>timePlot</code>.
-</figcaption></figure>
-</div>
-</div>
-</div>
-<section id="adding-text" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="adding-text">
-<span class="header-section-number">A.1</span> Adding text</h2>
-<p>To add text (or other annotations) it is necessary to know the coordinates on a plot for where the text will go, which will depend on the data plotted. In this extended example using the <code>timePlot</code> function, the y-axis will be in ordinary numerical units, whereas the x-axis will be in a date-time format (<code>POSIXct</code>).</p>
-<p>There are various ways that annotations can be added, but the method used here is to add to the previous plot using a function called <code><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object()</a></code> to which we want to add a later. This may seem complicated, but once a few examples are considered, the method becomes very powerful, flexible and straightforward. In a multi-panel plot such as <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> it is also useful to specify which rows/columns should be added to. If they are not specified then the annotation will appear in all panels.</p>
-<p>First, a plot should be produced to which we wish to add some text.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make sure latticeExtra is loaded</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://latticeextra.r-forge.r-project.org/">latticeExtra</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="st">"aug"</span><span class="op">)</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"o3"</span>, <span class="st">"pm25"</span>, <span class="st">"pm10"</span>, <span class="st">"ws"</span><span class="op">)</span>,</span>
-<span>  y.relation <span class="op">=</span> <span class="st">"free"</span></span>
-<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>So, considering <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> , this is how the text ‘some missing data’ was added to the top panel.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-04 12:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>    labels <span class="op">=</span> <span class="st">"some missing data"</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>So what does this do? First, the <code><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object()</a></code> is simply the last plot that was plotted. Next the <code>layer</code> function is used to add some text. The text itself is added using the <code>ltext</code> <span class="pkg">lattice</span> function. It is worth having a look at the help for <code>ltext</code> as that gives an overview of all the common annotations and other options. We have chosen to plot the text at position x = ‘2003-08-04’ and y = 200 and the label itself. A useful option to <code>ltext</code> is <code>pos</code>. Values can be 1, 2, 3 and 4, and indicate positions below (the default), to the left of, above and to the right of the specified coordinates</p>
-</section><section id="adding-text-and-a-shaded-area" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="adding-text-and-a-shaded-area">
-<span class="header-section-number">A.2</span> Adding text and a shaded area</h2>
-<p>This time we will highlight an interval in row 2 (O<sub>3</sub>) and write some text on top. Note that this time we use the <code>lpolygon</code> function and choose to put it under everything else on the plot. For the text, we have chosen a colour (yellow) font type 2 (bold) and made it a bit bigger (<code>cex = 1.5</code>). Note also the <code>y</code> values extend beyond the actual limits shown on the plot — just to make sure they cover the whole region.</p>
-<p>The polygon could of course be horizontal and more than one producing a series of ‘bands’ e.g.&nbsp;air quality indexes. A more sophisticated approach is shown later for PM<sub>2.5</sub></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-07 00:00"</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-07 00:00"</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-12 00:00"</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-12 00:00"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">600</span>, <span class="fl">600</span>, <span class="op">-</span><span class="fl">20</span><span class="op">)</span>,</span>
-<span>    col <span class="op">=</span> <span class="st">"grey"</span>, border <span class="op">=</span> <span class="cn">NA</span></span>
-<span>  <span class="op">)</span>, under <span class="op">=</span> <span class="cn">TRUE</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">## add text</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-09 12:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">50</span>,</span>
-<span>    labels <span class="op">=</span> <span class="st">"!!episode!!"</span>, col <span class="op">=</span> <span class="st">"yellow"</span>,</span>
-<span>    font <span class="op">=</span> <span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.5</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The small shaded, semi-transparent area shown in the bottom panel was added as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add shaded polygon</span></span>
-<span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="va">plt</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"2003-08-21"</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"2003-08-21"</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-23 00:00"</span><span class="op">)</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-23 00:00"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span>, border <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>    alpha <span class="op">=</span> <span class="fl">0.2</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="adding-an-arrow" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="adding-an-arrow">
-<span class="header-section-number">A.3</span> Adding an arrow</h2>
-<p>The arrow shown on the first panel of <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> was added as follows. Note the <code>code = 3</code> placed arrows at both ends. Note that <code>angle</code> is the angle from the shaft of the arrow to the edge of the arrow head.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">larrows</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-01 00:00"</span><span class="op">)</span>, <span class="fl">100</span>,</span>
-<span>    <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-08 14:00"</span><span class="op">)</span>,</span>
-<span>    <span class="fl">100</span>,</span>
-<span>    code <span class="op">=</span> <span class="fl">3</span>, angle <span class="op">=</span> <span class="fl">30</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="adding-a-reference-line-and-text" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="adding-a-reference-line-and-text">
-<span class="header-section-number">A.4</span> Adding a reference line and text</h2>
-<p>This code adds a vertical dashed reference line shown in the 4th panel (PM<sub>10</sub>) along with some text aligned at 90 degrees using the <code>srt</code> option of <code>ltext</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/panel.functions.html">panel.abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-25 00:00"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">4</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-25 08:00"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">60</span>,</span>
-<span>    labels <span class="op">=</span> <span class="st">"reference line"</span>, srt <span class="op">=</span> <span class="fl">90</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="highlight-a-specific-point" class="level2" data-number="A.5"><h2 data-number="A.5" class="anchored" data-anchor-id="highlight-a-specific-point">
-<span class="header-section-number">A.5</span> Highlight a specific point</h2>
-<p>Up until now annotations have been added using arbitrary coordinates in each panel. What if we wanted to highlight a particular point, or more generally work with the actual data that are plotted. Knowing how to refer to existing data greatly extends the power of these functions.</p>
-<p>It is possible to refer to a specific point in a panel simply by indexing the point of interest i.e.&nbsp;<code>x</code>, <code>y</code>. For example, to mark the 200th PM<sub>10</sub> concentration (without knowing the actual date or value):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a specific point</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">16</span>, cex <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">4</span></span>
-<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>What if we wanted to highlight the maximum O<sub>3</sub> concentration? It is possible to work out the index first and then use that to refer to that point. Note the <code>}</code> to allow for the code to span multiple commands.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## add a point to the max O3 concentration</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
-<span>    <span class="op">{</span></span>
-<span>      <span class="va">maxy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">maxy</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="va">maxy</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"black"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span>
-<span>    <span class="op">}</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">2</span></span>
-<span>  <span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## label max ozone</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
-<span>    <span class="op">{</span></span>
-<span>      <span class="va">maxy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">maxy</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="va">maxy</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="va">maxy</span><span class="op">]</span>, <span class="st">"ppb"</span><span class="op">)</span>,</span>
-<span>        pos <span class="op">=</span> <span class="fl">4</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">}</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">2</span></span>
-<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="add-a-filled-polygon" class="level2" data-number="A.6"><h2 data-number="A.6" class="anchored" data-anchor-id="add-a-filled-polygon">
-<span class="header-section-number">A.6</span> Add a filled polygon</h2>
-<p>It can be seen in the top panel of <a href="#fig-timePlotAnnotate" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> that some data are highlighted by filling the area below the line. This approach can be useful more generally in plotting. While it is possible to draw polygons easily and refer to the data itself, there needs to be a way for dealing with gaps in data, otherwise these gaps could be filled in perhaps unpredictable ways. A function has been written to draw a polygon taking into account gaps (<code>poly.na</code>).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poly.na</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x1</span>, <span class="va">y1</span>, <span class="va">x2</span>, <span class="va">y2</span>, <span class="va">col</span> <span class="op">=</span> <span class="st">"black"</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">y2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">i</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span>, <span class="va">x1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">x2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">x2</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y1</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span>, <span class="va">y1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">y2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">y2</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>        col <span class="op">=</span> <span class="va">col</span>, border <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="va">alpha</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This time we work out the ids of the data spanning an area of interest. Then the <code>poly.na</code> function is used. Note that the alpha transparency is by default 0.2 but another value can easily be supplied, as shown in the air quality ‘bands’ example.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
-<span>    <span class="op">{</span></span>
-<span>      <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-11 00:00"</span><span class="op">)</span> <span class="op">&amp;</span></span>
-<span>        <span class="va">x</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html">ymd_hm</a></span><span class="op">(</span><span class="st">"2003-08-25 00:00"</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">id</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="va">id</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span><span class="va">id</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>        col <span class="op">=</span> <span class="st">"darkorange"</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">}</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="add-air-quality-bands-as-polygons" class="level2" data-number="A.7"><h2 data-number="A.7" class="anchored" data-anchor-id="add-air-quality-bands-as-polygons">
-<span class="header-section-number">A.7</span> Add air quality bands as polygons</h2>
-<p>It is a simple extension to go from using a polygon below the data to polygons at certain intervals e.g.&nbsp;air quality indexes. These are shown for PM<sub>2.5</sub> and the bands considered are 0–20, 20–30, 30–40 and &gt;40.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    col <span class="op">=</span> <span class="st">"green"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span></span>
-<span>    <span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="cn">NA</span>, <span class="va">y</span><span class="op">)</span>, <span class="va">x</span>,</span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      col <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    rows <span class="op">=</span> <span class="fl">3</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">30</span>, <span class="cn">NA</span>, <span class="va">y</span><span class="op">)</span>,</span>
-<span>    <span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    col <span class="op">=</span> <span class="st">"orange"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu">poly.na</span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">40</span>, <span class="cn">NA</span>, <span class="va">y</span><span class="op">)</span>,</span>
-<span>    <span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    col <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="polar-plot-examples" class="level2" data-number="A.8"><h2 data-number="A.8" class="anchored" data-anchor-id="polar-plot-examples">
-<span class="header-section-number">A.8</span> Polar plot examples</h2>
-<p>Many of the examples considered above are relevant to all other functions e.g.&nbsp;how to add text, choosing rows and columns to plot in. Polar coordinate plots are different because of the coordinate system used and this section considers a few examples.</p>
-<p>One useful approach is to be able to draw an arc, perhaps highlighting an area of interest. A simple, but flexible function has been written to do this. It takes arguments <code>theta1</code> and <code>theta2</code> that define the angular area of interest and <code>lower</code> and <code>upper</code> to set the lower and upper wind speed, respectively. It also has additional arguments <code>theta3</code> and <code>theta4</code> which optionally set the angles for the ‘upper’ wind speed.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta1</span> <span class="op">=</span> <span class="fl">30</span>, <span class="va">theta2</span> <span class="op">=</span> <span class="fl">60</span>, <span class="va">theta3</span> <span class="op">=</span> <span class="va">theta1</span>, <span class="va">theta4</span> <span class="op">=</span> <span class="va">theta2</span>,</span>
-<span>                <span class="va">lower</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">upper</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="co">## function to work out coordinates for an arc sector</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">theta2</span> <span class="op">&lt;</span> <span class="va">theta1</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">ang1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">theta1</span>, <span class="fl">360</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta2</span> <span class="op">-</span> <span class="va">theta1</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">ang2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">theta2</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta2</span> <span class="op">-</span> <span class="va">theta1</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">angles.low</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ang1</span>, <span class="va">ang2</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="co">## for upper angles</span></span>
-<span>    <span class="va">ang1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">theta1</span>, <span class="fl">360</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta4</span> <span class="op">-</span> <span class="va">theta3</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">ang2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">theta2</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta4</span> <span class="op">-</span> <span class="va">theta3</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">angles.high</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ang1</span>, <span class="va">ang2</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="va">angles.low</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">theta1</span>, <span class="va">theta2</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta2</span> <span class="op">-</span> <span class="va">theta1</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">angles.high</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">theta3</span>, <span class="va">theta4</span>, length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">theta4</span> <span class="op">-</span> <span class="va">theta3</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="va">x1</span> <span class="op">&lt;-</span> <span class="va">lower</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.low</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span></span>
-<span>  <span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">lower</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.low</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span></span>
-<span>  <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.high</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span> <span class="op">*</span> <span class="va">angles.high</span> <span class="op">/</span> <span class="fl">180</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-annonatePolar" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-annonatePolar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-annonatePolar-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;A.2: Annotations on a polar plot."><img src="appendix-annotate_files/figure-html/fig-annonatePolar-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-annonatePolar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.2: Annotations on a polar plot.
-</figcaption></figure>
-</div>
-</div>
-</div>
-<p>Following on from the previous examples, some annotations have been added to the basic polar plot for SO<sub>2</sub> as shown in <a href="#fig-annonatePolar" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>. Note that in these plots (0, 0) is the middle of the plot and the radial distance will be determined by the wind speed — or whatever the radial variable is. This way of plotting arcs can also be applied to other functions that show directional data.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, col <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">12</span>, <span class="st">"A"</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">ltext</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="st">"B"</span>, cex <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lsegments</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">11.5</span>, <span class="op">-</span><span class="fl">11.5</span>, lty <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">## add and arc to highlight area of interest</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/update.trellis.html">trellis.last.object</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/latticeExtra/man/layer.html">layer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/llines.html">lpolygon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">arc</span><span class="op">(</span></span>
-<span>    theta1 <span class="op">=</span> <span class="fl">60</span>, theta2 <span class="op">=</span> <span class="fl">120</span>, lower <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    upper <span class="op">=</span> <span class="fl">15</span></span>
-<span>  <span class="op">)</span><span class="op">$</span><span class="va">x</span>, y <span class="op">=</span> <span class="fu">arc</span><span class="op">(</span></span>
-<span>    theta1 <span class="op">=</span> <span class="fl">60</span>,</span>
-<span>    theta2 <span class="op">=</span> <span class="fl">120</span>, lower <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    upper <span class="op">=</span> <span class="fl">15</span></span>
-<span>  <span class="op">)</span><span class="op">$</span><span class="va">y</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="using-grid-graphics-identify-locations-interactively" class="level2" data-number="A.9"><h2 data-number="A.9" class="anchored" data-anchor-id="using-grid-graphics-identify-locations-interactively">
-<span class="header-section-number">A.9</span> Using grid graphics — identify locations interactively</h2>
-<p>The examples above provide a precise way of annotating plots for single or multi-panels <span class="pkg">openair</span> displays. However, these methods won’t work for plots that consist of completely separate plots such as the four plots in <code>timeVariation</code>. There are however other methods that can be used to annotate such plots using the package <code>grid</code>, which forms the basis of <span class="pkg">lattice</span> graphics. There is enormous capability for annotating plots using the <code>grid</code> package and only a few simple examples are given here.</p>
-<p>Given a a basic <code>timeVariation</code> plot, how could texts be added at any location — say in the middle monthly plot? One very useful function for this type of annotation that allows the user to interactively choose a location is the <code><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator()</a></code> function in the <code>grid</code> package. That function can be called with different coordinate systems — but the one we want defines the bottom-left corner as (0, 0) and the top right as (1, 1).</p>
-<p>First, make a <code>timeVariation</code> plot.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Now let’s choose a location on the plot interactively using the mouse and selecting somewhere in the middle of the monthly plot.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
-<span><span class="co">## bring up the interactive location chooser</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.locator.html">grid.locator</a></span><span class="op">(</span>unit <span class="op">=</span> <span class="st">"npc"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>What should happen is that in the R console the coordinates are given for that point. In my case these were x = 0.503 and y = 0.338. These coordinates can now be used as the basis of adding some text or other annotation. In the example below, the <code>grid.text</code> function is used to add some text for these coordinates making the font bigger (<code>cex = 2</code>), bold (<code>font = 2</code>) and blue (<code>col = "blue"</code>).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="fl">0.503</span>, y <span class="op">=</span> <span class="fl">0.338</span>, label <span class="op">=</span> <span class="st">"here!"</span>,</span>
-<span>  gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>cex <span class="op">=</span> <span class="fl">2</span>, font <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Even with this basic approach, some sophisticated annotation is possible with <em>any</em> <span class="pkg">openair</span> plot. There are many other functions that can be used from the grid package that would allow for polygons, segments and other features to be drawn is a similar way to the examples earlier in this section. Continuing with the same example, here is how to add an arrow pointing to the maximum concentration shown on the top plot for Saturday (again using the <code>grid.locator</code> function).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grid/grid.lines.html">grid.lines</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.736</span>, <span class="fl">0.760</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.560</span>, <span class="fl">0.778</span><span class="op">)</span>,</span>
-<span>  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">scatter_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  x <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"nox"</span>,</span>
+<span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grid/grid.text.html">grid.text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.736</span>, y <span class="op">=</span> <span class="fl">0.560</span>, label <span class="op">=</span> <span class="st">"maximum"</span>, just <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span></span>
+<span><span class="co"># extract data</span></span>
+<span><span class="va">scatter_object</span><span class="op">$</span><span class="va">data</span></span>
+<span></span>
+<span><span class="co"># extract plot</span></span>
+<span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To make life easier, lets load the <span class="pkg">ggplot2</span> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A good introduction to tweaking plots is using <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code> to change the axis labels. With <code>ggplot2</code> you simply add (with <code>+</code>) new layers. Feel free to use <code><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText()</a></code> directly here too for automatic formatting.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"NO2 (ug/m3)"</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"NOx (ug/m3)"</span><span class="op">)</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Scatter Plot"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"Monthly NOx roughly correlates with NO2"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-labs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-labs-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;A.1: Using labs() to change axis labels and title."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-labs-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.1: Using <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code> to change axis labels and title.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<section id="annotations" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="annotations">
+<span class="header-section-number">A.1</span> Annotations</h2>
+<section id="adding-text" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="adding-text">
+<span class="header-section-number">A.1.1</span> Adding text</h3>
+<p>To add text, use <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">ggplot2::annotate()</a></code> with <code>geom = "text"</code> and specify the coordinates, colour and label. In this example, the text ‘This is high!’ is added to the right of the plot at a y-value of 300.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">48.5</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"This is high!"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-annotate-text" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-annotate-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-text-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;A.2: Adding text annotations with annotate()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-text-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-annotate-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.2: Adding text annotations with <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="adding-a-shaded-area" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="adding-a-shaded-area">
+<span class="header-section-number">A.1.2</span> Adding a shaded area</h3>
+<p>For a shaded area, use <code>geom = "rect"</code> and specify the coordinates of the rectangle. In this example, a semi-transparent orange rectangle is added to highlight a region of interest. Note that the <code>alpha</code> parameter controls the transparency of the rectangle, with values closer to 0 being more transparent and values closer to 1 being more opaque. We also use <code>fill</code> over <code>colour</code> to specify the fill colour of the rectangle; <code>colour</code> could be used to specify the border colour if desired.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"rect"</span>,</span>
+<span>    xmin <span class="op">=</span> <span class="fl">40</span>,</span>
+<span>    xmax <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    ymin <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"orange"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"orange4"</span>,</span>
+<span>    fontface <span class="op">=</span> <span class="st">"bold"</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Look at this!"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-annotate-rect" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-annotate-rect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-rect-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;A.3: Adding a shaded area with annotate()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-rect-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-annotate-rect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.3: Adding a shaded area with <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="adding-an-arrow" class="level3" data-number="A.1.3"><h3 data-number="A.1.3" class="anchored" data-anchor-id="adding-an-arrow">
+<span class="header-section-number">A.1.3</span> Adding an arrow</h3>
+<p>To add an arrow, use <code>geom = "segment"</code> and specify the coordinates of the start and end points, along with the <code>arrow</code> parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that <code>arrow(ends = "both")</code> creates arrowheads at both ends of the segment, and <code>linewidth</code> controls the thickness of the arrow line. The <code><a href="https://rdrr.io/r/grid/arrow.html">arrow()</a></code> function also has additional parameters such as <code>angle</code> and <code>length</code> to further customize the appearance of the arrowheads.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"path"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">60</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">250</span><span class="op">)</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>ends <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-annotate-arrow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-annotate-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-arrow-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;A.4: Adding an arrow with annotate()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-arrow-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-annotate-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.4: Adding an arrow with <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="highlight-a-specific-point" class="level3" data-number="A.1.4"><h3 data-number="A.1.4" class="anchored" data-anchor-id="highlight-a-specific-point">
+<span class="header-section-number">A.1.4</span> Highlight a specific point</h3>
+<p>To highlight a point, you can use <code>geom = "point"</code> and specify the coordinates of the point you want to highlight. For example, to highlight the point with the maximum NO<sub>2</sub> concentration, you can first extract that point from the data and then add it as an annotation. Note that different <span class="pkg">openair</span> plots will have different <code>data</code> structures, so explore what’s available for your specific plot of interest.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># can extract a specific point from the scatterplot data</span></span>
+<span><span class="va">max_no2_point</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">scatter_object</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">scatter_object</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">no2</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">scatter_object</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">no2</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># add this as an annotation</span></span>
+<span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"point"</span>,</span>
+<span>    x <span class="op">=</span> <span class="va">max_no2_point</span><span class="op">$</span><span class="va">no2</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">max_no2_point</span><span class="op">$</span><span class="va">nox</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>    shape <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-annotate-point" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-annotate-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-point-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;A.5: Highlighting a specific point with annotate()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-point-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-annotate-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.5: Highlighting a specific point with <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="add-a-reference-line" class="level3" data-number="A.1.5"><h3 data-number="A.1.5" class="anchored" data-anchor-id="add-a-reference-line">
+<span class="header-section-number">A.1.5</span> Add a reference line</h3>
+<p>To add a reference line, you use <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_hline()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_vline()</a></code>. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as “Limit”. The <code>lty</code> parameter controls the line type (e.g., dashed, dotted), and <code>color</code> specifies the color of the line.</p>
+<p>In this case, we set <code>x = I(0.01)</code>. The <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code> function tells <code>ggplot2</code> to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> plots with different x-axis scales - <code>x = I(0.01)</code> will <em>always</em> mean “nudged a little bit from the far left of the plot”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span></span>
+<span>    yintercept <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    lty <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"purple"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">205</span>,</span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>,</span>
+<span>    vjust <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    hjust <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Limit"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"purple"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-annotate-hline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-annotate-hline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-hline-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;A.6: Adding a reference line with geom_hline() and annotating it."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-annotate-hline-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-annotate-hline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.6: Adding a reference line with <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline()</a></code> and annotating it.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="working-with-dates" class="level3" data-number="A.1.6"><h3 data-number="A.1.6" class="anchored" data-anchor-id="working-with-dates">
+<span class="header-section-number">A.1.6</span> Working with dates</h3>
+<p>Working with dates (e.g., for plots like <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>) is a step more challenging, but is mostly identical to what has already been covered. <code><a href="https://rdrr.io/r/base/ISOdatetime.html">ISOdate()</a></code> is convenient way to create date(times) in R to plug into <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code> and similar functions. In this example, we add a vertical dashed line at a specific date (June 1, 2002) along with an annotation to label. The <code>xintercept</code> parameter specifies the position of the vertical line, and the <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code> function is used to add text at a specific date and y-value. The <code>hjust</code> and <code>vjust</code> parameters control the horizontal and vertical justification of the text, respectively.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">no2_timeplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"no2"</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">no2_timeplot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span></span>
+<span>    xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ISOdatetime.html">ISOdate</a></span><span class="op">(</span><span class="fl">2002</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"grey25"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ISOdatetime.html">ISOdate</a></span><span class="op">(</span><span class="fl">2002</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"What happened\nhere?\n🤔"</span>,</span>
+<span>    hjust <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    vjust <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"grey25"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-timeplot-annotate-date" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeplot-annotate-date-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-timeplot-annotate-date-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;A.7: Adding a vertical line at a specific date with geom_vline() and annotating it."><img src="appendix-annotate_files/figure-html/fig-timeplot-annotate-date-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeplot-annotate-date-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.7: Adding a vertical line at a specific date with <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline()</a></code> and annotating it.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="working-with-radial-axes" class="level3" data-number="A.1.7"><h3 data-number="A.1.7" class="anchored" data-anchor-id="working-with-radial-axes">
+<span class="header-section-number">A.1.7</span> Working with radial axes</h3>
+<p>For “radial” plots (e.g., <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>) the same principles apply, but the coordinates are different. You simply need to think in “radial” coordinates - the x-axis is the ‘compass directions’ in degrees (0-360) and the y-axis is the radial axis progressing out from the centre. In this example, a vertical dashed line is added at 225 degrees, along with two rectangles to highlight specific angular regions, and text annotations to label these regions as “A”, “B”, and “C”. The <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code> function is used to add both the rectangles and the text, with appropriate coordinates for each annotation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">no2_polarplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"no2"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">no2_polarplot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span></span>
+<span>    xintercept <span class="op">=</span> <span class="fl">225</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"rect"</span>,</span>
+<span>    xmin <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>    xmax <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>    ymin <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"rect"</span>,</span>
+<span>    xmin <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>,</span>
+<span>    xmax <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    ymin <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="fl">18</span>,</span>
+<span>    fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"A"</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">8</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">105</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"B"</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">8</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"label"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">225</span>,</span>
+<span>    y <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"C"</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polarplot-annotate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarplot-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-polarplot-annotate-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;A.8: Adding annotations to a polar plot, using radial coordinates."><img src="appendix-annotate_files/figure-html/fig-polarplot-annotate-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polarplot-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.8: Adding annotations to a polar plot, using radial coordinates.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="multi-panel-plots" class="level3" data-number="A.1.8"><h3 data-number="A.1.8" class="anchored" data-anchor-id="multi-panel-plots">
+<span class="header-section-number">A.1.8</span> Multi-panel plots</h3>
+<p>When <code>type</code> is used in an <code>openair</code> plot, multiple panels (“facets” in <span class="pkg">ggplot2</span> speak) are created. Further, some functions like <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> are automatically faceted. You may wish to annotate only a single panel. Use the <code>layout</code> argument to specify the panel of interest.</p>
+<p>Below, we highlight Christmas day on a <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code>. Note that <code>layout = 12</code> means “the twelfth panel, progressing from left-to-right, top-to-bottom”. This argument could take a vector - e.g., <code>layout = c(5, 12)</code> - which would annotate the fifth and twelfth panels.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">multipanel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2000</span>, plot <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">multipanel</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"rect"</span>,</span>
+<span>    xmin <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>    xmax <span class="op">=</span> <span class="fl">3.5</span>,</span>
+<span>    ymin <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>    layout <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="cn">NA</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-calendarplot-annotate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarplot-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-calendarplot-annotate-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;A.9: Annotating a specific panel in a multi-panel plot using the layout argument."><img src="appendix-annotate_files/figure-html/fig-calendarplot-annotate-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarplot-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.9: Annotating a specific panel in a multi-panel plot using the <code>layout</code> argument.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="assembly-plots" class="level3" data-number="A.1.9"><h3 data-number="A.1.9" class="anchored" data-anchor-id="assembly-plots">
+<span class="header-section-number">A.1.9</span> Assembly plots</h3>
+<p>A few <code>openair</code> plots are actually multiple plots in one. You can typically tell this because the different “panels” are arranged on an irregular grid (e.g., <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>) or are comprised of very different plot types (e.g., <code><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval()</a></code>). These plots are powered by the <span class="pkg">patchwork</span> package, which makes it simple to extract and modify sub-panels. For <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>, the “top” panel can be accessed with <code>[[1]]</code> and the “bottom” three with <code>[[2]][[1]]</code>, <code>[[2]][[2]]</code>, and <code>[[2]][[3]]</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">timevar_no2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"no2"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">timevar_no2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-timevariation-annotate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timevariation-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-timevariation-annotate-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;A.10: Annotating a specific panel in an assembly plot, using timeVariation() as an example."><img src="appendix-annotate_files/figure-html/fig-timevariation-annotate-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timevariation-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.10: Annotating a specific panel in an assembly plot, using <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> as an example.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section></section><section id="themes" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="themes">
+<span class="header-section-number">A.2</span> Themes</h2>
+<p>With <span class="pkg">ggplot2</span> it is simple to control the “theme” of your plot (i.e., all non-data elements) using the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code> function. There is an excellent blog post about <span class="pkg">ggplot2</span> stlying at <a href="https://tidyverse.org/blog/2025/10/ggplot2-styling/" class="uri">https://tidyverse.org/blog/2025/10/ggplot2-styling/</a>, but below we demonstrate a few examples of tweaking the plot style.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span></span>
+<span>      linetype <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>      color <span class="op">=</span> <span class="st">"cadetblue2"</span>,</span>
+<span>      linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span></span>
+<span>      linetype <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      color <span class="op">=</span> <span class="st">"cadetblue"</span>,</span>
+<span>      linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span></span>
+<span>      angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>      vjust <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span></span>
+<span>      angle <span class="op">=</span> <span class="fl">90</span>,</span>
+<span>      vjust <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span></span>
+<span>      fill <span class="op">=</span> <span class="st">"grey95"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span></span>
+<span>      linewidth <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>      lineend <span class="op">=</span> <span class="st">"square"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;A.11: Customising the plot theme with theme()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.11: Customising the plot theme with <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>It is also possible to set a global ‘complete’ theme. This could be a default <span class="pkg">ggplot2</span> theme, or one from an extension package. This could be helpful to ensure your <span class="pkg">openair</span> plots align with other plots you’re already making in <span class="pkg">ggplot2</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-timeplot-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeplot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-timeplot-theme-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;A.12: Setting a global theme to control the styling of all openair plots."><img src="appendix-annotate_files/figure-html/fig-timeplot-theme-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeplot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.12: Setting a global theme to control the styling of all openair plots.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>To reset this behaviour, reset the global theme to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey()</a></code>. This is the <span class="pkg">ggplot2</span> default, and makes all of the <span class="pkg">openair</span> functions restore their default behaviour. If you’d like to actually use <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey()</a></code>, set your global theme to something like <code>theme_grey(10.01)</code> which is different <em>enough</em> to disable <span class="pkg">openair</span>’s overrides.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that some functions do their own <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code> manipulations, so your mileage may vary as to which of your options are honoured - or whether they do unexpected things to your plot!</p>
+<p>A related function is <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code>, which can be useful for controlling how axes and legends behave. These are typically set within <code>openair</code> functions, but can be overridden by more advanced users. Useful arguments include <code>position</code> and <code>angle</code>. For categorical scales, <code>check.overlap</code> or <code>n.dodge</code> can help mitigate overlapping axis labels.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html">guide_axis</a></span><span class="op">(</span></span>
+<span>      position <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>      angle <span class="op">=</span> <span class="fl">90</span>,</span>
+<span>      minor.ticks <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter-plot-guides" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;A.13: Customising axes with guides()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.13: Customising axes with <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="extensions" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="extensions">
+<span class="header-section-number">A.3</span> Extensions</h2>
+<p>There are <a href="https://exts.ggplot2.tidyverse.org/">many <code>ggplot2</code> extensions</a> out there which you can take advantage of in extending your <span class="pkg">openair</span> plots.</p>
+<p>One useful example is <span class="pkg">patchwork</span>, which provides an elegant API for combining multiple plots together into one assembly. This is how <code>timeVariaiton()</code> works under-the-hood, but users should feel free to assemble plots however they see fit.</p>
+<p>The package documentation for <span class="pkg">patchwork</span> is excellent and can be found <a href="https://patchwork.data-imaginist.com/">here</a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p_varplot_hour</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  <span class="st">"nox"</span>,</span>
+<span>  <span class="st">"hour"</span>,</span>
+<span>  sub <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">p_varplot_weekday</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  <span class="st">"nox"</span>,</span>
+<span>  <span class="st">"weekday"</span>,</span>
+<span>  sub <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">p_timeplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="va">p_heatmap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"default"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span></span>
+<span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">p_varplot_hour</span> <span class="op">|</span> <span class="va">p_varplot_weekday</span><span class="op">)</span> <span class="op">/</span> <span class="va">p_timeplot</span><span class="op">)</span> <span class="op">|</span> <span class="va">p_heatmap</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-patchwork-assembly" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-patchwork-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots into one assembly."><img src="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-patchwork-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots into one assembly.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Another really useful package is <span class="pkg">geomtextpath</span>, which combines labels and lines and paths for nicer annotations:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allancameron.github.io/geomtextpath/">geomtextpath</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"textpath"</span>,</span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">60</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">300</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Things go up!"</span>,</span>
+<span>    arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://allancameron.github.io/geomtextpath/reference/geom_textabline.html">geom_texthline</a></span><span class="op">(</span></span>
+<span>    yintercept <span class="op">=</span> <span class="fl">250</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"limit value"</span>,</span>
+<span>    hjust <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="fl">2</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-annotate_files/figure-html/geomtextpath-annotation-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."><img src="appendix-annotate_files/figure-html/geomtextpath-annotation-1.svg" class="img-fluid figure-img" alt="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."></a></p>
+<figcaption>Using the geomtextpath package to add text along a path, and horizontal reference lines with labels.</figcaption></figure>
+</div>
+</div>
+</div>
+<p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">legendry::guide_colring()</a></code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
+<p>This example highlights that sometimes you may need to take on further tweaks as you get deeper into customising your plots. Here, it was necessary to reset the colour scale to set appropriate labels and breaks.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, z <span class="op">=</span> <span class="st">"wd"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
+<span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu"><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">guide_colring</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradientn</a></span><span class="op">(</span></span>
+<span>    colours <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="st">"hue"</span><span class="op">)</span>,</span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"E"</span>, <span class="st">"S"</span>, <span class="st">"W"</span>, <span class="st">"N"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-legendry-guide" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-legendry-guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-legendry-guide-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;A.15: Using the legendry package to create a custom legend for a scatter plot."><img src="appendix-annotate_files/figure-html/fig-legendry-guide-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-legendry-guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.15: Using the legendry package to create a custom legend for a scatter plot.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Many extension packages usefully provide themes that can be easily set globally to apply to <span class="pkg">openair</span> plots. For example, for those working with or for the UK Government, the <span class="pkg">afcharts</span> package exports <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code> for accessible, Government Statistical Service-approved plot styling.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">afcharts</span><span class="fu">::</span><span class="fu"><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">theme_af</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
+<span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
+<span>  group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"gaf.cat"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-afcharts-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-afcharts-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-afcharts-theme-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;A.16: Setting a global theme from an extension package, in this case afcharts::theme_af(), and creating a timePlot()."><img src="appendix-annotate_files/figure-html/fig-afcharts-theme-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-afcharts-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.16: Setting a global theme from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>, and creating a <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"gaf.seq"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-windrose-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-windrose-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-windrose-theme-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;A.17: Customising the theme of a plot from an extension package, in this case afcharts::theme_af()."><img src="appendix-annotate_files/figure-html/fig-windrose-theme-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windrose-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.17: Customising the theme of a plot from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Note that it may easier to use <code><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot()</a></code> and use <span class="pkg">patchwork</span> directly yourself, depending on your use-case.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1360,11 +1467,11 @@ Figure&nbsp;A.2: Annotations on a polar plot.
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>

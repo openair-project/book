@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw">
+<meta name="author" content="David Carslaw and Jack Davison">
 <title>4&nbsp; Access meteorological data – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -64,22 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/directional-analysis/wind-roses.html" rel="next">
 <link href="../../sections/data-access/UK-air-quality-data.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -112,173 +110,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script><link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script><script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><link href="../../site_libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet">
-<link href="../../site_libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet">
-<script src="../../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script><script src="../../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script><script src="../../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script><link rel="stylesheet" href="../../assets/style/style.css">
+<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><link href="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.css" rel="stylesheet">
+<script src="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.min.js"></script><link href="../../site_libs/fontawesome-4.7.0/font-awesome.min.css" rel="stylesheet">
 </head>
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -324,7 +159,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -383,13 +217,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -430,13 +264,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -489,13 +323,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -518,13 +352,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -553,13 +387,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -582,17 +416,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -613,6 +447,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -625,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#the-worldmet-package" id="toc-the-worldmet-package" class="nav-link active" data-scroll-target="#the-worldmet-package"><span class="header-section-number">4.1</span> The worldmet package</a></li>
   <li><a href="#sec-link-aq" id="toc-sec-link-aq" class="nav-link" data-scroll-target="#sec-link-aq"><span class="header-section-number">4.2</span> Linking with air quality data</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html">Data Access</a></li><li class="breadcrumb-item"><a href="../../sections/data-access/access-met-data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></a></li></ol></nav><div class="quarto-title">
@@ -658,60 +498,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="the-worldmet-package" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="the-worldmet-package">
 <span class="header-section-number">4.1</span> The worldmet package</h2>
 <p>Most of the import functions described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a> return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that Ricardo runs to provide the data.</p>
-<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg">worldmet</span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/openair-project/worldmet" class="uri">https://github.com/openair-project/worldmet</a> and <a href="https://www.ncdc.noaa.gov/isd" class="uri">https://www.ncdc.noaa.gov/isd</a> for further information.</p>
-<p>Access to surface meteorological data is very useful in general but is especially useful when using <span class="pkg">openair</span> and functions such as <code>polarPlot</code>. To install the package, type:</p>
+<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg">worldmet</span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/openair-project/worldmet" class="uri">https://github.com/openair-project/worldmet</a> and <a href="https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly" class="uri">https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly</a> for further information.</p>
+<p>Access to surface meteorological data is very useful in general but is especially useful when using <span class="pkg">openair</span> and functions such as <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>. To install the package, type:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"worldmet"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>There are two main functions in the package: <code>getMeta</code> and <code>importNOAA</code>. The former helps the user find meteorological sites by name, country and proximity to a location based on the latitude and longitude. <code>getMeta</code> will also return a code that can be supplied to <code>importNOAA</code>, which then imports the data.</p>
-<p>Probably the most common use of <code>getMeta</code> is to search around a location of interest based on its latitude and longitude. First we will load the <span class="pkg">worldmet</span> (and other packages we use later):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/worldmet/">worldmet</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<p>To learn which monitoring stations are available, the <code><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations()</a></code> function is provided. By default, this function returns all data as a <code>data.frame</code>, but can usefully also return it as a map using <code>return = "map"</code>. As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">getMeta</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lng <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, return <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-worldmet" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-d6050a8d685bd5f1ea6a" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-d6050a8d685bd5f1ea6a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.302,53.421,52.85,53.533,54.233,54.05,52.283,53.248,53.017,52.783],[-6.451,-6.27,-6.9,-7.367,-6.5,-7.3,-6.483,-4.535,-8,-4.733],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>CASEMENT<\/b><br/><hr><b>Code:<\/b> 039670-99999<br/><b>Start:<\/b> 1987-02-01<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 10 km","<b>DUBLIN<\/b><br/><hr><b>Code:<\/b> 039690-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 13.6 km","<b>OAK PARK - CARLOW<\/b><br/><hr><b>Code:<\/b> 039610-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 64.1 km","<b>MULLINGAR<\/b><br/><hr><b>Code:<\/b> 039710-99999<br/><b>Start:<\/b> 1973-01-01<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 75.3 km","<b>GLENANNE NO2<\/b><br/><hr><b>Code:<\/b> 039230-99999<br/><b>Start:<\/b> 1985-02-07<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 104.6 km","<b>BALLYHAISE<\/b><br/><hr><b>Code:<\/b> 039790-99999<br/><b>Start:<\/b> 2008-07-21<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 106.3 km","<b>JOHNSTOWN CASTLE<\/b><br/><hr><b>Code:<\/b> 039560-99999<br/><b>Start:<\/b> 2007-08-06<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 113.8 km","<b>VALLEY<\/b><br/><hr><b>Code:<\/b> 033020-99999<br/><b>Start:<\/b> 1926-06-06<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 117.5 km","<b>GURTEEN<\/b><br/><hr><b>Code:<\/b> 039660-99999<br/><b>Start:<\/b> 1929-10-01<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 117.6 km","<b>ABERDARON<\/b><br/><hr><b>Code:<\/b> 034050-99999<br/><b>Start:<\/b> 1994-10-01<br/><b>End:<\/b> 2025-08-24<br/><b>Distance:<\/b> 119.5 km"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircles","args":[53.3,-6.3,200,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":20,"opacity":0.5,"fill":true,"fillColor":"red","fillOpacity":0.2},["Search location<br/>Lat = 53.302<br/>Lon = -6.451","Search location<br/>Lat = 53.421<br/>Lon = -6.27","Search location<br/>Lat = 52.85<br/>Lon = -6.9","Search location<br/>Lat = 53.533<br/>Lon = -7.367","Search location<br/>Lat = 54.233<br/>Lon = -6.5","Search location<br/>Lat = 54.05<br/>Lon = -7.3","Search location<br/>Lat = 52.283<br/>Lon = -6.483","Search location<br/>Lat = 53.248<br/>Lon = -4.535","Search location<br/>Lat = 53.017<br/>Lon = -8","Search location<br/>Lat = 52.783<br/>Lon = -4.733"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLayersControl","args":[["OpenStreetMap","Esri.WorldImagery"],[],{"collapsed":false,"autoZIndex":false,"position":"topright"}]}],"limits":{"lat":[52.283,54.233],"lng":[-8,-4.535]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-cef09e606343dd85247c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-cef09e606343dd85247c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"OSM",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.34999999999999,53.367,53.3017,53.4213,53.4333,53.586,53.51,53.149,53.84999999999999,52.84999999999999],[-6.27,-6.35,-6.451300000000001,-6.2701,-6.25,-6.161,-6.656,-6.816,-6.1,-6.9],null,null,"Stations",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>DUBLIN<\/b><br/><hr><b>ID:<\/b> EIU60-00108<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> U<br/><b>Elevation:<\/b> 7 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 5.9 km","<b>DUBLIN<\/b><br/><hr><b>ID:<\/b> EIU68-00018<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> U<br/><b>Elevation:<\/b> 48.5 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 8.2 km","<b>CASEMENT<\/b><br/><hr><b>ID:<\/b> EII0000EIME<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> I<br/><b>Elevation:<\/b> 97.2 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 10.1 km","<b>DUBLIN<\/b><br/><hr><b>ID:<\/b> EII0000EIDW<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> I<br/><b>Elevation:<\/b> 73.8 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 13.6 km","<b>DUBLIN WEATHER CENTER<\/b><br/><hr><b>ID:<\/b> EII0000EIDB<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> I<br/><b>Elevation:<\/b> 68 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 15.2 km","<b>ARDGILLAN<\/b><br/><hr><b>ID:<\/b> UKU68-00001<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> UK<br/><b>State:<\/b> NA<br/><b>Network:<\/b> U<br/><b>Elevation:<\/b> 64 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 33.1 km","<b>DUNSANY<\/b><br/><hr><b>ID:<\/b> EIU00001375<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> U<br/><b>Elevation:<\/b> NA m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 33.2 km","<b>CURRAGH<\/b><br/><hr><b>ID:<\/b> EIU72510051<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> U<br/><b>Elevation:<\/b> 137 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 38.2 km","<b>COWDEN<\/b><br/><hr><b>ID:<\/b> UKI0000EGXF<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> UK<br/><b>State:<\/b> NA<br/><b>Network:<\/b> I<br/><b>Elevation:<\/b> 15 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 62.6 km","<b>OAK PARK - CARLOW<\/b><br/><hr><b>ID:<\/b> EIM00003961<br/><br><b><u>Geography<\/u><\/b><br/><b>Country:<\/b> EI<br/><b>State:<\/b> NA<br/><b>Network:<\/b> M<br/><b>Elevation:<\/b> 63 m<br/><br><b><u>Station Flags<\/u><\/b><br/><b>GSN FLAG:<\/b> NA<br/><b>HCN/CRN FLAG:<\/b> NA<br/><b>WMO ID:<\/b> NA<br/><br><b>Distance from marker:<\/b> 64.1 km"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["OSM","Satellite"],["Stations","Target"],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"addAwesomeMarkers","args":[53.3,-6.3,{"icon":"circle","markerColor":"red","iconColor":"#FFFFFF","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,"Target",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>TARGET<\/b><hr> <b>Latitude/Y<\/b>: 53.3<br> <b>Longitude/X<\/b>: -6.3<br> <b>CRS:<\/b> 4326",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[52.84999999999999,53.84999999999999],"lng":[-6.9,-6.1]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Map of returned area of interest. The user can interactively select a site of interest and find its code to import data.
 </figcaption></figure>
 </div>
 </div>
-<p>Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code i.e.</p>
+<p>Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">getMeta</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations</a></span><span class="op">(</span>return <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can use the map that is produced to select a site of interest and import the data. For example, to import data for Dublin Airport and look at some of the data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">importNOAA</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"039690-99999"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dublin_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_hourly.html">import_ghcn_hourly</a></span><span class="op">(</span><span class="st">"EII0000EIDW"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># first few lines of data</span></span>
 <span><span class="va">dublin_met</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,752 × 24
-   code         station date                latitude longitude  elev    ws    wd
-   &lt;fct&gt;        &lt;fct&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 039690-99999 DUBLIN… 2019-01-01 00:00:00     53.4     -6.27  73.8  5.07  250 
- 2 039690-99999 DUBLIN… 2019-01-01 01:00:00     53.4     -6.27  73.8  4.72  247.
- 3 039690-99999 DUBLIN… 2019-01-01 02:00:00     53.4     -6.27  73.8  4.07  250 
- 4 039690-99999 DUBLIN… 2019-01-01 03:00:00     53.4     -6.27  73.8  4.4   250 
- 5 039690-99999 DUBLIN… 2019-01-01 04:00:00     53.4     -6.27  73.8  5.45  257.
- 6 039690-99999 DUBLIN… 2019-01-01 05:00:00     53.4     -6.27  73.8  4.9   260 
- 7 039690-99999 DUBLIN… 2019-01-01 06:00:00     53.4     -6.27  73.8  4.9   260 
- 8 039690-99999 DUBLIN… 2019-01-01 07:00:00     53.4     -6.27  73.8  4.38  254.
- 9 039690-99999 DUBLIN… 2019-01-01 08:00:00     53.4     -6.27  73.8  5.27  270 
-10 039690-99999 DUBLIN… 2019-01-01 09:00:00     53.4     -6.27  73.8  4.72  263.
-# ℹ 8,742 more rows
-# ℹ 16 more variables: air_temp &lt;dbl&gt;, atmos_pres &lt;dbl&gt;, visibility &lt;dbl&gt;,
-#   dew_point &lt;dbl&gt;, RH &lt;dbl&gt;, ceil_hgt &lt;dbl&gt;, cl_1 &lt;dbl&gt;, cl_2 &lt;dbl&gt;,
-#   cl_3 &lt;dbl&gt;, cl &lt;dbl&gt;, cl_1_height &lt;dbl&gt;, cl_2_height &lt;dbl&gt;,
-#   cl_3_height &lt;dbl&gt;, precip_12 &lt;dbl&gt;, precip_6 &lt;dbl&gt;, precip &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 8,760 × 37
+   station_id  station_name   lat   lng  elev date                   wd    ws
+   &lt;fct&gt;       &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 00:00:00  250   5.05
+ 2 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 01:00:00  245.  4.8 
+ 3 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 02:00:00  250   4.05
+ 4 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 03:00:00  250   4.55
+ 5 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 04:00:00  255.  5.35
+ 6 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 05:00:00  260   5.05
+ 7 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 06:00:00  260   4.8 
+ 8 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 07:00:00  256.  4.55
+ 9 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 08:00:00  270   5.05
+10 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 09:00:00  265.  4.8 
+# ℹ 8,750 more rows
+# ℹ 29 more variables: air_temp &lt;dbl&gt;, atmos_pres &lt;dbl&gt;, visibility &lt;dbl&gt;,
+#   dew_point &lt;dbl&gt;, rh &lt;dbl&gt;, cl_layer_4 &lt;lgl&gt;, cl_layer_baseht_1 &lt;dbl&gt;,
+#   cl_layer_baseht_2 &lt;dbl&gt;, cl_layer_baseht_3 &lt;dbl&gt;, cl_layer_baseht_4 &lt;lgl&gt;,
+#   cl_summation_1 &lt;lgl&gt;, cl_summation_2 &lt;lgl&gt;, cl_summation_3 &lt;lgl&gt;,
+#   cl_summation_4 &lt;lgl&gt;, cl_summation_baseht_1 &lt;lgl&gt;,
+#   cl_summation_baseht_2 &lt;lgl&gt;, cl_summation_baseht_3 &lt;lgl&gt;, …</code></pre>
 </div>
 </div>
 <p>Plot a wind rose.</p>
@@ -720,7 +560,7 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 <div class="cell-output-display">
 <div id="fig-dublin-rose" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dublin-rose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="access-met-data_files/figure-html/fig-dublin-rose-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.2: Example wind rose for Dublin Airport data."><img src="access-met-data_files/figure-html/fig-dublin-rose-1.png" class="img-fluid figure-img" style="width:50.0%"></a>
+<a href="access-met-data_files/figure-html/fig-dublin-rose-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.2: Example wind rose for Dublin Airport data."><img src="access-met-data_files/figure-html/fig-dublin-rose-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dublin-rose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
@@ -733,56 +573,48 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 <p>Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a <code>date</code> column in each data set that make the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g.&nbsp;<code>ws</code>, <code>wd</code> and <code>air_temp</code>, as is the case with most data accessible as described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a>. In this case, the aim to to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some air quality data and check the variables that exist</span></span>
-<span></span>
-<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq_2019</span><span class="op">)</span> <span class="co"># ws, wd, air_temp already exist from WRF model</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="co"># `meteo = FALSE` does not import the modelled met data</span></span>
+<span><span class="va">aq_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>site <span class="op">=</span> <span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2019</span>, meteo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq_2019</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "source"   "site"     "code"     "date"     "co"       "nox"     
- [7] "no2"      "no"       "o3"       "so2"      "pm10"     "pm2.5"   
-[13] "ws"       "wd"       "air_temp"</code></pre>
+<pre><code> [1] "source" "site"   "code"   "date"   "co"     "nox"    "no2"    "no"    
+ [9] "o3"     "so2"    "pm10"   "pm2.5" </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some met data - default is London Heathrow</span></span>
-<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some met data from London City Airport</span></span>
+<span><span class="va">met_2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_hourly.html">import_ghcn_hourly</a></span><span class="op">(</span><span class="st">"UKI0000EGLC"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># merge the two data sets but not ws, wd, air_temp from aq data</span></span>
+<span><span class="co"># join the two datasets, selecting a sample of the met data</span></span>
 <span><span class="va">aq_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">aq_2019</span>, <span class="op">-</span><span class="va">ws</span>, <span class="op">-</span><span class="va">wd</span>, <span class="op">-</span><span class="va">air_temp</span><span class="op">)</span>,</span>
-<span>  <span class="va">met_2019</span>,</span>
+<span>  <span class="va">aq_2019</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">met_2019</span>, <span class="va">date</span>, <span class="va">ws</span>, <span class="va">wd</span>, <span class="va">air_temp</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="st">"date"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aq_met</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "source"      "site"        "code.x"      "date"        "co"         
- [6] "nox"         "no2"         "no"          "o3"          "so2"        
-[11] "pm10"        "pm2.5"       "code.y"      "station"     "latitude"   
-[16] "longitude"   "elev"        "ws"          "wd"          "air_temp"   
-[21] "atmos_pres"  "visibility"  "dew_point"   "RH"          "ceil_hgt"   
-[26] "cl_1"        "cl_2"        "cl_3"        "cl"          "cl_1_height"
-[31] "cl_2_height" "cl_3_height" "precip_12"   "precip_6"    "pwc"        
-[36] "precip"     </code></pre>
+<pre><code> [1] "source"   "site"     "code"     "date"     "co"       "nox"     
+ [7] "no2"      "no"       "o3"       "so2"      "pm10"     "pm2.5"   
+[13] "ws"       "wd"       "air_temp"</code></pre>
+</div>
+</div>
+<p>With joined data, we can now create <code>openair</code> plots using measured meteorological data. For example, <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> requires both air quality <em>and</em> meteorological data in one <code>data.frame</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">aq_met</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polarplot-citymet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polarplot-citymet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="access-met-data_files/figure-html/fig-polarplot-citymet-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;4.3: A polarPlot() created using measured met data from London City Airport."><img src="access-met-data_files/figure-html/fig-polarplot-citymet-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polarplot-citymet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> created using measured met data from London City Airport.
+</figcaption></figure>
+</div>
 </div>
 </div>
 
 
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
-<ol>
-<li id="fn1"><p>Note that <code>returnMap</code> was only used to display the map in this document and would not normally be needed.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1199,11 +1031,11 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>

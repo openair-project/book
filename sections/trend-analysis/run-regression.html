@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw">
+<meta name="author" content="David Carslaw and Jack Davison">
 <title>17&nbsp; Dilution lines and pollutant ratios – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -57,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -84,22 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/trend-analysis/trend-level.html" rel="next">
 <link href="../../sections/trend-analysis/smooth-trend.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -128,171 +125,9 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../../assets/style/style.css">
+}</script>
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -338,7 +173,6 @@ div.csl-indent {
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -374,13 +208,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
@@ -397,13 +231,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -503,13 +337,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -532,13 +366,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -567,13 +401,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -596,17 +430,17 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -627,6 +461,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -639,7 +479,7 @@ div.csl-indent {
   <ul>
 <li><a href="#run-regression-sec-timePropBack" id="toc-run-regression-sec-timePropBack" class="nav-link active" data-scroll-target="#run-regression-sec-timePropBack"><span class="header-section-number">17.1</span> Background</a></li>
   <li><a href="#run-regression-sec-timePropEx" id="toc-run-regression-sec-timePropEx" class="nav-link" data-scroll-target="#run-regression-sec-timePropEx"><span class="header-section-number">17.2</span> Examples</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/run-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/run-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/run-regression.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Dilution lines and pollutant ratios</span></a></li></ol></nav><div class="quarto-title">
@@ -668,9 +508,9 @@ div.csl-indent {
 <p>The behaviour of pollutants in the atmosphere is highly complex, which can make it difficult to understand the influence that different sources have on concentrations. Across all time scales dispersion processes have a strong influence on how emissions dilute in the atmosphere. However, when considering two pollutants, some of these complexities can be reduced. In a dispersion plume from a single source, the ratio between two pollutant concentrations will remain constant in the absence of loss e.g.&nbsp;through deposition or through chemical reaction. This characteristic of constant ratios in dispersing plumes can be exploited through different analysis approaches.</p>
 <p><span class="citation" data-cites="bentley2004">Bentley (<a href="../references.html#ref-bentley2004" role="doc-biblioref">2004</a>)</span> considered the relationship between two pollutants in a range of interesting ways, which have not been widely adopted but are nevertheless useful. <span class="citation" data-cites="bentley2004">Bentley (<a href="../references.html#ref-bentley2004" role="doc-biblioref">2004</a>)</span> considered the relationship between two pollutants with the aim of understanding the ratio, which can then be compared with emission inventories. The approach is to consider the issue from the perspective of a local source being mixed into background air. Both the background air and source contributions in terms of concentrations will vary, which can make it difficult to establish a pollutant ratio for a dominant source. This approach has also been used to consider vehicle emission quantification using high time resolution data (at 1-Hz) by <span class="citation" data-cites="farren2023a">Farren et al. (<a href="../references.html#ref-farren2023a" role="doc-biblioref">2023</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-bentley2004" class="csl-entry" role="listitem">
-Bentley, S. T. 2004. <span>“Graphical Techniques for Constraining Estimates of Aerosol Emissions from Motor Vehicles Using Air Monitoring Network Data.”</span> <em>Atmospheric Environment</em> 38 (10): 1491–1500. <a href="https://doi.org/10.1016/j.atmosenv.2003.11.033">https://doi.org/10.1016/j.atmosenv.2003.11.033</a>.
+Bentley, S. T. 2004. <span>“Graphical Techniques for Constraining Estimates of Aerosol Emissions from Motor Vehicles Using Air Monitoring Network Data.”</span> <em>Atmospheric Environment</em> 38 (10): 1491–500. <a href="https://doi.org/10.1016/j.atmosenv.2003.11.033">https://doi.org/10.1016/j.atmosenv.2003.11.033</a>.
 </div><div id="ref-farren2023a" class="csl-entry" role="listitem">
-Farren, Naomi J., Christina Schmidt, Hannes Juchem, Denis Pöhler, Shona E. Wilde, Rebecca L. Wagner, Samuel Wilson, Marvin D. Shaw, and David C. Carslaw. 2023. <span>“Emission Ratio Determination from Road Vehicles Using a Range of Remote Emission Sensing Techniques.”</span> <em>Science of The Total Environment</em> 875 (June): 162621. <a href="https://doi.org/10.1016/j.scitotenv.2023.162621">https://doi.org/10.1016/j.scitotenv.2023.162621</a>.
+Farren, Naomi J., Christina Schmidt, Hannes Juchem, et al. 2023. <span>“Emission Ratio Determination from Road Vehicles Using a Range of Remote Emission Sensing Techniques.”</span> <em>Science of The Total Environment</em> 875 (June): 162621. <a href="https://doi.org/10.1016/j.scitotenv.2023.162621">https://doi.org/10.1016/j.scitotenv.2023.162621</a>.
 </div></div><p>The idea is to exploit the fact that for a local dispersing plume, the ratio between two pollutants would be expected to be invariant. The main approach is to look in time series data over short periods of time where, in a dispersing plume, the ratio between two pollutants is constant. For hourly data for example, considering the relationship between two pollutants over three consecutive hours using a linear regression can be used to identify short periods where the ratio (the slope from a regression) is constant (or close to constant). By considering high R<sup>2</sup> values (typically &gt; 0.9 to 0.95), these conditions correspond to constant ratios between two pollutants, which would be indicative of the behaviour of a diluting plume. The regression itself is a rolling regression e.g.&nbsp;first consider hours 1 to 3, then 2 to 4 and so on. The approach becomes clearer by considering an example.</p>
 </section><section id="run-regression-sec-timePropEx" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="run-regression-sec-timePropEx">
 <span class="header-section-number">17.2</span> Examples</h2>
@@ -682,7 +522,9 @@ Farren, Naomi J., Christina Schmidt, Hannes Juchem, Denis Pöhler, Shona E. Wild
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/worldmet/">worldmet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="st">"my1"</span>, year <span class="op">=</span> <span class="fl">2022</span>, meteo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/deprecated-isd.html">importNOAA</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_isd_hourly.html">import_isd_hourly</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">aq</span>, <span class="va">met</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next we will consider the relationship between PM<sub>2.5</sub> and NO<sub>x</sub> with a 3-hour rolling regression window. The data frame returned (<code>out</code>) has the rolling 3-hour regression fit information and other variables that can be used for plotting and post-processing.</p>
@@ -718,8 +560,8 @@ Farren, Naomi J., Christina Schmidt, Hannes Juchem, Denis Pöhler, Shona E. Wild
 <span><span class="va">out_filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
 <span>  <span class="va">out</span>,</span>
 <span>  <span class="va">r_squared</span> <span class="op">&gt;</span> <span class="fl">0.95</span>,</span>
-<span>  <span class="va">slope</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">slope</span>, probs <span class="op">=</span> <span class="fl">.01</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  <span class="va">slope</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">slope</span>, probs <span class="op">=</span> <span class="fl">.99</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  <span class="va">slope</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">slope</span>, probs <span class="op">=</span> <span class="fl">0.01</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  <span class="va">slope</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">slope</span>, probs <span class="op">=</span> <span class="fl">0.99</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  <span class="va">delta_nox</span> <span class="op">&gt;</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -727,7 +569,7 @@ Farren, Naomi J., Christina Schmidt, Hannes Juchem, Denis Pöhler, Shona E. Wild
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># original data in selection</span></span>
 <span><span class="va">aq_select</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">out_filter</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">out_filter</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
 <span>      <span class="va">aq</span>,</span>
 <span>      <span class="va">date</span> <span class="op">&gt;=</span> <span class="va">out_filter</span><span class="op">$</span><span class="va">date_start</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
@@ -749,7 +591,7 @@ Farren, Naomi J., Christina Schmidt, Hannes Juchem, Denis Pöhler, Shona E. Wild
 <div class="cell-output-display">
 <div id="fig-nox-pm25" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nox-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="run-regression_files/figure-html/fig-nox-pm25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;17.1: Relationship between hourly NOx and PM2.5 for filtered data at Marylebone Road for 2022."><img src="run-regression_files/figure-html/fig-nox-pm25-1.png" class="img-fluid figure-img" width="432"></a>
+<a href="run-regression_files/figure-html/fig-nox-pm25-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;17.1: Relationship between hourly NOx and PM2.5 for filtered data at Marylebone Road for 2022."><img src="run-regression_files/figure-html/fig-nox-pm25-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nox-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.1: Relationship between hourly NO<sub>x</sub> and PM<sub>2.5</sub> for filtered data at Marylebone Road for 2022.
@@ -766,13 +608,16 @@ Figure&nbsp;17.1: Relationship between hourly NO<sub>x</sub> and PM<sub>2.5</sub
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"_1"</span><span class="op">)</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"_2"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">out_filter</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x1</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y1</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  xend <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x2</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  yend <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y2</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  colour <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">out_filter</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x1</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y1</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    xend <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x2</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    yend <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y2</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    colour <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y1</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradientn</a></span><span class="op">(</span>colours <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="st">"turbo"</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_colourbar.html">guide_colourbar</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"Background\nPM2.5"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -781,7 +626,7 @@ Figure&nbsp;17.1: Relationship between hourly NO<sub>x</sub> and PM<sub>2.5</sub
 <div class="cell-output-display">
 <div id="fig-dilution-lines" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dilution-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="run-regression_files/figure-html/fig-dilution-lines-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;17.2: Relationship between hourly NOx and PM2.5 for filtered data at Marylebone Road for 2022. In this case the 3-hour ‘dilution lines’ are shown where the linear regression R2 is > 0.95 and the change in NOx is > 100 μg m-3."><img src="run-regression_files/figure-html/fig-dilution-lines-1.png" class="img-fluid figure-img" width="518"></a>
+<a href="run-regression_files/figure-html/fig-dilution-lines-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;17.2: Relationship between hourly NOx and PM2.5 for filtered data at Marylebone Road for 2022. In this case the 3-hour ‘dilution lines’ are shown where the linear regression R2 is > 0.95 and the change in NOx is > 100 μg m-3."><img src="run-regression_files/figure-html/fig-dilution-lines-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dilution-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.2: Relationship between hourly NO<sub>x</sub> and PM<sub>2.5</sub> for filtered data at Marylebone Road for 2022. In this case the 3-hour ‘dilution lines’ are shown where the linear regression R<sup>2</sup> is &gt; 0.95 and the change in NO<sub>x</sub> is &gt; 100 μg m<sup>-3</sup>.
@@ -816,7 +661,7 @@ Figure&nbsp;17.2: Relationship between hourly NO<sub>x</sub> and PM<sub>2.5</sub
 <div class="cell-output-display">
 <div id="fig-mode-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mode-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="run-regression_files/figure-html/fig-mode-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;17.3: Distribution of slopes as a density plot with the estimated mode value of the slopes shown."><img src="run-regression_files/figure-html/fig-mode-plot-1.png" class="img-fluid figure-img" width="432"></a>
+<a href="run-regression_files/figure-html/fig-mode-plot-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;17.3: Distribution of slopes as a density plot with the estimated mode value of the slopes shown."><img src="run-regression_files/figure-html/fig-mode-plot-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mode-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.3: Distribution of slopes as a density plot with the estimated mode value of the slopes shown.
@@ -830,7 +675,7 @@ Figure&nbsp;17.3: Distribution of slopes as a density plot with the estimated mo
 <div class="cell-output-display">
 <div id="fig-polar-slope" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-polar-slope-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="run-regression_files/figure-html/fig-polar-slope-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;17.4: Polar plot of the slope of PM2.5/NOx from the run-regression analysis using filtered data. Note that"><img src="run-regression_files/figure-html/fig-polar-slope-1.png" class="img-fluid figure-img" width="432"></a>
+<a href="run-regression_files/figure-html/fig-polar-slope-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;17.4: Polar plot of the slope of PM2.5/NOx from the run-regression analysis using filtered data. Note that"><img src="run-regression_files/figure-html/fig-polar-slope-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polar-slope-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.4: Polar plot of the slope of PM<sub>2.5</sub>/NO<sub>x</sub> from the run-regression analysis using filtered data. Note that
@@ -846,19 +691,6 @@ Figure&nbsp;17.4: Polar plot of the slope of PM<sub>2.5</sub>/NO<sub>x</sub> fro
 <li id="fn1"><p>A value of 100 μg m<sup>-3</sup> was used to make the plots clearer.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1275,11 +1107,11 @@ Figure&nbsp;17.4: Polar plot of the slope of PM<sub>2.5</sub>/NO<sub>x</sub> fro
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/run-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/run-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>

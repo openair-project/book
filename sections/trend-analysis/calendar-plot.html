@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw">
+<meta name="author" content="David Carslaw and Jack Davison">
 <title>13&nbsp; Calendar plots – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -57,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -84,22 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/trend-analysis/time-proportion.html" rel="next">
 <link href="../../sections/trend-analysis/time-variation.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -128,171 +125,9 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../../assets/style/style.css">
+}</script>
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -338,7 +173,6 @@ div.csl-indent {
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -374,13 +208,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
@@ -397,13 +231,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -503,13 +337,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -532,13 +366,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -567,13 +401,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -596,17 +430,17 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -627,6 +461,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -639,7 +479,7 @@ div.csl-indent {
   <ul>
 <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">13.1</span> Purpose</a></li>
   <li><a href="#calendar-examples" id="toc-calendar-examples" class="nav-link" data-scroll-target="#calendar-examples"><span class="header-section-number">13.2</span> Calendar examples</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/calendar-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/calendar-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/calendar-plot.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></a></li></ol></nav><div class="quarto-title">
@@ -677,7 +517,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-calendarPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-calendarPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;13.1: A calendarPlot() for O3 concentrations in 2003."><img src="calendar-plot_files/figure-html/fig-calendarPlot-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="calendar-plot_files/figure-html/fig-calendarPlot-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;13.1: A calendarPlot() for O3 concentrations in 2003."><img src="calendar-plot_files/figure-html/fig-calendarPlot-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003.
@@ -689,8 +529,10 @@ Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/ref
 <p><a href="#fig-calendarPlotExceed" class="quarto-xref">Figure&nbsp;<span>13.2</span></a> highlights those days where PM<sub>10</sub> concentrations exceed 50 μg m<sup>-3</sup> by making the annotation for those days bigger, bold and orange. Plotting the data in this way clearly shows the days where PM<sub>10</sub> &gt; 50 μg m<sup>-3</sup>.</p>
 <p>Other <span class="pkg">openair</span> functions can be used to plot other statistics. For example, <code>rollingMean</code> could be used to calculate rolling 8-hour mean O<sub>3</sub> concentrations. Then, <code>calendarPlot</code> could be used with <code>statistic = "max"</code> to show days where the maximum daily rolling 8-hour mean O<sub>3</sub> concentration is greater than a certain threshold e.g.&nbsp;100 or 120 μg m<sup>-3</sup>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm10"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  annotate <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>  lim <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>  cols <span class="op">=</span> <span class="st">"Purples"</span>,</span>
@@ -700,7 +542,7 @@ Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/ref
 <div class="cell-output-display">
 <div id="fig-calendarPlotExceed" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlotExceed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;13.2: A calendarPlot() for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM10 >50 μg m-3. The numbers show the PM10 concentration in μg m-3."><img src="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;13.2: A calendarPlot() for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM10 >50 μg m-3. The numbers show the PM10 concentration in μg m-3."><img src="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlotExceed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM<sub>10</sub> &gt;50 μg m<sup>-3</sup>. The numbers show the PM<sub>10</sub> concentration in μg m<sup>-3</sup>.
@@ -710,14 +552,11 @@ Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/ref
 </div>
 <p>To show wind angle, scaled to wind speed (<a href="#fig-calendarPlot2" class="quarto-xref">Figure&nbsp;<span>13.3</span></a>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
-<span>  annotate <span class="op">=</span> <span class="st">"ws"</span></span>
-<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span>, windflow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-calendarPlot2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;13.3: A calendarPlot() for O3 concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O3 concentrations on the 18 and 19th of April were associated with strong north-easterly winds."><img src="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="img-fluid figure-img" style="width:80.0%"></a>
+<a href="calendar-plot_files/figure-html/fig-calendarPlot2-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;13.3: A calendarPlot() for O3 concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O3 concentrations on the 18 and 19th of April were associated with strong north-easterly winds."><img src="calendar-plot_files/figure-html/fig-calendarPlot2-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.3: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O<sub>3</sub> concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
@@ -725,28 +564,29 @@ Figure&nbsp;13.3: A <code><a href="https://openair-project.github.io/openair/ref
 </div>
 </div>
 </div>
-<p>Note again that <code>selectByDate</code> can be useful. For example, to plot select months:</p>
+<p>Note again that <code><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate()</a></code> can be useful. For example, to plot select months:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>    year <span class="op">=</span> <span class="fl">2003</span>,</span>
-<span>    month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2003</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> shows an example of plotting data with a categorical scale. In this case the options <code>labels</code> and <code>breaks</code> have been used to define concentration intervals and their descriptions. Note that <code>breaks</code> needs to be one longer than <code>labels</code>. In the example in <a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> the first interval (‘Very low’) is defined as concentrations from 0 to 50 (ppb), ‘Low’ is 50 to 100 and so on. Note that the upper value of <code>breaks</code> should be a number greater than the maximum value contained in the data to ensure that it is encompassed. In the example given in <a href="#fig-calendarPlotCategor" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> the maximum daily concentration is plotted. These types of plots are very useful for considering national or international air quality indexes.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span><span class="op">)</span>,</span>
-<span>  cols <span class="op">=</span> <span class="st">"increment"</span>, statistic <span class="op">=</span> <span class="st">"max"</span></span>
+<span>  cols <span class="op">=</span> <span class="st">"increment"</span>,</span>
+<span>  statistic <span class="op">=</span> <span class="st">"max"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-calendarPlotCategor" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlotCategor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;13.4: A calendarPlot() for NO2 concentrations in 2003 with a user-defined categorical scale."><img src="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;13.4: A calendarPlot() for NO2 concentrations in 2003 with a user-defined categorical scale."><img src="calendar-plot_files/figure-html/fig-calendarPlotCategor-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlotCategor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for NO<sub>2</sub> concentrations in 2003 with a user-defined categorical scale.
@@ -756,8 +596,10 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 </div>
 <p>The user can explicitly set each colour interval:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2003</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Very low"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span><span class="op">)</span>,</span>
 <span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lightblue"</span>, <span class="st">"forestgreen"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
@@ -768,14 +610,26 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">34</span>, <span class="fl">66</span>, <span class="fl">100</span>, <span class="fl">121</span>, <span class="fl">141</span>, <span class="fl">160</span>, <span class="fl">188</span>, <span class="fl">214</span>, <span class="fl">240</span>, <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Low.1"</span>, <span class="st">"Low.2"</span>, <span class="st">"Low.3"</span>, <span class="st">"Moderate.4"</span>, <span class="st">"Moderate.5"</span>, <span class="st">"Moderate.6"</span>,</span>
-<span>  <span class="st">"High.7"</span>, <span class="st">"High.8"</span>, <span class="st">"High.9"</span>, <span class="st">"Very High.10"</span></span>
+<span>  <span class="st">"Low.1"</span>,</span>
+<span>  <span class="st">"Low.2"</span>,</span>
+<span>  <span class="st">"Low.3"</span>,</span>
+<span>  <span class="st">"Moderate.4"</span>,</span>
+<span>  <span class="st">"Moderate.5"</span>,</span>
+<span>  <span class="st">"Moderate.6"</span>,</span>
+<span>  <span class="st">"High.7"</span>,</span>
+<span>  <span class="st">"High.8"</span>,</span>
+<span>  <span class="st">"High.9"</span>,</span>
+<span>  <span class="st">"Very High.10"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>, year <span class="op">=</span> <span class="fl">2003</span>,</span>
-<span>  breaks <span class="op">=</span> <span class="va">breaks</span>, labels <span class="op">=</span> <span class="va">labels</span>,</span>
-<span>  cols <span class="op">=</span> <span class="st">"turbo"</span>, statistic <span class="op">=</span> <span class="st">"max"</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2003</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>  labels <span class="op">=</span> <span class="va">labels</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
+<span>  statistic <span class="op">=</span> <span class="st">"max"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It is also possible to first use <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> to calculate statistics. For example, if one was interested in plotting the maximum daily rolling 8-hour mean concentration, the data could be prepared and plotted as follows.</p>
@@ -784,8 +638,16 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, hours <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">34</span>, <span class="fl">66</span>, <span class="fl">100</span>, <span class="fl">121</span>, <span class="fl">141</span>, <span class="fl">160</span>, <span class="fl">188</span>, <span class="fl">214</span>, <span class="fl">240</span>, <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Low.1"</span>, <span class="st">"Low.2"</span>, <span class="st">"Low.3"</span>, <span class="st">"Moderate.4"</span>, <span class="st">"Moderate.5"</span>, <span class="st">"Moderate.6"</span>,</span>
-<span>  <span class="st">"High.7"</span>, <span class="st">"High.8"</span>, <span class="st">"High.9"</span>, <span class="st">"Very High.10"</span></span>
+<span>  <span class="st">"Low.1"</span>,</span>
+<span>  <span class="st">"Low.2"</span>,</span>
+<span>  <span class="st">"Low.3"</span>,</span>
+<span>  <span class="st">"Moderate.4"</span>,</span>
+<span>  <span class="st">"Moderate.5"</span>,</span>
+<span>  <span class="st">"Moderate.6"</span>,</span>
+<span>  <span class="st">"High.7"</span>,</span>
+<span>  <span class="st">"High.8"</span>,</span>
+<span>  <span class="st">"High.9"</span>,</span>
+<span>  <span class="st">"Very High.10"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
@@ -800,7 +662,7 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 </div>
 <p>The UK has an air quality index for O<sub>3</sub>, NO<sub>2</sub>, PM<sub>10</sub> and PM<sub>2.5</sub> described in detail at <a href="http://uk-air.defra.gov.uk/air-pollution/daqi" class="uri">http://uk-air.defra.gov.uk/air-pollution/daqi</a> and <span class="citation" data-cites="COMEAP2011">COMEAP (<a href="../references.html#ref-COMEAP2011" role="doc-biblioref">2011</a>)</span>. The index is most relevant to air quality forecasting, but is used widely for public information. Most other countries have similar indexes. Note that the indexes are calculated for different averaging times dependent on the pollutant: rolling 8-hour mean for O<sub>3</sub>, hourly means for NO<sub>2</sub> and a fixed 24-hour mean for PM<sub>10</sub> and PM<sub>2.5</sub>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-COMEAP2011" class="csl-entry" role="listitem">
-COMEAP. 2011. <span>“Review of the UK Air Quality Index: A Report by the Committee on the Medical Effects of Air Pollutants.”</span> <a href="http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html">http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html</a>.
+COMEAP. 2011. <em>Review of the UK Air Quality Index: A Report by the Committee on the Medical Effects of Air Pollutants</em>. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html">http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html</a>.
 </div></div><p>In the code below the labels and breaks are defined for each pollutant to make it easier to use the index in the <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import UK daily air quality info</span></span>
@@ -836,12 +698,14 @@ COMEAP. 2011. <span>“Review of the UK Air Quality Index: A Report by the Commi
 <span>  <span class="co"># set labels (above)</span></span>
 <span>  labels <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>  <span class="co"># built-in DAQI colours</span></span>
-<span>  cols <span class="op">=</span> <span class="st">"daqi"</span></span>
+<span>  cols <span class="op">=</span> <span class="st">"daqi"</span>,</span>
+<span>  <span class="co"># nicer key title</span></span>
+<span>  key.title <span class="op">=</span> <span class="st">"PM10 DAQI"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-AQIndex" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-AQIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;13.5: A DAQI calendarPlot()"><img src="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="calendar-plot_files/figure-html/fig-AQIndex-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;13.5: A DAQI calendarPlot()"><img src="calendar-plot_files/figure-html/fig-AQIndex-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AQIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code>
@@ -854,19 +718,6 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1283,11 +1134,11 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/calendar-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/calendar-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>

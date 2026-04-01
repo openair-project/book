@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw">
+<meta name="author" content="David Carslaw and Jack Davison">
 <title>26&nbsp; Utility functions – The openair book</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -57,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -84,22 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/utilities/scatter-plot.html" rel="next">
 <link href="../../sections/maps/maps-traj.html" rel="prev">
-<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<link href="../../assets/media/plume.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-90935a24108b4a39a4124ec83939ffdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-16f97050ac2be45245cb20edcbc03c24.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -128,171 +125,9 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../../assets/style/style.css">
+}</script>
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -338,7 +173,6 @@ div.csl-indent {
           </li>
       </ul>
 </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -374,13 +208,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
@@ -397,13 +231,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
@@ -444,13 +278,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -503,13 +337,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -532,13 +366,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -596,17 +430,17 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Annotating openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -625,6 +459,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -655,7 +495,7 @@ div.csl-indent {
   <li><a href="#sec-timeAverage" id="toc-sec-timeAverage" class="nav-link" data-scroll-target="#sec-timeAverage"><span class="header-section-number">26.8</span> Aggregating data by different time intervals</a></li>
   <li><a href="#sec-calcPercentile" id="toc-sec-calcPercentile" class="nav-link" data-scroll-target="#sec-calcPercentile"><span class="header-section-number">26.9</span> Calculating percentiles</a></li>
   <li><a href="#sec-corPlot" id="toc-sec-corPlot" class="nav-link" data-scroll-target="#sec-corPlot"><span class="header-section-number">26.10</span> Correlation matrices</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></a></li></ol></nav><div class="quarto-title">
@@ -848,11 +688,15 @@ $ so2_cuts  &lt;fct&gt; so2 4 to 6.46, so2 6.46 to 63.2, so2 6.46 to 63.2, so2 6
 </div>
 <p>Now we are going to produce two pollution roses shown in <a href="#fig-RunningRes" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>. Note, however that many other types of analysis could be carried out now the data have been partitioned.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">ted</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, type <span class="op">=</span> <span class="st">"criterion"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span></span>
+<span>  <span class="va">ted</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"criterion"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-RunningRes" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-RunningRes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-RunningRes-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;26.1: Example of using the selectRunning function to select episode hours to produce pollution roses of O3 concentration."><img src="utility-functions_files/figure-html/fig-RunningRes-1.png" class="img-fluid figure-img" style="width:90.0%"></a>
+<a href="utility-functions_files/figure-html/fig-RunningRes-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;26.1: Example of using the selectRunning function to select episode hours to produce pollution roses of O3 concentration."><img src="utility-functions_files/figure-html/fig-RunningRes-1.svg" class="img-fluid figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-RunningRes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to select episode hours to produce pollution roses of O<sub>3</sub> concentration.
@@ -916,9 +760,9 @@ Figure&nbsp;26.1: Example of using the <code>selectRunning</code> function to se
 <span class="header-section-number">26.5</span> Calculating rolling quantiles (percentiles)</h2>
 <p>There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a ‘background’ concentration. For example, for fast reponse measurements (e.g.&nbsp;at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement <span class="citation" data-cites="Padilla2021 Farren2024">(<a href="../references.html#ref-Padilla2021" role="doc-biblioref">Padilla et al. 2022</a>; <a href="../references.html#ref-Farren2024" role="doc-biblioref">Farren et al. 2024</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Padilla2021" class="csl-entry" role="listitem">
-Padilla, Lauren E., Geoffrey Q. Ma, Daniel Peters, Megan Dupuy-Todd, Ella Forsyth, Amy Stidworthy, Jim Mills, et al. 2022. <span>“New Methods to Derive Street-Scale Spatial Patterns of Air Pollution from Mobile Monitoring.”</span> <em>Atmospheric Environment</em> 270: 118851. https://doi.org/<a href="https://doi.org/10.1016/j.atmosenv.2021.118851">https://doi.org/10.1016/j.atmosenv.2021.118851</a>.
+Padilla, Lauren E., Geoffrey Q. Ma, Daniel Peters, et al. 2022. <span>“New Methods to Derive Street-Scale Spatial Patterns of Air Pollution from Mobile Monitoring.”</span> <em>Atmospheric Environment</em> 270: 118851. https://doi.org/<a href="https://doi.org/10.1016/j.atmosenv.2021.118851">https://doi.org/10.1016/j.atmosenv.2021.118851</a>.
 </div><div id="ref-Farren2024" class="csl-entry" role="listitem">
-Farren, Naomi J., Sam Wilson, Yoann Bernard, Marvin D. Shaw, K. Lee, M. Crowe, and David C. Carslaw. 2024. <span>“An Ambient Measurement Technique for Vehicle Emission Quantification and Concentration Source Apportionment.”</span> <em>Environmental Science &amp; Technology</em>. https://doi.org/<a href="https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf">https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf</a>.
+Farren, Naomi J., Sam Wilson, Yoann Bernard, et al. 2024. <span>“An Ambient Measurement Technique for Vehicle Emission Quantification and Concentration Source Apportionment.”</span> <em>Environmental Science &amp; Technology</em>, ahead of print. https://doi.org/<a href="https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf">https://pubs.acs.org/action/showCitFormats?doi=10.1021/acs.est.4c07907&amp;ref=pdf</a>.
 </div></div><p>The <code>rollingQuantile</code> function provides a fast way of calculating one or more quantiles in a rime series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.</p>
 <p>An example is shown below and plotted in <a href="#fig-rollingQuant" class="quarto-xref">Figure&nbsp;<span>26.2</span></a>. In this example, we choose a rolling window width of 744 (about a month) and calculate quantile levels at 0.05 and 0.95. <a href="#fig-rollingQuant" class="quarto-xref">Figure&nbsp;<span>26.2</span></a> shows the jump in NO<sub>2</sub> concentrations at the start of 2003 for the high quantile level but not the lower one. As mentioned elsewhere, this increase in NO<sub>2</sub> was related to an increase in primary NO<sub>2</sub> emissions related to bus aftertreatment technology.</p>
 <div class="cell">
@@ -964,7 +808,7 @@ $ counts     &lt;int&gt; 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 
 <div class="cell-output-display">
 <div id="fig-rollingQuant" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rollingQuant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-rollingQuant-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;26.2: Example of using the rollingQuantile function to calculate low (0.05) and high (0.95) rolling quantiles."><img src="utility-functions_files/figure-html/fig-rollingQuant-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="utility-functions_files/figure-html/fig-rollingQuant-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;26.2: Example of using the rollingQuantile function to calculate low (0.05) and high (0.95) rolling quantiles."><img src="utility-functions_files/figure-html/fig-rollingQuant-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rollingQuant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.2: Example of using the <code>rollingQuantile</code> function to calculate low (0.05) and high (0.95) rolling quantiles.
@@ -1018,7 +862,7 @@ $ n_no2      &lt;int&gt; 2149, 2150, 2151, 2152, 2153, 2154, 2155, 2156, 2157, 2
 <div class="cell-output-display">
 <div id="fig-gauss-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-gauss-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-gauss-smooth-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;26.3: Example of using the GassianSmooth function to smooth NO2 concentrations with sigma set at about 1 month."><img src="utility-functions_files/figure-html/fig-gauss-smooth-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="utility-functions_files/figure-html/fig-gauss-smooth-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;26.3: Example of using the GassianSmooth function to smooth NO2 concentrations with sigma set at about 1 month."><img src="utility-functions_files/figure-html/fig-gauss-smooth-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to smooth NO<sub>2</sub> concentrations with sigma set at about 1 month.
@@ -1041,9 +885,14 @@ Figure&nbsp;26.3: Example of using the <code>GassianSmooth</code> function to sm
 Eilers, Paul H. C. 2003. <span>“A Perfect Smoother.”</span> <em>Analytical Chemistry</em> 75 (14): 3631–36. <a href="https://doi.org/10.1021/ac034173t">https://doi.org/10.1021/ac034173t</a>.
 </div></div></section><section id="standard-smoothing" class="level3" data-number="26.7.2"><h3 data-number="26.7.2" class="anchored" data-anchor-id="standard-smoothing">
 <span class="header-section-number">26.7.2</span> Standard smoothing</h3>
-<p>The simplest use of <code><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth()</a></code> is to produce a smoothed version of a pollutant time series. In the example below, NO<sub>2</sub> concentrations are smoothed with <code>lambda = 20</code>. The function adds a new column <code>smooth_no2</code> to the data frame.</p>
+<p>The simplest use of <code><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth()</a></code> is to produce a smoothed version of a pollutant time series. In the example below, NO<sub>2</sub> concentrations are smoothed with <code>lambda = 2000</code>. The function adds a new column <code>smooth_no2</code> to the data frame.</p>
+<p>Where the aim is to reduce noise, setting <code>lambda = NA</code> will use Generalised Cross Validation (GCV) to choose an optimal <code>lambda</code> value automatically, though this can be computationally expensive for large datasets. However, for smoothing purposes, it is often more useful to experiment with a range of <code>lambda</code> values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, lambda <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fl">2000</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">mydata_smooth</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 65,533
@@ -1058,7 +907,7 @@ $ pm10       &lt;int&gt; 29, 37, 34, 35, 34, 16, 11, 12, 12, 12, 10, 11, 13, 17,
 $ so2        &lt;dbl&gt; 4.7225, NA, 6.8300, 7.6625, 8.0700, 5.5050, 4.2300, 3.8750,…
 $ co         &lt;dbl&gt; 3.3725, NA, 9.6025, 10.2175, 8.9125, 3.0525, 2.2650, 1.9950…
 $ pm25       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ smooth_no2 &lt;dbl&gt; 46.57912, 48.82263, 50.68718, 51.79381, 51.76358, 50.22784,…</code></pre>
+$ smooth_no2 &lt;dbl&gt; 50.75965, 49.77722, 48.78892, 47.78885, 46.77115, 45.73203,…</code></pre>
 </div>
 </div>
 <p><a href="#fig-whittaker-smooth" class="quarto-xref">Figure&nbsp;<span>26.4</span></a> shows the first 744 hours (approximately one month) of raw and smoothed NO<sub>2</sub> data. The Whittaker smoother closely tracks the data while removing short-term noise, making the underlying variation much easier to interpret.</p>
@@ -1077,7 +926,7 @@ $ smooth_no2 &lt;dbl&gt; 46.57912, 48.82263, 50.68718, 51.79381, 51.76358, 50.22
 <div class="cell-output-display">
 <div id="fig-whittaker-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-whittaker-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-whittaker-smooth-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;26.4: Whittaker-Eilers smoothed NO2 concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of mydata. Lambda was set to 20."><img src="utility-functions_files/figure-html/fig-whittaker-smooth-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="utility-functions_files/figure-html/fig-whittaker-smooth-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;26.4: Whittaker-Eilers smoothed NO2 concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of mydata. Lambda was set to 20."><img src="utility-functions_files/figure-html/fig-whittaker-smooth-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whittaker-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.4: Whittaker-Eilers smoothed NO<sub>2</sub> concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of <code>mydata</code>. Lambda was set to 20.
@@ -1086,6 +935,7 @@ Figure&nbsp;26.4: Whittaker-Eilers smoothed NO<sub>2</sub> concentrations (red) 
 </div>
 </div>
 <p>The <code>lambda</code> value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range <code>lambda = 1e6</code> to <code>lambda = 1e10</code> are often appropriate. If <code>lambda = NA</code>, Generalised Cross Validation (GCV) is used to choose <code>lambda</code> automatically, though this can be computationally expensive for large datasets.</p>
+<p>A major advantage of the Whittaker-Eilers approach is that a user can confidently “set and forget” their <code>lambda</code> value. Because <code>lambda</code> acts as an absolute penalty, the local smoothing characteristics will remain identical regardless of how much new data is appended to the series; as a time series grows, the Whittaker smooth will always deliver a predictable, consistent outcome. In contrast, methods like LOESS (locally-weighted regression) or GAMs often rely on a relative span or fraction of the total data. To maintain that same visually and mathematically consistent smoothing effect as a dataset expands, users of those methods must constantly recalculate and shrink their smoothing parameters.</p>
 </section><section id="baseline-estimation" class="level3" data-number="26.7.3"><h3 data-number="26.7.3" class="anchored" data-anchor-id="baseline-estimation">
 <span class="header-section-number">26.7.3</span> Baseline estimation</h3>
 <p>Beyond smoothing, <code><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth()</a></code> can be used for <em>baseline estimation</em> via Asymmetric Least Squares (ALS) by supplying the <code>p</code> argument. When <code>p</code> is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the <em>lower envelope</em> of the time series — the background or baseline — rather than the central tendency.</p>
@@ -1101,7 +951,7 @@ Figure&nbsp;26.4: Whittaker-Eilers smoothed NO<sub>2</sub> concentrations (red) 
 <span class="header-section-number">26.7.4</span> Comparison with rolling low quantiles</h3>
 <p>A common alternative approach for estimating a background is to use a rolling low quantile (e.g., the 1st percentile over a sliding window). <a href="#fig-whittaker-baseline" class="quarto-xref">Figure&nbsp;<span>26.5</span></a> compares the Whittaker baseline with a 1st-percentile rolling quantile computed over a 50-hour window.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, lambda <span class="op">=</span> <span class="fl">20</span>, p <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, lambda <span class="op">=</span> <span class="fl">2000</span>, p <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingQuantile.html">rollingQuantile</a></span><span class="op">(</span>pollutant <span class="op">=</span> <span class="st">"no2"</span>, width <span class="op">=</span> <span class="fl">50</span>, probs <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
@@ -1115,7 +965,7 @@ Figure&nbsp;26.4: Whittaker-Eilers smoothed NO<sub>2</sub> concentrations (red) 
 <div class="cell-output-display">
 <div id="fig-whittaker-baseline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-whittaker-baseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-whittaker-baseline-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO2 data (green) for the first 1000 hours of mydata. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."><img src="utility-functions_files/figure-html/fig-whittaker-baseline-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="utility-functions_files/figure-html/fig-whittaker-baseline-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO2 data (green) for the first 1000 hours of mydata. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."><img src="utility-functions_files/figure-html/fig-whittaker-baseline-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whittaker-baseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO<sub>2</sub> data (green) for the first 1000 hours of <code>mydata</code>. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series.
@@ -1322,7 +1172,7 @@ Figure&nbsp;26.5: Comparison of the Whittaker baseline (blue) and a 50-hour roll
 <div class="no-row-height column-margin column-container"><div id="ref-friendly2002" class="csl-entry" role="listitem">
 Friendly, M. 2002. <span>“<span class="nocase">Corrgrams: Exploratory Displays for Correlation Matrices</span>.”</span> <em>The American Statistician</em> 56 (4): 316–25.
 </div><div id="ref-Sarkar2008" class="csl-entry" role="listitem">
-Sarkar, Deepayan. 2007. <em>Lattice Multivariate Data Visualization with <span>R</span></em>. New York: Springer.
+Sarkar, Deepayan. 2007. <em>Lattice Multivariate Data Visualization with <span>R</span></em>. Springer.
 </div></div><p>The <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle — imagine a ‘fuzz’ of points with no relationship between them.</p>
 <p>With many variables it can be difficult to see relationships between variables i.e.&nbsp;which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if <code>cluster = TRUE</code>.)</p>
 <p>An example of the <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> function is shown in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.6</span></a>. In this Figure it can be seen the highest correlation coefficient is between PM<sub>10</sub> and PM<sub>2.5</sub> (r = 0. 84) and that the correlations between SO<sub>2</sub>, NO<sub>2</sub> and NO<sub>x</sub> are also high. O<sub>3</sub> has a negative correlation with most pollutants, which is expected due to the reaction between NO and O<sub>3</sub>. It is not that apparent in <a href="#fig-corPlot" class="quarto-xref">Figure&nbsp;<span>26.6</span></a> that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a <em>dendrogram</em> that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for <code>type = "default"</code> i.e.&nbsp;for a single panel plot.</p>
@@ -1331,7 +1181,7 @@ Sarkar, Deepayan. 2007. <em>Lattice Multivariate Data Visualization with <span>R
 <div class="cell-output-display">
 <div id="fig-corPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="utility-functions_files/figure-html/fig-corPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;26.6: Example of a correlation matrix showing the relationships between variables."><img src="utility-functions_files/figure-html/fig-corPlot-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="utility-functions_files/figure-html/fig-corPlot-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;26.6: Example of a correlation matrix showing the relationships between variables."><img src="utility-functions_files/figure-html/fig-corPlot-1.svg" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;26.6: Example of a correlation matrix showing the relationships between variables.
@@ -1355,19 +1205,6 @@ Figure&nbsp;26.6: Example of a correlation matrix showing the relationships betw
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1784,11 +1621,11 @@ Figure&nbsp;26.6: Example of a correlation matrix showing the relationships betw
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
 </div>   
     <div class="nav-footer-center">
-<p>Part of the <a href="https://github.com/openair-project">openair project</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/utility-functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
 </div>
