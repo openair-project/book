@@ -328,7 +328,7 @@ group_by(traj, sector) |>
   mutate(percent = 100 * n / nrow(traj))
 ```
 
-## Potential Source Contribution Function (PSCF)
+### Potential Source Contribution Function (PSCF)
 
 If `statistic = "pscf"` then the Potential Source Contribution Function (PSCF) is plotted. The PSCF calculates the probability that a source is located at latitude $i$ and longitude $j$ [@Fleming2012; @Pekney2006]. The PSCF is somewhat analogous to the CPF function described on @sec-CPF that considers local wind direction probabilities. In fact, the two approaches have been shown to work well together [@Pekney2006]. The PSCF approach has been widely used in the analysis of air mass back trajectories. [@AraBegum2005] for example assessed the method against the known locations of wildfires and found it performed well for PM~2.5~, EC (elemental carbon) and OC (organic carbon) and that other (non-fire related) species such as sulphate had different source origins. The basis of PSCF is that if a source is located at ($i$, $j$), an air parcel back trajectory passing through that location indicates that material from the source can be collected and transported along the trajectory to the receptor site. PSCF solves
 
@@ -354,7 +354,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   )
 ```
 
-## Concentration Weighted Trajectory (CWT)
+### Concentration Weighted Trajectory (CWT)
 
 A limitation of the PSCF method is that grid cells can have the same PSCF value when sample concentrations are either only slightly higher or much higher than the criterion [@Hsu2003]. As a result, it can be difficult to distinguish moderate sources from strong ones. [@seibert1994] computed concentration fields to identify source areas of pollutants. This approach is sometimes referred to as the CWT or CF (concentration field). A grid domain was used as in the PSCF method. For each grid cell, the mean (CWT) or logarithmic mean (used in the Residence Time Weighted Concentration (RTWC) method) concentration of a pollutant species was calculated as follows:
 
@@ -412,7 +412,7 @@ filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) |>
 
 It should be noted that it makes sense to analyse back trajectories for pollutants that have a large regional component --- such as particles or O~3~. It makes little sense to analyse pollutants that are known to have local impacts e.g. NO~x~ However, a species such as NO~x~ can be helpful to exclude 'fresh' emissions from the analysis.
 
-## Simplified Quantitative Transport Bias Analysis (SQTBA)
+### Simplified Quantitative Transport Bias Analysis (SQTBA)
 
 Both CWT and PSCF techniques in essence assume that the trajectory paths represent a good estimate of the centreline of the air mass origin. However, trajectory analysis is implicitly uncertain, not least because of the difficulty of accurately describing the dispersion of pollutants in the atmosphere. Hysplit has many approaches to deal with these uncertainties such as running an ensemble of trajectories with different starting locations. However, for longer term analysis it can be very time consuming to run the model to explore the influence of meteorological variation.
 
@@ -658,6 +658,36 @@ timeProp(
   key.position = "top",
   key.columns = 6
 )
+```
+
+## Reprojecting trajectories
+
+Both of `trajPlot()` and `trajLevel()` contain the `crs` argument, which is passed to `ggplot2::coord_sf()` via `sf::st_crs()`. Both of these latter two functions document `crs` extensively but, in short, it is a way to define a coordinate reference system to reproject the plotted data.
+
+By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic System" (WGS84), which is associated with the globally ubiquitous "latitude and longitude" coordinate system. However, WGS84/ESPG:4326 is a geographic coordinate system — it describes positions on a sphere — rather than a projected one that flattens that sphere onto a 2D plane. This means shapes and distances can appear distorted, particularly at higher latitudes or across wide spatial extents. Choosing a projected CRS better suited to your region of interest can produce a more accurate and visually appealing map.
+
+@fig-crs-latlng, @fig-crs-bng and @fig-crs-lambert show the same back trajectory data plotted with different CRSs. The first plot uses the default WGS84/ESPG:4326, which is a geographic coordinate system. The second plot uses the British National Grid (BNG) CRS, which is a projected coordinate system commonly used in the UK. The third plot uses the Lambert Azimuthal Equal Area (LAEA) CRS, which is a projected coordinate system often used for European data.
+
+::: {.callout-warning}
+`crs` can take a wide variety of arguments, including custom projections written in the PROJ string form. It's up to you to pick a suitable `crs` for your data, as poorly chosen coordinate reference systems may obscure the data or cause visual artefacts. For example, crs = 27700 (the British National Grid) is well-suited for trajectories surrounding the UK, but will produce increasing distortion for trajectories that extend far beyond it.
+:::
+
+```{r}
+#| label: fig-crs-latlng
+#| fig-cap: Trajectories plotted in the default WGS84/ESPG:4326 coordinate reference system (CRS) using `trajLevel()`.
+trajLevel(traj, crs = 4326)
+```
+
+```{r}
+#| label: fig-crs-bng
+#| fig-cap: Trajectories plotted in the British National Grid (BNG) coordinate reference system (CRS) using `trajLevel()`. 
+trajLevel(traj, crs = 27700)
+```
+
+```{r}
+#| label: fig-crs-lambert
+#| fig-cap: Trajectories plotted in the Lambert Azimuthal Equal Area (LAEA) coordinate reference system (CRS) using `trajLevel()`. This projection is often used for European data and is a good choice for this dataset.
+trajLevel(traj, crs = 3035)
 ```
 
 ## Trajectories on an interactive map
