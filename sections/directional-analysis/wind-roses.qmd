@@ -233,9 +233,7 @@ from the east occur with a low frequency.
 pollutionRose(
   mydata,
   pollutant = "so2",
-  normalise = TRUE,
-  seg = 1,
-  cols = "heat"
+  normalise = TRUE
 )
 ```
 

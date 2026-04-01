@@ -133,7 +133,11 @@ Now we are going to produce two pollution roses shown in @fig-RunningRes. Note, 
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 90%
-pollutionRose(ted, pollutant = "o3", type = "criterion")
+pollutionRose(
+  ted,
+  pollutant = "o3",
+  type = "criterion"
+)
 ```
 
 The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time to the O~3~ chemistry to take place.
