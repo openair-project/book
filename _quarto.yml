@@ -100,7 +100,6 @@ execute:
   prompt: false
   freeze: auto
   cache: true
-  fig-format: svg
 
 format:
   html:
