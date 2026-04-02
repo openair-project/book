@@ -521,7 +521,7 @@ window.Quarto = {
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>Because the <span class="pkg">openair</span> package (and R itself) are continually updated, it will be useful to know this document was produced using R version 4.5.2 and <span class="pkg">openair</span> version 2.19.2.0000.</p>
+<p>Because the <span class="pkg">openair</span> package (and R itself) are continually updated, it will be useful to know this document was produced using R version 4.5.2 and <span class="pkg">openair</span> version 3.0.0.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -888,7 +888,7 @@ Table&nbsp;2.2: Built-in ways of splitting data in <span class="pkg">openair</sp
 <div class="cell-output-display">
 <div id="fig-colours" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-colours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="openair-package_files/figure-html/fig-colours-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;2.1: elected pre-defined colour scales in. The top colour scheme is a user-defined one."><img src="openair-package_files/figure-html/fig-colours-1.svg" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="openair-package_files/figure-html/fig-colours-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;2.1: elected pre-defined colour scales in. The top colour scheme is a user-defined one."><img src="openair-package_files/figure-html/fig-colours-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.1: elected pre-defined colour scales in. The top colour scheme is a user-defined one.
@@ -914,11 +914,11 @@ Figure&nbsp;2.1: elected pre-defined colour scales in. The top colour scheme is 
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://colorspace.R-Forge.R-project.org/">colorspace</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/colorspace/man/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"Dark 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="fu"><a href="https://colorspace.R-Forge.R-project.org/reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"Dark 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div id="fig-colorspace" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-colorspace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="openair-package_files/figure-html/fig-colorspace-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2.2: A demonstration of the colorspace package in use with openair."><img src="openair-package_files/figure-html/fig-colorspace-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="openair-package_files/figure-html/fig-colorspace-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2.2: A demonstration of the colorspace package in use with openair."><img src="openair-package_files/figure-html/fig-colorspace-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colorspace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.2: A demonstration of the <span class="pkg">colorspace</span> package in use with <span class="pkg">openair</span>.
@@ -941,7 +941,7 @@ Figure&nbsp;2.2: A demonstration of the <span class="pkg">colorspace</span> pack
 <span><span class="va">a</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span> <span class="va">b</span><span class="op">$</span><span class="va">plot</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="openair-package_files/figure-html/unnamed-chunk-16-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="openair-package_files/figure-html/unnamed-chunk-16-1.svg" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="openair-package_files/figure-html/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="openair-package_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
