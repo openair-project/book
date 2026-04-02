@@ -91,7 +91,7 @@ ggsave(
   td_sd,
   width = 5,
   height = 5,
-  dpi = 300
+  dpi = 100
 )
 
 td_r <-
@@ -122,7 +122,7 @@ ggsave(
   td_r,
   width = 5,
   height = 5,
-  dpi = 300
+  dpi = 100
 )
 
 td_rms <-
@@ -152,5 +152,5 @@ ggsave(
   td_rms,
   width = 5,
   height = 5,
-  dpi = 300
+  dpi = 100
 )
