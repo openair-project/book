@@ -147,7 +147,7 @@ scatter_object$plot +
 
 ### Add a reference line
 
-To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `lty` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the color of the line.
+To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `linetype` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the color of the line.
 
 In this case, we set `x = I(0.01)`. The `I()` function tells `ggplot2` to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different `timePlot()` plots with different x-axis scales - `x = I(0.01)` will *always* mean "nudged a little bit from the far left of the plot".
 
@@ -157,7 +157,7 @@ In this case, we set `x = I(0.01)`. The `I()` function tells `ggplot2` to ignore
 scatter_object$plot +
   geom_hline(
     yintercept = 200,
-    lty = 2,
+    linetype = 2,
     color = "purple"
   ) +
   annotate(

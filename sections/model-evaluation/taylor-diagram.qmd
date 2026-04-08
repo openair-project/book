@@ -119,7 +119,7 @@ TaylorDiagram(
   mod = "mod",
   group = c("group", "site"),
   normalise = TRUE,
-  cex = 1,
-  pch = c(15:19, 15:18)
+  size = 1,
+  shape = c(15:19, 15:18)
 )
 ```

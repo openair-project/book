@@ -524,7 +524,7 @@ timeVariation(
   key.columns = 4,
   col = "Set2",
   ci = FALSE,
-  lwd = 3
+  linewidth = 3
 )
 ```
 
@@ -540,7 +540,7 @@ timeVariation(
   pollutant = "so2",
   group = "cluster",
   col = openColours("Set2", 8)[5:6],
-  lwd = 3
+  linewidth = 3
 )
 ```
 

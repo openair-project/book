@@ -99,7 +99,7 @@ selectByDate(
 ) |>
   trajPlot(
     type = "day",
-    layout = c(7, 1)
+    ncol = 7
   )
 ```
 
@@ -118,7 +118,7 @@ selectByDate(
   trajPlot(
     group = "day",
     col = "turbo",
-    lwd = 1,
+    linewidth = 1,
     key.pos = "top",
     key.col = 4,
     ylim = c(50, 79)
@@ -152,7 +152,7 @@ selectByDate(
   trajPlot(
     pollutant = "pm10",
     col = "turbo",
-    lwd = 1
+    linewidth = 1
   )
 ```
 
@@ -186,7 +186,7 @@ selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
     pollutant = "pm.new",
     col = "turbo",
-    lwd = 2
+    linewidth = 2
   )
 ```
 
@@ -406,7 +406,7 @@ filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) |>
     pollutant = "pm2.5",
     type = "season",
     statistic = "pscf",
-    layout = c(4, 1)
+    ncol = 4
   )
 ```
 
@@ -634,7 +634,7 @@ trendLevel(
   kc1,
   pollutant = "v2.5",
   type = "cluster",
-  layout = c(6, 1),
+  ncol = 6,
   cols = "increment"
 )
 ```

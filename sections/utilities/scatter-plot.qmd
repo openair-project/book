@@ -116,7 +116,8 @@ scatterPlot(
   type = "o3",
   smooth = FALSE,
   linear = TRUE,
-  layout = c(2, 2)
+  ncol = 2,
+  nrow = 2
 )
 ```
 
@@ -159,8 +160,8 @@ scatterPlot(
   x = "nox",
   y = "value",
   group = "pollutant",
-  pch = 16:17,
-  cex = 1.6,
+  shape = 16:17,
+  size = 1.6,
   linear = TRUE,
   xlab = "nox (ppb)",
   ylab = "PM concentration (ug/m3)"
@@ -177,8 +178,8 @@ scatterPlot(
   x = "nox",
   y = "value",
   group = "pollutant",
-  pch = 16:17,
-  cex = 1.6,
+  shape = 16:17,
+  size = 1.6,
   linear = TRUE,
   xlab = "nox (ppb)",
   ylab = "PM concentration (ug/m3)",
@@ -196,8 +197,8 @@ scatterPlot(
   x = "nox",
   y = "value",
   group = "pollutant",
-  pch = 16:17,
-  cex = 2,
+  shape = 16:17,
+  size = 2,
   linear = TRUE,
   xlab = "nox (ppb)",
   ylab = "PM concentration (ug/m3)",
@@ -254,9 +255,9 @@ scatterPlot(
   x = "date",
   y = "no2",
   z = "o3",
-  cex = 3,
+  size = 3,
   col = "increment",
-  windflow = list(col = "grey50", lwd = 0.8),
+  windflow = windflowOpts(colour = "grey50", linewidth = 0.8),
   ylab = "no2 (ppb)"
 )
 ```

@@ -155,7 +155,7 @@ polarPlot(theData, type = "year", poll = "so2")
 
 In this case writing `poll` is sufficient to uniquely identify that the option is `pollutant`.
 
-Also there are many common options available in functions that are not explicitly documented, but are part of lattice graphics. Some common ones are summarised in @tbl-options. The `layout` option allows the user to control the layout of multi-panel plots e.g. `layout = c(4, 1)` would ensure a four-panel plot is 4 columns by 1 row.
+Also there are many common options available in functions that are not explicitly documented. Some common ones are summarised in @tbl-options. For example, `nrow` and `ncol` allow the user to control the layout of multi-panel plots, e.g., `ncol = 4, nrow = 1` would ensure a four-panel plot is 4 columns by 1 row.
 
 ```{r}
 #| echo: false
@@ -164,22 +164,26 @@ tab_dat <- tibble(
   option = c(
     "xlab",
     "ylab",
-    "main",
-    "pch",
-    "cex",
-    "lty",
-    "lwd",
-    "layout"
+    "title",
+    "subtitle",
+    "caption",
+    "shape",
+    "size",
+    "linetype",
+    "linewidth",
+    "nrow/ncol"
   ),
   description = c(
     "x-axis label",
     "y-axis label",
     "title of the plot",
+    "subtitle of the plot",
+    "caption of the plot",
     "plotting symbol used for points",
-    "size of symbol plotted",
-    "line type",
-    "line width",
-    "the plot layout e.g. c(2, 2) "
+    "size of symbol plotted for points",
+    "line type for lines (e.g., solid, dashed, dotted)",
+    "line width for lines",
+    "the plot layout for multi-panel plots"
   )
 )
 ```
@@ -193,7 +197,7 @@ knitr::kable(tab_dat, booktabs = TRUE)
 
 ## The type option
 
-One of the central themes in [openair]{.pkg} is the idea of *conditioning*. Rather than plot $x$ against $y$, considerably more information can usually be gained by considering a third variable, $z$. In this case, $x$ is plotted against $y$ for many different intervals of $z$. This idea can be further extended. For example, a trend of NO~x~ against time can be *conditioned* in many ways: NO~x~ vs. time split by wind sector, day of the week, wind speed, temperature, hour of the day ... and so on. This type of analysis is rarely carried out when analysing air pollution data, in part because it is time consuming to do. However, thanks to the capabilities of R and packages such as [lattice]{.pkg} and [ggplot2]{.pkg}, it becomes easier to work in this way.
+One of the central themes in [openair]{.pkg} is the idea of *conditioning*. Rather than plot $x$ against $y$, considerably more information can usually be gained by considering a third variable, $z$. In this case, $x$ is plotted against $y$ for many different intervals of $z$. This idea can be further extended. For example, a trend of NO~x~ against time can be *conditioned* in many ways: NO~x~ vs. time split by wind sector, day of the week, wind speed, temperature, hour of the day ... and so on. This type of analysis is rarely carried out when analysing air pollution data, in part because it is time consuming to do. However, thanks to the capabilities of R and packages such as [ggplot2]{.pkg}, it becomes easier to work in this way.
 
 In most [openair]{.pkg} functions conditioning is controlled using the `type` option. `type` can be any other variable available in a data frame (numeric, character or factor). A simple example of `type` would be a variable representing a 'before' and 'after' situation, say a variable called `period` i.e. the option `type = "period"` is supplied. In this case a plot or analysis would be separately shown for 'before' and 'after'. When `type` is a numeric variable then the data will be split into four *quantiles* and labelled accordingly. Note however the user can set the quantile intervals to other values using the option `n.levels`. For example, the user could choose to plot a variable by different levels of temperature. If `n.levels = 3` then the data could be split by 'low', 'medium' and 'high' temperatures, and so on. Some variables are treated in a special way. For example if `type = "wd"` then the data are split into 8 wind sectors (N, NE, E, ...) and plots are organised by points of the compass.
 

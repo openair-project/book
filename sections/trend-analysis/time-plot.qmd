@@ -121,8 +121,8 @@ timePlot(
   pollutant = c("nox", "no2", "co", "so2", "pm10"),
   avg.time = "year",
   normalise = "1/1/1998",
-  lwd = 3,
-  lty = 1,
+  linewidth = 3,
+  linetype = 1,
   group = TRUE,
   ylim = c(0, 125)
 )
@@ -165,9 +165,9 @@ timePlot(
   pollutant = "nox",
   group = "site",
   avg.time = "month",
-  lty = 1,
+  linetype = 1,
   cols = "tol.bright",
-  lwd = c(3, 2, 1),
+  linewidth = c(3, 2, 1),
   ylab = "nox (ug/m3)"
 )
 ```
@@ -189,7 +189,7 @@ timePlot(
     colour = "skyblue"
   ),
   strip.position = "right",
-  lwd = 2,
+  linewidth = 2,
   cols = "tol.bright",
   key = FALSE,
   y.relation = "free",

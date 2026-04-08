@@ -157,7 +157,7 @@ ggplot(out_filter, aes(x = slope)) +
   theme_minimal() +
   geom_vline(
     xintercept = mode_value,
-    lty = 5,
+    linetype = 5,
     colour = "tomato"
   ) +
   geom_text(

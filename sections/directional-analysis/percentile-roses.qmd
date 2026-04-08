@@ -97,6 +97,7 @@ percentileRose(
   percentile = 95,
   method = "cpf",
   col = "darkorange",
-  layout = c(3, 2)
+  ncol = 3,
+  nrow = 2
 )
 ```

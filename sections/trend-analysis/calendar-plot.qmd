@@ -44,7 +44,8 @@ calendarPlot(
   lim = 50,
   cols = "Purples",
   col.lim = c("black", "orange"),
-  layout = c(4, 3)
+  ncol = 4,
+  nrow = 3
 )
 ```
 

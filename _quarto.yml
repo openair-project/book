@@ -10,7 +10,7 @@ book:
   - Jack Davison
   reader-mode: true
   
-  favicon: assets/media/plume.png
+  favicon: assets/media/favicon.png
   site-url: https://openair-project.github.io/book/
   repo-url: https://github.com/openair-project/book/
   repo-branch: main

@@ -80,7 +80,8 @@ of how wind speed and direction vary seasonally.
 windRose(
   mydata,
   type = "year",
-  layout = c(4, 2),
+  ncol = 4,
+  nrow = 2,
   width = 0.5
 )
 ```
@@ -109,7 +110,7 @@ pollutant. Furthermore, the `type` option is available in almost all
 #| fig-cap: Wind rose for four different levels of PM~10~ concentration. The levels are defined as the four *quantiles* of PM~10~ concentration and the ranges are shown on each of the plot labels.
 #| fig-width: 11
 #| fig-height: 5
-windRose(mydata, type = "pm10", layout = c(4, 1))
+windRose(mydata, type = "pm10", ncol = 4)
 ```
 
 A comparison of the effect that bias has can be seen by plotting the
@@ -171,7 +172,7 @@ pollutionRose(
   mydata,
   pollutant = "nox",
   type = "so2",
-  layout = c(4, 1),
+  ncol = 4,
   key.position = "bottom"
 )
 ```

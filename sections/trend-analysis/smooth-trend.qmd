@@ -85,7 +85,7 @@ smoothTrend(
   pollutant = c("no2", "pm10", "o3"),
   type = c("season", "wd"),
   date.breaks = 3,
-  lty = 0
+  linetype = 0
 )
 ```
 
