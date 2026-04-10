@@ -298,54 +298,22 @@ The font size will be reset to the default sizes once the plot is complete. Fine
 
 ## Using colours {#colours}
 
-Many of the functions described require that colour scales are used; particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme, shown at the top of @fig-colours. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the `RColorBrewer` package.
+Many of the functions described require that colour scales are used; particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the `RColorBrewer` package.
 
-Several pre-defined colour schemes are available to make it easy to plot data. In fact, for most situations the default colour schemes should be adequate. The choice of colours can easily be set; either by using one of the pre-defined schemes or through a user-defined scheme. More details can be found in the [openair]{.pkg} `openColours()` function. Some defined colours are shown in @fig-colours, together with an example of a user defined scale that provides a smooth transition from red to green.
+Several pre-defined colour schemes are available to make it easy to plot data, managed by the `openColours()` function. The choice of colours can easily be set using the `cols` argument, which can take either a pre-defined scheme name or a vector of user-defined colours (either built-in R colour names like `"yellow"` or hex codes like `"#FFF000"`). A few examples are shown in @fig-colours using `polarPlot()`. 
+
+A full list of built-in palettes can be obtained with `openSchemes()`. More details about colours can be found in @sec-colours, including a full gallery of available colour schemes in [openair]{.pkg}.
 
 ```{r}
 #| label: fig-colours
-#| fig-cap: elected pre-defined colour scales in. The top colour scheme is a user-defined one.
-#| fig-width: 5
-#| fig-height: 7
-#| out-width: 70%
-library(openair)
-## small function for plotting
-printCols <- function(col, y) {
-  rect(
-    (0:200) / 200,
-    y,
-    (1:201) / 200,
-    y + 0.1,
-    col = openColours(col, n = 201),
-    border = NA
-  )
-  text(0.5, y + 0.15, deparse(substitute(col)))
-}
-
-## plot an empty plot
-plot(
-  1,
-  xlim = c(0, 1),
-  ylim = c(0, 1.6),
-  type = "n",
-  xlab = "",
-  ylab = "",
-  axes = FALSE
-)
-printCols("default", 0)
-printCols("increment", 0.2)
-printCols("heat", 0.4)
-printCols("turbo", 0.6)
-printCols("viridis", 0.8)
-printCols("inferno", 1.0)
-printCols("greyscale", 1.2)
-printCols(c("tomato", "white", "forestgreen"), 1.4)
-```
-
-The user-defined scheme is very flexible and the following provides examples of its use. In the examples shown next, the `polarPlot` function is used as a demonstration of their use.
-
-```{r}
-#| eval: false
+#| fig-cap: "Examples of different colour schemes applied to the same plot."
+#| fig-subcap:
+#| - "Default colours"
+#| - "Pre-defined `turbo` colour scheme"
+#| - "User-defined colours from yellow to green"
+#| - "Pre-defined `mako` colour scheme modified with the `colorOpts()` function"
+#| layout-ncol: 2
+#| layout-nrow: 2
 # use default colours - no need to specify
 polarPlot(mydata)
 
@@ -355,50 +323,43 @@ polarPlot(mydata, cols = "turbo")
 # define own colours going from yellow to green
 polarPlot(mydata, cols = c("yellow", "green"))
 
-# define own colours going from red to white to blue
-polarPlot(mydata, cols = c("red", "white", "blue"))
-```
-
-For more detailed information on using appropriate colours, have a look at the [colorspace](https://cran.r-project.org/web/packages/colorspace/vignettes/colorspace.html) package. [colorspace]{.pkg} provides the definitive, comprehensive approach to using colours effectively. You will need to install the package, `install.packages("colorspace")`. To use the palettes with [openair]{.pkg}, you can for example do:
-
-```{r}
-#| label: fig-colorspace
-#| fig-cap: A demonstration of the [colorspace]{.pkg} package in use with [openair]{.pkg}.
-#| fig.width: 6
-#| fig.height: 6
-#| fig-align: center
-library(colorspace)
-library(openair)
-windRose(mydata, cols = qualitative_hcl(4, palette = "Dark 3"))
+# tweak colour palette through `colorOpts()`
+polarPlot(mydata, cols = colorOpts("mako", begin = 0.1, end = 0.9, direction = -1))
 ```
 
 ## Automatic text formatting {#quickText}
 
-[openair]{.pkg} tries to automate the process of annotating plots. It can be time-consuming (and tricky) to repetitively type in text to represent μg m^-3^ or PM~10~ (μg m^-3^) etc. in R. For this reason, an attempt is made to automatically detect strings such as `nox` or `NOx` and format them correctly. Where a user needs a y-axis label such as NO~x~ (μg m^-3^) it will only be necessary to type `ylab = "nox (ug/m3)"`. The same is also true for plot titles.
+[openair]{.pkg} tries to automate the process of annotating plots. It can be time-consuming (and tricky) to repetitively type in text to represent μg m^-3^ or PM~10~ (μg m^-3^) etc. in R. For this reason, an attempt is made to automatically detect strings such as `nox` or `NOx` and format them correctly. Where a user needs a y-axis label such as NO~x~ (μg m^-3^) it will only be necessary to type `ylab = "nox (ug/m3)"`. The same is also true for plot titles, subtitles, captions and tags. 
 
-Users can override this option by setting it to FALSE.
+Users can override this option by setting `auto.text` to `FALSE`.
 
 ## Multiple plots on a page {#sec-multiple-plots-page}
 
 We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} makes this a bit easier. As [openair]{.pkg} uses the [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
 
-Let's put two plots side by side (2 columns, 1 row). First it is necessary to assign the plots to a variable:
+Let's start by creating a few individual plots.
 
 ```{r}
-#| include: false
-a <- windRose(mydata, key.position = "bottom")
-b <- polarPlot(mydata, key.position = "bottom")
+#| output: false
+plt1 <- timePlot(mydata, "no2", avg.time = "month", key.position = "none")
+plt2 <- variationPlot(mydata, "no2", x = "weekday", key.position = "none")
+plt3 <- trendLevel(mydata, key.position = "right")
 ```
 
-Now let's load [patchwork]{.pkg} and simply add the two plots together.
+Now let's load [patchwork]{.pkg} and add the plots together, providing a bit of customisation using [ggplot2]{.pkg} and [patchwork]{.pkg} itself.
 
 ```{r}
+#| label: fig-patchwork
+#| fig-cap: An assembly of a few plots on one "page".
+#| fig-height: 6
 library(patchwork)
 
-a$plot + b$plot
+((plt1$plot / (plt2$plot + plt3$plot)) &
+  ggplot2::theme(plot.margin = ggplot2::margin_auto(4))) +
+  plot_layout(guides = "collect", heights = c(0.4, 0.6))
 ```
 
-[patchwork]{.pkg} is very powerful package for arranging plots, and actually powers functions like `timeVariation()` under-the-hood. Learn more about this package in its own [package documentation](https://patchwork.data-imaginist.com/). More is also written about arranging plots like this in the [customisation appendix](../appendices/appendix-annotate.qmd).
+[patchwork]{.pkg} is very powerful package for arranging plots, and actually powers functions like `timeVariation()` under the hood. Learn more about this package in its own [package documentation](https://patchwork.data-imaginist.com/). More is also written about arranging plots like this in the [customisation appendix](../appendices/appendix-annotate.qmd).
 
 ## Saving plots and data
 

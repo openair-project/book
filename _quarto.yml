@@ -82,6 +82,7 @@ book:
     
   appendices:
    - sections/appendices/appendix-annotate.qmd
+   - sections/appendices/appendix-colours.qmd
    - sections/appendices/appendix-hysplit.qmd
    - sections/appendices/appendix-trends.qmd
    - sections/appendices/appendix-gethelp.qmd

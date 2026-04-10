@@ -1,0 +1,168 @@
+---
+author: Jack Davison
+validate-yaml: false
+execute: 
+  warning: false
+  error: false
+  message: false
+---
+
+# Colour Palettes {#sec-colours}
+
+## Using Colours
+
+As well as giving users the option to define their own colours (whether hex-codes like `"#FF6347"` or built-in R colours like `"tomato"`), [openair]{.pkg} provides a great number of curated pre-defined colour schemes for users to take advantage of.
+
+An easy way to access all of the available schemes is by running the `openSchemes()` function, which returns a table of available palettes.
+
+```{r}
+#| label: schemes
+library(openair)
+schemes <- openSchemes()
+head(schemes)
+```
+
+There are currently `r nrow(schemes)` schemes available through [openair]{.pkg}. You can simply feed any of these schemes into the `cols` argument of your plot of choice and they will automatically be applied.
+
+```{r}
+#| label: fig-cols
+#| fig-cap: "Examples of different colour schemes applied to the same plot."
+#| fig-subcap:
+#| - "`turbo` colour scheme"
+#| - "`viridis` colour scheme"
+#| - "`greyscale` colour scheme"
+#| layout-ncol: 3
+trendLevel(mydata, cols = "turbo")
+trendLevel(mydata, cols = "viridis")
+trendLevel(mydata, cols = "greyscale")
+```
+
+There are three kinds of scheme:
+
+- `"sequential"` palettes can be interpolated into any number of individual colours. These are most useful for numeric data (e.g., the colourbar of a `polarPlot()`) or categorical data with some kind of natural order (e.g., "low", "medium", "high").
+
+- `"diverging"` palettes are similar to sequential palettes, but have a natural middle point (usually white or black) from which two separate sequential schemes diverge. These are useful for functions like `corPlot()` and `polarDiff()`.
+
+- `"qualitative"` palettes are typically limited to a certain number of colours, and are typically visually distinct from one another. These are most useful for unordered categorical data (e.g., distinguishing between measured and modelled data, different monitoring sites, etc.).
+
+[openair]{.pkg} does not enforce that you use the "correct" kind of palette with the correct kind of plot and, for certain qualitative palettes, will actually attempt to interpolate them for you. This can make some horrible looking plots if misused, as in @fig-cols-right-wrong.
+
+```{r}
+#| label: fig-cols-right-wrong
+#| fig-cap: "Examples of 'correct' and 'incorrect' use of colour schemes. The left-hand plot uses a sequential scheme, which is appropriate for the numeric data being plotted. The right-hand plot uses a qualitative scheme, which is less appropriate for this kind of data."
+#| fig-subcap:
+#|  - "`mako` sequential colour scheme"
+#|  - "`Dark2` qualitative colour scheme"
+#| layout-ncol: 2
+trendLevel(mydata, cols = "mako", tag = "✔️")
+trendLevel(mydata, cols = "Dark2", tag = "❌")
+```
+
+To better control colours, you can use the `colourOpts()` function instead of a bare scheme name. This allows you to control extra features of the plot:
+
+- `direction` allows you to reverse the palette. For example, `"viridis"` progresses from dark puple at low values to yellow at higher values. `direction = -1` changes this to have yellow at lower values and dark puple at higher values.
+
+- `begin` and `end` allow you to select a subset of the palette. For example, `begin = 0.25` and `end = 0.75` would select the middle 50% of the palette, which can be useful for avoiding very light or very dark colours.
+
+- `alpha` allows you to control the transparency of the colours. This may be useful to combat overplotting on a particularly busy `scatterPlot()`, or many be of help if you want to, e.g., overlaying plots on a map for an infographic or poster.
+
+```{r}
+#| label: fig-cols-opts
+#| fig-cap: "Examples of using `colourOpts()` to control the colour scheme."
+#| fig-subcap:
+#| - "Default `turbo` colour scheme"
+#| - "`turbo` colour scheme with `begin = 0.2` and `end = 0.8` to subset the palette"
+#| - "`turbo` colour scheme with `direction = -1` to reverse the palette"
+#| layout-ncol: 3
+trendLevel(mydata, cols = "turbo")
+trendLevel(mydata, cols = colorOpts("turbo", begin = 0.2, end = 0.8))
+trendLevel(mydata, cols = colorOpts("turbo", direction = -1))
+```
+
+## Gallery
+
+This section includes a gallery of the different colour schemes available in [openair]{.pkg}, grouped by type.
+
+```{r}
+#| include: false
+show_palette <- function(scheme) {
+  n <- schemes$max_n[schemes$palette == scheme]
+  if (is.na(n)) {
+    n <- 200
+  }
+  cols <- openair::openColors(scheme, n = n)
+
+  plot <- data.frame(
+    fill = cols,
+    x = seq_along(cols),
+    y = 1
+  ) |>
+    ggplot2::ggplot(ggplot2::aes(y = y, x = x, fill = fill, color = fill)) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_identity(aesthetics = c("fill", "colour")) +
+    ggplot2::coord_cartesian(expand = FALSE) +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      plot.margin = ggplot2::margin(t = 20, 0, 0, 0),
+      panel.border = ggplot2::element_blank(),
+      panel.spacing = ggplot2::unit(0, "pt")
+    )
+
+  print(plot)
+}
+seq_pals <- openSchemes("seq")$palette |> sort()
+div_pals <- openSchemes("div")$palette |> sort()
+qual_pals <- openSchemes("qual")$palette |> sort()
+
+# remove dups 
+qual_pals <- qual_pals[!qual_pals %in% c("tol", "cbPalette")]
+```
+
+### Sequential
+
+```{r}
+#| label: sequential
+#| fig-subcap: !expr 'seq_pals'
+#| fig-height: 0.75
+#| fig-width: 10
+#| out.width: "100%"
+#| fig-cap-location: top
+#| echo: false
+purrr::walk(
+  .x = seq_pals,
+  .f = show_palette
+)
+```
+
+### Diverging
+
+```{r}
+#| label: diverging
+#| fig-subcap: !expr 'div_pals'
+#| fig-height: 0.75
+#| fig-width: 10
+#| out.width: "100%"
+#| fig-cap-location: top
+#| echo: false
+purrr::walk(
+  .x = div_pals,
+  .f = show_palette
+)
+```
+
+### Qualitative
+
+```{r}
+#| label: qualitative
+#| fig-subcap: !expr 'qual_pals'
+#| fig-height: 0.75
+#| fig-width: 10
+#| out.width: "100%"
+#| fig-cap-location: top
+#| echo: false
+purrr::walk(
+  .x = qual_pals,
+  .f = show_palette
+)
+```
+
