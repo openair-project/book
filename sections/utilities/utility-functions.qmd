@@ -96,11 +96,11 @@ However, it can be useful to call `cutData()` *before* supplying the data to a f
 
 A seemingly easy thing to do that has relevance to air pollution episodes is to select run lengths of contiguous values of a pollutant above a certain threshold. For example, one might be interested in selecting O~3~ concentrations where there are at least 8 consecutive hours above 90\~ppb. In other words, a selection that combines both a threshold and *persistence*. These periods can be very important from a health perspective and it can be useful to study the conditions under which they occur. But how do you select such periods easily? The `selectRunning` utility function has been written to do this. It could be useful for all sorts of situations e.g.
 
--   Selecting hours when primary pollutant concentrations are persistently high --- and then applying other [openair]{.pkg} functions to analyse the data in more depth.
+- Selecting hours when primary pollutant concentrations are persistently high --- and then applying other [openair]{.pkg} functions to analyse the data in more depth.
 
--   In the study of particle suspension or deposition etc. it might be useful to select hours when wind speeds remain high or rainfall persists for several hours to see how these conditions affect particle concentrations.
+- In the study of particle suspension or deposition etc. it might be useful to select hours when wind speeds remain high or rainfall persists for several hours to see how these conditions affect particle concentrations.
 
--   It could be useful in health impact studies to select blocks of data where pollutant concentrations remain above a certain threshold.
+- It could be useful in health impact studies to select blocks of data where pollutant concentrations remain above a certain threshold.
 
 As an example we are going to consider O~3~ concentrations at a semi-rural site in south-west London (Teddington). The data can be downloaded as follows:
 
@@ -280,14 +280,14 @@ The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method fo
 
 Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:
 
--   It handles missing values (`NA`) naturally, interpolating across gaps without requiring imputation.
--   It is computationally efficient even for long time series [@eilers2003].
--   The order of the roughness penalty `d` can be varied: `d = 2` (the default) penalises curvature, `d = 1` penalises slope and effectively performs linear interpolation across gaps.
--   The `lambda` parameter gives direct, intuitive control over the degree of smoothing.
+- It handles missing values (`NA`) naturally, interpolating across gaps without requiring imputation.
+- It is computationally efficient even for long time series [@eilers2003].
+- The order of the roughness penalty `d` can be varied: `d = 2` (the default) penalises curvature, `d = 1` penalises slope and effectively performs linear interpolation across gaps.
+- The `lambda` parameter gives direct, intuitive control over the degree of smoothing.
 
 ### Standard smoothing
 
-The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 2000`. The function adds a new column `smooth_no2` to the data frame. 
+The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 2000`. The function adds a new column `smooth_no2` to the data frame.
 
 Where the aim is to reduce noise, setting `lambda = NA` will use Generalised Cross Validation (GCV) to choose an optimal `lambda` value automatically, though this can be computationally expensive for large datasets. However, for smoothing purposes, it is often more useful to experiment with a range of `lambda` values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.
 
@@ -331,8 +331,8 @@ Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via 
 
 The function returns two new columns:
 
--   `<pollutant>_baseline`: the estimated background concentration.
--   `<pollutant>_increment`: the difference between the observed concentration and the baseline, representing the local enhancement above background.
+- `<pollutant>_baseline`: the estimated background concentration.
+- `<pollutant>_increment`: the difference between the observed concentration and the baseline, representing the local enhancement above background.
 
 This decomposition is particularly useful in air pollution studies, where it is common to want to separate a *background* component (e.g., regional or photochemical NO~2~) from local *increments* (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.
 
@@ -369,18 +369,20 @@ The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique tha
 The value of the KZ filter in atmospheric and air quality science lies in the decomposition step [@Rao1997; @Eskridge1997]. By applying the filter successively at four increasing window sizes — approximately one day, one week, one month, and one year for hourly data — and taking the *differences* between adjacent filtered series, the raw time series is partitioned into five additive components:
 
 | Component | Typical period | Physical interpretation |
-|-----------|----------------|------------------------|
-| Short | Hours to ~2 days | Diurnal cycles, brief emission pulses |
-| Synoptic | ~2–7 days | Frontal passages, weather systems |
-| Intermediate | Weeks to ~2 months | Sub-seasonal variability |
-| Seasonal | Months to ~1 year | Annual cycle, photochemistry |
+|----|----|----|
+| Short | Hours to \~2 days | Diurnal cycles, brief emission pulses |
+| Synoptic | \~2–7 days | Frontal passages, weather systems |
+| Intermediate | Weeks to \~2 months | Sub-seasonal variability |
+| Seasonal | Months to \~1 year | Annual cycle, photochemistry |
 | Trend | Multi-year | Long-term emission changes, climate signals |
 
-: Default temporal decomposition produced by `kzFilter()` for hourly data. {#tbl-kz-components}
+: Default temporal decomposition produced by `kzFilter()` for hourly data.
 
 These components are mutually exclusive and sum to the original series, making the decomposition physically interpretable and suitable for downstream analysis.
 
 The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 and @Rao1997, who showed that synoptic-scale meteorological variability can mask long-term ozone trends unless removed. The same logic extends naturally to PM~2.5~, NO~x~, and other regulated pollutants [@Wise2005].
+
+By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings --- especially of many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events. 
 
 ### Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
 
@@ -390,7 +392,9 @@ The degree of window shrinkage is governed by the `sensitivity` argument: larger
 
 ### Using `kzFilter()` {#sec-kzFilter}
 
-The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
+The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment. 
+
+Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 7, 30, 90, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.
 
 Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:
 
@@ -427,7 +431,7 @@ cols = "turbo",
 key.title = "pm25\n(ug/m3)")
 ```
 
-For the synoptic component it can be useful to plot a `calendarPlot()` for a paricular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
+For the synoptic component it can be useful to plot a `calendarPlot()` for a particular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
 
 ```{r}
 #| label: fig-calendarPlot-synoptic
@@ -440,14 +444,10 @@ mutate(kz_out_pm25, synoptic = synoptic + trend) |>
     pollutant = "synoptic", 
     year = 2020, 
     cols = colorOpts("batlow", direction = -1),
-    windflow = windflowOpts(
-      range = c(0.1, 0.8), 
-      linewidth = 0.25, 
-      arrow.angle = 30, 
-      colour = "white"))
+    windflow = TRUE)
 ```
 
-Finally, it is useful to investigate the seasonal variation of a pollutant, as shown for O~3~ in @fig-kz-seasonal. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter.
+Finally, it is useful to investigate the seasonal variation of a pollutant, as shown for O~3~ in @fig-kz-seasonal. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
 
 ```{r}
 #| label: fig-kz-seasonal
@@ -455,7 +455,8 @@ Finally, it is useful to investigate the seasonal variation of a pollutant, as s
 #| fig-width: 6
 #| fig-height: 4
 
-timePlot(kz_out_o3, pollutant = "seasonal", 
+timePlot(kz_out_o3, 
+         pollutant = "seasonal", 
 ylab = "o3 (ug/m3)", xlab = "Year")
 ```
 
@@ -463,11 +464,13 @@ ylab = "o3 (ug/m3)", xlab = "Year")
 
 `kzaFilter()` shares the same interface as `kzFilter()` with one additional argument, `sensitivity`, which controls how aggressively the window is reduced near structural breaks (default 1.0). It is the preferred choice when:
 
-- A known policy change, sensor replacement, or source modification is expected to produce a step change. 
+- A known policy change, sensor replacement, or source modification is expected to produce a step change.
 - The trend component from `kzFilter()` shows a suspicious sharp feature that may be an artefact of the standard window.
-- There is a wish to detect and locate undocumented discontinuities.
+- There is a wish to detect and locate unknown discontinuities.
 
 The choice if `kzFilter()` vs `kzaFilter()` is often a matter of judgement and experimentation. If the KZ trend shows a sharp drop or rise, or rapid variations, that coincides with a known event, it is worth trying the KZA filter to see if it preserves that feature more cleanly. If the KZA trend is much smoother and more interpretable, it may be the better choice for subsequent analysis.
+
+In @fig-kz-kza-compare, the KZ and KZA trends for NO~2~ concentrations at the Marylebone Road site are compared. The KZA filter (red) preserves a sharp drop in NO~2~ in early 2020 that is smoothed out by the standard KZ filter (blue). This drop is related to the COVID-19 lockdown measures that were implemented in the UK in March 2020, which led to a sudden reduction in traffic emissions. The KZA filter is able to capture this abrupt change more effectively than the standard KZ filter, which smooths it out over a longer period.
 
 ```{r}
 #| label: fig-kz-kza-compare
@@ -494,23 +497,25 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
     group = TRUE,
     cols = c("steelblue", "tomato"),
     name.pol = c("KZ trend", "KZA trend"),
-    ylab = "NO2 trend (ug/m3)"
+    ylab = "NO2 trend (ug/m3)",
+    linewidth = c(0.5, 1)
   )
 ```
+
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
 Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:
 
--   Data sets may have different averaging periods and there is a need to combine them. For example, the task of combining an hourly air quality data set with a 15-minute average meteorological data set. The need here would be to aggregate the 15-minute data to 1-hour before merging.
+- Data sets may have different averaging periods and there is a need to combine them. For example, the task of combining an hourly air quality data set with a 15-minute average meteorological data set. The need here would be to aggregate the 15-minute data to 1-hour before merging.
 
--   It is extremely useful to consider data with different averaging times straightforwardly. Plotting a very long time series of hourly or higher resolution data can hide the main features and it would be useful to apply a specific (but flexible) averaging period to the data for plotting.
+- It is extremely useful to consider data with different averaging times straightforwardly. Plotting a very long time series of hourly or higher resolution data can hide the main features and it would be useful to apply a specific (but flexible) averaging period to the data for plotting.
 
--   Those who make measurements during field campaigns (particularly for academic research) may have many instruments with a range of different time resolutions. It can be useful to re-calculate time series with a common averaging period; or maybe help reduce noise.
+- Those who make measurements during field campaigns (particularly for academic research) may have many instruments with a range of different time resolutions. It can be useful to re-calculate time series with a common averaging period; or maybe help reduce noise.
 
--   It is useful to calculate statistics other than means when aggregating e.g. percentile values, maximums etc.
+- It is useful to calculate statistics other than means when aggregating e.g. percentile values, maximums etc.
 
--   For statistical analysis there can be short-term autocorrelation present. Being able to choose a longer averaging period is sometimes a useful strategy for minimising autocorrelation.
+- For statistical analysis there can be short-term autocorrelation present. Being able to choose a longer averaging period is sometimes a useful strategy for minimising autocorrelation.
 
 In aggregating data in this way, there are a couple of other issues that can be useful to deal with at the same time. First, the calculation of proper vector-averaged wind direction is essential. Second, sometimes it is useful to set a minimum number of data points that must be present before the averaging is done. For example, in calculating monthly averages, it may be unwise to not account for data capture if some months only have a few valid points.
 
