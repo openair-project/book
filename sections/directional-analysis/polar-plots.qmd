@@ -173,7 +173,7 @@ Arguably a better approach would be to calculate the ratio (slope) from a regres
 ```{r}
 #| label: fig-polarRatio
 #| fig-cap: Bivariate polar plot of the ratio of SO~2~/NO~x~.
-polarPlot(mydata, pollutant = "ratio", main = "so2/nox ratio")
+polarPlot(mydata, pollutant = "ratio", title = "so2/nox ratio")
 ```
 
 Sometimes when considering ratios it might be necessary to limit the values in some way; perhaps due to some unusually low value denominator data resulting in a few very high values for the ratio. This is easy to do with the [dplyr]{.pkg} `filter` command. The code below selects ratios less than 0.1.

@@ -34,7 +34,7 @@ smoothTrend(
   mydata,
   pollutant = "o3",
   ylab = "concentration (ppb)",
-  main = "monthly mean o3"
+  title = "monthly mean o3"
 )
 
 smoothTrend(
@@ -42,7 +42,7 @@ smoothTrend(
   pollutant = "o3",
   deseason = TRUE,
   ylab = "concentration (ppb)",
-  main = "monthly mean deseasonalised o3"
+  title = "monthly mean deseasonalised o3"
 )
 
 smoothTrend(
@@ -50,7 +50,7 @@ smoothTrend(
   pollutant = "no2",
   simulate = TRUE,
   ylab = "concentration (ppb)",
-  main = "monthly mean no2 (bootstrap uncertainties)"
+  title = "monthly mean no2 (bootstrap uncertainties)"
 )
 
 smoothTrend(
@@ -59,7 +59,7 @@ smoothTrend(
   deseason = TRUE,
   simulate = TRUE,
   ylab = "concentration (ppb)",
-  main = "monthly mean deseasonalised no2 (bootstrap uncertainties)"
+  title = "monthly mean deseasonalised no2 (bootstrap uncertainties)"
 )
 ```
 
