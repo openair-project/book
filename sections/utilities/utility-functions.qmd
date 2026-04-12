@@ -425,10 +425,12 @@ To show the different components for PM~2.5~, a polar plot can be produced, as s
 #| fig-height: 4
 kz_out_pm25 |> 
   mutate(short = short + trend, synoptic = synoptic + trend) |> 
-polarPlot(pollutant = c("short", "synoptic"), 
-limits = c(0, 15), 
-cols = "turbo",
-key.title = "pm25\n(ug/m3)")
+polarPlot(
+  pollutant = c("short", "synoptic"), 
+  limits = c(0, 15), 
+  cols = "turbo",
+  key.title = "pm25\n(ug/m3)"
+)
 ```
 
 For the synoptic component it can be useful to plot a `calendarPlot()` for a particular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
