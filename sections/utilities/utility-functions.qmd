@@ -360,7 +360,39 @@ WhittakerSmooth(mydata, pollutant = "no2", lambda = 2000, p = 0.001) |>
 
 As @fig-whittaker-baseline illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.
 
-## Aggregating data by different time intervals {#sec-timeAverage}
+## Kolmogorov-Zurbenko filters {#sec-kz-filter}
+
+### Background {#sec-kz-background}
+
+The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales [@Zurbenko1986; @Yang2010]. Its defining characteristic is simplicity: a plain moving average of window length $m$ is applied $k$ times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ($m$, $k$), where $m$ is the half-window length in data steps and $k$ is the number of passes. The effective pass-band boundary (the period below which variation is suppressed) scales roughly as $m\sqrt{k}$, giving the analyst straightforward control over temporal resolution without requiring Fourier transforms or spectral expertise.
+
+The value of the KZ filter in atmospheric and air quality science lies in the decomposition step [@Rao1997; @Eskridge1997]. By applying the filter successively at four increasing window sizes — approximately one day, one week, one month, and one year for hourly data — and taking the *differences* between adjacent filtered series, the raw time series is partitioned into five additive components:
+
+| Component | Typical period | Physical interpretation |
+|-----------|----------------|------------------------|
+| Short | Hours to ~2 days | Diurnal cycles, brief emission pulses |
+| Synoptic | ~2–7 days | Frontal passages, weather systems |
+| Intermediate | Weeks to ~2 months | Sub-seasonal variability |
+| Seasonal | Months to ~1 year | Annual cycle, photochemistry |
+| Trend | Multi-year | Long-term emission changes, climate signals |
+
+: Default temporal decomposition produced by `kzFilter()` for hourly data. {#tbl-kz-components}
+
+These components are mutually exclusive and sum to the original series, making the decomposition physically interpretable and suitable for downstream analysis.
+
+The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 and @Rao1997, who showed that synoptic-scale meteorological variability can mask long-term ozone trends unless removed. The same logic extends naturally to PM~2.5~, NO~x~, and other regulated pollutants [@Wise2005].
+
+### Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
+
+The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and *shrinking* the averaging window near those discontinuities [@Zurbenko1996]. Wherever the algorithm identifies an abrupt change — a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change — it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.
+
+The degree of window shrinkage is governed by the `sensitivity` argument: larger values cause more aggressive adaptation. For detecting clear, sudden shifts in air quality (e.g., the introduction of a clean-air zone, COVID-19 lockdown effects, or the commissioning of an industrial scrubber) the KZA filter will generally give a cleaner result than the standard KZ filter.
+
+### Using `kzFilter()` {#sec-kzFilter}
+
+The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
+
+### Aggregating data by different time intervals {#sec-timeAverage}
 
 Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:
 
