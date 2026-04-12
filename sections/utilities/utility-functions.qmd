@@ -525,6 +525,20 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
   )
 ```
 
+The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted. 
+
+```{r}
+#| label: kz-kza-combine
+#| eval: false
+# standard KZ filter
+trend_kz <- kzFilter(
+   filter(london_aq, code == "MY1"),
+   pollutant = "no2")
+
+# combine seasonal and trend components
+trend_kz <- mutate(trend_kz, total = seasonal + trend) 
+timePlot(trend_kz, pollutant = "total")
+```
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
