@@ -99,7 +99,7 @@ selectByDate(
 ) |>
   trajPlot(
     type = "day",
-    ncols = 7
+    ncol = 7
   )
 ```
 
@@ -634,7 +634,7 @@ trendLevel(
   kc1,
   pollutant = "v2.5",
   type = "cluster",
-  ncols = 6,
+  ncol = 6,
   cols = "increment"
 )
 ```
