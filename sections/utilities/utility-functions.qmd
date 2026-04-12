@@ -521,7 +521,7 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
     cols = c("steelblue", "tomato"),
     name.pol = c("KZ trend", "KZA trend"),
     ylab = "NO2 trend (ug/m3)",
-    linewidth = c(0.5, 1)
+    linewidth = c(0.5, 0.7)
   )
 ```
 
