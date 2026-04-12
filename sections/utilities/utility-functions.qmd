@@ -382,7 +382,7 @@ These components are mutually exclusive and sum to the original series, making t
 
 The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 and @Rao1997, who showed that synoptic-scale meteorological variability can mask long-term ozone trends unless removed. The same logic extends naturally to PM~2.5~, NO~x~, and other regulated pollutants [@Wise2005].
 
-By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings --- especially of many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events. 
+By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings --- especially of many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events.
 
 ### Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
 
@@ -392,7 +392,7 @@ The degree of window shrinkage is governed by the `sensitivity` argument: larger
 
 ### Using `kzFilter()` {#sec-kzFilter}
 
-The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment. 
+The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
 
 Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 7, 30, 90, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.
 
@@ -454,7 +454,7 @@ mutate(kz_out_pm25, synoptic = synoptic + trend) |>
     windflow = TRUE)
 ```
 
- @fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
+@fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
 
 ```{r}
 #| label: fig-kz-seasonal
@@ -525,7 +525,9 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
   )
 ```
 
-The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted. 
+The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.[^1]
+
+[^1]: Or try the `kzaFilter` with `sensitivity = 0.5` for more structure to capture more of the variation.
 
 ```{r}
 #| label: kz-kza-combine
