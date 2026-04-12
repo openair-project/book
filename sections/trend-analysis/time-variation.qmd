@@ -130,7 +130,7 @@ timeVariation(
   mydata,
   pollutant = "pm10",
   statistic = "median",
-  col = "firebrick"
+  cols = "firebrick"
 )
 ```
 

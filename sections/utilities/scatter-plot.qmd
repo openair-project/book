@@ -63,7 +63,7 @@ scatterPlot(
   x = "nox",
   y = "no2",
   method = "hexbin",
-  col = "turbo",
+  cols = "turbo",
   bins = 50
 )
 ```
@@ -78,7 +78,7 @@ scatterPlot(
   x = "nox",
   y = "no2",
   method = "hexbin",
-  col = "turbo",
+  cols = "turbo",
   border = "grey",
   bins = 30
 )
@@ -256,7 +256,7 @@ scatterPlot(
   y = "no2",
   z = "o3",
   size = 3,
-  col = "increment",
+  cols = "increment",
   windflow = windflowOpts(colour = "grey50", linewidth = 0.8),
   ylab = "no2 (ppb)"
 )

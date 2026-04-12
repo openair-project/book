@@ -75,7 +75,7 @@ Next, we consider how to plot back trajectories with a few simple examples. The 
 selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
     map.cols = openColours("hue", 10),
-    col = "grey30"
+    cols = "grey30"
   )
 ```
 
@@ -117,10 +117,10 @@ selectByDate(
 ) |>
   trajPlot(
     group = "day",
-    col = "turbo",
+    cols = "turbo",
     linewidth = 1,
     key.pos = "top",
-    key.col = 4,
+    key.columns = 4,
     ylim = c(50, 79)
   )
 ```
@@ -151,7 +151,7 @@ selectByDate(
 ) |>
   trajPlot(
     pollutant = "pm10",
-    col = "turbo",
+    cols = "turbo",
     linewidth = 1
   )
 ```
@@ -185,7 +185,7 @@ Now it is possible to plot the trajectories:
 selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
     pollutant = "pm.new",
-    col = "turbo",
+    cols = "turbo",
     linewidth = 2
   )
 ```
@@ -214,7 +214,7 @@ It is also possible to use hexagonal binning to gain an idea about trajectory fr
 filter(traj, lat > 30, lat < 70, lon > -50, lon < 20) |>
   trajLevel(
     method = "hexbin",
-    col = "turbo",
+    cols = "turbo",
     xbin = 40
   )
 ```
@@ -238,7 +238,7 @@ trajLevel(
   traj,
   pollutant = "pm10",
   statistic = "difference",
-  col = c("skyblue", "white", "tomato"),
+  cols = c("skyblue", "white", "tomato"),
   min.bin = 50,
   border = NA,
   xlim = c(-20, 20),
@@ -255,7 +255,7 @@ trajLevel(
   traj,
   pollutant = "pm10",
   statistic = "frequency",
-  col = "heat",
+  cols = "heat",
   type = "season"
 )
 ```
@@ -349,7 +349,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   trajLevel(
     pollutant = "pm2.5",
     statistic = "pscf",
-    col = "increment",
+    cols = "increment",
     border = NA
   )
 ```
@@ -375,7 +375,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   trajLevel(
     pollutant = "pm2.5",
     statistic = "cwt",
-    col = "increment",
+    cols = "increment",
     border = "white"
   )
 ```
@@ -392,7 +392,7 @@ filter(traj, lat > 45 & lat < 60 & lon > -20 & lon < 20) |>
     pollutant = "pm2.5",
     statistic = "cwt",
     smooth = TRUE,
-    col = "increment"
+    cols = "increment"
   )
 ```
 
@@ -576,7 +576,7 @@ clust <- trajCluster(
   traj,
   method = "Angle",
   n.cluster = 6,
-  col = "Set2",
+  cols = "Set2",
   map.cols = openColours("Paired", 10)
 )
 ```
@@ -592,7 +592,7 @@ A useful way in which to see where these air masses come from by trajectory is t
 
 ```{r}
 #| eval: false
-trajLevel(clust$data$traj, type = "cluster", col = "increment", border = NA)
+trajLevel(clust$data$traj, type = "cluster", cols = "increment", border = NA)
 ```
 
 Perhaps more useful is to merge the cluster data with measurement data. In this case the data at North Kensington site are used. Note that in merging these two data frames it is not necessary to retain all 96 back trajectory hours and for this reason we extract only the first hour.

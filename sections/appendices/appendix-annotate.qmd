@@ -376,32 +376,40 @@ The package documentation for [patchwork]{.pkg} is excellent and can be found [h
 
 ```{r}
 #| label: fig-patchwork-assembly
-#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly."
+#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly. The `tag` argument is being used to label each one with a letter "
 library(patchwork)
 
 p_varplot_hour <- variationPlot(
   mydata,
   "nox",
   "hour",
-  sub = "",
-  plot = FALSE
+  caption = "",
+  plot = FALSE,
+  tag = "A"
 )$plot
 
 p_varplot_weekday <- variationPlot(
   mydata,
   "nox",
   "weekday",
-  sub = "",
-  plot = FALSE
+  caption = "",
+  plot = FALSE,
+  tag = "B"
 )$plot
 
-p_timeplot <- timePlot(mydata, "nox", avg.time = "month", plot = FALSE)$plot
+p_timeplot <- timePlot(
+  mydata,
+  "nox",
+  avg.time = "month",
+  plot = FALSE,
+  tag = "C"
+)$plot
 
-p_heatmap <- trendLevel(mydata, type = "default", plot = FALSE)$plot
+p_heatmap <- trendLevel(mydata, type = "default", plot = FALSE, tag = "D")$plot
 
 (((p_varplot_hour | p_varplot_weekday) / p_timeplot) | p_heatmap) +
   plot_layout(widths = c(0.7, 0.3)) &
-  theme(plot.margin = unit(rep(0.1, 4), "cm"))
+  theme(plot.margin = unit(rep(0, 4), "cm"))
 ```
 
 Another really useful package is [geomtextpath]{.pkg}, which combines labels and lines and paths for nicer annotations:

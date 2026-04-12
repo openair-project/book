@@ -141,7 +141,7 @@ The default however is to down-weight the bins with few data points when fitting
 polarPlot(
   mydata,
   pollutant = "nox",
-  col = "turbo",
+  cols = "turbo",
   key.position = "bottom",
   key.title = "mean nox (ug/m3)"
 )
@@ -173,7 +173,7 @@ Arguably a better approach would be to calculate the ratio (slope) from a regres
 ```{r}
 #| label: fig-polarRatio
 #| fig-cap: Bivariate polar plot of the ratio of SO~2~/NO~x~.
-polarPlot(mydata, pollutant = "ratio", main = "so2/nox ratio")
+polarPlot(mydata, pollutant = "ratio", title = "so2/nox ratio")
 ```
 
 Sometimes when considering ratios it might be necessary to limit the values in some way; perhaps due to some unusually low value denominator data resulting in a few very high values for the ratio. This is easy to do with the [dplyr]{.pkg} `filter` command. The code below selects ratios less than 0.1.
@@ -325,7 +325,7 @@ polarPlot(
   har,
   poll = c("pm2.5", "pm10"),
   statistic = "robust_slope",
-  col = "turbo",
+  cols = "turbo",
   limits = c(0, 1),
   ws_spread = 1.5,
   wd_spread = 10
@@ -346,7 +346,7 @@ polarPlot(
   har,
   poll = c("pm2.5", "pm10"),
   statistic = "york_slope",
-  col = "turbo",
+  cols = "turbo",
   limits = c(0, 1),
   ws_spread = 1.5,
   wd_spread = 10,
@@ -522,7 +522,7 @@ timeVariation(
   pollutant = "so2",
   group = "cluster",
   key.columns = 4,
-  col = "Set2",
+  cols = "Set2",
   ci = FALSE,
   linewidth = 3
 )
@@ -539,7 +539,7 @@ timeVariation(
   dplyr::filter(results, cluster %in% c("C5", "C6")),
   pollutant = "so2",
   group = "cluster",
-  col = openColours("Set2", 8)[5:6],
+  cols = openColours("Set2", 8)[5:6],
   linewidth = 3
 )
 ```
@@ -559,7 +559,7 @@ timeProp(
   pollutant = "so2",
   avg.time = "day",
   proportion = "cluster",
-  col = "Set2",
+  cols = "Set2",
   key.position = "top",
   key.columns = 8,
   date.breaks = 10,
