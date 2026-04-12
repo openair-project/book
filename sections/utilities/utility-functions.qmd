@@ -267,7 +267,7 @@ timePlot(
   group = TRUE,
   linetype = 1,
   cols = c("tomato", "turquoise4"),
-  linewidth = c(1, 3),
+  linewidth = c(0.5, 1.3),
   ylab = "no2 (ug/m3)"
 )
 ```
@@ -314,7 +314,7 @@ mydata_smooth |>
     pollutant = c("smooth_no2", "no2"),
     group = TRUE,
     linetype = 1,
-    linewidth = c(2, 0.3),
+    linewidth = c(1.3, 0.3),
     cols = c("tomato", "steelblue"),
     name.pol = c("Whittaker smooth", "Raw NO2"),
     ylab = "NO2 (µg/m³)"
@@ -351,7 +351,7 @@ WhittakerSmooth(mydata, pollutant = "no2", lambda = 2000, p = 0.001) |>
   timePlot(
     pollutant = c("no2_baseline", "q_no2_0.01", "no2"),
     group = TRUE,
-    linewidth = c(2, 2, 0.4),
+    linewidth = c(1, 1, 0.4),
     ylab = "NO2 (µg/m3)",
     cols = "tol.bright",
     name.pol = c("Whittaker", "Rolling Quantile", "Raw NO2 data")
