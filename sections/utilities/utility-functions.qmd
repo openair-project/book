@@ -416,20 +416,25 @@ kz_out_o3 <- kzFilter(
   pollutant = "o3")
 ```
 
-To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the short term and synoptic variation are considered together. It should be noted that the trend component has been added back to both the short and synoptic components to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the indluence of pollution episodes that last a few days.
+To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the short term, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a week or two (intermediate).
 
 ```{r}
 #| label: fig-kz-components-pm25
-#| fig-cap: "Polar plot of the short and synoptic components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."
-#| fig-width: 6
-#| fig-height: 4
+#| fig-cap: "Polar plot of the short, synoptic and intermediate components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."
+#| fig-width: 8
+#| fig-height: 5
+#| out-width: 90%
 kz_out_pm25 |> 
-  mutate(short = short + trend, synoptic = synoptic + trend) |> 
+  mutate(
+    short = short + trend, 
+    synoptic = synoptic + trend, 
+    intermediate = intermediate + trend) |> 
 polarPlot(
-  pollutant = c("short", "synoptic"), 
+  pollutant = c("short", "synoptic", "intermediate"), 
   limits = c(0, 15), 
   cols = "turbo",
-  key.title = "pm25\n(ug/m3)"
+  key.title = "pm25 (ug/m3)",
+  key.position = "top"
 )
 ```
 
