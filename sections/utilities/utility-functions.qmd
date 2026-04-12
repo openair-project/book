@@ -392,7 +392,113 @@ The degree of window shrinkage is governed by the `sensitivity` argument: larger
 
 The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
 
-### Aggregating data by different time intervals {#sec-timeAverage}
+Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:
+
+```{r}
+#| label: kz-import
+london_aq <- readr::read_rds("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_aq.rds")
+```
+
+Next, we calculate the KZ components for a few pollutants at the North Kensington site. The `kzFilter()` function returns a data frame with the original data and new columns for each component.
+
+```{r}
+#| label: kz-components
+kz_out_pm25 <- kzFilter(
+  filter(london_aq, code == "KC1"), 
+  pollutant = "pm2.5")
+
+kz_out_o3 <- kzFilter(
+  filter(london_aq, code == "KC1"), 
+  pollutant = "o3")
+```
+
+To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the short term and synoptic variation are considered together. It should be noted that the trend component has been added back to both the short and synoptic components to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the indluence of pollution episodes that last a few days.
+
+```{r}
+#| label: fig-kz-components-pm25
+#| fig-cap: "Polar plot of the short and synoptic components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."
+#| fig-width: 6
+#| fig-height: 4
+kz_out_pm25 |> 
+  mutate(short = short + trend, synoptic = synoptic + trend) |> 
+polarPlot(pollutant = c("short", "synoptic"), 
+limits = c(0, 15), 
+cols = "turbo",
+key.title = "pm25\n(ug/m3)")
+```
+
+For the synoptic component it can be useful to plot a `calendarPlot()` for a paricular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
+
+```{r}
+#| label: fig-calendarPlot-synoptic
+#| fig-cap: "Calendar plot of the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."
+#| fig-width: 8
+#| fig-height: 6
+
+mutate(kz_out_pm25, synoptic = synoptic + trend) |> 
+  calendarPlot(
+    pollutant = "synoptic", 
+    year = 2020, 
+    cols = colorOpts("batlow", direction = -1),
+    windflow = windflowOpts(
+      range = c(0.1, 0.8), 
+      linewidth = 0.25, 
+      arrow.angle = 30, 
+      colour = "white"))
+```
+
+Finally, it is useful to investigate the seasonal variation of a pollutant, as shown for O~3~ in @fig-kz-seasonal. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter.
+
+```{r}
+#| label: fig-kz-seasonal
+#| fig-cap: "Time plot of the seasonal component of O~3~ concentrations at the North Kensington site."
+#| fig-width: 6
+#| fig-height: 4
+
+timePlot(kz_out_o3, pollutant = "seasonal", 
+ylab = "o3 (ug/m3)", xlab = "Year")
+```
+
+### Using `kzaFilter()` {#sec-kzaFilter}
+
+`kzaFilter()` shares the same interface as `kzFilter()` with one additional argument, `sensitivity`, which controls how aggressively the window is reduced near structural breaks (default 1.0). It is the preferred choice when:
+
+- A known policy change, sensor replacement, or source modification is expected to produce a step change. 
+- The trend component from `kzFilter()` shows a suspicious sharp feature that may be an artefact of the standard window.
+- There is a wish to detect and locate undocumented discontinuities.
+
+The choice if `kzFilter()` vs `kzaFilter()` is often a matter of judgement and experimentation. If the KZ trend shows a sharp drop or rise, or rapid variations, that coincides with a known event, it is worth trying the KZA filter to see if it preserves that feature more cleanly. If the KZA trend is much smoother and more interpretable, it may be the better choice for subsequent analysis.
+
+```{r}
+#| label: fig-kz-kza-compare
+#| fig-cap: "Comparison of KZ and KZA filters applied to NO~2~ concentrations at the Marylebone Road site. The KZA filter (red) preserves a sharp drop in NO~2~ in early 2020 that is smoothed out by the standard KZ filter (blue)."
+#| fig-width: 5
+#| fig-height: 4
+trend_kz <- kzFilter(
+  filter(london_aq, code == "MY1"),
+  pollutant = "no2"
+) |>
+  rename(kz_trend = trend)
+
+trend_kza <- kzaFilter(
+  filter(london_aq, code == "MY1"),
+  pollutant = "no2",
+  sensitivity = 0.8
+) |>
+  rename(kza_trend = trend)
+
+left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
+  timeAverage(avg.time = "week") |>
+  timePlot(
+    pollutant = c("kz_trend", "kza_trend"),
+    group = TRUE,
+    cols = c("steelblue", "tomato"),
+    name.pol = c("KZ trend", "KZA trend"),
+    ylab = "NO2 trend (ug/m3)"
+  )
+```
+
+## Aggregating data by different time intervals {#sec-timeAverage}
 
 Aggregating data by different averaging periods is a common and important task. There are many reasons for aggregating data in this way:
 
