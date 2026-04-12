@@ -447,7 +447,7 @@ mutate(kz_out_pm25, synoptic = synoptic + trend) |>
     windflow = TRUE)
 ```
 
-Finally, it is useful to investigate the seasonal variation of a pollutant, as shown for O~3~ in @fig-kz-seasonal. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
+ @fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
 
 ```{r}
 #| label: fig-kz-seasonal
@@ -457,7 +457,23 @@ Finally, it is useful to investigate the seasonal variation of a pollutant, as s
 
 timePlot(kz_out_o3, 
          pollutant = "seasonal", 
-ylab = "o3 (ug/m3)", xlab = "Year")
+         ylab = "o3 (ug/m3)", 
+         xlab = "Year"
+         )
+```
+
+Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the short-term, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic. These plots confirm the expected behaviour of the KZ filtering for targetted temporal scales.
+
+```{r}
+#| label: fig-kz-timevariation
+#| fig-cap: "Time variation plot for the short-term, synoptic and sesasonal components of O~3~ concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic."
+#| fig-width: 8
+#| fig-height: 5
+timeVariation(
+  kz_out_o3, 
+  pollutant = c("short", "synoptic", "seasonal"), 
+  ci = FALSE, 
+  cols = "Set2")
 ```
 
 ### Using `kzaFilter()` {#sec-kzaFilter}
