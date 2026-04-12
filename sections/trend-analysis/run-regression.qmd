@@ -130,9 +130,11 @@ ggplot(
 ) +
   geom_segment() +
   scale_color_gradientn(colours = openColours("turbo", 100)) +
-  guides(col = guide_colourbar(title = quickText("Background\nPM2.5"))) +
-  ylab(quickText("pm2.5 (ug/m3)")) +
-  xlab(quickText("nox (ug/m3)"))
+  labs(
+    y = quickText("pm2.5 (ug/m3)"),
+    x = quickText("nox (ug/m3)"),
+    colour = quickText("Background\nPM2.5")
+  )
 ```
 
 To get more quantitative information from @fig-dilution-lines, the slope can be extracted and plotted as a density plot distribution. Furthermore, the mode of the distribution can also be estimated, as shown in @fig-mode-plot. These results show that the mode is about 0.04 for the mass ratio of PM~2.5~/NO~x~. Given that this estimate is based on 'dilution events' when the change in NO~x~ concentrations is quite large, the value of 0.04 is an estimate of the traffic emissions ratio of PM~2.5~/NO~x~, which could consist of both direct exhaust emissions and non-exhaust emissions. Note that if a NO~x~ change of 50 μg m^-3^ had been used, the mode estimate is very similar (0.039) to the case where the change was 100 μg m^-3^. This result seems reasonable in that a change of 50 or 100μg m^-3^ are both quite large and would both be indicative of a change in concentration due to a proximate source.[^run-regression-1]

@@ -97,6 +97,6 @@ polarFreq(
   statistic = "weighted.mean",
   offset = 60,
   trans = FALSE,
-  col = "heat"
+  cols = "heat"
 )
 ```

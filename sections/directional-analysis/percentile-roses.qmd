@@ -38,7 +38,7 @@ percentileRose(
   mydata,
   pollutant = "so2",
   percentile = c(25, 50, 75, 90, 95, 99, 99.9),
-  col = "brewer1",
+  cols = "brewer1",
   key.position = "right",
   smooth = TRUE
 )
@@ -58,7 +58,7 @@ percentileRose(
   mydata,
   type = c("season", "daylight"),
   pollutant = "o3",
-  col = "Set3",
+  cols = "Set3",
   mean.col = "black"
 )
 ```
@@ -78,7 +78,7 @@ percentileRose(
   poll = "so2",
   percentile = 95,
   method = "cpf",
-  col = "darkorange",
+  cols = "darkorange",
   smooth = TRUE
 )
 ```
@@ -96,7 +96,7 @@ percentileRose(
   pollutant = c("nox", "so2", "o3", "co", "pm10", "pm25"),
   percentile = 95,
   method = "cpf",
-  col = "darkorange",
+  cols = "darkorange",
   ncol = 3,
   nrow = 2
 )
