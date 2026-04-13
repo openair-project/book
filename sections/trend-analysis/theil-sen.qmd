@@ -126,6 +126,8 @@ ppb/year. The $\ast\ast\ast$ show that the trend is significant to the
 #| fig-height: 4
 #| out-width: 70%
 library(openair)
+library(tidyverse)
+
 TheilSen(
   mydata,
   pollutant = "o3",
@@ -149,7 +151,12 @@ code would be as follows.
 
 ```{r}
 #| eval: false
-TheilSen(mydata, pollutant = "o3", ylab = "ozone (ppb)", alpha = 0.01)
+TheilSen(
+  mydata, 
+  pollutant = "o3", 
+  ylab = "ozone (ppb)", 
+  alpha = 0.01
+  )
 ```
 
 Sometimes it is useful to consider a subset of data, perhaps by
@@ -222,7 +229,12 @@ fractions of) the time series spans.
 ```{r}
 #| label: MannKen
 #| eval: false
-TheilSen(mydata, pollutant = "o3", deseason = TRUE, slope.percent = TRUE)
+TheilSen(
+  mydata, 
+  pollutant = "o3", 
+  deseason = TRUE, 
+  slope.percent = TRUE
+  )
 ```
 
 ::: callout-important
@@ -263,7 +275,11 @@ into a variable:
 ```{r}
 #| label: MKout
 #| fig.keep: none
-MKresults <- TheilSen(mydata, pollutant = "o3", deseason = TRUE, type = "wd")
+MKresults <- TheilSen(
+  mydata, 
+  pollutant = "o3", 
+  deseason = TRUE, 
+  type = "wd")
 ```
 
 This returns a list of two data frames containing all the monthly mean
@@ -284,3 +300,148 @@ MKresults$data[[2]]
 In the results above the `lower` and `upper` fields provide the 95% (or
 chosen confidence interval using the `alpha` option) of the trend and
 `slope` is the trend estimate expressed in units/year.
+
+## Summarising trends
+
+One of the most powerful uses of `TheilSen` is to compare trends across
+a large number of sites simultaneously. By supplying multiple values to
+the `type` argument, the function will run the trend analysis
+independently for each combination of conditioning variables. The
+results can then be extracted and visualised in whatever way is most
+informative for the task at hand. The example in this section can easily be adapted for a wide range of purposes.
+
+The example below demonstrates this workflow for NO~2~ across a
+stratified sample of UK urban monitoring sites. The analysis proceeds in
+several steps.
+
+**Step 1: Select well-monitored sites.** Annual mean data are imported
+from the AURN for 2016--2025 using `importAURN` with `meta = TRUE` to
+include site metadata. Sites are then filtered to those with a complete
+ten-year record *and* at least 75% data capture in *every* year. This
+guards against trends being artefacts of uneven monitoring coverage
+rather than genuine concentration changes.
+
+**Step 2: Stratified sample.** To keep the analysis manageable, 25
+sites are drawn at random from each of two site types --- Urban Traffic
+and Urban Background. Using `set.seed` ensures the sample is
+reproducible.
+
+**Step 3: Run `TheilSen` across all sites.** The key call is:
+
+```r
+TheilSen(
+  aq_sample,
+  pollutant = "no2",
+  avg.time  = "year",
+  type      = c("site_type", "site"),
+  plot      = FALSE,
+  silent    = TRUE
+)
+```
+
+Passing `type = c("site_type", "site")` tells `TheilSen` to condition
+on both site type and individual site, so a separate Theil-Sen slope is
+estimated for each site. Setting `plot = FALSE` and `silent = TRUE`
+suppresses graphical and console output while looping through all 50
+sites, which would otherwise produce a large volume of unwanted output.
+
+**Step 4: Extract the summary statistics.** As described in the
+[Output] section, the trend statistics --- slope and 95% confidence
+intervals --- are held in `$data[[2]]`. These are extracted directly for
+plotting.
+
+**Step 5: Forest plot.** The slope estimates and their confidence
+intervals are displayed as a forest plot using `ggplot2`. Sites are
+ordered by slope within each site type, making it easy to see the
+spread of trends at a glance. A vertical dashed line at zero serves as
+a reference: sites to the left show declining NO~2~, those to the right
+a (none in this case) increase. The resulting plot is shown in
+@fig-TheilSenSummary.
+
+The forest plot makes clear that NO~2~ declined signficantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source. 
+
+::: callout-tip
+## Flexibility of the `type` argument
+
+The same workflow applies to any conditioning variable recognised by
+`TheilSen`. For example, setting `type = "wd"` splits the data into
+eight (or more) wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in `$data[[2]]` can be post-processed and visualised in the same way as shown here.
+:::
+
+```{r}
+#| label: fig-TheilSenSummary
+#| fig-cap: "Forest plot of Theil-Sen slopes for NO~2~ at 50 UK urban sites (2016--2025), split by site type. Points show the estimated annual trend (µg m^−3^ yr^−1^) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."
+#| fig-width: 8
+#| fig-height: 10
+
+set.seed(42)
+
+# import annual data
+aq <- importAURN(year = 2016:2025, data_type = "annual", meta = TRUE)
+
+# --- 1. Filter sites with >=75% NO2 capture in ALL years ---
+eligible_sites <- aq |>
+  filter(!is.na(no2), !is.na(no2_capture)) |>
+  group_by(code, site, site_type) |>
+  summarise(
+    n_years     = n(),
+    min_capture = min(no2_capture, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  filter(n_years == 10, min_capture >= 0.75)
+
+# --- 2. Stratified sample ---
+sample_sites <- bind_rows(
+  eligible_sites |> filter(site_type == "Urban Traffic")    |> slice_sample(n = 25),
+  eligible_sites |> filter(site_type == "Urban Background") |> slice_sample(n = 25)
+)
+
+# --- 3. Subset aq to sampled sites and run TheilSen with type = "site" ---
+aq_sample <- aq |> filter(code %in% sample_sites$code)
+
+ts_out <- TheilSen(
+  aq_sample,
+  pollutant = "no2",
+  avg.time  = "year",
+  type      = c("site_type", "site"),
+  plot      = FALSE,
+  silent    = TRUE
+)
+
+# --- 4. Extract slope and uncertaintiese ---
+ts_results <- ts_out$data[[2]] 
+
+# --- 5. Summary ordered plot ---
+# Order sites within each group by slope (high to low) using a single factor
+ordered_levels <- ts_results |>
+  arrange(site_type, slope) |>
+  pull(site)
+
+plot_data <- ts_results |>
+  mutate(
+    site_type = factor(site_type, levels = c(
+      "Urban Traffic", "Urban Background"
+    )),
+    site = factor(site, levels = ordered_levels)
+  )
+
+ggplot(plot_data, aes(x = slope, y = site, colour = site_type)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey50") +
+  geom_errorbar(aes(xmin = lower, xmax = upper), height = 0.3) +
+  geom_point(size = 2) +
+  facet_wrap(~ site_type, scales = "free_y", ncol = 1) +
+  scale_colour_brewer(palette = "Set1", guide = "none") +
+  labs(
+    x        = quickText("no2 (ug/m3/year)"),
+    y        = NULL,
+    title    = quickText("no2 Annual Trends (2016 - 2025)"),
+    subtitle = "Theil-Sen slope with 95% confidence interval"
+  ) +
+  theme_bw(base_size = 11) +
+  theme(
+    strip.background = element_rect(fill = "grey92"),
+    panel.grid.major.y = element_blank()
+  ) +
+  coord_cartesian(xlim = c(-7.5, 0.5))
+
+```
