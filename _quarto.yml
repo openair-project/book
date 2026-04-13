@@ -59,6 +59,8 @@ book:
         - sections/trend-analysis/smooth-trend.qmd
         - sections/trend-analysis/run-regression.qmd
         - sections/trend-analysis/trend-level.qmd
+        - sections/trend-analysis/ts-smoothing.qmd
+        - sections/trend-analysis/ts-filtering.qmd
         
     - part: "Model Evaluation"
       chapters:

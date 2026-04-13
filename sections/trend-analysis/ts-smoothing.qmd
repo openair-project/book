@@ -1,0 +1,197 @@
+---
+author: David Carslaw
+---
+
+# Time Series Smoothing {#sec-ts-smoothing}
+
+## Calculating rolling means {#sec-rollingMean}
+
+Some air pollution statistics such as for O~3~ and particulate matter are expressed as rolling means and it is useful to be able to calculate these. It can also be useful to help smooth-out data for clearer plotting. The `rollingMean()` function makes these calculations. One detail that can be important is that for some statistics a mean is only considered valid if there are a sufficient number of valid readings over the averaging period. Often there is a requirement for at least 75% data capture. For example, with an averaging period of 8 hours and a data capture threshold of 75%, at least 6 hours are required to calculate the mean.
+
+The function is called as follows; in this case to calculate 8-hour rolling mean concentrations of O~3~.
+
+```{r}
+#| label: selectBydate
+
+library(openair)
+library(tidyverse)
+
+mydata <- rollingMean(
+  mydata,
+  pollutant = "o3",
+  width = 8,
+  new.name = "rollingo3",
+  data.thresh = 75
+)
+tail(mydata)
+```
+
+Note that calculating rolling means shortens the length of the data set. In the case of O~3~, no calculations are made for the last 7 hours.
+
+Like `selectRunning()`, `rollingMean()` will fail if there are duplicate dates within the data frame; users can again use `type = "site"` or similar to calculate rolling means for different monitoring stations.
+
+Type `?rollingMean` into R for more details.
+
+## Calculating rolling quantiles (percentiles) {#sec-rollingQuantile}
+
+There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a 'background' concentration. For example, for fast reponse measurements (e.g. at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement [@Padilla2021; @Farren2024].
+
+The `rollingQuantile` function provides a fast way of calculating one or more quantiles in a rime series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.
+
+An example is shown below and plotted in @fig-rollingQuant. In this example, we choose a rolling window width of 744 (about a month) and calculate quantile levels at 0.05 and 0.95. @fig-rollingQuant shows the jump in NO~2~ concentrations at the start of 2003 for the high quantile level but not the lower one. As mentioned elsewhere, this increase in NO~2~ was related to an increase in primary NO~2~ emissions related to bus aftertreatment technology.
+
+```{r}
+#| label: fig-rollingQuant
+#| fig-cap: Example of using the `rollingQuantile` function to calculate low (0.05) and high (0.95) rolling quantiles.
+#| fig-width: 6
+#| fig-height: 4
+data(mydata) # reload the original data
+
+# calculate quantiles
+quantile_data <- rollingQuantile(
+  mydata,
+  pollutant = "no2",
+  width = 744,
+  data.thresh = 75,
+  probs = c(0.05, 0.95)
+)
+
+# look at the data
+dplyr::glimpse(quantile_data)
+
+# plot it
+timePlot(
+  quantile_data,
+  pollutant = c("q_no2_0.05", "q_no2_0.95"),
+  group = TRUE,
+  linetype = 1,
+  cols = c("tomato", "turquoise4"),
+  ylab = "no2 (ug/m3)"
+)
+```
+
+## Gaussian smoothing {#sec-gauss-smooth}
+
+There are numerous ways of smoothing and aggregating time series (and other data). One common and powerful technique is *Gaussian smoothing* where a Gaussian window slides along the data for each time step and smooths the data. The basic idea is that the smoothing process puts more weight on data close to the time in question and less further away with the weighting being determined by the σ value in the Gaussian equation.
+
+Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, and better preserves trends, and reduced edge artefacts. 
+
+In the example shown in @fig-gauss-smooth, the data have been plotted as weekly averages to make the raw data easier to see. The smoothed line provides a clear indication of how NO~2~ concentrations have varied over many years. In this case `sigma` was set to 744, which corresponds to about one month.
+
+It should be noted `GassianSmooth` will work with any time series data e.g. at 1 Hz so should be useful for processing noisy fast response data.
+
+```{r}
+#| label: fig-gauss-smooth
+#| fig-cap: Example of using the `GassianSmooth` function to smooth NO~2~ concentrations with sigma set at about 1 month.
+#| fig-width: 6
+#| fig-height: 4
+data(mydata) # reload the original data
+
+gauss_smooth <- GaussianSmooth(
+  mydata,
+  pollutant = "no2",
+  sigma = 744
+)
+
+# show the data
+dplyr::glimpse(gauss_smooth)
+
+# plot weekly means of orginal data and smoothed
+timePlot(
+  timeAverage(gauss_smooth, avg.time = "week"),
+  pollutant = c("no2", "smooth_no2"),
+  group = TRUE,
+  linetype = 1,
+  cols = c("tomato", "turquoise4"),
+  linewidth = c(0.5, 1.3),
+  ylab = "no2 (ug/m3)"
+)
+```
+
+## Whittaker-Eilers smoothing {#sec-whittaker}
+
+### Background
+
+The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` — larger values produce smoother results.
+
+Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:
+
+- It handles missing values (`NA`) naturally, interpolating across gaps without requiring imputation.
+- It is computationally efficient even for long time series [@eilers2003].
+- The order of the roughness penalty `d` can be varied: `d = 2` (the default) penalises curvature, `d = 1` penalises slope and effectively performs linear interpolation across gaps.
+- The `lambda` parameter gives direct, intuitive control over the degree of smoothing.
+
+### Standard smoothing
+
+The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 2000`. The function adds a new column `smooth_no2` to the data frame.
+
+Where the aim is to reduce noise, setting `lambda = NA` will use Generalised Cross Validation (GCV) to choose an optimal `lambda` value automatically, though this can be computationally expensive for large datasets. However, for smoothing purposes, it is often more useful to experiment with a range of `lambda` values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.
+
+```{r}
+#| label: whittaker-smooth
+mydata_smooth <- WhittakerSmooth(
+  mydata,
+  pollutant = "no2",
+  lambda = 2000
+)
+dplyr::glimpse(mydata_smooth)
+```
+
+@fig-whittaker-smooth shows the first 744 hours (approximately one month) of raw and smoothed NO~2~ data. The Whittaker smoother closely tracks the data while removing short-term noise, making the underlying variation much easier to interpret.
+
+```{r}
+#| label: fig-whittaker-smooth
+#| fig-cap: "Whittaker-Eilers smoothed NO~2~ concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of `mydata`. Lambda was set to 20."
+#| fig-width: 6
+#| fig-height: 4
+mydata_smooth |>
+  slice_head(n = 744) |>
+  timePlot(
+    pollutant = c("smooth_no2", "no2"),
+    group = TRUE,
+    linetype = 1,
+    linewidth = c(1.3, 0.3),
+    cols = c("tomato", "steelblue"),
+    name.pol = c("Whittaker smooth", "Raw NO2"),
+    ylab = "NO2 (µg/m³)"
+  )
+```
+
+The `lambda` value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range `lambda = 1e6` to `lambda = 1e10` are often appropriate. If `lambda = NA`, Generalised Cross Validation (GCV) is used to choose `lambda` automatically, though this can be computationally expensive for large datasets.
+
+A major advantage of the Whittaker-Eilers approach is that a user can confidently "set and forget" their `lambda` value. Because `lambda` acts as an absolute penalty, the local smoothing characteristics will remain identical regardless of how much new data is appended to the series; as a time series grows, the Whittaker smooth will always deliver a predictable, consistent outcome. In contrast, methods like LOESS (locally-weighted regression) or GAMs often rely on a relative span or fraction of the total data. To maintain that same visually and mathematically consistent smoothing effect as a dataset expands, users of those methods must constantly recalculate and shrink their smoothing parameters.
+
+### Baseline estimation
+
+Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series — the background or baseline — rather than the central tendency.
+
+The function returns two new columns:
+
+- `<pollutant>_baseline`: the estimated background concentration.
+- `<pollutant>_increment`: the difference between the observed concentration and the baseline, representing the local enhancement above background.
+
+This decomposition is particularly useful in air pollution studies, where it is common to want to separate a *background* component (e.g., regional or photochemical NO~2~) from local *increments* (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.
+
+### Comparison with rolling low quantiles
+
+A common alternative approach for estimating a background is to use a rolling low quantile (e.g., the 1st percentile over a sliding window). @fig-whittaker-baseline compares the Whittaker baseline with a 1st-percentile rolling quantile computed over a 50-hour window.
+
+```{r}
+#| label: fig-whittaker-baseline
+#| fig-cap: "Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO~2~ data (green) for the first 1000 hours of `mydata`. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."
+#| fig-width: 6
+#| fig-height: 4
+WhittakerSmooth(mydata, pollutant = "no2", lambda = 2000, p = 0.001) |>
+  rollingQuantile(pollutant = "no2", width = 50, probs = 0.01) |>
+  slice_head(n = 1000) |>
+  timePlot(
+    pollutant = c("no2_baseline", "q_no2_0.01", "no2"),
+    group = TRUE,
+    linewidth = c(1, 1, 0.4),
+    ylab = "NO2 (µg/m3)",
+    cols = "tol.bright",
+    name.pol = c("Whittaker", "Rolling Quantile", "Raw NO2 data")
+  )
+```
+
+As @fig-whittaker-baseline illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.
