@@ -2,12 +2,10 @@
 author: David Carslaw
 ---
 
-# Time Series Filtering {#sec-ts-filtering}
+# Kolmogorov-Zurbenko filters {#sec-ts-filtering}
 
 
-## Kolmogorov-Zurbenko filters {#sec-kz-filter}
-
-### Background {#sec-kz-background}
+## Background {#sec-kz-background}
 
 The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales [@Zurbenko1986; @Yang2010]. Its defining characteristic is simplicity: a plain moving average of window length $m$ is applied $k$ times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ($m$, $k$), where $m$ is the half-window length in data steps and $k$ is the number of passes. The effective pass-band boundary (the period below which variation is suppressed) scales roughly as $m\sqrt{k}$, giving the analyst straightforward control over temporal resolution without requiring Fourier transforms or spectral expertise.
 
@@ -29,13 +27,13 @@ The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 an
 
 By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings --- especially of many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events.
 
-### Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
+## Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
 
 The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and *shrinking* the averaging window near those discontinuities [@Zurbenko1996]. Wherever the algorithm identifies an abrupt change — a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change — it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.
 
 The degree of window shrinkage is governed by the `sensitivity` argument: larger values cause more aggressive adaptation. For detecting clear, sudden shifts in air quality (e.g., the introduction of a clean-air zone, COVID-19 lockdown effects, or the commissioning of an industrial scrubber) the KZA filter will generally give a cleaner result than the standard KZ filter.
 
-### Using `kzFilter()` {#sec-kzFilter}
+## Using `kzFilter()` {#sec-kzFilter}
 
 The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
 
@@ -134,7 +132,7 @@ timeVariation(
   cols = "Set2")
 ```
 
-### Using `kzaFilter()` {#sec-kzaFilter}
+## Using `kzaFilter()` {#sec-kzaFilter}
 
 `kzaFilter()` shares the same interface as `kzFilter()` with one additional argument, `sensitivity`, which controls how aggressively the window is reduced near structural breaks (default 1.0). It is the preferred choice when:
 
