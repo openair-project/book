@@ -212,8 +212,8 @@ The trend, $T$ is defined as:
 
 $$
 T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
-  - 1\right)\Bigg /N_{years} (\#eq:MannK)
-$$
+  - 1\right)\Bigg /N_{years}
+$$ {#eq-MannK}
 
 where $C_{End}$ and $C_{Start}$ are the mean concentrations for the end
 and start date, respectively. $N_{years}$ is the number of years (or
@@ -237,16 +237,7 @@ case it is best to stick with changes in absolute concentrations.
 The `TheilSen` function was written to work with hourly data, which is
 then averaged into monthly or annual data. However, it is realised that
 users may already have data that is monthly or annual. The function can
-therefore accept as input monthly or annual data directly. *However, it
-is necessary to ensure the date field is in the correct format*.
-Assuming data in an Excel file in the format dd/mm/YYYY (e.g.
-23/11/2008), it is necessary to convert this to a date format understood
-by R, as shown below. Similarly, if annual data were available, get the
-dates in formats like '2005-01-01', '2006-01-01' ... and make sure the
-date is again formatted using `as.Date`. Note that if dates are
-pre-formatted as YYYY-mm-dd, then it is sufficient to use `as.Date`
-without providing any format information because it is already in the
-correct format.
+therefore accept as input monthly or annual data directly. 
 
 ```{r}
 #| eval: false
