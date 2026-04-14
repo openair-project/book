@@ -84,7 +84,7 @@ It should be noted `GassianSmooth` will work with any time series data e.g. at 1
 #| label: fig-gauss-smooth
 #| fig-cap: Example of using the `GassianSmooth` function to smooth NO~2~ concentrations with sigma set at about 1 month.
 #| fig-width: 6
-#| fig-height: 4
+#| fig-height: 5
 data(mydata) # reload the original data
 
 gauss_smooth <- GaussianSmooth(
@@ -143,7 +143,7 @@ dplyr::glimpse(mydata_smooth)
 #| label: fig-whittaker-smooth
 #| fig-cap: "Whittaker-Eilers smoothed NO~2~ concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of `mydata`. Lambda was set to 20."
 #| fig-width: 6
-#| fig-height: 4
+#| fig-height: 5
 mydata_smooth |>
   slice_head(n = 744) |>
   timePlot(
@@ -178,12 +178,12 @@ A common alternative approach for estimating a background is to use a rolling lo
 
 ```{r}
 #| label: fig-whittaker-baseline
-#| fig-cap: "Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO~2~ data (green) for the first 1000 hours of `mydata`. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."
+#| fig-cap: "Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO~2~ data (green) for the first 500 hours of `mydata`. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."
 #| fig-width: 6
-#| fig-height: 4
+#| fig-height: 5
 WhittakerSmooth(mydata, pollutant = "no2", lambda = 2000, p = 0.001) |>
   rollingQuantile(pollutant = "no2", width = 50, probs = 0.01) |>
-  slice_head(n = 1000) |>
+  slice_head(n = 500) |>
   timePlot(
     pollutant = c("no2_baseline", "q_no2_0.01", "no2"),
     group = TRUE,
