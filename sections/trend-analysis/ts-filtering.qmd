@@ -47,7 +47,9 @@ Ten years of data have been uploaded for a background (North Kensington) and roa
 library(openair)
 library(tidyverse)
 
-london_aq <- readr::read_rds("https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_aq.rds")
+london_aq <- readr::read_rds(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_aq.rds"
+)
 ```
 
 Next, we calculate the KZ components for a few pollutants at the North Kensington site. The `kzFilter()` function returns a data frame with the original data and new columns for each component.
@@ -55,12 +57,14 @@ Next, we calculate the KZ components for a few pollutants at the North Kensingto
 ```{r}
 #| label: kz-components
 kz_out_pm25 <- kzFilter(
-  filter(london_aq, code == "KC1"), 
-  pollutant = "pm2.5")
+  filter(london_aq, code == "KC1"),
+  pollutant = "pm2.5"
+)
 
 kz_out_o3 <- kzFilter(
-  filter(london_aq, code == "KC1"), 
-  pollutant = "o3")
+  filter(london_aq, code == "KC1"),
+  pollutant = "o3"
+)
 ```
 
 To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the short term, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a week or two (intermediate).
@@ -71,18 +75,19 @@ To show the different components for PM~2.5~, a polar plot can be produced, as s
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 90%
-kz_out_pm25 |> 
+kz_out_pm25 |>
   mutate(
-    short = short + trend, 
-    synoptic = synoptic + trend, 
-    intermediate = intermediate + trend) |> 
-polarPlot(
-  pollutant = c("short", "synoptic", "intermediate"), 
-  limits = c(0, 15), 
-  cols = "turbo",
-  key.title = "pm25 (ug/m3)",
-  key.position = "top"
-)
+    short = short + trend,
+    synoptic = synoptic + trend,
+    intermediate = intermediate + trend
+  ) |>
+  polarPlot(
+    pollutant = c("short", "synoptic", "intermediate"),
+    limits = c(0, 15),
+    cols = "turbo",
+    key.title = "pm25 (ug/m3)",
+    key.position = "top"
+  )
 ```
 
 For the synoptic component it can be useful to plot a `calendarPlot()` for a particular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
@@ -93,14 +98,15 @@ For the synoptic component it can be useful to plot a `calendarPlot()` for a par
 #| fig-width: 8
 #| fig-height: 6
 
-mutate(kz_out_pm25, synoptic = synoptic + trend) |> 
+mutate(kz_out_pm25, synoptic = synoptic + trend) |>
   calendarPlot(
-    pollutant = "synoptic", 
-    year = 2020, 
+    pollutant = "synoptic",
+    year = 2020,
     cols = colorOpts("batlow", direction = -1),
     windflow = windflowOpts(
       colour = "white"
-    ))
+    )
+  )
 ```
 
 @fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
@@ -111,11 +117,12 @@ mutate(kz_out_pm25, synoptic = synoptic + trend) |>
 #| fig-width: 6
 #| fig-height: 4
 
-timePlot(kz_out_o3, 
-         pollutant = "seasonal", 
-         ylab = "o3 (ug/m3)", 
-         xlab = "Year"
-         )
+timePlot(
+  kz_out_o3,
+  pollutant = "seasonal",
+  ylab = "o3 (ug/m3)",
+  xlab = "Year"
+)
 ```
 
 Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the short-term, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic. These plots confirm the expected behaviour of the KZ filtering for targetted temporal scales.
@@ -126,10 +133,11 @@ Finally, the `timeVariation()` function can be used to show how the different co
 #| fig-width: 8
 #| fig-height: 5
 timeVariation(
-  kz_out_o3, 
-  pollutant = c("short", "synoptic", "seasonal"), 
-  ci = FALSE, 
-  cols = "Set2")
+  kz_out_o3,
+  pollutant = c("short", "synoptic", "seasonal"),
+  ci = FALSE,
+  cols = "Set2"
+)
 ```
 
 ## Using `kzaFilter()` {#sec-kzaFilter}
@@ -183,11 +191,12 @@ The analysis above for Covid-19 lockdown effects could arguably be better analys
 #| eval: false
 # standard KZ filter
 trend_kz <- kzFilter(
-   filter(london_aq, code == "MY1"),
-   pollutant = "no2")
+  filter(london_aq, code == "MY1"),
+  pollutant = "no2"
+)
 
 # combine seasonal and trend components
-trend_kz <- mutate(trend_kz, total = seasonal + trend) 
+trend_kz <- mutate(trend_kz, total = seasonal + trend)
 timePlot(trend_kz, pollutant = "total")
 ```
 

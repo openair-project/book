@@ -181,8 +181,17 @@ A common alternative approach for estimating a background is to use a rolling lo
 #| fig-cap: "Comparison of the Whittaker baseline (blue) and a 50-hour rolling 1st-percentile (red) against the raw NO~2~ data (green) for the first 500 hours of `mydata`. The Whittaker baseline varies smoothly and continuously, while the rolling quantile produces a stepped series."
 #| fig-width: 6
 #| fig-height: 5
-WhittakerSmooth(mydata, pollutant = "no2", lambda = 2000, p = 0.001) |>
-  rollingQuantile(pollutant = "no2", width = 50, probs = 0.01) |>
+WhittakerSmooth(
+  mydata,
+  pollutant = "no2",
+  lambda = 2000,
+  p = 0.001
+) |>
+  rollingQuantile(
+    pollutant = "no2",
+    width = 50,
+    probs = 0.01
+  ) |>
   slice_head(n = 500) |>
   timePlot(
     pollutant = c("no2_baseline", "q_no2_0.01", "no2"),
