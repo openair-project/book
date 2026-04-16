@@ -12,7 +12,6 @@ The function is called as follows; in this case to calculate 8-hour rolling mean
 
 ```{r}
 #| label: selectBydate
-
 library(openair)
 library(tidyverse)
 
@@ -98,7 +97,8 @@ dplyr::glimpse(gauss_smooth)
 
 # plot weekly means of orginal data and smoothed
 timePlot(
-  timeAverage(gauss_smooth, avg.time = "week"),
+  gauss_smooth,
+  avg.time = "week",
   pollutant = c("no2", "smooth_no2"),
   group = TRUE,
   linetype = 1,
