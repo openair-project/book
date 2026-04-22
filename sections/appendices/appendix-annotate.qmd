@@ -295,6 +295,116 @@ timevar_no2$main.plot[[2]][[1]] <- timevar_no2$main.plot[[2]][[1]] +
 plot(timevar_no2)
 ```
 
+## Facets
+
+One of the sets of arguments passed through `...` could be described as "facet" arguments, as these influence the appearance of 'faceted' (i.e., multi-panel) plots. All of these arguments get passed straight through to either `ggplot2::facet_wrap()` or `ggplot2::facet_grid()` - see the documentation for these functions to learn more.
+
+To demonstrate, lets consider this heatmap plot:
+
+```{r}
+#| label: fig-heatmap-1
+#| fig-cap: "A standard heatmap plot."
+#| fig-height: 3.5
+#| fig-width: 8
+heatmap_data <- selectByDate(mydata, year = 2003:2005)
+trendLevel(heatmap_data, type = "year")
+```
+
+In this case, all three of the panels share the same x- and y-scales. Despite this, some readers may prefer that each of the axes are labelled, even if they are identical. The `axes` argument (which defaults to `"margins"`) controls this; it can either be `"all_x"`, `"all_y"` or `"all"` to make axes appear.
+
+```{r}
+#| label: fig-heatmap-2
+#| fig-cap: "A heatmap with all axes labelled."
+#| fig-height: 3.5
+#| fig-width: 8
+trendLevel(heatmap_data, type = "year", axes = "all")
+```
+
+@fig-heatmap-2 clearly shows that our data finishes at the end of June 2005, meaning the rest of that panel is empty. It may be appropriate to simply exclude the rest of 2005 from our plot. To do so, we can use the `scales` argument, which can take `"free"`, `"free_y"`, `"free_x"` or `"fixed"` (the default).
+
+```{r}
+#| label: fig-heatmap-3
+#| fig-cap: "A heatmap with a 'free' x-axis."
+#| fig-height: 3.5
+#| fig-width: 8
+trendLevel(heatmap_data, type = "year", scales = "free_x")
+```
+
+@fig-heatmap-3 is an improvement, but the way in which the 2005 panel is "stretched" is aesthetically unappealing. The `space` argument allows the width or heights of panels to match the scale of data displayed on the axes. When only one `type` is specified, this argument can either take `"fixed"` (the default), `"free_x"` or `"free_y"`, and will force the plot to be 1 dimensional row or column of plots rather than wrapped into a square grid. In this case, our plot is already a row of three so no change is apparent. If there are two values given to `type`, and therefore the plot is a 2D matrix of panels, `space` can also take `"free"` to vary both x and y.
+
+```{r}
+#| label: fig-heatmap-4
+#| fig-cap: "A heatmap with a 'free' x-axis and panel widths that match the data displayed on the axes."
+#| fig-height: 3.5
+#| fig-width: 8
+trendLevel(heatmap_data, type = "year", scales = "free_x", space = "free_x")
+```
+
+All of `nrow`, `ncol`, `scales`, `space`, `axes`, `axis.labels`, `switch` and `strip.position` can be passed through `...` to be used to customise multi-panel plot layout and appearance. 
+
+Note that not all of these arguments will always work in all functions. For example, plots on radial axes like `polarPlot()` fix their x-axis (radial axis) range to be from 0 to 360 to represent compass directions, so `scales = "free_x"` will not do anything.
+
+::: {.callout-note}
+### Legacy Options
+
+Users of older versions of [openair]{.pkg} may recall the `x.relation`, `y.relation` and `layout` options. These mapped onto [lattice]{.pkg} arguments, which pre-dated [ggplot2]{.pkg} as the plotting engine for [openair]{.pkg}. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:
+
+```{r}
+#| label: legacy-map
+#| echo: false
+
+gt_nrow <-
+  tibble::tibble(
+  legacy_layout = c("`c(2, 5)`"),
+  new_ncol = c("`2`"),
+  new_nrow = c("`5`")
+) |>
+  gt::gt() |>
+  gt::tab_spanner(
+    label = "legacy",
+    columns = legacy_layout
+  ) |>
+  gt::tab_spanner(
+    label = "new",
+    columns = c(new_ncol, new_nrow)
+  ) |>
+  gt::cols_label(
+    legacy_layout = gt::md("`layout`"),
+    new_ncol = gt::md("`ncol`"),
+    new_nrow = gt::md("`nrow`")
+  ) |>
+  gt::fmt_markdown(gt::everything())
+
+gt_layout <-
+  tibble::tibble(
+    legacy_x.relation = c("`'free'`", "`'same'`", "`'free'`", "`'same'`"),
+    legacy_y.relation = c("`'free'`", "`'free'`", "`'same'`", "`'same'`"),
+    new_scales = c("`'free'`", "`'free_y'`", "`'free_x'`", "`'fixed'`")
+  ) |>
+  gt::gt() |>
+  gt::tab_spanner(
+    label = "legacy",
+    columns = c(legacy_x.relation, legacy_y.relation)
+  ) |>
+  gt::tab_spanner(
+    label = "new",
+    columns = new_scales
+  ) |>
+  gt::cols_label(
+    legacy_x.relation = gt::md("`x.relation`"),
+    legacy_y.relation = gt::md("`y.relation`"),
+    new_scales = gt::md("`scales`")
+  ) |>
+  gt::fmt_markdown(gt::everything())
+
+gt::gt_group(
+  gt_nrow,
+  gt_layout
+)
+```
+
+:::
+
 ## Themes
 
 With [ggplot2]{.pkg} it is simple to control the "theme" of your plot (i.e., all non-data elements) using the `ggplot2::theme()` function. There is an excellent blog post about [ggplot2]{.pkg} stlying at <https://tidyverse.org/blog/2025/10/ggplot2-styling/>, but below we demonstrate a few examples of tweaking the plot style.

@@ -31,7 +31,7 @@ A full set of examples is shown in the help pages --- see `?timePlot` for detail
 timePlot(
   mydata,
   pollutant = c("nox", "o3"),
-  y.relation = "free"
+  scales = "free_y"
 )
 ```
 
@@ -44,7 +44,7 @@ To plot data only for 2003:
 timePlot(
   selectByDate(mydata, year = 2003),
   pollutant = c("nox", "o3"),
-  y.relation = "free"
+  scales = "free_y"
 )
 ```
 
@@ -62,7 +62,7 @@ timePlot(
   selectByDate(mydata, year = 2003, month = "aug"),
   pollutant = c("nox", "o3", "pm25", "pm10", "ws"),
   strip.position = "right",
-  y.relation = "free"
+  scales = "free_y"
 )
 ```
 
@@ -75,7 +75,7 @@ timePlot(
   mydata,
   pollutant = c("o3", "no2"),
   avg.time = "month",
-  y.relation = "free"
+  scales = "free_y"
 )
 
 ## plor 95th percentile monthly concentrations
@@ -85,7 +85,7 @@ timePlot(
   avg.time = "month",
   statistic = "percentile",
   percentile = 95,
-  y.relation = "free"
+  scales = "free_y"
 )
 
 ## plot the number of valid records in each 2-week period
@@ -94,7 +94,7 @@ timePlot(
   pollutant = c("o3", "no2"),
   avg.time = "2 week",
   statistic = "frequency",
-  y.relation = "free"
+  scales = "free_y"
 )
 ```
 
@@ -150,7 +150,7 @@ timePlot(
 )
 ```
 
-In @fig-importAQdata the y-scale is the same by default for all panels. However, the `y.relation` argument can be used to set the y-scales to be set individually for each panel by setting `y.relation = "free"`. 
+In @fig-importAQdata the y-scale is the same by default for all panels. However, the `scales` argument can be used to set the y-scales to be set individually for each panel by setting `scales = "free_y"`. Other options include `scales = "free_x"` for individual x-axis scales and `scales = "free"` for this to apply to both the x- and y-axes.
 
 Using the code above it is also possible to include several species. But what if we wanted to plot NO~x~ concentrations across all sites in one panel? An example of how to do this is shown below. In this case the `group` argument is used to display the concentrations from multiple sites in one panel.
 
@@ -172,7 +172,8 @@ timePlot(
 )
 ```
 
-If wind speed `ws` and wind direction `wd` are available they can be used in plots and shown as 'wind vectors'. Plotting data in this way conveys more information in an easy-to-understand way, which works best for relatively short time periods e.g. a pollution episode lasting a few days. As an example @fig-timePlotwswd shows the first 48 hours of NO~x~ and NO~2~ data with wind arrows shown. The arrows are controlled by a list of option that control the length, shape and colour of the arrows. The maximum length of the arrow plotted is a fraction of the plot dimension with the longest arrow being `scale` of the plot x-y dimension. Note, if the plot size is adjusted manually by the user it should be re-plotted to ensure the correct wind angle.  Wind vector arrows can also be used with the `scatterPlot` function. 
+If wind speed `ws` and wind direction `wd` are available they can be used in plots and shown as 'wind vectors'. Plotting data in this way conveys more information in an easy-to-understand way, which works best for relatively short time periods e.g. a pollution episode lasting a few days. As an example @fig-timePlotwswd shows the first 48 hours of NO~x~ and NO~2~ data with wind arrows shown. The arrows are controlled by a list of option that control the length, shape and colour of the arrows. The maximum length of the arrow plotted is a fraction of the plot dimension with the longest arrow being `scale` of the plot x-y dimension. Note, if the plot size is adjusted manually by the user it should be re-plotted to ensure the correct wind angle.  Wind vector arrows can also be used with the `scatterPlot` function.
+
 See help for `windflowOpts()` for more details on the options available to control the wind vectors.
 
 ```{r}
@@ -191,8 +192,8 @@ timePlot(
   strip.position = "right",
   linewidth = 2,
   cols = "tol.bright",
-  key = FALSE,
-  y.relation = "free",
+  key.position = "none",
+  scales = "free_y",
   ylab = "concentration (ug/m3)"
 )
 ```
