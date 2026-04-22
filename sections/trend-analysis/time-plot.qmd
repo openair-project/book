@@ -123,6 +123,7 @@ timePlot(
   normalise = "1/1/1998",
   linewidth = 3,
   linetype = 1,
+  lineend = "round",
   group = TRUE,
   ylim = c(0, 125)
 )
