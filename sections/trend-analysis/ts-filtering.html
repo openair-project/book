@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="David Carslaw and Jack Davison">
+<title>20&nbsp; Kolmogorov-Zurbenko filters – The openair book</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../sections/model-evaluation/mod-stats.html" rel="next">
+<link href="../../sections/trend-analysis/ts-smoothing.html" rel="prev">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/ts-filtering.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">The openair book</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/intro/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Access</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/data-access/access-met-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Directional Analysis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-freq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Polar frequencies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/percentile-roses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Percentile roses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Polar plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-annulus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polar annulus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/trajectory-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Trajectory analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Time Series and Trends</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time series plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-variation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/calendar-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-proportion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Time proportion plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/theil-sen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/smooth-trend.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Smooth trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/run-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Dilution lines and pollutant ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/trend-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Model Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interactive Maps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Utility functions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#sec-kz-background" id="toc-sec-kz-background" class="nav-link active" data-scroll-target="#sec-kz-background"><span class="header-section-number">20.1</span> Background</a></li>
+  <li><a href="#sec-kza-background" id="toc-sec-kza-background" class="nav-link" data-scroll-target="#sec-kza-background"><span class="header-section-number">20.2</span> Kolmogorov-Zurbenko Adaptive filter</a></li>
+  <li><a href="#sec-kzFilter" id="toc-sec-kzFilter" class="nav-link" data-scroll-target="#sec-kzFilter"><span class="header-section-number">20.3</span> Using <code>kzFilter()</code></a></li>
+  <li><a href="#sec-kzaFilter" id="toc-sec-kzaFilter" class="nav-link" data-scroll-target="#sec-kzaFilter"><span class="header-section-number">20.4</span> Using <code>kzaFilter()</code></a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/ts-filtering.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/ts-filtering.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-ts-filtering" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>David Carslaw </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="sec-kz-background" class="level2 page-columns page-full" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="sec-kz-background">
+<span class="header-section-number">20.1</span> Background</h2>
+<p>The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales <span class="citation" data-cites="Zurbenko1986 Yang2010">(<a href="../references.html#ref-Zurbenko1986" role="doc-biblioref">Zurbenko 1986</a>; <a href="../references.html#ref-Yang2010" role="doc-biblioref">Yang and Zurbenko 2010</a>)</span>. Its defining characteristic is simplicity: a plain moving average of window length <span class="math inline">\(m\)</span> is applied <span class="math inline">\(k\)</span> times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ(<span class="math inline">\(m\)</span>, <span class="math inline">\(k\)</span>), where <span class="math inline">\(m\)</span> is the full window width in data steps (so a window of <span class="math inline">\(m = 25\)</span> hours extends 12 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as <span class="math inline">\(m\sqrt{k}\)</span>, where <span class="math inline">\(m\)</span> is the full window width. Increasing <span class="math inline">\(k\)</span> thus pushes the cut-off to longer periods, providing greater smoothing.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Zurbenko1986" class="csl-entry" role="listitem">
+Zurbenko, Igor G. 1986. <em>The Spectral Analysis of Time Series</em>. North-Holland.
+</div><div id="ref-Yang2010" class="csl-entry" role="listitem">
+Yang, Yuehua, and Igor G. Zurbenko. 2010. <span>“Kolmogorov–<span>Zurbenko</span> Filters.”</span> <em>Wiley Interdisciplinary Reviews: Computational Statistics</em> 2 (3): 340–51. <a href="https://doi.org/10.1002/wics.71">https://doi.org/10.1002/wics.71</a>.
+</div><div id="ref-Eskridge1997" class="csl-entry" role="listitem">
+Eskridge, R. E., J. Y. Ku, S. T. Rao, P. S. Porter, and I. G. Zurbenko. 1997. <span>“Separating Different Scales of Motion in Time Series of Meteorological Variables.”</span> <em>Bulletin of the American Meteorological Society</em> 78 (7): 1473–83. <a href="https://doi.org/10.1175/1520-0477(1997)078<1473:SDSOMI>2.0.CO;2">https://doi.org/10.1175/1520-0477(1997)078&lt;1473:SDSOMI&gt;2.0.CO;2</a>.
+</div></div><p>The value of the KZ filter in atmospheric and air quality science lies in the decomposition step <span class="citation" data-cites="Rao1997 Eskridge1997">(<a href="../references.html#ref-Rao1997" role="doc-biblioref">Rao et al. 1997</a>; <a href="../references.html#ref-Eskridge1997" role="doc-biblioref">Eskridge et al. 1997</a>)</span>. By applying the filter successively at four increasing window sizes — approximately one day, one week, one month, and one year for hourly data — and taking the <em>differences</em> between adjacent filtered series, the raw time series is partitioned into five additive components:</p>
+<table class="caption-top table">
+<caption>Default temporal decomposition produced by <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter()</a></code> for hourly data.</caption>
+<thead><tr class="header">
+<th>Component</th>
+<th>Typical period</th>
+<th>Physical interpretation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Short</td>
+<td>Hours to ~2 days</td>
+<td>Diurnal cycles, brief emission pulses</td>
+</tr>
+<tr class="even">
+<td>Synoptic</td>
+<td>~2–7 days</td>
+<td>Frontal passages, weather systems</td>
+</tr>
+<tr class="odd">
+<td>Intermediate</td>
+<td>Weeks to ~2 months</td>
+<td>Sub-seasonal variability</td>
+</tr>
+<tr class="even">
+<td>Seasonal</td>
+<td>Months to ~1 year</td>
+<td>Annual cycle, photochemistry</td>
+</tr>
+<tr class="odd">
+<td>Trend</td>
+<td>Multi-year</td>
+<td>Long-term emission changes, climate signals</td>
+</tr>
+</tbody>
+</table>
+<p>These components are mutually exclusive and sum to the original series, making the decomposition physically interpretable and suitable for downstream analysis.</p>
+<p>The approach was first demonstrated on ambient ozone data by <span class="citation" data-cites="RaoZurbenko1994">Rao and Zurbenko (<a href="../references.html#ref-RaoZurbenko1994" role="doc-biblioref">1994</a>)</span> and <span class="citation" data-cites="Rao1997">Rao et al. (<a href="../references.html#ref-Rao1997" role="doc-biblioref">1997</a>)</span>, who showed that synoptic-scale meteorological variability can mask long-term ozone trends unless removed. The same logic extends naturally to PM<sub>2.5</sub>, NO<sub>x</sub>, and other regulated pollutants <span class="citation" data-cites="Wise2005">(<a href="../references.html#ref-Wise2005" role="doc-biblioref">Wise and Comrie 2005</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-RaoZurbenko1994" class="csl-entry" role="listitem">
+Rao, S. T., and I. G. Zurbenko. 1994. <span>“Detecting and Tracking Changes in Ozone Air Quality.”</span> <em>Journal of the Air &amp; Waste Management Association</em> 44 (9): 1089–92. <a href="https://doi.org/10.1080/10473289.1994.10467303">https://doi.org/10.1080/10473289.1994.10467303</a>.
+</div><div id="ref-Rao1997" class="csl-entry" role="listitem">
+Rao, S. T., I. G. Zurbenko, R. Neagu, P. S. Porter, J. Y. Ku, and R. F. Henry. 1997. <span>“Space and Time Scales in Ambient Ozone Data.”</span> <em>Bulletin of the American Meteorological Society</em> 78 (10): 2153–66. <a href="https://doi.org/10.1175/1520-0477(1997)078<2153:SATSIA>2.0.CO;2">https://doi.org/10.1175/1520-0477(1997)078&lt;2153:SATSIA&gt;2.0.CO;2</a>.
+</div><div id="ref-Wise2005" class="csl-entry" role="listitem">
+Wise, E. K., and A. C. Comrie. 2005. <span>“Extending the <span>Kolmogorov</span>–<span>Zurbenko</span> Filter: Application to Ozone, Particulate Matter, and Meteorological Trends.”</span> <em>Journal of the Air &amp; Waste Management Association</em> 55 (8): 1208–16. <a href="https://doi.org/10.1080/10473289.2005.10464718">https://doi.org/10.1080/10473289.2005.10464718</a>.
+</div></div><p>By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings — especially of many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events.</p>
+</section><section id="sec-kza-background" class="level2 page-columns page-full" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="sec-kza-background">
+<span class="header-section-number">20.2</span> Kolmogorov-Zurbenko Adaptive filter</h2>
+<p>The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and <em>shrinking</em> the averaging window near those discontinuities <span class="citation" data-cites="Zurbenko1996">(<a href="../references.html#ref-Zurbenko1996" role="doc-biblioref">Zurbenko et al. 1996</a>)</span>. Wherever the algorithm identifies an abrupt change — a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change — it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Zurbenko1996" class="csl-entry" role="listitem">
+Zurbenko, I. G., P. S. Porter, S. T. Rao, J. Y. Ku, R. Gui, and R. E. Eskridge. 1996. <span>“Detecting Discontinuities in Time Series of Upper-Air Data: Development and Demonstration of an Adaptive Filter Technique.”</span> <em>Journal of Climate</em> 9 (12): 3548–60. <a href="https://doi.org/10.1175/1520-0442(1996)009<3548:DDITSO>2.0.CO;2">https://doi.org/10.1175/1520-0442(1996)009&lt;3548:DDITSO&gt;2.0.CO;2</a>.
+</div></div><p>The degree of window shrinkage is governed by the <code>sensitivity</code> argument: larger values cause more aggressive adaptation. For detecting clear, sudden shifts in air quality (e.g., the introduction of a clean-air zone, COVID-19 lockdown effects, or the commissioning of an industrial scrubber) the KZA filter will generally give a cleaner result than the standard KZ filter.</p>
+</section><section id="sec-kzFilter" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="sec-kzFilter">
+<span class="header-section-number">20.3</span> Using <code>kzFilter()</code>
+</h2>
+<p>The default window sizes <code>m = c(25, 169, 721, 8761)</code> are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count <code>k = 5</code> provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.</p>
+<p>Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 7, 30, 90, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.</p>
+<p>Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">london_aq</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_aq.rds"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, we calculate the KZ components for a few pollutants at the North Kensington site. The <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter()</a></code> function returns a data frame with the original data and new columns for each component.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kz_out_pm25</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">london_aq</span>, <span class="va">code</span> <span class="op">==</span> <span class="st">"KC1"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"pm2.5"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">kz_out_o3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">london_aq</span>, <span class="va">code</span> <span class="op">==</span> <span class="st">"KC1"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To show the different components for PM<sub>2.5</sub>, a polar plot can be produced, as shown in <a href="#fig-kz-components-pm25" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. In this case, the short term, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a week or two (intermediate).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kz_out_pm25</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    short <span class="op">=</span> <span class="va">short</span> <span class="op">+</span> <span class="va">trend</span>,</span>
+<span>    synoptic <span class="op">=</span> <span class="va">synoptic</span> <span class="op">+</span> <span class="va">trend</span>,</span>
+<span>    intermediate <span class="op">=</span> <span class="va">intermediate</span> <span class="op">+</span> <span class="va">trend</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span></span>
+<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"short"</span>, <span class="st">"synoptic"</span>, <span class="st">"intermediate"</span><span class="op">)</span>,</span>
+<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>    cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
+<span>    key.title <span class="op">=</span> <span class="st">"pm25 (ug/m3)"</span>,</span>
+<span>    key.position <span class="op">=</span> <span class="st">"top"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-kz-components-pm25" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-components-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;20.1: Polar plot of the short, synoptic and intermediate components of PM2.5 concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="img-fluid figure-img" style="width:90.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-components-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.1: Polar plot of the short, synoptic and intermediate components of PM<sub>2.5</sub> concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>For the synoptic component it can be useful to plot a <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for a particular year. <a href="#fig-calendarPlot-synoptic" class="quarto-xref">Figure&nbsp;<span>20.2</span></a> shows the calendar plot for the synoptic component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">kz_out_pm25</span>, synoptic <span class="op">=</span> <span class="va">synoptic</span> <span class="op">+</span> <span class="va">trend</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
+<span>    pollutant <span class="op">=</span> <span class="st">"synoptic"</span>,</span>
+<span>    year <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>    cols <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colorOpts</a></span><span class="op">(</span><span class="st">"batlow"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>    windflow <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/windflowOpts.html">windflowOpts</a></span><span class="op">(</span></span>
+<span>      colour <span class="op">=</span> <span class="st">"white"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-calendarPlot-synoptic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot-synoptic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;20.2: Calendar plot of the synoptic component of PM2.5 concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot-synoptic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.2: Calendar plot of the synoptic component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-kz-seasonal" class="quarto-xref">Figure&nbsp;<span>20.3</span></a> considers the seasonal component of O<sub>3</sub> concentrations. The plot shows that the seasonal component of O<sub>3</sub> concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O<sub>3</sub> concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in <a href="#fig-kz-seasonal" class="quarto-xref">Figure&nbsp;<span>20.3</span></a> is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g.&nbsp;adding the seasonal to the trend (<code>mutate(kz_out_o3, seasonal = seasonal + trend)</code>) to show the overall seasonal variation in concentrations on top of a long-term trend.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">kz_out_o3</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"seasonal"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"o3 (ug/m3)"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Year"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-kz-seasonal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-seasonal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-filtering_files/figure-html/fig-kz-seasonal-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;20.3: Time plot of the seasonal component of O3 concentrations at the North Kensington site."><img src="ts-filtering_files/figure-html/fig-kz-seasonal-1.png" class="img-fluid figure-img" width="576"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-seasonal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.3: Time plot of the seasonal component of O<sub>3</sub> concentrations at the North Kensington site.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Finally, the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function can be used to show how the different components vary by hour of the day and month of the year. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> shows the time variation plot for the short-term, synoptic and seasonal components of O<sub>3</sub> concentrations at the North Kensington site. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> acts as a simple test to see which temporal variations are removed and which remain for different time scales. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O<sub>3</sub> concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic. These plots confirm the expected behaviour of the KZ filtering for targetted temporal scales.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span></span>
+<span>  <span class="va">kz_out_o3</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"short"</span>, <span class="st">"synoptic"</span>, <span class="st">"seasonal"</span><span class="op">)</span>,</span>
+<span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"Set2"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-kz-timevariation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-timevariation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;20.4: Time variation plot for the short-term, synoptic and sesasonal components of O3 concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O3 concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic."><img src="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-timevariation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.4: Time variation plot for the short-term, synoptic and sesasonal components of O<sub>3</sub> concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O<sub>3</sub> concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="sec-kzaFilter" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="sec-kzaFilter">
+<span class="header-section-number">20.4</span> Using <code>kzaFilter()</code>
+</h2>
+<p><code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzaFilter()</a></code> shares the same interface as <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter()</a></code> with one additional argument, <code>sensitivity</code>, which controls how aggressively the window is reduced near structural breaks (default 1.0). It is the preferred choice when:</p>
+<ul>
+<li>A known policy change, sensor replacement, or source modification is expected to produce a step change.</li>
+<li>The trend component from <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter()</a></code> shows a suspicious sharp feature that may be an artefact of the standard window.</li>
+<li>There is a wish to detect and locate unknown discontinuities.</li>
+</ul>
+<p>The choice if <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter()</a></code> vs <code><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzaFilter()</a></code> is often a matter of judgement and experimentation. If the KZ trend shows a sharp drop or rise, or rapid variations, that coincides with a known event, it is worth trying the KZA filter to see if it preserves that feature more cleanly. If the KZA trend is much smoother and more interpretable, it may be the better choice for subsequent analysis.</p>
+<p>In <a href="#fig-kz-kza-compare" class="quarto-xref">Figure&nbsp;<span>20.5</span></a>, the KZ and KZA trends for NO<sub>2</sub> concentrations at the Marylebone Road site are compared. The KZA filter (red) preserves a sharp drop in NO<sub>2</sub> in early 2020 that is smoothed out by the standard KZ filter (blue). This drop is related to the COVID-19 lockdown measures that were implemented in the UK in March 2020, which led to a sudden reduction in traffic emissions. The KZA filter is able to capture this abrupt change more effectively than the standard KZ filter, which smooths it out over a longer period.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trend_kz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">london_aq</span>, <span class="va">code</span> <span class="op">==</span> <span class="st">"MY1"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>kz_trend <span class="op">=</span> <span class="va">trend</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">trend_kza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzaFilter</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">london_aq</span>, <span class="va">code</span> <span class="op">==</span> <span class="st">"MY1"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  sensitivity <span class="op">=</span> <span class="fl">0.8</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>kza_trend <span class="op">=</span> <span class="va">trend</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">trend_kz</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">trend_kza</span>, <span class="va">date</span>, <span class="va">kza_trend</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage</a></span><span class="op">(</span>avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kz_trend"</span>, <span class="st">"kza_trend"</span><span class="op">)</span>,</span>
+<span>    group <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>    name.pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KZ trend"</span>, <span class="st">"KZA trend"</span><span class="op">)</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"NO2 trend (ug/m3)"</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-kz-kza-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-kza-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-filtering_files/figure-html/fig-kz-kza-compare-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;20.5: Comparison of KZ and KZA filters applied to NO2 concentrations at the Marylebone Road site. The KZA filter (red) preserves a sharp drop in NO2 in early 2020 that is smoothed out by the standard KZ filter (blue)."><img src="ts-filtering_files/figure-html/fig-kz-kza-compare-1.png" class="img-fluid figure-img" width="480"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-kza-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.5: Comparison of KZ and KZA filters applied to NO<sub>2</sub> concentrations at the Marylebone Road site. The KZA filter (red) preserves a sharp drop in NO<sub>2</sub> in early 2020 that is smoothed out by the standard KZ filter (blue).
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and and some of the effects lasted a few weeks to a few months i.e.&nbsp;they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># standard KZ filter</span></span>
+<span><span class="va">trend_kz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/kzFilter.html">kzFilter</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">london_aq</span>, <span class="va">code</span> <span class="op">==</span> <span class="st">"MY1"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># combine seasonal and trend components</span></span>
+<span><span class="va">trend_kz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">trend_kz</span>, total <span class="op">=</span> <span class="va">seasonal</span> <span class="op">+</span> <span class="va">trend</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">trend_kz</span>, pollutant <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Or try the <code>kzaFilter</code> with <code>sensitivity = 0.5</code> for more structure to capture more of the variation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../../sections/trend-analysis/ts-smoothing.html" class="pagination-link" aria-label="Time Series Smoothing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../sections/model-evaluation/mod-stats.html" class="pagination-link" aria-label="Model evaluation">
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/ts-filtering.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
+</div>
+  </div>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

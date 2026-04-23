@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>15&nbsp; Theil-Sen trends – The openair book</title>
@@ -86,17 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/trend-analysis/smooth-trend.html" rel="next">
 <link href="../../sections/trend-analysis/time-proportion.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -358,6 +358,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -372,19 +384,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,25 +413,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -436,13 +448,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,26 +482,32 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -509,6 +527,7 @@ window.Quarto = {
 <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output"><span class="header-section-number">15.2.1</span> Output</a></li>
   </ul>
 </li>
+  <li><a href="#summarising-trends" id="toc-summarising-trends" class="nav-link" data-scroll-target="#summarising-trends"><span class="header-section-number">15.3</span> Summarising trends</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/theil-sen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -559,6 +578,8 @@ Kunsch, H. R. 1989. <span>“The Jackknife and the Bootstrap for General Station
 <p>The plot shows the deseasonalised monthly mean concentrations of O<sub>3</sub>. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The <span class="math inline">\(\ast\ast\ast\)</span> show that the trend is significant to the 0.001 level.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
@@ -579,12 +600,17 @@ Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseaso
 </div>
 <p>Because the function runs simulations to estimate the uncertainty in the slope, it can take a little time for all the calculations to finish. These printed results show that in this case the trend in O<sub>3</sub> was +0.37 units (i.e.&nbsp;ppb) per year as an average over the entire period. It also shows the 95% confidence intervals in the trend ranged between 0.22 to 0.50 ppb/year. Finally, the significance level in this case is very high; providing very strong evidence that concentrations of O<sub>3</sub> increased over the period. The plot together with the summary results is shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>. Note that if one wanted to display the confidence intervals in the slope at the 99% confidence intervals, the code would be as follows.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>, </span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, </span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.01</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Sometimes it is useful to consider a subset of data, perhaps by excluding some years. This is easy with the <code>filter</code> function. The following code calculates trends for years greater than 1999 i.e.&nbsp;from 2000 onward.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -612,13 +638,18 @@ Figure&nbsp;15.2: Trends in ozone at Marylebone Road split by eight wind sectors
 </div>
 <p>The option <code>slope.percent</code> can be set to express slope estimates as a percentage change per year. This is useful for comparing slopes for sites with very different concentration levels and for comparison with emission inventories. The percentage change uses the concentration at the beginning and end months to express the mean slope.</p>
 <p>The trend, <span class="math inline">\(T\)</span> is defined as:</p>
-<p><span class="math display">\[
+<p><span id="eq-MannK"><span class="math display">\[
 T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
-  - 1\right)\Bigg /N_{years} (\#eq:MannK)
-\]</span></p>
+  - 1\right)\Bigg /N_{years}
+\tag{15.1}\]</span></span></p>
 <p>where <span class="math inline">\(C_{End}\)</span> and <span class="math inline">\(C_{Start}\)</span> are the mean concentrations for the end and start date, respectively. <span class="math inline">\(N_{years}\)</span> is the number of years (or fractions of) the time series spans.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, slope.percent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>, </span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  slope.percent <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -633,7 +664,7 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <p>Sometimes considering percentages can be misleading. A specific case to look out for is when the uncertainties in the slope are wide and go from a negative concentration to a positive, which is problematic. In this case it is best to stick with changes in absolute concentrations.</p>
 </div>
 </div>
-<p>The <code>TheilSen</code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly. <em>However, it is necessary to ensure the date field is in the correct format</em>. Assuming data in an Excel file in the format dd/mm/YYYY (e.g. 23/11/2008), it is necessary to convert this to a date format understood by R, as shown below. Similarly, if annual data were available, get the dates in formats like ‘2005-01-01’, ‘2006-01-01’ … and make sure the date is again formatted using <code>as.Date</code>. Note that if dates are pre-formatted as YYYY-mm-dd, then it is sufficient to use <code>as.Date</code> without providing any format information because it is already in the correct format.</p>
+<p>The <code>TheilSen</code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -645,21 +676,25 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <span class="header-section-number">15.2.1</span> Output</h3>
 <p>The <code>TheilSen</code> function provides lots of output data for further analysis or adding to a report. To obtain it, it is necessary to read it into a variable:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, deseason <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>, </span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This returns a list of two data frames containing all the monthly mean values and trend statistics and an aggregated summary. The first 6 lines are shown next:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">MKresults</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 20
-  wd    date        conc     a       b upper.a upper.b lower.a lower.b     p
-  &lt;ord&gt; &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 N     1998-01-01  6.88 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
-2 N     1998-02-01  6.18 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
-3 N     1998-03-01  5.71 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
-4 N     1998-04-01  6.21 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
-5 N     1998-05-01  7.38 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
-6 N     1998-06-01  6.62 -18.1 0.00240   -24.1 0.00294   -11.4 0.00181     0
+  wd    date         conc     a       b upper.a upper.b lower.a  lower.b     p
+  &lt;ord&gt; &lt;date&gt;      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+1 E     1998-01-01  5.10  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+2 E     1998-02-01  3.39  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+3 E     1998-03-01  5.23  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+4 E     1998-04-01  4.67  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+5 E     1998-05-01 -0.652 -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
+6 E     1998-06-01  5.21  -7.20 0.00113   -12.2 0.00154   -1.37 0.000612     0
 # ℹ 10 more variables: p.stars &lt;chr&gt;, slope &lt;dbl&gt;, intercept &lt;dbl&gt;,
 #   intercept.lower &lt;dbl&gt;, intercept.upper &lt;dbl&gt;, lower &lt;dbl&gt;, upper &lt;dbl&gt;,
 #   slope.percent &lt;dbl&gt;, lower.percent &lt;dbl&gt;, upper.percent &lt;dbl&gt;</code></pre>
@@ -672,24 +707,137 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <pre><code># A tibble: 8 × 20
   wd    p.stars date        conc       a        b upper.a  upper.b lower.a
   &lt;ord&gt; &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1 N     "***"   2001-09-15  9.82 -18.1   0.00240  -24.1   0.00294  -11.4  
-2 NE    "***"   2001-09-15  9.77 -13.6   0.00198  -24.3   0.00297   -0.125
-3 E     "***"   2001-09-15  6.08  -7.19  0.00113  -12.2   0.00154   -1.37 
-4 SE    ""      2001-09-15  5.79   4.38  0.000125   1.47  0.000385   7.78 
+1 E     "***"   2001-09-15  6.08  -7.20  0.00113  -12.2   0.00154   -1.37 
+2 N     "***"   2001-09-15  9.82 -18.1   0.00240  -24.1   0.00294  -11.4  
+3 NE    "***"   2001-09-15  9.77 -13.6   0.00198  -24.3   0.00297   -0.125
+4 NW    "***"   2001-09-15  9.79  -9.94  0.00167  -17.6   0.00233   -4.80 
 5 S     ""      2001-09-15  5.06   3.44  0.000118   1.44  0.000294   5.53 
-6 SW    "*"     2001-09-15  4.77   2.15  0.000225  -0.587 0.000459   4.59 
-7 W     "***"   2001-09-15  5.62  -0.537 0.000513  -2.46  0.000691   1.62 
-8 NW    "***"   2001-09-15  9.79 -10.1   0.00168  -17.5   0.00234   -4.79 
+6 SE    ""      2001-09-15  5.79   4.38  0.000125   1.47  0.000385   7.78 
+7 SW    "*"     2001-09-15  4.77   2.15  0.000225  -0.587 0.000459   4.59 
+8 W     "***"   2001-09-15  5.62  -0.537 0.000513  -2.46  0.000691   1.62 
 # ℹ 11 more variables: lower.b &lt;dbl&gt;, p &lt;dbl&gt;, slope &lt;dbl&gt;, intercept &lt;dbl&gt;,
 #   intercept.lower &lt;dbl&gt;, intercept.upper &lt;dbl&gt;, lower &lt;dbl&gt;, upper &lt;dbl&gt;,
 #   slope.percent &lt;dbl&gt;, lower.percent &lt;dbl&gt;, upper.percent &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>In the results above the <code>lower</code> and <code>upper</code> fields provide the 95% (or chosen confidence interval using the <code>alpha</code> option) of the trend and <code>slope</code> is the trend estimate expressed in units/year.</p>
+</section></section><section id="summarising-trends" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="summarising-trends">
+<span class="header-section-number">15.3</span> Summarising trends</h2>
+<p>One of the most powerful uses of <code>TheilSen</code> is to compare trends across a large number of sites simultaneously. By supplying multiple values to the <code>type</code> argument, the function will run the trend analysis independently for each combination of conditioning variables. The results can then be extracted and visualised in whatever way is most informative for the task at hand. The example in this section can easily be adapted for a wide range of purposes.</p>
+<p>The example below demonstrates this workflow for NO<sub>2</sub> across a stratified sample of UK urban monitoring sites. The analysis proceeds in several steps.</p>
+<p><strong>Step 1: Select well-monitored sites.</strong> Annual mean data are imported from the AURN for 2016–2025 using <code>importAURN</code> with <code>meta = TRUE</code> to include site metadata. Sites are then filtered to those with a complete ten-year record <em>and</em> at least 75% data capture in <em>every</em> year. This guards against trends being artefacts of uneven monitoring coverage rather than genuine concentration changes.</p>
+<p><strong>Step 2: Stratified sample.</strong> To keep the analysis manageable, 25 sites are drawn at random from each of two site types — Urban Traffic and Urban Background. Using <code>set.seed</code> ensures the sample is reproducible.</p>
+<p><strong>Step 3: Run <code>TheilSen</code> across all sites.</strong> The key call is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
+<span>  <span class="va">aq_sample</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  avg.time  <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span>  type      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site_type"</span>, <span class="st">"site"</span><span class="op">)</span>,</span>
+<span>  plot      <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  silent    <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Passing <code>type = c("site_type", "site")</code> tells <code>TheilSen</code> to condition on both site type and individual site, so a separate Theil-Sen slope is estimated for each site. Setting <code>plot = FALSE</code> and <code>silent = TRUE</code> suppresses graphical and console output while looping through all 50 sites, which would otherwise produce a large volume of unwanted output.</p>
+<p><strong>Step 4: Extract the summary statistics.</strong> As described in the <a href="#output">Output</a> section, the trend statistics — slope and 95% confidence intervals — are held in <code>$data[[2]]</code>. These are extracted directly for plotting.</p>
+<p><strong>Step 5: Forest plot.</strong> The slope estimates and their confidence intervals are displayed as a forest plot using <code>ggplot2</code>. Sites are ordered by slope within each site type, making it easy to see the spread of trends at a glance. A vertical dashed line at zero serves as a reference: sites to the left show declining NO<sub>2</sub>, those to the right a (none in this case) increase. The resulting plot is shown in <a href="#fig-TheilSenSummary" class="quarto-xref">Figure&nbsp;<span>15.3</span></a>.</p>
+<p>The forest plot makes clear that NO<sub>2</sub> declined signficantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Flexibility of the <code>type</code> argument
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The same workflow applies to any conditioning variable recognised by <code>TheilSen</code>. For example, setting <code>type = "wd"</code> splits the data into eight (or more) wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in <code>$data[[2]]</code> can be post-processed and visualised in the same way as shown here.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import annual data</span></span>
+<span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ-wrapper.html">importAURN</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2025</span>, data_type <span class="op">=</span> <span class="st">"annual"</span>, meta <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># --- 1. Filter sites with &gt;=75% NO2 capture in ALL years ---</span></span>
+<span><span class="va">eligible_sites</span> <span class="op">&lt;-</span> <span class="va">aq</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">no2</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">no2_capture</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">site</span>, <span class="va">site_type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    n_years     <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    min_capture <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">no2_capture</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n_years</span> <span class="op">==</span> <span class="fl">10</span>, <span class="va">min_capture</span> <span class="op">&gt;=</span> <span class="fl">0.75</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># --- 2. Stratified sample ---</span></span>
+<span><span class="va">sample_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="va">eligible_sites</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">site_type</span> <span class="op">==</span> <span class="st">"Urban Traffic"</span><span class="op">)</span>    <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>,</span>
+<span>  <span class="va">eligible_sites</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">site_type</span> <span class="op">==</span> <span class="st">"Urban Background"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># --- 3. Subset aq to sampled sites and run TheilSen with type = "site" ---</span></span>
+<span><span class="va">aq_sample</span> <span class="op">&lt;-</span> <span class="va">aq</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">sample_sites</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ts_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
+<span>  <span class="va">aq_sample</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  avg.time  <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span>  type      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site_type"</span>, <span class="st">"site"</span><span class="op">)</span>,</span>
+<span>  plot      <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  silent    <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># --- 4. Extract slope and uncertaintiese ---</span></span>
+<span><span class="va">ts_results</span> <span class="op">&lt;-</span> <span class="va">ts_out</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> </span>
+<span></span>
+<span><span class="co"># --- 5. Summary ordered plot ---</span></span>
+<span><span class="co"># Order sites within each group by slope (high to low) using a single factor</span></span>
+<span><span class="va">ordered_levels</span> <span class="op">&lt;-</span> <span class="va">ts_results</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">site_type</span>, <span class="va">slope</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="va">ts_results</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    site_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">site_type</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="st">"Urban Traffic"</span>, <span class="st">"Urban Background"</span></span>
+<span>    <span class="op">)</span><span class="op">)</span>,</span>
+<span>    site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">site</span>, levels <span class="op">=</span> <span class="va">ordered_levels</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plot_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">slope</span>, y <span class="op">=</span> <span class="va">site</span>, colour <span class="op">=</span> <span class="va">site_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">lower</span>, xmax <span class="op">=</span> <span class="va">upper</span><span class="op">)</span>, height <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">site_type</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span>, guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x        <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"no2 (ug/m3/year)"</span><span class="op">)</span>,</span>
+<span>    y        <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    title    <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"no2 Annual Trends (2016 - 2025)"</span><span class="op">)</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Theil-Sen slope with 95% confidence interval"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"grey92"</span><span class="op">)</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">7.5</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-TheilSenSummary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSenSummary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO2 at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (µg m−3 yr−1) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."><img src="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TheilSenSummary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (µg m<sup>−3</sup> yr<sup>−1</sup>) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change.
+</figcaption></figure>
+</div>
+</div>
+</div>
 
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();

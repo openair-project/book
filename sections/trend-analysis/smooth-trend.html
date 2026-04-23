@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>16&nbsp; Smooth trends – The openair book</title>
@@ -86,17 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/trend-analysis/run-regression.html" rel="next">
 <link href="../../sections/trend-analysis/theil-sen.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -333,6 +333,18 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -347,19 +359,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -376,25 +388,25 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -411,13 +423,13 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -445,26 +457,32 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -509,7 +527,7 @@ div.csl-indent {
 <p>The <code>smoothTrend</code> function calculates smooth trends in the monthly mean concentrations of pollutants. In its basic use it will generate a plot of monthly concentrations and fit a smooth line to the data and show the 95% confidence intervals of the fit. The smooth line is essentially determined using Generalized Additive Modelling using the <span class="pkg">mgcv</span> package. This package provides a comprehensive and powerful set of methods for modelling data. In this case, however, the <em>model</em> is a relationship between time and pollutant concentration i.e.&nbsp;a trend. One of the principal advantages of this approach is that the amount of smoothness in the trend is optimised in the sense that it is neither too smooth (therefore missing important features) nor too variable (perhaps fitting ‘noise’ rather than real effects). Some background information on the use of this approach in an air quality setting can be found in <span class="citation" data-cites="Carslaw2007a">Carslaw et al. (<a href="../references.html#ref-Carslaw2007a" role="doc-biblioref">2007</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Carslaw2007a" class="csl-entry" role="listitem">
 Carslaw, D. C., S. D. Beevers, and J. E. Tate. 2007. <span>“Modelling and Assessing Trends in Traffic-Related Emissions Using a Generalised Additive Modelling Approach.”</span> <em>Atmospheric Environment</em> 41 (26): 5289–99.
-</div></div><p><a href="../appendices/appendix-trends.html" class="quarto-xref"><span>Appendix C</span></a> considers smooth trends in more detail and considers how different models can be developed that can be quite sophisticated. Readers should consider this section if they are considering trend analysis in more depth.</p>
+</div></div><p><a href="../appendices/appendix-trends.html" class="quarto-xref"><span>Appendix D</span></a> considers smooth trends in more detail and considers how different models can be developed that can be quite sophisticated. Readers should consider this section if they are considering trend analysis in more depth.</p>
 <p>The user can select to deseasonalise the data first to provide a clearer indication of the overall trend on a monthly basis. The data are deseasonalised using the <code>stl</code> function. The user may also select to use bootstrap simulations to provide an alternative method of estimating the uncertainties in the trend. In addition, the simulated estimates of uncertainty can account for autocorrelation in the residuals using a block bootstrap approach.</p>
 </section><section id="examples-of-trend-analysis" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="examples-of-trend-analysis">
 <span class="header-section-number">16.2</span> Examples of trend analysis</h2>
@@ -520,7 +538,7 @@ Carslaw, D. C., S. D. Beevers, and J. E. Tate. 2007. <span>“Modelling and Asse
 <span>  <span class="va">mydata</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
-<span>  main <span class="op">=</span> <span class="st">"monthly mean o3"</span></span>
+<span>  title <span class="op">=</span> <span class="st">"monthly mean o3"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span></span>
@@ -528,7 +546,7 @@ Carslaw, D. C., S. D. Beevers, and J. E. Tate. 2007. <span>“Modelling and Asse
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
-<span>  main <span class="op">=</span> <span class="st">"monthly mean deseasonalised o3"</span></span>
+<span>  title <span class="op">=</span> <span class="st">"monthly mean deseasonalised o3"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span></span>
@@ -536,7 +554,7 @@ Carslaw, D. C., S. D. Beevers, and J. E. Tate. 2007. <span>“Modelling and Asse
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>  simulate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
-<span>  main <span class="op">=</span> <span class="st">"monthly mean no2 (bootstrap uncertainties)"</span></span>
+<span>  title <span class="op">=</span> <span class="st">"monthly mean no2 (bootstrap uncertainties)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/smoothTrend.html">smoothTrend</a></span><span class="op">(</span></span>
@@ -545,7 +563,7 @@ Carslaw, D. C., S. D. Beevers, and J. E. Tate. 2007. <span>“Modelling and Asse
 <span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  simulate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"concentration (ppb)"</span>,</span>
-<span>  main <span class="op">=</span> <span class="st">"monthly mean deseasonalised no2 (bootstrap uncertainties)"</span></span>
+<span>  title <span class="op">=</span> <span class="st">"monthly mean deseasonalised no2 (bootstrap uncertainties)"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-smoothTrendComp" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-smoothTrendComp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -619,7 +637,7 @@ Figure&nbsp;16.2: Trends in O<sub>3</sub> using the <code>smoothTrend</code> fun
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"no2"</span>, <span class="st">"pm10"</span>, <span class="st">"o3"</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"wd"</span><span class="op">)</span>,</span>
 <span>  date.breaks <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  lty <span class="op">=</span> <span class="fl">0</span></span>
+<span>  linetype <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-smoothwdSeason" class="quarto-float quarto-figure quarto-figure-center anchored">

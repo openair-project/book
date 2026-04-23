@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>Appendix A — Customising openair plots – The openair book</title>
@@ -65,19 +65,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../sections/appendices/appendix-hysplit.html" rel="next">
+<link href="../../sections/appendices/appendix-colours.html" rel="next">
 <link href="../../sections/references.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -314,6 +314,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -328,19 +340,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,25 +369,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -392,13 +404,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -426,26 +438,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -472,8 +490,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#assembly-plots" id="toc-assembly-plots" class="nav-link" data-scroll-target="#assembly-plots"><span class="header-section-number">A.1.9</span> Assembly plots</a></li>
   </ul>
 </li>
-  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">A.2</span> Themes</a></li>
-  <li><a href="#extensions" id="toc-extensions" class="nav-link" data-scroll-target="#extensions"><span class="header-section-number">A.3</span> Extensions</a></li>
+  <li><a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets"><span class="header-section-number">A.2</span> Facets</a></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">A.3</span> Themes</a></li>
+  <li><a href="#extensions" id="toc-extensions" class="nav-link" data-scroll-target="#extensions"><span class="header-section-number">A.4</span> Extensions</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-annotate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -654,13 +673,13 @@ Figure&nbsp;A.5: Highlighting a specific point with <code><a href="https://ggplo
 </div>
 </section><section id="add-a-reference-line" class="level3" data-number="A.1.5"><h3 data-number="A.1.5" class="anchored" data-anchor-id="add-a-reference-line">
 <span class="header-section-number">A.1.5</span> Add a reference line</h3>
-<p>To add a reference line, you use <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_hline()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_vline()</a></code>. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as “Limit”. The <code>lty</code> parameter controls the line type (e.g., dashed, dotted), and <code>color</code> specifies the color of the line.</p>
+<p>To add a reference line, you use <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_hline()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">ggplot2::geom_vline()</a></code>. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as “Limit”. The <code>linetype</code> parameter controls the line type (e.g., dashed, dotted), and <code>color</code> specifies the color of the line.</p>
 <p>In this case, we set <code>x = I(0.01)</code>. The <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code> function tells <code>ggplot2</code> to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> plots with different x-axis scales - <code>x = I(0.01)</code> will <em>always</em> mean “nudged a little bit from the far left of the plot”.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span></span>
 <span>    yintercept <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>    lty <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"purple"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
@@ -830,11 +849,1051 @@ Figure&nbsp;A.10: Annotating a specific panel in an assembly plot, using <code><
 </div>
 </div>
 </div>
-</section></section><section id="themes" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="themes">
-<span class="header-section-number">A.2</span> Themes</h2>
+</section></section><section id="facets" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="facets">
+<span class="header-section-number">A.2</span> Facets</h2>
+<p>One of the sets of arguments passed through <code>...</code> could be described as “facet” arguments, as these influence the appearance of ‘faceted’ (i.e., multi-panel) plots. All of these arguments get passed straight through to either <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">ggplot2::facet_wrap()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">ggplot2::facet_grid()</a></code> - see the documentation for these functions to learn more.</p>
+<p>To demonstrate, lets consider this heatmap plot:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heatmap_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">:</span><span class="fl">2005</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">heatmap_data</span>, type <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-heatmap-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-heatmap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-heatmap-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;A.11: A standard heatmap plot."><img src="appendix-annotate_files/figure-html/fig-heatmap-1-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.11: A standard heatmap plot.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>In this case, all three of the panels share the same x- and y-scales. Despite this, some readers may prefer that each of the axes are labelled, even if they are identical. The <code>axes</code> argument (which defaults to <code>"margins"</code>) controls this; it can either be <code>"all_x"</code>, <code>"all_y"</code> or <code>"all"</code> to make axes appear.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">heatmap_data</span>, type <span class="op">=</span> <span class="st">"year"</span>, axes <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-heatmap-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-heatmap-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;A.12: A heatmap with all axes labelled."><img src="appendix-annotate_files/figure-html/fig-heatmap-2-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.12: A heatmap with all axes labelled.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-heatmap-2" class="quarto-xref">Figure&nbsp;<span>A.12</span></a> clearly shows that our data finishes at the end of June 2005, meaning the rest of that panel is empty. It may be appropriate to simply exclude the rest of 2005 from our plot. To do so, we can use the <code>scales</code> argument, which can take <code>"free"</code>, <code>"free_y"</code>, <code>"free_x"</code> or <code>"fixed"</code> (the default).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">heatmap_data</span>, type <span class="op">=</span> <span class="st">"year"</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-heatmap-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-heatmap-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-heatmap-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;A.13: A heatmap with a ‘free’ x-axis."><img src="appendix-annotate_files/figure-html/fig-heatmap-3-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.13: A heatmap with a ‘free’ x-axis.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-heatmap-3" class="quarto-xref">Figure&nbsp;<span>A.13</span></a> is an improvement, but the way in which the 2005 panel is “stretched” is aesthetically unappealing. The <code>space</code> argument allows the width or heights of panels to match the scale of data displayed on the axes. When only one <code>type</code> is specified, this argument can either take <code>"fixed"</code> (the default), <code>"free_x"</code> or <code>"free_y"</code>, and will force the plot to be 1 dimensional row or column of plots rather than wrapped into a square grid. In this case, our plot is already a row of three so no change is apparent. If there are two values given to <code>type</code>, and therefore the plot is a 2D matrix of panels, <code>space</code> can also take <code>"free"</code> to vary both x and y.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">heatmap_data</span>, type <span class="op">=</span> <span class="st">"year"</span>, scales <span class="op">=</span> <span class="st">"free_x"</span>, space <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-heatmap-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-heatmap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-annotate_files/figure-html/fig-heatmap-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match the data displayed on the axes."><img src="appendix-annotate_files/figure-html/fig-heatmap-4-1.png" class="img-fluid figure-img" width="768"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match the data displayed on the axes.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>All of <code>nrow</code>, <code>ncol</code>, <code>scales</code>, <code>space</code>, <code>axes</code>, <code>axis.labels</code>, <code>switch</code> and <code>strip.position</code> can be passed through <code>...</code> to be used to customise multi-panel plot layout and appearance.</p>
+<p>Note that not all of these arguments will always work in all functions. For example, plots on radial axes like <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> fix their x-axis (radial axis) range to be from 0 to 360 to represent compass directions, so <code>scales = "free_x"</code> will not do anything.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Legacy Options
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Users of older versions of <span class="pkg">openair</span> may recall the <code>x.relation</code>, <code>y.relation</code> and <code>layout</code> options. These mapped onto <span class="pkg">lattice</span> arguments, which pre-dated <span class="pkg">ggplot2</span> as the plotting engine for <span class="pkg">openair</span>. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="mkafccxafk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mkafccxafk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mkafccxafk thead, #mkafccxafk tbody, #mkafccxafk tfoot, #mkafccxafk tr, #mkafccxafk td, #mkafccxafk th {
+  border-style: none;
+}
+
+#mkafccxafk p {
+  margin: 0;
+  padding: 0;
+}
+
+#mkafccxafk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mkafccxafk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mkafccxafk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mkafccxafk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mkafccxafk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mkafccxafk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mkafccxafk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mkafccxafk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mkafccxafk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mkafccxafk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mkafccxafk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mkafccxafk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mkafccxafk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mkafccxafk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mkafccxafk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkafccxafk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mkafccxafk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mkafccxafk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mkafccxafk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkafccxafk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mkafccxafk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkafccxafk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mkafccxafk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkafccxafk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mkafccxafk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkafccxafk .gt_left {
+  text-align: left;
+}
+
+#mkafccxafk .gt_center {
+  text-align: center;
+}
+
+#mkafccxafk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mkafccxafk .gt_font_normal {
+  font-weight: normal;
+}
+
+#mkafccxafk .gt_font_bold {
+  font-weight: bold;
+}
+
+#mkafccxafk .gt_font_italic {
+  font-style: italic;
+}
+
+#mkafccxafk .gt_super {
+  font-size: 65%;
+}
+
+#mkafccxafk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mkafccxafk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mkafccxafk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mkafccxafk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mkafccxafk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mkafccxafk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mkafccxafk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mkafccxafk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mkafccxafk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" scope="col" id="legacy">
+        <div class="gt_column_spanner">legacy</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="new">
+        <div class="gt_column_spanner">new</div>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="legacy_layout"><span data-qmd-base64="YGxheW91dGA="><span class="gt_from_md"><code>layout</code></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="new_ncol"><span data-qmd-base64="YG5jb2xg"><span class="gt_from_md"><code>ncol</code></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="new_nrow"><span data-qmd-base64="YG5yb3dg"><span class="gt_from_md"><code>nrow</code></span></span></th>
+    </tr>
+</thead>
+<tbody class="gt_table_body"><tr>
+<td headers="legacy_layout" class="gt_row gt_left"><span data-qmd-base64="YGMoMiwgNSlg"><span class="gt_from_md"><code>c(2, 5)</code></span></span></td>
+<td headers="new_ncol" class="gt_row gt_left"><span data-qmd-base64="YDJg"><span class="gt_from_md"><code>2</code></span></span></td>
+<td headers="new_nrow" class="gt_row gt_left"><span data-qmd-base64="YDVg"><span class="gt_from_md"><code>5</code></span></span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="wtpmqkyylg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wtpmqkyylg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wtpmqkyylg thead, #wtpmqkyylg tbody, #wtpmqkyylg tfoot, #wtpmqkyylg tr, #wtpmqkyylg td, #wtpmqkyylg th {
+  border-style: none;
+}
+
+#wtpmqkyylg p {
+  margin: 0;
+  padding: 0;
+}
+
+#wtpmqkyylg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wtpmqkyylg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wtpmqkyylg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wtpmqkyylg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wtpmqkyylg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wtpmqkyylg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wtpmqkyylg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wtpmqkyylg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wtpmqkyylg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wtpmqkyylg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wtpmqkyylg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wtpmqkyylg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wtpmqkyylg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wtpmqkyylg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wtpmqkyylg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtpmqkyylg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wtpmqkyylg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wtpmqkyylg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wtpmqkyylg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtpmqkyylg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wtpmqkyylg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtpmqkyylg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wtpmqkyylg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtpmqkyylg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wtpmqkyylg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtpmqkyylg .gt_left {
+  text-align: left;
+}
+
+#wtpmqkyylg .gt_center {
+  text-align: center;
+}
+
+#wtpmqkyylg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wtpmqkyylg .gt_font_normal {
+  font-weight: normal;
+}
+
+#wtpmqkyylg .gt_font_bold {
+  font-weight: bold;
+}
+
+#wtpmqkyylg .gt_font_italic {
+  font-style: italic;
+}
+
+#wtpmqkyylg .gt_super {
+  font-size: 65%;
+}
+
+#wtpmqkyylg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wtpmqkyylg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wtpmqkyylg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wtpmqkyylg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wtpmqkyylg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wtpmqkyylg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wtpmqkyylg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wtpmqkyylg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wtpmqkyylg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="legacy">
+        <div class="gt_column_spanner">legacy</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" scope="col" id="new">
+        <div class="gt_column_spanner">new</div>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="legacy_x.relation"><span data-qmd-base64="YHgucmVsYXRpb25g"><span class="gt_from_md"><code>x.relation</code></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="legacy_y.relation"><span data-qmd-base64="YHkucmVsYXRpb25g"><span class="gt_from_md"><code>y.relation</code></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="new_scales"><span data-qmd-base64="YHNjYWxlc2A="><span class="gt_from_md"><code>scales</code></span></span></th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="legacy_x.relation" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlJ2A="><span class="gt_from_md"><code>'free'</code></span></span></td>
+<td headers="legacy_y.relation" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlJ2A="><span class="gt_from_md"><code>'free'</code></span></span></td>
+<td headers="new_scales" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlJ2A="><span class="gt_from_md"><code>'free'</code></span></span></td>
+</tr>
+<tr>
+<td headers="legacy_x.relation" class="gt_row gt_left"><span data-qmd-base64="YCdzYW1lJ2A="><span class="gt_from_md"><code>'same'</code></span></span></td>
+<td headers="legacy_y.relation" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlJ2A="><span class="gt_from_md"><code>'free'</code></span></span></td>
+<td headers="new_scales" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlX3knYA=="><span class="gt_from_md"><code>'free_y'</code></span></span></td>
+</tr>
+<tr>
+<td headers="legacy_x.relation" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlJ2A="><span class="gt_from_md"><code>'free'</code></span></span></td>
+<td headers="legacy_y.relation" class="gt_row gt_left"><span data-qmd-base64="YCdzYW1lJ2A="><span class="gt_from_md"><code>'same'</code></span></span></td>
+<td headers="new_scales" class="gt_row gt_left"><span data-qmd-base64="YCdmcmVlX3gnYA=="><span class="gt_from_md"><code>'free_x'</code></span></span></td>
+</tr>
+<tr>
+<td headers="legacy_x.relation" class="gt_row gt_left"><span data-qmd-base64="YCdzYW1lJ2A="><span class="gt_from_md"><code>'same'</code></span></span></td>
+<td headers="legacy_y.relation" class="gt_row gt_left"><span data-qmd-base64="YCdzYW1lJ2A="><span class="gt_from_md"><code>'same'</code></span></span></td>
+<td headers="new_scales" class="gt_row gt_left"><span data-qmd-base64="YCdmaXhlZCdg"><span class="gt_from_md"><code>'fixed'</code></span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="themes" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="themes">
+<span class="header-section-number">A.3</span> Themes</h2>
 <p>With <span class="pkg">ggplot2</span> it is simple to control the “theme” of your plot (i.e., all non-data elements) using the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code> function. There is an excellent blog post about <span class="pkg">ggplot2</span> stlying at <a href="https://tidyverse.org/blog/2025/10/ggplot2-styling/" class="uri">https://tidyverse.org/blog/2025/10/ggplot2-styling/</a>, but below we demonstrate a few examples of tweaking the plot style.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
 <span>    text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>,</span>
 <span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span></span>
@@ -866,37 +1925,37 @@ Figure&nbsp;A.10: Annotating a specific panel in an assembly plot, using <code><
 <div class="cell-output-display">
 <div id="fig-scatter-plot-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;A.11: Customising the plot theme with theme()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;A.15: Customising the plot theme with theme()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.11: Customising the plot theme with <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code>.
+Figure&nbsp;A.15: Customising the plot theme with <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code>.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>It is also possible to set a global ‘complete’ theme. This could be a default <span class="pkg">ggplot2</span> theme, or one from an extension package. This could be helpful to ensure your <span class="pkg">openair</span> plots align with other plots you’re already making in <span class="pkg">ggplot2</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>, avg.time <span class="op">=</span> <span class="st">"week"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeplot-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeplot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-timeplot-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;A.12: Setting a global theme to control the styling of all openair plots."><img src="appendix-annotate_files/figure-html/fig-timeplot-theme-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-timeplot-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;A.16: Setting a global theme to control the styling of all openair plots."><img src="appendix-annotate_files/figure-html/fig-timeplot-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeplot-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.12: Setting a global theme to control the styling of all openair plots.
+Figure&nbsp;A.16: Setting a global theme to control the styling of all openair plots.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>To reset this behaviour, reset the global theme to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey()</a></code>. This is the <span class="pkg">ggplot2</span> default, and makes all of the <span class="pkg">openair</span> functions restore their default behaviour. If you’d like to actually use <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey()</a></code>, set your global theme to something like <code>theme_grey(10.01)</code> which is different <em>enough</em> to disable <span class="pkg">openair</span>’s overrides.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that some functions do their own <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code> manipulations, so your mileage may vary as to which of your options are honoured - or whether they do unexpected things to your plot!</p>
 <p>A related function is <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code>, which can be useful for controlling how axes and legends behave. These are typically set within <code>openair</code> functions, but can be overridden by more advanced users. Useful arguments include <code>position</code> and <code>angle</code>. For categorical scales, <code>check.overlap</code> or <code>n.dodge</code> can help mitigate overlapping axis labels.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html">guide_axis</a></span><span class="op">(</span></span>
 <span>      position <span class="op">=</span> <span class="st">"top"</span>,</span>
@@ -907,59 +1966,67 @@ Figure&nbsp;A.12: Setting a global theme to control the styling of all openair p
 <div class="cell-output-display">
 <div id="fig-scatter-plot-guides" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-plot-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;A.13: Customising axes with guides()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;A.17: Customising axes with guides()."><img src="appendix-annotate_files/figure-html/fig-scatter-plot-guides-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-plot-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.13: Customising axes with <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code>.
+Figure&nbsp;A.17: Customising axes with <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code>.
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="extensions" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="extensions">
-<span class="header-section-number">A.3</span> Extensions</h2>
+</section><section id="extensions" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="extensions">
+<span class="header-section-number">A.4</span> Extensions</h2>
 <p>There are <a href="https://exts.ggplot2.tidyverse.org/">many <code>ggplot2</code> extensions</a> out there which you can take advantage of in extending your <span class="pkg">openair</span> plots.</p>
 <p>One useful example is <span class="pkg">patchwork</span>, which provides an elegant API for combining multiple plots together into one assembly. This is how <code>timeVariaiton()</code> works under-the-hood, but users should feel free to assemble plots however they see fit.</p>
 <p>The package documentation for <span class="pkg">patchwork</span> is excellent and can be found <a href="https://patchwork.data-imaginist.com/">here</a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_varplot_hour</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  <span class="st">"nox"</span>,</span>
 <span>  <span class="st">"hour"</span>,</span>
-<span>  sub <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  caption <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tag <span class="op">=</span> <span class="st">"A"</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
 <span></span>
 <span><span class="va">p_varplot_weekday</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  <span class="st">"nox"</span>,</span>
 <span>  <span class="st">"weekday"</span>,</span>
-<span>  sub <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  caption <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tag <span class="op">=</span> <span class="st">"B"</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
 <span></span>
-<span><span class="va">p_timeplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"nox"</span>, avg.time <span class="op">=</span> <span class="st">"month"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span><span class="va">p_timeplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  <span class="st">"nox"</span>,</span>
+<span>  avg.time <span class="op">=</span> <span class="st">"month"</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tag <span class="op">=</span> <span class="st">"C"</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
 <span></span>
-<span><span class="va">p_heatmap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"default"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
+<span><span class="va">p_heatmap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"default"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, tag <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span></span>
 <span></span>
 <span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">p_varplot_hour</span> <span class="op">|</span> <span class="va">p_varplot_weekday</span><span class="op">)</span> <span class="op">/</span> <span class="va">p_timeplot</span><span class="op">)</span> <span class="op">|</span> <span class="va">p_heatmap</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-patchwork-assembly" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-patchwork-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots into one assembly."><img src="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;A.18: Using the patchwork package to combine multiple openair plots into one assembly. The tag argument is being used to label each one with a letter"><img src="appendix-annotate_files/figure-html/fig-patchwork-assembly-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-patchwork-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots into one assembly.
+Figure&nbsp;A.18: Using the patchwork package to combine multiple openair plots into one assembly. The <code>tag</code> argument is being used to label each one with a letter
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Another really useful package is <span class="pkg">geomtextpath</span>, which combines labels and lines and paths for nicer annotations:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allancameron.github.io/geomtextpath/">geomtextpath</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allancameron.github.io/geomtextpath/">geomtextpath</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">scatter_object</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
@@ -978,7 +2045,7 @@ Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots 
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="appendix-annotate_files/figure-html/geomtextpath-annotation-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."><img src="appendix-annotate_files/figure-html/geomtextpath-annotation-1.png" class="img-fluid figure-img" width="672" alt="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."></a></p>
+<figure class="figure"><p><a href="appendix-annotate_files/figure-html/geomtextpath-annotation-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."><img src="appendix-annotate_files/figure-html/geomtextpath-annotation-1.png" class="img-fluid figure-img" width="672" alt="Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."></a></p>
 <figcaption>Using the geomtextpath package to add text along a path, and horizontal reference lines with labels.</figcaption></figure>
 </div>
 </div>
@@ -986,7 +2053,7 @@ Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots 
 <p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">legendry::guide_colring()</a></code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
 <p>This example highlights that sometimes you may need to take on further tweaks as you get deeper into customising your plots. Here, it was necessary to reset the colour scale to set appropriate labels and breaks.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, z <span class="op">=</span> <span class="st">"wd"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, z <span class="op">=</span> <span class="st">"wd"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
 <span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu"><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">guide_colring</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
@@ -998,17 +2065,17 @@ Figure&nbsp;A.14: Using the patchwork package to combine multiple openair plots 
 <div class="cell-output-display">
 <div id="fig-legendry-guide" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-legendry-guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-legendry-guide-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;A.15: Using the legendry package to create a custom legend for a scatter plot."><img src="appendix-annotate_files/figure-html/fig-legendry-guide-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-legendry-guide-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure&nbsp;A.19: Using the legendry package to create a custom legend for a scatter plot."><img src="appendix-annotate_files/figure-html/fig-legendry-guide-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-legendry-guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.15: Using the legendry package to create a custom legend for a scatter plot.
+Figure&nbsp;A.19: Using the legendry package to create a custom legend for a scatter plot.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Many extension packages usefully provide themes that can be easily set globally to apply to <span class="pkg">openair</span> plots. For example, for those working with or for the UK Government, the <span class="pkg">afcharts</span> package exports <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code> for accessible, Government Statistical Service-approved plot styling.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">afcharts</span><span class="fu">::</span><span class="fu"><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">theme_af</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">afcharts</span><span class="fu">::</span><span class="fu"><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">theme_af</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -1020,29 +2087,29 @@ Figure&nbsp;A.15: Using the legendry package to create a custom legend for a sca
 <div class="cell-output-display">
 <div id="fig-afcharts-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-afcharts-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;A.16: Setting a global theme from an extension package, in this case afcharts::theme_af(), and creating a timePlot()."><img src="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;A.20: Setting a global theme from an extension package, in this case afcharts::theme_af(), and creating a timePlot()."><img src="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-afcharts-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.16: Setting a global theme from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>, and creating a <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>.
+Figure&nbsp;A.20: Setting a global theme from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>, and creating a <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"gaf.seq"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"gaf.seq"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-windrose-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-windrose-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;A.17: Customising the theme of a plot from an extension package, in this case afcharts::theme_af()."><img src="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;A.21: Customising the theme of a plot from an extension package, in this case afcharts::theme_af()."><img src="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windrose-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.17: Customising the theme of a plot from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>.
+Figure&nbsp;A.21: Customising the theme of a plot from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_gray</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -1459,8 +2526,8 @@ Figure&nbsp;A.17: Customising the theme of a plot from an extension package, in 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../sections/appendices/appendix-hysplit.html" class="pagination-link" aria-label="Production of HYSPLIT trajectory files">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../sections/appendices/appendix-colours.html" class="pagination-link" aria-label="Colour Palettes">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

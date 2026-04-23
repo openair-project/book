@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
-<title>27&nbsp; Scatter plots – The openair book</title>
+<title>29&nbsp; Scatter plots – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,17 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/references.html" rel="next">
 <link href="../../sections/utilities/utility-functions.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -140,7 +140,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/scatter-plot.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/scatter-plot.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -339,6 +339,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -353,19 +365,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -382,25 +394,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -417,13 +429,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -451,26 +463,32 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -483,18 +501,18 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-ScatterPurpose" id="toc-sec-ScatterPurpose" class="nav-link active" data-scroll-target="#sec-ScatterPurpose"><span class="header-section-number">27.1</span> Purpose</a></li>
+<li><a href="#sec-ScatterPurpose" id="toc-sec-ScatterPurpose" class="nav-link active" data-scroll-target="#sec-ScatterPurpose"><span class="header-section-number">29.1</span> Purpose</a></li>
   <li>
-<a href="#sec-ScatterEx" id="toc-sec-ScatterEx" class="nav-link" data-scroll-target="#sec-ScatterEx"><span class="header-section-number">27.2</span> Examples</a>
+<a href="#sec-ScatterEx" id="toc-sec-ScatterEx" class="nav-link" data-scroll-target="#sec-ScatterEx"><span class="header-section-number">29.2</span> Examples</a>
   <ul class="collapse">
-<li><a href="#sec-hexbin" id="toc-sec-hexbin" class="nav-link" data-scroll-target="#sec-hexbin"><span class="header-section-number">27.2.1</span> Hexagonal binning</a></li>
+<li><a href="#sec-hexbin" id="toc-sec-hexbin" class="nav-link" data-scroll-target="#sec-hexbin"><span class="header-section-number">29.2.1</span> Hexagonal binning</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/utilities/scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/scatter-plot.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-scatterPlot" class="quarto-section-identifier"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/utilities/utility-functions.html">Utility functions</a></li><li class="breadcrumb-item"><a href="../../sections/utilities/scatter-plot.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-scatterPlot" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></h1>
 </div>
 
 
@@ -514,8 +532,8 @@ window.Quarto = {
   
 
 
-</header><section id="sec-ScatterPurpose" class="level2" data-number="27.1"><h2 data-number="27.1" class="anchored" data-anchor-id="sec-ScatterPurpose">
-<span class="header-section-number">27.1</span> Purpose</h2>
+</header><section id="sec-ScatterPurpose" class="level2" data-number="29.1"><h2 data-number="29.1" class="anchored" data-anchor-id="sec-ScatterPurpose">
+<span class="header-section-number">29.1</span> Purpose</h2>
 <p>Scatter plots are extremely useful and a very commonly used analysis technique for considering how variables relate to one another. R does of course have many capabilities for plotting data in this way. However, it can be tricky to add linear relationships, or split scatter plots by levels of other variables etc. The purpose of the <code>scatterPlot</code> function is to make it straightforward to consider how variables are related to one another in a way consistent with other <span class="pkg">openair</span> functions. We have added several capabilities that can be used just by setting different options, some of which are shown below.</p>
 <p>There is less need for this function now that <span class="pkg">ggplot2</span> is available, but it still has some benefits for interactive use.</p>
 <ul>
@@ -528,8 +546,8 @@ window.Quarto = {
 <li><p>It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g.&nbsp;hourly, daily, weekly etc. using the <code>timeAverage</code> function and the argument <code>avg.time</code>.</p></li>
 </ul>
 <p>The <code>scatterPlot</code> function isn’t really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other <span class="pkg">openair</span> functions. Nevertheless, along with the <code>timePlot</code> function they do form an important part of <span class="pkg">openair</span> because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.</p>
-</section><section id="sec-ScatterEx" class="level2" data-number="27.2"><h2 data-number="27.2" class="anchored" data-anchor-id="sec-ScatterEx">
-<span class="header-section-number">27.2</span> Examples</h2>
+</section><section id="sec-ScatterEx" class="level2" data-number="29.2"><h2 data-number="29.2" class="anchored" data-anchor-id="sec-ScatterEx">
+<span class="header-section-number">29.2</span> Examples</h2>
 <p>We provide a few examples of use and as usual, users are directed towards the help pages (type <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">?scatterPlot</a></code>) for more extensive examples.</p>
 <p>First we select a subset of data (2003) using the <span class="pkg">openair</span> <code>selectByDate</code> function and plot NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub></p>
 <div class="cell">
@@ -540,34 +558,34 @@ window.Quarto = {
 <div class="cell-output-display">
 <div id="fig-scatterPlot1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlot1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;27.1: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road for 2003."><img src="scatter-plot_files/figure-html/fig-scatterPlot1-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlot1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;29.1: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road for 2003."><img src="scatter-plot_files/figure-html/fig-scatterPlot1-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.1: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road for 2003.
+Figure&nbsp;29.1: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road for 2003.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Often with several years of data, points are over-plotted and it can be very difficult to see what the underlying relationship looks like. One very effective method to use in these situations is to ‘bin’ the data and to colour the intervals by the number of counts of occurrences in each bin. There are various ways of doing this, but ‘hexagonal binning’ is particularly effective because of the way hexagons can be placed next to one another.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<section id="sec-hexbin" class="level3" data-number="27.2.1"><h3 data-number="27.2.1" class="anchored" data-anchor-id="sec-hexbin">
-<span class="header-section-number">27.2.1</span> Hexagonal binning</h3>
-<p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>27.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>27.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), <code>trans = function(x) log(x)</code> and <code>inv = function(x) exp(x)</code>. For a square root transform use <code>trans = sqrt</code> and <code>inv =  function(x) x^2</code>. To not apply any transformation <code>trans = NULL</code> and <code>inv = NULL</code> should be used.</p>
+<section id="sec-hexbin" class="level3" data-number="29.2.1"><h3 data-number="29.2.1" class="anchored" data-anchor-id="sec-hexbin">
+<span class="header-section-number">29.2.1</span> Hexagonal binning</h3>
+<p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), <code>trans = function(x) log(x)</code> and <code>inv = function(x) exp(x)</code>. For a square root transform use <code>trans = sqrt</code> and <code>inv =  function(x) x^2</code>. To not apply any transformation <code>trans = NULL</code> and <code>inv = NULL</code> should be used.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">data2003</span>,</span>
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"hexbin"</span>,</span>
-<span>  col <span class="op">=</span> <span class="st">"turbo"</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
 <span>  bins <span class="op">=</span> <span class="fl">50</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-scatterPlot2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;27.2: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road using hexagonal binning. The number of occurrences in each bin is colour-coded (not on a linear scale). It is now possible to see where most of the data lie and a better indication of the relationship between NOx and NO2 is revealed."><img src="scatter-plot_files/figure-html/fig-scatterPlot2-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;29.2: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road using hexagonal binning. The number of occurrences in each bin is colour-coded (not on a linear scale). It is now possible to see where most of the data lie and a better indication of the relationship between NOx and NO2 is revealed."><img src="scatter-plot_files/figure-html/fig-scatterPlot2-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road using hexagonal binning. The number of occurrences in each bin is colour-coded (not on a linear scale). It is now possible to see where most of the data lie and a better indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> is revealed.
+Figure&nbsp;29.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road using hexagonal binning. The number of occurrences in each bin is colour-coded (not on a linear scale). It is now possible to see where most of the data lie and a better indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> is revealed.
 </figcaption></figure>
 </div>
 </div>
@@ -579,12 +597,12 @@ Figure&nbsp;27.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"hexbin"</span>,</span>
-<span>  col <span class="op">=</span> <span class="st">"turbo"</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
 <span>  border <span class="op">=</span> <span class="st">"grey"</span>,</span>
 <span>  bins <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in <code>scatterPlot</code> with the <code>method =   "density"</code> option. Such a plot is shown in <a href="#fig-scatterPlotDens" class="quarto-xref">Figure&nbsp;<span>27.3</span></a>.</p>
+<p>The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in <code>scatterPlot</code> with the <code>method =   "density"</code> option. Such a plot is shown in <a href="#fig-scatterPlotDens" class="quarto-xref">Figure&nbsp;<span>29.3</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
@@ -596,10 +614,10 @@ Figure&nbsp;27.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <div class="cell-output-display">
 <div id="fig-scatterPlotDens" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlotDens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlotDens-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;27.3: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road using a kernel density estimate to show where most of the points lie. The intensity is a measure of how many points lie in a unit area of NOx and NO2 concentration."><img src="scatter-plot_files/figure-html/fig-scatterPlotDens-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlotDens-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;29.3: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road using a kernel density estimate to show where most of the points lie. The intensity is a measure of how many points lie in a unit area of NOx and NO2 concentration."><img src="scatter-plot_files/figure-html/fig-scatterPlotDens-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlotDens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.3: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road using a kernel density estimate to show where most of the points lie. The <em>intensity</em> is a measure of how many points lie in a unit area of NO<sub>x</sub> and NO<sub>2</sub> concentration.
+Figure&nbsp;29.3: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road using a kernel density estimate to show where most of the points lie. The <em>intensity</em> is a measure of how many points lie in a unit area of NO<sub>x</sub> and NO<sub>2</sub> concentration.
 </figcaption></figure>
 </div>
 </div>
@@ -613,15 +631,16 @@ Figure&nbsp;27.3: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <span>  type <span class="op">=</span> <span class="st">"o3"</span>,</span>
 <span>  smooth <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  linear <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span>  ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-scatterPlot3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlot3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;27.4: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road by different levels of O3."><img src="scatter-plot_files/figure-html/fig-scatterPlot3-1.png" class="img-fluid figure-img" style="width:65.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlot3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;29.4: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road by different levels of O3."><img src="scatter-plot_files/figure-html/fig-scatterPlot3-1.png" class="img-fluid figure-img" style="width:65.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlot3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road by different levels of O<sub>3</sub>.
+Figure&nbsp;29.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road by different levels of O<sub>3</sub>.
 </figcaption></figure>
 </div>
 </div>
@@ -652,23 +671,23 @@ Figure&nbsp;27.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <pre><code># A tibble: 6 × 4
   date                  nox pollutant value
   &lt;dttm&gt;              &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
-1 1997-12-29 00:00:00  128. pm10       21.8
-2 1997-12-29 00:00:00  128. pm25       NA  
-3 1998-01-05 00:00:00  189. pm10       33.6
-4 1998-01-05 00:00:00  189. pm25       NA  
-5 1998-01-12 00:00:00  203. pm10       29.1
-6 1998-01-12 00:00:00  203. pm25       NA  </code></pre>
+1 1997-12-28 00:00:00  135. pm10       22.0
+2 1997-12-28 00:00:00  135. pm25       NA  
+3 1998-01-04 00:00:00  177. pm10       31.6
+4 1998-01-04 00:00:00  177. pm25       NA  
+5 1998-01-11 00:00:00  212. pm10       31.8
+6 1998-01-11 00:00:00  212. pm25       NA  </code></pre>
 </div>
 </div>
-<p>Now we will plot weekly NO<sub>x</sub> versus PM<sub>10</sub> and PM<sub>2.5</sub> and fit a linear equation to both — and adjust some of the symbols (shown in <a href="#fig-scatterPlotTwo" class="quarto-xref">Figure&nbsp;<span>27.5</span></a>).</p>
+<p>Now we will plot weekly NO<sub>x</sub> versus PM<sub>10</sub> and PM<sub>2.5</sub> and fit a linear equation to both — and adjust some of the symbols (shown in <a href="#fig-scatterPlotTwo" class="quarto-xref">Figure&nbsp;<span>29.5</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">subdat</span>,</span>
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"pollutant"</span>,</span>
-<span>  pch <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
-<span>  cex <span class="op">=</span> <span class="fl">1.6</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">1.6</span>,</span>
 <span>  linear <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"nox (ppb)"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"PM concentration (ug/m3)"</span></span>
@@ -676,10 +695,10 @@ Figure&nbsp;27.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <div class="cell-output-display">
 <div id="fig-scatterPlotTwo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlotTwo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlotTwo-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;27.5: Scatter plot of weekly NOx vs.&nbsp;PM10 and PM2.5 at Marylebone Road with linear equations shown and plot symbols modified."><img src="scatter-plot_files/figure-html/fig-scatterPlotTwo-1.png" class="img-fluid figure-img" style="width:67.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlotTwo-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;29.5: Scatter plot of weekly NOx vs.&nbsp;PM10 and PM2.5 at Marylebone Road with linear equations shown and plot symbols modified."><img src="scatter-plot_files/figure-html/fig-scatterPlotTwo-1.png" class="img-fluid figure-img" style="width:67.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlotTwo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub><em>and</em> PM<sub>2.5</sub> at Marylebone Road with linear equations shown and plot symbols modified.
+Figure&nbsp;29.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub><em>and</em> PM<sub>2.5</sub> at Marylebone Road with linear equations shown and plot symbols modified.
 </figcaption></figure>
 </div>
 </div>
@@ -691,8 +710,8 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"pollutant"</span>,</span>
-<span>  pch <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
-<span>  cex <span class="op">=</span> <span class="fl">1.6</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">1.6</span>,</span>
 <span>  linear <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"nox (ppb)"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"PM concentration (ug/m3)"</span>,</span>
@@ -706,16 +725,16 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 <span>  x <span class="op">=</span> <span class="st">"nox"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"pollutant"</span>,</span>
-<span>  pch <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
-<span>  cex <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">17</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  linear <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"nox (ppb)"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"PM concentration (ug/m3)"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"season"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Finally, we show how to plot a continuous colour scale for a third <em>numeric</em> variable setting the value of <code>z</code> to the third variable. <a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>27.6</span></a> shows again the relationship between NO<sub>x</sub> and NO<sub>2</sub> but this time colour-coded by the concentration of O<sub>3</sub>. We also take the opportunity to split the data into seasons and weekday/weekend by setting <code>type =   c("season", "weekend")</code>. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O<sub>3</sub> and colouring the data by the concentration of O<sub>3</sub> helps to show how O<sub>3</sub> concentrations affect NO<sub>2</sub> concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO<sub>2</sub> concentrations are associated with high O<sub>3</sub> concentrations. Indeed there are some hours where NO<sub>2</sub> is &gt;100 ppb at quite low concentrations of NO<sub>x</sub> (<span class="math inline">\(\approx\)</span> 200 ppb). It would also be interesting instead of using O<sub>3</sub> concentrations from Marylebone Road to use O<sub>3</sub> from a background site.</p>
-<p><a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>27.6</span></a> was very easily produced but contains a huge amount of useful information showing the relationship between NO<sub>x</sub> and NO<sub>2</sub> dependent upon the concentration of O<sub>3</sub>, the season and the day of the week. There are of course numerous other plots that are equally easily produced.</p>
+<p>Finally, we show how to plot a continuous colour scale for a third <em>numeric</em> variable setting the value of <code>z</code> to the third variable. <a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>29.6</span></a> shows again the relationship between NO<sub>x</sub> and NO<sub>2</sub> but this time colour-coded by the concentration of O<sub>3</sub>. We also take the opportunity to split the data into seasons and weekday/weekend by setting <code>type =   c("season", "weekend")</code>. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O<sub>3</sub> and colouring the data by the concentration of O<sub>3</sub> helps to show how O<sub>3</sub> concentrations affect NO<sub>2</sub> concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO<sub>2</sub> concentrations are associated with high O<sub>3</sub> concentrations. Indeed there are some hours where NO<sub>2</sub> is &gt;100 ppb at quite low concentrations of NO<sub>x</sub> (<span class="math inline">\(\approx\)</span> 200 ppb). It would also be interesting instead of using O<sub>3</sub> concentrations from Marylebone Road to use O<sub>3</sub> from a background site.</p>
+<p><a href="#fig-scatterPlot4" class="quarto-xref">Figure&nbsp;<span>29.6</span></a> was very easily produced but contains a huge amount of useful information showing the relationship between NO<sub>x</sub> and NO<sub>2</sub> dependent upon the concentration of O<sub>3</sub>, the season and the day of the week. There are of course numerous other plots that are equally easily produced.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">data2003</span>,</span>
@@ -728,15 +747,15 @@ Figure&nbsp;27.5: Scatter plot of weekly NO<sub>x</sub> vs.&nbsp;PM<sub>10</sub>
 <div class="cell-output-display">
 <div id="fig-scatterPlot4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlot4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;27.6: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road by different levels of O3 split by season and weekday-weekend."><img src="scatter-plot_files/figure-html/fig-scatterPlot4-1.png" class="img-fluid figure-img" width="960"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlot4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;29.6: Scatter plot of hourly NOx vs.&nbsp;NO2 at Marylebone Road by different levels of O3 split by season and weekday-weekend."><img src="scatter-plot_files/figure-html/fig-scatterPlot4-1.png" class="img-fluid figure-img" width="960"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlot4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.6: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road by different levels of O<sub>3</sub> split by season and weekday-weekend.
+Figure&nbsp;29.6: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> at Marylebone Road by different levels of O<sub>3</sub> split by season and weekday-weekend.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-scatterPlot5" class="quarto-xref">Figure&nbsp;<span>27.7</span></a> shows that <code>scatterPlot</code> can also handle dates on the x-axis; in this case shown for SO<sub>2</sub> concentrations coloured by wind direction for August 2003.</p>
+<p><a href="#fig-scatterPlot5" class="quarto-xref">Figure&nbsp;<span>29.7</span></a> shows that <code>scatterPlot</code> can also handle dates on the x-axis; in this case shown for SO<sub>2</sub> concentrations coloured by wind direction for August 2003.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span>, month <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
@@ -748,33 +767,33 @@ Figure&nbsp;27.6: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <div class="cell-output-display">
 <div id="fig-scatterPlot5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlot5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;27.7: Scatter plot of date vs.&nbsp;SO2- at Marylebone Road by different levels of wind direction for August 2003."><img src="scatter-plot_files/figure-html/fig-scatterPlot5-1.png" class="img-fluid figure-img" style="width:85.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;29.7: Scatter plot of date vs.&nbsp;SO2- at Marylebone Road by different levels of wind direction for August 2003."><img src="scatter-plot_files/figure-html/fig-scatterPlot5-1.png" class="img-fluid figure-img" style="width:85.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlot5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.7: Scatter plot of date vs.&nbsp;SO<sub>2</sub>- at Marylebone Road by different levels of wind direction for August 2003.
+Figure&nbsp;29.7: Scatter plot of date vs.&nbsp;SO<sub>2</sub>- at Marylebone Road by different levels of wind direction for August 2003.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>Similar to <a href="../trend-analysis/time-plot.html" class="quarto-xref"><span>Chapter 11</span></a>, <code>scatterPlot</code> can also plot wind vector arrows if wind speed and wind direction are available in the data frame. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>27.8</span></a> shows an example of using the <code>windflow</code> option. The Figure also sets many other options including showing the concentration of O<sub>3</sub> as a colour, setting the colour scale used and selecting a few days of interest using the <code>selectByDate</code> function. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>27.8</span></a> shows that when the wind direction changes to northerly, the concentration of NO<sub>2</sub> decreases and that of O<sub>3</sub> increases.</p>
+<p>Similar to <a href="../trend-analysis/time-plot.html" class="quarto-xref"><span>Chapter 11</span></a>, <code>scatterPlot</code> can also plot wind vector arrows if wind speed and wind direction are available in the data frame. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>29.8</span></a> shows an example of using the <code>windflow</code> option. The Figure also sets many other options including showing the concentration of O<sub>3</sub> as a colour, setting the colour scale used and selecting a few days of interest using the <code>selectByDate</code> function. <a href="#fig-scatterPlotwswd" class="quarto-xref">Figure&nbsp;<span>29.8</span></a> shows that when the wind direction changes to northerly, the concentration of NO<sub>2</sub> decreases and that of O<sub>3</sub> increases.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, start <span class="op">=</span> <span class="st">"1/6/2001"</span>, end <span class="op">=</span> <span class="st">"5/6/2001"</span><span class="op">)</span>,</span>
 <span>  x <span class="op">=</span> <span class="st">"date"</span>,</span>
 <span>  y <span class="op">=</span> <span class="st">"no2"</span>,</span>
 <span>  z <span class="op">=</span> <span class="st">"o3"</span>,</span>
-<span>  cex <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  col <span class="op">=</span> <span class="st">"increment"</span>,</span>
-<span>  windflow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"grey50"</span>, lwd <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  cols <span class="op">=</span> <span class="st">"increment"</span>,</span>
+<span>  windflow <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/windflowOpts.html">windflowOpts</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"grey50"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"no2 (ppb)"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-scatterPlotwswd" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatterPlotwswd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="scatter-plot_files/figure-html/fig-scatterPlotwswd-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;27.8: Scatter plot of date vs.&nbsp;NO2 with the colour scale representing O3. The wind flow vectors are also shown."><img src="scatter-plot_files/figure-html/fig-scatterPlotwswd-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="scatter-plot_files/figure-html/fig-scatterPlotwswd-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;29.8: Scatter plot of date vs.&nbsp;NO2 with the colour scale representing O3. The wind flow vectors are also shown."><img src="scatter-plot_files/figure-html/fig-scatterPlotwswd-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterPlotwswd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27.8: Scatter plot of date vs.&nbsp;NO<sub>2</sub> with the colour scale representing O<sub>3</sub>. The wind flow vectors are also shown.
+Figure&nbsp;29.8: Scatter plot of date vs.&nbsp;NO<sub>2</sub> with the colour scale representing O<sub>3</sub>. The wind flow vectors are also shown.
 </figcaption></figure>
 </div>
 </div>
@@ -1190,7 +1209,7 @@ Figure&nbsp;27.8: Scatter plot of date vs.&nbsp;NO<sub>2</sub> with the colour s
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../sections/utilities/utility-functions.html" class="pagination-link" aria-label="Utility functions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

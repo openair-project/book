@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="David Carslaw and Jack Davison">
+<title>Appendix B — Colour Palettes – The openair book</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../sections/appendices/appendix-hysplit.html" rel="next">
+<link href="../../sections/appendices/appendix-annotate.html" rel="prev">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-colours.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">The openair book</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/intro/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Access</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/data-access/access-met-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Directional Analysis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-freq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Polar frequencies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/percentile-roses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Percentile roses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Polar plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/polar-annulus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polar annulus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/directional-analysis/trajectory-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Trajectory analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Time Series and Trends</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time series plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-variation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/calendar-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/time-proportion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Time proportion plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/theil-sen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/smooth-trend.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Smooth trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/run-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Dilution lines and pollutant ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/trend-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Model Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Interactive Maps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Utility functions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#using-colours" id="toc-using-colours" class="nav-link active" data-scroll-target="#using-colours"><span class="header-section-number">B.1</span> Using Colours</a></li>
+  <li><a href="#choosing-a-colour-palette" id="toc-choosing-a-colour-palette" class="nav-link" data-scroll-target="#choosing-a-colour-palette"><span class="header-section-number">B.2</span> Choosing a Colour Palette</a></li>
+  <li>
+<a href="#gallery" id="toc-gallery" class="nav-link" data-scroll-target="#gallery"><span class="header-section-number">B.3</span> Gallery</a>
+  <ul class="collapse">
+<li><a href="#sequential" id="toc-sequential" class="nav-link" data-scroll-target="#sequential"><span class="header-section-number">B.3.1</span> Sequential</a></li>
+  <li><a href="#diverging" id="toc-diverging" class="nav-link" data-scroll-target="#diverging"><span class="header-section-number">B.3.2</span> Diverging</a></li>
+  <li><a href="#qualitative" id="toc-qualitative" class="nav-link" data-scroll-target="#qualitative"><span class="header-section-number">B.3.3</span> Qualitative</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-colours.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-colours.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-colours" class="quarto-section-identifier">Appendix B — Colour Palettes</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jack Davison </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="using-colours" class="level2" data-number="B.1"><h2 data-number="B.1" class="anchored" data-anchor-id="using-colours">
+<span class="header-section-number">B.1</span> Using Colours</h2>
+<p>As well as giving users the option to define their own colours (whether hex-codes like <code>"#FF6347"</code> or built-in R colours like <code>"tomato"</code>), <span class="pkg">openair</span> provides a great number of curated pre-defined colour schemes for users to take advantage of.</p>
+<p>An easy way to access all of the available schemes is by running the <code><a href="https://openair-project.github.io/openair/reference/openSchemes.html">openSchemes()</a></code> function, which returns a table of available palettes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
+<span><span class="va">schemes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/openSchemes.html">openSchemes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">schemes</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  palette   type       max_n
+  &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;
+1 default   sequential    NA
+2 hue       sequential    NA
+3 greyscale sequential    NA
+4 increment sequential    NA
+5 heat      sequential    NA
+6 jet       sequential    NA</code></pre>
+</div>
+</div>
+<p>There are currently 104 schemes available through <span class="pkg">openair</span>. You can simply feed any of these schemes into the <code>cols</code> argument of your plot of choice and they will automatically be applied.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"viridis"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"greyscale"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-cols" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cols-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-1.png" class="lightbox" data-gallery="fig-cols" title="Figure&nbsp;B.1&nbsp;(a): turbo colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-1.png" class="img-fluid figure-img" data-ref-parent="fig-cols" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>turbo</code> colour scheme
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cols-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-2.png" class="lightbox" data-gallery="fig-cols" title="Figure&nbsp;B.1&nbsp;(b): viridis colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-2.png" class="img-fluid figure-img" data-ref-parent="fig-cols" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>viridis</code> colour scheme
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cols-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-3.png" class="lightbox" data-gallery="fig-cols" title="Figure&nbsp;B.1&nbsp;(c): greyscale colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-3.png" class="img-fluid figure-img" data-ref-parent="fig-cols" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) <code>greyscale</code> colour scheme
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.1: Examples of different colour schemes applied to the same plot.
+</figcaption></figure>
+</div>
+<p>There are three kinds of scheme:</p>
+<ul>
+<li><p><code>"sequential"</code> palettes can be interpolated into any number of individual colours. These are most useful for numeric data (e.g., the colourbar of a <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>) or categorical data with some kind of natural order (e.g., “low”, “medium”, “high”).</p></li>
+<li><p><code>"diverging"</code> palettes are similar to sequential palettes, but have a natural middle point (usually white or black) from which two separate sequential schemes diverge. These are useful for functions like <code><a href="https://openair-project.github.io/openair/reference/corPlot.html">corPlot()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/polarDiff.html">polarDiff()</a></code>.</p></li>
+<li><p><code>"qualitative"</code> palettes are typically limited to a certain number of colours, and are typically visually distinct from one another. These are most useful for unordered categorical data (e.g., distinguishing between measured and modelled data, different monitoring sites, etc.).</p></li>
+</ul>
+<p><span class="pkg">openair</span> does not enforce that you use the “correct” kind of palette with the correct kind of plot and, for certain qualitative palettes, will actually attempt to interpolate them for you. This can make some horrible looking plots if misused, as in <a href="#fig-cols-right-wrong" class="quarto-xref">Figure&nbsp;<span>B.2</span></a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"mako"</span>, tag <span class="op">=</span> <span class="st">"✔️"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"Dark2"</span>, tag <span class="op">=</span> <span class="st">"❌"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-cols-right-wrong" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cols-right-wrong-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-right-wrong" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-right-wrong-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-right-wrong-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-right-wrong-1.png" class="lightbox" data-gallery="fig-cols-right-wrong" title="Figure&nbsp;B.2&nbsp;(a): mako sequential colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-right-wrong-1.png" class="img-fluid figure-img" data-ref-parent="fig-cols-right-wrong" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-right-wrong-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>mako</code> sequential colour scheme
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-right-wrong" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-right-wrong-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-right-wrong-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-right-wrong-2.png" class="lightbox" data-gallery="fig-cols-right-wrong" title="Figure&nbsp;B.2&nbsp;(b): Dark2 qualitative colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-right-wrong-2.png" class="img-fluid figure-img" data-ref-parent="fig-cols-right-wrong" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-right-wrong-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>Dark2</code> qualitative colour scheme
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cols-right-wrong-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.2: Examples of ‘correct’ and ‘incorrect’ use of colour schemes. The left-hand plot uses a sequential scheme, which is appropriate for the numeric data being plotted. The right-hand plot uses a qualitative scheme, which is less appropriate for this kind of data.
+</figcaption></figure>
+</div>
+<p>To better control colours, you can use the <code><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colourOpts()</a></code> function instead of a bare scheme name. This allows you to control extra features of the plot:</p>
+<ul>
+<li><p><code>direction</code> allows you to reverse the palette. For example, <code>"viridis"</code> progresses from dark purple at low values to yellow at higher values. <code>direction = -1</code> changes this to have yellow at lower values and dark purple at higher values.</p></li>
+<li><p><code>begin</code> and <code>end</code> allow you to select a subset of the palette. For example, <code>begin = 0.25</code> and <code>end = 0.75</code> would select the middle 50% of the palette, which can be useful for avoiding very light or very dark colours.</p></li>
+<li><p><code>alpha</code> allows you to control the transparency of the colours. This may be useful to combat over-plotting on a particularly busy <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code>, or many be of help if you want to, e.g., overlay plots on a map for an infographic or poster.</p></li>
+<li><p><code>saturation</code> allows you to control the saturation of the colours. Saturation refers to the intensity of the colours, with higher saturation resulting in more vivid colours and lower saturation resulting in more muted colours. <code>saturation</code> defaults to <code>0.5</code>, with <code>0</code> being completely grey and <code>1</code> being super-saturated.</p></li>
+<li><p><code>lightness</code> allows you to control the lightness of the colours. Lightness refers to how light or dark the colours are, with higher lightness resulting in lighter colours and lower lightness resulting in darker colours. <code>lightness</code> defaults to <code>0.5</code>, with <code>0</code> being completely black and <code>1</code> being completely white.</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="st">"turbo"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colorOpts</a></span><span class="op">(</span><span class="st">"turbo"</span>, begin <span class="op">=</span> <span class="fl">0.2</span>, end <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colorOpts</a></span><span class="op">(</span><span class="st">"turbo"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span><span class="va">mydata</span>, cols <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colorOpts</a></span><span class="op">(</span><span class="st">"turbo"</span>, saturation <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-cols-opts" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cols-opts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-opts" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-opts-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-opts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-opts-1.png" class="lightbox" data-gallery="fig-cols-opts" title="Figure&nbsp;B.3&nbsp;(a): The default turbo colour scheme"><img src="appendix-colours_files/figure-html/fig-cols-opts-1.png" class="img-fluid figure-img" data-ref-parent="fig-cols-opts" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-opts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) The default <code>turbo</code> colour scheme
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-opts" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-opts-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-opts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-opts-2.png" class="lightbox" data-gallery="fig-cols-opts" title="Figure&nbsp;B.3&nbsp;(b): The turbo colour scheme with begin = 0.2 and end = 0.8 to subset the palette"><img src="appendix-colours_files/figure-html/fig-cols-opts-2.png" class="img-fluid figure-img" data-ref-parent="fig-cols-opts" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-opts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) The <code>turbo</code> colour scheme with <code>begin = 0.2</code> and <code>end = 0.8</code> to subset the palette
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-opts" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-opts-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-opts-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-opts-3.png" class="lightbox" data-gallery="fig-cols-opts" title="Figure&nbsp;B.3&nbsp;(c): The turbo colour scheme with direction = -1 to reverse the palette"><img src="appendix-colours_files/figure-html/fig-cols-opts-3.png" class="img-fluid figure-img" data-ref-parent="fig-cols-opts" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-opts-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) The <code>turbo</code> colour scheme with <code>direction = -1</code> to reverse the palette
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cols-opts" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-cols-opts-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-cols-opts-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="appendix-colours_files/figure-html/fig-cols-opts-4.png" class="lightbox" data-gallery="fig-cols-opts" title="Figure&nbsp;B.3&nbsp;(d): The turbo colour scheme with saturation = 0.25 to reduce saturation"><img src="appendix-colours_files/figure-html/fig-cols-opts-4.png" class="img-fluid figure-img" data-ref-parent="fig-cols-opts" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cols-opts-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) The <code>turbo</code> colour scheme with <code>saturation = 0.25</code> to reduce saturation
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cols-opts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.3: Examples of using <code><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colourOpts()</a></code> to control the colour scheme.
+</figcaption></figure>
+</div>
+</section><section id="choosing-a-colour-palette" class="level2" data-number="B.2"><h2 data-number="B.2" class="anchored" data-anchor-id="choosing-a-colour-palette">
+<span class="header-section-number">B.2</span> Choosing a Colour Palette</h2>
+<p>Please remember that choosing colours is more than an aesthetic preference!</p>
+<ul>
+<li><p><strong>Many people are colour-blind</strong>, so have trouble distinguishing between certain colours. Most commonly red-green colour-blindness is discussed, but there are <a href="https://www.colourblindawareness.org/colour-blindness/types-of-colour-blindness/">many different types</a>. Similarly, some people without colour vision deficiency may choose to print your plots in black and white.</p></li>
+<li><p>Modern <strong>web accessibility guidelines</strong> demand certain levels of <a href="https://webaim.org/articles/contrast/">colour contrast</a> for accessibility purposes.</p></li>
+<li><p><strong>Colour has cultural meaning</strong> that should be obeyed to make your plots understandable - for example, green is often interpreted as ‘good’ or ‘safe’ whereas red means ‘bad’ or ‘danger’ (as used in the <a href="https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi">UK Daily Air Quality Index</a>). Using green for high concentrations and red for low concentrations may therefore confuse a reader! Equally, it makes sense to use warm colours like orange to represent summer and cool colours like blue to represent winter - the reverse would be unusual and could cause confusion.</p></li>
+<li><p><strong>‘Rainbow’ palettes (e.g., <code>"jet"</code>) are linked to lower accuracy</strong> in certain applications as they are not ‘perceptually uniform’ - often they create artificial ‘bands’ of colour which accentuate certain features despite the scale being smoothly varying. If you do wish to use a rainbow palette, we recommend <code>"turbo"</code> - read more about it <a href="https://research.google/blog/turbo-an-improved-rainbow-colormap-for-visualization/">here</a>.</p></li>
+<li><p>It’s often useful to <strong>be consistent</strong> within your reports, papers, posters and slide decks. For example, if Site A is blue and Site B is orange in your <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code> but they’re reversed in your <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> plot, that will cause confusion for any readers comparing the two figures.</p></li>
+<li><p><strong>Sometimes a continuous palette is better for categorical data than a categorical one</strong> if the categories have some kind of order. For example, even though the <code>breaks</code> argument in <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> produces discrete categories, they are still ordered from the lowest value bin to a higher value one, so <code>"viridis"</code> still makes more sense than <code>"Dark2"</code>. However, if the categories were different measurement sites, for example, using a continuous palette may <em>imply</em> order where there isn’t any - in that case, <code>"Dark2"</code> is the more suitable choice.</p></li>
+</ul>
+<p>It is the user’s responsibility to choose an accessible and appropriate palette for their plots. Some of the palettes built-in to <code>openair</code> have been designed to be accessible. For categorical data, consider one of Paul Tol’s palettes (e.g., <code>"tol.bright"</code>) which are distinct for all people, from black and white, on screen and paper, and match well together aesthetically. For continuous data, Fabio Crameri’s palettes (e.g., <code>"batlow"</code>) are designed to be perceptually uniform and ordered, colour deficiency friendly, and readable in black and white print. Also popular are the “Brewer” palettes (e.g., <code>"Dark2"</code>) and the “viridis” palettes (e.g., <code>"viridis"</code>, <code>"mako"</code>, etc.). While these palettes are designed for accessibility, using arguments like <code>begin</code>, <code>end</code>, <code>lightness</code> and <code>saturation</code> may make them less so, so tread carefully!</p>
+</section><section id="gallery" class="level2" data-number="B.3"><h2 data-number="B.3" class="anchored" data-anchor-id="gallery">
+<span class="header-section-number">B.3</span> Gallery</h2>
+<p>An application has been developed to preview all of the colour schemes available in <span class="pkg">openair</span>. This has been stored in a <em>GitHub gist</em> (some code that can be shared publicly). Copy the code below and paste it into R, which will load the necessary needed to launch this application. <strong>Note that the below chunk potentially installs or updates three new packages.</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install the required packages, if not already installed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"shiny"</span>, <span class="st">"bslib"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get the code from the gist</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/source_gist.html">source_gist</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://gist.github.com/jack-davison/909433ca28fee378cfe0482a7b719527"</span>,</span>
+<span>  filename <span class="op">=</span> <span class="st">"preview_openair_schemes.R"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># launch in browser</span></span>
+<span><span class="fu">preview_openair_schemes</span><span class="op">(</span>options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>launch.browser <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As an alternative, this section includes a gallery of the different colour schemes available in <span class="pkg">openair</span>, grouped by type.</p>
+<section id="sequential" class="level3" data-number="B.3.1"><h3 data-number="B.3.1" class="anchored" data-anchor-id="sequential">
+<span class="header-section-number">B.3.1</span> Sequential</h3>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="acton"><img src="appendix-colours_files/figure-html/sequential-1.png" class="img-fluid figure-img" style="width:100.0%" alt="acton"></a></p>
+<figcaption>acton</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="bamako"><img src="appendix-colours_files/figure-html/sequential-2.png" class="img-fluid figure-img" style="width:100.0%" alt="bamako"></a></p>
+<figcaption>bamako</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="bamO"><img src="appendix-colours_files/figure-html/sequential-3.png" class="img-fluid figure-img" style="width:100.0%" alt="bamO"></a></p>
+<figcaption>bamO</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="batlow"><img src="appendix-colours_files/figure-html/sequential-4.png" class="img-fluid figure-img" style="width:100.0%" alt="batlow"></a></p>
+<figcaption>batlow</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="batlowK"><img src="appendix-colours_files/figure-html/sequential-5.png" class="img-fluid figure-img" style="width:100.0%" alt="batlowK"></a></p>
+<figcaption>batlowK</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="batlowW"><img src="appendix-colours_files/figure-html/sequential-6.png" class="img-fluid figure-img" style="width:100.0%" alt="batlowW"></a></p>
+<figcaption>batlowW</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="bilbao"><img src="appendix-colours_files/figure-html/sequential-7.png" class="img-fluid figure-img" style="width:100.0%" alt="bilbao"></a></p>
+<figcaption>bilbao</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Blues"><img src="appendix-colours_files/figure-html/sequential-8.png" class="img-fluid figure-img" style="width:100.0%" alt="Blues"></a></p>
+<figcaption>Blues</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="brocO"><img src="appendix-colours_files/figure-html/sequential-9.png" class="img-fluid figure-img" style="width:100.0%" alt="brocO"></a></p>
+<figcaption>brocO</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="buda"><img src="appendix-colours_files/figure-html/sequential-10.png" class="img-fluid figure-img" style="width:100.0%" alt="buda"></a></p>
+<figcaption>buda</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="BuGn"><img src="appendix-colours_files/figure-html/sequential-11.png" class="img-fluid figure-img" style="width:100.0%" alt="BuGn"></a></p>
+<figcaption>BuGn</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="BuPu"><img src="appendix-colours_files/figure-html/sequential-12.png" class="img-fluid figure-img" style="width:100.0%" alt="BuPu"></a></p>
+<figcaption>BuPu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="cividis"><img src="appendix-colours_files/figure-html/sequential-13.png" class="img-fluid figure-img" style="width:100.0%" alt="cividis"></a></p>
+<figcaption>cividis</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="corkO"><img src="appendix-colours_files/figure-html/sequential-14.png" class="img-fluid figure-img" style="width:100.0%" alt="corkO"></a></p>
+<figcaption>corkO</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="davos"><img src="appendix-colours_files/figure-html/sequential-15.png" class="img-fluid figure-img" style="width:100.0%" alt="davos"></a></p>
+<figcaption>davos</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="default"><img src="appendix-colours_files/figure-html/sequential-16.png" class="img-fluid figure-img" style="width:100.0%" alt="default"></a></p>
+<figcaption>default</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="devon"><img src="appendix-colours_files/figure-html/sequential-17.png" class="img-fluid figure-img" style="width:100.0%" alt="devon"></a></p>
+<figcaption>devon</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="gaf.seq"><img src="appendix-colours_files/figure-html/sequential-18.png" class="img-fluid figure-img" style="width:100.0%" alt="gaf.seq"></a></p>
+<figcaption>gaf.seq</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="glasgow"><img src="appendix-colours_files/figure-html/sequential-19.png" class="img-fluid figure-img" style="width:100.0%" alt="glasgow"></a></p>
+<figcaption>glasgow</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="GnBu"><img src="appendix-colours_files/figure-html/sequential-20.png" class="img-fluid figure-img" style="width:100.0%" alt="GnBu"></a></p>
+<figcaption>GnBu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="grayC"><img src="appendix-colours_files/figure-html/sequential-21.png" class="img-fluid figure-img" style="width:100.0%" alt="grayC"></a></p>
+<figcaption>grayC</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Greens"><img src="appendix-colours_files/figure-html/sequential-22.png" class="img-fluid figure-img" style="width:100.0%" alt="Greens"></a></p>
+<figcaption>Greens</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-23.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Greys"><img src="appendix-colours_files/figure-html/sequential-23.png" class="img-fluid figure-img" style="width:100.0%" alt="Greys"></a></p>
+<figcaption>Greys</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-24.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="greyscale"><img src="appendix-colours_files/figure-html/sequential-24.png" class="img-fluid figure-img" style="width:100.0%" alt="greyscale"></a></p>
+<figcaption>greyscale</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-25.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="hawaii"><img src="appendix-colours_files/figure-html/sequential-25.png" class="img-fluid figure-img" style="width:100.0%" alt="hawaii"></a></p>
+<figcaption>hawaii</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-26.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="heat"><img src="appendix-colours_files/figure-html/sequential-26.png" class="img-fluid figure-img" style="width:100.0%" alt="heat"></a></p>
+<figcaption>heat</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-27.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36" title="hue"><img src="appendix-colours_files/figure-html/sequential-27.png" class="img-fluid figure-img" style="width:100.0%" alt="hue"></a></p>
+<figcaption>hue</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-28.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37" title="imola"><img src="appendix-colours_files/figure-html/sequential-28.png" class="img-fluid figure-img" style="width:100.0%" alt="imola"></a></p>
+<figcaption>imola</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-29.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="increment"><img src="appendix-colours_files/figure-html/sequential-29.png" class="img-fluid figure-img" style="width:100.0%" alt="increment"></a></p>
+<figcaption>increment</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-30.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="inferno"><img src="appendix-colours_files/figure-html/sequential-30.png" class="img-fluid figure-img" style="width:100.0%" alt="inferno"></a></p>
+<figcaption>inferno</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-31.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="jet"><img src="appendix-colours_files/figure-html/sequential-31.png" class="img-fluid figure-img" style="width:100.0%" alt="jet"></a></p>
+<figcaption>jet</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-32.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41" title="lajolla"><img src="appendix-colours_files/figure-html/sequential-32.png" class="img-fluid figure-img" style="width:100.0%" alt="lajolla"></a></p>
+<figcaption>lajolla</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-33.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42" title="lapaz"><img src="appendix-colours_files/figure-html/sequential-33.png" class="img-fluid figure-img" style="width:100.0%" alt="lapaz"></a></p>
+<figcaption>lapaz</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-34.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43" title="lipari"><img src="appendix-colours_files/figure-html/sequential-34.png" class="img-fluid figure-img" style="width:100.0%" alt="lipari"></a></p>
+<figcaption>lipari</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-35.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="magma"><img src="appendix-colours_files/figure-html/sequential-35.png" class="img-fluid figure-img" style="width:100.0%" alt="magma"></a></p>
+<figcaption>magma</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-36.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="mako"><img src="appendix-colours_files/figure-html/sequential-36.png" class="img-fluid figure-img" style="width:100.0%" alt="mako"></a></p>
+<figcaption>mako</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-37.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46" title="navia"><img src="appendix-colours_files/figure-html/sequential-37.png" class="img-fluid figure-img" style="width:100.0%" alt="navia"></a></p>
+<figcaption>navia</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-38.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47" title="naviaW"><img src="appendix-colours_files/figure-html/sequential-38.png" class="img-fluid figure-img" style="width:100.0%" alt="naviaW"></a></p>
+<figcaption>naviaW</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-39.png" class="lightbox" data-gallery="quarto-lightbox-gallery-48" title="nuuk"><img src="appendix-colours_files/figure-html/sequential-39.png" class="img-fluid figure-img" style="width:100.0%" alt="nuuk"></a></p>
+<figcaption>nuuk</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-40.png" class="lightbox" data-gallery="quarto-lightbox-gallery-49" title="Oranges"><img src="appendix-colours_files/figure-html/sequential-40.png" class="img-fluid figure-img" style="width:100.0%" alt="Oranges"></a></p>
+<figcaption>Oranges</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-41.png" class="lightbox" data-gallery="quarto-lightbox-gallery-50" title="OrRd"><img src="appendix-colours_files/figure-html/sequential-41.png" class="img-fluid figure-img" style="width:100.0%" alt="OrRd"></a></p>
+<figcaption>OrRd</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-42.png" class="lightbox" data-gallery="quarto-lightbox-gallery-51" title="oslo"><img src="appendix-colours_files/figure-html/sequential-42.png" class="img-fluid figure-img" style="width:100.0%" alt="oslo"></a></p>
+<figcaption>oslo</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-43.png" class="lightbox" data-gallery="quarto-lightbox-gallery-52" title="plasma"><img src="appendix-colours_files/figure-html/sequential-43.png" class="img-fluid figure-img" style="width:100.0%" alt="plasma"></a></p>
+<figcaption>plasma</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-44.png" class="lightbox" data-gallery="quarto-lightbox-gallery-53" title="PuBu"><img src="appendix-colours_files/figure-html/sequential-44.png" class="img-fluid figure-img" style="width:100.0%" alt="PuBu"></a></p>
+<figcaption>PuBu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-45.png" class="lightbox" data-gallery="quarto-lightbox-gallery-54" title="PuBuGn"><img src="appendix-colours_files/figure-html/sequential-45.png" class="img-fluid figure-img" style="width:100.0%" alt="PuBuGn"></a></p>
+<figcaption>PuBuGn</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-46.png" class="lightbox" data-gallery="quarto-lightbox-gallery-55" title="PuRd"><img src="appendix-colours_files/figure-html/sequential-46.png" class="img-fluid figure-img" style="width:100.0%" alt="PuRd"></a></p>
+<figcaption>PuRd</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-47.png" class="lightbox" data-gallery="quarto-lightbox-gallery-56" title="Purples"><img src="appendix-colours_files/figure-html/sequential-47.png" class="img-fluid figure-img" style="width:100.0%" alt="Purples"></a></p>
+<figcaption>Purples</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-48.png" class="lightbox" data-gallery="quarto-lightbox-gallery-57" title="RdPu"><img src="appendix-colours_files/figure-html/sequential-48.png" class="img-fluid figure-img" style="width:100.0%" alt="RdPu"></a></p>
+<figcaption>RdPu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-49.png" class="lightbox" data-gallery="quarto-lightbox-gallery-58" title="Reds"><img src="appendix-colours_files/figure-html/sequential-49.png" class="img-fluid figure-img" style="width:100.0%" alt="Reds"></a></p>
+<figcaption>Reds</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-59" title="rocket"><img src="appendix-colours_files/figure-html/sequential-50.png" class="img-fluid figure-img" style="width:100.0%" alt="rocket"></a></p>
+<figcaption>rocket</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-51.png" class="lightbox" data-gallery="quarto-lightbox-gallery-60" title="romaO"><img src="appendix-colours_files/figure-html/sequential-51.png" class="img-fluid figure-img" style="width:100.0%" alt="romaO"></a></p>
+<figcaption>romaO</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-52.png" class="lightbox" data-gallery="quarto-lightbox-gallery-61" title="tokyo"><img src="appendix-colours_files/figure-html/sequential-52.png" class="img-fluid figure-img" style="width:100.0%" alt="tokyo"></a></p>
+<figcaption>tokyo</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-53.png" class="lightbox" data-gallery="quarto-lightbox-gallery-62" title="turbo"><img src="appendix-colours_files/figure-html/sequential-53.png" class="img-fluid figure-img" style="width:100.0%" alt="turbo"></a></p>
+<figcaption>turbo</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-54.png" class="lightbox" data-gallery="quarto-lightbox-gallery-63" title="turku"><img src="appendix-colours_files/figure-html/sequential-54.png" class="img-fluid figure-img" style="width:100.0%" alt="turku"></a></p>
+<figcaption>turku</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-55.png" class="lightbox" data-gallery="quarto-lightbox-gallery-64" title="vikO"><img src="appendix-colours_files/figure-html/sequential-55.png" class="img-fluid figure-img" style="width:100.0%" alt="vikO"></a></p>
+<figcaption>vikO</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-56.png" class="lightbox" data-gallery="quarto-lightbox-gallery-65" title="viridis"><img src="appendix-colours_files/figure-html/sequential-56.png" class="img-fluid figure-img" style="width:100.0%" alt="viridis"></a></p>
+<figcaption>viridis</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-57.png" class="lightbox" data-gallery="quarto-lightbox-gallery-66" title="YlGn"><img src="appendix-colours_files/figure-html/sequential-57.png" class="img-fluid figure-img" style="width:100.0%" alt="YlGn"></a></p>
+<figcaption>YlGn</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-58.png" class="lightbox" data-gallery="quarto-lightbox-gallery-67" title="YlGnBu"><img src="appendix-colours_files/figure-html/sequential-58.png" class="img-fluid figure-img" style="width:100.0%" alt="YlGnBu"></a></p>
+<figcaption>YlGnBu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-59.png" class="lightbox" data-gallery="quarto-lightbox-gallery-68" title="YlOrBr"><img src="appendix-colours_files/figure-html/sequential-59.png" class="img-fluid figure-img" style="width:100.0%" alt="YlOrBr"></a></p>
+<figcaption>YlOrBr</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/sequential-60.png" class="lightbox" data-gallery="quarto-lightbox-gallery-69" title="YlOrRd"><img src="appendix-colours_files/figure-html/sequential-60.png" class="img-fluid figure-img" style="width:100.0%" alt="YlOrRd"></a></p>
+<figcaption>YlOrRd</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="diverging" class="level3" data-number="B.3.2"><h3 data-number="B.3.2" class="anchored" data-anchor-id="diverging">
+<span class="header-section-number">B.3.2</span> Diverging</h3>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-70" title="bam"><img src="appendix-colours_files/figure-html/diverging-1.png" class="img-fluid figure-img" style="width:100.0%" alt="bam"></a></p>
+<figcaption>bam</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-71" title="berlin"><img src="appendix-colours_files/figure-html/diverging-2.png" class="img-fluid figure-img" style="width:100.0%" alt="berlin"></a></p>
+<figcaption>berlin</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-72" title="BrBG"><img src="appendix-colours_files/figure-html/diverging-3.png" class="img-fluid figure-img" style="width:100.0%" alt="BrBG"></a></p>
+<figcaption>BrBG</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-73" title="broc"><img src="appendix-colours_files/figure-html/diverging-4.png" class="img-fluid figure-img" style="width:100.0%" alt="broc"></a></p>
+<figcaption>broc</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-74" title="cork"><img src="appendix-colours_files/figure-html/diverging-5.png" class="img-fluid figure-img" style="width:100.0%" alt="cork"></a></p>
+<figcaption>cork</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-75" title="lisbon"><img src="appendix-colours_files/figure-html/diverging-6.png" class="img-fluid figure-img" style="width:100.0%" alt="lisbon"></a></p>
+<figcaption>lisbon</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-76" title="managua"><img src="appendix-colours_files/figure-html/diverging-7.png" class="img-fluid figure-img" style="width:100.0%" alt="managua"></a></p>
+<figcaption>managua</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-77" title="PiYG"><img src="appendix-colours_files/figure-html/diverging-8.png" class="img-fluid figure-img" style="width:100.0%" alt="PiYG"></a></p>
+<figcaption>PiYG</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-78" title="PRGn"><img src="appendix-colours_files/figure-html/diverging-9.png" class="img-fluid figure-img" style="width:100.0%" alt="PRGn"></a></p>
+<figcaption>PRGn</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-79" title="PuOr"><img src="appendix-colours_files/figure-html/diverging-10.png" class="img-fluid figure-img" style="width:100.0%" alt="PuOr"></a></p>
+<figcaption>PuOr</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-80" title="RdBu"><img src="appendix-colours_files/figure-html/diverging-11.png" class="img-fluid figure-img" style="width:100.0%" alt="RdBu"></a></p>
+<figcaption>RdBu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-81" title="RdGy"><img src="appendix-colours_files/figure-html/diverging-12.png" class="img-fluid figure-img" style="width:100.0%" alt="RdGy"></a></p>
+<figcaption>RdGy</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-82" title="RdYlBu"><img src="appendix-colours_files/figure-html/diverging-13.png" class="img-fluid figure-img" style="width:100.0%" alt="RdYlBu"></a></p>
+<figcaption>RdYlBu</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-83" title="RdYlGn"><img src="appendix-colours_files/figure-html/diverging-14.png" class="img-fluid figure-img" style="width:100.0%" alt="RdYlGn"></a></p>
+<figcaption>RdYlGn</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-84" title="roma"><img src="appendix-colours_files/figure-html/diverging-15.png" class="img-fluid figure-img" style="width:100.0%" alt="roma"></a></p>
+<figcaption>roma</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-85" title="Spectral"><img src="appendix-colours_files/figure-html/diverging-16.png" class="img-fluid figure-img" style="width:100.0%" alt="Spectral"></a></p>
+<figcaption>Spectral</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-86" title="tofino"><img src="appendix-colours_files/figure-html/diverging-17.png" class="img-fluid figure-img" style="width:100.0%" alt="tofino"></a></p>
+<figcaption>tofino</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-87" title="vanimo"><img src="appendix-colours_files/figure-html/diverging-18.png" class="img-fluid figure-img" style="width:100.0%" alt="vanimo"></a></p>
+<figcaption>vanimo</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/diverging-19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-88" title="vik"><img src="appendix-colours_files/figure-html/diverging-19.png" class="img-fluid figure-img" style="width:100.0%" alt="vik"></a></p>
+<figcaption>vik</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="qualitative" class="level3" data-number="B.3.3"><h3 data-number="B.3.3" class="anchored" data-anchor-id="qualitative">
+<span class="header-section-number">B.3.3</span> Qualitative</h3>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-89" title="Accent"><img src="appendix-colours_files/figure-html/qualitative-1.png" class="img-fluid figure-img" style="width:100.0%" alt="Accent"></a></p>
+<figcaption>Accent</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-90" title="daqi"><img src="appendix-colours_files/figure-html/qualitative-2.png" class="img-fluid figure-img" style="width:100.0%" alt="daqi"></a></p>
+<figcaption>daqi</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-91" title="daqi.bands"><img src="appendix-colours_files/figure-html/qualitative-3.png" class="img-fluid figure-img" style="width:100.0%" alt="daqi.bands"></a></p>
+<figcaption>daqi.bands</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-92" title="Dark2"><img src="appendix-colours_files/figure-html/qualitative-4.png" class="img-fluid figure-img" style="width:100.0%" alt="Dark2"></a></p>
+<figcaption>Dark2</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-93" title="gaf.cat"><img src="appendix-colours_files/figure-html/qualitative-5.png" class="img-fluid figure-img" style="width:100.0%" alt="gaf.cat"></a></p>
+<figcaption>gaf.cat</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-94" title="gaf.focus"><img src="appendix-colours_files/figure-html/qualitative-6.png" class="img-fluid figure-img" style="width:100.0%" alt="gaf.focus"></a></p>
+<figcaption>gaf.focus</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-95" title="observable"><img src="appendix-colours_files/figure-html/qualitative-7.png" class="img-fluid figure-img" style="width:100.0%" alt="observable"></a></p>
+<figcaption>observable</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-96" title="okabeito"><img src="appendix-colours_files/figure-html/qualitative-8.png" class="img-fluid figure-img" style="width:100.0%" alt="okabeito"></a></p>
+<figcaption>okabeito</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-97" title="Paired"><img src="appendix-colours_files/figure-html/qualitative-9.png" class="img-fluid figure-img" style="width:100.0%" alt="Paired"></a></p>
+<figcaption>Paired</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-98" title="Pastel1"><img src="appendix-colours_files/figure-html/qualitative-10.png" class="img-fluid figure-img" style="width:100.0%" alt="Pastel1"></a></p>
+<figcaption>Pastel1</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-99" title="Pastel2"><img src="appendix-colours_files/figure-html/qualitative-11.png" class="img-fluid figure-img" style="width:100.0%" alt="Pastel2"></a></p>
+<figcaption>Pastel2</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="Set1"><img src="appendix-colours_files/figure-html/qualitative-12.png" class="img-fluid figure-img" style="width:100.0%" alt="Set1"></a></p>
+<figcaption>Set1</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Set2"><img src="appendix-colours_files/figure-html/qualitative-13.png" class="img-fluid figure-img" style="width:100.0%" alt="Set2"></a></p>
+<figcaption>Set2</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Set3"><img src="appendix-colours_files/figure-html/qualitative-14.png" class="img-fluid figure-img" style="width:100.0%" alt="Set3"></a></p>
+<figcaption>Set3</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="tableau"><img src="appendix-colours_files/figure-html/qualitative-15.png" class="img-fluid figure-img" style="width:100.0%" alt="tableau"></a></p>
+<figcaption>tableau</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="tol.bright"><img src="appendix-colours_files/figure-html/qualitative-16.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.bright"></a></p>
+<figcaption>tol.bright</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="tol.dark"><img src="appendix-colours_files/figure-html/qualitative-17.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.dark"></a></p>
+<figcaption>tol.dark</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="tol.highcontrast"><img src="appendix-colours_files/figure-html/qualitative-18.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.highcontrast"></a></p>
+<figcaption>tol.highcontrast</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="tol.light"><img src="appendix-colours_files/figure-html/qualitative-19.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.light"></a></p>
+<figcaption>tol.light</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="tol.mediumcontrast"><img src="appendix-colours_files/figure-html/qualitative-20.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.mediumcontrast"></a></p>
+<figcaption>tol.mediumcontrast</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="tol.muted"><img src="appendix-colours_files/figure-html/qualitative-21.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.muted"></a></p>
+<figcaption>tol.muted</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-110" title="tol.pale"><img src="appendix-colours_files/figure-html/qualitative-22.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.pale"></a></p>
+<figcaption>tol.pale</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="appendix-colours_files/figure-html/qualitative-23.png" class="lightbox" data-gallery="quarto-lightbox-gallery-111" title="tol.vibrant"><img src="appendix-colours_files/figure-html/qualitative-23.png" class="img-fluid figure-img" style="width:100.0%" alt="tol.vibrant"></a></p>
+<figcaption>tol.vibrant</figcaption></figure>
+</div>
+</div>
+</div>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../../sections/appendices/appendix-annotate.html" class="pagination-link" aria-label="Customising openair plots">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../sections/appendices/appendix-hysplit.html" class="pagination-link" aria-label="Production of HYSPLIT trajectory files">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/appendices/appendix-colours.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This work is licensed under a <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal License</a>.</p>
+</div>
+  </div>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

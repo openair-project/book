@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
-<title>20&nbsp; Taylor Diagram – The openair book</title>
+<title>22&nbsp; Taylor Diagram – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -86,17 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/model-evaluation/conditional-quantiles.html" rel="next">
 <link href="../../sections/model-evaluation/mod-stats.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -159,7 +159,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/taylor-diagram.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/taylor-diagram.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -358,6 +358,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -372,19 +384,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,25 +413,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -436,13 +448,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,26 +482,32 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -502,13 +520,13 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-TaylorBack" id="toc-sec-TaylorBack" class="nav-link active" data-scroll-target="#sec-TaylorBack"><span class="header-section-number">20.1</span> Background</a></li>
-  <li><a href="#examples-of-taylor-diagrams" id="toc-examples-of-taylor-diagrams" class="nav-link" data-scroll-target="#examples-of-taylor-diagrams"><span class="header-section-number">20.2</span> Examples of Taylor Diagrams</a></li>
+<li><a href="#sec-TaylorBack" id="toc-sec-TaylorBack" class="nav-link active" data-scroll-target="#sec-TaylorBack"><span class="header-section-number">22.1</span> Background</a></li>
+  <li><a href="#examples-of-taylor-diagrams" id="toc-examples-of-taylor-diagrams" class="nav-link" data-scroll-target="#examples-of-taylor-diagrams"><span class="header-section-number">22.2</span> Examples of Taylor Diagrams</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/model-evaluation/taylor-diagram.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/taylor-diagram.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-TaylorDiagram" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/taylor-diagram.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-TaylorDiagram" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></h1>
 </div>
 
 
@@ -528,13 +546,13 @@ window.Quarto = {
   
 
 
-</header><section id="sec-TaylorBack" class="level2 page-columns page-full" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="sec-TaylorBack">
-<span class="header-section-number">20.1</span> Background</h2>
+</header><section id="sec-TaylorBack" class="level2 page-columns page-full" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="sec-TaylorBack">
+<span class="header-section-number">22.1</span> Background</h2>
 <p>The <em>Taylor Diagram</em> is one of the more useful methods for evaluating model performance. Details of the diagram can be found <a href="https://pcmdi.llnl.gov/staff/taylor/CV/Taylor_diagram_primer.pdf">here</a> and in <span class="citation" data-cites="taylor2001">Taylor (<a href="../references.html#ref-taylor2001" role="doc-biblioref">2001</a>)</span>. The diagram provides a way of showing how three complementary model performance statistics vary simultaneously. These statistics are the correlation coefficient R, the standard deviation (sigma) and the (centred) root-mean-square error. These three statistics can be plotted on one (2D) graph because of the way they are related to one another which can be represented through the Law of Cosines.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-taylor2001" class="csl-entry" role="listitem">
 Taylor, K. E. 2001. <span>“Summarizing Multiple Aspects of Model Performance in a Single Diagram.”</span> <em>Journal of Geophysical Research</em> 106 (D7): 7183–92.
 </div></div><p>The <span class="pkg">openair</span> version of the Taylor Diagram has several enhancements that increase its flexibility. In particular, the straightforward way of producing conditioning plots should prove valuable under many circumstances (using the <code>type</code> option). Many examples of Taylor Diagrams focus on model-observation comparisons for several models using all the available data. However, more insight can be gained into model performance by partitioning the data in various ways e.g.&nbsp;by season, daylight/nighttime, day of the week, by levels of a numeric variable e.g.&nbsp;wind speed or by land-use type etc.</p>
-<p>We first show a diagram and then pick apart the different components to understand how to interpret it. The diagram can look overly complex but once it is understood how to interpret the three main characteristics it becomes much easier to understand. A typical diagram is shown in <a href="#fig-TaylorExam" class="quarto-xref">Figure&nbsp;<span>20.1</span></a> for nine anonymised models used for predicting hourly O<sub>3</sub> concentrations at 15 sites around the UK.</p>
+<p>We first show a diagram and then pick apart the different components to understand how to interpret it. The diagram can look overly complex but once it is understood how to interpret the three main characteristics it becomes much easier to understand. A typical diagram is shown in <a href="#fig-TaylorExam" class="quarto-xref">Figure&nbsp;<span>22.1</span></a> for nine anonymised models used for predicting hourly O<sub>3</sub> concentrations at 15 sites around the UK.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -559,17 +577,17 @@ Taylor, K. E. 2001. <span>“Summarizing Multiple Aspects of Model Performance i
 <div class="cell-output-display">
 <div id="fig-TaylorExam" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorExam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="taylor-diagram_files/figure-html/fig-TaylorExam-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;20.1: An example of the use of the TaylorDiagram function."><img src="taylor-diagram_files/figure-html/fig-TaylorExam-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="taylor-diagram_files/figure-html/fig-TaylorExam-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;22.1: An example of the use of the TaylorDiagram function."><img src="taylor-diagram_files/figure-html/fig-TaylorExam-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TaylorExam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.1: An example of the use of the <code>TaylorDiagram</code> function.
+Figure&nbsp;22.1: An example of the use of the <code>TaylorDiagram</code> function.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>The plots shown in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>20.2</span></a> break the Taylor Diagrams into three components to aid interpretation. The first plot (top left) highlights the comparison of variability in for each model compared with the measurements. The variability is represented by the standard deviation of the observed and modelled values. The plot shows that the observed variability (given by the standard deviation) is about 27 (μg m<sup>-3</sup>) and is marked as ‘observed’ on the x-axis. The magnitude of the variability is measured as the <strong>radial</strong> distance from the origin of the plot (the red line with the arrow shows the standard deviation for model <span class="math inline">\(g\)</span>, which is about 25~μg m<sup>-3</sup>). To aid interpretation the radial dashed line is shown from the ‘observed’ point. Each model is shown in this case by the position of the letters a to i. On this basis it can be seen that models 1, <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> have more variability than the measurements (because they extend beyond the dashed line), whereas the others have less variability than the measurements. Models <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are also closed to the dashed line and therefore have the closest variability compared with the observations.</p>
-<p>The next statistic to consider is the correlation coefficient, <span class="math inline">\(R\)</span> shown by the top-right Figure in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>20.2</span></a>. This is shown on the arc and points that lie closest to the x-axis have the highest correlation. The grey lines help to show this specific correlation coefficients. The red arc shows <span class="math inline">\(R\)</span>=0.7 for model <span class="math inline">\(g\)</span>. The best performing models with the highest <span class="math inline">\(R\)</span> are models <span class="math inline">\(b\)</span> and <span class="math inline">\(g\)</span> with correlation coefficients around 0.7. Two models stand out as having much worse correlations with the observations: models <span class="math inline">\(e\)</span> and <span class="math inline">\(i\)</span> (values of around 0.4).</p>
-<p>Finally, the lower plot in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>20.2</span></a> highlights the <em>centred</em> root-mean square error (RMS). It is centred because the mean values of the data (observations and predictions) are subtracted first. The concentric dashed lines emanating from the `observed’ point show the value of the RMS error — so points furthest from the ‘observed’ value are the worst performing models because they have the highest RMS errors. On this basis, model <span class="math inline">\(g\)</span> has the lowest error of about 20~μg m<sup>-3</sup>, shown again by the red line. Models <span class="math inline">\(e\)</span> and <span class="math inline">\(i\)</span> are considerably worse because they have RMS errors of around 30 μg m<sup>-3</sup>.</p>
+<p>The plots shown in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>22.2</span></a> break the Taylor Diagrams into three components to aid interpretation. The first plot (top left) highlights the comparison of variability in for each model compared with the measurements. The variability is represented by the standard deviation of the observed and modelled values. The plot shows that the observed variability (given by the standard deviation) is about 27 (μg m<sup>-3</sup>) and is marked as ‘observed’ on the x-axis. The magnitude of the variability is measured as the <strong>radial</strong> distance from the origin of the plot (the red line with the arrow shows the standard deviation for model <span class="math inline">\(g\)</span>, which is about 25~μg m<sup>-3</sup>). To aid interpretation the radial dashed line is shown from the ‘observed’ point. Each model is shown in this case by the position of the letters a to i. On this basis it can be seen that models 1, <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> have more variability than the measurements (because they extend beyond the dashed line), whereas the others have less variability than the measurements. Models <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are also closed to the dashed line and therefore have the closest variability compared with the observations.</p>
+<p>The next statistic to consider is the correlation coefficient, <span class="math inline">\(R\)</span> shown by the top-right Figure in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>22.2</span></a>. This is shown on the arc and points that lie closest to the x-axis have the highest correlation. The grey lines help to show this specific correlation coefficients. The red arc shows <span class="math inline">\(R\)</span>=0.7 for model <span class="math inline">\(g\)</span>. The best performing models with the highest <span class="math inline">\(R\)</span> are models <span class="math inline">\(b\)</span> and <span class="math inline">\(g\)</span> with correlation coefficients around 0.7. Two models stand out as having much worse correlations with the observations: models <span class="math inline">\(e\)</span> and <span class="math inline">\(i\)</span> (values of around 0.4).</p>
+<p>Finally, the lower plot in <a href="#fig-TaylorPlots" class="quarto-xref">Figure&nbsp;<span>22.2</span></a> highlights the <em>centred</em> root-mean square error (RMS). It is centred because the mean values of the data (observations and predictions) are subtracted first. The concentric dashed lines emanating from the `observed’ point show the value of the RMS error — so points furthest from the ‘observed’ value are the worst performing models because they have the highest RMS errors. On this basis, model <span class="math inline">\(g\)</span> has the lowest error of about 20~μg m<sup>-3</sup>, shown again by the red line. Models <span class="math inline">\(e\)</span> and <span class="math inline">\(i\)</span> are considerably worse because they have RMS errors of around 30 μg m<sup>-3</sup>.</p>
 <p>So which model is best? Taken as a whole it is probably model <span class="math inline">\(g\)</span> because it has reasonably similar variability compared with the observations, the highest correlation and the least RMS error. However, models <span class="math inline">\(f\)</span> and <span class="math inline">\(b\)</span> also look to be good. Perhaps it is easier to conclude that models <span class="math inline">\(e\)</span> and <span class="math inline">\(i\)</span> are not good .</p>
 <p>Note that in cases where there is a column <code>site</code> it makes sense to use <code>type = "site"</code> to ensure that the statistics are calculated on a per site basis and each panel represents a single site.</p>
 <div id="fig-TaylorPlots" class="quarto-layout-panel">
@@ -578,7 +596,7 @@ Figure&nbsp;20.1: An example of the use of the <code>TaylorDiagram</code> functi
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-TaylorPlots" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-TaylorPlots-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-TaylorPlots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../../assets/media/TaylorExplainSD.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;20.2&nbsp;(a): Standard deviation."><img src="../../assets/media/TaylorExplainSD.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
+<a href="../../assets/media/TaylorExplainSD.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;22.2&nbsp;(a): Standard deviation."><img src="../../assets/media/TaylorExplainSD.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-TaylorPlots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Standard deviation.
@@ -588,7 +606,7 @@ Figure&nbsp;20.1: An example of the use of the <code>TaylorDiagram</code> functi
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-TaylorPlots" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-TaylorPlots-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-TaylorPlots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../../assets/media/TaylorExplainR.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;20.2&nbsp;(b): Correlation coefficient."><img src="../../assets/media/TaylorExplainR.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
+<a href="../../assets/media/TaylorExplainR.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;22.2&nbsp;(b): Correlation coefficient."><img src="../../assets/media/TaylorExplainR.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-TaylorPlots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Correlation coefficient.
@@ -600,7 +618,7 @@ Figure&nbsp;20.1: An example of the use of the <code>TaylorDiagram</code> functi
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-TaylorPlots" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-TaylorPlots-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-TaylorPlots-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../../assets/media/TaylorExplainRMS.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;20.2&nbsp;(c): Centred RMS."><img src="../../assets/media/TaylorExplainRMS.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
+<a href="../../assets/media/TaylorExplainRMS.png" class="lightbox" data-gallery="fig-TaylorPlots" title="Figure&nbsp;22.2&nbsp;(c): Centred RMS."><img src="../../assets/media/TaylorExplainRMS.png" class="img-fluid figure-img" data-ref-parent="fig-TaylorPlots" width="198"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-TaylorPlots-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Centred RMS.
@@ -610,11 +628,11 @@ Figure&nbsp;20.1: An example of the use of the <code>TaylorDiagram</code> functi
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TaylorPlots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.2: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to read interpret each of the three statistics.
+Figure&nbsp;22.2: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to read interpret each of the three statistics.
 </figcaption></figure>
 </div>
-</section><section id="examples-of-taylor-diagrams" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="examples-of-taylor-diagrams">
-<span class="header-section-number">20.2</span> Examples of Taylor Diagrams</h2>
+</section><section id="examples-of-taylor-diagrams" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="examples-of-taylor-diagrams">
+<span class="header-section-number">22.2</span> Examples of Taylor Diagrams</h2>
 <p>The example used here carries on from the previous section using data from a Defra model evaluation exercise. As mentioned previously, the use of the <code>type</code> option offers enormous flexibility for comparing models. However, we will only focus on the seasonal evaluation of the models. In the call below, <code>group</code> is the column that identified the model and <code>type</code> is the conditioning variable that produces in this case four panels — one for each season. Note that in this case we focus on a single site.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## select a single site</span></span>
@@ -623,15 +641,15 @@ Figure&nbsp;20.2: Taylor Diagrams broken down to highlight how to interpret the 
 <div class="cell-output-display">
 <div id="fig-TaylorSeas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TaylorSeas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="taylor-diagram_files/figure-html/fig-TaylorSeas-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;20.3: Use of the TaylorDiagam function to show model performance for 9 models used to predict O3 concentrations at the Lullington Heath site."><img src="taylor-diagram_files/figure-html/fig-TaylorSeas-1.png" class="img-fluid figure-img" width="864"></a>
+<a href="taylor-diagram_files/figure-html/fig-TaylorSeas-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;22.3: Use of the TaylorDiagam function to show model performance for 9 models used to predict O3 concentrations at the Lullington Heath site."><img src="taylor-diagram_files/figure-html/fig-TaylorSeas-1.png" class="img-fluid figure-img" width="864"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TaylorSeas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model performance for 9 models used to predict O<sub>3</sub> concentrations at the Lullington Heath site.
+Figure&nbsp;22.3: Use of the <code>TaylorDiagam</code> function to show model performance for 9 models used to predict O<sub>3</sub> concentrations at the Lullington Heath site.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-TaylorSeas" class="quarto-xref">Figure&nbsp;<span>20.3</span></a> contains a lot of useful information. Consider the summer comparison first. All models tend to underestimate the variability of O<sub>3</sub> concentrations because they all lies within the black dashed line. However, models 7 and 9 are close to the observed variability. The general underestimate of the variability for summer conditions might reflect that the models do not adequately capture regional O<sub>3</sub> episodes when concentrations are high. Models 7 and 8 do best in terms of high correlation with the measurements (around 0.8) and lowest RMS error (around 20–22 μg m<sup>-3</sup>). Models 3, 5 and 6 tend to do worse on all three statistics during the summer.</p>
+<p><a href="#fig-TaylorSeas" class="quarto-xref">Figure&nbsp;<span>22.3</span></a> contains a lot of useful information. Consider the summer comparison first. All models tend to underestimate the variability of O<sub>3</sub> concentrations because they all lies within the black dashed line. However, models 7 and 9 are close to the observed variability. The general underestimate of the variability for summer conditions might reflect that the models do not adequately capture regional O<sub>3</sub> episodes when concentrations are high. Models 7 and 8 do best in terms of high correlation with the measurements (around 0.8) and lowest RMS error (around 20–22 μg m<sup>-3</sup>). Models 3, 5 and 6 tend to do worse on all three statistics during the summer.</p>
 <p>By contrast, during wintertime conditions models 1 and 3 are clearly best. From an evaluation perspective it would be useful to understand why some models are better for wintertime conditions and others better in summer and this is clearly something that could be investigated further.</p>
 <p>There are many other useful comparisons that can be undertaken easily. A few of these are shown below, but not plotted.</p>
 <div class="cell">
@@ -656,7 +674,7 @@ Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model pe
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"daylight"</span>, <span class="st">"season"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>It is also possible to combine different groups of model results. For example, rather than plot how the models perform at a single site it can be useful to show how they compare at all sites. To do this it is necessary to normalise the data because there will be different values of the observed variable across different sites. In this case we can supply the option <code>group = c("group", "site")</code>. This will show the variation by model for <em>all</em> sites. The results are shown in <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>. These results show that in general models tend to predict in similarly good (or bad) ways across all sites as shown by the grouping of points on <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>20.4</span></a>.</p>
+<p>It is also possible to combine different groups of model results. For example, rather than plot how the models perform at a single site it can be useful to show how they compare at all sites. To do this it is necessary to normalise the data because there will be different values of the observed variable across different sites. In this case we can supply the option <code>group = c("group", "site")</code>. This will show the variation by model for <em>all</em> sites. The results are shown in <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>22.4</span></a>. These results show that in general models tend to predict in similarly good (or bad) ways across all sites as shown by the grouping of points on <a href="#fig-Taylor2Grp" class="quarto-xref">Figure&nbsp;<span>22.4</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TaylorDiagram.html">TaylorDiagram</a></span><span class="op">(</span></span>
 <span>  <span class="va">modTest</span>,</span>
@@ -664,16 +682,16 @@ Figure&nbsp;20.3: Use of the <code>TaylorDiagam</code> function to show model pe
 <span>  mod <span class="op">=</span> <span class="st">"mod"</span>,</span>
 <span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"site"</span><span class="op">)</span>,</span>
 <span>  normalise <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span></span>
+<span>  size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-Taylor2Grp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-Taylor2Grp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="taylor-diagram_files/figure-html/fig-Taylor2Grp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;20.4: Use of the TaylorDiagam function to show model performance for 9 models used for all sites."><img src="taylor-diagram_files/figure-html/fig-Taylor2Grp-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="taylor-diagram_files/figure-html/fig-Taylor2Grp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;22.4: Use of the TaylorDiagam function to show model performance for 9 models used for all sites."><img src="taylor-diagram_files/figure-html/fig-Taylor2Grp-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Taylor2Grp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.4: Use of the <code>TaylorDiagam</code> function to show model performance for 9 models used for all sites.
+Figure&nbsp;22.4: Use of the <code>TaylorDiagam</code> function to show model performance for 9 models used for all sites.
 </figcaption></figure>
 </div>
 </div>
@@ -1087,12 +1105,12 @@ Figure&nbsp;20.4: Use of the <code>TaylorDiagam</code> function to show model pe
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../sections/model-evaluation/mod-stats.html" class="pagination-link" aria-label="Model evaluation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../sections/model-evaluation/conditional-quantiles.html" class="pagination-link" aria-label="Conditional quantiles">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

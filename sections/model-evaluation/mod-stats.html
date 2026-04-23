@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
-<title>19&nbsp; Model evaluation – The openair book</title>
+<title>21&nbsp; Model evaluation – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -85,18 +85,18 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/model-evaluation/taylor-diagram.html" rel="next">
-<link href="../../sections/trend-analysis/trend-level.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../sections/trend-analysis/ts-filtering.html" rel="prev">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -156,7 +156,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,6 +355,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -369,19 +381,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -398,25 +410,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -433,13 +445,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -467,26 +479,32 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +517,13 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-ModBack" id="toc-sec-ModBack" class="nav-link active" data-scroll-target="#sec-ModBack"><span class="header-section-number">19.1</span> Background</a></li>
-  <li><a href="#ModEx" id="toc-ModEx" class="nav-link" data-scroll-target="#ModEx"><span class="header-section-number">19.2</span> Example of use</a></li>
+<li><a href="#sec-ModBack" id="toc-sec-ModBack" class="nav-link active" data-scroll-target="#sec-ModBack"><span class="header-section-number">21.1</span> Background</a></li>
+  <li><a href="#ModEx" id="toc-ModEx" class="nav-link" data-scroll-target="#ModEx"><span class="header-section-number">21.2</span> Example of use</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/model-evaluation/mod-stats.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-modStats" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../../sections/model-evaluation/mod-stats.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-modStats" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></h1>
 </div>
 
 
@@ -525,8 +543,8 @@ window.Quarto = {
   
 
 
-</header><section id="sec-ModBack" class="level2 page-columns page-full" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="sec-ModBack">
-<span class="header-section-number">19.1</span> Background</h2>
+</header><section id="sec-ModBack" class="level2 page-columns page-full" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="sec-ModBack">
+<span class="header-section-number">21.1</span> Background</h2>
 <p>The <code>modStats</code> function provides key model evaluation statistics for comparing models against measurements and models against other models.</p>
 <p>There are a very wide range of evaluation statistics that can be used to assess model performance. There is, however, no single statistic that encapsulates all aspects of interest. For this reason it is useful to consider several performance statistics and also to understand the sort of information or insight they might provide.</p>
 <p>In the following definitions, <span class="math inline">\(O_i\)</span> represents the <span class="math inline">\(i\)</span>th observed value and <span class="math inline">\(M_i\)</span> represents the <span class="math inline">\(i\)</span>th modelled value for a total of <span class="math inline">\(n\)</span> observations.</p>
@@ -534,37 +552,37 @@ window.Quarto = {
 <p>The fraction of modelled values within a factor of two of the observed values are the fraction of model predictions that satisfy:</p>
 <p><span id="eq-FAC2"><span class="math display">\[
    0.5 \leq \frac{M_i}{O_i} \leq 2.0
-\tag{19.1}\]</span></span></p>
+\tag{21.1}\]</span></span></p>
 <p><strong>Mean bias, <em>MB</em></strong></p>
 <p>The mean bias provides a good indication of the mean over or under estimate of predictions. Mean bias in the same units as the quantities being considered.</p>
 <p><span id="eq-MB"><span class="math display">\[
 MB = \frac{1}{n}\sum_{i=1}^{N} M_i - O_i  
-\tag{19.2}\]</span></span></p>
+\tag{21.2}\]</span></span></p>
 <p><strong>Mean Gross Error, <em>MGE</em></strong></p>
 <p>The mean gross error provides a good indication of the mean error regardless of whether it is an over or under estimate. Mean gross error is in the same units as the quantities being considered.</p>
 <p><span id="eq-MGE"><span class="math display">\[
 MGE = \frac{1}{n}\sum_{i=1}^{N} |M_i - O_i|  
-\tag{19.3}\]</span></span></p>
+\tag{21.3}\]</span></span></p>
 <p><strong>Normalised mean bias, <em>NMB</em></strong></p>
 <p>The normalised mean bias is useful for comparing pollutants that cover different concentration scales and the mean bias is normalised by dividing by the observed concentration.</p>
 <p><span id="eq-NMB"><span class="math display">\[
 NMB = \frac{\sum\limits_{i=1}^{n} M_i - O_i}{\sum\limits_{i=1}^{n} O_i}
-\tag{19.4}\]</span></span></p>
+\tag{21.4}\]</span></span></p>
 <p><strong>Normalised mean gross error, <em>NMGE</em></strong></p>
 <p>The normalised mean gross error further ignores whether a prediction is an over or under estimate.</p>
 <p><span id="eq-NMGE"><span class="math display">\[
 NMGE = \frac{\sum\limits_{i=1}^{n} |M_i - O_i|}{\sum\limits_{i=1}^{n} O_i}
-\tag{19.5}\]</span></span></p>
+\tag{21.5}\]</span></span></p>
 <p><strong>Root mean squared error, <em>RMSE</em></strong></p>
 <p>The RMSE is a commonly used statistic that provides a good overall measure of how close modelled values are to predicted values.</p>
 <p><span id="eq-RMSE"><span class="math display">\[
    RMSE = \left({\frac{\sum\limits_{i=1}^{n} (M_i - O_i)^2}{n}}\right)^{1/2}   
-\tag{19.6}\]</span></span></p>
+\tag{21.6}\]</span></span></p>
 <p><strong>Correlation coefficient, <em>r</em></strong></p>
 <p>The (Pearson) correlation coefficient is a measure of the strength of the linear relationship between two variables. If there is perfect linear relationship with positive slope between the two variables, <span class="math inline">\(r\)</span> = 1. If there is a perfect linear relationship with negative slope between the two variables <span class="math inline">\(r\)</span> = -1. A correlation coefficient of 0 means that there is no linear relationship between the variables. Note that <code>modStats</code> accepts an option <code>method</code>, which can be set to “kendall” and “spearman” for alternative calculations of <span class="math inline">\(r\)</span>.</p>
 <p><span id="eq-r"><span class="math display">\[
 r = \frac{1}{(n-1)}\sum\limits_{i=1}^{n}\left(\frac{M_i - \overline{M}}{\sigma_M}\right)\left(\frac{O_i - \overline{O}}{\sigma_O}\right)   
-\tag{19.7}\]</span></span></p>
+\tag{21.7}\]</span></span></p>
 <p><strong>Coefficient of Efficiency, <em>COE</em></strong></p>
 <p>The <em>Coefficient of Efficiency</em> based on <span class="citation" data-cites="legates2012">Legates and McCabe (<a href="../references.html#ref-legates2012" role="doc-biblioref">2012</a>)</span> and <span class="citation" data-cites="legates1999">Legates and McCabe Jr (<a href="../references.html#ref-legates1999" role="doc-biblioref">1999</a>)</span>. There have been many suggestions for measuring model performance over the years, but the <span class="math inline">\(COE\)</span> is a simple formulation which is easy to interpret.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-legates2012" class="csl-entry" role="listitem">
@@ -576,7 +594,7 @@ Legates, D. R., and G. J. McCabe Jr. 1999. <span>“Evaluating the Use of <span>
 <p><span id="eq-COE"><span class="math display">\[
 COE = 1.0 - \frac{\sum\limits_{i=1}^{n} |M_i
              -O_i|}{\sum\limits_{i=1}^{n} |O_i - \overline{O}|}  
-\tag{19.8}\]</span></span></p>
+\tag{21.8}\]</span></span></p>
 <p><strong>Index of Agreement, <em>IOA</em></strong></p>
 <p>The <em>Index of Agreement</em>, <span class="math inline">\(IOA\)</span> is commonly used in model evaluation <span class="citation" data-cites="Willmott2011">(<a href="../references.html#ref-Willmott2011" role="doc-biblioref">Willmott et al. 2011</a>)</span>. It spans between -1 and +1 with values approaching +1 representing better model performance. An <span class="math inline">\(IOA\)</span> of 0.5, for example, indicates that the sum of the error-magnitudes is one half of the sum of the observed-deviation magnitudes. When <span class="math inline">\(IOA\)</span> = 0.0, it signifies that the sum of the magnitudes of the errors and the sum of the observed-deviation magnitudes are equivalent. When <span class="math inline">\(IOA\)</span> = -0.5, it indicates that the sum of the error-magnitudes is twice the sum of the perfect model-deviation and observed-deviation magnitudes. Values of <span class="math inline">\(IOA\)</span> near -1.0 can mean that the model-estimated deviations about <span class="math inline">\(O\)</span> are poor estimates of the observed deviations; but, they also can mean that there simply is little observed variability — so some caution is needed when the <span class="math inline">\(IOA\)</span> approaches -1. It is defined as (with <span class="math inline">\(c = 2\)</span>):</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Willmott2011" class="csl-entry" role="listitem">
@@ -592,9 +610,9 @@ IOA = \left\{
            \sum\limits_{i=1}^{n} |M_i-O_i| &gt; c\sum\limits_{i=1}^{n} |O_i - \overline{O}|
    \end{array}
 \right.
-\tag{19.9}\]</span></span></p>
-</section><section id="ModEx" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="ModEx">
-<span class="header-section-number">19.2</span> Example of use</h2>
+\tag{21.9}\]</span></span></p>
+</section><section id="ModEx" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="ModEx">
+<span class="header-section-number">21.2</span> Example of use</h2>
 <p>The function can be called very simply and only requires two numeric fields to compare. To show how the function works, some synthetic data will be generated for 5 models.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## observations; 100 random numbers</span></span>
@@ -1131,13 +1149,13 @@ IOA = \left\{
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../../sections/trend-analysis/trend-level.html" class="pagination-link" aria-label="Trend heat maps">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span>
+      <a href="../../sections/trend-analysis/ts-filtering.html" class="pagination-link" aria-label="Kolmogorov-Zurbenko filters">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../sections/model-evaluation/taylor-diagram.html" class="pagination-link" aria-label="Taylor Diagram">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

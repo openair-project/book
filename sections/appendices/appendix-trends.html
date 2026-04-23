@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
-<title>Appendix C — A closer look at trends – The openair book</title>
+<title>Appendix D — A closer look at trends – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -86,17 +86,17 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <link href="../../sections/appendices/appendix-gethelp.html" rel="next">
 <link href="../../sections/appendices/appendix-hysplit.html" rel="prev">
-<link href="../../assets/media/plume.png" rel="icon" type="image/png">
+<link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -134,7 +134,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-trends.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-trends.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -333,6 +333,18 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sections/trend-analysis/ts-filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Kolmogorov-Zurbenko filters</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -347,19 +359,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Model evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/conditional-quantiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -376,25 +388,25 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -411,13 +423,13 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -445,26 +457,32 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-hysplit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-trends.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-gethelp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -477,8 +495,8 @@ div.csl-indent {
         
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-trends.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A closer look at trends</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-trends-gam" class="quarto-section-identifier">Appendix C — A closer look at trends</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../sections/appendices/appendix-trends.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">A closer look at trends</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-trends-gam" class="quarto-section-identifier">Appendix D — A closer look at trends</span></h1>
 </div>
 
 
@@ -522,15 +540,15 @@ Wood, S. N. 2006. <em>Generalized Additive Models: An Introduction with r</em>. 
 <div class="cell-output-display">
 <div id="fig-MHplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-MHplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-MHplot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;C.1: Monthly mean O3 concentrations at Mace Head, Ireland (1998–2010)."><img src="appendix-trends_files/figure-html/fig-MHplot-1.png" class="img-fluid figure-img" width="960"></a>
+<a href="appendix-trends_files/figure-html/fig-MHplot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;D.1: Monthly mean O3 concentrations at Mace Head, Ireland (1998–2010)."><img src="appendix-trends_files/figure-html/fig-MHplot-1.png" class="img-fluid figure-img" width="960"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MHplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.1: Monthly mean O<sub>3</sub> concentrations at Mace Head, Ireland (1998–2010).
+Figure&nbsp;D.1: Monthly mean O<sub>3</sub> concentrations at Mace Head, Ireland (1998–2010).
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-MHplot" class="quarto-xref">Figure&nbsp;<span>C.1</span></a> shows that there is a clear seasonal variation in O<sub>3</sub> concentrations, which is certainly expected. Less obvious is whether there is a trend.</p>
+<p><a href="#fig-MHplot" class="quarto-xref">Figure&nbsp;<span>D.1</span></a> shows that there is a clear seasonal variation in O<sub>3</sub> concentrations, which is certainly expected. Less obvious is whether there is a trend.</p>
 <p>Even though it is known there is a seasonal signal in the data, we will first of all ignore it and build a simple model that only has a trend component (model M0).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html">gam</a></span><span class="op">(</span><span class="va">o3</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">monthly</span><span class="op">)</span></span>
@@ -559,7 +577,7 @@ R-sq.(adj) =  0.0212   Deviance explained = 2.48%
 GCV = 106.82  Scale est. = 106.04    n = 276</code></pre>
 </div>
 </div>
-<p>This model only explains about 2% of the variation as shown by the adjusted r<sup>2</sup>. More of a problem however is that no account has been taken of the seasonal variation. An easy way of seeing the effect of this omission is to plot the autocorrelation function (ACF) of the residuals, shown in <a href="#fig-M0ACF" class="quarto-xref">Figure&nbsp;<span>C.2</span></a>. This Figure clearly shows the residuals have a strong seasonal pattern. <span class="citation" data-cites="Chatfield2004">Chatfield (<a href="../references.html#ref-Chatfield2004" role="doc-biblioref">2004</a>)</span> provides lots of useful information on time series modelling.</p>
+<p>This model only explains about 2% of the variation as shown by the adjusted r<sup>2</sup>. More of a problem however is that no account has been taken of the seasonal variation. An easy way of seeing the effect of this omission is to plot the autocorrelation function (ACF) of the residuals, shown in <a href="#fig-M0ACF" class="quarto-xref">Figure&nbsp;<span>D.2</span></a>. This Figure clearly shows the residuals have a strong seasonal pattern. <span class="citation" data-cites="Chatfield2004">Chatfield (<a href="../references.html#ref-Chatfield2004" role="doc-biblioref">2004</a>)</span> provides lots of useful information on time series modelling.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Chatfield2004" class="csl-entry" role="listitem">
 Chatfield, Christopher. 2004. <em>The Analysis of Time Series : An Introduction / Chris Chatfield</em>. 6th ed. Chapman &amp; Hall/CRC.
 </div></div><div class="cell">
@@ -567,10 +585,10 @@ Chatfield, Christopher. 2004. <em>The Analysis of Time Series : An Introduction 
 <div class="cell-output-display">
 <div id="fig-M0ACF" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-M0ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-M0ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;C.2: ACF for the residuals of model M0."><img src="appendix-trends_files/figure-html/fig-M0ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-M0ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;D.2: ACF for the residuals of model M0."><img src="appendix-trends_files/figure-html/fig-M0ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-M0ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.2: ACF for the residuals of model M0.
+Figure&nbsp;D.2: ACF for the residuals of model M0.
 </figcaption></figure>
 </div>
 </div>
@@ -610,10 +628,10 @@ GCV = 39.766  Scale est. = 38.566    n = 276</code></pre>
 <div class="cell-output-display">
 <div id="fig-M1trend" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-M1trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-M1trend-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;C.3: The trend component of model M1."><img src="appendix-trends_files/figure-html/fig-M1trend-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-M1trend-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;D.3: The trend component of model M1."><img src="appendix-trends_files/figure-html/fig-M1trend-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-M1trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.3: The trend component of model M1.
+Figure&nbsp;D.3: The trend component of model M1.
 </figcaption></figure>
 </div>
 </div>
@@ -623,25 +641,25 @@ Figure&nbsp;C.3: The trend component of model M1.
 <div class="cell-output-display">
 <div id="fig-M1seas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-M1seas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-M1seas-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;C.4: The seasonal component of model M1."><img src="appendix-trends_files/figure-html/fig-M1seas-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-M1seas-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;D.4: The seasonal component of model M1."><img src="appendix-trends_files/figure-html/fig-M1seas-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-M1seas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.4: The seasonal component of model M1.
+Figure&nbsp;D.4: The seasonal component of model M1.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>The seasonal component shown in <a href="#fig-M1seas" class="quarto-xref">Figure&nbsp;<span>C.4</span></a> clearly shows the strong seasonal effect on O<sub>3</sub> at this site (peaking in April). The trend component is actually linear in this case and could be modelled as such. This model looks much better, but as is often the case autocorrelation could remain important. The ACF is shown in <a href="#fig-M1ACF" class="quarto-xref">Figure&nbsp;<span>C.5</span></a> and shows there is still some short-term correlation in the residuals.</p>
-<p>Note also that there are other diagnostic tests one should consider when comparing these models that are not shown here e.g.&nbsp;such as considering the normality of the residuals. Indeed a consideration of the residuals shows that the model fails to some extent in explaining the very low values of O<sub>3</sub>, which can be seen in <a href="#fig-MHplot" class="quarto-xref">Figure&nbsp;<span>C.1</span></a>. These few points (which skew the residuals) may well be associated with air masses from the polluted regions of Europe. Better and more useful models would likely be possible if the data were split by airmass origin, which is something that will be returned to when <span class="pkg">openair</span> includes a consideration of back trajectories.</p>
+<p>The seasonal component shown in <a href="#fig-M1seas" class="quarto-xref">Figure&nbsp;<span>D.4</span></a> clearly shows the strong seasonal effect on O<sub>3</sub> at this site (peaking in April). The trend component is actually linear in this case and could be modelled as such. This model looks much better, but as is often the case autocorrelation could remain important. The ACF is shown in <a href="#fig-M1ACF" class="quarto-xref">Figure&nbsp;<span>D.5</span></a> and shows there is still some short-term correlation in the residuals.</p>
+<p>Note also that there are other diagnostic tests one should consider when comparing these models that are not shown here e.g.&nbsp;such as considering the normality of the residuals. Indeed a consideration of the residuals shows that the model fails to some extent in explaining the very low values of O<sub>3</sub>, which can be seen in <a href="#fig-MHplot" class="quarto-xref">Figure&nbsp;<span>D.1</span></a>. These few points (which skew the residuals) may well be associated with air masses from the polluted regions of Europe. Better and more useful models would likely be possible if the data were split by airmass origin, which is something that will be returned to when <span class="pkg">openair</span> includes a consideration of back trajectories.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">M1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-M1ACF" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-M1ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-M1ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;C.5: ACF for the residuals of model M1."><img src="appendix-trends_files/figure-html/fig-M1ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-M1ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;D.5: ACF for the residuals of model M1."><img src="appendix-trends_files/figure-html/fig-M1ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-M1ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.5: ACF for the residuals of model M1.
+Figure&nbsp;D.5: ACF for the residuals of model M1.
 </figcaption></figure>
 </div>
 </div>
@@ -679,16 +697,16 @@ R-sq.(adj) =  0.643
   Scale est. = 38.863    n = 276</code></pre>
 </div>
 </div>
-<p>The ACF plot is shown in <a href="#fig-M2ACF" class="quarto-xref">Figure&nbsp;<span>C.6</span></a> and shows that the autocorrelation has been dealt with and we can be rather more confident about the trend component (not plotted). Note that in this case we need to use the normalized residuals to get residuals that take account of the fitted correlation structure.</p>
+<p>The ACF plot is shown in <a href="#fig-M2ACF" class="quarto-xref">Figure&nbsp;<span>D.6</span></a> and shows that the autocorrelation has been dealt with and we can be rather more confident about the trend component (not plotted). Note that in this case we need to use the normalized residuals to get residuals that take account of the fitted correlation structure.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">M2</span><span class="op">$</span><span class="va">lme</span>, type <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-M2ACF" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-M2ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-M2ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;C.6: ACF for the residuals of model M2."><img src="appendix-trends_files/figure-html/fig-M2ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-M2ACF-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;D.6: ACF for the residuals of model M2."><img src="appendix-trends_files/figure-html/fig-M2ACF-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-M2ACF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.6: ACF for the residuals of model M2.
+Figure&nbsp;D.6: ACF for the residuals of model M2.
 </figcaption></figure>
 </div>
 </div>
@@ -727,7 +745,7 @@ R-sq.(adj) =  0.667
   Scale est. = 35.993    n = 276</code></pre>
 </div>
 </div>
-<p>It becomes a bit more difficult to plot the two-way interaction between the trend and the month, but it is possible with a surface as shown in <a href="#fig-perpsM3" class="quarto-xref">Figure&nbsp;<span>C.7</span></a>. This plot shows for example that during summertime the trends component varies little. However for the autumn and winter months there has been a much greater increase in the trend component for O<sub>3</sub>.</p>
+<p>It becomes a bit more difficult to plot the two-way interaction between the trend and the month, but it is possible with a surface as shown in <a href="#fig-perpsM3" class="quarto-xref">Figure&nbsp;<span>D.7</span></a>. This plot shows for example that during summertime the trends component varies little. However for the autumn and winter months there has been a much greater increase in the trend component for O<sub>3</sub>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">M3</span><span class="op">$</span><span class="va">gam</span>,</span>
@@ -740,10 +758,10 @@ R-sq.(adj) =  0.667
 <div class="cell-output-display">
 <div id="fig-perpsM3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-perpsM3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="appendix-trends_files/figure-html/fig-perpsM3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;C.7: Plot showing the two-way interaction between the trend and seasonal components."><img src="appendix-trends_files/figure-html/fig-perpsM3-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
+<a href="appendix-trends_files/figure-html/fig-perpsM3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;D.7: Plot showing the two-way interaction between the trend and seasonal components."><img src="appendix-trends_files/figure-html/fig-perpsM3-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-perpsM3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;C.7: Plot showing the two-way interaction between the trend and seasonal components.
+Figure&nbsp;D.7: Plot showing the two-way interaction between the trend and seasonal components.
 </figcaption></figure>
 </div>
 </div>
@@ -1159,12 +1177,12 @@ Figure&nbsp;C.7: Plot showing the two-way interaction between the trend and seas
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../sections/appendices/appendix-hysplit.html" class="pagination-link" aria-label="Production of HYSPLIT trajectory files">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Production of HYSPLIT trajectory files</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../sections/appendices/appendix-gethelp.html" class="pagination-link" aria-label="Getting help">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Getting help</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
