@@ -54,8 +54,8 @@ There are three kinds of scheme:
 #|  - "`mako` sequential colour scheme"
 #|  - "`Dark2` qualitative colour scheme"
 #| layout-ncol: 2
-trendLevel(mydata, cols = "mako", tag = "✔️")
-trendLevel(mydata, cols = "Dark2", tag = "❌")
+trendLevel(mydata, cols = "mako", tag = "Good")
+trendLevel(mydata, cols = "Dark2", tag = "Bad")
 ```
 
 To better control colours, you can use the `colourOpts()` function instead of a bare scheme name. This allows you to control extra features of the plot:

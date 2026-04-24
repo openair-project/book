@@ -190,7 +190,7 @@ no2_timeplot +
     geom = "text",
     x = ISOdate(2002, 5, 5, 0),
     y = I(0.975),
-    label = "What happened\nhere?\n🤔",
+    label = "What happened\nhere?",
     hjust = 1,
     vjust = 1,
     color = "grey25"
