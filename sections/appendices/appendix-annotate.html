@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>Appendix A — Customising openair plots – The openair book</title>
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -718,7 +718,7 @@ Figure&nbsp;A.6: Adding a reference line with <code><a href="https://ggplot2.tid
 <span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ISOdatetime.html">ISOdate</a></span><span class="op">(</span><span class="fl">2002</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span>,</span>
 <span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span>,</span>
-<span>    label <span class="op">=</span> <span class="st">"What happened\nhere?\n🤔"</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"What happened\nhere?"</span>,</span>
 <span>    hjust <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>    vjust <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"grey25"</span></span>
@@ -924,23 +924,23 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
 <p>Users of older versions of <span class="pkg">openair</span> may recall the <code>x.relation</code>, <code>y.relation</code> and <code>layout</code> options. These mapped onto <span class="pkg">lattice</span> arguments, which pre-dated <span class="pkg">ggplot2</span> as the plotting engine for <span class="pkg">openair</span>. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mkafccxafk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mkafccxafk table {
+<div id="ivbrawsubr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ivbrawsubr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mkafccxafk thead, #mkafccxafk tbody, #mkafccxafk tfoot, #mkafccxafk tr, #mkafccxafk td, #mkafccxafk th {
+#ivbrawsubr thead, #ivbrawsubr tbody, #ivbrawsubr tfoot, #ivbrawsubr tr, #ivbrawsubr td, #ivbrawsubr th {
   border-style: none;
 }
 
-#mkafccxafk p {
+#ivbrawsubr p {
   margin: 0;
   padding: 0;
 }
 
-#mkafccxafk .gt_table {
+#ivbrawsubr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -966,12 +966,12 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-left-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_caption {
+#ivbrawsubr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mkafccxafk .gt_title {
+#ivbrawsubr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -983,7 +983,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-width: 0;
 }
 
-#mkafccxafk .gt_subtitle {
+#ivbrawsubr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -995,7 +995,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-width: 0;
 }
 
-#mkafccxafk .gt_heading {
+#ivbrawsubr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1007,13 +1007,13 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_bottom_border {
+#ivbrawsubr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_col_headings {
+#ivbrawsubr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1028,7 +1028,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_col_heading {
+#ivbrawsubr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1048,7 +1048,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#mkafccxafk .gt_column_spanner_outer {
+#ivbrawsubr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1060,15 +1060,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 4px;
 }
 
-#mkafccxafk .gt_column_spanner_outer:first-child {
+#ivbrawsubr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mkafccxafk .gt_column_spanner_outer:last-child {
+#ivbrawsubr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mkafccxafk .gt_column_spanner {
+#ivbrawsubr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1080,11 +1080,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   width: 100%;
 }
 
-#mkafccxafk .gt_spanner_row {
+#ivbrawsubr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mkafccxafk .gt_group_heading {
+#ivbrawsubr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1110,7 +1110,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   text-align: left;
 }
 
-#mkafccxafk .gt_empty_group_heading {
+#ivbrawsubr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1125,15 +1125,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: middle;
 }
 
-#mkafccxafk .gt_from_md > :first-child {
+#ivbrawsubr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mkafccxafk .gt_from_md > :last-child {
+#ivbrawsubr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mkafccxafk .gt_row {
+#ivbrawsubr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1152,7 +1152,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#mkafccxafk .gt_stub {
+#ivbrawsubr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1165,7 +1165,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#mkafccxafk .gt_stub_row_group {
+#ivbrawsubr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1179,15 +1179,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: top;
 }
 
-#mkafccxafk .gt_row_group_first td {
+#ivbrawsubr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mkafccxafk .gt_row_group_first th {
+#ivbrawsubr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mkafccxafk .gt_summary_row {
+#ivbrawsubr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1197,16 +1197,16 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#mkafccxafk .gt_first_summary_row {
+#ivbrawsubr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_first_summary_row.thick {
+#ivbrawsubr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mkafccxafk .gt_last_summary_row {
+#ivbrawsubr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1216,7 +1216,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_grand_summary_row {
+#ivbrawsubr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1226,7 +1226,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#mkafccxafk .gt_first_grand_summary_row {
+#ivbrawsubr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1236,7 +1236,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_last_grand_summary_row_top {
+#ivbrawsubr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1246,11 +1246,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_striped {
+#ivbrawsubr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mkafccxafk .gt_table_body {
+#ivbrawsubr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1259,7 +1259,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_footnotes {
+#ivbrawsubr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1273,7 +1273,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_footnote {
+#ivbrawsubr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1282,7 +1282,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#mkafccxafk .gt_sourcenotes {
+#ivbrawsubr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1296,7 +1296,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#mkafccxafk .gt_sourcenote {
+#ivbrawsubr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1304,72 +1304,72 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#mkafccxafk .gt_left {
+#ivbrawsubr .gt_left {
   text-align: left;
 }
 
-#mkafccxafk .gt_center {
+#ivbrawsubr .gt_center {
   text-align: center;
 }
 
-#mkafccxafk .gt_right {
+#ivbrawsubr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mkafccxafk .gt_font_normal {
+#ivbrawsubr .gt_font_normal {
   font-weight: normal;
 }
 
-#mkafccxafk .gt_font_bold {
+#ivbrawsubr .gt_font_bold {
   font-weight: bold;
 }
 
-#mkafccxafk .gt_font_italic {
+#ivbrawsubr .gt_font_italic {
   font-style: italic;
 }
 
-#mkafccxafk .gt_super {
+#ivbrawsubr .gt_super {
   font-size: 65%;
 }
 
-#mkafccxafk .gt_footnote_marks {
+#ivbrawsubr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mkafccxafk .gt_asterisk {
+#ivbrawsubr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mkafccxafk .gt_indent_1 {
+#ivbrawsubr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mkafccxafk .gt_indent_2 {
+#ivbrawsubr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mkafccxafk .gt_indent_3 {
+#ivbrawsubr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mkafccxafk .gt_indent_4 {
+#ivbrawsubr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mkafccxafk .gt_indent_5 {
+#ivbrawsubr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mkafccxafk .katex-display {
+#ivbrawsubr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mkafccxafk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ivbrawsubr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1396,23 +1396,23 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
 </tr></tbody>
 </table>
 </div>
-<div id="wtpmqkyylg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wtpmqkyylg table {
+<div id="uijmhybeyp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uijmhybeyp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wtpmqkyylg thead, #wtpmqkyylg tbody, #wtpmqkyylg tfoot, #wtpmqkyylg tr, #wtpmqkyylg td, #wtpmqkyylg th {
+#uijmhybeyp thead, #uijmhybeyp tbody, #uijmhybeyp tfoot, #uijmhybeyp tr, #uijmhybeyp td, #uijmhybeyp th {
   border-style: none;
 }
 
-#wtpmqkyylg p {
+#uijmhybeyp p {
   margin: 0;
   padding: 0;
 }
 
-#wtpmqkyylg .gt_table {
+#uijmhybeyp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1438,12 +1438,12 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-left-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_caption {
+#uijmhybeyp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wtpmqkyylg .gt_title {
+#uijmhybeyp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1455,7 +1455,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-width: 0;
 }
 
-#wtpmqkyylg .gt_subtitle {
+#uijmhybeyp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1467,7 +1467,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-width: 0;
 }
 
-#wtpmqkyylg .gt_heading {
+#uijmhybeyp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1479,13 +1479,13 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_bottom_border {
+#uijmhybeyp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_col_headings {
+#uijmhybeyp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1500,7 +1500,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_col_heading {
+#uijmhybeyp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1520,7 +1520,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#wtpmqkyylg .gt_column_spanner_outer {
+#uijmhybeyp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1532,15 +1532,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 4px;
 }
 
-#wtpmqkyylg .gt_column_spanner_outer:first-child {
+#uijmhybeyp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wtpmqkyylg .gt_column_spanner_outer:last-child {
+#uijmhybeyp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wtpmqkyylg .gt_column_spanner {
+#uijmhybeyp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1552,11 +1552,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   width: 100%;
 }
 
-#wtpmqkyylg .gt_spanner_row {
+#uijmhybeyp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wtpmqkyylg .gt_group_heading {
+#uijmhybeyp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1582,7 +1582,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   text-align: left;
 }
 
-#wtpmqkyylg .gt_empty_group_heading {
+#uijmhybeyp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1597,15 +1597,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: middle;
 }
 
-#wtpmqkyylg .gt_from_md > :first-child {
+#uijmhybeyp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wtpmqkyylg .gt_from_md > :last-child {
+#uijmhybeyp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wtpmqkyylg .gt_row {
+#uijmhybeyp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1624,7 +1624,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#wtpmqkyylg .gt_stub {
+#uijmhybeyp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1637,7 +1637,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#wtpmqkyylg .gt_stub_row_group {
+#uijmhybeyp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1651,15 +1651,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: top;
 }
 
-#wtpmqkyylg .gt_row_group_first td {
+#uijmhybeyp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wtpmqkyylg .gt_row_group_first th {
+#uijmhybeyp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wtpmqkyylg .gt_summary_row {
+#uijmhybeyp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1669,16 +1669,16 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#wtpmqkyylg .gt_first_summary_row {
+#uijmhybeyp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_first_summary_row.thick {
+#uijmhybeyp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wtpmqkyylg .gt_last_summary_row {
+#uijmhybeyp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1688,7 +1688,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_grand_summary_row {
+#uijmhybeyp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1698,7 +1698,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#wtpmqkyylg .gt_first_grand_summary_row {
+#uijmhybeyp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1708,7 +1708,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_last_grand_summary_row_top {
+#uijmhybeyp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1718,11 +1718,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_striped {
+#uijmhybeyp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wtpmqkyylg .gt_table_body {
+#uijmhybeyp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1731,7 +1731,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_footnotes {
+#uijmhybeyp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1745,7 +1745,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_footnote {
+#uijmhybeyp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1754,7 +1754,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#wtpmqkyylg .gt_sourcenotes {
+#uijmhybeyp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1768,7 +1768,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#wtpmqkyylg .gt_sourcenote {
+#uijmhybeyp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1776,72 +1776,72 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#wtpmqkyylg .gt_left {
+#uijmhybeyp .gt_left {
   text-align: left;
 }
 
-#wtpmqkyylg .gt_center {
+#uijmhybeyp .gt_center {
   text-align: center;
 }
 
-#wtpmqkyylg .gt_right {
+#uijmhybeyp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wtpmqkyylg .gt_font_normal {
+#uijmhybeyp .gt_font_normal {
   font-weight: normal;
 }
 
-#wtpmqkyylg .gt_font_bold {
+#uijmhybeyp .gt_font_bold {
   font-weight: bold;
 }
 
-#wtpmqkyylg .gt_font_italic {
+#uijmhybeyp .gt_font_italic {
   font-style: italic;
 }
 
-#wtpmqkyylg .gt_super {
+#uijmhybeyp .gt_super {
   font-size: 65%;
 }
 
-#wtpmqkyylg .gt_footnote_marks {
+#uijmhybeyp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wtpmqkyylg .gt_asterisk {
+#uijmhybeyp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wtpmqkyylg .gt_indent_1 {
+#uijmhybeyp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wtpmqkyylg .gt_indent_2 {
+#uijmhybeyp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wtpmqkyylg .gt_indent_3 {
+#uijmhybeyp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wtpmqkyylg .gt_indent_4 {
+#uijmhybeyp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wtpmqkyylg .gt_indent_5 {
+#uijmhybeyp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wtpmqkyylg .katex-display {
+#uijmhybeyp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wtpmqkyylg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uijmhybeyp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
