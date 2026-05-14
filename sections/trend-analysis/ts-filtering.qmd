@@ -43,7 +43,6 @@ Ten years of data have been uploaded for a background (North Kensington) and roa
 
 ```{r}
 #| label: kz-import
-
 library(openair)
 library(tidyverse)
 
@@ -97,7 +96,6 @@ For the synoptic component it can be useful to plot a `calendarPlot()` for a par
 #| fig-cap: "Calendar plot of the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."
 #| fig-width: 8
 #| fig-height: 6
-
 mutate(kz_out_pm25, synoptic = synoptic + trend) |>
   calendarPlot(
     pollutant = "synoptic",
@@ -116,7 +114,6 @@ mutate(kz_out_pm25, synoptic = synoptic + trend) |>
 #| fig-cap: "Time plot of the seasonal component of O~3~ concentrations at the North Kensington site."
 #| fig-width: 6
 #| fig-height: 4
-
 timePlot(
   kz_out_o3,
   pollutant = "seasonal",
@@ -131,7 +128,7 @@ Finally, the `timeVariation()` function can be used to show how the different co
 #| label: fig-kz-timevariation
 #| fig-cap: "Time variation plot for the short-term, synoptic and sesasonal components of O~3~ concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic."
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 6
 timeVariation(
   kz_out_o3,
   pollutant = c("short", "synoptic", "seasonal"),
