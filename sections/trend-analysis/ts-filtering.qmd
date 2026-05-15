@@ -7,16 +7,17 @@ author: David Carslaw
 
 ## Background {#sec-kz-background}
 
-The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales [@Zurbenko1986; @Yang2010]. Its defining characteristic is simplicity: a plain moving average of window length $m$ is applied $k$ times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ($m$, $k$), where $m$ is the full window width in data steps (so a window of $m = 25$ hours extends 12 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as $m\sqrt{k}$, where $m$ is the full window width. Increasing $k$ thus pushes the cut-off to longer periods, providing greater smoothing.
+The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales [@Zurbenko1986; @Yang2010]. Its defining characteristic is simplicity: a plain moving average of window length $m$ is applied $k$ times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ($m$, $k$), where $m$ is the full window width in data steps (so a window of $m = 13$ hours extends 6 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as $m\sqrt{k}$, where $m$ is the full window width. Increasing $k$ thus pushes the cut-off to longer periods, providing greater smoothing.
 
 The value of the KZ filter in atmospheric and air quality science lies in the decomposition step [@Rao1997; @Eskridge1997]. By applying the filter successively at four increasing window sizes — approximately one day, one week, one month, and one year for hourly data — and taking the *differences* between adjacent filtered series, the raw time series is partitioned into five additive components:
 
 | Component | Typical period | Physical interpretation |
 |----|----|----|
-| Short | Hours to \~2 days | Diurnal cycles, brief emission pulses |
-| Synoptic | \~2–7 days | Frontal passages, weather systems |
-| Intermediate | Weeks to \~2 months | Sub-seasonal variability |
-| Seasonal | Months to \~1 year | Annual cycle, photochemistry |
+| Sub-day | Hours | Brief emission pulses |
+| Diurnal | Diurnal cycles | Diel variation
+| Synoptic | \~1–10 days | Weather systems, regional scale episodes |
+| Intermediate | Week to ~2 months | Sub-seasonal variability |
+| Seasonal | Months to ~1 year | Annual cycle, photochemistry |
 | Trend | Multi-year | Long-term emission changes, climate signals |
 
 : Default temporal decomposition produced by `kzFilter()` for hourly data.
@@ -35,9 +36,9 @@ The degree of window shrinkage is governed by the `sensitivity` argument: larger
 
 ## Using `kzFilter()` {#sec-kzFilter}
 
-The default window sizes `m = c(25, 169, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
+The default window sizes `m = c(3, 13, 107, 721, 8761)` are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count `k = 5` provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.
 
-Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 7, 30, 90, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.
+Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 5, 13, 41, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.
 
 Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:
 
@@ -66,22 +67,22 @@ kz_out_o3 <- kzFilter(
 )
 ```
 
-To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the short term, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a week or two (intermediate).
+To show the different components for PM~2.5~, a polar plot can be produced, as shown in @fig-kz-components-pm25. In this case, the diurnal, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the diurnal variation is dominated by low wind speed conditions, typical of local sources at ground level and higher wind speed features that likely reflect specific short-term source contributions. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a few weeks (intermediate).
 
 ```{r}
 #| label: fig-kz-components-pm25
-#| fig-cap: "Polar plot of the short, synoptic and intermediate components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."
+#| fig-cap: "Polar plot of the diurnal, synoptic and intermediate components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 90%
 kz_out_pm25 |>
   mutate(
-    short = short + trend,
+    diurnal = diurnal + trend,
     synoptic = synoptic + trend,
     intermediate = intermediate + trend
   ) |>
   polarPlot(
-    pollutant = c("short", "synoptic", "intermediate"),
+    pollutant = c("diurnal", "synoptic", "intermediate"),
     limits = c(0, 15),
     cols = "turbo",
     key.title = "pm25 (ug/m3)",
@@ -89,16 +90,16 @@ kz_out_pm25 |>
   )
 ```
 
-For the synoptic component it can be useful to plot a `calendarPlot()` for a particular year. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
+For the synoptic / intermediate component it can be useful to plot a `calendarPlot()` for a particular year to highlight episodes that last days to weeks. @fig-calendarPlot-synoptic shows the calendar plot for the synoptic + intermediate component of PM~2.5~ concentrations at the North Kensington site for 2020. The plot shows that the synoptic + intermediate component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the these components, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.
 
 ```{r}
 #| label: fig-calendarPlot-synoptic
-#| fig-cap: "Calendar plot of the synoptic component of PM~2.5~ concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."
+#| fig-cap: "Calendar plot of the synoptic + intermediate component of PM~2.5~ concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."
 #| fig-width: 8
 #| fig-height: 6
-mutate(kz_out_pm25, synoptic = synoptic + trend) |>
+mutate(kz_out_pm25, episodes = synoptic + intermediate + trend) |>
   calendarPlot(
-    pollutant = "synoptic",
+    pollutant = "episodes",
     year = 2020,
     cols = colorOpts("batlow", direction = -1),
     windflow = windflowOpts(
@@ -122,18 +123,21 @@ timePlot(
 )
 ```
 
-Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the short-term, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic. These plots confirm the expected behaviour of the KZ filtering for targetted temporal scales.
+Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The sub-day component shows decrease around 7.00 to 8.00 am coinciding with the short-term morning rush hour and increased emissions of NO~x~ that act to reduce concentrations of O~3~. The strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night, shows the typical diel variation of O~3~ concentrations expected at an urban background site. There is no (or very little) variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. 
+
+The day of the week variation (bottom-right) shows that only synoptic component with any notable variation. In this case there are higher O~3~ concentrations on Saturdays and Sundays when traffic emissions of NO~x~ are lower leading to O~3~ concentrations that are higher. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term components. These plots confirm the expected behaviour of the KZ filtering for targeted temporal scales.
 
 ```{r}
 #| label: fig-kz-timevariation
-#| fig-cap: "Time variation plot for the short-term, synoptic and sesasonal components of O~3~ concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic."
+#| fig-cap: "Time variation plot for the sub-day, diurnal, synoptic and sesasonal components of O~3~ concentrations at the North Kensington site. "
 #| fig-width: 8
 #| fig-height: 6
 timeVariation(
   kz_out_o3,
-  pollutant = c("short", "synoptic", "seasonal"),
+  pollutant = c("sub_day", "diurnal", "synoptic", "seasonal"),
   ci = FALSE,
-  cols = "Set2"
+  cols = "Set2",
+  ylab = "o3 (ug/m3)"
 )
 ```
 
