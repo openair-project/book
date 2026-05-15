@@ -550,7 +550,7 @@ window.Quarto = {
 
 </header><section id="sec-kz-background" class="level2 page-columns page-full" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="sec-kz-background">
 <span class="header-section-number">20.1</span> Background</h2>
-<p>The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales <span class="citation" data-cites="Zurbenko1986 Yang2010">(<a href="../references.html#ref-Zurbenko1986" role="doc-biblioref">Zurbenko 1986</a>; <a href="../references.html#ref-Yang2010" role="doc-biblioref">Yang and Zurbenko 2010</a>)</span>. Its defining characteristic is simplicity: a plain moving average of window length <span class="math inline">\(m\)</span> is applied <span class="math inline">\(k\)</span> times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ(<span class="math inline">\(m\)</span>, <span class="math inline">\(k\)</span>), where <span class="math inline">\(m\)</span> is the full window width in data steps (so a window of <span class="math inline">\(m = 25\)</span> hours extends 12 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as <span class="math inline">\(m\sqrt{k}\)</span>, where <span class="math inline">\(m\)</span> is the full window width. Increasing <span class="math inline">\(k\)</span> thus pushes the cut-off to longer periods, providing greater smoothing.</p>
+<p>The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales <span class="citation" data-cites="Zurbenko1986 Yang2010">(<a href="../references.html#ref-Zurbenko1986" role="doc-biblioref">Zurbenko 1986</a>; <a href="../references.html#ref-Yang2010" role="doc-biblioref">Yang and Zurbenko 2010</a>)</span>. Its defining characteristic is simplicity: a plain moving average of window length <span class="math inline">\(m\)</span> is applied <span class="math inline">\(k\)</span> times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ(<span class="math inline">\(m\)</span>, <span class="math inline">\(k\)</span>), where <span class="math inline">\(m\)</span> is the full window width in data steps (so a window of <span class="math inline">\(m = 13\)</span> hours extends 6 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as <span class="math inline">\(m\sqrt{k}\)</span>, where <span class="math inline">\(m\)</span> is the full window width. Increasing <span class="math inline">\(k\)</span> thus pushes the cut-off to longer periods, providing greater smoothing.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Zurbenko1986" class="csl-entry" role="listitem">
 Zurbenko, Igor G. 1986. <em>The Spectral Analysis of Time Series</em>. North-Holland.
 </div><div id="ref-Yang2010" class="csl-entry" role="listitem">
@@ -567,26 +567,31 @@ Eskridge, R. E., J. Y. Ku, S. T. Rao, P. S. Porter, and I. G. Zurbenko. 1997. <s
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Short</td>
-<td>Hours to ~2 days</td>
-<td>Diurnal cycles, brief emission pulses</td>
+<td>Sub-day</td>
+<td>Hours</td>
+<td>Brief emission pulses</td>
 </tr>
 <tr class="even">
-<td>Synoptic</td>
-<td>~2–7 days</td>
-<td>Frontal passages, weather systems</td>
+<td>Diurnal</td>
+<td>Diurnal cycles</td>
+<td>Diel variation</td>
 </tr>
 <tr class="odd">
-<td>Intermediate</td>
-<td>Weeks to ~2 months</td>
-<td>Sub-seasonal variability</td>
+<td>Synoptic</td>
+<td>~1–10 days</td>
+<td>Weather systems, regional scale episodes</td>
 </tr>
 <tr class="even">
+<td>Intermediate</td>
+<td>Week to ~2 months</td>
+<td>Sub-seasonal variability</td>
+</tr>
+<tr class="odd">
 <td>Seasonal</td>
 <td>Months to ~1 year</td>
 <td>Annual cycle, photochemistry</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Trend</td>
 <td>Multi-year</td>
 <td>Long-term emission changes, climate signals</td>
@@ -611,8 +616,8 @@ Zurbenko, I. G., P. S. Porter, S. T. Rao, J. Y. Ku, R. Gui, and R. E. Eskridge. 
 </section><section id="sec-kzFilter" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="sec-kzFilter">
 <span class="header-section-number">20.3</span> Using <code>kzFilter()</code>
 </h2>
-<p>The default window sizes <code>m = c(25, 169, 721, 8761)</code> are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count <code>k = 5</code> provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.</p>
-<p>Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 7, 30, 90, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.</p>
+<p>The default window sizes <code>m = c(3, 13, 107, 721, 8761)</code> are chosen for hourly data and correspond roughly to one day, one week, one month, and one year. The iteration count <code>k = 5</code> provides a near-Gaussian frequency response at each scale. These defaults are appropriate for most ambient monitoring records and rarely need adjustment.</p>
+<p>Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 5, 13, 41, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.</p>
 <p>Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
@@ -634,16 +639,16 @@ Zurbenko, I. G., P. S. Porter, S. T. Rao, J. Y. Ku, R. Gui, and R. E. Eskridge. 
 <span>  pollutant <span class="op">=</span> <span class="st">"o3"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>To show the different components for PM<sub>2.5</sub>, a polar plot can be produced, as shown in <a href="#fig-kz-components-pm25" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. In this case, the short term, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the short-term variation is dominated by low wind speed conditions, typical of local sources at ground level. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a week or two (intermediate).</p>
+<p>To show the different components for PM<sub>2.5</sub>, a polar plot can be produced, as shown in <a href="#fig-kz-components-pm25" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. In this case, the diurnal, synoptic and seasonal variation are considered together. It should be noted that the trend component has been added back to show the overall variation in concentrations. The plot shows that the diurnal variation is dominated by low wind speed conditions, typical of local sources at ground level and higher wind speed features that likely reflect specific short-term source contributions. By contrast, the synoptic and intermediate variation has a much clearer easterly / north-easterly component present also at higher wind speeds, which is dominated by regional transport and the influence of pollution episodes that last a few days (synoptic) to a few weeks (intermediate).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kz_out_pm25</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    short <span class="op">=</span> <span class="va">short</span> <span class="op">+</span> <span class="va">trend</span>,</span>
+<span>    diurnal <span class="op">=</span> <span class="va">diurnal</span> <span class="op">+</span> <span class="va">trend</span>,</span>
 <span>    synoptic <span class="op">=</span> <span class="va">synoptic</span> <span class="op">+</span> <span class="va">trend</span>,</span>
 <span>    intermediate <span class="op">=</span> <span class="va">intermediate</span> <span class="op">+</span> <span class="va">trend</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span></span>
-<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"short"</span>, <span class="st">"synoptic"</span>, <span class="st">"intermediate"</span><span class="op">)</span>,</span>
+<span>    pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"diurnal"</span>, <span class="st">"synoptic"</span>, <span class="st">"intermediate"</span><span class="op">)</span>,</span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span>,</span>
 <span>    cols <span class="op">=</span> <span class="st">"turbo"</span>,</span>
 <span>    key.title <span class="op">=</span> <span class="st">"pm25 (ug/m3)"</span>,</span>
@@ -652,19 +657,19 @@ Zurbenko, I. G., P. S. Porter, S. T. Rao, J. Y. Ku, R. Gui, and R. E. Eskridge. 
 <div class="cell-output-display">
 <div id="fig-kz-components-pm25" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-components-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;20.1: Polar plot of the short, synoptic and intermediate components of PM2.5 concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="img-fluid figure-img" style="width:90.0%"></a>
+<a href="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;20.1: Polar plot of the diurnal, synoptic and intermediate components of PM2.5 concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-kz-components-pm25-1.png" class="img-fluid figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-components-pm25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.1: Polar plot of the short, synoptic and intermediate components of PM<sub>2.5</sub> concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations.
+Figure&nbsp;20.1: Polar plot of the diurnal, synoptic and intermediate components of PM<sub>2.5</sub> concentrations at the North Kensington site. The trend component has been added back to both components to show the overall variation in concentrations.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>For the synoptic component it can be useful to plot a <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for a particular year. <a href="#fig-calendarPlot-synoptic" class="quarto-xref">Figure&nbsp;<span>20.2</span></a> shows the calendar plot for the synoptic component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The plot shows that the synoptic component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the synoptic component, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.</p>
+<p>For the synoptic / intermediate component it can be useful to plot a <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for a particular year to highlight episodes that last days to weeks. <a href="#fig-calendarPlot-synoptic" class="quarto-xref">Figure&nbsp;<span>20.2</span></a> shows the calendar plot for the synoptic + intermediate component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The plot shows that the synoptic + intermediate component is dominated by a few episodes of high concentrations that last a few days and are associated with easterly / north-easterly conditions (as shown in the polar plot above). The plot also shows that there is a lot of variation in the these components, with many days having very low values, and some days having very high values. The trend component has been added back to show the overall variation in concentrations.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">kz_out_pm25</span>, synoptic <span class="op">=</span> <span class="va">synoptic</span> <span class="op">+</span> <span class="va">trend</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">kz_out_pm25</span>, episodes <span class="op">=</span> <span class="va">synoptic</span> <span class="op">+</span> <span class="va">intermediate</span> <span class="op">+</span> <span class="va">trend</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
-<span>    pollutant <span class="op">=</span> <span class="st">"synoptic"</span>,</span>
+<span>    pollutant <span class="op">=</span> <span class="st">"episodes"</span>,</span>
 <span>    year <span class="op">=</span> <span class="fl">2020</span>,</span>
 <span>    cols <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/colourOpts.html">colorOpts</a></span><span class="op">(</span><span class="st">"batlow"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>    windflow <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/windflowOpts.html">windflowOpts</a></span><span class="op">(</span></span>
@@ -674,10 +679,10 @@ Figure&nbsp;20.1: Polar plot of the short, synoptic and intermediate components 
 <div class="cell-output-display">
 <div id="fig-calendarPlot-synoptic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot-synoptic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;20.2: Calendar plot of the synoptic component of PM2.5 concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;20.2: Calendar plot of the synoptic + intermediate component of PM2.5 concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations."><img src="ts-filtering_files/figure-html/fig-calendarPlot-synoptic-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot-synoptic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.2: Calendar plot of the synoptic component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations.
+Figure&nbsp;20.2: Calendar plot of the synoptic + intermediate component of PM<sub>2.5</sub> concentrations at the North Kensington site for 2020. The trend component has been added back to show the overall variation in concentrations.
 </figcaption></figure>
 </div>
 </div>
@@ -701,21 +706,22 @@ Figure&nbsp;20.3: Time plot of the seasonal component of O<sub>3</sub> concentra
 </div>
 </div>
 </div>
-<p>Finally, the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function can be used to show how the different components vary by hour of the day and month of the year. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> shows the time variation plot for the short-term, synoptic and seasonal components of O<sub>3</sub> concentrations at the North Kensington site. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> acts as a simple test to see which temporal variations are removed and which remain for different time scales. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O<sub>3</sub> concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic. These plots confirm the expected behaviour of the KZ filtering for targetted temporal scales.</p>
+<p>Finally, the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function can be used to show how the different components vary by hour of the day and month of the year. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> shows the time variation plot for the sub-day, diurnal, synoptic and seasonal components of O<sub>3</sub> concentrations at the North Kensington site. <a href="#fig-kz-timevariation" class="quarto-xref">Figure&nbsp;<span>20.4</span></a> acts as a simple test to see which temporal variations are removed and which remain for different time scales. The sub-day component shows decrease around 7.00 to 8.00 am coinciding with the short-term morning rush hour and increased emissions of NO<sub>x</sub> that act to reduce concentrations of O<sub>3</sub>. The strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night, shows the typical diel variation of O<sub>3</sub> concentrations expected at an urban background site. There is no (or very little) variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed.</p>
+<p>The day of the week variation (bottom-right) shows that only synoptic component with any notable variation. In this case there are higher O<sub>3</sub> concentrations on Saturdays and Sundays when traffic emissions of NO<sub>x</sub> are lower leading to O<sub>3</sub> concentrations that are higher. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O<sub>3</sub> concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term components. These plots confirm the expected behaviour of the KZ filtering for targeted temporal scales.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span></span>
 <span>  <span class="va">kz_out_o3</span>,</span>
-<span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"short"</span>, <span class="st">"synoptic"</span>, <span class="st">"seasonal"</span><span class="op">)</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sub_day"</span>, <span class="st">"diurnal"</span>, <span class="st">"synoptic"</span>, <span class="st">"seasonal"</span><span class="op">)</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cols <span class="op">=</span> <span class="st">"Set2"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-kz-timevariation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-kz-timevariation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;20.4: Time variation plot for the short-term, synoptic and sesasonal components of O3 concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O3 concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic."><img src="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;20.4: Time variation plot for the sub-day, diurnal, synoptic and sesasonal components of O3 concentrations at the North Kensington site."><img src="ts-filtering_files/figure-html/fig-kz-timevariation-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kz-timevariation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20.4: Time variation plot for the short-term, synoptic and sesasonal components of O<sub>3</sub> concentrations at the North Kensington site. The short-term component shows a strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night. There is no variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O<sub>3</sub> concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term component, and very little for the synoptic.
+Figure&nbsp;20.4: Time variation plot for the sub-day, diurnal, synoptic and sesasonal components of O<sub>3</sub> concentrations at the North Kensington site.
 </figcaption></figure>
 </div>
 </div>

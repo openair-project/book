@@ -2036,7 +2036,7 @@ Figure&nbsp;A.18: Using the patchwork package to combine multiple openair plots 
 <span>    label <span class="op">=</span> <span class="st">"Things go up!"</span>,</span>
 <span>    arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_texthline</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://allancameron.github.io/geomtextpath/reference/geom_textabline.html">geom_texthline</a></span><span class="op">(</span></span>
 <span>    yintercept <span class="op">=</span> <span class="fl">250</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"blue"</span>,</span>
 <span>    label <span class="op">=</span> <span class="st">"limit value"</span>,</span>
@@ -2050,12 +2050,12 @@ Figure&nbsp;A.18: Using the patchwork package to combine multiple openair plots 
 </div>
 </div>
 </div>
-<p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code>legendry::guide_colring()</code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
+<p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">legendry::guide_colring()</a></code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
 <p>This example highlights that sometimes you may need to take on further tweaks as you get deeper into customising your plots. Here, it was necessary to reset the colour scale to set appropriate labels and breaks.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, z <span class="op">=</span> <span class="st">"wd"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
-<span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu">guide_colring</span><span class="op">(</span><span class="op">)</span></span>
+<span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu"><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">guide_colring</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradientn</a></span><span class="op">(</span></span>
 <span>    colours <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="st">"hue"</span><span class="op">)</span>,</span>
