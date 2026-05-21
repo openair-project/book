@@ -87,14 +87,14 @@ trajLevelMap(
 )
 ```
 
-`trajLevelMap()` also supports the `smooth` argument from `trajLevel()`.
+`trajLevelMap()` also supports the `smooth` and `breaks` arguments from `trajLevel()`.
 
 ```{r}
 #| label: fig-trajlevelsmooth
 #| fig-cap: A smoothed frqeuency map plotted by `trajLevelMap()`.
 trajLevelMap(
   traj_data,
-  statistic = "pscf",
+  statistic = "sqtba",
   pollutant = "pm10",
   smooth = TRUE
 )
