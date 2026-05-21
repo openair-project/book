@@ -50,7 +50,7 @@ Often with several years of data, points are over-plotted and it can be very dif
 
 ### Hexagonal binning {#sec-hexbin}
 
-Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that For `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), `trans = function(x) log(x)` and `inv = function(x) exp(x)`. For a square root transform use `trans = sqrt` and `inv =  function(x) x^2`. To not apply any transformation `trans = NULL` and `inv = NULL` should be used.
+Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that For `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. By default, `"hexbin"` is transformed using a `"log10"` transform. For a square root transform use `trans = "sqrt"`. To not apply any transformation `trans = NULL` should be used.
 
 ```{r}
 #| label: fig-scatterPlot2
@@ -84,7 +84,7 @@ scatterPlot(
 )
 ```
 
-The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in `scatterPlot` with the `method =   "density"` option. Such a plot is shown in @fig-scatterPlotDens.
+The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in `scatterPlot` with the `method = "density"` option. Such a plot is shown in @fig-scatterPlotDens.
 
 ```{r}
 #| label: fig-scatterPlotDens
