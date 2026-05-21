@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>29&nbsp; Scatter plots – The openair book</title>
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -569,7 +569,7 @@ Figure&nbsp;29.1: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <p>Often with several years of data, points are over-plotted and it can be very difficult to see what the underlying relationship looks like. One very effective method to use in these situations is to ‘bin’ the data and to colour the intervals by the number of counts of occurrences in each bin. There are various ways of doing this, but ‘hexagonal binning’ is particularly effective because of the way hexagons can be placed next to one another.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="sec-hexbin" class="level3" data-number="29.2.1"><h3 data-number="29.2.1" class="anchored" data-anchor-id="sec-hexbin">
 <span class="header-section-number">29.2.1</span> Hexagonal binning</h3>
-<p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. This is possible by supplying two functions: one that applies the transformation and the other that inverses it. For log scaling for example (the default), <code>trans = function(x) log(x)</code> and <code>inv = function(x) exp(x)</code>. For a square root transform use <code>trans = sqrt</code> and <code>inv =  function(x) x^2</code>. To not apply any transformation <code>trans = NULL</code> and <code>inv = NULL</code> should be used.</p>
+<p>Now it should be possible to make the plot by setting the method option to <code>method = "hexbin"</code>, as shown in <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a>. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g.&nbsp;several million records. In this case <a href="#fig-scatterPlot2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> provides a clearer indication of the relationship between NO<sub>x</sub> and NO<sub>2</sub> than <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> because it reveals where most of the points lie, which is not apparent from <a href="#fig-scatterPlot1" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. Note that For <code>method = "hexbin"</code> it can be useful to transform the scale if it is dominated by a few very high values. By default, <code>"hexbin"</code> is transformed using a <code>"log10"</code> transform. For a square root transform use <code>trans = "sqrt"</code>. To not apply any transformation <code>trans = NULL</code> should be used.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">data2003</span>,</span>
@@ -602,7 +602,7 @@ Figure&nbsp;29.2: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <span>  bins <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in <code>scatterPlot</code> with the <code>method =   "density"</code> option. Such a plot is shown in <a href="#fig-scatterPlotDens" class="quarto-xref">Figure&nbsp;<span>29.3</span></a>.</p>
+<p>The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in <code>scatterPlot</code> with the <code>method = "density"</code> option. Such a plot is shown in <a href="#fig-scatterPlotDens" class="quarto-xref">Figure&nbsp;<span>29.3</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/selectByDate.html">selectByDate</a></span><span class="op">(</span><span class="va">mydata</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span>,</span>
@@ -671,12 +671,12 @@ Figure&nbsp;29.4: Scatter plot of hourly NO<sub>x</sub> vs.&nbsp;NO<sub>2</sub> 
 <pre><code># A tibble: 6 × 4
   date                  nox pollutant value
   &lt;dttm&gt;              &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
-1 1997-12-28 00:00:00  135. pm10       22.0
-2 1997-12-28 00:00:00  135. pm25       NA  
-3 1998-01-04 00:00:00  177. pm10       31.6
-4 1998-01-04 00:00:00  177. pm25       NA  
-5 1998-01-11 00:00:00  212. pm10       31.8
-6 1998-01-11 00:00:00  212. pm25       NA  </code></pre>
+1 1997-12-29 00:00:00  128. pm10       21.8
+2 1997-12-29 00:00:00  128. pm25       NA  
+3 1998-01-05 00:00:00  189. pm10       33.6
+4 1998-01-05 00:00:00  189. pm25       NA  
+5 1998-01-12 00:00:00  203. pm10       29.1
+6 1998-01-12 00:00:00  203. pm25       NA  </code></pre>
 </div>
 </div>
 <p>Now we will plot weekly NO<sub>x</sub> versus PM<sub>10</sub> and PM<sub>2.5</sub> and fit a linear equation to both — and adjust some of the symbols (shown in <a href="#fig-scatterPlotTwo" class="quarto-xref">Figure&nbsp;<span>29.5</span></a>).</p>
