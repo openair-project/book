@@ -9,26 +9,12 @@ execute:
 
 ## Data Requirements
 
-[openairmaps]{.pkg} contains the `polar_data` dataset to allow users to test the directional analysis functions^[By "directional analysis", we are referring to the outputs from [openair]{.pkg} functions like `polarPlot()`.]. The structure of this data set is provided below, and a summary is given in @tbl-polardata. The important feature of this data when compared to `openair::mydata` is latitude and longitude information, which [openairmaps]{.pkg} needs to place the directional analysis markers in the correct positions.
+[openairmaps]{.pkg} contains the `polar_data` dataset to allow users to test the directional analysis functions^[By "directional analysis", we are referring to the outputs from [openair]{.pkg} functions like `polarPlot()`.]. The structure of this data set is provided below. The important feature of this data when compared to `openair::mydata` is latitude and longitude information, which [openairmaps]{.pkg} needs to place the directional analysis markers in the correct positions.
 
 ```{r}
 #| label: glimpsePolar
 library(openairmaps)
 dplyr::glimpse(polar_data)
-```
-
-```{r}
-#| label: tbl-polardata
-#| echo: false
-#| tbl-cap: "A statistical summary of the `polar_data` dataset."
-polar_data |>
-  dplyr::select(-site_type) |>
-  gtsummary::tbl_summary(
-    missing = "no",
-    by = "site",
-    type = list(lat ~ "continuous", lon ~ "continuous"),
-    statistic = list(lat ~ "{median}", lon ~ "{median}")
-  )
 ```
 
 If you would prefer to use data from different sites or years, the `import*()` functions from [openair]{.pkg} make it easy to obtain pollution data with associated site latitude/longitude. The key thing to remember is to use the `meta = TRUE` argument when using a function like `importUKAQ()` to have the lat/lon (& site type) appended to your imported data.
