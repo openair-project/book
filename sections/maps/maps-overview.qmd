@@ -145,5 +145,3 @@ tribble(
   cols_move_to_start(c(Family, Description))
 ```
 
-The next few pages will discuss each of these function families in turn, starting with network visualisation.
-

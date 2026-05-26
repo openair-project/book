@@ -71,7 +71,6 @@ book:
     - part: "Interactive Maps"
       chapters:
         - sections/maps/maps-overview.qmd
-        - sections/maps/maps-network.qmd
         - sections/maps/maps-polar.qmd
         - sections/maps/maps-traj.qmd
         

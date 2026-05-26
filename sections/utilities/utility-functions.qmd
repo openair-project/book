@@ -312,3 +312,4 @@ hc <- importUKAQ(site = "my1", year = 2005, hc = TRUE)
 ## similarly to one another
 corPlot(hc)
 ```
+

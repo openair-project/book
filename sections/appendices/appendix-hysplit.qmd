@@ -4,7 +4,7 @@ author: David Carslaw
 
 # Production of HYSPLIT trajectory files {#sec-prod-hyspl-traj}
 
-As discussed in @sec-trajPlot, [openair]{.pkg} can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a Ricardo webserver to make it easy to import 96-hour back trajectory data. Several users have requested how they can run HYSPLIT themselves e.g. for different trajectory start heights or for many locations. It should be noted that Hysplit is a powerful and flexible model and to exploit its full potential, users should consider using Hysplit directly [@stein2015].
+As discussed in @sec-trajPlot, [openair]{.pkg} can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a WSP webserver to make it easy to import 96-hour back trajectory data. Several users have requested how they can run HYSPLIT themselves e.g. for different trajectory start heights or for many locations. It should be noted that Hysplit is a powerful and flexible model and to exploit its full potential, users should consider using Hysplit directly [@stein2015].
 
 A well-written R package called [splitr]{.pkg} by Rich Iannone (see [here](https://github.com/rich-iannone/splitr)) provides a lot of flexibility for working with different meteorological inputs and Hysplit options. Users should consider [splitr]{.pkg} if they want more control over Hysplit options --- especially for the detailed investigation of short time periods such as pollution episodes where higher resolution meteorological data is useful.
 

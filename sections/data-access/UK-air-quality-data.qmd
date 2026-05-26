@@ -1,30 +1,19 @@
 ---
-author: David Carslaw
-editor_options: 
-  markdown: 
-    wrap: 72
+author: 
+- David Carslaw
+- Jack Davison
 abstract: This section outlines the different ways users can access the abundant air quality data in the UK. The main functions provide easy access to hourly data and other statistical summaries such as annual means and data capture rates. Easy access is also provided to site meta data such as longitude, latitude, site type and details of the pollutants measured.
+aliases:
+  - sections/maps/maps-network.html
 ---
 
 # Accessing UK Air Quality Data {#sec-importUKAQ}
 
 ## Accessing data
 
-The UK has a surprisingly large amount of air quality data that is publicly
-accessible. The main UK AURN archive and regional (England, Scotland, Wales and
-Northern Ireland) together with Imperial College London's London Air Quality
-Network (LAQN) are important and large databases of information that allow free
-public access. Storing and managing data in this way has many advantages
-including consistent data format, and underlying high quality methods to process
-and store the data.
+The UK has a surprisingly large amount of air quality data that is publicly accessible. The main UK AURN archive and regional (England, Scotland, Wales and Northern Ireland) together with Imperial College London's London Air Quality Network (LAQN) are important and large databases of information that allow free public access. Storing and managing data in this way has many advantages including consistent data format, and underlying high quality methods to process and store the data.
 
-[openair]{.pkg} has a core function that provides users with
-extensive access to UK air quality data; `importUKAQ()`. Ricardo
-has provided `.RData` files (R workspaces) for several important air
-quality networks in the UK. These files are updated on a daily basis.
-This approach requires a link to the Internet to work. The work of
-Trevor Davies at Ricardo is greatly appreciated in
-making all the data available. The networks available through `importUKAQ()` include:
+[openair]{.pkg} has a core function that provides users with extensive access to UK air quality data; `importUKAQ()`. [WSP](https://www.wsp.com/en-gb/) (formerly Ricardo) has provided `.RData` files (R workspaces) for several important air quality networks in the UK. These files are updated on a daily basis. This approach requires a link to the Internet to work. The work of Trevor Davies at WSP is greatly appreciated in making all the data available. The networks available through `importUKAQ()` include:
 
 -   The UK national network, the [Automatic Urban and Rural Network](https://uk-air.defra.gov.uk/networks/network-info?view=aurn). This is the main UK network.
 
@@ -53,26 +42,15 @@ When analysing UK air quality data, it may be useful to compare it to data from 
 The European Environment Agency (EEA) now provides an air quality download service (<https://eeadmz1-downloads-webapp.azurewebsites.net/>), which includes an API. The `openair` family now includes the [euroaq]{.pkg} package, which allows you to easily access this through R - see <https://openair-project.github.io/euroaq/> for more information.
 :::
 
-Many users download hourly data from [UK
-AIR](https://uk-air.defra.gov.uk/data/). Most commonly, the data are emailed to
-the user as .csv files and have a fixed format as shown below. This is a useful
-facility but does have some limitations and frustrations, many of which have
-been overcome using a new way of storing and downloading the data described
-below.
+Many users download hourly data from [GOV UK](https://get-air-pollution-data.service.gov.uk/). This is a useful facility but does have some limitations and frustrations, many of which are overcome using `openair` to download the data:
 
-There are several advantages over the web portal approach where .csv
-files are downloaded. First, it is quick to select a range of sites,
-pollutants and periods (see examples below). Second, storing the data as
-.RData objects is very efficient as they are about four times smaller
-than .csv files (which are already small) --- which means the data
-downloads quickly and saves bandwidth. Third, the function completely
-avoids any need for data manipulation or setting time formats, time
-zones etc. Finally, it is easy to import many years of data. The final
-point makes it possible to download several long time series in one go.
+1. It is quick to select a range of sites, pollutants and periods, and it is possible to download several long time series in one go.
 
-The site codes and pollutant names can be upper or lower case.
+1. Storing the data as .RData objects is very efficient as they are about four times smaller than .csv files (which are already small). This means the data downloads quickly and saves bandwidth.
 
-Some examples of usage are shown below. First load the packages we need.
+1. The function completely avoids any need for data manipulation or setting time formats, time zones etc.
+
+Some examples of usage are shown below. First, lets load the packages we need.
 
 ```{r}
 #| warning: false
@@ -86,12 +64,7 @@ library(tidyverse)
 
 ### National networks
 
-The first question is, what sites are available and what do they
-measure? Users can access the details of air pollution monitoring sites
-using the `importMeta()` function. The user only needs to provide the
-network name and (optionally) whether all data should be returned and
-whether certain periods should be considered. By default only site type,
-latitude and longitude are returned.
+The first question is, what sites are available and what do they measure? Users can access the details of air pollution monitoring sites using the `importMeta()` function. The user only needs to provide the network name and (optionally) whether all data should be returned and whether certain periods should be considered. By default only site type, latitude and longitude are returned.
 
 ```{r}
 #| label: importMeta
@@ -101,9 +74,7 @@ aurn_meta <- importMeta(source = "aurn")
 aurn_meta
 ```
 
-Or return much more detailed data that includes which pollutants are
-measured at each site and site start / end dates. The option
-`all = TRUE` should be added.
+Or return much more detailed data that includes which pollutants are measured at each site and site start / end dates. The option `all = TRUE` should be added.
 
 ```{r}
 #| label: importMetaAll
@@ -114,25 +85,15 @@ aurn_meta <- importMeta(source = "aurn", all = TRUE)
 glimpse(aurn_meta)
 ```
 
-Note that `importMeta()` can import information for several networks at
-once e.g. `source = c("aurn", "saqn")`.
+Note that `importMeta()` can import information for several networks at once e.g. `source = c("aurn", "saqn")`. Further, a convenience value for `source` is `"ukaq"`, which returns metadata for all networks accessible via `importUKAQ()` (AURN, AQE, SAQN, WAQN, NI, and local networks).
 
-Often it is useful to consider sites that were open in a particular year
-or were open for a duration of years. This can be done using the `year`
-argument. When `year` is a range such as `year = 2010:2020`, only sites
-that were open across that range of years will be returned. This option
-is especially useful for trend analysis when there might be an interest
-in extracting only sites that were measuring over the period of
-interest. Furthermore, if `all = TRUE` is used, supplying a year (or
-years) will select only specific pollutants that were measured during
-the period of interest.[^uk-air-quality-data-2]
+Often it is useful to consider sites that were open in a particular year or were open for a duration of years. This can be done using the `year` argument. When `year` is a range such as `year = 2010:2020`, only sites that were open across that range of years will be returned. This option is especially useful for trend analysis when there might be an interest in extracting only sites that were measuring over the period of interest. Furthermore, if `all = TRUE` is used, supplying a year (or years) will select only specific pollutants that were measured during the period of interest.[^uk-air-quality-data-2]
 
 [^uk-air-quality-data-2]: Note that while a site may have been in
     operation for a long time, it is not necessarily the case that all
     pollutants were measured since the start of the site.
 
-For example, to check the number of sites that were open from 2010 to
-2022 in the AURN and SAQN combined:
+For example, to check the number of sites that were open from 2010 to 2022 in the AURN and SAQN combined:
 
 ```{r}
 sites_2010_2022 <- importMeta(
@@ -143,32 +104,27 @@ sites_2010_2022 <- importMeta(
 nrow(sites_2010_2022)
 ```
 
-The example below uses sites on the AURN that measure NO~2~, but can
-easily be extended to the other data sources.
-
-To see how many sites measure NO~2~ in the AURN that are 'urban
-traffic':
+`importMeta()` also supports filtering by pollutant directly, without needing to filter the returned data frame manually. The `pollutant` argument accepts one or more pollutant names (case-insensitive), and `"hc"` can be used as a shorthand for all hydrocarbons. For example, to find all Urban Traffic sites on the AURN that measure NO~2~:
 
 ```{r}
 #| warning: false
 #| message: false
-aurn_detailed <- importMeta(source = "aurn", all = TRUE)
-
-no2_sites <- filter(
-  aurn_detailed,
-  variable == "NO2",
-  site_type == "Urban Traffic"
+no2_sites <- importMeta(
+  source = "aurn",
+  all = TRUE,
+  pollutant = "no2",
+  site_type = "Urban Traffic"
 )
 
 nrow(no2_sites)
 ```
 
-::: callout-tip
-## Use `importMeta()` as a way to select sites to import
+Additional filtering arguments include `site` (pattern-matched site name), `code` (exact site code), and `duplicate` (set `TRUE` to retain sites that appear in multiple networks rather than de-duplicating them).
 
-One of the most useful aspects of `importMeta()` is to use it as a basis
-to identify site codes to then import data. For example, to import data
-from the AURN for sites that have been in operation from 2005 to 2020:
+::: callout-tip
+#### Use `importMeta()` as a way to select sites to import
+
+One of the most useful aspects of `importMeta()` is to use it as a basis to identify site codes to then import data. For example, to import data from the AURN for sites that have been in operation from 2005 to 2020:
 
 ```{r}
 #| eval: false
@@ -179,41 +135,112 @@ sites_2005_2020 <- importMeta(
 
 all_aq_data <- importUKAQ(
   site = sites_2005_2020$code,
+  source = sites_2005_2020$source,
   year = 2005:2020
 )
 ```
 :::
 
-To import data, you can use the `importUKAQ()` function. Some
-examples are below.
+### Finding sites near a location
+
+`importMeta()` can also find sites near a specific location by supplying `lat` and `lng` coordinates. The returned data will include a `distance_km` column and be sorted by distance. This is useful when assessing pollution exposure at a receptor (e.g., a school or hospital) or when looking for monitors near a potential pollution source (e.g., an industrial installation or quarry).
+
+The `max_dist` argument limits results to sites within a given radius (in km), and `max_n` caps the number of sites returned. These can be combined to find, say, the four nearest sites within 5 km. [openairmaps]{.pkg} provides the `convertPostcode()` function as a convenient way to obtain coordinates from a UK postcode. The below example finds the four closest monitoring stations within 5km of Great Ormond Street Hospital, a famous children's hospital in London.
+
+```{r}
+#| eval: true
+hospital_coords <- list(
+  lat = 51.52221,
+  lng = -0.119898
+)
+
+importMeta(
+  source = c("aurn", "aqe"),
+  year = 2022,
+  lat = hospital_coords$lat,
+  lng = hospital_coords$lng,
+  max_dist = 2,
+  max_n = 4
+)
+```
+
+### Plot Sites on a Map
+
+To easily visualise entire monitoring networks, consider using the [openairmaps]{.pkg} R package. This package can be installed from CRAN, similar to [openair]{.pkg}.
 
 ```{r}
 #| eval: false
-## import all pollutants from Marylebone Rd from 2000:2005
+install.packages("openairmaps")
+```
+
+This package contains the `networkMap()` function which acts as a wrapper around `importMeta()` and returns a detailed map, with many options for customisation. For example, sites can be clustered together to avoid clutter, and an optional "control menu" can be added to filter for certain sites (e.g., different site types, shown below). All of the filtering arguments described above --- `year`, `pollutant`, `site_type`, `lat`, `lng`, `max_dist`, `max_n` --- can be passed directly to `networkMap()` and are forwarded on to `importMeta()`.
+
+```{r}
+#| label: fig-openairmapsNetworkMap
+#| cache: false
+#| fig-cap: Plotting some English Air Quality stations using the `openairmaps` package.
+library(openairmaps)
+networkMap(source = c("aurn", "aqe"), control = "site_type")
+```
+
+When spatial filtering is applied, `networkMap()` clearly shows the 'target' coordinate as a white marker and, if relevant, the `max_dist` radius as a circle.
+
+```{r}
+#| label: fig-openairmapsNetworkMap2
+#| cache: false
+#| fig-cap: A map of AURN and AQE monitoring stations local to Great Ormond Street.
+networkMap(
+  source = c("aurn", "aqe"),
+  year = 2022,
+  lat = hospital_coords$lat,
+  lng = hospital_coords$lng,
+  max_dist = 2
+)
+```
+
+As well as providing all of the functionality of `importMeta()`, `networkMap()` provides several additional arguments for customisation:
+
+- `control`: Any column of the equivalent `importMeta()` dataset, which is used to create a "layer control" menu to allow readers to filter for certain sites. The `control` option is quite opinionated, and selects an appropriate style of layer control depending on the column selected (e.g., pollutants are switched between, whereas multiple site types can be selected at once).
+
+- `cluster`: By default, if greater than 25 markers are plotted then they default to be clustered together until users zoom in close. This default behaviour improves the appearance and performance of the HTML map widget. The `cluster` argument allows you to turn this feature on and off.
+
+- `provider`: Any number of the [leaflet]{.pkg} providers (see `leaflet::providers`). The default for this is a typical 'street map' and a satellite map, both of which can be toggled between.
+
+## Monitoring Data
+
+### Hourly data
+
+To import data, you can use the `importUKAQ()` function. Some examples are below.
+
+```{r}
+#| eval: false
+
+# import all pollutants from Marylebone Rd from 2000:2005
 mary <- importUKAQ(site = "my1", year = 2000:2005)
 
-## import nox, no2, o3 from Marylebone Road and Nottingham Centre for 2000
+# import nox, no2, o3 from Marylebone Road and Nottingham Centre for 2000
 thedata <- importUKAQ(
-  site = c("my1", "nott"), year = 2000,
+  site = c("my1", "nott"),
+  year = 2000,
   pollutant = c("nox", "no2", "o3")
 )
 
-## import over 30 years of Mace Head O3 data!
+# import over 30 years of Mace Head O3 data!
 o3 <- importUKAQ(site = "mh", year = 1987:2019)
 
-## import hydrocarbon data from Marylebone Road
+# import hydrocarbon data from Marylebone Road
 hc <- importUKAQ(site = "my1", year = 2008, hc = TRUE)
 
-## Import data from the AQE network (York data in this case)
+# Import data from the AQE network (York data in this case)
 yk13 <- importUKAQ(site = "yk13", year = 2018, source = "aqe")
 
-## Import data from the AURN *and* AQE network! Different networks are
-## automatically detected
+# Import data from the AURN *and* AQE network! Different networks are
+# automatically detected
 duo <- importUKAQ(site = c("my1", "yk13"), year = 2020)
 
-## Or, `source` can be specified - useful for ambiguous codes (some 'locally
-## managed' sites may have overlapping site codes w/ nationally managed sites -
-## e.g., "AD1")
+# Or, `source` can be specified - useful for ambiguous codes (some 'locally
+# managed' sites may have overlapping site codes w/ nationally managed
+# sites, e.g., "AD1")
 ad1_saqn <- importUKAQ(site = "ad1", year = 2020, source = "saqn")
 ad1_eng <- importUKAQ(site = "ad1", year = 2020, source = "local")
 ```
@@ -227,77 +254,30 @@ kc1 <- importUKAQ(site = "kc1", year = 2018, meta = TRUE)
 glimpse(kc1)
 
 ## custom metadata - anything in `importMeta()`
-kc1_zagglom <- importUKAQ(site = "kc1", year = 2018, meta = TRUE, meta_columns = c("zone", "agglomeration"))
+kc1_zagglom <- importUKAQ(
+  site = "kc1",
+  year = 2018,
+  meta = TRUE,
+  meta_columns = c("zone", "agglomeration")
+)
 glimpse(kc1_zagglom)
 ```
 
-By default, the function returns data where each pollutant is in a
-separate column. However, it is possible to return the data in a *tidy*
-format (column for pollutant name, column for value) by using the option
-`to_narrow`:
+By default, the function returns data where each pollutant is in a separate column. However, it is possible to return the data in a *tidy* format (column for pollutant name, column for value) by using the option `to_narrow`:
 
 ```{r}
 #| eval: false
 my1 <- importUKAQ("my1", year = 2018, to_narrow = TRUE)
 ```
 
-It is also possible to return information on whether the data have been
-ratified or not using the option `ratified` (`FALSE` by default). So,
-add the option `ratified = TRUE` if you want this information.
+It is also possible to return information on whether the data have been ratified or not using the option `ratified` (`FALSE` by default). So, add the option `ratified = TRUE` if you want this information.
 
-### Local networks
+### Annual and other statistics
 
-In the case of **locally available data**, it is useful to know who the
-data providers are, which are shown below.
-
-```{r}
-# access local meta data to get provider
-meta_local <- importMeta("local", all = TRUE)
-unique(meta_local$provider)
-```
-
-## Plot Sites on a Map
-
-To easily visualise entire monitoring networks, consider using the
-[openairmaps]{.pkg} R package. This package can be installed from CRAN,
-similar to [openair]{.pkg}.
-
-```{r}
-#| eval: false
-install.packages("openairmaps")
-```
-
-This package contains the `networkMap()` function which acts as a wrapper
-around `importMeta()` and returns a detailed map similar to the one
-produced below, with many options for customisation. For example, sites
-can be clustered together to avoid clutter, and an optional "control
-menu" can be added to filter for certain sites (e.g., different site
-types, shown below).
-
-```{r}
-#| label: fig-openairmapsNetworkMap
-#| cache: false
-#| fig-cap: Plotting the AURN using the `openairmaps` package.
-library(openairmaps)
-networkMap(source = "aurn", control = "site_type")
-```
-
-For more information about using [openairmaps]{.pkg} to build maps of
-monitoring networks, please refer to the [Network Visualisation
-Page](../maps/maps-network.qmd).
-
-## Annual and other statistics
-
-By default, all the functions above return hourly data. However, often
-there is a need to return data such as annual means of a long period of
-time. `importUKAQ()` (but not `importImperial()`) can return data
-for averaging times: annual, monthly, daily and for SO~2~ 15-minute. The
-annual and monthly data also provide valuable information on data
-capture rates. The averaging statistic is selected with the `data_type`
-option. The values `data_type` can take include:
+By default, all the functions above return hourly data. However, often there is a need to return data such as annual means of a long period of time. `importUKAQ()` (but not `importImperial()`) can return data for averaging times: annual, monthly, daily and for SO~2~ 15-minute. The annual and monthly data also provide valuable information on data capture rates. The averaging statistic is selected with the `data_type` option. The values `data_type` can take include:
 
 -   **"hourly"** This is the default and specific site(s) must be provided.
--   **"daily"** Daily means returned and specific site(s) must be provided. Note that in the case of PM~10~ and PM~2.5~ daily measurements can be available those derived from hourly measurements (using instruments such as TEOM, BAM and FIDAS) and our daily gravimetric measurements such as from a Partisol. In the returned data the gravimetric daily measurements are shown as `gr_pm10` and `gr_pm2.5`, respectively.
+-   **"daily"** Daily means returned and specific site(s) must be provided. Note that in the case of PM~10~ and PM~2.5~ daily measurements can be available from those derived from hourly measurements (using instruments such as TEOM, BAM and FIDAS) and from daily gravimetric measurements such as from a Partisol. In the returned data the gravimetric daily measurements are shown as `gr_pm10` and `gr_pm2.5`, respectively.
 -   **"monthly"** Monthly means returned. No site code is needed because all data for a particular year are returned. Data capture statistics are also given.
 -   **"annual"** Annual means returned. No site code is needed because all data for a particular year are returned. Data capture statistics are also given.
 -   **"15_min"** 15-minute SO~2~ concentrations returned for a specific site(s).
@@ -306,8 +286,7 @@ option. The values `data_type` can take include:
 -   **"daily_max_8"** Maximum daily rolling 8-hour maximum for O~3~ and CO.
 -   **"daqi"** Daily Air Quality Index (DAQI). See [here](https://uk-air.defra.gov.uk/air-pollution/daqi?view=more-info&pollutant=ozone#pollutant) for more details of how the index is defined.
 
-Note that for annual and monthly statistics all network data is returned
-and the `site` option has no effect.
+Note that for annual and monthly statistics all network data is returned and the `site` option has no effect.
 
 As an example, to import 5 years of annual mean data from the AURN:
 
@@ -316,11 +295,7 @@ As an example, to import 5 years of annual mean data from the AURN:
 uk_annual <- importUKAQ(year = 2016:2020, data_type = "annual", source = "AURN")
 ```
 
-By default, this will return data in "wide" format with a pollutant and
-its data capture rate in separate columns. Often it is more useful to
-have "narrow" format data, which is possible to select with the
-`to_narrow` option. Furthermore, it is also possible to return site meta
-data (site type, latitude and longitude) at the same time.
+By default, this will return data in "wide" format with a pollutant and its data capture rate in separate columns. Often it is more useful to have "narrow" format data, which is possible to select with the `to_narrow` option. Furthermore, it is also possible to return site meta data (site type, latitude and longitude) at the same time.
 
 Below is an example of obtaining annual mean data for 2020.
 
@@ -343,17 +318,14 @@ The pollutants returned include:
 unique(uk_2020$species)
 ```
 
-Now it is easy for example, to select annual mean data from 2020 for
-NO~2~ with a data capture rate of at least 80%:
+Now it is easy for example, to select annual mean data from 2020 for NO~2~ with a data capture rate of at least 80%:
 
 ```{r}
 #| label: filterNO2
-uk_2020 |>
-  filter(species == "no2", data_capture >= 0.8)
+filter(uk_2020, species == "no2", data_capture >= 0.8)
 ```
 
-For the AURN, it is also possible to return the DAQI (Daily Air Quality
-Index) by pollutant to save deriving it.
+For the AURN, AQE, SAQN, WAQN and NI networks, it is also possible to return the DAQI (Daily Air Quality Index) by pollutant to save deriving it.
 
 ```{r}
 #| label: daqi
