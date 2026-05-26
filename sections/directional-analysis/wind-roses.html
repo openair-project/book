@@ -418,20 +418,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -448,13 +442,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -593,7 +587,7 @@ Figure&nbsp;5.2: Use of <code>windRose</code> function to plot wind speed/direct
 </div>
 </div>
 </div>
-<p>The <code>type</code> option is very flexible in <span class="pkg">openair</span> and can be used to quickly consider the dependencies between variables. <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 28.2</span></a> describes the basis of this option in <span class="pkg">openair</span> plot. As an example, consider the question: what are the meteorological conditions that control high and low concentrations of PM<sub>10</sub>? By setting <code>type = "pm10"</code>, <span class="pkg">openair</span> will split the PM<sub>10</sub> concentrations into four <em>quantiles</em> i.e.&nbsp;roughly equal numbers of points in each level. The plot will then show four different wind roses for each quantile level, although the default number of levels can be set by the user — see <code><a href="https://openair-project.github.io/openair/reference/cutData.html">?cutData</a></code> for more details. <a href="#fig-windRsPM10" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> shows the results of setting <code>type = "pm10"</code>. For the lowest concentrations of PM<sub>10</sub> the wind direction is dominated by northerly winds, and relatively low wind speeds. By contrast, the highest concentrations (plot furthest right) are dominated by relatively strong winds from the south-west. It is therefore very easy to obtain a good idea about the conditions that tend to lead to high (or low) concentrations of a pollutant. Furthermore, the <code>type</code> option is available in almost all <span class="pkg">openair</span> functions.</p>
+<p>The <code>type</code> option is very flexible in <span class="pkg">openair</span> and can be used to quickly consider the dependencies between variables. <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a> describes the basis of this option in <span class="pkg">openair</span> plot. As an example, consider the question: what are the meteorological conditions that control high and low concentrations of PM<sub>10</sub>? By setting <code>type = "pm10"</code>, <span class="pkg">openair</span> will split the PM<sub>10</sub> concentrations into four <em>quantiles</em> i.e.&nbsp;roughly equal numbers of points in each level. The plot will then show four different wind roses for each quantile level, although the default number of levels can be set by the user — see <code><a href="https://openair-project.github.io/openair/reference/cutData.html">?cutData</a></code> for more details. <a href="#fig-windRsPM10" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> shows the results of setting <code>type = "pm10"</code>. For the lowest concentrations of PM<sub>10</sub> the wind direction is dominated by northerly winds, and relatively low wind speeds. By contrast, the highest concentrations (plot furthest right) are dominated by relatively strong winds from the south-west. It is therefore very easy to obtain a good idea about the conditions that tend to lead to high (or low) concentrations of a pollutant. Furthermore, the <code>type</code> option is available in almost all <span class="pkg">openair</span> functions.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

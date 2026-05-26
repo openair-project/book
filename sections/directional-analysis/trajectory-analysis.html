@@ -422,20 +422,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -452,13 +446,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -569,7 +563,7 @@ window.Quarto = {
 <p>Back trajectories are extremely useful in air pollution and can provide important information on air mass origins. Despite the clear usefulness of back trajectories, their use tends to be restricted to the research community. Back trajectories are used for many purposes from understanding the origins of air masses over a few days to undertaking longer term analyses. They are often used to filter air mass origins to allow for more refined analyses of air pollution — for example trends in concentration by air mass origin. They are often also combined with more sophisticated analyses such as cluster analysis to help group similar type of air mass by origin.</p>
 <p>Perhaps one of the reasons why back trajectory analysis is not carried out more often is that it can be time consuming to do. This is particularly so if one wants to consider several years at several sites. It can also be difficult to access back trajectory data. In an attempt to overcome some of these issues and expand the possibilities for data analysis, <span class="pkg">openair</span> makes several functions available to access and analyse pre-calculated back trajectories.</p>
 <p>Currently these functions allow for the import of pre-calculated back trajectories at several pre-defined locations and some trajectory plotting functions. In time, all of these functions will be developed to allow more sophisticated analyses to be undertaken.</p>
-<p>The <code><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj()</a></code> function imports pre-calculated back trajectories using the Hysplit trajectory model <a href="https://ready.arl.noaa.gov/HYSPLIT.php">Hybrid Single Particle Lagrangian Integrated Trajectory Model</a> <span class="citation" data-cites="stein2015">(<a href="../references.html#ref-stein2015" role="doc-biblioref">Stein et al. 2015</a>)</span>. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at Ricardo Energy &amp; Environment similar to that for <a href="../data-access/UK-air-quality-data.html">importUKAQ</a>, which makes it very easy to import pre-processed trajectory data for a range of locations and years. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/importTraj.html">importTraj()</a></code> function imports pre-calculated back trajectories using the Hysplit trajectory model <a href="https://ready.arl.noaa.gov/HYSPLIT.php">Hybrid Single Particle Lagrangian Integrated Trajectory Model</a> <span class="citation" data-cites="stein2015">(<a href="../references.html#ref-stein2015" role="doc-biblioref">Stein et al. 2015</a>)</span>. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at WSP similar to that for <a href="../data-access/UK-air-quality-data.html">importUKAQ</a>, which makes it very easy to import pre-processed trajectory data for a range of locations and years. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="no-row-height column-margin column-container"><div id="ref-stein2015" class="csl-entry" role="listitem">
 Stein, A. F., R. R. Draxler, G. D. Rolph, B. J. B. Stunder, M. D. Cohen, and F. Ngan. 2015. <span>“NOAA<span>’</span>s HYSPLIT Atmospheric Transport and Dispersion Modeling System.”</span> <em>Bulletin of the American Meteorological Society</em> 96 (12): 2059–77. <a href="https://doi.org/10.1175/bams-d-14-00110.1">https://doi.org/10.1175/bams-d-14-00110.1</a>.
 </div></div><div class="callout callout-style-simple callout-tip callout-titled">
@@ -786,7 +780,7 @@ Figure&nbsp;10.5: Gridded back trajectory frequencies. The <code>border = NA</co
 </div>
 </div>
 </div>
-<p>It is also possible to use hexagonal binning to gain an idea about trajectory frequencies. In this case each 3-hour point along each trajectory is used in the counting. The code below focuses more on Europe and uses the hexagonal binning method. Note that the effect of the very few high number of points at the origin has been diminished by plotting the data on a log scale — see <a href="../utilities/scatter-plot.html#sec-hexbin" class="quarto-xref"><span>Section 29.2.1</span></a> for details.</p>
+<p>It is also possible to use hexagonal binning to gain an idea about trajectory frequencies. In this case each 3-hour point along each trajectory is used in the counting. The code below focuses more on Europe and uses the hexagonal binning method. Note that the effect of the very few high number of points at the origin has been diminished by plotting the data on a log scale — see <a href="../utilities/scatter-plot.html#sec-hexbin" class="quarto-xref"><span>Section 28.2.1</span></a> for details.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">traj</span>, <span class="va">lat</span> <span class="op">&gt;</span> <span class="fl">30</span>, <span class="va">lat</span> <span class="op">&lt;</span> <span class="fl">70</span>, <span class="va">lon</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">50</span>, <span class="va">lon</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://openair-project.github.io/openair/reference/trajLevel.html">trajLevel</a></span><span class="op">(</span></span>

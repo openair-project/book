@@ -418,20 +418,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -448,13 +442,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -630,7 +624,7 @@ Figure&nbsp;23.3: Conditional quantiles at Lullington Heath conditioned by seaso
 </section><section id="sec-conditionalEval" class="level2 page-columns page-full" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="sec-conditionalEval">
 <span class="header-section-number">23.2</span> Conditional evaluation</h2>
 <p>There are numerous ways in which model performance can be assessed, including the use of common statistical measures described in <a href="mod-stats.html" class="quarto-xref"><span>Chapter 21</span></a>. These approaches are very useful for comparing models against observations and other models. However, model developers would generally like to know <em>why</em> a model may have poor performance under some situations. This is a much more challenging issue to address. However, useful information can be gained by considering how other variables vary simultaneously.</p>
-<p>The <code>conditionalEval</code> function provides information on how other variables vary across the <em>same</em> intervals as shown on the conditional quantile plot. There are two types of variable that can be considered by setting the value of <code>statistic</code>. First, <code>statistic</code> can be another variable in the data frame. In this case the plot will show the different proportions of <code>statistic</code> across the range of predictions. For example <code>statistic = "season"</code> will show for each interval of <code>mod</code> the proportion of predictions that were spring, summer, autumn or winter. This is useful because if model performance is worse for example at high concentrations of <code>mod</code> then knowing that these tend to occur during a particular season etc. can be very helpful when trying to understand <em>why</em> a model fails. See <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 28.2</span></a> for more details on the types of variable that can be <code>statistic</code>. Another example would be <code>statistic = "ws"</code> (if wind speed were available in the data frame), which would then split wind speed into four quantiles and plot the proportions of each. Again, this would help show whether model performance in predicting concentrations of O<sub>3</sub> for example is related to low to high wind speed conditions.</p>
+<p>The <code>conditionalEval</code> function provides information on how other variables vary across the <em>same</em> intervals as shown on the conditional quantile plot. There are two types of variable that can be considered by setting the value of <code>statistic</code>. First, <code>statistic</code> can be another variable in the data frame. In this case the plot will show the different proportions of <code>statistic</code> across the range of predictions. For example <code>statistic = "season"</code> will show for each interval of <code>mod</code> the proportion of predictions that were spring, summer, autumn or winter. This is useful because if model performance is worse for example at high concentrations of <code>mod</code> then knowing that these tend to occur during a particular season etc. can be very helpful when trying to understand <em>why</em> a model fails. See <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a> for more details on the types of variable that can be <code>statistic</code>. Another example would be <code>statistic = "ws"</code> (if wind speed were available in the data frame), which would then split wind speed into four quantiles and plot the proportions of each. Again, this would help show whether model performance in predicting concentrations of O<sub>3</sub> for example is related to low to high wind speed conditions.</p>
 <p><code>conditionalEval</code> can also simultaneously plot the model performance of other observed/predicted variable <em>pairs</em> according to different model evaluation statistics. These statistics derive from the <a href="mod-stats.html" class="quarto-xref"><span>Chapter 21</span></a>) function and include <em>MB</em>, <em>NMB</em>, <em>r</em>, <em>COE</em>, <em>MGE</em>, <em>NMGE</em>, <em>RMSE</em> and <em>FAC2</em>. More than one statistic can be supplied e.g.&nbsp;<code>statistic = c("NMB", "COE")</code>. Bootstrap samples are taken from the corresponding values of other variables to be plotted and their statistics with 95% confidence intervals calculated. In this case, the model <em>performance</em> of other variables is shown across the same intervals of <code>mod</code>, rather than just the values of single variables. In this second case the model would need to provide observed/predicted pairs of other variables.</p>
 <p>For example, a model may provide predictions of NO<sub>x</sub> and wind speed (for which there are also observations available). The <code>conditionalEval</code> function will show how well these other variables are predicted for the <em>same prediction intervals</em> of the main variable assessed in the conditional quantile plot e.g.&nbsp;ozone. In this case, values are supplied to <code>var.obs</code> (observed values for other variables) and <code>var.mod</code> (modelled values for other variables). For example, to consider how well the model predicts NO<sub>x</sub> and wind speed <code>var.obs = c("nox.obs", "ws.obs")</code> and <code>var.mod = c("nox.mod",  "ws.mod")</code> would be supplied (assuming <code>nox.obs, nox.mod, ws.obs,  ws.mod</code> are present in the data frame). The analysis could show for example, when ozone concentrations are under-predicted, the model may also be shown to over-predict concentrations of NO<sub>x</sub> at the same time, or under-predict wind speeds. Such information can thus help identify the underlying causes of poor model performance. For example, an under-prediction in wind speed could result in higher surface NO<sub>x</sub> concentrations and lower ozone concentrations. Similarly if wind speed predictions were good and NO<sub>x</sub> was over predicted it might suggest an over-estimate of NO<sub>x</sub> emissions. One or more additional variables can be plotted.</p>
 <p>A special case is <code>statistic = "cluster"</code>. In this case a data frame is provided that contains the cluster calculated by <code>trajCluster</code> and <code>importTraj</code>. Alternatively users could supply their own pre-calculated clusters. These calculations can be very useful in showing whether certain back trajectory clusters are associated with poor (or good) model performance. Note that in the case of <code>statistic = "cluster"</code> there will be fewer data points used in the analysis compared with the ordinary statistics above because the trajectories are available for every three hours. Also note that <code>statistic = "cluster"</code> cannot be used together with the ordinary model evaluation statistics such as <em>MB</em>. The output will be a bar chart showing the proportion of each interval of <code>mod</code> by cluster number.</p>

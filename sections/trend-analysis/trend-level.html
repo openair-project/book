@@ -399,20 +399,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -429,13 +423,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -531,7 +525,7 @@ window.Quarto = {
 <span class="header-section-number">18.1</span> Another way of representing trends</h2>
 <p>The <code>trendLevel</code> function provides a way of rapidly showing a large amount of data in a condensed way. It is particularly useful for plotting the level of a value against two categorical variables. These categorical variables can pre-exist in a data set or be made on the fly using <span class="pkg">openair</span>. By default it will show the mean value of a variable against two categorical variables but can also consider a wider range of statistics e.g.&nbsp;the maximum, frequency, or indeed a user-defined function. The function is much more flexible than this by showing temporal data and can plot ‘heat maps’ in many flexible ways. Both continuous colour scales and user-defined categorical scales can be used.</p>
 <p>The <code>trendLevel</code> function shows how the value of a variable varies according to intervals of two other variables. The <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables can be categorical (factor or character) or numeric. The third variable (<span class="math inline">\(z\)</span>) must be numeric and is coloured according to its value. Despite being called <code>trendLevel</code> the function is flexible enough to consider a wide range of plotting variables.</p>
-<p>If the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are not categorical they are made so by splitting the data into quantiles (using <code>cutData</code>). Furthermore, the user can supply as many levels as they wish for the quantile using the option <code>n.levels</code>. Remember also there are lots of built-in options for <code>x</code> or <code>y</code> based on temporal variations (see <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 28.2</span></a>) e.g.&nbsp;“month” (the default), “week”, “daylight” and so on.</p>
+<p>If the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are not categorical they are made so by splitting the data into quantiles (using <code>cutData</code>). Furthermore, the user can supply as many levels as they wish for the quantile using the option <code>n.levels</code>. Remember also there are lots of built-in options for <code>x</code> or <code>y</code> based on temporal variations (see <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a>) e.g.&nbsp;“month” (the default), “week”, “daylight” and so on.</p>
 </section><section id="sec-TrendLevelEx" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="sec-TrendLevelEx">
 <span class="header-section-number">18.2</span> Examples</h2>
 <p>The standard output from <code>trendLevel</code> is shown in <a href="#fig-trendLevel1" class="quarto-xref">Figure&nbsp;<span>18.1</span></a>, which shows the variation in NO<sub>x</sub> concentrations by month and hour of the day. By default the function will use “month” for the x-axis and “hour” for the y-axis.</p>

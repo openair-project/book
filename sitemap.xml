@@ -14,11 +14,11 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/data-access/UK-air-quality-data.html</loc>
-    <lastmod>2026-03-31T08:17:30.364Z</lastmod>
+    <lastmod>2026-05-26T10:23:11.363Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/data-access/access-met-data.html</loc>
-    <lastmod>2026-03-31T20:23:25.418Z</lastmod>
+    <lastmod>2026-05-26T09:55:06.262Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/wind-roses.html</loc>
@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/directional-analysis/trajectory-analysis.html</loc>
-    <lastmod>2026-04-22T08:09:41.300Z</lastmod>
+    <lastmod>2026-05-26T09:55:19.214Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/time-plot.html</loc>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/theil-sen.html</loc>
-    <lastmod>2026-04-22T08:09:41.314Z</lastmod>
+    <lastmod>2026-05-26T10:31:39.761Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/trend-analysis/smooth-trend.html</loc>
@@ -98,11 +98,7 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-overview.html</loc>
-    <lastmod>2026-03-31T08:09:20.708Z</lastmod>
-  </url>
-  <url>
-    <loc>https://openair-project.github.io/book/sections/maps/maps-network.html</loc>
-    <lastmod>2026-03-31T08:17:54.180Z</lastmod>
+    <lastmod>2026-05-26T10:17:05.334Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/maps/maps-polar.html</loc>
@@ -114,7 +110,7 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/utilities/utility-functions.html</loc>
-    <lastmod>2026-04-22T08:09:41.325Z</lastmod>
+    <lastmod>2026-05-26T10:31:21.622Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/utilities/scatter-plot.html</loc>
@@ -134,7 +130,7 @@
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-hysplit.html</loc>
-    <lastmod>2026-03-31T08:16:12.535Z</lastmod>
+    <lastmod>2026-05-26T09:54:50.941Z</lastmod>
   </url>
   <url>
     <loc>https://openair-project.github.io/book/sections/appendices/appendix-trends.html</loc>

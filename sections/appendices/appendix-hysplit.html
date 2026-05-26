@@ -390,20 +390,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../sections/maps/maps-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Network Visualisation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -420,13 +414,13 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/scatter-plot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Scatter plots</span></span></a>
   </div>
 </li>
       </ul>
@@ -513,7 +507,7 @@ div.csl-indent {
   
 
 
-</header><p>As discussed in <a href="../directional-analysis/trajectory-analysis.html" class="quarto-xref"><span>Chapter 10</span></a>, <span class="pkg">openair</span> can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a Ricardo webserver to make it easy to import 96-hour back trajectory data. Several users have requested how they can run HYSPLIT themselves e.g.&nbsp;for different trajectory start heights or for many locations. It should be noted that Hysplit is a powerful and flexible model and to exploit its full potential, users should consider using Hysplit directly <span class="citation" data-cites="stein2015">(<a href="../references.html#ref-stein2015" role="doc-biblioref">Stein et al. 2015</a>)</span>.</p>
+</header><p>As discussed in <a href="../directional-analysis/trajectory-analysis.html" class="quarto-xref"><span>Chapter 10</span></a>, <span class="pkg">openair</span> can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a WSP webserver to make it easy to import 96-hour back trajectory data. Several users have requested how they can run HYSPLIT themselves e.g.&nbsp;for different trajectory start heights or for many locations. It should be noted that Hysplit is a powerful and flexible model and to exploit its full potential, users should consider using Hysplit directly <span class="citation" data-cites="stein2015">(<a href="../references.html#ref-stein2015" role="doc-biblioref">Stein et al. 2015</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-stein2015" class="csl-entry" role="listitem">
 Stein, A. F., R. R. Draxler, G. D. Rolph, B. J. B. Stunder, M. D. Cohen, and F. Ngan. 2015. <span>“NOAA<span>’</span>s HYSPLIT Atmospheric Transport and Dispersion Modeling System.”</span> <em>Bulletin of the American Meteorological Society</em> 96 (12): 2059–77. <a href="https://doi.org/10.1175/bams-d-14-00110.1">https://doi.org/10.1175/bams-d-14-00110.1</a>.
 </div></div><p>A well-written R package called <span class="pkg">splitr</span> by Rich Iannone (see <a href="https://github.com/rich-iannone/splitr">here</a>) provides a lot of flexibility for working with different meteorological inputs and Hysplit options. Users should consider <span class="pkg">splitr</span> if they want more control over Hysplit options — especially for the detailed investigation of short time periods such as pollution episodes where higher resolution meteorological data is useful.</p>
