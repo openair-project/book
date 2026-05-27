@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.38">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="David Carslaw and Jack Davison">
 <title>27&nbsp; Utility functions – The openair book</title>
@@ -93,10 +93,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -793,18 +793,18 @@ Figure&nbsp;27.1: Example of using the <code>selectRunning</code> function to se
 <span><span class="va">twoweek</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 196 × 10
-   date                   ws     wd   nox   no2    o3  pm10   so2    co  pm25
-   &lt;dttm&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 1997-12-29 00:00:00  6.98 204.    167.  41.4  4.63  29.3  4.47  2.17  NA  
- 2 1998-01-12 00:00:00  4.91 207.    173.  42.1  4.70  28.8  5.07  1.86  NA  
- 3 1998-01-26 00:00:00  2.78 330.    233.  51.4  2.30  34.9  8.07  2.45  NA  
- 4 1998-02-09 00:00:00  4.43 216.    276.  57.1  2.63  43.7  8.98  2.94  NA  
- 5 1998-02-23 00:00:00  6.89 243.    248.  56.7  4.99  28.8  9.79  2.57  NA  
- 6 1998-03-09 00:00:00  2.97 309.    160.  44.8  5.64  32.7  8.65  1.62  NA  
- 7 1998-03-23 00:00:00  4.87 185.    224.  53.6  5.52  35.9 10.2   2.34  NA  
- 8 1998-04-06 00:00:00  3.24 306.    144.  43.4 10.1   23.8  5.48  1.40  NA  
- 9 1998-04-20 00:00:00  4.38 199.    177.  47.6 10.5   31.4  5.54  1.73  NA  
-10 1998-05-04 00:00:00  3.97   4.23  134.  45.5 10.2   38.6  5.49  1.41  24.6
+   date                   ws    wd   nox   no2    o3  pm10   so2    co  pm25
+   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 1997-12-25 00:00:00  7.86 215.   156.  41.2  5.99  25.3  4.18  2.14  NA  
+ 2 1998-01-08 00:00:00  5.39 206.   192.  44.1  3.69  31.6  5.14  2.12  NA  
+ 3 1998-01-22 00:00:00  2.49  20.9  182.  45.0  3.46  31.7  7.03  1.91  NA  
+ 4 1998-02-05 00:00:00  4.49 220.   291.  58.1  1.99  44.2  8.12  3.08  NA  
+ 5 1998-02-19 00:00:00  5.97 233.   262.  57.8  4.28  32.0 11.0   2.66  NA  
+ 6 1998-03-05 00:00:00  4.60 276.   183.  47.6  5.61  32.6  8.85  1.93  NA  
+ 7 1998-03-19 00:00:00  3.40 198.   201.  50.4  4.35  35.3 10.1   2.03  NA  
+ 8 1998-04-02 00:00:00  4.36 249.   159.  45.2 10.2   24.8  5.89  1.66  NA  
+ 9 1998-04-16 00:00:00  4.15 204.   199.  52.2  7.24  32.0  6.55  1.95  NA  
+10 1998-04-30 00:00:00  4.32 349.   122.  41.1 14.1   34.7  4.85  1.27  22.6
 # ℹ 186 more rows</code></pre>
 </div>
 </div>
