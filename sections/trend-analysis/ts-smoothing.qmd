@@ -163,7 +163,7 @@ A major advantage of the Whittaker-Eilers approach is that a user can confidentl
 
 ### Baseline estimation
 
-Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.001), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series — the background or baseline — rather than the central tendency.
+Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.01), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series — the background or baseline — rather than the central tendency.
 
 The function returns two new columns:
 
@@ -171,6 +171,77 @@ The function returns two new columns:
 - `<pollutant>_increment`: the difference between the observed concentration and the baseline, representing the local enhancement above background.
 
 This decomposition is particularly useful in air pollution studies, where it is common to want to separate a *background* component (e.g., regional or photochemical NO~2~) from local *increments* (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.
+
+The question arises as to what the best `lambda` value is for baseline estimation. To a large extent, the value of `lambda` will depend on the specific application and the desired balance between smoothness and fidelity to the data. For baseline estimation, it is often desirable to use a larger `lambda` value than for general smoothing to ensure that the baseline is sufficiently smooth and does not track short-term fluctuations in the data. 
+
+The parameter $\lambda$ directly regulates the filter's cutoff frequency ($\omega_c$), where the filter cuts the power of the signal in half. It can be shown that for a time series with a sampling frequency of 1 hour, the relationship between $\lambda$ and the cutoff period $T_c$ (in hours) is given by:
+
+$$
+\lambda = \left[ 2 \sin\left(\frac{\pi}{T_c}\right) \right]^{-2d}
+$$
+
+As an example, it is often desirable to suppress the diurnal cycle when estimating a background for hourly data. The diurnal cycle has a period of 24 hours, so setting $T_c = 24$ hours would be a natural choice. However, because the Whittaker smoother is not a sharp filter, it may be necessary to use a larger $T_c$ (and thus a larger $\lambda$) to ensure that the diurnal cycle is sufficiently attenuated. @tbl-lambda-settings provides some example $\lambda$ values for different cutoff periods.
+
+| Target Cutoff Period ($T_c$) | Physical Meaning | Calculated $\lambda$ Value |
+|:---|:---|:---|
+| **$T_c = 24$ hours** | Starts attenuating the diurnal cycle | $\lambda \approx 215$ |
+| **$T_c = 48$ hours (2 days)** | Mostly suppresses the diurnal cycle | $\lambda \approx 3400$ |
+| **$T_c = 72$ hours (3 days)** | Thoroughly flattens out daily variations | $\lambda \approx 17300$ |
+| **$T_c = 96$ hours (4 days)** | Clean, ultra-smooth synoptic background | $\lambda \approx 54800$ |
+
+: Lambda ($\lambda$) settings for hourly air pollution baseline smoothing ($d=2$). {#tbl-lambda-settings}
+
+As an example of the application of baseline smoothing, it is useful to consider a site affected by different sources. The London Heathrow site (`LHR2` in the Air Quality England Network) is influenced by a clear airport source to the south (the northern runway is about 200 m to the south), a road immediately to the north, and a more regional background component from Greater London to the east. The airport source has the same sort of pattern each day. It is useful therefore to use the `WhittakerSmooth()` function to estimate the background and then to use the increment for further analysis such as polar plots to identify the source directions.
+
+The data can be accessed as follows:
+
+```{r}
+lhr2 <- readr::read_rds(
+  "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/lhr2_2019_2025.rds"
+)
+```
+
+Next we calculate the baseline and increment for NO~x~ using `WhittakerSmooth()` with `lambda = 3000` to suppress the diurnal cycle.
+
+```{r}
+lhr2 <- WhittakerSmooth(
+  lhr2,
+  pollutant = "nox",
+  lambda = 3000,
+  p = 0.01
+)
+```
+
+Finally, we can separately plot the baseline and increment to show how they differ. @fig-polar-plots shows polar plots of the NO~x~ increment and baseline. The increment plot clearly shows the airport source to the south and the road source to the north. The airport source shows elevated concentrations at high wind speeds and the road source shown by the feature in the middle of the plot at low wind speeds. By contrast, the baseline plot shows a more regional background with a slight enhancement from the east (Greater London) and a wider influence of ground level sources at low wind speeds. However, the most striking feature of the baseline plot is the absence of the airport source, which is clearly visible in the increment plot. This illustrates how the Whittaker-ALS approach can effectively separate a local source from a background, allowing for clearer interpretation of source contributions and their directional characteristics. A similar approach can be used at other sites where there is interest in extracting the influence of locally-dominant sources, using the defaults used in the code above.
+
+```{r}
+#| label: fig-polar-plots
+#| fig-cap: "Comparison of NO~x~ Increment and Baseline."
+#| fig-subcap: 
+#|   - "NO~x~ Increment."
+#|   - "NO~x~ Baseline."
+#| layout-ncol: 2
+#| fig-width: 5
+#| fig-height: 5
+#| message: false
+#| warning: false
+# Increment Plot
+polarPlot(
+  lhr2,
+  pollutant = "nox_increment",
+  limits = c(0, 100),
+  key.title = "nox increment"
+)
+
+# Baseline Plot
+polarPlot(
+  lhr2,
+  pollutant = "nox_baseline",
+  key.title = "nox baseline"
+)
+```
+
+Although not shown, it is useful to use `timeVariation()` to check that the baseline has successfully removed the diurnal cycle. If the diurnal cycle is still present in the baseline, it may be necessary to increase `lambda` further to ensure that the diurnal cycle is sufficiently suppressed.
 
 ### Comparison with rolling low quantiles
 
