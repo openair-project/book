@@ -275,3 +275,33 @@ WhittakerSmooth(
 ```
 
 As @fig-whittaker-baseline illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.
+
+Finally, we can use `ggplot2()` to show the increment and baseline filled, which can help to better visualise each contribution, shown in @fig-whittaker-filled.
+
+```{r}
+#| label: fig-whittaker-filled
+#| fig-cap: "Contrasting the baseline and increment NO~2~ concentrations by filling each separately with a colour. Note that where the increment is less than zero it is set to zero."
+#| fig-width: 6
+#| fig-height: 5
+WhittakerSmooth(
+  mydata,
+  pollutant = "no2",
+  lambda = 2000,
+  p = 0.01
+) |>
+  slice_head(n = 500) |>
+  mutate(no2_increment = pmax(0, no2 - no2_baseline)) |>
+  ggplot(aes(x = date)) +
+  geom_ribbon(aes(ymin = 0, ymax = no2_baseline, fill = "Baseline")) +
+  geom_ribbon(aes(
+    ymin = no2_baseline,
+    ymax = no2_baseline + no2_increment,
+    fill = "Increment"
+  )) +
+  scale_fill_manual(
+    values = c("Baseline" = "#4477AA", "Increment" = "#EE6677")
+  ) +
+  labs(y = quickText("no2 (ug/m3)"), fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
