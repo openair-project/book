@@ -115,13 +115,13 @@ An example of normalising data is shown in @fig-timePlotNorm. In this plot we ha
 #| fig-cap: An example of normalising time series data to fix values to equal 100 at the beginning of 1998
 #| fig-width: 5
 #| fig-height: 4.5
-#| out-width: 70%
+#| out-width: 80%
 timePlot(
   mydata,
   pollutant = c("nox", "no2", "co", "so2", "pm10"),
   avg.time = "year",
   normalise = "1/1/1998",
-  linewidth = 3,
+  linewidth = 2,
   linetype = 1,
   lineend = "round",
   group = TRUE,
@@ -160,7 +160,6 @@ Using the code above it is also possible to include several species. But what if
 #| fig-cap: Plot of NO~x~ concentrations from three sites grouped in a single plot.
 #| fig-width: 6
 #| fig-height: 4.5
-#| out-width: 70%
 timePlot(
   aq,
   pollutant = "nox",
@@ -168,7 +167,7 @@ timePlot(
   avg.time = "month",
   linetype = 1,
   cols = "tol.bright",
-  linewidth = c(3, 2, 1),
+  linewidth = c(1.5, 1, 0.7),
   ylab = "nox (ug/m3)"
 )
 ```
