@@ -918,6 +918,40 @@ Figure&nbsp;19.5: Comparison of the Whittaker baseline (blue) and a 50-hour roll
 </div>
 </div>
 <p>As <a href="#fig-whittaker-baseline" class="quarto-xref">Figure&nbsp;<span>19.5</span></a> illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.</p>
+<p>Finally, we can use <code>ggplot2()</code> to show the increment and baseline filled, which can help to better visualise each contribution, shown in <a href="#fig-whittaker-filled" class="quarto-xref">Figure&nbsp;<span>19.6</span></a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/WhittakerSmooth.html">WhittakerSmooth</a></span><span class="op">(</span></span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  p <span class="op">=</span> <span class="fl">0.01</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">500</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>no2_increment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">no2</span> <span class="op">-</span> <span class="va">no2_baseline</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="fl">0</span>, ymax <span class="op">=</span> <span class="va">no2_baseline</span>, fill <span class="op">=</span> <span class="st">"Baseline"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    ymin <span class="op">=</span> <span class="va">no2_baseline</span>,</span>
+<span>    ymax <span class="op">=</span> <span class="va">no2_baseline</span> <span class="op">+</span> <span class="va">no2_increment</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Increment"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span></span>
+<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span> <span class="op">=</span> <span class="st">"#4477AA"</span>, <span class="st">"Increment"</span> <span class="op">=</span> <span class="st">"#EE6677"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"no2 (ug/m3)"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-whittaker-filled" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-whittaker-filled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ts-smoothing_files/figure-html/fig-whittaker-filled-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;19.6: Contrasting the baseline and increment NO2 concentrations by filling each separately with a colour. Note that where the increment is less than zero it is set to zero."><img src="ts-smoothing_files/figure-html/fig-whittaker-filled-1.png" class="img-fluid figure-img" width="576"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whittaker-filled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.6: Contrasting the baseline and increment NO<sub>2</sub> concentrations by filling each separately with a colour. Note that where the increment is less than zero it is set to zero.
+</figcaption></figure>
+</div>
+</div>
+</div>
 
 
 
