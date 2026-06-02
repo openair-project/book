@@ -1417,18 +1417,45 @@ Figure&nbsp;8.22: Clustering differences in polar plot concentrations of SO<sub>
 6 &lt;NA&gt;        5.17</code></pre>
 </div>
 </div>
+<p>A more useful output is to track the concentrations before and after based on <a href="#fig-polarClust-diff" class="quarto-xref">Figure&nbsp;<span>8.22</span></a>, which can be achived using the code below. The results show the greatest reduction in SO<sub>2</sub> concentrations is in Cluster 3, which is the cluster most strongly associated with the change in SO<sub>2</sub> concentrations. This is a good example of how clustering differences can be used to identify the features that have changed the most between two time periods.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span></span>
+<span>  before <span class="op">=</span> <span class="va">clust_out</span><span class="op">$</span><span class="va">data</span>,</span>
+<span>  after <span class="op">=</span> <span class="va">clust_out</span><span class="op">$</span><span class="va">after</span>,</span>
+<span>  .id <span class="op">=</span> <span class="st">"period"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cluster</span>, <span class="va">period</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_so2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">so2</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">period</span>, values_from <span class="op">=</span> <span class="va">mean_so2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>change <span class="op">=</span> <span class="va">after</span> <span class="op">-</span> <span class="va">before</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  cluster after before change
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 C1      10.1    5.99  4.12 
+2 C2       3.33   4.10 -0.776
+3 C3      10.6   16.6  -6.01 
+4 C4       1.93   2.27 -0.341
+5 C5       1.32   1.02  0.298
+6 &lt;NA&gt;     5.80   3.54  2.26 </code></pre>
+</div>
+</div>
 </section></section><section id="polar-plots-on-an-interactive-map" class="level2 page-columns page-full" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="polar-plots-on-an-interactive-map">
 <span class="header-section-number">8.9</span> Polar plots on an interactive map</h2>
 <p>An R package called <span class="pkg">openairmaps</span> has been developed to plot polar plots and other “directional analysis” visualisations on interactive <span class="pkg">leaflet</span> maps. This package can be installed from CRAN, similar to <span class="pkg">openair</span>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The function <code>polarMap</code> requires information on the site (name or code), latitude and longitude in addition to the usual information required by the <code>polarPlot</code> function. The package comes with some example data (<code>polar_data</code>) that can be used as a template for using different data. This function can plot <em>any</em> type of polar plot, e.g., with different options for <code>statistic</code>.</p>
-<p>First, load the package and check out the data format.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">polar_data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>` `` { r } #| eval: false install.packages(“openairmaps”)</p>
+<pre><code>
+The function `polarMap` requires information on the site (name or code), latitude and longitude in addition to the usual information required by the `polarPlot` function. The package comes with some example data (`polar_data`) that can be used as a template for using different data. This function can plot *any* type of polar plot, e.g., with different options for `statistic`.
+
+First, load the package and check out the data format.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+library(openairmaps)
+
+glimpse(polar_data)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 35,040
 Columns: 13
@@ -1446,10 +1473,10 @@ $ ws         &lt;dbl&gt; 2.066667, 1.900000, 1.550000, 2.100000, 1.500000, 2.100
 $ visibility &lt;dbl&gt; 5000.000, 4933.333, 5000.000, 4900.000, 5000.000, 6000.000,…
 $ air_temp   &lt;dbl&gt; 0.8666667, 0.8666667, 0.8000000, 0.8500000, 0.8666667, 0.96…</code></pre>
 </div>
-</div>
+<p>:::</p>
 <p>Plot an interactive map.</p>
 <div class="cell column-screen-inset-shaded">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">polarMap</span><span class="op">(</span></span>
 <span>  <span class="va">polar_data</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="st">"lat"</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="st">"lon"</span>,</span>
@@ -1460,7 +1487,7 @@ $ air_temp   &lt;dbl&gt; 0.8666667, 0.8666667, 0.8000000, 0.8500000, 0.8666667, 
 </div>
 <p>The <code>polarMap</code> function allows for control of many parts of the <span class="pkg">leaflet</span> map. For example, you can provide one (or more) different base map(s) — there are many! You may also visualise multiple pollutants at once which can then be toggled between.</p>
 <div class="cell column-screen-inset-shaded">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap</a></span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">polarMap</span><span class="op">(</span></span>
 <span>  <span class="fu">openairmaps</span><span class="fu">::</span><span class="va"><a href="https://openair-project.github.io/openairmaps/reference/polar_data.html">polar_data</a></span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"no2"</span><span class="op">)</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="st">"lat"</span>,</span>
@@ -1478,7 +1505,7 @@ Figure&nbsp;8.23: Interactive map of polar plots for multiple pollutants with a 
 </div>
 </div>
 <p>Note that if you are using the <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code> function it is useful to add the option <code>meta = TRUE</code>, which will return the latitude and longitude of the site together with the air quality data.</p>
-<p><span class="pkg">openairmaps</span> isn’t limited to just <code><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap()</a></code> — almost any kind of “directional analysis” plot can be placed on a map. There are many similar functions which correspond to other <span class="pkg">openair</span> plotting functions; <code><a href="https://openair-project.github.io/openairmaps/reference/annulusMap.html">annulusMap()</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/freqMap.html">freqMap()</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/percentileMap.html">percentileMap()</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/polarMap.html">polarMap()</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/pollroseMap.html">pollroseMap()</a></code>, <code><a href="https://openair-project.github.io/openairmaps/reference/windroseMap.html">windroseMap()</a></code>, and <code><a href="https://openair-project.github.io/openairmaps/reference/diffMap.html">diffMap()</a></code>.</p>
+<p><span class="pkg">openairmaps</span> isn’t limited to just <code>polarMap()</code> — almost any kind of “directional analysis” plot can be placed on a map. There are many similar functions which correspond to other <span class="pkg">openair</span> plotting functions; <code>annulusMap()</code>, <code>freqMap()</code>, <code>percentileMap()</code>, <code>polarMap()</code>, <code>pollroseMap()</code>, <code>windroseMap()</code>, and <code>diffMap()</code>.</p>
 <p>For more information about using <span class="pkg">openairmaps</span> to create maps with polar plots as markers, please refer to the <a href="../../sections/maps/maps-polar.html">Directional Analysis Maps Page</a>.</p>
 
 
