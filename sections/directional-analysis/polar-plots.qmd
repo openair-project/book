@@ -598,6 +598,23 @@ group_by(clust_data, cluster) |>
   summarise(mean_so2 = mean(so2, na.rm = TRUE))
 ```
 
+A more useful output is to track the concentrations before and after based on @fig-polarClust-diff, which can be achived using the code below. The results show the greatest reduction in SO~2~ concentrations is in Cluster 3, which is the cluster most strongly associated with the change in SO~2~ concentrations. This is a good example of how clustering differences can be used to identify the features that have changed the most between two time periods.
+
+```{r}
+#| label: trackClustDiff
+bind_rows(
+  before = clust_out$data,
+  after = clust_out$after,
+  .id = "period"
+) |>
+  group_by(cluster, period) |>
+  summarise(mean_so2 = mean(so2, na.rm = TRUE), .groups = "drop") |>
+  tidyr::pivot_wider(names_from = period, values_from = mean_so2) |>
+  mutate(change = after - before)
+```
+
+
+
 ## Polar plots on an interactive map
 
 An R package called [openairmaps]{.pkg} has been developed to plot polar plots and other "directional analysis" visualisations on interactive [leaflet]{.pkg} maps. This package can be installed from CRAN, similar to [openair]{.pkg}.
