@@ -65,8 +65,8 @@ While [openairmaps]{.pkg} can be used without a thorough understanding of the [l
 library(leaflet)
 
 leaflet() |>
-  addTiles(group = "OSM") |>
-  addProviderTiles("CartoDB.Positron", group = "CartoDB.Positron") |>
+  addTiles(group = "Street Map") |>
+  addProviderTiles("Esri.WorldImagery", group = "Satellite") |>
   addMarkers(
     lat = 51.5034,
     lng = -0.1276,
@@ -75,7 +75,7 @@ leaflet() |>
     group = "Marker"
   ) |>
   addLayersControl(
-    baseGroups = c("CartoDB.Positron", "OSM"),
+    baseGroups = c("Street Map", "Satellite"),
     overlayGroups = "Marker"
   )
 ```

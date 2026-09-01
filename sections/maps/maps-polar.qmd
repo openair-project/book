@@ -121,7 +121,7 @@ Another example, this time using `annulusMap()`, is given in @fig-annulusMap. No
 annulusMap(
   polar_data,
   pollutant = c("nox", "no2"),
-  provider = "CartoDB.Positron",
+  provider = "Esri.WorldGrayCanvas",
   latitude = "lat",
   longitude = "lon"
 )
@@ -271,29 +271,29 @@ To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` 
 #| fig-cap: "Using `addPolarMarkers()` to create a more complex map."
 library(leaflet)
 library(openair)
-leaflet() |>
-  addProviderTiles("CartoDB.Voyager") |>
+leaflet(data = polar_data) |>
+  addProviderTiles("Esri.WorldGrayCanvas") |>
   addPolarMarkers(
-    lng = "lon", lat = "lat",
+    lng = "lon",
+    lat = "lat",
     pollutant = "nox",
     group = "Mean",
-    data = polar_data,
     fun = polarFreq,
     statistic = "mean"
   ) |>
   addPolarMarkers(
-    lng = "lon", lat = "lat",
+    lng = "lon",
+    lat = "lat",
     pollutant = "nox",
     group = "Median",
-    data = polar_data,
     fun = polarFreq,
     statistic = "median"
   ) |>
   addPolarMarkers(
-    lng = "lon", lat = "lat",
+    lng = "lon",
+    lat = "lat",
     pollutant = "nox",
     group = "Max",
-    data = polar_data,
     fun = polarFreq,
     statistic = "max"
   ) |>
