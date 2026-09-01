@@ -663,7 +663,7 @@ polarMap(
   pollutant = c("nox", "no2"),
   latitude = "lat",
   longitude = "lon",
-  provider = "CartoDB.Positron"
+  provider = "Esri.WorldStreetMap"
 )
 ```
 

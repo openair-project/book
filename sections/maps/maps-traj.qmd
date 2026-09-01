@@ -46,8 +46,7 @@ trajMap(
   traj_data,
   colour = "pm10",
   npoints = 6,
-  cols = "magma",
-  provider = "CartoDB.Positron"
+  cols = "magma"
 )
 ```
 
@@ -61,13 +60,13 @@ clustdata <- openair::trajCluster(traj_data)
 
 ```{r}
 #| label: fig-trajNeon
-#| fig-cap: Interactive map of clustered trajectories, with a cool neon colour scheme!
+#| fig-cap: Interactive map of clustered trajectories.
 trajMap(
   data = clustdata$data$traj,
   colour = "cluster",
   type = "cluster",
-  cols = c("#9B5DE5", "#F15BB5", "#FEE440", "#00BBF9", "#00F5D4"),
-  provider = "CartoDB.DarkMatter"
+  cols = "observable",
+  provider = "Esri.WorldGrayCanvas"
 )
 ```
 
