@@ -329,7 +329,6 @@ rosm::osm.types()
 polarMap(
   polar_data,
   pollutant = c("nox", "pm2.5"),
-  provider = "cartolight",
   latitude = "lat",
   longitude = "lon",
   d.icon = 100,
