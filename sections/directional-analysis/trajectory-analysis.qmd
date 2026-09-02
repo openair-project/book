@@ -267,6 +267,7 @@ One of the key aspects of trajectory analysis is knowing something about where a
 ```{r}
 #| echo: false
 ## load from file
+rm(traj)
 load("../../assets/data/londonTraj.RData")
 ```
 
@@ -554,6 +555,7 @@ As an example we will consider back trajectories for London in 2011.
 #| echo: false
 ## load pre-calculated cluster data for kc1
 ## provides traj and kc1
+rm(traj, kc1)
 load("../../assets/data/clusterData.RData")
 ```
 
@@ -561,6 +563,7 @@ First, the back trajectory data for London is imported together with the air pol
 
 ```{r}
 #| label: importTrajKC1
+#| eval: false
 traj <- importTraj(site = "london", year = 2011)
 kc1 <- importUKAQ(site = "kc1", year = 2011)
 ```
@@ -600,7 +603,13 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 ```{r}
 #| label: mergeClustTraj
 # use inner join - so only where we have data in each
-kc1 <- inner_join(kc1, filter(clust$data$traj, hour.inc == 0), by = "date")
+kc1 <- inner_join(
+  kc1 |> mutate(date = as.POSIXct(date, tz = "GMT")),
+  filter(clust$data$traj, hour.inc == 0) |> 
+    mutate(date = as.POSIXct(date, tz = "GMT")) |>
+    select(date, cluster),
+  by = "date"
+)
 ```
 
 Now `kc1` contains air pollution data identified by cluster. The size of this data frame is about a third of the original size because back trajectories are only run every 3 hours.

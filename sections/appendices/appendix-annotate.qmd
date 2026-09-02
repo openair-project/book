@@ -282,14 +282,14 @@ multipanel +
 
 ### Assembly plots
 
-A few `openair` plots are actually multiple plots in one. You can typically tell this because the different "panels" are arranged on an irregular grid (e.g., `timeVariation()`) or are comprised of very different plot types (e.g., `conditionalEval()`). These plots are powered by the [patchwork]{.pkg} package, which makes it simple to extract and modify sub-panels. For `timeVariation()`, the "top" panel can be accessed with `[[1]]` and the "bottom" three with `[[2]][[1]]`, `[[2]][[2]]`, and `[[2]][[3]]`.^[Note that it may easier to use `variationPlot()` and use [patchwork]{.pkg} directly yourself, depending on your use-case.]
+A few `openair` plots are actually multiple plots in one. You can typically tell this because the different "panels" are arranged on an irregular grid (e.g., `timeVariation()`) or are comprised of very different plot types (e.g., `conditionalEval()`). These plots are powered by the [patchwork]{.pkg} package, which makes it simple to extract and modify sub-panels. For `timeVariation()`, the "top" panel can be accessed with `[[1]]` and the "bottom" three with `[[2]]`, `[[3]]`, and `[[4]]`.^[Note that it may easier to use `variationPlot()` and use [patchwork]{.pkg} directly yourself, depending on your use-case.]
 
 ```{r}
 #| label: fig-timevariation-annotate
 #| fig-cap: "Annotating a specific panel in an assembly plot, using `timeVariation()` as an example."
 timevar_no2 <- timeVariation(mydata, "no2", plot = FALSE)
 
-timevar_no2$main.plot[[2]][[1]] <- timevar_no2$main.plot[[2]][[1]] +
+timevar_no2$main.plot[[4]] <- timevar_no2$main.plot[[4]] +
   geom_hline(yintercept = 50)
 
 plot(timevar_no2)
