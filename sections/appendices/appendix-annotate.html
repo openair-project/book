@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bd6be98ab2a8dee037497026b45d0b60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -824,11 +824,11 @@ Figure&nbsp;A.9: Annotating a specific panel in a multi-panel plot using the <co
 </div>
 </section><section id="assembly-plots" class="level3" data-number="A.1.9"><h3 data-number="A.1.9" class="anchored" data-anchor-id="assembly-plots">
 <span class="header-section-number">A.1.9</span> Assembly plots</h3>
-<p>A few <code>openair</code> plots are actually multiple plots in one. You can typically tell this because the different “panels” are arranged on an irregular grid (e.g., <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>) or are comprised of very different plot types (e.g., <code><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval()</a></code>). These plots are powered by the <span class="pkg">patchwork</span> package, which makes it simple to extract and modify sub-panels. For <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>, the “top” panel can be accessed with <code>[[1]]</code> and the “bottom” three with <code>[[2]][[1]]</code>, <code>[[2]][[2]]</code>, and <code>[[2]][[3]]</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>A few <code>openair</code> plots are actually multiple plots in one. You can typically tell this because the different “panels” are arranged on an irregular grid (e.g., <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>) or are comprised of very different plot types (e.g., <code><a href="https://openair-project.github.io/openair/reference/conditionalEval.html">conditionalEval()</a></code>). These plots are powered by the <span class="pkg">patchwork</span> package, which makes it simple to extract and modify sub-panels. For <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>, the “top” panel can be accessed with <code>[[1]]</code> and the “bottom” three with <code>[[2]]</code>, <code>[[3]]</code>, and <code>[[4]]</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">timevar_no2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="st">"no2"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span></span>
+<span><span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">timevar_no2</span><span class="op">$</span><span class="va">main.plot</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">timevar_no2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -918,23 +918,23 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
 <p>Users of older versions of <span class="pkg">openair</span> may recall the <code>x.relation</code>, <code>y.relation</code> and <code>layout</code> options. These mapped onto <span class="pkg">lattice</span> arguments, which pre-dated <span class="pkg">ggplot2</span> as the plotting engine for <span class="pkg">openair</span>. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="gsbexmkijb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gsbexmkijb table {
+<div id="xbaybnlrxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xbaybnlrxo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gsbexmkijb thead, #gsbexmkijb tbody, #gsbexmkijb tfoot, #gsbexmkijb tr, #gsbexmkijb td, #gsbexmkijb th {
+#xbaybnlrxo thead, #xbaybnlrxo tbody, #xbaybnlrxo tfoot, #xbaybnlrxo tr, #xbaybnlrxo td, #xbaybnlrxo th {
   border-style: none;
 }
 
-#gsbexmkijb p {
+#xbaybnlrxo p {
   margin: 0;
   padding: 0;
 }
 
-#gsbexmkijb .gt_table {
+#xbaybnlrxo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -960,12 +960,12 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-left-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_caption {
+#xbaybnlrxo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gsbexmkijb .gt_title {
+#xbaybnlrxo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -977,7 +977,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-width: 0;
 }
 
-#gsbexmkijb .gt_subtitle {
+#xbaybnlrxo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -989,7 +989,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-width: 0;
 }
 
-#gsbexmkijb .gt_heading {
+#xbaybnlrxo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1001,13 +1001,13 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_bottom_border {
+#xbaybnlrxo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_col_headings {
+#xbaybnlrxo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1022,7 +1022,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_col_heading {
+#xbaybnlrxo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1042,7 +1042,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#gsbexmkijb .gt_column_spanner_outer {
+#xbaybnlrxo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,15 +1054,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 4px;
 }
 
-#gsbexmkijb .gt_column_spanner_outer:first-child {
+#xbaybnlrxo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gsbexmkijb .gt_column_spanner_outer:last-child {
+#xbaybnlrxo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gsbexmkijb .gt_column_spanner {
+#xbaybnlrxo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1074,11 +1074,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   width: 100%;
 }
 
-#gsbexmkijb .gt_spanner_row {
+#xbaybnlrxo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gsbexmkijb .gt_group_heading {
+#xbaybnlrxo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1104,7 +1104,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   text-align: left;
 }
 
-#gsbexmkijb .gt_empty_group_heading {
+#xbaybnlrxo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1119,15 +1119,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: middle;
 }
 
-#gsbexmkijb .gt_from_md > :first-child {
+#xbaybnlrxo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gsbexmkijb .gt_from_md > :last-child {
+#xbaybnlrxo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gsbexmkijb .gt_row {
+#xbaybnlrxo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1146,7 +1146,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#gsbexmkijb .gt_stub {
+#xbaybnlrxo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1159,7 +1159,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#gsbexmkijb .gt_stub_row_group {
+#xbaybnlrxo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1173,15 +1173,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: top;
 }
 
-#gsbexmkijb .gt_row_group_first td {
+#xbaybnlrxo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gsbexmkijb .gt_row_group_first th {
+#xbaybnlrxo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gsbexmkijb .gt_summary_row {
+#xbaybnlrxo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1191,16 +1191,16 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#gsbexmkijb .gt_first_summary_row {
+#xbaybnlrxo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_first_summary_row.thick {
+#xbaybnlrxo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gsbexmkijb .gt_last_summary_row {
+#xbaybnlrxo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1210,7 +1210,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_grand_summary_row {
+#xbaybnlrxo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1220,7 +1220,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#gsbexmkijb .gt_first_grand_summary_row {
+#xbaybnlrxo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1230,7 +1230,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_last_grand_summary_row_top {
+#xbaybnlrxo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1240,11 +1240,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_striped {
+#xbaybnlrxo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gsbexmkijb .gt_table_body {
+#xbaybnlrxo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1253,7 +1253,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_footnotes {
+#xbaybnlrxo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1267,7 +1267,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_footnote {
+#xbaybnlrxo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1276,7 +1276,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#gsbexmkijb .gt_sourcenotes {
+#xbaybnlrxo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1290,7 +1290,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#gsbexmkijb .gt_sourcenote {
+#xbaybnlrxo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1298,72 +1298,72 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#gsbexmkijb .gt_left {
+#xbaybnlrxo .gt_left {
   text-align: left;
 }
 
-#gsbexmkijb .gt_center {
+#xbaybnlrxo .gt_center {
   text-align: center;
 }
 
-#gsbexmkijb .gt_right {
+#xbaybnlrxo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gsbexmkijb .gt_font_normal {
+#xbaybnlrxo .gt_font_normal {
   font-weight: normal;
 }
 
-#gsbexmkijb .gt_font_bold {
+#xbaybnlrxo .gt_font_bold {
   font-weight: bold;
 }
 
-#gsbexmkijb .gt_font_italic {
+#xbaybnlrxo .gt_font_italic {
   font-style: italic;
 }
 
-#gsbexmkijb .gt_super {
+#xbaybnlrxo .gt_super {
   font-size: 65%;
 }
 
-#gsbexmkijb .gt_footnote_marks {
+#xbaybnlrxo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gsbexmkijb .gt_asterisk {
+#xbaybnlrxo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gsbexmkijb .gt_indent_1 {
+#xbaybnlrxo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gsbexmkijb .gt_indent_2 {
+#xbaybnlrxo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gsbexmkijb .gt_indent_3 {
+#xbaybnlrxo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gsbexmkijb .gt_indent_4 {
+#xbaybnlrxo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gsbexmkijb .gt_indent_5 {
+#xbaybnlrxo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gsbexmkijb .katex-display {
+#xbaybnlrxo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gsbexmkijb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xbaybnlrxo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1390,23 +1390,23 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
 </tr></tbody>
 </table>
 </div>
-<div id="piuyqqdnjz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#piuyqqdnjz table {
+<div id="ffipldmnkh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ffipldmnkh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#piuyqqdnjz thead, #piuyqqdnjz tbody, #piuyqqdnjz tfoot, #piuyqqdnjz tr, #piuyqqdnjz td, #piuyqqdnjz th {
+#ffipldmnkh thead, #ffipldmnkh tbody, #ffipldmnkh tfoot, #ffipldmnkh tr, #ffipldmnkh td, #ffipldmnkh th {
   border-style: none;
 }
 
-#piuyqqdnjz p {
+#ffipldmnkh p {
   margin: 0;
   padding: 0;
 }
 
-#piuyqqdnjz .gt_table {
+#ffipldmnkh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1432,12 +1432,12 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-left-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_caption {
+#ffipldmnkh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#piuyqqdnjz .gt_title {
+#ffipldmnkh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1449,7 +1449,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-width: 0;
 }
 
-#piuyqqdnjz .gt_subtitle {
+#ffipldmnkh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1461,7 +1461,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-width: 0;
 }
 
-#piuyqqdnjz .gt_heading {
+#ffipldmnkh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1473,13 +1473,13 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_bottom_border {
+#ffipldmnkh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_col_headings {
+#ffipldmnkh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1494,7 +1494,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_col_heading {
+#ffipldmnkh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1514,7 +1514,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#piuyqqdnjz .gt_column_spanner_outer {
+#ffipldmnkh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1526,15 +1526,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 4px;
 }
 
-#piuyqqdnjz .gt_column_spanner_outer:first-child {
+#ffipldmnkh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#piuyqqdnjz .gt_column_spanner_outer:last-child {
+#ffipldmnkh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#piuyqqdnjz .gt_column_spanner {
+#ffipldmnkh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1546,11 +1546,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   width: 100%;
 }
 
-#piuyqqdnjz .gt_spanner_row {
+#ffipldmnkh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#piuyqqdnjz .gt_group_heading {
+#ffipldmnkh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1576,7 +1576,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   text-align: left;
 }
 
-#piuyqqdnjz .gt_empty_group_heading {
+#ffipldmnkh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1591,15 +1591,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: middle;
 }
 
-#piuyqqdnjz .gt_from_md > :first-child {
+#ffipldmnkh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#piuyqqdnjz .gt_from_md > :last-child {
+#ffipldmnkh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#piuyqqdnjz .gt_row {
+#ffipldmnkh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1618,7 +1618,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   overflow-x: hidden;
 }
 
-#piuyqqdnjz .gt_stub {
+#ffipldmnkh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1631,7 +1631,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#piuyqqdnjz .gt_stub_row_group {
+#ffipldmnkh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1645,15 +1645,15 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   vertical-align: top;
 }
 
-#piuyqqdnjz .gt_row_group_first td {
+#ffipldmnkh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#piuyqqdnjz .gt_row_group_first th {
+#ffipldmnkh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#piuyqqdnjz .gt_summary_row {
+#ffipldmnkh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1663,16 +1663,16 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#piuyqqdnjz .gt_first_summary_row {
+#ffipldmnkh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_first_summary_row.thick {
+#ffipldmnkh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#piuyqqdnjz .gt_last_summary_row {
+#ffipldmnkh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1682,7 +1682,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_grand_summary_row {
+#ffipldmnkh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1692,7 +1692,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#piuyqqdnjz .gt_first_grand_summary_row {
+#ffipldmnkh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1702,7 +1702,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-top-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_last_grand_summary_row_top {
+#ffipldmnkh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1712,11 +1712,11 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_striped {
+#ffipldmnkh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#piuyqqdnjz .gt_table_body {
+#ffipldmnkh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1725,7 +1725,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-bottom-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_footnotes {
+#ffipldmnkh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1739,7 +1739,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_footnote {
+#ffipldmnkh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1748,7 +1748,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#piuyqqdnjz .gt_sourcenotes {
+#ffipldmnkh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1762,7 +1762,7 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   border-right-color: #D3D3D3;
 }
 
-#piuyqqdnjz .gt_sourcenote {
+#ffipldmnkh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1770,72 +1770,72 @@ Figure&nbsp;A.14: A heatmap with a ‘free’ x-axis and panel widths that match
   padding-right: 5px;
 }
 
-#piuyqqdnjz .gt_left {
+#ffipldmnkh .gt_left {
   text-align: left;
 }
 
-#piuyqqdnjz .gt_center {
+#ffipldmnkh .gt_center {
   text-align: center;
 }
 
-#piuyqqdnjz .gt_right {
+#ffipldmnkh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#piuyqqdnjz .gt_font_normal {
+#ffipldmnkh .gt_font_normal {
   font-weight: normal;
 }
 
-#piuyqqdnjz .gt_font_bold {
+#ffipldmnkh .gt_font_bold {
   font-weight: bold;
 }
 
-#piuyqqdnjz .gt_font_italic {
+#ffipldmnkh .gt_font_italic {
   font-style: italic;
 }
 
-#piuyqqdnjz .gt_super {
+#ffipldmnkh .gt_super {
   font-size: 65%;
 }
 
-#piuyqqdnjz .gt_footnote_marks {
+#ffipldmnkh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#piuyqqdnjz .gt_asterisk {
+#ffipldmnkh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#piuyqqdnjz .gt_indent_1 {
+#ffipldmnkh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#piuyqqdnjz .gt_indent_2 {
+#ffipldmnkh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#piuyqqdnjz .gt_indent_3 {
+#ffipldmnkh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#piuyqqdnjz .gt_indent_4 {
+#ffipldmnkh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#piuyqqdnjz .gt_indent_5 {
+#ffipldmnkh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#piuyqqdnjz .katex-display {
+#ffipldmnkh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#piuyqqdnjz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ffipldmnkh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2044,12 +2044,12 @@ Figure&nbsp;A.18: Using the patchwork package to combine multiple openair plots 
 </div>
 </div>
 </div>
-<p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code>legendry::guide_colring()</code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
+<p>An interesting package is <span class="pkg">legendry</span>, which has a lot of different functions for tweaking legends and guides. Of interest may be <code><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">legendry::guide_colring()</a></code>, which wraps a continuous legend into a doughnut. This could be useful for cyclical variables like wind direction.</p>
 <p>This example highlights that sometimes you may need to take on further tweaks as you get deeper into customising your plots. Here, it was necessary to reset the colour scale to set appropriate labels and breaks.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot</a></span><span class="op">(</span><span class="va">mydata</span>, z <span class="op">=</span> <span class="st">"wd"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span></span>
-<span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu">guide_colring</span><span class="op">(</span><span class="op">)</span></span>
+<span>    color <span class="op">=</span> <span class="fu">legendry</span><span class="fu">::</span><span class="fu"><a href="https://teunbrand.github.io/legendry/reference/guide_colring.html">guide_colring</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_color_gradientn</a></span><span class="op">(</span></span>
 <span>    colours <span class="op">=</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/openColours.html">openColours</a></span><span class="op">(</span><span class="st">"hue"</span><span class="op">)</span>,</span>
@@ -2067,9 +2067,9 @@ Figure&nbsp;A.19: Using the legendry package to create a custom legend for a sca
 </div>
 </div>
 </div>
-<p>Many extension packages usefully provide themes that can be easily set globally to apply to <span class="pkg">openair</span> plots. For example, for those working with or for the UK Government, the <span class="pkg">afcharts</span> package exports <code>afcharts::theme_af()</code> for accessible, Government Statistical Service-approved plot styling.</p>
+<p>Many extension packages usefully provide themes that can be easily set globally to apply to <span class="pkg">openair</span> plots. For example, for those working with or for the UK Government, the <span class="pkg">afcharts</span> package exports <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code> for accessible, Government Statistical Service-approved plot styling.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">afcharts</span><span class="fu">::</span><span class="fu">theme_af</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">afcharts</span><span class="fu">::</span><span class="fu"><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">theme_af</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -2084,7 +2084,7 @@ Figure&nbsp;A.19: Using the legendry package to create a custom legend for a sca
 <a href="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;A.20: Setting a global theme from an extension package, in this case afcharts::theme_af(), and creating a timePlot()."><img src="appendix-annotate_files/figure-html/fig-afcharts-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-afcharts-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.20: Setting a global theme from an extension package, in this case <code>afcharts::theme_af()</code>, and creating a <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>.
+Figure&nbsp;A.20: Setting a global theme from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>, and creating a <code><a href="https://openair-project.github.io/openair/reference/timePlot.html">timePlot()</a></code>.
 </figcaption></figure>
 </div>
 </div>
@@ -2097,7 +2097,7 @@ Figure&nbsp;A.20: Setting a global theme from an extension package, in this case
 <a href="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;A.21: Customising the theme of a plot from an extension package, in this case afcharts::theme_af()."><img src="appendix-annotate_files/figure-html/fig-windrose-theme-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windrose-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;A.21: Customising the theme of a plot from an extension package, in this case <code>afcharts::theme_af()</code>.
+Figure&nbsp;A.21: Customising the theme of a plot from an extension package, in this case <code><a href="https://best-practice-and-impact.github.io/afcharts/reference/theme_af.html">afcharts::theme_af()</a></code>.
 </figcaption></figure>
 </div>
 </div>
