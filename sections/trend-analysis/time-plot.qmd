@@ -118,7 +118,7 @@ An example of normalising data is shown in @fig-timePlotNorm. In this plot we ha
 #| fig-cap: An example of normalising time series data to fix values to equal 100 at the beginning of 1998.
 #| fig-width: 5
 #| fig-height: 4.5
-#| out-width: 80%
+#| out-width: 75%
 timePlot(
   mydata,
   pollutant = c("nox", "no2", "co", "so2", "pm10"),
@@ -184,7 +184,6 @@ See help for `windflowOpts()` for more details on the options available to contr
 #| fig-cap: An example of using the `windflow` option in `timePlot()`.
 #| fig-width: 6
 #| fig-height: 4
-#| out-width: 90%
 timePlot(
   head(mydata, 48),
   pollutant = c("nox", "no2"),

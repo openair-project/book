@@ -330,7 +330,6 @@ Like other [openair]{.pkg} functions, the `type` option can be used to compare t
 #| fig-cap: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows show the mean bias in wind direction and the text shows the value of that bias.
 #| fig-width: 8
 #| fig-height: 9
-#| out-width: 90%
 windRose(
   met_compare,
   ws = "ws_lon",

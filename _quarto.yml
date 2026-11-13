@@ -17,6 +17,7 @@ book:
   repo-url: https://github.com/openair-project/book/
   repo-branch: main
   repo-actions: [edit, issue]
+  bread-crumbs: false
   open-graph: true
   twitter-card: true
   date: today
@@ -106,12 +107,12 @@ execute:
 
 format:
   html:
-    theme: 
-      - lumen
+    theme:
+      - cosmo
       - assets/style/openair.scss
     mainfont: "Nunito Sans"
     monofont: "JetBrains Mono"
-    highlight-style: a11y
+    highlight-style: github
     code-link: true
     code-copy: true
     fig-align: center

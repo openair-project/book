@@ -136,7 +136,6 @@ Now we are going to produce two pollution roses shown in @fig-RunningRes. Note, 
 #| fig-cap: Example of using the `selectRunning()` function to select episode hours to produce pollution roses of O~3~ concentration.
 #| fig-width: 8
 #| fig-height: 5
-#| out-width: 90%
 pollutionRose(
   ted,
   pollutant = "o3",

@@ -125,7 +125,7 @@ ppb/year. The $\ast\ast\ast$ show that the trend is significant to the
 #| fig-cap: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O~3~. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22--0.50 ppb/year. The '∗∗∗' show that the trend is significant to the 0.001 level.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 library(openair)
 library(tidyverse)
 

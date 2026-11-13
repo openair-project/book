@@ -124,7 +124,7 @@ It is also possible to combine different groups of model results. For example, r
 #| fig-cap: Use of the `TaylorDiagram()` function to show model performance for 9 models used for all sites.
 #| fig-width: 5
 #| fig-height: 5
-#| out-width: 70%
+#| out-width: 75%
 TaylorDiagram(
   modTest,
   obs = "o3",

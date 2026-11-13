@@ -28,7 +28,7 @@ Where code is shown in this document, function names are hyper-linked and will t
 
 ## Installation and code access
 
-[openair]{.pkg} is available on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive Network) which means it can be installed easily from R. I would recommend re-starting R and then type `install.packages("openair")`. If you use [RStudio](https://posit.co/products/open-source/rstudio/) (which is *highly* recommended), you can just choose the 'packages' tab on the bottom-right, and then select 'Install'. Simply start typing `openair` and you will find the package.
+[openair]{.pkg} is available on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive Network) which means it can be installed easily from R. We would recommend restarting R and then typing `install.packages("openair")`. We also *highly* recommend using an integrated development environment (IDE) such as [RStudio](https://posit.co/products/open-source/rstudio/) or [Positron](https://positron.posit.co/). In RStudio you can also install packages from the 'Packages' tab on the bottom-right: select 'Install', start typing `openair` and you will find the package.
 
 For [openair]{.pkg} all development is carried out using GitHub for version control. Users can access all code used in [openair]{.pkg} at <https://github.com/openair-project/openair>.
 
@@ -36,21 +36,21 @@ Sometimes it might be useful to install the development version of [openair]{.pk
 
 ## Input data requirements
 
-The [openair]{.pkg} package applies certain constraints on input data requirements. **It is important to adhere to these requirements to ensure that data are correctly formatted for use in** [openair]{.pkg}. The principal reason for insisting on specific input data format is that there will be less that can go wrong and it is easier to write code for a more limited set of conditions.
+The [openair]{.pkg} package places certain requirements on input data. **It is important to adhere to these requirements to ensure that data are correctly formatted for use in** [openair]{.pkg}. The principal reason for insisting on specific input data format is that there will be less that can go wrong and it is easier to write code for a more limited set of conditions.
 
 -   Data should be in a data frame (or `tibble`).
 
 -   **The date/time field should be called `date`** --- note the lower case. No other name is acceptable.
 
--   **The wind speed and wind direction should be named `ws` and `wd`**, respectively (note again, lower case). Wind directions follow the UK Met Office format and are represented as degrees from north e.g. 90 degrees is east. North is taken to be 360 degrees.
+-   **The wind speed and wind direction should be named `ws` and `wd`**, respectively (note again, lower case). Wind directions follow the UK Met Office format and are represented as degrees from north e.g., 90 degrees is east. North is taken to be 360 degrees.
 
--   Where fields should have numeric data e.g. concentrations of NO~x~, then the user should ensure that no other characters are present in the column, except maybe something that represents missing data e.g. 'no data'.
+-   Where fields should have numeric data e.g., concentrations of NO~x~, then the user should ensure that no other characters are present in the column, except maybe something that represents missing data e.g., 'no data'.
 
--   Other variable names can be upper/lower case *but should not start with a number*. If column names do have white spaces, R will automatically replace them with a full-stop. While `PM2.5` as a field name is perfectly acceptable, it is a pain to type it in---better just to use `pm25` ([openair]{.pkg} will recognise pollutant names like this and automatically format them as PM~2.5~ in plots).
+-   Other variable names can be upper/lower case *but should not start with a number*. If column names contain spaces, some functions (such as `read.csv()`) will automatically replace them with a full stop. While `PM2.5` as a field name is perfectly acceptable, it is a pain to type --- better just to use `pm25` ([openair]{.pkg} will recognise pollutant names like this and automatically format them as PM~2.5~ in plots).
 
 ## Reading and formatting dates and times
 
-While not specific to [openair]{.pkg}, dealing with dates and times is likely to be an issue that needs to be dealt with at some point. There is no getting away from the fact that dates and times can be complicated with issues such as time zones and daylight saving time i.e. when the clocks change for summer. This is a potentially big topic to consider and it is only considered in outline here.
+While not specific to [openair]{.pkg}, dates and times are likely to be an issue that needs to be dealt with at some point. There is no getting away from the fact that dates and times can be complicated by issues such as time zones and daylight saving time, i.e., when the clocks change for summer. This is a potentially big topic to consider and it is only considered in outline here.
 
 For a lot of [openair]{.pkg} functions this issue will not be important. While these issues can often be ignored, it is better to be explicit and set the date-time correctly. Two situations where it becomes important are when wanting to show temporal variations in local time and combining data sets that are in different time zones. The former issue can be important (for example) when considering diurnal variations in a pollutant concentration that follows a human activity (such as rush-hour traffic), which follows local time and not GMT/UTC.
 
@@ -60,7 +60,7 @@ For a lot of [openair]{.pkg} functions this issue will not be important. While t
 When importing data into R it is important to know how the date-time is represented in your original data, especially in terms of time zone.
 :::
 
-When importing data it is important to know how the date-time is represented. In the UK it is easy for us to forget that simply working with data in GMT is not always an option. However, most air quality and meteorological data around the world tends to be in GMT/UTC or a fixed offset from GMT/UTC i.e. not in local time where hours can be missing or duplicated.
+When importing data it is important to know how the date-time is represented. In the UK it is easy for us to forget that simply working with data in GMT is not always an option. However, most air quality and meteorological data around the world tend to be in GMT/UTC or a fixed offset from GMT/UTC, i.e., not in local time where hours can be missing or duplicated.
 
 Life is made much easier using the [lubridate]{.pkg} package, which has been developed for working with dates and times. The [lubridate]{.pkg} package has a family of functions that will convert common formats of dates and times into an R-formatted version. These functions are useful when importing data and the date-time is in a character format and needs formatting. Here are some examples:
 
@@ -75,9 +75,9 @@ date_time <- "2/8/2022 11:00"
 dmy_hm(date_time)
 ```
 
-When R formats a date-time correctly it will be shown from 'large to small' i.e. YYYY-MM-DD HH:MM:SS, which provides a clue that it has indeed been formatted correctly.
+When R formats a date-time correctly it will be shown from 'large to small' i.e., YYYY-MM-DD HH:MM:SS, which provides a clue that it has indeed been formatted correctly.
 
-US date time with seconds (month-day-year):
+US date-time with seconds (month-day-year):
 
 ```{r}
 #| label: mdy-hms
@@ -85,9 +85,9 @@ date_time <- "8/2/2022 11:05:12"
 mdy_hms(date_time)
 ```
 
-As you can see, by default, the date-time is formatted in UTC (GMT). It is at this point where you can also set a time zone of the original data if it was not in GMT. Let's assume the original data were a fixed off-set from GMT of -8 hours (west coast USA perhaps). This can be done by setting the time zone explicitly[^openair-package-1]:
+As you can see, by default, the date-time is formatted in UTC (GMT). It is at this point where you can also set a time zone of the original data if it was not in GMT. Let's assume the original data were a fixed offset from GMT of -8 hours (west coast USA perhaps). This can be done by setting the time zone explicitly[^openair-package-1]:
 
-[^openair-package-1]: As R help says: "Contrary to some expectations (but consistent with names such as '⁠PST8PDT⁠'), negative offsets are times ahead of (east of) UTC, positive offsets are times behind (west of) UTC."
+[^openair-package-1]: As R help says: "Contrary to some expectations (but consistent with names such as 'PST8PDT'), negative offsets are times ahead of (east of) UTC, positive offsets are times behind (west of) UTC."
 
 ```{r}
 #| label: tz-offset
@@ -122,7 +122,7 @@ hour(time_local)
 
 In the above example, `date_time` and `time_local` are the same absolute time --- we are just changing how the time is displayed. In practice, given a data frame with a `date` column in GMT and an interest in making sure [openair]{.pkg} uses the local time, some formatting such as `mydata$date <- with_tz(mydata$date, tz = "Europe/London")` is what is needed.
 
-Another scenario is you import data using a function such as `read_csv()` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz()` function. For example:
+Another scenario is that you import data using a function such as `read_csv()` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz()` function. For example:
 
 ```{r}
 #| label: force-tz
@@ -145,7 +145,7 @@ This section gives a brief overview of the functions in [openair]{.pkg}. Having 
 functionName(thedata, options, ...)
 ```
 
-The usage is best illustrated through a specific example, in this case the `polarPlot()` function. The details of the function are shown in @sec-polarPlot and through the help pages (type `?polarPlot`). As it can be seen there are numerous options associated with `polarPlot()` --- and most other functions and each of these has a default. For example, the default pollutant considered in `polarPlot()` is `nox`. If the user has a data frame called `theData` then `polarPlot()` could minimally be called by:
+The usage is best illustrated through a specific example, in this case the `polarPlot()` function. The details of the function are shown in @sec-polarPlot and through the help pages (type `?polarPlot`). As can be seen, `polarPlot()` has numerous options --- as do most other functions --- and each of these has a default. For example, the default pollutant considered in `polarPlot()` is `nox`. If the user has a data frame called `theData` then `polarPlot()` could minimally be called by:
 
 ```{r}
 #| label: polarPlot-minimal
@@ -210,9 +210,9 @@ knitr::kable(tab_dat, booktabs = TRUE)
 
 One of the central themes in [openair]{.pkg} is the idea of *conditioning*. Rather than plot $x$ against $y$, considerably more information can usually be gained by considering a third variable, $z$. In this case, $x$ is plotted against $y$ for many different intervals of $z$. This idea can be further extended. For example, a trend of NO~x~ against time can be *conditioned* in many ways: NO~x~ vs. time split by wind sector, day of the week, wind speed, temperature, hour of the day ... and so on. This type of analysis is rarely carried out when analysing air pollution data, in part because it is time consuming to do. However, thanks to the capabilities of R and packages such as [ggplot2]{.pkg}, it becomes easier to work in this way.
 
-In most [openair]{.pkg} functions conditioning is controlled using the `type` option. `type` can be any other variable available in a data frame (numeric, character or factor). A simple example of `type` would be a variable representing a 'before' and 'after' situation, say a variable called `period` i.e. the option `type = "period"` is supplied. In this case a plot or analysis would be separately shown for 'before' and 'after'. When `type` is a numeric variable then the data will be split into four *quantiles* and labelled accordingly. Note however the user can set the quantile intervals to other values using the option `n.levels`. For example, the user could choose to plot a variable by different levels of temperature. If `n.levels = 3` then the data could be split by 'low', 'medium' and 'high' temperatures, and so on. Some variables are treated in a special way. For example if `type = "wd"` then the data are split into 8 wind sectors (N, NE, E, ...) and plots are organised by points of the compass.
+In most [openair]{.pkg} functions conditioning is controlled using the `type` option. `type` can be any other variable available in a data frame (numeric, character or factor). A simple example of `type` would be a variable representing a 'before' and 'after' situation, say a variable called `period`, and the option `type = "period"` is supplied. In this case a plot or analysis would be separately shown for 'before' and 'after'. When `type` is a numeric variable then the data will be split into four *quantiles* and labelled accordingly. Note, however, that the user can set the number of quantile intervals using the option `n.levels`. For example, the user could choose to plot a variable by different levels of temperature. If `n.levels = 3` then the data could be split by 'low', 'medium' and 'high' temperatures, and so on. Some variables are treated in a special way. For example, if `type = "wd"` then the data are split into 8 wind sectors (N, NE, E, ...) and plots are organised by points of the compass.
 
-There are a series of pre-defined values that `type` can take related to the temporal components of the data as summarised in @tbl-openairType. To use these there *must* be a `date` field so that it can be calculated. These pre-defined values of `type`, shown below, are both useful and convenient. Given a data frame containing several years of data it is easy to analyse the data e.g. plot it, by year by supplying the option `type = "year"`. Other useful and straightforward values are "hour" and "month". When `type = "season"` [openair]{.pkg} will split the data by the four seasons (winter = Dec/Jan/Feb etc.). Note for southern hemisphere users that the option `hemisphere = "southern"` can be given. When `type = "daylight"` is used the data are split between nighttime and daylight hours. In this case the user can also supply the options `latitude` and `longitude` for their location (the default is London).
+There is a series of pre-defined values that `type` can take related to the temporal components of the data as summarised in @tbl-openairType. To use these there *must* be a `date` field so that it can be calculated. These pre-defined values of `type`, shown below, are both useful and convenient. Given a data frame containing several years of data it is easy to analyse the data (e.g., plot it) by year by supplying the option `type = "year"`. Other useful and straightforward values are "hour" and "month". When `type = "season"` [openair]{.pkg} will split the data by the four seasons (winter = Dec/Jan/Feb etc.). Note for southern hemisphere users that the option `hemisphere = "southern"` can be given. When `type = "daylight"` is used the data are split between nighttime and daylight hours. In this case the user can also supply the options `latitude` and `longitude` for their location (the default is London).
 
 ```{r}
 #| label: type-table-data
@@ -258,11 +258,11 @@ knitr::kable(
 )
 ```
 
-If a categorical variable is present in a data frame e.g. `site` then that variable can be used directly e.g. `type = "site"`.
+If a categorical variable is present in a data frame, e.g., `site`, then that variable can be used directly e.g., `type = "site"`.
 
 ### Make your own type
 
-In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut()` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
+In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut()` function. In the example below, concentrations of NO~2~ are divided into intervals 0--50, 50--100, 100--150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is one more break than there are labels. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
 
 ```{r}
 #| label: cut-intervals
@@ -282,9 +282,9 @@ mydata$intervals <- cut(
 head(mydata)
 ```
 
-Then it is possible to use the new `intervals` variable in most [openair]{.pkg} functions e.g. `windRose(mydata, type = "intervals")`.
+Then it is possible to use the new `intervals` variable in most [openair]{.pkg} functions e.g., `windRose(mydata, type = "intervals")`.
 
-A special case is splitting data by date. In this scenario there might be interest in a 'before-after' situation e.g. due to an intervention. The [openair]{.pkg} function `splitByDate()` should make this easy. Here is an example:
+A special case is splitting data by date. In this scenario there might be interest in a 'before-after' situation e.g., due to an intervention. The [openair]{.pkg} function `splitByDate()` should make this easy. Here is an example:
 
 ```{r}
 #| label: splitbydate
@@ -300,7 +300,7 @@ This code adds a new column `scenario` that is labelled `before` and `after` dep
 
 ## Controlling font size {#sec-font-size}
 
-All [openair]{.pkg} plot functions have an option `fontsize`. Users can easily vary the size of the font for each plot e.g.
+All [openair]{.pkg} plot functions have an option `fontsize`. Users can easily vary the size of the font for each plot e.g.,
 
 ```{r}
 #| label: fontsize
@@ -312,7 +312,7 @@ The `fontsize` option only affects the plot it is supplied to. Because [openair]
 
 ## Using colours {#sec-using-colours}
 
-Many of the functions described require that colour scales are used; particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the `RColorBrewer` package.
+Many of the functions described require that colour scales are used, particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the [RColorBrewer]{.pkg} package.
 
 Several pre-defined colour schemes are available to make it easy to plot data, managed by the `openColours()` function. The choice of colours can easily be set using the `cols` argument, which can take either a pre-defined scheme name or a vector of user-defined colours (either built-in R colour names like `"yellow"` or hex codes like `"#FFF000"`). A few examples are shown in @fig-colours using `polarPlot()`. 
 
@@ -349,7 +349,7 @@ Users can override this option by setting `auto.text` to `FALSE`.
 
 ## Multiple plots on a page {#sec-multiple-plots-page}
 
-We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} make this a bit easier. As [openair]{.pkg} uses the [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
+We often get asked how to combine multiple plots on one page. Version 3 of [openair]{.pkg} makes this a bit easier. As [openair]{.pkg} uses [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
 
 Let's start by creating a few individual plots.
 
@@ -378,9 +378,9 @@ library(patchwork)
 
 ## Saving plots and data
 
-While you'll likely be using [openair]{.pkg} in an environment like [RStudio](https://posit.co/products/open-source/rstudio/), you'll likely want to get the outputs of your analysis *outside* of RStudio to put into reports, papers, or other deliverables.
+While you'll probably be using [openair]{.pkg} in an environment like [RStudio](https://posit.co/products/open-source/rstudio/), you'll likely want to get the outputs of your analysis *outside* of RStudio to put into reports, papers, or other deliverables.
 
-For data, this is relatively straightforward. The `write.csv()` function will write out a dataframe to a local file path. The only arguments it really needs are `x` (the dataframe to save) and `file` (the file path to save it to). For example, the below code chunk will load annual statistics for the Marylebone Road monitoring site, and save them to the path `"my1_annual-stats_2022.csv"`. Always try to give files evocative names so you'll know what's in them in future - `"my1_annual-stats_2022.csv"` is better than `"data.csv"`.
+For data, this is relatively straightforward. The `write.csv()` function will write out a data frame to a local file path. The only arguments it really needs are `x` (the data frame to save) and `file` (the file path to save it to). For example, the code below will load annual statistics for the Marylebone Road monitoring site, and save them to the path `"my1_annual-stats_2022.csv"`. Always try to give files evocative names so you'll know what's in them in future --- `"my1_annual-stats_2022.csv"` is better than `"data.csv"`.
 
 ```{r}
 #| label: demosavecsv
@@ -403,7 +403,7 @@ Plots are slightly more complicated. If you do use RStudio, the simplest way to 
 
 ![A screenshot of the 'Export' menu of the RStudio plots pane.](../../assets/media/rstudio-saving.png){#fig-rstudiosave}
 
-This may be useful in some scenarios, but using the RStudio GUI is not very reproducible. For sake of example, say you make a new set of plots every week for a weekly report. You may not want to have to repeatedly go into the plots pane, click 'export', set the correct dimensions, and so on every time a new plot needs to be saved. It would be preferable if your script created the plots *and* saved them!
+This may be useful in some scenarios, but using the RStudio GUI is not very reproducible. For the sake of example, say you make a new set of plots every week for a weekly report. You may not want to have to repeatedly go into the plots pane, click 'Export', set the correct dimensions, and so on every time a new plot needs to be saved. It would be preferable if your script created the plots *and* saved them!
 
 The easiest way to save plots is using `ggplot2::ggsave()`.
 

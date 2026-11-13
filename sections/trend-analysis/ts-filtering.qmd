@@ -85,7 +85,6 @@ To show the different components for PM~2.5~, a polar plot can be produced, as s
 #| fig-cap: "Polar plot of the diurnal, synoptic and intermediate components of PM~2.5~ concentrations at the North Kensington site. The trend component has been added back to each component to show the overall variation in concentrations."
 #| fig-width: 8
 #| fig-height: 5
-#| out-width: 90%
 kz_out_pm25 |>
   mutate(
     diurnal = diurnal + trend,

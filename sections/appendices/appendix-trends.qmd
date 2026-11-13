@@ -67,7 +67,7 @@ This model only explains about 2% of the variation as shown by the adjusted r^2^
 #| fig-cap: ACF for the residuals of model M0.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 acf(residuals(M0))
 ```
 
@@ -86,7 +86,7 @@ Now we have a model that explains much more of the variation with an r^2^ of 0.6
 #| fig-cap: The trend component of model M1.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 plot.gam(M1, select = 1, shade = TRUE)
 ```
 
@@ -95,7 +95,7 @@ plot.gam(M1, select = 1, shade = TRUE)
 #| fig-cap: The seasonal component of model M1.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 plot.gam(M1, select = 2, shade = TRUE)
 ```
 
@@ -108,7 +108,7 @@ Note also that there are other diagnostic tests one should consider when compari
 #| fig-cap: ACF for the residuals of model M1.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 acf(residuals(M1))
 ```
 
@@ -131,7 +131,7 @@ The ACF plot is shown in @fig-M2ACF and shows that the autocorrelation has been 
 #| fig-cap: ACF for the residuals of model M2.
 #| fig-width: 5
 #| fig-height: 4
-#| out-width: 70%
+#| out-width: 75%
 acf(residuals(M2$lme, type = "normalized"))
 ```
 

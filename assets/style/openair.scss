@@ -1,16 +1,317 @@
 /*-- scss:defaults --*/
 
-$primary: #5E4FA2 !default;
-$font-size-root: 18px !default;
+// A neutral charcoal accent: the colourful plume logo and plots stand out against
+// it, and individual packages can later be given their own pkgdown colours.
+$primary: #2b2f36;
+$font-size-root: 17px;
+
+// shared colours and sizes used by the rules below
+$oa-radius: 0.5rem;
+$oa-muted: #5b6475; // secondary text: captions, TOC title, footer
+$oa-line: #e3e6ee;  // hairlines and borders
+$oa-tint: #f6f7fb;  // code block background
+
+$border-radius: $oa-radius;
+$headings-font-weight: 700;
+
+// code: neutral inline code, softly boxed code blocks
+$code-color: #24304a;
+$code-bg: #eef1f7;
+$code-block-bg: $oa-tint;
+$code-block-border-left: false;
 
 /*-- scss:rules --*/
 
 // fonts used by the book: Nunito Sans (text) and JetBrains Mono (code)
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
+// ---- page ------------------------------------------------------------------
+
+// a thin accent rule across the top of every page
+body {
+  border-top: 3px solid $primary;
+  line-height: 1.65;
+}
+
+// ---- headings --------------------------------------------------------------
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+main h2, main h3, main h4, main h5 {
+  font-weight: 700;
+}
+
+h2 {
+  margin-top: 2.25rem;
+}
+
+// code in headings and the sidebar keeps its font but not the grey box
+h1 code, h2 code, h3 code, h4 code,
+#quarto-sidebar code {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+
+// chapter titles get a short accent bar underneath
+#title-block-header .title::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 4px;
+  margin-top: 0.75rem;
+  border-radius: 2px;
+  background: $primary;
+}
+
+// ---- links -----------------------------------------------------------------
+
+main a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba($primary, 0.55);
+  transition: text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
+
+  // with neutral link text, the underline is the affordance: it darkens and
+  // thickens on hover
+  &:hover {
+    text-decoration-color: $primary;
+    text-decoration-thickness: 2px;
+  }
+}
+
+// ---- code ------------------------------------------------------------------
+
+div.sourceCode {
+  border: 1px solid $oa-line;
+  border-radius: $oa-radius;
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+}
+
+// printed results (not code): a thin rule on the left instead of a box, so
+// output is easy to tell apart from the code that produced it
+.cell-output pre {
+  margin: 0.5rem 0 1rem;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid $oa-line;
+  background: none;
+  font-size: 0.85em;
+}
+
+.cell-output pre code {
+  background: none;
+}
+
+// ---- sidebar and table of contents ------------------------------------------
+
+// part headings ("Data Access", "Directional Analysis", ...) in bold
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container .menu-text {
+  font-weight: 700;
+  color: $body-color;
+}
+
+#quarto-sidebar .sidebar-link.active {
+  font-weight: 700;
+}
+
+#quarto-sidebar .sidebar-title,
+#quarto-sidebar .sidebar-title a {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+// long DOIs/URLs in margin citations and the reference list wrap instead of overflowing
+.csl-entry {
+  overflow-wrap: anywhere;
+}
+
+#toc-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $oa-muted;
+}
+
+// keep the "Edit this page" / "Report an issue" links clear of margin citations
+.toc-actions {
+  position: relative;
+  z-index: 1;
+  padding-top: 0.5rem;
+  background: $body-bg;
+}
+
+// ---- figures, tables, quotes -------------------------------------------------
+
+.figure-caption,
+figcaption {
+  color: $oa-muted;
+}
+
+main table:not(.gt_table) {
+  border-collapse: collapse;
+
+  th {
+    font-weight: 700;
+    border-bottom: 2px solid $oa-line;
+  }
+
+  td, th {
+    padding: 0.4rem 0.75rem;
+  }
+
+  tr + tr td {
+    border-top: 1px solid $oa-line;
+  }
+}
+
+main blockquote {
+  padding: 0.5rem 1rem;
+  border-left: 4px solid rgba($primary, 0.5);
+  border-radius: 0 $oa-radius $oa-radius 0;
+  background: rgba($primary, 0.05);
+}
+
+// ---- home page: openair toolkit cards -------------------------------------------
+
+.oa-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.oa-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.1rem;
+  border: 1px solid $oa-line;
+  border-top: 3px solid $primary;
+  border-radius: $oa-radius;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95em;
+  }
+
+  // keep the "See ..." line at the bottom of every card
+  p:last-child {
+    margin: auto 0 0;
+  }
+}
+
+.oa-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+}
+
+.oa-card-meta {
+  font-size: 0.85rem;
+  color: $oa-muted;
+}
+
+// ---- callouts ------------------------------------------------------------------
+
+// a faint tint of each callout's own colour, with a bolder title
+$oa-callouts: (
+  "note": $blue,
+  "tip": $green,
+  "important": $red,
+  "caution": $orange,
+  "warning": $yellow
+);
+
+@each $name, $colour in $oa-callouts {
+  div.callout-#{$name}.callout {
+    background-color: rgba($colour, 0.04);
+  }
+}
+
+.callout .callout-title-container {
+  font-weight: 700;
+}
+
+// ---- title block ---------------------------------------------------------------
+
+// keep author/date metadata quiet so readers get to the content sooner
+.quarto-title-meta {
+  font-size: 0.85rem;
+  color: $oa-muted;
+}
+
+.quarto-title-meta-heading {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+// ---- previous / next chapter links -------------------------------------------------
+
+.page-navigation {
+  gap: 1rem;
+}
+
+.page-navigation .nav-page {
+  flex: 1 1 0;
+}
+
+.page-navigation .pagination-link {
+  display: block;
+  height: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid $oa-line;
+  border-top: 3px solid $primary;
+  color: $body-color;
+  font-weight: 600;
+  border-radius: $oa-radius;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.page-navigation .nav-page-next .pagination-link {
+  text-align: right;
+}
+
+// ---- footer ------------------------------------------------------------------
+
+.nav-footer {
+  border-top: 1px solid $oa-line;
+  color: $oa-muted;
+}
+
+// ---- leaflet maps --------------------------------------------------------------
+
 figure.quarto-float div.leaflet-control {
   text-align: left;
 }
+
+// ---- package names -------------------------------------------------------------
 
 // Package names, written as [openair]{.pkg}. The pkg-links.lua filter turns
 // them into links, and the box itself (rather than an underline) acts as the
@@ -35,7 +336,7 @@ $pkg-border: #7c9393;
   transition: color 0.15s ease;
 }
 
-// hover / keyboard focus: the box turns purple and "presses in"
+// hover / keyboard focus: the box takes the accent colour and "presses in"
 .pkg:has(a:hover),
 .pkg:has(a:focus-visible) {
   border-color: $primary;
@@ -46,6 +347,25 @@ $pkg-border: #7c9393;
 .pkg a:hover,
 .pkg a:focus-visible {
   color: $primary;
+}
+
+// in headings, callout titles, the TOC and the sidebar, package names are
+// plain text: the box is too busy there
+h1 .pkg, h2 .pkg, h3 .pkg, h4 .pkg,
+.callout-title-container .pkg,
+#TOC .pkg,
+#quarto-sidebar .pkg,
+.page-navigation .pkg {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  font-weight: inherit;
+}
+
+.callout-title-container .pkg a {
+  font-weight: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {

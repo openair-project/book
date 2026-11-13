@@ -48,7 +48,7 @@ trendLevel(
 #| fig-cap: '`trendLevel()` output with SO~2~/NO~x~ ratio `type` conditioning.'
 #| fig-width: 8
 #| fig-height: 8
-#| out-width: 80%
+#| out-width: 75%
 ## new field: so2/nox ratio
 mydata <- mutate(mydata, ratio = so2 / nox)
 
@@ -133,7 +133,7 @@ As a simple example, consider @fig-trendLevel3, which summarises by mean. This t
 #| fig-cap: '`trendLevel()` using locally defined `statistic`.'
 #| fig-width: 8
 #| fig-height: 8
-#| out-width: 80%
+#| out-width: 75%
 ## function to estimate 95th percentile
 percentile <- function(x) quantile(x, probs = 0.95, na.rm = TRUE)
 
