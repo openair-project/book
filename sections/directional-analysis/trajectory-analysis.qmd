@@ -29,6 +29,7 @@ These trajectories have been calculated using the Global NOAA-NCEP/NCAR reanalys
 Users should see the help file for `importTraj()` to get an up to date list of receptors where back trajectories have been calculated. First, the packages are loaded that are needed.
 
 ```{r}
+#| label: load-packages
 #| warning: false
 #| message: false
 library(openair)
@@ -46,6 +47,7 @@ load("../../assets/data/londonTraj.RData")
 ```
 
 ```{r}
+#| label: importTraj-london
 #| eval: false
 traj <- importTraj(site = "london", year = 2010)
 ```
@@ -159,6 +161,7 @@ selectByDate(
 However, it is possible to account for the PM that is local to some extent by considering the relationship between NO~x~ and PM~10~ (or PM~2.5~). For example, using `scatterPlot()` (not shown):
 
 ```{r}
+#| label: scatterPlot-nox-pm10
 #| eval: false
 scatterPlot(kc1, x = "nox", y = "pm10", avg.time = "day", linear = TRUE)
 ```
@@ -166,6 +169,7 @@ scatterPlot(kc1, x = "nox", y = "pm10", avg.time = "day", linear = TRUE)
 which suggests a gradient of 0.084. Therefore, we can remove the PM~10~ that is associated with NO~x~ in `kc1` data, making a new column `pm.new`:
 
 ```{r}
+#| label: pm-new
 #| eval: false
 kc1 <- mutate(kc1, pm.new = pm10 - 0.084 * nox)
 ```
@@ -173,6 +177,7 @@ kc1 <- mutate(kc1, pm.new = pm10 - 0.084 * nox)
 We have already merged `kc1` with `traj`, so to keep things simple we import `traj` again and merge it with `kc1`. Note that if we had thought of this initially, `pm.new` would have been calculated first before merging with `traj`.
 
 ```{r}
+#| label: reimport-traj
 #| eval: false
 traj <- importTraj(site = "london", year = 2010)
 traj <- left_join(traj, kc1, by = "date")
@@ -181,6 +186,7 @@ traj <- left_join(traj, kc1, by = "date")
 Now it is possible to plot the trajectories:
 
 ```{r}
+#| label: trajPlot-pm-new
 #| eval: false
 selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   trajPlot(
@@ -265,6 +271,7 @@ trajLevel(
 One of the key aspects of trajectory analysis is knowing something about where air masses have come from. Cluster analysis can be used to group trajectories based on their origins and this is discussed in @sec-trajCluster-trajectory-analysis. A simple approach is to consider different wind sectors e.g. N, NE, E and calculate the proportion of time a particular back trajectory resides in a specific sector. It is then possible to allocate a particular trajectory to a sector based on some assumption about the proportion of time it is in that sector --- for example, assume a trajectory is from the west sector if it spends at least 50% of its time in that sector or otherwise record the allocation as 'unallocated'. The code below can be used as the basis of such an approach.
 
 ```{r}
+#| label: reload-traj
 #| echo: false
 ## load from file
 rm(traj)
@@ -274,6 +281,7 @@ load("../../assets/data/londonTraj.RData")
 First we import the trajectories, which in this case are for London in 2010:
 
 ```{r}
+#| label: importTraj-alloc
 #| eval: false
 traj <- importTraj(site = "london", year = 2010)
 ```
@@ -552,6 +560,7 @@ where $X_0$ and $Y_0$ are the coordinates of the location being studied i.e. the
 As an example we will consider back trajectories for London in 2011.
 
 ```{r}
+#| label: load-cluster-data
 #| echo: false
 ## load pre-calculated cluster data for kc1
 ## provides traj and kc1
@@ -587,6 +596,7 @@ clust <- trajCluster(
 `clust` returns all the back trajectory information together with the cluster (as a character). This data can now be used together with other data to analyse results further. However, first it is possible to show all trajectories coloured by cluster, although for a year of data there is significant overlap and it is difficult to tell them apart.
 
 ```{r}
+#| label: trajPlot-clusters
 #| eval: false
 trajPlot(clust$data$traj, group = "cluster")
 ```
@@ -594,6 +604,7 @@ trajPlot(clust$data$traj, group = "cluster")
 A useful way in which to see where these air masses come from by trajectory is to produce a frequency plot by cluster. Such a plot (not shown, but code below) provides a good indication of the spread of the different trajectory clusters as well as providing an indication of where air masses spend most of their time. For the London 2011 data it can be seen cluster 1 is dominated by air from the European mainland to the south.
 
 ```{r}
+#| label: trajLevel-clusters
 #| eval: false
 trajLevel(clust$data$traj, type = "cluster", cols = "increment", border = NA)
 ```
@@ -704,6 +715,7 @@ trajLevel(traj, crs = 3035)
 An R package called [openairmaps]{.pkg} has been developed to plot trajectories on interactive [leaflet]{.pkg} maps. This package can be installed from CRAN, similar to [openair]{.pkg}.
 
 ```{r}
+#| label: install
 #| eval: false
 install.packages("openairmaps")
 ```
@@ -713,6 +725,7 @@ The function `trajMap()` is the [openairmaps]{.pkg} equivalent of the `trajPlot(
 First, load the package.
 
 ```{r}
+#| label: load-openairmaps
 #| cache: false
 library(openairmaps)
 ```
@@ -729,6 +742,7 @@ trajMap(traj_data, colour = "pm10")
 The `trajMap()` function allows for control of many parts of the [leaflet]{.pkg} map. For example, you can provide one (or more) different base map(s) --- there are many! You can also specify a "control" column, which will allow you to show and hide certain trajectory paths. This is nicely showcased using output from the `trajCluster()` function.
 
 ```{r}
+#| label: clustdata
 #| fig-show: hide
 clustdata <- trajCluster(traj_data)
 ```

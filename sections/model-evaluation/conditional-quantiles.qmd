@@ -18,9 +18,20 @@ First the data are loaded:
 
 ```{r}
 #| label: loadCMAQ
+#| eval: false
 load(url(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/CMAQozone.RData"
 ))
+```
+
+```{r}
+#| label: loadCMAQ-local
+#| echo: false
+load("../../assets/data/CMAQozone.RData")
+```
+
+```{r}
+#| label: headCMAQ
 class(CMAQ.KCL$date) <- c("POSIXct", "POSIXt")
 head(CMAQ.KCL)
 ```
@@ -94,10 +105,21 @@ As an example, similar data to that described above from CMAQ have been used as 
 A subset of the data for the North Kensington site can be imported as shown below. The file contains observed and modelled hourly values for O~3~, NO~x~, wind speed, wind direction, temperature and relative humidity.
 
 ```{r}
+#| label: loadCondDat
+#| eval: false
 load(url(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/condDat.RData"
 ))
+```
 
+```{r}
+#| label: loadCondDat-local
+#| echo: false
+load("../../assets/data/condDat.RData")
+```
+
+```{r}
+#| label: headCondDat
 head(condDat)
 ```
 

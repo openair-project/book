@@ -10,6 +10,7 @@ format:
 In this book two packages are frequently used and it is a good idea to load both.
 
 ```{r}
+#| label: load-packages
 #| message: false
 #| warning: false
 library(openair)
@@ -65,6 +66,7 @@ Life is made much easier using the [lubridate]{.pkg} package, which has been dev
 Original date in 'British' format (day/month/ year hours-minutes):
 
 ```{r}
+#| label: lubridate-dmy
 library(lubridate) # load package
 date_time <- "2/8/2022 11:00"
 
@@ -77,6 +79,7 @@ When R formats a date-time correctly it will be shown from 'large to small' i.e.
 US date time with seconds (month-day-year):
 
 ```{r}
+#| label: mdy-hms
 date_time <- "8/2/2022 11:05:12"
 mdy_hms(date_time)
 ```
@@ -86,6 +89,7 @@ As you can see, by default, the date-time is formatted in UTC (GMT). It is at th
 [^openair-package-1]: As R help says: "Contrary to some expectations (but consistent with names such as '⁠PST8PDT⁠'), negative offsets are times ahead of (east of) UTC, positive offsets are times behind (west of) UTC."
 
 ```{r}
+#| label: tz-offset
 date_time <- "8/2/2022 11:05:12" # time 8 hours behind GMT
 mdy_hms(date_time, tz = "Etc/GMT+8")
 ```
@@ -97,6 +101,7 @@ A common task might be to plot time series and temporal variations of pollutant 
 In this case it is necessary to know how the local time zone with daylight saving time (DST) is represented. Time zone names follow the Olson scheme --- you can list them by typing `OlsonNames()`. Given the scenario where we have imported data in GMT but want to display the data in local time (BST --- British Summer Time), we can use the `with_tz()` function in [lubridate]{.pkg} to do this:
 
 ```{r}
+#| label: with-tz
 date_time <- "2/8/2022 11:00"
 
 # format it
@@ -119,6 +124,7 @@ In the above example, `date_time` and `time_local` are the same absolute time --
 Another scenario is you import data using a function such as `read_csv()` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz()` function. For example:
 
 ```{r}
+#| label: force-tz
 # a correctly formatted date-time that is in GMT but should be something else
 date_time
 
@@ -133,6 +139,7 @@ Finally, what about combining data sets in different time zones? In @sec-worldme
 This section gives a brief overview of the functions in [openair]{.pkg}. Having read some data into a data frame it is then straightforward to run any function. Almost all functions are run as:
 
 ```{r}
+#| label: function-usage
 #| eval: false
 functionName(thedata, options, ...)
 ```
@@ -140,6 +147,7 @@ functionName(thedata, options, ...)
 The usage is best illustrated through a specific example, in this case the `polarPlot()` function. The details of the function are shown in @sec-polarPlot and through the help pages (type ?polarPlot). As it can be seen there are numerous options associated with `polarPlot()` --- and most other functions and each of these has a default. For example, the default pollutant considered in `polarPlot()` is `nox`. If the user has a data frame called `theData` then `polarPlot()` could minimally be called by:
 
 ```{r}
+#| label: polarPlot-minimal
 #| eval: false
 polarPlot(theData)
 ```
@@ -149,6 +157,7 @@ which would plot a `nox` polar plot if `nox` was available in the data frame `th
 Note that the options do not need to be specified in order nor is it always necessary to write the whole word. For example, it is possible to write:
 
 ```{r}
+#| label: polarPlot-partial-args
 #| eval: false
 polarPlot(theData, type = "year", poll = "so2")
 ```
@@ -158,6 +167,7 @@ In this case writing `poll` is sufficient to uniquely identify that the option i
 Also there are many common options available in functions that are not explicitly documented. Some common ones are summarised in @tbl-options. For example, `nrow` and `ncol` allow the user to control the layout of multi-panel plots, e.g., `ncol = 4, nrow = 1` would ensure a four-panel plot is 4 columns by 1 row.
 
 ```{r}
+#| label: options-table-data
 #| echo: false
 
 tab_dat <- tibble(
@@ -204,6 +214,7 @@ In most [openair]{.pkg} functions conditioning is controlled using the `type` op
 There are a series of pre-defined values that `type` can take related to the temporal components of the data as summarised in @tbl-openairType. To use these there *must* be a `date` field so that it can be calculated. These pre-defined values of `type` are shown below are both useful and convenient. Given a data frame containing several years of data it is easy to analyse the data e.g. plot it, by year by supplying the option `type = "year"`. Other useful and straightforward values are "hour" and "month". When `type = "season"` [openair]{.pkg} will split the data by the four seasons (winter = Dec/Jan/Feb etc.). Note for southern hemisphere users that the option `hemisphere = "southern"` can be given. When `type = "daylight"` is used the data are split between nighttime and daylight hours. In this case the user can also supply the options `latitude` and `longitude` for their location (the default is London).
 
 ```{r}
+#| label: type-table-data
 #| echo: false
 
 tab_type <- tibble(
@@ -253,6 +264,7 @@ If a categorical variable is present in a data frame e.g. `site` then that vari
 In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut()` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
 
 ```{r}
+#| label: cut-intervals
 mydata$intervals <- cut(
   mydata$no2,
   breaks = c(0, 50, 100, 150, 1000),
@@ -290,6 +302,7 @@ This code adds a new column `scenario` that is labelled `before` and `after` dep
 All [openair]{.pkg} plot functions have an option `fontsize`. Users can easily vary the size of the font for each plot e.g.
 
 ```{r}
+#| label: fontsize
 #| eval: false
 polarPlot(mydata, fontsize = 20)
 ```
@@ -340,6 +353,7 @@ We often get asked how to combine multiple plots on one page. Recent changes to 
 Let's start by creating a few individual plots.
 
 ```{r}
+#| label: patchwork-plots
 #| output: false
 plt1 <- timePlot(mydata, "no2", avg.time = "month", key.position = "none")
 plt2 <- variationPlot(mydata, "no2", x = "weekday", key.position = "none")

@@ -116,6 +116,7 @@ We first use the function in its simplest form to make a polar plot of NO~x~. Th
 First, load the packages we need.
 
 ```{r}
+#| label: load-packages
 #| cache: false
 library(openair)
 library(tidyverse)
@@ -155,14 +156,16 @@ polarPlot(mydata, pollutant = "so2")
 
 A very useful approach for understanding air pollution is to consider ratios of pollutants. One reason is that pollutant ratios can be largely independent of meteorological variation. In many circumstances it is possible to gain a lot of insight into sources if pollutant ratios are considered. First, it is necessary to calculate a ratio, which is easy in R. In this example we consider the ratio of SO~2~/NO~x~:
 
-```{r }
+```{r}
+#| label: so2-nox-ratio
 library(tidyverse)
 mydata <- mutate(mydata, ratio = so2 / nox)
 ```
 
 This makes a new variable called `ratio`. Sometimes it can be problematic if there are values equal to zero on the denominator, as is the case here. The mean and maximum value of the ratio is infinite, as shown by the `Inf` in the statistics below. Luckily, R can deal with infinity and the [openair]{.pkg} functions will remove these values before performing calculations. It is very simple therefore to calculate ratios.
 
-```{r }
+```{r}
+#| label: ratio-summary
 summary(mydata$ratio)
 ```
 
@@ -179,6 +182,7 @@ polarPlot(mydata, pollutant = "ratio", title = "so2/nox ratio")
 Sometimes when considering ratios it might be necessary to limit the values in some way; perhaps due to some unusually low value denominator data resulting in a few very high values for the ratio. This is easy to do with the [dplyr]{.pkg} `filter()` command. The code below selects ratios less than 0.1.
 
 ```{r}
+#| label: polarPlot-ratio-filter
 #| eval: false
 polarPlot(filter(mydata, ratio < 0.1), pollutant = "ratio")
 ```
@@ -499,7 +503,8 @@ head(results[["data"]])
 
 Note that there is an additional column `cluster` that gives the cluster a particular row belongs to and that this is a *character* variable. It might be easier to read these results into a new data frame:
 
-```{r }
+```{r}
+#| label: results-data
 results <- results[["data"]]
 ```
 
@@ -620,6 +625,7 @@ bind_rows(
 An R package called [openairmaps]{.pkg} has been developed to plot polar plots and other "directional analysis" visualisations on interactive [leaflet]{.pkg} maps. This package can be installed from CRAN, similar to [openair]{.pkg}.
 
 ```{r}
+#| label: install
 #| eval: false
 install.packages("openairmaps")
 ```
@@ -629,6 +635,7 @@ The function `polarMap()` requires information on the site (name or code), latit
 First, load the package and check out the data format.
 
 ```{r}
+#| label: load-openairmaps
 #| cache: false
 library(openairmaps)
 

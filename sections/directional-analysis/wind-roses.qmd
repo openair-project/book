@@ -49,6 +49,7 @@ multiplied by 1.125.
 First we load the packages:
 
 ```{r}
+#| label: load-packages
 #| message: false
 #| warning: false
 library(openair)
@@ -259,6 +260,7 @@ as described in @sec-worldmet.
 
 ```{r}
 #| label: imprtMet
+#| eval: false
 ## example of comparing 2 met sites
 
 # london met data
@@ -270,6 +272,19 @@ london_met <- readr::read_rds(
 mod_met <- importUKAQ("kc1", year = 2024)
 
 # combine into one data frame and change names - only select ws, wd and date
+met_compare <- inner_join(
+  select(london_met, date, ws, wd),
+  select(mod_met, date, ws, wd),
+  suffix = c("_lon", "_mod"),
+  by = "date"
+)
+```
+
+```{r}
+#| label: imprtMet-local
+#| echo: false
+london_met <- readr::read_rds("../../assets/data/london_met.rds")
+mod_met <- importUKAQ("kc1", year = 2024)
 met_compare <- inner_join(
   select(london_met, date, ws, wd),
   select(mod_met, date, ws, wd),

@@ -150,6 +150,7 @@ confidence intervals in the slope at the 99% confidence intervals, the
 code would be as follows.
 
 ```{r}
+#| label: TheilSen-alpha
 #| eval: false
 TheilSen(
   mydata, 
@@ -165,6 +166,7 @@ following code calculates trends for years greater than 1999 i.e. from
 2000 onward.
 
 ```{r}
+#| label: TheilSen-filter
 #| eval: false
 TheilSen(
   filter(mydata, format(date, "%Y") > 1999),
@@ -252,6 +254,7 @@ users may already have data that is monthly or annual. The function can
 therefore accept as input monthly or annual data directly. In this case, make sure the `date` column is a proper date. For example, if monthly dates have been read in as text in British format (dd/mm/YYYY), they can be converted as follows:
 
 ```{r}
+#| label: monthly-dates
 #| eval: false
 mydata$date <- as.Date(mydata$date, format = "%d/%m/%Y")
 ```
@@ -262,6 +265,7 @@ with three columns is required: date, pollutant and *site*. The call
 would then be, for example:
 
 ```{r}
+#| label: TheilSen-site
 #| eval: false
 TheilSen(mydata, pollutant = "no2", type = "site")
 ```
@@ -286,14 +290,16 @@ This returns a list of two data frames containing all the monthly mean
 values and trend statistics and an aggregated summary. The first 6 lines
 are shown next:
 
-```{r }
+```{r}
+#| label: MKresults-data
 head(MKresults$data[[1]])
 ```
 
 Often only the trend statistics are required and not all the monthly
 values. These can be obtained by:
 
-```{r }
+```{r}
+#| label: MKresults-stats
 MKresults$data[[2]]
 ```
 

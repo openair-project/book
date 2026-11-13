@@ -13,6 +13,7 @@ The example considered is 23 years of O~3~ measurements at Mace Head on the West
 First we import the data:
 
 ```{r}
+#| label: load-mace-head-local
 #| echo: false
 #| message: false
 #| warning: false
@@ -23,6 +24,7 @@ load("../../assets/data/MaceHead.RData")
 ```
 
 ```{r}
+#| label: import-mace-head
 #| eval: false
 library(mgcv)
 dat <- importUKAQ(site = "mh", year = 1988:2010)

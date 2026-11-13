@@ -158,6 +158,7 @@ head(hour_weekday_df)
 It is also possible to plot any of the individual plots that make up `timeVariation()`.
 
 ```{r}
+#| label: plot-subset
 #| eval: false
 plot(myOutput, subset = "hour")
 # ...or plot(myOutput$plot$hour)
@@ -166,6 +167,7 @@ plot(myOutput, subset = "hour")
 Note if you are only interested in one panel, the `variationPlot()` function may be more suitable. It has many of the same arguments as `timeVariation()`, though has the added advantage of being able to take two `type` arguments.
 
 ```{r}
+#| label: variationPlot
 variationPlot(
   mydata,
   pollutant = "so2",

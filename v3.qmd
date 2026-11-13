@@ -19,6 +19,7 @@ Since its inception over 10 years ago, the package has relied on [lattice]{.pkg}
 You will still find almost all of the functions that you are used to, with some slight visual tweaks now that the new plotting engine is being used.
 
 ```{r}
+#| label: polarPlot-v3
 library(openair)
 
 polarplot <- polarPlot(mydata)
@@ -29,6 +30,7 @@ polarplot <- polarPlot(mydata)
 While [lattice]{.pkg} capably produced a variety of plots, once a plot was produced it was difficult to modify it after-the-fact. By comparison, [ggplot2]{.pkg} uses a layer-based approach, meaning it is easy to layer on additional labels or annotations after a plot has been constructed.
 
 ```{r}
+#| label: annotate-polarplot
 # change some of the labels and annotate with a segment
 polarplot$plot +
   ggplot2::labs(
@@ -53,6 +55,7 @@ polarplot$plot +
 Through the use of functions like `ggplot2::theme()`, nearly every individual visual element of a plot can be tweaked. For example, let's create a "minimalist" `polarPlot()` by setting a global [ggplot2]{.pkg} theme.
 
 ```{r}
+#| label: theme-minimal
 # set a global ggplot2 theme
 ggplot2::theme_set(ggplot2::theme_minimal())
 
@@ -68,6 +71,7 @@ polarPlot(mydata, cols = "Blues", plot = FALSE)$plot +
 ```
 
 ```{r}
+#| label: theme-reset
 # reset theme
 ggplot2::theme_set(ggplot2::theme_grey())
 ```
@@ -93,6 +97,7 @@ As with any major software update, there are some 'breaking' changes that may af
 - Trajectory mapping functions have been extensively rewritten, including `trajPlot()`, `trajLevel()` and `trajCluster()`. The long-term home for these functions may be in [openairmaps]{.pkg}, but for the time being they remain in [openair]{.pkg}. The previous method of map projection has been removed and replaced with an [sf]{.pkg}-powered approach, meaning users only need to provide a "coordinate reference system" number (`crs`). For example, the British National Grid is [EPSG:27700](https://epsg.io/27700). As these functions no longer call `scatterPlot()`, `scatterPlot()` has lost the `map` argument.
 
 ```{r}
+#| label: trajPlot-crs
 openairmaps::traj_data |> openair::trajPlot(pollutant = "pm10", crs = 27700)
 ```
 

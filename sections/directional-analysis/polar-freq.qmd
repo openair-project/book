@@ -71,6 +71,7 @@ polarFreq(
 Users are encouraged to try out other plot options. However, one potentially useful plot is to select a few specific years of user interest. For example, what if you just wanted to compare two years e.g. 2000 and 2003? This is easy to do by sending a subset of data to the function. Use here can be made of the [openair]{.pkg} `selectByDate()` function (see @sec-selectByDate).
 
 ```{r}
+#| label: polarFreq-2000-2003
 #| eval: false
 # polar frequency plot for just 2000 and 2003
 polarFreq(

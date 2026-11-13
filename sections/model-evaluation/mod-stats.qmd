@@ -137,10 +137,21 @@ The `modStats()` function is however much more flexible than indicated above. Wh
 Data have been assembled from a Defra model evaluation exercise which consists of hourly O~3~ predictions at 15 receptor points around the UK for 2006. The aim here is not to identify a particular model that is 'best' and for this reason the models are simply referred to as `model 1`, `model 2` and so on. We will aim to make the data more widely available. However, data set has this form:
 
 ```{r}
-#| label: showModData
+#| label: loadModData
+#| eval: false
 load(url(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/modelData.RData"
 ))
+```
+
+```{r}
+#| label: loadModData-local
+#| echo: false
+load("../../assets/data/modelData.RData")
+```
+
+```{r}
+#| label: showModData
 head(modTest)
 ```
 

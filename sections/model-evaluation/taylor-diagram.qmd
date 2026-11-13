@@ -13,15 +13,27 @@ The [openair]{.pkg} version of the Taylor Diagram has several enhancements that 
 We first show a diagram and then pick apart the different components to understand how to interpret it. The diagram can look overly complex but once it is understood how to interpret the three main characteristics it becomes much easier to understand. A typical diagram is shown in @fig-TaylorExam for nine anonymised models used for predicting hourly O~3~ concentrations at 15 sites around the UK.
 
 ```{r}
+#| label: load-packages
 library(openair)
 library(tidyverse)
 ```
 
 ```{r}
-#| label: showModData
+#| label: loadModData
+#| eval: false
 load(url(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/modelData.RData"
 ))
+```
+
+```{r}
+#| label: loadModData-local
+#| echo: false
+load("../../assets/data/modelData.RData")
+```
+
+```{r}
+#| label: showModData
 head(modTest)
 ```
 

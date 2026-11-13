@@ -71,6 +71,7 @@ Sometimes the hardest thing about producing a reproducible example is providing 
 * **Use `dput()`**. If your data is quite small, you can use the `dput()` function to generate a line of code that will recreate your data in someone else's R session.
 
 ```{r}
+#| label: dput
 dput(head(openair::mydata))
 ```
 

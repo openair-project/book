@@ -27,6 +27,7 @@ Another useful feature of `timePlot()` is the ability to average the data in sev
 A full set of examples is shown in the help pages --- see `?timePlot` for details. At the basic level, concentrations are shown using a simple call e.g. to plot time series of NO~x~ and O~3~ in separate panels with their own scales.
 
 ```{r}
+#| label: timePlot-nox-o3
 #| eval: false
 timePlot(
   mydata,
@@ -40,6 +41,7 @@ Often it is necessary to only consider part of a time series and using the [open
 To plot data only for 2003:
 
 ```{r}
+#| label: timePlot-2003
 #| eval: false
 timePlot(
   selectByDate(mydata, year = 2003),
@@ -69,6 +71,7 @@ timePlot(
 Some other examples (not plotted) are:
 
 ```{r}
+#| label: timePlot-examples
 #| eval: false
 ## plot monthly means of ozone and no2
 timePlot(

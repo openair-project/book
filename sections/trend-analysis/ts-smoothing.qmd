@@ -196,14 +196,23 @@ As an example of the application of baseline smoothing, it is useful to consider
 The data can be accessed as follows:
 
 ```{r}
+#| label: import-lhr2
+#| eval: false
 lhr2 <- readr::read_rds(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/lhr2_2019_2025.rds"
 )
 ```
 
+```{r}
+#| label: import-lhr2-local
+#| echo: false
+lhr2 <- readr::read_rds("../../assets/data/lhr2_2019_2025.rds")
+```
+
 Next we calculate the baseline and increment for NO~x~ using `WhittakerSmooth()` with `lambda = 3000` to suppress the diurnal cycle.
 
 ```{r}
+#| label: whittaker-lhr2
 lhr2 <- WhittakerSmooth(
   lhr2,
   pollutant = "nox",

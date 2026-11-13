@@ -53,6 +53,7 @@ Many users download hourly data from [GOV UK](https://get-air-pollution-data.ser
 Some examples of usage are shown below. First, let's load the packages we need.
 
 ```{r}
+#| label: load-packages
 #| warning: false
 #| message: false
 #| cache: false
@@ -96,6 +97,7 @@ Often it is useful to consider sites that were open in a particular year or were
 For example, to check the number of sites that were open from 2010 to 2022 in the AURN and SAQN combined:
 
 ```{r}
+#| label: sites_2010_2022
 sites_2010_2022 <- importMeta(
   source = c("aurn", "saqn"),
   year = 2010:2022
@@ -107,6 +109,7 @@ nrow(sites_2010_2022)
 `importMeta()` also supports filtering by pollutant directly, without needing to filter the returned data frame manually. The `pollutant` argument accepts one or more pollutant names (case-insensitive), and `"hc"` can be used as a shorthand for all hydrocarbons. For example, to find all Urban Traffic sites on the AURN that measure NO~2~:
 
 ```{r}
+#| label: no2_sites
 #| warning: false
 #| message: false
 no2_sites <- importMeta(
@@ -127,6 +130,7 @@ Additional filtering arguments include `site` (pattern-matched site name), `code
 One of the most useful aspects of `importMeta()` is to use it as a basis to identify site codes to then import data. For example, to import data from the AURN for sites that have been in operation from 2005 to 2020:
 
 ```{r}
+#| label: sites_2005_2020
 #| eval: false
 sites_2005_2020 <- importMeta(
   source = "aurn",
@@ -148,6 +152,7 @@ all_aq_data <- importUKAQ(
 The `max_dist` argument limits results to sites within a given radius (in km), and `max_n` caps the number of sites returned. These can be combined to find, say, the four nearest sites within 2 km. [openairmaps]{.pkg} provides the `convertPostcode()` function as a convenient way to obtain coordinates from a UK postcode. The below example finds the four closest monitoring stations within 2 km of Great Ormond Street Hospital, a famous children's hospital in London.
 
 ```{r}
+#| label: hospital_coords
 #| eval: true
 hospital_coords <- list(
   lat = 51.52221,
@@ -169,6 +174,7 @@ importMeta(
 To easily visualise entire monitoring networks, consider using the [openairmaps]{.pkg} R package. This package can be installed from CRAN, similar to [openair]{.pkg}.
 
 ```{r}
+#| label: install
 #| eval: false
 install.packages("openairmaps")
 ```
@@ -213,6 +219,7 @@ As well as providing all of the functionality of `importMeta()`, `networkMap()` 
 To import data, you can use the `importUKAQ()` function. Some examples are below.
 
 ```{r}
+#| label: import-examples
 #| eval: false
 
 # import all pollutants from Marylebone Rd from 2000:2005
@@ -266,6 +273,7 @@ glimpse(kc1_zagglom)
 By default, the function returns data where each pollutant is in a separate column. However, it is possible to return the data in a *tidy* format (column for pollutant name, column for value) by using the option `to_narrow`:
 
 ```{r}
+#| label: to-narrow
 #| eval: false
 my1 <- importUKAQ("my1", year = 2018, to_narrow = TRUE)
 ```
@@ -291,6 +299,7 @@ Note that for annual and monthly statistics all network data is returned and the
 As an example, to import 5 years of annual mean data from the AURN:
 
 ```{r}
+#| label: uk_annual
 #| eval: false
 uk_annual <- importUKAQ(year = 2016:2020, data_type = "annual", source = "AURN")
 ```
@@ -315,6 +324,7 @@ uk_2020
 The pollutants returned include:
 
 ```{r}
+#| label: species-list
 unique(uk_2020$species)
 ```
 

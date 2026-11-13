@@ -44,12 +44,22 @@ Ten years of data have been uploaded for a background (North Kensington) and roa
 
 ```{r}
 #| label: kz-import
+#| eval: false
 library(openair)
 library(tidyverse)
 
 london_aq <- readr::read_rds(
   "https://github.com/openair-project/book/raw/refs/heads/main/assets/data/london_aq.rds"
 )
+```
+
+```{r}
+#| label: kz-import-local
+#| echo: false
+library(openair)
+library(tidyverse)
+
+london_aq <- readr::read_rds("../../assets/data/london_aq.rds")
 ```
 
 Next, we calculate the KZ components for a few pollutants at the North Kensington site. The `kzFilter()` function returns a data frame with the original data and new columns for each component.

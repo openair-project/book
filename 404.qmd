@@ -22,6 +22,7 @@ You may want to try searching to find the page's new location.
 👉 [Return to the openair book](index.qmd).
 
 ```{r}
+#| label: polarplot-404
 #| echo: false
 #| message: false
 #| warning: false

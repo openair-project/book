@@ -11,13 +11,15 @@ Selecting by date/time in R can be intimidating for new users---and time-consumi
 First load the packages we need.
 
 ```{r}
+#| label: load-packages
 #| message: false
 #| warning: false
 library(openair)
 library(tidyverse)
 ```
 
-```{r }
+```{r}
+#| label: selectByDate-examples
 ## select all of 1999
 data.1999 <- selectByDate(mydata, start = "1/1/1999", end = "31/12/1999")
 head(data.1999)
@@ -41,6 +43,7 @@ sub.data <- selectByDate(
 The function can be used directly in other functions. For example, to make a polar plot using year 2000 data:
 
 ```{r}
+#| label: polarPlot-2000
 #| eval: false
 polarPlot(selectByDate(mydata, year = 2000), pollutant = "so2")
 ```
@@ -86,6 +89,7 @@ dplyr::glimpse(newdata)
 Most of the time users do not have to call `cutData()` directly because most functions have a `type` option that is used to call `cutData()` directly, e.g.,
 
 ```{r}
+#| label: polarPlot-season
 #| eval: false
 polarPlot(mydata, pollutant = "so2", type = "season")
 ```
@@ -145,6 +149,7 @@ The results are shown in @fig-RunningRes. The pollution rose for the "no" criter
 The code below shows (as an example), that the summer of 2006 had a high proportion of conditions where the criterion was met.
 
 ```{r}
+#| label: timeProp-criterion
 #| eval: false
 timeProp(
   ted,
@@ -299,6 +304,7 @@ corPlot(mydata, dendrogram = TRUE)
 Note also that the `corPlot()` accepts a `type` option, so it is possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
 
 ```{r}
+#| label: corPlot-season
 #| eval: false
 corPlot(mydata, type = "season")
 ```
@@ -306,6 +312,7 @@ corPlot(mydata, type = "season")
 When there are a very large number of variables present, the `corPlot()` function is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane result from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.
 
 ```{r}
+#| label: corPlot-hc
 #| eval: false
 hc <- importUKAQ(site = "my1", year = 2005, hc = TRUE)
 ## now it is possible to see the hydrocarbons that behave most

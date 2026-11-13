@@ -62,6 +62,7 @@ calendarPlot(mydata, pollutant = "o3", year = 2003, windflow = TRUE)
 Note again that `selectByDate()` can be useful. For example, to plot select months:
 
 ```{r}
+#| label: calendarPlot-summer
 #| eval: false
 calendarPlot(
   selectByDate(mydata, year = 2003, month = c(6, 7, 8)),

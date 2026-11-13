@@ -126,6 +126,7 @@ preview_openair_schemes(options = list(launch.browser = T))
 As an alternative, this section includes a gallery of the different colour schemes available in [openair]{.pkg}, grouped by type.
 
 ```{r}
+#| label: show_palette
 #| include: false
 show_palette <- function(scheme) {
   n <- schemes$max_n[schemes$palette == scheme]
