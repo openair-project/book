@@ -125,8 +125,7 @@ library(openair) # load package
 modStats(modData, obs = "obs", mod = "mod", type = "model")
 ```
 
-It is possible to rank the statistics based on the \emph{Coefficient
-  of Efficiency}, which is a good general indicator of model performance.
+It is possible to rank the statistics based on the *Coefficient of Efficiency*, which is a good general indicator of model performance.
 
 ```{r}
 #| label: evalModStatsRank

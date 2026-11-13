@@ -94,7 +94,7 @@ However, it can be useful to call `cutData()` *before* supplying the data to a f
 
 ## Selecting run lengths of values above a threshold --- pollution episodes {#sec-selectRunning}
 
-A seemingly easy thing to do that has relevance to air pollution episodes is to select run lengths of contiguous values of a pollutant above a certain threshold. For example, one might be interested in selecting O~3~ concentrations where there are at least 8 consecutive hours above 90\~ppb. In other words, a selection that combines both a threshold and *persistence*. These periods can be very important from a health perspective and it can be useful to study the conditions under which they occur. But how do you select such periods easily? The `selectRunning` utility function has been written to do this. It could be useful for all sorts of situations e.g.
+A seemingly easy thing to do that has relevance to air pollution episodes is to select run lengths of contiguous values of a pollutant above a certain threshold. For example, one might be interested in selecting O~3~ concentrations where there are at least 8 consecutive hours above 90 ppb. In other words, a selection that combines both a threshold and *persistence*. These periods can be very important from a health perspective and it can be useful to study the conditions under which they occur. But how do you select such periods easily? The `selectRunning` utility function has been written to do this. It could be useful for all sorts of situations e.g.
 
 - Selecting hours when primary pollutant concentrations are persistently high --- and then applying other [openair]{.pkg} functions to analyse the data in more depth.
 
