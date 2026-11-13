@@ -165,7 +165,7 @@ The `modStats` function is much more flexible than indicated above and can be us
 
 ```{r}
 #| label: modStatsEx
-#| #| eval: false
+#| eval: false
 modStats(
   modTest,
   obs = "o3",

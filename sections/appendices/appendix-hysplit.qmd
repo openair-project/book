@@ -77,6 +77,7 @@ It is first necessary on ensure that the [devtools]{.pkg} package is installed, 
 
 ```{r}
 #| label: getGist
+#| eval: false
 library(devtools)
 source_gist(
   "https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5",
@@ -100,7 +101,7 @@ data_out <- run_hysplit(
   start = 2015,
   end = "2015-01-10",
   hysplit_exec = "~/hysplit/exec",
-  hysplit_input = "~/trajData",
+  hysplit_input = "~/TrajData",
   hysplit_output = "~/temp",
   site = "gibraltar"
 )

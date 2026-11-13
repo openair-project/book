@@ -26,7 +26,7 @@ library(worldmet)
 
 aq <- importUKAQ("my1", year = 2022, meteo = FALSE)
 
-met <- import_isd_hourly(year = 2022)
+met <- import_isd_hourly(code = "037720-99999", year = 2022) # London Heathrow
 
 aq <- left_join(aq, met, by = "date")
 ```

@@ -168,8 +168,12 @@ traj <- importTraj("london", 2006)
 ## carry out a cluster analysis
 cl <- trajCluster(traj, method = "Angle", n.cluster = 5)
 
-## join with original model eval data
-out <- inner_join(condDat, cl$data$traj, by = "date")
+## join with original model eval data (arrival time only, one row per trajectory)
+out <- inner_join(
+  condDat,
+  dplyr::filter(cl$data$traj, hour.inc == 0) |> dplyr::select(date, cluster),
+  by = "date"
+)
 
 ## plot it
 conditionalEval(

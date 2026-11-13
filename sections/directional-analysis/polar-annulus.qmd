@@ -42,15 +42,15 @@ Where there is interest in considering the wind direction dependence of concentr
 #| label: polarAnnSub
 #| eval: false
 ## wind speed >2
-polarAnnulus(filter(mydata, ws > 2), pollutant = "pm10", type = "hour")
+polarAnnulus(dplyr::filter(mydata, ws > 2), pollutant = "pm10", period = "hour")
 
 ## wind speed > 10th percentile
 polarAnnulus(
-  filter(
+  dplyr::filter(
     mydata,
     ws > quantile(ws, probs = 0.1, na.rm = TRUE)
   ),
   pollutant = "pm10",
-  type = "hour"
+  period = "hour"
 )
 ```
