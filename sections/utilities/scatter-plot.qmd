@@ -22,7 +22,7 @@ There is less need for this function now that [ggplot2]{.pkg} is available, but 
 
 -   A plot of two variables can be colour-coded by a continuous colour scale of a third variable.
 
--   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g. hourly, daily, weekly etc. using the `timeAverage()` function and the argument `avg.time`.
+-   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g., hourly, daily, weekly etc. using the `timeAverage()` function and the argument `avg.time`.
 
 The `scatterPlot()` function isn't really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other [openair]{.pkg} functions. Nevertheless, along with the `timePlot()` function they do form an important part of [openair]{.pkg} because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.
 
@@ -30,7 +30,7 @@ The `scatterPlot()` function isn't really specific to atmospheric sciences, in t
 
 We provide a few examples of use and as usual, users are directed towards the help pages (type `?scatterPlot`) for more extensive examples.
 
-First we select a subset of data (2003) using the [openair]{.pkg} `selectByDate()` function and plot NO~x~ vs. NO~2~
+First we select a subset of data (2003) using the [openair]{.pkg} `selectByDate()` function and plot NO~x~ vs. NO~2~:
 
 ```{r}
 #| label: fig-scatterPlot1
@@ -50,7 +50,7 @@ Often with several years of data, points are over-plotted and it can be very dif
 
 ### Hexagonal binning {#sec-hexbin}
 
-Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that for `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. By default, `"hexbin"` is transformed using a `"log10"` transform. For a square root transform use `trans = "sqrt"`. To not apply any transformation `trans = NULL` should be used.
+A hexagonal binning plot can be made by setting `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g., several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that for `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. By default, `"hexbin"` is transformed using a `"log10"` transform. For a square root transform use `trans = "sqrt"`. To not apply any transformation `trans = NULL` should be used.
 
 ```{r}
 #| label: fig-scatterPlot2
@@ -68,7 +68,7 @@ scatterPlot(
 )
 ```
 
-Note that when `method = "hexbin"` there are various options that are useful e.g. a border around each bin and the number of bins. For example, to place a grey border around each bin and set the bin size try:
+Note that when `method = "hexbin"` there are various options that are useful e.g., a border around each bin and the number of bins. For example, to place a grey border around each bin and set the number of bins, try:
 
 ```{r}
 #| label: hexbinAlt
@@ -121,7 +121,7 @@ scatterPlot(
 )
 ```
 
-Below is an extended example that brings together data manipulation, refined plot options and linear fitting of two variables with NO~x~. The aim is to plot the weekly concentration of NO~x~ against PM~10~ and PM~2.5~ and fit linear equations to both relationships. To do this we need the $x$ variable as NO~x~ and the $y$ variable as PM~10~ or PM~2.5~, which means we also need a column that will act as a grouping column i.e. identifies whether the $y$ is PM~10~ or PM~2.5~.
+Below is an extended example that brings together data manipulation, refined plot options and linear fitting of two variables with NO~x~. The aim is to plot the weekly concentration of NO~x~ against PM~10~ and PM~2.5~ and fit linear equations to both relationships. To do this we need the $x$ variable as NO~x~ and the $y$ variable as PM~10~ or PM~2.5~, which means we also need a column that will act as a grouping column i.e., identifies whether the $y$ is PM~10~ or PM~2.5~.
 
 ```{r}
 #| label: dataManip
@@ -135,7 +135,9 @@ subdat <- select(
   nox,
   pm10,
   pm25
-) # calculate weekly averages
+)
+
+# calculate weekly averages
 subdat <- timeAverage(subdat, avg.time = "week")
 
 # reshape so we have two variable columns
@@ -206,13 +208,13 @@ scatterPlot(
 )
 ```
 
-Finally, we show how to plot a continuous colour scale for a third *numeric* variable setting the value of `z` to the third variable. @fig-scatterPlot4 shows again the relationship between NO~x~ and NO~2~ but this time colour-coded by the concentration of O~3~. We also take the opportunity to split the data into seasons and weekday/weekend by setting `type =   c("season", "weekend")`. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O~3~ and colouring the data by the concentration of O~3~ helps to show how O~3~ concentrations affect NO~2~ concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO~2~ concentrations are associated with high O~3~ concentrations. Indeed there are some hours where NO~2~ is \>100 ppb at quite low concentrations of NO~x~ ($\approx$ 200 ppb). It would also be interesting instead of using O~3~ concentrations from Marylebone Road to use O~3~ from a background site.
+Finally, we show how to plot a continuous colour scale for a third *numeric* variable setting the value of `z` to the third variable. @fig-scatterPlot4 shows again the relationship between NO~x~ and NO~2~ but this time colour-coded by the concentration of O~3~. We also take the opportunity to split the data into seasons and weekday/weekend by setting `type = c("season", "weekend")`. There is an enormous amount of information that can be gained from plots such as this. Differences between weekdays and the weekend can highlight changes in emission sources, splitting by seasons can show seasonal influences in meteorology and background O~3~ and colouring the data by the concentration of O~3~ helps to show how O~3~ concentrations affect NO~2~ concentrations. For example, consider the summertime-weekday panel where it clearly shows that the higher NO~2~ concentrations are associated with high O~3~ concentrations. Indeed there are some hours where NO~2~ is \>100 ppb at quite low concentrations of NO~x~ ($\approx$ 200 ppb). It would also be interesting instead of using O~3~ concentrations from Marylebone Road to use O~3~ from a background site.
 
 @fig-scatterPlot4 was very easily produced but contains a huge amount of useful information showing the relationship between NO~x~ and NO~2~ dependent upon the concentration of O~3~, the season and the day of the week. There are of course numerous other plots that are equally easily produced.
 
 ```{r}
 #| label: fig-scatterPlot4
-#| fig-cap: Scatter plot of hourly NO~x~ vs. NO~2~ at Marylebone Road by different levels of O~3~ split by season and weekday-weekend.
+#| fig-cap: Scatter plot of hourly NO~x~ vs. NO~2~ at Marylebone Road coloured by O~3~ concentration and split by season and weekday-weekend.
 #| fig-width: 10
 #| fig-height: 5
 scatterPlot(
@@ -229,7 +231,7 @@ scatterPlot(
 
 ```{r}
 #| label: fig-scatterPlot5
-#| fig-cap: Scatter plot of date vs. SO~2~ at Marylebone Road by different levels of wind direction for August 2003.
+#| fig-cap: Scatter plot of date vs. SO~2~ at Marylebone Road coloured by wind direction for August 2003.
 #| fig-width: 6
 #| fig-height: 4
 #| out-width: 85%
@@ -242,7 +244,7 @@ scatterPlot(
 )
 ```
 
-Similar to @sec-timePlot, `scatterPlot()` can also plot wind vector arrows if wind speed and wind direction are available in the data frame. @fig-scatterPlotwswd shows an example of using the `windflow` option. The Figure also sets many other options including showing the concentration of O~3~ as a colour, setting the colour scale used and selecting a few days of interest using the `selectByDate()` function. @fig-scatterPlotwswd shows that when the wind direction changes to northerly, the concentration of NO~2~ decreases and that of O~3~ increases.
+Similar to @sec-timePlot, `scatterPlot()` can also plot wind vector arrows if wind speed and wind direction are available in the data frame. @fig-scatterPlotwswd shows an example of using the `windflow` option. The plot also sets many other options including showing the concentration of O~3~ as a colour, setting the colour scale used and selecting a few days of interest using the `selectByDate()` function. @fig-scatterPlotwswd shows that when the wind direction changes to northerly, the concentration of NO~2~ decreases and that of O~3~ increases.
 
 ```{r}
 #| label: fig-scatterPlotwswd

@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Background and examples {#sec-polarFreqBack}
 
-This compactly shows the distribution of wind speeds and directions from meteorological measurements. It is similar to the traditional wind rose, but includes a number of enhancements to also show how concentrations of pollutants and other variables vary. It can summarise all available data, or show it by different time periods e.g. by year, month, day of the week. It can also consider a wide range of statistics.
+The `polarFreq()` function compactly shows the distribution of wind speeds and directions from meteorological measurements. It is similar to the traditional wind rose, but includes a number of enhancements to also show how concentrations of pollutants and other variables vary. It can summarise all available data, or show it by different time periods e.g., by year, month, day of the week. It can also consider a wide range of statistics.
 
 This section shows an example output and use, using our data frame `mydata`. The function is very simply run as shown in @fig-polarFreqa.
 
@@ -33,7 +33,7 @@ polarFreq(mydata, type = "year")
 
 The `polarFreq()` function can also usefully consider pollutant concentrations. @fig-polarFreqMean shows the mean concentration of SO~2~ by wind speed and wind direction and clearly highlights that SO~2~ concentrations tend to be highest for easterly winds and for 1998 in particular.
 
-Weighting the concentrations by the frequency of occasions the wind is from a certain direction and has a certain speed gives a better indication of the conditions that dominate the overall mean concentrations. @fig-polarFreqWeightedMean shows the weighted mean concentration of SO~2~ and highlights that annual mean concentrations are dominated by south-westerly winds i.e. contributions from the road itself --- and not by the fewer higher hours of concentrations when the wind is easterly. However, 2003 looks interesting because for that year, significant contributions to the overall mean were due to easterly wind conditions.
+Weighting the concentrations by the frequency of occasions the wind is from a certain direction and has a certain speed gives a better indication of the conditions that dominate the overall mean concentrations. @fig-polarFreqWeightedMean shows the weighted mean concentration of SO~2~ and highlights that annual mean concentrations are dominated by south-westerly winds i.e., contributions from the road itself --- and not by the fewer higher hours of concentrations when the wind is easterly. However, 2003 looks interesting because for that year, significant contributions to the overall mean were due to easterly wind conditions.
 
 These plots when applied to other locations can reveal some useful features about different sources. For example, it may be that the highest concentrations measured only occur infrequently, and the weighted mean plot can help show this.
 
@@ -68,7 +68,7 @@ polarFreq(
 )
 ```
 
-Users are encouraged to try out other plot options. However, one potentially useful plot is to select a few specific years of user interest. For example, what if you just wanted to compare two years e.g. 2000 and 2003? This is easy to do by sending a subset of data to the function. Use here can be made of the [openair]{.pkg} `selectByDate()` function (see @sec-selectByDate).
+Users are encouraged to try out other plot options. However, one potentially useful plot is to select a few specific years of user interest. For example, what if you just wanted to compare two years e.g., 2000 and 2003? This is easy to do by sending a subset of data to the function. Use here can be made of the [openair]{.pkg} `selectByDate()` function (see @sec-selectByDate).
 
 ```{r}
 #| label: polarFreq-2000-2003
@@ -81,9 +81,9 @@ polarFreq(
 )
 ```
 
-The `polarFreq()` function can also be used to gain an idea about the wind directions that contribute most to the overall mean concentrations. As already shown, use of the option `statistic =   "weighted.mean"` will show the percentage contribution by wind direction and wind speed bin. However, often it is unnecessary to consider different wind speed intervals. To make the plot more effective, a few options are set as shown in @fig-polarFreqAttr. First, the `statistic = "weighted.mean"` is chosen to ensure that the plot shows concentrations weighted by their frequency of occurrence of wind direction. For this plot, we are mostly interested in just the contribution by wind direction and not wind speed. Setting the `ws.int` to be above the maximum wind speed in the data set ensures that all data are shown in one interval. Rather than having a square-root transform applied to the colour scale, we choose to have a linear scale by setting `trans = FALSE`. Finally, to show a 'disk', the `offset` is set at 60. Increasing the value of the offset will narrow the disk.
+The `polarFreq()` function can also be used to gain an idea about the wind directions that contribute most to the overall mean concentrations. As already shown, use of the option `statistic = "weighted.mean"` will show the percentage contribution by wind direction and wind speed bin. However, often it is unnecessary to consider different wind speed intervals. To make the plot more effective, a few options are set as shown in @fig-polarFreqAttr. First, the `statistic = "weighted.mean"` is chosen to ensure that the plot shows concentrations weighted by their frequency of occurrence of wind direction. For this plot, we are mostly interested in just the contribution by wind direction and not wind speed. Setting the `ws.int` to be above the maximum wind speed in the data set ensures that all data are shown in one interval. Rather than having a square-root transform applied to the colour scale, we choose to have a linear scale by setting `trans = FALSE`. Finally, to show a 'disk', the `offset` is set at 60. Increasing the value of the offset will narrow the disk.
 
-While @fig-polarFreqAttr is useful --- e.g. it clearly shows that concentrations of NO~x~ at this site are totally dominated by south-westerly winds, the use of `pollutionRose()` for this type of plot is more effective, as shown in @sec-windRose.
+While @fig-polarFreqAttr is useful --- e.g., it clearly shows that concentrations of NO~x~ at this site are totally dominated by south-westerly winds --- the use of `pollutionRose()` for this type of plot is more effective, as shown in @sec-windRose.
 
 ```{r}
 #| label: fig-polarFreqAttr

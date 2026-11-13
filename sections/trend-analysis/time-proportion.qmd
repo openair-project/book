@@ -34,9 +34,9 @@ timeProp(
 )
 ```
 
-Note that `proportion` can be an existing categorical (i.e. factor or character) variable in a data frame. If a numeric variable is supplied, then it is typically cut into four quantile levels. So, for example, the plot below would show intervals of wind speed, which would help show the wind speed conditions that control high SO~2~ concentration --- and importantly, when they occur.
+Note that `proportion` can be an existing categorical (i.e., factor or character) variable in a data frame. If a numeric variable is supplied, then it is typically cut into four quantile levels. So, for example, the plot below would show intervals of wind speed, which would help show the wind speed conditions that control high SO~2~ concentration --- and importantly, when they occur.
 
-An example of using `timeProp()` with a continuous variable is shown in @fig-timePropws. In this case the wind speed values are split into 3 quantile levels. The number of quantiles used is determined by the option `n.levels`. This approach can be used for any numeric variables.
+An example of using `timeProp()` with a continuous variable is shown in @fig-timePropws. In this case the wind speed values are split into 3 quantile levels. The number of quantiles used is determined by the option `n.levels`. This approach can be used for any numeric variable.
 
 ```{r}
 #| label: fig-timePropws
@@ -57,4 +57,4 @@ timeProp(
 )
 ```
 
-One of the key uses of `timeProp()` is to post-process cluster analysis data. Users should consider the uses of `timeProp()` for cluster analysis shown in @sec-polarCluster and @sec-trajCluster-trajectory-analysis. In both these cases the cluster analysis yields a categorical output directly i.e. cluster, which lends itself to analysis using `timeProp()`.
+One of the key uses of `timeProp()` is to post-process cluster analysis data. Users should consider the uses of `timeProp()` for cluster analysis shown in @sec-polarCluster and @sec-trajCluster-trajectory-analysis. In both these cases the cluster analysis yields a categorical output directly i.e., cluster, which lends itself to analysis using `timeProp()`.

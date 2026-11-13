@@ -8,9 +8,9 @@ author: David Carslaw
 
 `percentileRose()` calculates percentile levels of a pollutant and plots them by wind direction. One or more percentile levels can be calculated and these are displayed as either filled areas or as lines.
 
-By default, the function plots percentile concentrations in 10 degree segments. Alternatively, the levels by wind direction are calculated using a cyclic smooth cubic spline. The wind directions are rounded to the nearest 10 degrees, consistent with surface data from the UK Met Office before a smooth is fitted.
+By default, the function plots percentile concentrations in 10 degree segments. Alternatively, by setting `smooth = TRUE`, the levels by wind direction are calculated using a cyclic smooth cubic spline. The wind directions are rounded to the nearest 10 degrees, consistent with surface data from the UK Met Office before a smooth is fitted.
 
-The `percentileRose()` function complements other similar functions including `windRose()`, `pollutionRose()`, `polarFreq()` or `polarPlot()`. It is most useful for showing the distribution of concentrations by wind direction and often can reveal different sources e.g. those that only affect high percentile concentrations such as a chimney stack.
+The `percentileRose()` function complements other similar functions including `windRose()`, `pollutionRose()`, `polarFreq()` or `polarPlot()`. It is most useful for showing the distribution of concentrations by wind direction and often can reveal different sources e.g., those that only affect high percentile concentrations such as a chimney stack.
 
 Similar to other functions, flexible conditioning is available through the `type` option. It is easy for example to consider multiple percentile values for a pollutant by season, year and so on. See examples below.
 
@@ -44,13 +44,13 @@ percentileRose(
 )
 ```
 
-Lots more insight can be gained by considering how percentile values vary by other factors i.e. conditioning. For example, what do O~3~ concentrations look like split by season and whether it is daylight or nighttime hours? We can set the type to consider season *and* whether it is daylight or nighttime.[^percentile-roses-1] This Figure reveals some interesting features. First, O~3~ concentrations are higher in the spring and summer and when the wind is from the north. O~3~ concentrations are higher on average at this site in spring due to the peak of northern hemispheric O~3~ and to some extent local production. This may also explain why O~3~ concentrations are somewhat higher at nighttime in spring compared with summer. Second, peak O~3~ concentrations are higher during daylight hours in summer when the wind is from the south-east. This will be due to more local (UK/European) production that is photochemically driven --- and hence more important during daylight hours.
+Lots more insight can be gained by considering how percentile values vary by other factors i.e., conditioning. For example, what do O~3~ concentrations look like split by season and whether it is daylight or nighttime hours? We can set the type to consider season *and* whether it is daylight or nighttime.[^percentile-roses-1] @fig-percentileRoseO3 reveals some interesting features. First, O~3~ concentrations are higher in the spring and summer and when the wind is from the north. O~3~ concentrations are higher on average at this site in spring due to the peak of northern hemispheric O~3~ and to some extent local production. This may also explain why O~3~ concentrations are somewhat higher at nighttime in spring compared with summer. Second, peak O~3~ concentrations are higher during daylight hours in summer when the wind is from the south-east. This will be due to more local (UK/European) production that is photochemically driven --- and hence more important during daylight hours.
 
 [^percentile-roses-1]: In choosing `type = "daylight"` the default is to consider a latitude of central London (or close to). Users can set the latitude in the function call if working in other parts of the world.
 
 ```{r}
 #| label: fig-percentileRoseO3
-#| fig-cap: A `percentileRose()` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction. The plot shows the variation by season and whether  it is nighttime or daylight hours.
+#| fig-cap: A `percentileRose()` plot of O~3~ concentrations at Marylebone Road. The percentile intervals are shaded and are shown by wind direction. The plot shows the variation by season and whether it is nighttime or daylight hours.
 #| fig-width: 10
 #| fig-height: 6
 #| fig-format: svg
@@ -65,7 +65,7 @@ percentileRose(
 
 ## Conditional probability function {#sec-CPF}
 
-The `percentileRose()` function can also plot conditional probability functions (CPF) [@Ashbaugh1985]. The CPF is defined as CPF = $m_\theta/n_\theta$, where $m_\theta$ is the number of samples in the wind sector $\theta$ with mixing ratios greater than some *high* concentration, and $n_\theta$ is the total number of samples in the same wind sector. CPF analysis is very useful for showing which wind directions are dominated by high concentrations and give the probability of doing so. In [openair]{.pkg}, a CPF plot can be produced as shown in @fig-percentileRoseCPF. Note that in these plots only one percentile is provided and the method must be supplied. In @fig-percentileRoseCPF it is clear that the high concentrations (greater than the 95th percentile of *all* observations) are dominated by easterly wind directions. There are very low conditional probabilities of these concentrations being experienced for other wind directions.
+The `percentileRose()` function can also plot conditional probability functions (CPF) [@Ashbaugh1985]. The CPF is defined as CPF = $m_\theta/n_\theta$, where $m_\theta$ is the number of samples in the wind sector $\theta$ with mixing ratios greater than some *high* concentration, and $n_\theta$ is the total number of samples in the same wind sector. CPF analysis is very useful for showing which wind directions are dominated by high concentrations and gives the probability of doing so. In [openair]{.pkg}, a CPF plot can be produced as shown in @fig-percentileRoseCPF. Note that in these plots only one percentile is provided and the method must be supplied. In @fig-percentileRoseCPF it is clear that the high concentrations (greater than the 95th percentile of *all* observations) are dominated by easterly wind directions. There are very low conditional probabilities of these concentrations being experienced for other wind directions.
 
 ```{r}
 #| label: fig-percentileRoseCPF
@@ -83,11 +83,11 @@ percentileRose(
 )
 ```
 
-It is easy to plot several species on the same plot and this works well because they all have the same probability scale (i.e. 0 to 1). In the example below @fig-CPFExample it is easy to see for each pollutant the wind directions that dominate the contributions to the highest (95th percentile) concentrations. For example, the highest CO and NO~x~ concentrations are totally dominated by south/south-westerly winds and the probability of their being such high concentrations from other wind directions is effectively zero.
+It is easy to plot several species on the same plot and this works well because they all have the same probability scale (i.e., 0 to 1). In the example below @fig-CPFExample it is easy to see for each pollutant the wind directions that dominate the contributions to the highest (95th percentile) concentrations. For example, the highest CO and NO~x~ concentrations are totally dominated by south/south-westerly winds and the probability of their being such high concentrations from other wind directions is effectively zero.
 
 ```{r}
 #| label: fig-CPFExample
-#| fig-cap: A CPF plot of many pollutants  at Marylebone Road.
+#| fig-cap: A CPF plot of many pollutants at Marylebone Road.
 #| fig-width: 7
 #| fig-height: 5
 #| fig-format: svg

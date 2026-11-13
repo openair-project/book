@@ -14,10 +14,10 @@ In the following definitions, $O_i$ represents the $i$th observed value and $M_i
 
 **Fraction of predictions within a factor of two, *FAC2***
 
-The fraction of modelled values within a factor of two of the observed values are the fraction of model predictions that satisfy:
+The fraction of modelled values within a factor of two of the observed values is the fraction of model predictions that satisfy:
 
 $$
-   0.5 \leq \frac{M_i}{O_i} \leq 2.0 
+   0.5 \leq \frac{M_i}{O_i} \leq 2.0
 $$ {#eq-FAC2}
 
 **Mean bias, *MB***
@@ -25,7 +25,7 @@ $$ {#eq-FAC2}
 The mean bias provides a good indication of the mean over or under estimate of predictions. Mean bias is in the same units as the quantities being considered.
 
 $$
- MB = \frac{1}{n}\sum_{i=1}^{N} M_i - O_i  
+ MB = \frac{1}{n}\sum_{i=1}^{n} (M_i - O_i)
 $$ {#eq-MB}
 
 **Mean Gross Error, *MGE***
@@ -33,7 +33,7 @@ $$ {#eq-MB}
 The mean gross error provides a good indication of the mean error regardless of whether it is an over or under estimate. Mean gross error is in the same units as the quantities being considered.
 
 $$
- MGE = \frac{1}{n}\sum_{i=1}^{N} |M_i - O_i|  
+ MGE = \frac{1}{n}\sum_{i=1}^{n} |M_i - O_i|
 $$ {#eq-MGE}
 
 **Normalised mean bias, *NMB***
@@ -41,7 +41,7 @@ $$ {#eq-MGE}
 The normalised mean bias is useful for comparing pollutants that cover different concentration scales and the mean bias is normalised by dividing by the observed concentration.
 
 $$
- NMB = \frac{\sum\limits_{i=1}^{n} M_i - O_i}{\sum\limits_{i=1}^{n} O_i} 
+ NMB = \frac{\sum\limits_{i=1}^{n} M_i - O_i}{\sum\limits_{i=1}^{n} O_i}
 $$ {#eq-NMB}
 
 **Normalised mean gross error, *NMGE***
@@ -49,7 +49,7 @@ $$ {#eq-NMB}
 The normalised mean gross error further ignores whether a prediction is an over or under estimate.
 
 $$
- NMGE = \frac{\sum\limits_{i=1}^{n} |M_i - O_i|}{\sum\limits_{i=1}^{n} O_i} 
+ NMGE = \frac{\sum\limits_{i=1}^{n} |M_i - O_i|}{\sum\limits_{i=1}^{n} O_i}
 $$ {#eq-NMGE}
 
 **Root mean squared error, *RMSE***
@@ -57,20 +57,20 @@ $$ {#eq-NMGE}
 The RMSE is a commonly used statistic that provides a good overall measure of how close modelled values are to observed values.
 
 $$
-   RMSE = \left({\frac{\sum\limits_{i=1}^{n} (M_i - O_i)^2}{n}}\right)^{1/2}   
+   RMSE = \left({\frac{\sum\limits_{i=1}^{n} (M_i - O_i)^2}{n}}\right)^{1/2}
 $$ {#eq-RMSE}
 
 **Correlation coefficient, *r***
 
-The (Pearson) correlation coefficient is a measure of the strength of the linear relationship between two variables. If there is perfect linear relationship with positive slope between the two variables, $r$ = 1. If there is a perfect linear relationship with negative slope between the two variables $r$ = -1. A correlation coefficient of 0 means that there is no linear relationship between the variables. Note that `modStats()` accepts an option `method`, which can be set to "kendall" and "spearman" for alternative calculations of $r$.
+The (Pearson) correlation coefficient is a measure of the strength of the linear relationship between two variables. If there is a perfect linear relationship with positive slope between the two variables, $r$ = 1. If there is a perfect linear relationship with negative slope between the two variables $r$ = -1. A correlation coefficient of 0 means that there is no linear relationship between the variables. Note that `modStats()` accepts an option `method`, which can be set to "kendall" and "spearman" for alternative calculations of $r$.
 
 $$
- r = \frac{1}{(n-1)}\sum\limits_{i=1}^{n}\left(\frac{M_i - \overline{M}}{\sigma_M}\right)\left(\frac{O_i - \overline{O}}{\sigma_O}\right)   
+ r = \frac{1}{(n-1)}\sum\limits_{i=1}^{n}\left(\frac{M_i - \overline{M}}{\sigma_M}\right)\left(\frac{O_i - \overline{O}}{\sigma_O}\right)
 $$ {#eq-r}
 
 **Coefficient of Efficiency, *COE***
 
-The *Coefficient of Efficiency* based on @legates2012 and @legates1999. There have been many suggestions for measuring model performance over the years, but the $COE$ is a simple formulation which is easy to interpret.
+The *Coefficient of Efficiency* is based on @legates2012 and @legates1999. There have been many suggestions for measuring model performance over the years, but the $COE$ is a simple formulation which is easy to interpret.
 
 A perfect model has a $COE$ = 1. As noted by Legates and McCabe although the $COE$ has no lower bound, a value of $COE$ = 0.0 has a fundamental meaning. It implies that the model is no more able to predict the observed values than does the observed mean. Therefore, since the model can explain no more of the variation in the observed values than can the observed mean, such a model can have no predictive advantage.
 
@@ -78,7 +78,7 @@ For negative values of $COE$, the model is less effective than the observed mean
 
 $$
  COE = 1.0 - \frac{\sum\limits_{i=1}^{n} |M_i
-             -O_i|}{\sum\limits_{i=1}^{n} |O_i - \overline{O}|}  
+             -O_i|}{\sum\limits_{i=1}^{n} |O_i - \overline{O}|}
 $$ {#eq-COE}
 
 **Index of Agreement, *IOA***
@@ -94,7 +94,7 @@ IOA = \left\{
           \frac{\displaystyle c\sum\limits_{i=1}^{n} |O_i - \overline{O}|}
 {\displaystyle \sum\limits_{i=1}^{n} |M_i-O_i|} - 1.0, when \\
            \sum\limits_{i=1}^{n} |M_i-O_i| > c\sum\limits_{i=1}^{n} |O_i - \overline{O}|
-   \end{array} 
+   \end{array}
 \right.
 $$ {#eq-IOA}
 
@@ -134,7 +134,7 @@ modStats(modData, obs = "obs", mod = "mod", type = "model", rank.name = "model")
 
 The `modStats()` function is however much more flexible than indicated above. While it is useful to calculate model evaluation statistics in a straightforward way it can be much more informative to consider the statistics split by different periods.
 
-Data have been assembled from a Defra model evaluation exercise which consists of hourly O~3~ predictions at 15 receptor points around the UK for 2006. The aim here is not to identify a particular model that is 'best' and for this reason the models are simply referred to as `model 1`, `model 2` and so on. We will aim to make the data more widely available. However, data set has this form:
+Data have been assembled from a Defra model evaluation exercise which consists of hourly O~3~ predictions at 15 receptor points around the UK for 2006. The aim here is not to identify a particular model that is 'best' and for this reason the models are simply referred to as `model 1`, `model 2` and so on. The data set has this form:
 
 ```{r}
 #| label: loadModData
@@ -186,4 +186,4 @@ modStats(
 )
 ```
 
-Similarly, if other data are available e.g. meteorological data or other pollutant species then these variables can also be used to test models against ranges in their values. This capability is potentially very useful because it allows for a much more probing analysis into model evaluation. For example, with wind speed and direction it is easy to consider how model performance varies by wind speed intervals or wind sectors, both of which could reveal important performance characteristics.
+Similarly, if other data are available e.g., meteorological data or other pollutant species then these variables can also be used to test models against ranges in their values. This capability is potentially very useful because it allows for a much more probing analysis into model evaluation. For example, with wind speed and direction it is easy to consider how model performance varies by wind speed intervals or wind sectors, both of which could reveal important performance characteristics.

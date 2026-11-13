@@ -12,17 +12,17 @@ Perhaps one of the reasons why back trajectory analysis is not carried out more 
 
 Currently these functions allow for the import of pre-calculated back trajectories at several pre-defined locations and some trajectory plotting functions. In time, all of these functions will be developed to allow more sophisticated analyses to be undertaken.
 
-The `importTraj()` function imports pre-calculated back trajectories using the HYSPLIT trajectory model [Hybrid Single Particle Lagrangian Integrated Trajectory Model](https://ready.arl.noaa.gov/HYSPLIT.php) [@stein2015]. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at WSP similar to that for [importUKAQ](#sec-importUKAQ), which makes it very easy to import pre-processed trajectory data for a range of locations and years. [^trajectory-analysis-1]
+The `importTraj()` function imports pre-calculated back trajectories using the [HYSPLIT](https://ready.arl.noaa.gov/HYSPLIT.php) (Hybrid Single Particle Lagrangian Integrated Trajectory) model [@stein2015]. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground level (10 m) and propagated backwards in time. The data are stored on web-servers at WSP similar to that for `importUKAQ()` (@sec-importUKAQ), which makes it very easy to import pre-processed trajectory data for a range of locations and years.[^trajectory-analysis-1]
 
 [^trajectory-analysis-1]: Note --- the back trajectories have been pre-calculated for specific locations and stored as .RData objects. Users should contact David Carslaw to request the addition of other locations.
 
 ::: callout-tip
 ## Generate your own back trajectories
 
-Users may for various reasons wish to run HYSPLIT themselves e.g. for different starting heights, longer periods or more locations. Code and instructions have been provided in @sec-prod-hyspl-traj for users wishing to do this. Users can also use different means of calculating back trajectories e.g. ECMWF and plot them in [openair]{.pkg} provided a few basic fields are present: `date` (POSIXct), `lat` (decimal latitude), `lon` (decimal longitude) and `hour.inc` the hour offset from the arrival date (i.e. from zero decreasing to the length of the back trajectories). See ?importTraj for more details.
+Users may for various reasons wish to run HYSPLIT themselves e.g., for different starting heights, longer periods or more locations. Code and instructions have been provided in @sec-prod-hyspl-traj for users wishing to do this. Users can also use different means of calculating back trajectories e.g., ECMWF and plot them in [openair]{.pkg} provided a few basic fields are present: `date` (POSIXct), `lat` (decimal latitude), `lon` (decimal longitude) and `hour.inc` the hour offset from the arrival date (i.e., from zero decreasing to the length of the back trajectories). See `?importTraj` for more details.
 :::
 
-These trajectories have been calculated using the Global NOAA-NCEP/NCAR reanalysis data archives. The global data are on a latitude-longitude grid (2.5°). Note that there are many meteorological data sets that can be used to run HYSPLIT e.g. including ECMWF data. However, in order to make it practicable to run and store trajectories for many years and sites, the NOAA-NCEP/NCAR reanalysis data is most useful. In addition, these archives are available for use widely, which is not the case for many other data sets e.g. ECMWF. HYSPLIT calculated trajectories based on archive data may be distributed without permission (see <https://ready.arl.noaa.gov/HYSPLIT_agreement.php>). For those wanting, for example, to consider higher resolution meteorological data sets it may be better to run the trajectories separately.
+These trajectories have been calculated using the Global NOAA-NCEP/NCAR reanalysis data archives. The global data are on a latitude-longitude grid (2.5°). Note that there are many meteorological data sets that can be used to run HYSPLIT e.g., including ECMWF data. However, in order to make it practicable to run and store trajectories for many years and sites, the NOAA-NCEP/NCAR reanalysis data is most useful. In addition, these archives are available for use widely, which is not the case for many other data sets e.g., ECMWF. HYSPLIT calculated trajectories based on archive data may be distributed without permission (see <https://ready.arl.noaa.gov/HYSPLIT_agreement.php>). For those wanting, for example, to consider higher resolution meteorological data sets it may be better to run the trajectories separately.
 
 [openair]{.pkg} draws trajectory maps using [sf]{.pkg} and [ggplot2]{.pkg}. By default, trajectories are shown in latitude and longitude (WGS84, EPSG:4326), but any other map projection can be chosen using the `crs` argument, as described in the "Reprojecting trajectories" section below. Note that the HYSPLIT model itself uses one of three different projections depending on the latitude of the origin: a polar stereographic projection if the latitude is greater than 55.0 (or less than -55.0), the Mercator projection if the latitude is between -25.0 and 25.0, and the Lambert conformal projection elsewhere (the mid-latitudes).
 
@@ -59,15 +59,13 @@ The file itself contains lots of information that is of use for plotting back tr
 head(traj)
 ```
 
-The `traj` data frame contains among other things the latitude and longitude of the back trajectory, the height (m) and pressure (hPa) of the trajectory. The `date` field is the *arrival* time of the air-mass and is useful for linking with ambient measurement data.
+The `traj` data frame contains among other things the latitude and longitude of the back trajectory, the height (m) and pressure (hPa) of the trajectory. The `date` field is the *arrival* time of the air mass and is useful for linking with ambient measurement data.
 
 The `trajPlot()` function is used for plotting back trajectory lines, while `trajLevel()` (described later) is used for gridded analyses. See `?trajPlot` and `?trajLevel` for the full set of options.
 
 ## Plotting trajectories
 
-Next, we consider how to plot back trajectories with a few simple examples. The first example will consider a potentially interesting period when the Icelandic volcano, Eyjafjallajokull erupted in April 2010. The eruption of Eyjafjallajokull resulted in a flight-ban that lasted six days across many European airports. In @fig-traj1 `selectByDate()` is used to consider the 7 days of interest and the back trajectories are plotted as lines. @fig-traj1 does indeed show that many of the back trajectories originated from Iceland over this period. Note also the plot automatically includes a world base map. The base map itself is not at very high resolution by default but is useful for the sorts of spatial scales that back trajectories exist over. The base map is also global, so provided that there are pre-calculated back trajectories, these maps can be generated anywhere in the world. By default the function uses the 'world' map from the [maps]{.pkg} package. If `map.res = "hires"` then the (much) more detailed base map `worldHires` from the [mapdata]{.pkg} package is used.[^trajectory-analysis-2]
-
-[^trajectory-analysis-2]: You will need to load the [mapdata]{.pkg} package i.e. `library(mapdata)`.
+Next, we consider how to plot back trajectories with a few simple examples. The first example will consider a potentially interesting period when the Icelandic volcano, Eyjafjallajokull erupted in April 2010. The eruption of Eyjafjallajokull resulted in a flight-ban that lasted six days across many European airports. In @fig-traj1 `selectByDate()` is used to consider the 7 days of interest and the back trajectories are plotted as lines. @fig-traj1 does indeed show that many of the back trajectories originated from Iceland over this period. Note also the plot automatically includes a world base map. The base map itself is not at very high resolution by default but is useful for the sorts of spatial scales that back trajectories exist over. The base map is also global, so provided that there are pre-calculated back trajectories, these maps can be generated anywhere in the world. The base map comes from Natural Earth via the [rnaturalearth]{.pkg} package; its level of detail can be set using `map.res` (`"small"`, `"medium"` (the default) or `"large"`).
 
 ```{r}
 #| label: fig-traj1
@@ -81,7 +79,7 @@ selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
   )
 ```
 
-Note that `trajPlot()` will only plot *full length* trajectories. This can be important when plotting something like a single month e.g. by using `selectByDate()` when only partial sections of some trajectories may be selected.
+Note that `trajPlot()` will only plot *full length* trajectories. This can be important when plotting something like a single month e.g., by using `selectByDate()` when only partial sections of some trajectories may be selected.
 
 There are a few other ways of representing the data shown in @fig-traj1. For example, it might be useful to plot the trajectories for each day. To do this we need to make a new column `day` which can be used in the plotting. The first example considers plotting the back trajectories in separate panels (@fig-traj2).
 
@@ -121,13 +119,13 @@ selectByDate(
     group = "day",
     cols = "turbo",
     linewidth = 1,
-    key.pos = "top",
+    key.position = "top",
     key.columns = 4,
     ylim = c(50, 79)
   )
 ```
 
-So far the plots have provided information on where the back trajectories come from, grouped or split by day. It is also possible, in common with most other [openair]{.pkg} functions to split the trajectories by many other variables e.g. month, season and so on. However, perhaps one of the most useful approaches is to link the back trajectories with the concentrations of a pollutant. As mentioned previously, the back trajectory data has a column `date` representing the arrival time of the air mass that can be used to link with concentration measurements. A couple of steps are required to do this using the `left_join()` function.
+So far the plots have provided information on where the back trajectories come from, grouped or split by day. It is also possible, in common with most other [openair]{.pkg} functions to split the trajectories by many other variables e.g., month, season and so on. However, perhaps one of the most useful approaches is to link the back trajectories with the concentrations of a pollutant. As mentioned previously, the back trajectory data has a column `date` representing the arrival time of the air mass that can be used to link with concentration measurements. A couple of steps are required to do this using the `left_join()` function.
 
 ```{r}
 #| label: mergeTraj
@@ -139,7 +137,7 @@ traj <- left_join(traj, kc1, by = "date")
 head(traj)
 ```
 
-This time we can use the option `pollutant` in the function `trajPlot()`, which will plot the back trajectories coloured by the concentration of a pollutant. @fig-traj4 does seem to show elevated PM~10~ concentrations originating from Iceland over the period of interest. In fact, these elevated concentrations occur on two days as shown in @fig-traj2. However, care is needed when interpreting such data because other analysis would need to rule out other reasons why PM~10~ could be elevated; in particular due to local sources of PM~10~. There are lots of [openair]{.pkg} functions that can help here e.g. `timeVariation()` or `timePlot()` to see if NO~x~ concentrations were also elevated (which they seem to be). It would also be worth considering other sites for back trajectories that could be less influenced by local emissions.
+This time we can use the option `pollutant` in the function `trajPlot()`, which will plot the back trajectories coloured by the concentration of a pollutant. @fig-traj4 does seem to show elevated PM~10~ concentrations originating from Iceland over the period of interest. In fact, these elevated concentrations occur on two days (compare with @fig-traj2). However, care is needed when interpreting such data because other analysis would need to rule out other reasons why PM~10~ could be elevated; in particular due to local sources of PM~10~. There are lots of [openair]{.pkg} functions that can help here e.g., `timeVariation()` or `timePlot()` to see if NO~x~ concentrations were also elevated (which they seem to be). It would also be worth considering other sites for back trajectories that could be less influenced by local emissions.
 
 ```{r}
 #| label: fig-traj4
@@ -200,7 +198,7 @@ Which, interestingly still clearly shows elevated PM~10~ concentrations for thos
 
 ## Trajectory gridded frequencies {#sec-trajLevel}
 
-The HYSPLIT model itself contains various analysis options for gridding trajectory data. Similar capabilities are also available in [openair]{.pkg} where the analyses can be extended using other [openair]{.pkg} capabilities. It is useful to gain an idea of where trajectories come from. Over the course of a year representing trajectories as lines or points results in a lot of over-plotting. Therefore it is useful to grid the trajectory data and calculate various statistics by considering latitude-longitude intervals. The first analysis considers the number of unique trajectories in a particular grid square. This is achieved by using the `trajLevel()` function and setting the `statistic` option to "frequency". @fig-trajFreq shows the frequency of back trajectory crossings for the London data. In this case it highlights that most trajectory origins are from the west and north for 2010 at this site. Note that in this case, `pollutant` can just be the trajectory height (or another numeric field) rather than an actual pollutant because only the frequencies are considered.
+The HYSPLIT model itself contains various analysis options for gridding trajectory data. Similar capabilities are also available in [openair]{.pkg} where the analyses can be extended using other [openair]{.pkg} capabilities. It is useful to gain an idea of where trajectories come from. Over the course of a year representing trajectories as lines or points results in a lot of over-plotting. Therefore it is useful to grid the trajectory data and calculate various statistics by considering latitude-longitude intervals. The first analysis considers the number of unique trajectories in a particular grid square. This is achieved by using the `trajLevel()` function and setting the `statistic` option to "frequency". @fig-trajFreq shows the frequency of back trajectory crossings for the London data. In this case it highlights that most trajectory origins are from the west and north for 2010 at this site.
 
 ```{r}
 #| label: fig-trajFreq
@@ -231,9 +229,9 @@ Back trajectories offer the possibility to undertake receptor modelling to ident
 
 ### Identifying the contribution of high concentration back trajectories
 
-A useful analysis to undertake is to consider the pattern of frequencies for two different conditions. In particular, there is often interest in the origin of high concentrations for different pollutants. For example, compared with data over a whole year, how do the frequencies of occurrence differ? @fig-trajDiff shows an example of such an analysis for PM~10~ concentrations. By default the function will compare concentrations \>90th percentile with the full year. The percentile level is controlled by the option `percentile`. Note also there is an option `min.bin` that will exclude grid cells where there are fewer than `min.bin` data points. The analysis compares the percentage of time the air masses are in particular grid squares for all data and a subset of data where the concentrations are greater than the given percentile. The graph shows the absolute percentage difference between the two cases i.e. high minus base.
+A useful analysis to undertake is to consider the pattern of frequencies for two different conditions. In particular, there is often interest in the origin of high concentrations for different pollutants. For example, compared with data over a whole year, how do the frequencies of occurrence differ? @fig-trajDiff shows an example of such an analysis for PM~10~ concentrations. By default the function will compare concentrations \>90th percentile with the full year. The percentile level is controlled by the option `percentile`. Note also there is an option `min.bin` that will exclude grid cells where there are fewer than `min.bin` data points. The analysis compares the percentage of time the air masses are in particular grid squares for all data and a subset of data where the concentrations are greater than the given percentile. The graph shows the absolute percentage difference between the two cases i.e., high minus base.
 
-@fig-trajDiff shows that compared with the whole year, high PM~10~ concentrations (90th percentile) are more prevalent when the trajectories originate from the east, which is seen by the positive values in the plot. Similarly there are relatively fewer occurrences of these high concentration back trajectories when they originate from the west. This analysis is in keeping with the highest PM~10~ concentrations being largely controlled by secondary aerosol formation from air-masses originating during anticyclonic conditions from mainland Europe.
+@fig-trajDiff shows that compared with the whole year, high PM~10~ concentrations (90th percentile) are more prevalent when the trajectories originate from the east, which is seen by the positive values in the plot. Similarly there are relatively fewer occurrences of these high concentration back trajectories when they originate from the west. This analysis is in keeping with the highest PM~10~ concentrations being largely controlled by secondary aerosol formation from air masses originating during anticyclonic conditions from mainland Europe.
 
 ```{r}
 #| label: fig-trajDiff
@@ -268,7 +266,7 @@ trajLevel(
 
 ### Allocating trajectories to different wind sectors
 
-One of the key aspects of trajectory analysis is knowing something about where air masses have come from. Cluster analysis can be used to group trajectories based on their origins and this is discussed in @sec-trajCluster-trajectory-analysis. A simple approach is to consider different wind sectors e.g. N, NE, E and calculate the proportion of time a particular back trajectory resides in a specific sector. It is then possible to allocate a particular trajectory to a sector based on some assumption about the proportion of time it is in that sector --- for example, assume a trajectory is from the west sector if it spends at least 50% of its time in that sector or otherwise record the allocation as 'unallocated'. The code below can be used as the basis of such an approach.
+One of the key aspects of trajectory analysis is knowing something about where air masses have come from. Cluster analysis can be used to group trajectories based on their origins and this is discussed in @sec-trajCluster-trajectory-analysis. A simple approach is to consider different wind sectors e.g., N, NE, E and calculate the proportion of time a particular back trajectory resides in a specific sector. It is then possible to allocate a particular trajectory to a sector based on some assumption about the proportion of time it is in that sector --- for example, assume a trajectory is from the west sector if it spends at least 50% of its time in that sector or otherwise record the allocation as 'unallocated'. The code below can be used as the basis of such an approach.
 
 ```{r}
 #| label: reload-traj
@@ -342,12 +340,12 @@ group_by(traj, sector) |>
 If `statistic = "pscf"` then the Potential Source Contribution Function (PSCF) is plotted. The PSCF calculates the probability that a source is located at latitude $i$ and longitude $j$ [@Fleming2012; @Pekney2006]. The PSCF is somewhat analogous to the CPF function described in @sec-CPF that considers local wind direction probabilities. In fact, the two approaches have been shown to work well together [@Pekney2006]. The PSCF approach has been widely used in the analysis of air mass back trajectories. @AraBegum2005 for example assessed the method against the known locations of wildfires and found it performed well for PM~2.5~, EC (elemental carbon) and OC (organic carbon) and that other (non-fire related) species such as sulphate had different source origins. The basis of PSCF is that if a source is located at ($i$, $j$), an air parcel back trajectory passing through that location indicates that material from the source can be collected and transported along the trajectory to the receptor site. PSCF solves
 
 $$
-PSCF = \frac{m_{ij}}{n_{ij}} 
+PSCF = \frac{m_{ij}}{n_{ij}}
 $$ {#eq-PSCF}
 
 where $n_{ij}$ is the number of times that the trajectories passed through the cell ($i$, $j$) and $m_{ij}$ is the number of times that a source concentration was high when the trajectories passed through the cell ($i$, $j$). The criterion for determining $m_{ij}$ is controlled by `percentile`, which by default is 90. Note also that cells with few data have a weighting factor applied to reduce their effect.
 
-An example of a PSCF plot is shown in @fig-PSCF for PM~2.5~ for concentrations above the 90th percentile. This Figure gives a very clear indication that the principal (high) sources are dominated by source origins in mainland Europe --- particularly around the Benelux countries.
+An example of a PSCF plot is shown in @fig-PSCF for PM~2.5~ for concentrations above the 90th percentile. This figure gives a very clear indication that the principal (high) sources are dominated by source origins in mainland Europe --- particularly around the Benelux countries.
 
 ```{r}
 #| label: fig-PSCF
@@ -368,12 +366,12 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
 A limitation of the PSCF method is that grid cells can have the same PSCF value when sample concentrations are either only slightly higher or much higher than the criterion [@Hsu2003]. As a result, it can be difficult to distinguish moderate sources from strong ones. @seibert1994 computed concentration fields to identify source areas of pollutants. This approach is sometimes referred to as the CWT or CF (concentration field). A grid domain was used as in the PSCF method. For each grid cell, the mean (CWT) or logarithmic mean (used in the Residence Time Weighted Concentration (RTWC) method) concentration of a pollutant species was calculated as follows:
 
 $$
-  ln(\overline{C}_{ij}) = \frac{1}{\sum_{k=1}^{N}\tau_{ijk}}\sum_{k=1}^{N}ln(c_k)\tau_{ijk} 
+  ln(\overline{C}_{ij}) = \frac{1}{\sum_{k=1}^{N}\tau_{ijk}}\sum_{k=1}^{N}ln(c_k)\tau_{ijk}
 $$ {#eq-RTWC}
 
-where $i$ and $j$ are the indices of grid, $k$ the index of trajectory, $N$ the total number of trajectories used in analysis, $c_k$ the pollutant concentration measured upon arrival of trajectory $k$, and $\tau_{ijk}$ the residence time of trajectory $k$ in grid cell ($i$, $j$). A high value of $\overline{C}_{ij}$ means that, air parcels passing over cell ($i$, $j$) would, on average, cause high concentrations at the receptor site.
+where $i$ and $j$ are the indices of grid, $k$ the index of trajectory, $N$ the total number of trajectories used in analysis, $c_k$ the pollutant concentration measured upon arrival of trajectory $k$, and $\tau_{ijk}$ the residence time of trajectory $k$ in grid cell ($i$, $j$). A high value of $\overline{C}_{ij}$ means that air parcels passing over cell ($i$, $j$) would, on average, cause high concentrations at the receptor site.
 
-@fig-traj5 shows the situation for PM~2.5~ concentrations. It was calculated by recording the associated PM~2.5~ concentration for each point on the back trajectory based on the arrival time concentration using 2010 data. The plot shows the geographic areas most strongly associated with high PM~2.5~ concentrations i.e. to the east in continental Europe. Both the CWT and PSCF methods have been shown to give similar results and each have their advantages and disadvantages [@Lupu2002; @Hsu2003]. @fig-traj5 can be compared with @fig-PSCF to compare the overall identification of source regions using the CWT and PSCF techniques. Overall the agreement is good in that similar geographic locations are identified as being important for PM~2.5~.
+@fig-traj5 shows the situation for PM~2.5~ concentrations. It was calculated by recording the associated PM~2.5~ concentration for each point on the back trajectory based on the arrival time concentration using 2010 data. The plot shows the geographic areas most strongly associated with high PM~2.5~ concentrations i.e., to the east in continental Europe. Both the CWT and PSCF methods have been shown to give similar results and each have their advantages and disadvantages [@Lupu2002; @Hsu2003]. @fig-traj5 can be compared with @fig-PSCF to compare the overall identification of source regions using the CWT and PSCF techniques. Overall the agreement is good in that similar geographic locations are identified as being important for PM~2.5~.
 
 ```{r}
 #| label: fig-traj5
@@ -419,17 +417,17 @@ filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) |>
   )
 ```
 
-It should be noted that it makes sense to analyse back trajectories for pollutants that have a large regional component --- such as particles or O~3~. It makes little sense to analyse pollutants that are known to have local impacts e.g. NO~x~. However, a species such as NO~x~ can be helpful to exclude 'fresh' emissions from the analysis.
+It should be noted that it makes sense to analyse back trajectories for pollutants that have a large regional component --- such as particles or O~3~. It makes little sense to analyse pollutants that are known to have local impacts e.g., NO~x~. However, a species such as NO~x~ can be helpful to exclude 'fresh' emissions from the analysis.
 
 ### Simplified quantitative transport bias analysis (SQTBA)
 
 Both CWT and PSCF techniques in essence assume that the trajectory paths represent a good estimate of the centreline of the air mass origin. However, trajectory analysis is implicitly uncertain, not least because of the difficulty of accurately describing the dispersion of pollutants in the atmosphere. HYSPLIT has many approaches to deal with these uncertainties such as running an ensemble of trajectories with different starting locations. However, for longer term analysis it can be very time consuming to run the model to explore the influence of meteorological variation.
 
-SQTBA is an approach that recognises the natural processes of plume dispersion and uses this understanding as part of back trajectory analysis. The approach has been used in many studies that aim to better understand source regions for PM~2.5~ (or components of PM~2.5~) e.g. @brook2004 considering PM~2.5~ in North America, @zhao2007 modelling particulate nitrate and sulphate, @zhou2004 comparing different source attribution techniques including SQTBA and the consideration of sources of ammonia in New York State [@zhou2019].
+SQTBA is an approach that recognises the natural processes of plume dispersion and uses this understanding as part of back trajectory analysis. The approach has been used in many studies that aim to better understand source regions for PM~2.5~ (or components of PM~2.5~) e.g., @brook2004 considering PM~2.5~ in North America, @zhao2007 modelling particulate nitrate and sulphate, @zhou2004 comparing different source attribution techniques including SQTBA and the consideration of sources of ammonia in New York State [@zhou2019].
 
 The basic idea, only described briefly here, is that there is a natural transport behaviour of dispersing air masses that can be described by the Gaussian plume equation. Rather than a single back trajectory being considered, it is assumed that concentrations are represented according to Gaussian plume dilution along each trajectory --- giving a probability of a certain concentration at a particular point on a grid. In effect, the further from a receptor (measurement site), the wider the plume (σ value), which has the effect of spreading-out the likely origin of the source. This approach is an effective, pragmatic solution to better account for the uncertainties in the location of upwind sources.
 
-Q(x,t\| x', t') is the probability for the air parcel at position x' at time t' to arrive at position x at time t is given by:
+The probability Q(x,t\| x', t') that the air parcel at position x' at time t' arrives at position x at time t is given by:
 
 $$
   Q(x, t, x', t') = \frac{1}{2 \pi \sigma_x(t') \sigma_y(t')}e^{-\frac{1}{2}\Bigg[\bigg(\frac{X - x'(t')}{\sigma_x(t')}\bigg)^2 + \bigg(\frac{Y - y'(t')}{\sigma_y(t')}\bigg)^2\Bigg]}
@@ -441,20 +439,20 @@ x' y': Centreline of trajectory
 
 σ: Standard deviation of trajectories at two directions which are assumed to grow with time
 
-σ~x~(t') = σ~y~(t') = at', a is a dispersion speed, equals to 1.5 km h^-1^. Note that the default σ is assumed to be 1.5 km h^-1^ rather than 5.4 km h^-1^ that is commonly used in other studies because testing shows that a lower value reveals more information about source origins without introducing noise. In practice, the value of σ will vary depending on meteorological conditions and be influenced by both turbulence and wind shear. Users can set their own value of σ in the function options.
+σ~x~(t') = σ~y~(t') = at', a is a dispersion speed, equal to 1.5 km h^-1^. Note that the default σ is assumed to be 1.5 km h^-1^ rather than 5.4 km h^-1^ that is commonly used in other studies because testing shows that a lower value reveals more information about source origins without introducing noise. In practice, the value of σ will vary depending on meteorological conditions and be influenced by both turbulence and wind shear. Users can set their own value of σ in the function options.
 
 This means at each trajectory point, the probability is calculated across a pre-defined grid. These calculations can take some time to run. For example, with 96 hour back trajectories calculated every 3 hours in a year, there are 283,240 trajectory end points (2,920 trajectories each with 97 hourly points). Each one of these points is used to estimate the probability on a grid, which itself can be large (a one degree grid from 35 to 80°N and 55°W to 25°E is 3600 grid points).
 
-A *potential mass transfer field* for a given trajectory l, arriving at time t, is integrated over back trajectory time 𝜏:
+A *potential mass transfer field* for a given trajectory l, arriving at time t, is integrated over back trajectory time $\tau$:
 
 $$
-\overline{T_l}(x | x') = \frac{\int_{t-\tau}^{t} Q(x,t| x', t')dt'}{\int_{t-\tau}^{t}dt'} 
+\overline{T_l}(x | x') = \frac{\int_{t-\tau}^{t} Q(x,t| x', t')dt'}{\int_{t-\tau}^{t}dt'}
 $$
 
 and the concentration-weighted field calculated as:
 
 $$
-\widetilde{T}(x|x') = \sum_{l=1}^{l=L}\overline{T_l}(x|x')c_l 
+\widetilde{T}(x|x') = \sum_{l=1}^{l=L}\overline{T_l}(x|x')c_l
 $$
 
 c~l~: Receptor concentration of back trajectory l
@@ -485,7 +483,7 @@ trajLevel(
 )
 ```
 
-Some further analysis can be carried out on the TEOM FDMS measurements, which separately reports the volatile and non-volatile components of PM. @fig-SQTBA-PMv shows the plot for the volatile PM~2.5~ component, which highlights the source regions of the Benelux countries and (likely) northern Italy.
+Some further analysis can be carried out on the TEOM FDMS measurements, which separately report the volatile and non-volatile components of PM. @fig-SQTBA-PMv shows the plot for the volatile PM~2.5~ component, which highlights the source regions of the Benelux countries and (likely) northern Italy.
 
 ```{r}
 #| label: fig-SQTBA-PMv
@@ -503,7 +501,7 @@ trajLevel(
 )
 ```
 
-On the other hand, @fig-SQTBA-PMnv shows the non-volatile PM~2.5~ component, which more clearly shows eastern Europe as the principal source. This plot differs from @fig-SQTBA-PMv and likely highlights the higher sulphur emissions from power generation in this part of Europe. More detailed analysis can be carried out if the components of PM are available at an hourly or daily resolution e.g. particulate nitrate, sulphate.
+On the other hand, @fig-SQTBA-PMnv shows the non-volatile PM~2.5~ component, which more clearly shows eastern Europe as the principal source. This plot differs from @fig-SQTBA-PMv and likely highlights the higher sulphur emissions from power generation in this part of Europe. More detailed analysis can be carried out if the components of PM are available at an hourly or daily resolution e.g., particulate nitrate, sulphate.
 
 ```{r}
 #| label: fig-SQTBA-PMnv
@@ -521,24 +519,24 @@ trajLevel(
 )
 ```
 
-The analysis above was demonstrated for a single site. However, to exploit the full potential of the SQTBA approach, multiple receptors should be considered. The reason why multiple sites should be considered is that there will be better geographic coverage of the trajectories and potential for source regions to be sampled multiple times. To conduct an analysis of multiple sites, trajectories linked to pollutant concentrations should be combined into a single data frame in the format similar to `traj` above but with an additional variable that identifies the different sites. When running `trajLevel()` the option `.combine` should be used to identify the relevant column e.g. `.combine = "site"`.
+The analysis above was demonstrated for a single site. However, to exploit the full potential of the SQTBA approach, multiple receptors should be considered. The reason why multiple sites should be considered is that there will be better geographic coverage of the trajectories and potential for source regions to be sampled multiple times. To conduct an analysis of multiple sites, trajectories linked to pollutant concentrations should be combined into a single data frame in the format similar to `traj` above but with an additional variable that identifies the different sites. When running `trajLevel()` the option `.combine` should be used to identify the relevant column e.g., `.combine = "site"`.
 
 The results returned from multiple site analysis are normalised by each site individually by dividing the output by the mean of the pollutant concentration. This approach ensures that sites with potentially very different mean concentrations can be used in a consistent way to identify source regions, without single sites dominating the output.
 
 ## Trajectory clustering {#sec-trajCluster-trajectory-analysis}
 
-Often it is useful to use cluster analysis on back trajectories to group similar air mass origins together. The principal purpose of clustering back trajectories is to post-process data according to cluster origin. By grouping data with similar geographic origins it is possible to gain information on pollutant species with similar chemical histories. There are several ways in which clustering can be carried out and several measures of the similarity of different clusters. A key issue is how the *distance matrix* is calculated, which determines the similarity (or dissimilarity) of different back trajectories. The simplest measure is the Euclidean distance. However, an angle-based measure is also often used. The two distance measures are defined below. In [openair]{.pkg} the distance matrices are calculated using C$++$ code because their calculation is computationally intensive. Note that these calculations can also be performed directly in the HYSPLIT model itself.
+Often it is useful to use cluster analysis on back trajectories to group similar air mass origins together. The principal purpose of clustering back trajectories is to post-process data according to cluster origin. By grouping data with similar geographic origins it is possible to gain information on pollutant species with similar chemical histories. There are several ways in which clustering can be carried out and several measures of the similarity of different clusters. A key issue is how the *distance matrix* is calculated, which determines the similarity (or dissimilarity) of different back trajectories. The simplest measure is the Euclidean distance. However, an angle-based measure is also often used. The two distance measures are defined below. In [openair]{.pkg} the distance matrices are calculated using C++ code because their calculation is computationally intensive. Note that these calculations can also be performed directly in the HYSPLIT model itself.
 
-The Euclidean distance between two trajectories is given by @eq-Euclid. Where $X_1$, $Y_1$ and $X_2$, $Y_2$ are the latitude and longitude coordinates of back trajectories $1$ and $2$, respectively. $n$ is the number of back trajectory points (96 hours in this case). Note that a simpler formula is sufficient for this calculation than the more accurate Haversine formula.
+The Euclidean distance between two trajectories is given by @eq-Euclid. Where $X_1$, $Y_1$ and $X_2$, $Y_2$ are the latitude and longitude coordinates of back trajectories $1$ and $2$, respectively. $n$ is the number of back trajectory points (97 hourly points for 96-hour trajectories). Note that a simpler formula is sufficient for this calculation than the more accurate Haversine formula.
 
 $$
-d_{1, 2} = \left({\sum_{i=1}^{n} 111((X_{1i} - X_{2i}) ^ 2 + ((Y_{1i} - Y_{2i})cos(X_{1i})) ^ 2}\right)^{1/2} 
+d_{1, 2} = \left({\sum_{i=1}^{n} 111((X_{1i} - X_{2i}) ^ 2 + ((Y_{1i} - Y_{2i})cos(X_{1i})) ^ 2)}\right)^{1/2}
 $$ {#eq-Euclid}
 
-The *angle* distance matrix is a measure of how similar two back trajectory points are in terms of their angle from the origin i.e. the starting location of the back trajectories. The angle-based measure will often capture some of the important circulatory features in the atmosphere e.g. situations where there is a high pressure located to the east of the UK. However, the most appropriate distance measure will be application dependent and is probably best tested by the extent to which they are able to differentiate different air-mass characteristics, which can be tested through post-processing. The angle-based distance measure is defined as:
+The *angle* distance matrix is a measure of how similar two back trajectory points are in terms of their angle from the origin i.e., the starting location of the back trajectories. The angle-based measure will often capture some of the important circulatory features in the atmosphere e.g., situations where there is a high pressure located to the east of the UK. However, the most appropriate distance measure will be application dependent and is probably best tested by the extent to which they are able to differentiate different air-mass characteristics, which can be tested through post-processing. The angle-based distance measure is defined as:
 
 $$
-d_{1, 2} = \frac{1}{n}\sum_{i=1}^{n}cos^{-1} \left(0.5\frac{A_i + B_i - C_i}{\sqrt{A_iB_i}}\right)  
+d_{1, 2} = \frac{1}{n}\sum_{i=1}^{n}cos^{-1} \left(0.5\frac{A_i + B_i - C_i}{\sqrt{A_iB_i}}\right)
 $$ {#eq-Angle}
 
 where
@@ -555,7 +553,7 @@ $$
   C_i = (X_2(i) - X_1(i))^2 + (Y_2(i) - Y_1(i))^2
 $$ {#eq-C}
 
-where $X_0$ and $Y_0$ are the coordinates of the location being studied i.e. the starting location of the trajectories.
+where $X_0$ and $Y_0$ are the coordinates of the location being studied i.e., the starting location of the trajectories.
 
 As an example we will consider back trajectories for London in 2011.
 
@@ -616,7 +614,7 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 # use inner join - so only where we have data in each
 kc1 <- inner_join(
   kc1 |> mutate(date = as.POSIXct(date, tz = "GMT")),
-  filter(clust$data$traj, hour.inc == 0) |> 
+  filter(clust$data$traj, hour.inc == 0) |>
     mutate(date = as.POSIXct(date, tz = "GMT")) |>
     select(date, cluster),
   by = "date"
@@ -632,9 +630,9 @@ The numbers of each cluster are given by:
 table(kc1[["cluster"]])
 ```
 
-i.e. the data are dominated by clusters 3 and 2 from west and south-west (Atlantic).
+i.e., the data are dominated by clusters 3 and 2 from west and south-west (Atlantic).
 
-Now it is possible to analyse the concentration data according to the cluster. There are numerous types of analysis that can be carried out with these results, which will depend on what the aims of the analysis are in the first place. However, perhaps one of the first things to consider is how the concentrations vary by cluster. As the summary results below show, there are distinctly different mean concentrations of most pollutants by cluster. For example, clusters 1 and 6 are associated with much higher concentrations of PM~10~ --- approximately double that of other clusters. Both of these clusters originate from continental Europe. Cluster 5 is also relatively high, which tends to come from the rest of the UK. Other clues concerning the types of air-mass can be gained from the mean pressure. For example, cluster 5 is associated with the highest pressure (1014 hPa), and as is seen in @fig-calcClusterTraj the shape of the line for cluster 5 is consistent with air-masses associated with a high pressure system (a clockwise-type sweep).
+Now it is possible to analyse the concentration data according to the cluster. There are numerous types of analysis that can be carried out with these results, which will depend on what the aims of the analysis are in the first place. However, perhaps one of the first things to consider is how the concentrations vary by cluster. As the summary results below show, there are distinctly different mean concentrations of most pollutants by cluster. For example, clusters 1 and 6 are associated with much higher concentrations of PM~10~ --- approximately double that of other clusters. Both of these clusters originate from continental Europe. Cluster 5 is also relatively high, which tends to come from the rest of the UK. Other clues concerning the types of air mass can be gained from the mean pressure. For example, cluster 5 is associated with the highest pressure (1014 hPa), and as is seen in @fig-calcClusterTraj the shape of the line for cluster 5 is consistent with air masses associated with a high pressure system (a clockwise-type sweep).
 
 ```{r}
 #| label: clustMeans
@@ -661,7 +659,7 @@ trendLevel(
 
 Similarly, as considered in @sec-polarCluster, the `timeVariation()` function can also be used to consider the temporal components.
 
-Another useful plot to consider is `timeProp()` (see @sec-timeProp), which can show how the concentration of a pollutant is comprised. In this case it is useful to plot the time series of PM~2.5~ *and* show how much of the concentration is contributed to by each cluster. Such a plot is shown in @fig-timePropTraj. It is now easy to see for example that during the spring months many of the high concentration events were due to clusters 1 and 6, which correspond to European origin air-masses as shown in @fig-calcClusterTraj.
+Another useful plot to consider is `timeProp()` (see @sec-timeProp), which can show how the concentration of a pollutant is comprised. In this case it is useful to plot the time series of PM~2.5~ *and* show how much of the concentration is contributed to by each cluster. Such a plot is shown in @fig-timePropTraj. It is now easy to see for example that during the spring months many of the high concentration events were due to clusters 1 and 6, which correspond to European origin air masses as shown in @fig-calcClusterTraj.
 
 ```{r}
 #| label: fig-timePropTraj
@@ -682,14 +680,14 @@ timeProp(
 
 ## Reprojecting trajectories
 
-Both of `trajPlot()` and `trajLevel()` contain the `crs` argument, which is passed to `ggplot2::coord_sf()` via `sf::st_crs()`. Both of these latter two functions document `crs` extensively but, in short, it is a way to define a coordinate reference system to reproject the plotted data.
+Both `trajPlot()` and `trajLevel()` contain the `crs` argument, which is passed to `ggplot2::coord_sf()` via `sf::st_crs()`. Both of these latter two functions document `crs` extensively but, in short, it is a way to define a coordinate reference system to reproject the plotted data.
 
-By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic System" (WGS84), which is associated with the globally ubiquitous "latitude and longitude" coordinate system. However, WGS84/EPSG:4326 is a geographic coordinate system — it describes positions on a sphere — rather than a projected one that flattens that sphere onto a 2D plane. This means shapes and distances can appear distorted, particularly at higher latitudes or across wide spatial extents. Choosing a projected CRS better suited to your region of interest can produce a more accurate and visually appealing map.
+By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic System" (WGS84), which is associated with the globally ubiquitous "latitude and longitude" coordinate system. However, WGS84/EPSG:4326 is a geographic coordinate system --- it describes positions on a sphere --- rather than a projected one that flattens that sphere onto a 2D plane. This means shapes and distances can appear distorted, particularly at higher latitudes or across wide spatial extents. Choosing a projected CRS better suited to your region of interest can produce a more accurate and visually appealing map.
 
 @fig-crs-latlng, @fig-crs-bng and @fig-crs-lambert show the same back trajectory data plotted with different CRSs. The first plot uses the default WGS84/EPSG:4326, which is a geographic coordinate system. The second plot uses the British National Grid (BNG) CRS, which is a projected coordinate system commonly used in the UK. The third plot uses the Lambert Azimuthal Equal Area (LAEA) CRS, which is a projected coordinate system often used for European data.
 
 ::: {.callout-warning}
-`crs` can take a wide variety of arguments, including custom projections written in the PROJ string form. It's up to you to pick a suitable `crs` for your data, as poorly chosen coordinate reference systems may obscure the data or cause visual artefacts. For example, crs = 27700 (the British National Grid) is well-suited for trajectories surrounding the UK, but will produce increasing distortion for trajectories that extend far beyond it.
+`crs` can take a wide variety of arguments, including custom projections written in the PROJ string form. It's up to you to pick a suitable `crs` for your data, as poorly chosen coordinate reference systems may obscure the data or cause visual artefacts. For example, `crs = 27700` (the British National Grid) is well-suited for trajectories surrounding the UK, but will produce increasing distortion for trajectories that extend far beyond it.
 :::
 
 ```{r}
@@ -700,13 +698,13 @@ trajLevel(traj, crs = 4326)
 
 ```{r}
 #| label: fig-crs-bng
-#| fig-cap: Trajectories plotted in the British National Grid (BNG) coordinate reference system (CRS) using `trajLevel()`. 
+#| fig-cap: Trajectories plotted in the British National Grid (BNG) coordinate reference system (CRS) using `trajLevel()`.
 trajLevel(traj, crs = 27700)
 ```
 
 ```{r}
 #| label: fig-crs-lambert
-#| fig-cap: Trajectories plotted in the Lambert Azimuthal Equal Area (LAEA) coordinate reference system (CRS) using `trajLevel()`. This projection is often used for European data and is a good choice for this dataset.
+#| fig-cap: Trajectories plotted in the Lambert Azimuthal Equal Area (LAEA) coordinate reference system (CRS) using `trajLevel()`. This projection is often used for European data and is a good choice for this data set.
 trajLevel(traj, crs = 3035)
 ```
 

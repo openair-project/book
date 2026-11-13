@@ -6,27 +6,27 @@ author: David Carslaw
 
 ## Purpose {#sec-purpose-time-var}
 
-In air pollution, the variation of a pollutant by time of day and day of week can reveal useful information concerning the likely sources. For example, road vehicle emissions tend to follow very regular patterns both on a daily and weekly basis. By contrast some industrial emissions or pollutants from natural sources (e.g. sea salt aerosol) may well have very different patterns.
+In air pollution, the variation of a pollutant by time of day and day of week can reveal useful information concerning the likely sources. For example, road vehicle emissions tend to follow very regular patterns both on a daily and weekly basis. By contrast some industrial emissions or pollutants from natural sources (e.g., sea salt aerosol) may well have very different patterns.
 
-The `timeVariation()` function produces four plots: day of the week variation, mean hour of day variation and a combined hour of day -- day of week plot and a monthly plot. Also shown on the plots is the 95% confidence interval in the mean. These uncertainty limits can be helpful when trying to determine whether one candidate source is different from another. The uncertainty intervals are calculated through bootstrap re-sampling, which will provide better estimates than the application of assumptions based on normality, particularly when there are few data available. The function can consider more than one input variable. In addition, there is the option of 'normalising' concentrations (or other quantities). Normalising is very useful for comparing the patterns of different pollutants, which often cover very different ranges in concentration. Normalising is achieved by dividing the concentration of a pollutant by its mean value. Note also that any other variables besides pollutant concentrations can be considered e.g. meteorological or traffic data.
+The `timeVariation()` function produces four plots: day of the week variation, mean hour of day variation and a combined hour of day -- day of week plot and a monthly plot. Also shown on the plots is the 95% confidence interval in the mean. These uncertainty limits can be helpful when trying to determine whether one candidate source is different from another. The uncertainty intervals are calculated through bootstrap resampling, which will provide better estimates than the application of assumptions based on normality, particularly when there are few data available. The function can consider more than one input variable. In addition, there is the option of 'normalising' concentrations (or other quantities). Normalising is very useful for comparing the patterns of different pollutants, which often cover very different ranges in concentration. Normalising is achieved by dividing the concentration of a pollutant by its mean value. Note also that any other variables besides pollutant concentrations can be considered e.g., meteorological or traffic data.
 
-There is also an option `difference` which is very useful for considering the difference in two time series and how they vary over different temporal resolutions. Again, bootstrap re-sampling methods are used to estimate the uncertainty of the difference in two means.
+There is also an option `difference` which is very useful for considering the difference in two time series and how they vary over different temporal resolutions. Again, bootstrap resampling methods are used to estimate the uncertainty of the difference in two means.
 
 ::: callout-tip
-## Note!
+## Averaging wind direction
 
-Care has been taken to ensure that wind direction (`wd`) is vector-averaged. Less obvious though is the uncertainty in wind direction. A pragmatic approach has been adopted here that considers how wind direction *changes*. For example, consider the following wind directions: 10, 10, 10, 180, 180, 180$^\circ$ The standard deviation of these numbers is 93$^\circ$. However, what actually occurs is the wind direction is constant at 10$^\circ$ then switches to 180$^\circ$. In terms of changes there is a sequence of numbers: 0, 0, 170, 0, 0 with a standard deviation of 76$^\circ$. We use the latter method as a basis of calculating the 95% confidence intervals in the mean.
+Care has been taken to ensure that wind direction (`wd`) is vector-averaged. Less obvious though is the uncertainty in wind direction. A pragmatic approach has been adopted here that considers how wind direction *changes*. For example, consider the following wind directions: 10, 10, 10, 180, 180, 180°. The standard deviation of these numbers is 93°. However, what actually occurs is the wind direction is constant at 10° then switches to 180°. In terms of changes there is a sequence of numbers: 0, 0, 170, 0, 0 with a standard deviation of 76°. We use the latter method as a basis of calculating the 95% confidence intervals in the mean.
 
-There are also problems with simple averaging---for example, what is the average of 20 and 200$^\circ$. It can't be known. In some situations where the wind direction is bi-modal with differences around 180$^\circ$, the mean can be 'unstable'. For example, wind that is funnelled along a valley forcing it to be either easterly or westerly. Consider for example the mean of 0$^\circ$ and 179$^\circ$ (89.5$^\circ$), but a small change in wind direction to 181$^\circ$ gives a mean of 270.5$^\circ$. Some care should be exercised therefore when averaging wind direction. It is always a good idea to use the `windRose()` function with type set to 'month' or 'hour'.
+There are also problems with simple averaging---for example, what is the average of 20 and 200°? It can't be known. In some situations where the wind direction is bi-modal with differences around 180°, the mean can be 'unstable'. For example, wind that is funnelled along a valley forcing it to be either easterly or westerly. Consider for example the mean of 0° and 179° (89.5°), but a small change in wind direction to 181° gives a mean of 270.5°. Some care should be exercised therefore when averaging wind direction. It is always a good idea to use the `windRose()` function with type set to 'month' or 'hour'.
 :::
 
 The `timeVariation()` function is probably one of the most useful functions that can be used for the analysis of air pollution. Here are a few uses/advantages:
 
 -   Variations in time are one of the most useful ways of characterising air pollution for a very wide range of pollutants including local urban pollutants and tropospheric background concentrations of ozone and the like.
 
--   The function works well in conjunction with other functions such as `polarPlot()` (see @sec-polarPlot), where the latter may identify conditions of interest (say a wind speed/direction range). By sub-setting for those conditions in `timeVariation()` the temporal characteristics of a particular source could be characterised and perhaps contrasted with another subset of conditions.
+-   The function works well in conjunction with other functions such as `polarPlot()` (see @sec-polarPlot), where the latter may identify conditions of interest (say a wind speed/direction range). By subsetting for those conditions in `timeVariation()` the temporal characteristics of a particular source could be characterised and perhaps contrasted with another subset of conditions.
 
--   The function can be used to compare a wide range of variables, if available. Suggestions include meteorological e.g. boundary layer height and traffic flows.
+-   The function can be used to compare a wide range of variables, if available. Suggestions include meteorological e.g., boundary layer height and traffic flows.
 
 -   The function can be used for comparing pollutants over different sites.
 
@@ -36,7 +36,7 @@ The `timeVariation()` function is probably one of the most useful functions that
 
 ## Applications
 
-We apply the `timeVariation()` function to PM~10~ concentrations and take the opportunity to filter the data to maximise the signal from the road. The `polarPlot()` function described in Section (@sec-polarPlot) is very useful in this respect in highlighting the conditions under which different sources have their greatest impact. A subset of data is used filtering for wind speeds \> 3 m s^-1^ and wind directions from 100--270 degrees. The code used is:
+We apply the `timeVariation()` function to PM~10~ concentrations and take the opportunity to filter the data to maximise the signal from the road. The `polarPlot()` function described in @sec-polarPlot is very useful in this respect in highlighting the conditions under which different sources have their greatest impact. A subset of data is used filtering for wind speeds \> 3 m s^-1^ and wind directions from 100--270 degrees. The code used is:
 
 ```{r}
 #| label: fig-timeVar1
@@ -53,7 +53,7 @@ timeVariation(
 )
 ```
 
-The results are shown in @fig-timeVar1. The plot shown at the bottom-left shows the diurnal variation of concentrations for all days. It shows for example that PM~10~ concentrations tend to peak around 9 am. The shading shows the 95% confidence intervals of the mean. The plot at the bottom-right shows how PM~10~ concentrations vary by day of the week. Here there is strong evidence that PM~10~ is much lower at the weekends and that there is a significant difference compared with weekdays. It also shows that concentrations tend to increase during the weekdays. Finally, the plot at the top shows both sets of information together to provide an overview of how concentrations vary.
+The results are shown in @fig-timeVar1. The plot shown at the bottom-left shows the diurnal variation of concentrations for all days. It shows for example that PM~10~ concentrations tend to peak around 9 am. The shading shows the 95% confidence intervals of the mean. The plot at the bottom-middle shows the variation by month. The plot at the bottom-right shows how PM~10~ concentrations vary by day of the week. Here there is strong evidence that PM~10~ is much lower at the weekends and that there is a significant difference compared with weekdays. It also shows that concentrations tend to increase during the weekdays. Finally, the plot at the top shows both sets of information together to provide an overview of how concentrations vary.
 
 Note that the plot need not just consider pollutant concentrations. Other useful variables (if available) are meteorological and traffic flow or speed data. Often, the combination of several sets of data can be very revealing.
 
@@ -82,7 +82,7 @@ Another example is splitting the data set by time. We use the `splitByDate()` fu
 mydata <- splitByDate(
   mydata,
   dates = "1/1/2003",
-  labels = c("before Jan. 2003", "After Jan. 2003")
+  labels = c("before Jan. 2003", "after Jan. 2003")
 )
 
 timeVariation(
@@ -93,15 +93,15 @@ timeVariation(
 )
 ```
 
-In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the `polarPlot()` function where a 'feature' of interest has been identified---maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available. This is an area that will be developed.
+In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the `polarPlot()` function where a 'feature' of interest has been identified---maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available.
 
 The approach here is to make a new variable called 'feature' that is labelled 'easterly' for the conditions of interest (easterly winds with wind speeds \> 4 m s^-1^) and 'other' for everything else. This approach could be extended to some quite complex situations.
 
-There are a couple of things to note in @fig-timeVar4. There seems to be evidence that for easterly winds \> 4 m s^-1^ that concentrations of SO~2~ are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This *might* reflect that SO~2~ concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources. This technique will be returned to with different data sets in future.
+There are a couple of things to note in @fig-timeVar4. There seems to be evidence that for easterly winds \> 4 m s^-1^ that concentrations of SO~2~ are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This *might* reflect that SO~2~ concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources.
 
 ```{r}
 #| label: fig-timeVar4
-#| fig-cap: Example plot using the `timeVariation()` function to plot SO~2~ concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds \> 4 m s^-1^ and everything else. Note that the uncertainty in the mean values for easterly winds is greater than *other*. This is mostly because the sample size is much lower for *easterly* compared  with *other*.
+#| fig-cap: Example plot using the `timeVariation()` function to plot SO~2~ concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds \> 4 m s^-1^ and everything else. Note that the uncertainty in the mean values for easterly winds is greater than *other*. This is mostly because the sample size is much lower for *easterly* compared with *other*.
 #| fig-width: 12
 #| fig-height: 7
 ## make a field called "feature": "easterly" for the conditions of interest, otherwise "other"
@@ -119,11 +119,11 @@ timeVariation(
 )
 ```
 
-By default `timeVariation()` shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for `statistic`. When `statistic = "median"` the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown by setting the `conf.int`. For example, `conf.int =   c(0.25, 0.99)` will show the median, 25/75th and 1/99th quantile values. The `statistic = "median"` option is therefore very useful for showing how the data are distributed --- somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when `statistic = "median"` is used due to potential over-plotting; although the function will display several species if required. An example is shown in @fig-timeVarMedian for PM~10~ concentrations.
+By default `timeVariation()` shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for `statistic`. When `statistic = "median"` the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown by setting the `conf.int`. For example, `conf.int = c(0.25, 0.99)` will show the median, 25/75th and 1/99th quantile values. The `statistic = "median"` option is therefore very useful for showing how the data are distributed --- somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when `statistic = "median"` is used due to potential over-plotting; although the function will display several species if required. An example is shown in @fig-timeVarMedian for PM~10~ concentrations.
 
 ```{r}
 #| label: fig-timeVarMedian
-#| fig-cap: Example plot using the `timeVariation()` function to show the variation in the median. The shading shows the extent to the 25/75th and 5/95th  quantiles.
+#| fig-cap: Example plot using the `timeVariation()` function to show the variation in the median. The shading shows the extent of the 25/75th and 5/95th quantiles.
 #| fig-width: 12
 #| fig-height: 7
 timeVariation(
@@ -136,9 +136,9 @@ timeVariation(
 
 ## Output
 
-The `timeVariation()` function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and the code shows how to access them.
+The `timeVariation()` function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and how to access them.
 
-The `...$plot` component is a list of individual panels, and the `...$data` component is a list of dataframes. Note that `mid`, `min` and `max` are the mean and upper/lower confidence intervals when `statistic = "mean"` and the median and upper/lower quantiles when `statistic = "median"`. Each part of the list is named after its respective panel.
+The `...$plot` component is a list of individual panels, and the `...$data` component is a list of data frames. Note that `mid`, `min` and `max` are the mean and upper/lower confidence intervals when `statistic = "mean"` and the median and upper/lower quantiles when `statistic = "median"`. Each part of the list is named after its respective panel.
 
 ```{r}
 #| label: timevarOutput
@@ -167,7 +167,8 @@ plot(myOutput, subset = "hour")
 Note if you are only interested in one panel, the `variationPlot()` function may be more suitable. It has many of the same arguments as `timeVariation()`, though has the added advantage of being able to take two `type` arguments.
 
 ```{r}
-#| label: variationPlot
+#| label: fig-variationPlot
+#| fig-cap: The diurnal variation in SO~2~ concentrations at Marylebone Road plotted using `variationPlot()`, split by season and weekday/weekend.
 variationPlot(
   mydata,
   pollutant = "so2",

@@ -1,8 +1,8 @@
 ---
-author: 
+author:
 - David Carslaw
 - Jack Davison
-abstract: This section outlines the different ways users can access the abundant air quality data in the UK. The main functions provide easy access to hourly data and other statistical summaries such as annual means and data capture rates. Easy access is also provided to site meta data such as longitude, latitude, site type and details of the pollutants measured.
+abstract: This section outlines the different ways users can access the abundant air quality data in the UK. The main functions provide easy access to hourly data and other statistical summaries such as annual means and data capture rates. Easy access is also provided to site metadata such as longitude, latitude, site type and details of the pollutants measured.
 aliases:
   - sections/maps/maps-network.html
 ---
@@ -27,9 +27,9 @@ The UK has a surprisingly large amount of air quality data that is publicly acce
 
     -   [Northern Ireland](https://www.airqualityni.co.uk) network of sites.
 
--   Locally managed AQ networks in England. These are sites operated in most cases by Local Authorities but may also include monitoring from other programmes, industry and airports. The location and purpose of these sites differs from the national network which is governed by strict rules of the air quality directives. As a result there is a broad range of site types, equipment and data quality practices. For more information see [here](https://uk-air.defra.gov.uk/networks/network-info?view=nondefraaqmon). These data represent information from about 15 different local air quality networks.
+-   Locally managed AQ networks in England. These are sites operated in most cases by Local Authorities but may also include monitoring from other programmes, industry and airports. The location and purpose of these sites differ from the national network which is governed by strict rules of the air quality directives. As a result there is a broad range of site types, equipment and data quality practices. For more information, see the [Defra page on local monitoring networks](https://uk-air.defra.gov.uk/networks/network-info?view=nondefraaqmon). These data represent information from about 15 different local air quality networks.
 
-Also available is `importImperial()` for accessing data from the sites operated by Imperial College London[^uk-air-quality-data-1], primarily including the [The London Air Quality Network](https://www.londonair.org.uk/LondonAir/Default.aspx).
+Also available is `importImperial()` for accessing data from the sites operated by Imperial College London[^uk-air-quality-data-1], primarily including [The London Air Quality Network](https://www.londonair.org.uk/LondonAir/Default.aspx).
 
 [^uk-air-quality-data-1]: The data were first accessible when the
     Environmental Research Group was based at King's College London.
@@ -39,10 +39,10 @@ Also available is `importImperial()` for accessing data from the sites operated 
 
 When analysing UK air quality data, it may be useful to compare it to data from the UK's neighbours in Europe. Historically, the [saqgetr]{.pkg} package allowed for access to European monitoring data, and [openair]{.pkg} provided the `importEurope()` function for a simplified interface for the same data source. Unfortunately, as of February 2024, this service is no longer supported.
 
-The European Environment Agency (EEA) now provides an air quality download service (<https://eeadmz1-downloads-webapp.azurewebsites.net/>), which includes an API. The [openair]{.pkg} family now includes the [euroaq]{.pkg} package, which allows you to easily access this through R - see <https://openair-project.github.io/euroaq/> for more information.
+The European Environment Agency (EEA) now provides an air quality download service (<https://eeadmz1-downloads-webapp.azurewebsites.net/>), which includes an API. The [openair]{.pkg} family now includes the [euroaq]{.pkg} package, which allows you to easily access this through R --- see <https://openair-project.github.io/euroaq/> for more information.
 :::
 
-Many users download hourly data from [GOV UK](https://get-air-pollution-data.service.gov.uk/). This is a useful facility but does have some limitations and frustrations, many of which are overcome using [openair]{.pkg} to download the data:
+Many users download hourly data from [GOV.UK](https://get-air-pollution-data.service.gov.uk/). This is a useful facility but does have some limitations and frustrations, many of which are overcome using [openair]{.pkg} to download the data:
 
 1. It is quick to select a range of sites, pollutants and periods, and it is possible to download several long time series in one go.
 
@@ -86,7 +86,7 @@ aurn_meta <- importMeta(source = "aurn", all = TRUE)
 glimpse(aurn_meta)
 ```
 
-Note that `importMeta()` can import information for several networks at once e.g. `source = c("aurn", "saqn")`. Further, a convenience value for `source` is `"ukaq"`, which returns metadata for all networks accessible via `importUKAQ()` (AURN, AQE, SAQN, WAQN, NI, and local networks).
+Note that `importMeta()` can import information for several networks at once e.g., `source = c("aurn", "saqn")`. Further, a convenience value for `source` is `"ukaq"`, which returns metadata for all networks accessible via `importUKAQ()` (AURN, AQE, SAQN, WAQN, NI, and local networks).
 
 Often it is useful to consider sites that were open in a particular year or were open for a duration of years. This can be done using the `year` argument. When `year` is a range such as `year = 2010:2020`, only sites that were open across that range of years will be returned. This option is especially useful for trend analysis when there might be an interest in extracting only sites that were measuring over the period of interest. Furthermore, if `all = TRUE` is used, supplying a year (or years) will select only specific pollutants that were measured during the period of interest.[^uk-air-quality-data-2]
 
@@ -125,7 +125,7 @@ nrow(no2_sites)
 Additional filtering arguments include `site` (pattern-matched site name), `code` (exact site code), and `duplicate` (set `TRUE` to retain sites that appear in multiple networks rather than de-duplicating them).
 
 ::: callout-tip
-#### Use `importMeta()` as a way to select sites to import
+## Use `importMeta()` as a way to select sites to import
 
 One of the most useful aspects of `importMeta()` is to use it as a basis to identify site codes to then import data. For example, to import data from the AURN for sites that have been in operation from 2005 to 2020:
 
@@ -184,7 +184,7 @@ This package contains the `networkMap()` function which acts as a wrapper around
 ```{r}
 #| label: fig-openairmapsNetworkMap
 #| cache: false
-#| fig-cap: Plotting some English Air Quality stations using the `openairmaps` package.
+#| fig-cap: "Plotting some English Air Quality stations using the [openairmaps]{.pkg} package."
 library(openairmaps)
 networkMap(source = c("aurn", "aqe"), control = "site_type")
 ```
@@ -206,7 +206,7 @@ networkMap(
 
 As well as providing all of the functionality of `importMeta()`, `networkMap()` provides several additional arguments for customisation:
 
-- `control`: Any column of the equivalent `importMeta()` dataset, which is used to create a "layer control" menu to allow readers to filter for certain sites. The `control` option is quite opinionated, and selects an appropriate style of layer control depending on the column selected (e.g., pollutants are switched between, whereas multiple site types can be selected at once).
+- `control`: Any column of the equivalent `importMeta()` data set, which is used to create a "layer control" menu to allow readers to filter for certain sites. The `control` option is quite opinionated, and selects an appropriate style of layer control depending on the column selected (e.g., pollutants are switched between, whereas multiple site types can be selected at once).
 
 - `cluster`: By default, if greater than 25 markers are plotted then they default to be clustered together until users zoom in close. This default behaviour improves the appearance and performance of the HTML map widget. The `cluster` argument allows you to turn this feature on and off.
 
@@ -252,7 +252,7 @@ ad1_saqn <- importUKAQ(site = "ad1", year = 2020, source = "saqn")
 ad1_eng <- importUKAQ(site = "ad1", year = 2020, source = "local")
 ```
 
-And to include basic meta data when importing air pollution data:
+And to include basic metadata when importing air pollution data:
 
 ```{r}
 #| label: importWithMeta
@@ -292,7 +292,7 @@ By default, all the functions above return hourly data. However, often there is 
 -   **"8_hour"** Rolling 8-hour concentrations returned for a specific site(s) for O~3~ and CO.
 -   **"24_hour"** Rolling 24-hour concentrations returned for a specific site(s) for PM~10~ and PM~2.5~.
 -   **"daily_max_8"** Daily maximum of the rolling 8-hour mean for O~3~ and CO.
--   **"daqi"** Daily Air Quality Index (DAQI). See [here](https://uk-air.defra.gov.uk/air-pollution/daqi?view=more-info&pollutant=ozone#pollutant) for more details of how the index is defined.
+-   **"daqi"** Daily Air Quality Index (DAQI). See the [Defra DAQI guidance](https://uk-air.defra.gov.uk/air-pollution/daqi?view=more-info&pollutant=ozone#pollutant) for more details of how the index is defined.
 
 Note that for annual and monthly statistics all network data is returned and the `site` option has no effect.
 
@@ -301,10 +301,10 @@ As an example, to import 5 years of annual mean data from the AURN:
 ```{r}
 #| label: uk_annual
 #| eval: false
-uk_annual <- importUKAQ(year = 2016:2020, data_type = "annual", source = "AURN")
+uk_annual <- importUKAQ(year = 2016:2020, data_type = "annual", source = "aurn")
 ```
 
-By default, this will return data in "wide" format with a pollutant and its data capture rate in separate columns. Often it is more useful to have "narrow" format data, which is possible to select with the `to_narrow` option. Furthermore, it is also possible to return site meta data (site type, latitude and longitude) at the same time.
+By default, this will return data in "wide" format with a pollutant and its data capture rate in separate columns. Often it is more useful to have "narrow" format data, which is possible to select with the `to_narrow` option. Furthermore, it is also possible to return site metadata (site type, latitude and longitude) at the same time.
 
 Below is an example of obtaining annual mean data for 2020.
 

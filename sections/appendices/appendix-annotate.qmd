@@ -1,6 +1,6 @@
 ---
 author: Jack Davison
-execute: 
+execute:
   warning: false
   error: false
   message: false
@@ -10,7 +10,7 @@ execute:
 
 A frequently asked question about [openair]{.pkg} and a commonly requested feature is how to annotate plots. Since all [openair]{.pkg} functions now return [ggplot2]{.pkg} objects, users have considerably more flexibility in adding annotations using the extensive set of tools available in [ggplot2]{.pkg} and its extensions. Embedding annotation options directly inside every [openair]{.pkg} function would make them unnecessarily complex and still not cover every customisation users may want. Instead, because plots are returned as standard [ggplot2]{.pkg} objects, users can build annotations incrementally, adding layers as needed.
 
-There are several types of annotation that can be useful, including text, shapes, lines, and shading. Because many [openair]{.pkg} plots consist of multiple facets, it is also important to understand how to target specific panels when adding annotations. The approaches described here apply broadly to all [openair]{.pkg} plots - the only differences concern the coordinate system used.
+There are several types of annotation that can be useful, including text, shapes, lines, and shading. Because many [openair]{.pkg} plots consist of multiple facets, it is also important to understand how to target specific panels when adding annotations. The approaches described here apply broadly to all [openair]{.pkg} plots --- the only differences concern the coordinate system used.
 
 The foundation of annotation in the new [openair]{.pkg} is the [ggplot2]{.pkg} layering system. Annotations can be added with standard geoms such as `ggplot2::geom_text()`, `ggplot2::geom_label()`, `ggplot2::geom_rect()`, `ggplot2::geom_segment()`, or using helper functions like `ggplot2::annotate()`. Since the output is a normal ggplot object, users can modify it by adding layers with the `+` operator, adjusting scales, or adding specialised annotation layers from packages such as [ggrepel]{.pkg}, [ggforce]{.pkg}, or [patchwork]{.pkg} for more complex layouts.
 
@@ -149,7 +149,7 @@ scatter_object$plot +
 
 To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `linetype` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the colour of the line.
 
-In this case, we set `x = I(0.01)`. The `I()` function tells [ggplot2]{.pkg} to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different `timePlot()` plots with different x-axis scales - `x = I(0.01)` will *always* mean "nudged a little bit from the far left of the plot".
+In this case, we set `x = I(0.01)`. The `I()` function tells [ggplot2]{.pkg} to ignore the data scale (e.g., 30 to 70 units of NO~2~) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful --- for example, you may create a lot of different `timePlot()` plots with different x-axis scales --- `x = I(0.01)` will *always* mean "nudged a little bit from the far left of the plot".
 
 ```{r}
 #| label: fig-scatter-plot-annotate-hline
@@ -173,7 +173,7 @@ scatter_object$plot +
 
 ### Working with dates
 
-Working with dates (e.g., for plots like `timePlot()`) is a step more challenging, but is mostly identical to what has already been covered. `ISOdate()` is convenient way to create date(times) in R to plug into `annotate()` and similar functions. In this example, we add a vertical dashed line at a specific date (June 1, 2002) along with an annotation to label. The `xintercept` parameter specifies the position of the vertical line, and the `annotate()` function is used to add text at a specific date and y-value. The `hjust` and `vjust` parameters control the horizontal and vertical justification of the text, respectively.
+Working with dates (e.g., for plots like `timePlot()`) is a step more challenging, but is mostly identical to what has already been covered. `ISOdate()` is a convenient way to create date(times) in R to plug into `annotate()` and similar functions. In this example, we add a vertical dashed line at a specific date (June 1, 2002) along with an annotation to label it. The `xintercept` parameter specifies the position of the vertical line, and the `annotate()` function is used to add text at a specific date and y-value. The `hjust` and `vjust` parameters control the horizontal and vertical justification of the text, respectively.
 
 ```{r}
 #| label: fig-timeplot-annotate-date
@@ -199,7 +199,7 @@ no2_timeplot +
 
 ### Working with radial axes
 
-For "radial" plots (e.g., `polarPlot()`) the same principles apply, but the coordinates are different. You simply need to think in "radial" coordinates - the x-axis is the 'compass directions' in degrees (0-360) and the y-axis is the radial axis progressing out from the centre. In this example, a vertical dashed line is added at 225 degrees, along with two rectangles to highlight specific angular regions, and text annotations to label these regions as "A", "B", and "C". The `annotate()` function is used to add both the rectangles and the text, with appropriate coordinates for each annotation.
+For "radial" plots (e.g., `polarPlot()`) the same principles apply, but the coordinates are different. You simply need to think in "radial" coordinates --- the x-axis is the 'compass directions' in degrees (0-360) and the y-axis is the radial axis progressing out from the centre. In this example, a vertical dashed line is added at 225 degrees, along with two rectangles to highlight specific angular regions, and text annotations to label these regions as "A", "B", and "C". The `annotate()` function is used to add both the rectangles and the text, with appropriate coordinates for each annotation.
 
 ```{r}
 #| label: fig-polarplot-annotate
@@ -258,14 +258,14 @@ no2_polarplot +
 
 ### Multi-panel plots
 
-When `type` is used in an [openair]{.pkg} plot, multiple panels ("facets" in [ggplot2]{.pkg} speak) are created. Further, some functions like `calendarPlot()` are automatically faceted. You may wish to annotate only a single panel. Use the `layout` argument to specify the panel of interest. 
+When `type` is used in an [openair]{.pkg} plot, multiple panels ("facets" in [ggplot2]{.pkg} speak) are created. Further, some functions like `calendarPlot()` are automatically faceted. You may wish to annotate only a single panel. Use the `layout` argument to specify the panel of interest.
 
-Below, we highlight Christmas day on a `calendarPlot()`. Note that `layout = 12` means "the twelfth panel, progressing from left-to-right, top-to-bottom". This argument could take a vector - e.g., `layout = c(5, 12)` - which would annotate the fifth and twelfth panels. 
+Below, we highlight Christmas day on a `calendarPlot()`. Note that `layout = 12` means "the twelfth panel, progressing from left-to-right, top-to-bottom". This argument could take a vector --- e.g., `layout = c(5, 12)` --- which would annotate the fifth and twelfth panels.
 
 ```{r}
 #| label: fig-calendarplot-annotate
 #| fig-cap: "Annotating a specific panel in a multi-panel plot using the `layout` argument."
-multipanel <- calendarPlot(mydata, "no2", year = 2000, plot = F)$plot
+multipanel <- calendarPlot(mydata, "no2", year = 2000, plot = FALSE)$plot
 
 multipanel +
   annotate(
@@ -297,7 +297,7 @@ plot(timevar_no2)
 
 ## Facets
 
-One of the sets of arguments passed through `...` could be described as "facet" arguments, as these influence the appearance of 'faceted' (i.e., multi-panel) plots. All of these arguments get passed straight through to either `ggplot2::facet_wrap()` or `ggplot2::facet_grid()` - see the documentation for these functions to learn more.
+One of the sets of arguments passed through `...` could be described as "facet" arguments, as these influence the appearance of 'faceted' (i.e., multi-panel) plots. All of these arguments get passed straight through to either `ggplot2::facet_wrap()` or `ggplot2::facet_grid()` --- see the documentation for these functions to learn more.
 
 To demonstrate, let's consider this heatmap plot:
 
@@ -330,7 +330,7 @@ trendLevel(heatmap_data, type = "year", axes = "all")
 trendLevel(heatmap_data, type = "year", scales = "free_x")
 ```
 
-@fig-heatmap-3 is an improvement, but the way in which the 2005 panel is "stretched" is aesthetically unappealing. The `space` argument allows the width or heights of panels to match the scale of data displayed on the axes. When only one `type` is specified, this argument can either take `"fixed"` (the default), `"free_x"` or `"free_y"`, and will force the plot to be 1 dimensional row or column of plots rather than wrapped into a square grid. In this case, our plot is already a row of three so no change is apparent. If there are two values given to `type`, and therefore the plot is a 2D matrix of panels, `space` can also take `"free"` to vary both x and y.
+@fig-heatmap-3 is an improvement, but the way in which the 2005 panel is "stretched" is aesthetically unappealing. The `space` argument allows the width or heights of panels to match the scale of data displayed on the axes. When only one `type` is specified, this argument can either take `"fixed"` (the default), `"free_x"` or `"free_y"`, and will force the plot to be a one-dimensional row or column of plots rather than wrapped into a square grid. In this case, our plot is already a row of three so no change is apparent. If there are two values given to `type`, and therefore the plot is a 2D matrix of panels, `space` can also take `"free"` to vary both x and y.
 
 ```{r}
 #| label: fig-heatmap-4
@@ -340,12 +340,12 @@ trendLevel(heatmap_data, type = "year", scales = "free_x")
 trendLevel(heatmap_data, type = "year", scales = "free_x", space = "free_x")
 ```
 
-All of `nrow`, `ncol`, `scales`, `space`, `axes`, `axis.labels`, `switch` and `strip.position` can be passed through `...` to be used to customise multi-panel plot layout and appearance. 
+All of `nrow`, `ncol`, `scales`, `space`, `axes`, `axis.labels`, `switch` and `strip.position` can be passed through `...` to be used to customise multi-panel plot layout and appearance.
 
 Note that not all of these arguments will always work in all functions. For example, plots on radial axes like `polarPlot()` fix their x-axis (radial axis) range to be from 0 to 360 to represent compass directions, so `scales = "free_x"` will not do anything.
 
 ::: {.callout-note}
-### Legacy options
+## Legacy options
 
 Users of older versions of [openair]{.pkg} may recall the `x.relation`, `y.relation` and `layout` options. These mapped onto [lattice]{.pkg} arguments, which pre-dated [ggplot2]{.pkg} as the plotting engine for [openair]{.pkg}. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:
 
@@ -447,7 +447,7 @@ It is also possible to set a global 'complete' theme. This could be a default [g
 
 ```{r}
 #| label: fig-timeplot-theme
-#| fig-cap: "Setting a global theme to control the styling of all openair plots."
+#| fig-cap: "Setting a global theme to control the styling of all [openair]{.pkg} plots."
 theme_set(theme_classic())
 timePlot(mydata, avg.time = "week")
 ```
@@ -459,7 +459,7 @@ To reset this behaviour, reset the global theme to `theme_grey()`. This is the [
 theme_set(theme_gray())
 ```
 
-Note that some functions do their own `theme()` manipulations, so your mileage may vary as to which of your options are honoured - or whether they do unexpected things to your plot!
+Note that some functions do their own `theme()` manipulations, so your mileage may vary as to which of your options are honoured --- or whether they do unexpected things to your plot!
 
 A related function is `guides()`, which can be useful for controlling how axes and legends behave. These are typically set within [openair]{.pkg} functions, but can be overridden by more advanced users. Useful arguments include `position` and `angle`. For categorical scales, `check.overlap` or `n.dodge` can help mitigate overlapping axis labels.
 
@@ -482,11 +482,11 @@ There are [many [ggplot2]{.pkg} extensions](https://exts.ggplot2.tidyverse.org/)
 
 One useful example is [patchwork]{.pkg}, which provides an elegant API for combining multiple plots together into one assembly. This is how `timeVariation()` works under-the-hood, but users should feel free to assemble plots however they see fit.
 
-The package documentation for [patchwork]{.pkg} is excellent and can be found [here](https://patchwork.data-imaginist.com/).
+The package documentation for [patchwork]{.pkg} is excellent and can be found on the [patchwork website](https://patchwork.data-imaginist.com/).
 
 ```{r}
 #| label: fig-patchwork-assembly
-#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly. The `tag` argument is being used to label each one with a letter."
+#| fig-cap: "Using the [patchwork]{.pkg} package to combine multiple [openair]{.pkg} plots into one assembly. The `tag` argument is being used to label each one with a letter."
 library(patchwork)
 
 p_varplot_hour <- variationPlot(
@@ -525,8 +525,8 @@ p_heatmap <- trendLevel(mydata, type = "default", plot = FALSE, tag = "D")$plot
 Another really useful package is [geomtextpath]{.pkg}, which combines labels and lines and paths for nicer annotations:
 
 ```{r}
-#| label: geomtextpath-annotation
-#| fig-cap: "Using the geomtextpath package to add text along a path, and horizontal reference lines with labels."
+#| label: fig-geomtextpath-annotation
+#| fig-cap: "Using the [geomtextpath]{.pkg} package to add text along a path, and horizontal reference lines with labels."
 library(geomtextpath)
 
 scatter_object$plot +
@@ -552,7 +552,7 @@ This example highlights that sometimes you may need to take on further tweaks as
 
 ```{r}
 #| label: fig-legendry-guide
-#| fig-cap: "Using the legendry package to create a custom legend for a scatter plot."
+#| fig-cap: "Using the [legendry]{.pkg} package to create a custom legend for a scatter plot."
 scatterPlot(mydata, z = "wd", plot = FALSE)$plot +
   guides(
     color = legendry::guide_colring()

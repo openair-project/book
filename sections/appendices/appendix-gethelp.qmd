@@ -8,7 +8,7 @@ The [openair]{.pkg} family was written to be as easy as possible to use for peop
 
 ## Where to get help {#sec-where}
 
-The best place to ask for help is by posting an issue on GitHub. Don't worry if you haven't used it before - simply sign up, navigate to one of the repositories, and then click "Issues". There'll be a big green "New Issue" button that'll present you with a box to fill in to ask your questions. The GitHub repositories for the [openair]{.pkg} family of packages can be found at:
+The best place to ask for help is by posting an issue on GitHub. Don't worry if you haven't used it before --- simply sign up, navigate to one of the repositories, and then click "Issues". There'll be a big green "New Issue" button that'll present you with a box to fill in to ask your questions. The GitHub repositories for the [openair]{.pkg} family of packages can be found at:
 
 * <https://github.com/openair-project/openair>
 
@@ -18,7 +18,7 @@ The best place to ask for help is by posting an issue on GitHub. Don't worry if 
 
 * <https://github.com/openair-project/deweather>
 
-If your problems are with R more generally rather than being specific to [openair]{.pkg}, you might also consider posting to these other communities. Users there will be much less familiar with [openair]{.pkg} and air quality, but they are much greater in number. 
+If your problems are with R more generally rather than being specific to [openair]{.pkg}, you might also consider posting to these other communities. Users there will be much less familiar with [openair]{.pkg} and air quality, but they are much greater in number.
 
 * [Posit Community](https://forum.posit.co/), an R-specific forum for R users to ask any and all questions relating to R and RStudio.
 
@@ -28,9 +28,9 @@ Regardless of where you choose to find answers, it is best to provide others wit
 
 ## Reproducible examples {#sec-reprex}
 
-While the [openair]{.pkg} authors can run code on our computers, we can't run *your* code on *your* computer using *your* data. To help us help you, you need to help bridge that gap - this is called providing a "reproducible example".
+While the [openair]{.pkg} authors can run code on our computers, we can't run *your* code on *your* computer using *your* data. To help us help you, you need to help bridge that gap --- this is called providing a "reproducible example".
 
-Reproducible examples need to be three things; *minimal*, *complete*, and *reproducible*.
+Reproducible examples need to be three things: *minimal*, *complete*, and *reproducible*.
 
 #### Minimal {-}
 
@@ -40,7 +40,7 @@ This means that you only need to provide just enough data to reproduce your prob
 
 #### Complete {-}
 
-This means that the example has all the information needed to reproduce your problem. We should be able to run the code on our computers successfully! Also **do not** provide screenshots or other images of code - copy and paste the lines so we can copy them into our R console.
+This means that the example has all the information needed to reproduce your problem. We should be able to run the code on our computers successfully! Also **do not** provide screenshots or other images of code --- copy and paste the lines so we can copy them into our R console.
 
 > For example, if your issue relates to some of your own data, don't send us code that contains `read_csv("my_data.csv")` if you haven't also provided "my_data.csv", else there's not a lot we can do!
 
@@ -62,7 +62,7 @@ The package is also very strict, so if the resulting output doesn't look right y
 
 Sometimes the hardest thing about producing a reproducible example is providing data. There are many different ways of doing so when getting help with [openair]{.pkg}:
 
-* **Write your example with `openair::mydata`, `openairmaps::polar_data` or `openairmaps::traj_data`.** These data are built in to their respective packages so are easily accessible to anyone.
+* **Write your example with `openair::mydata`, `openairmaps::polar_data` or `openairmaps::traj_data`.** These data are built into their respective packages so are easily accessible to anyone.
 
 * **Obtain data through `openair::importUKAQ()` or `worldmet::import_ghcn_hourly()`.** These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.
 

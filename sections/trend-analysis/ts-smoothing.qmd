@@ -11,7 +11,7 @@ Some air pollution statistics such as for O~3~ and particulate matter are expres
 The function is called as follows; in this case to calculate 8-hour rolling mean concentrations of O~3~.
 
 ```{r}
-#| label: selectBydate
+#| label: rollingMean-o3
 library(openair)
 library(tidyverse)
 
@@ -27,13 +27,13 @@ tail(mydata)
 
 Note that rolling means cannot be calculated at the very start and end of the data set, where the averaging window is incomplete, so these values are returned as `NA`.
 
-Like `selectRunning()`, `rollingMean()` will fail if there are duplicate dates within the data frame; users can again use `type = "site"` or similar to calculate rolling means for different monitoring stations.
+Like `selectRunning()` (@sec-selectRunning), `rollingMean()` will fail if there are duplicate dates within the data frame; users can use `type = "site"` or similar to calculate rolling means for different monitoring stations.
 
 Type `?rollingMean` into R for more details.
 
 ## Calculating rolling quantiles (percentiles) {#sec-rollingQuantile}
 
-There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a 'background' concentration. For example, for fast response measurements (e.g. at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement [@Padilla2021; @Farren2024].
+There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a 'background' concentration. For example, for fast response measurements (e.g., at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement [@Padilla2021; @Farren2024].
 
 The `rollingQuantile()` function provides a fast way of calculating one or more quantiles in a time series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.
 
@@ -73,11 +73,11 @@ timePlot(
 
 There are numerous ways of smoothing and aggregating time series (and other data). One common and powerful technique is *Gaussian smoothing* where a Gaussian window slides along the data for each time step and smooths the data. The basic idea is that the smoothing process puts more weight on data close to the time in question and less further away with the weighting being determined by the σ value in the Gaussian equation.
 
-Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, better preserves trends, and reduces edge artefacts. 
+Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, better preserves trends, and reduces edge artefacts.
 
 In the example shown in @fig-gauss-smooth, the data have been plotted as weekly averages to make the raw data easier to see. The smoothed line provides a clear indication of how NO~2~ concentrations have varied over many years. In this case `sigma` was set to 744, which corresponds to about one month.
 
-It should be noted `GaussianSmooth()` will work with any time series data e.g. at 1 Hz so should be useful for processing noisy fast response data.
+It should be noted `GaussianSmooth()` will work with any time series data e.g., at 1 Hz so should be useful for processing noisy fast response data.
 
 ```{r}
 #| label: fig-gauss-smooth
@@ -112,7 +112,7 @@ timePlot(
 
 ### Background
 
-The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` — larger values produce smoother results.
+The Whittaker-Eilers smoother [@eilers2003] is a powerful and flexible method for smoothing and interpolating time series data. The method is based on penalised least squares: it seeks a smooth series that is close to the observed data while penalising roughness (i.e., large differences between adjacent values). The balance between fidelity to the data and smoothness is controlled by a single parameter `lambda` --- larger values produce smoother results.
 
 Key advantages of the Whittaker-Eilers approach over simpler methods such as a moving average include:
 
@@ -125,7 +125,7 @@ Key advantages of the Whittaker-Eilers approach over simpler methods such as a m
 
 The simplest use of `WhittakerSmooth()` is to produce a smoothed version of a pollutant time series. In the example below, NO~2~ concentrations are smoothed with `lambda = 2000`. The function adds a new column `smooth_no2` to the data frame.
 
-Where the aim is to reduce noise, setting `lambda = NA` will use Generalised Cross Validation (GCV) to choose an optimal `lambda` value automatically, though this can be computationally expensive for large datasets. However, for smoothing purposes, it is often more useful to experiment with a range of `lambda` values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.
+Where the aim is to reduce noise, setting `lambda = NA` will use Generalized Cross Validation (GCV) to choose an optimal `lambda` value automatically, though this can be computationally expensive for large data sets. However, for smoothing purposes, it is often more useful to experiment with a range of `lambda` values to find one that produces a result that is consistent with the aims of smoothing data in the first instance.
 
 ```{r}
 #| label: whittaker-smooth
@@ -157,13 +157,13 @@ mydata_smooth |>
   )
 ```
 
-The `lambda` value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range `lambda = 1e6` to `lambda = 1e10` are often appropriate. If `lambda = NA`, Generalised Cross Validation (GCV) is used to choose `lambda` automatically, though this can be computationally expensive for large datasets.
+The `lambda` value can be increased substantially for longer time series spanning many years. Because smoothing a multi-year hourly record requires much greater regularisation, values in the range `lambda = 1e6` to `lambda = 1e10` are often appropriate.
 
-A major advantage of the Whittaker-Eilers approach is that a user can confidently "set and forget" their `lambda` value. Because `lambda` acts as an absolute penalty, the local smoothing characteristics will remain identical regardless of how much new data is appended to the series; as a time series grows, the Whittaker smooth will always deliver a predictable, consistent outcome. In contrast, methods like LOESS (locally-weighted regression) or GAMs often rely on a relative span or fraction of the total data. To maintain that same visually and mathematically consistent smoothing effect as a dataset expands, users of those methods must constantly recalculate and shrink their smoothing parameters.
+A major advantage of the Whittaker-Eilers approach is that a user can confidently "set and forget" their `lambda` value. Because `lambda` acts as an absolute penalty, the local smoothing characteristics will remain identical regardless of how much new data is appended to the series; as a time series grows, the Whittaker smooth will always deliver a predictable, consistent outcome. In contrast, methods like LOESS (locally-weighted regression) or GAMs often rely on a relative span or fraction of the total data. To maintain that same visually and mathematically consistent smoothing effect as a data set expands, users of those methods must constantly recalculate and shrink their smoothing parameters.
 
 ### Baseline estimation
 
-Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.01), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series — the background or baseline — rather than the central tendency.
+Beyond smoothing, `WhittakerSmooth()` can be used for *baseline estimation* via Asymmetric Least Squares (ALS) by supplying the `p` argument. When `p` is set to a small value (e.g., 0.01), the smoother is asymmetrically penalised: it is strongly discouraged from rising above the data but not from falling below it. This forces the smooth curve to track the *lower envelope* of the time series --- the background or baseline --- rather than the central tendency.
 
 The function returns two new columns:
 
@@ -172,7 +172,7 @@ The function returns two new columns:
 
 This decomposition is particularly useful in air pollution studies, where it is common to want to separate a *background* component (e.g., regional or photochemical NO~2~) from local *increments* (e.g., fresh traffic emissions). The increment can then be used as the basis for further analysis such as polar plots or wind roses to identify source directions.
 
-The question arises as to what the best `lambda` value is for baseline estimation. To a large extent, the value of `lambda` will depend on the specific application and the desired balance between smoothness and fidelity to the data. For baseline estimation, it is often desirable to use a larger `lambda` value than for general smoothing to ensure that the baseline is sufficiently smooth and does not track short-term fluctuations in the data. 
+The question arises as to what the best `lambda` value is for baseline estimation. To a large extent, the value of `lambda` will depend on the specific application and the desired balance between smoothness and fidelity to the data. For baseline estimation, it is often desirable to use a larger `lambda` value than for general smoothing to ensure that the baseline is sufficiently smooth and does not track short-term fluctuations in the data.
 
 The parameter $\lambda$ directly regulates the filter's cutoff frequency ($\omega_c$), where the filter cuts the power of the signal in half. It can be shown that for a time series with a sampling frequency of 1 hour, the relationship between $\lambda$ and the cutoff period $T_c$ (in hours) is given by:
 
@@ -221,14 +221,14 @@ lhr2 <- WhittakerSmooth(
 )
 ```
 
-Finally, we can separately plot the baseline and increment to show how they differ. @fig-polar-plots shows polar plots of the NO~x~ increment and baseline. The increment plot clearly shows the airport source to the south and the road source to the north. The airport source shows elevated concentrations at high wind speeds and the road source shown by the feature in the middle of the plot at low wind speeds. By contrast, the baseline plot shows a more regional background with a slight enhancement from the east (Greater London) and a wider influence of ground level sources at low wind speeds. However, the most striking feature of the baseline plot is the absence of the airport source, which is clearly visible in the increment plot. This illustrates how the Whittaker-ALS approach can effectively separate a local source from a background, allowing for clearer interpretation of source contributions and their directional characteristics. A similar approach can be used at other sites where there is interest in extracting the influence of locally-dominant sources, using the defaults used in the code above.
+Finally, we can separately plot the baseline and increment to show how they differ. @fig-polar-plots shows polar plots of the NO~x~ increment and baseline. The increment plot clearly shows the airport source to the south and the road source to the north. The airport source shows elevated concentrations at high wind speeds and the road source is shown by the feature in the middle of the plot at low wind speeds. By contrast, the baseline plot shows a more regional background with a slight enhancement from the east (Greater London) and a wider influence of ground level sources at low wind speeds. However, the most striking feature of the baseline plot is the absence of the airport source, which is clearly visible in the increment plot. This illustrates how the Whittaker-ALS approach can effectively separate a local source from a background, allowing for clearer interpretation of source contributions and their directional characteristics. A similar approach can be used at other sites where there is interest in extracting the influence of locally-dominant sources, using settings similar to those in the code above.
 
 ```{r}
 #| label: fig-polar-plots
-#| fig-cap: "Comparison of NO~x~ Increment and Baseline."
-#| fig-subcap: 
-#|   - "NO~x~ Increment."
-#|   - "NO~x~ Baseline."
+#| fig-cap: "Comparison of NO~x~ increment and baseline."
+#| fig-subcap:
+#|   - "NO~x~ increment."
+#|   - "NO~x~ baseline."
 #| layout-ncol: 2
 #| fig-width: 5
 #| fig-height: 5

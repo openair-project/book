@@ -1,7 +1,7 @@
 ---
 author: Jack Davison
 validate-yaml: false
-execute: 
+execute:
   warning: false
   error: false
   message: false
@@ -39,7 +39,7 @@ trendLevel(mydata, cols = "greyscale")
 
 There are three kinds of scheme:
 
-- `"sequential"` palettes can be interpolated into any number of individual colours. These are most useful for numeric data (e.g., the colourbar of a `polarPlot()`) or categorical data with some kind of natural order (e.g., "low", "medium", "high").
+- `"sequential"` palettes can be interpolated into any number of individual colours. These are most useful for numeric data (e.g., the colour bar of a `polarPlot()`) or categorical data with some kind of natural order (e.g., "low", "medium", "high").
 
 - `"diverging"` palettes are similar to sequential palettes, but have a natural middle point (usually white or black) from which two separate sequential schemes diverge. These are useful for functions like `corPlot()` and `polarDiff()`.
 
@@ -80,9 +80,9 @@ To better control colours, you can use the `colourOpts()` function instead of a 
 #| - "The `turbo` colour scheme with `saturation = 0.25` to reduce saturation"
 #| layout-ncol: 2
 trendLevel(mydata, cols = "turbo")
-trendLevel(mydata, cols = colorOpts("turbo", begin = 0.2, end = 0.8))
-trendLevel(mydata, cols = colorOpts("turbo", direction = -1))
-trendLevel(mydata, cols = colorOpts("turbo", saturation = 0.25))
+trendLevel(mydata, cols = colourOpts("turbo", begin = 0.2, end = 0.8))
+trendLevel(mydata, cols = colourOpts("turbo", direction = -1))
+trendLevel(mydata, cols = colourOpts("turbo", saturation = 0.25))
 ```
 
 ## Choosing a colour palette
@@ -93,13 +93,13 @@ Please remember that choosing colours is more than an aesthetic preference!
 
 - Modern **web accessibility guidelines** demand certain levels of [colour contrast](https://webaim.org/articles/contrast/) for accessibility purposes.
 
-- **Colour has cultural meaning** that should be obeyed to make your plots understandable - for example, green is often interpreted as 'good' or 'safe' whereas red means 'bad' or 'danger' (as used in the [UK Daily Air Quality Index](https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi)). Using green for high concentrations and red for low concentrations may therefore confuse a reader! Equally, it makes sense to use warm colours like orange to represent summer and cool colours like blue to represent winter - the reverse would be unusual and could cause confusion.
+- **Colour has cultural meaning** that should be obeyed to make your plots understandable --- for example, green is often interpreted as 'good' or 'safe' whereas red means 'bad' or 'danger' (as used in the [UK Daily Air Quality Index](https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi)). Using green for high concentrations and red for low concentrations may therefore confuse a reader! Equally, it makes sense to use warm colours like orange to represent summer and cool colours like blue to represent winter --- the reverse would be unusual and could cause confusion.
 
-- **'Rainbow' palettes (e.g., `"jet"`) are linked to lower accuracy** in certain applications as they are not 'perceptually uniform' - often they create artificial 'bands' of colour which accentuate certain features despite the scale being smoothly varying. If you do wish to use a rainbow palette, we recommend `"turbo"` - read more about it [here](https://research.google/blog/turbo-an-improved-rainbow-colormap-for-visualization/).
+- **'Rainbow' palettes (e.g., `"jet"`) are linked to lower accuracy** in certain applications as they are not 'perceptually uniform' --- often they create artificial 'bands' of colour which accentuate certain features despite the scale being smoothly varying. If you do wish to use a rainbow palette, we recommend `"turbo"` --- read more about it in the [blog post introducing turbo](https://research.google/blog/turbo-an-improved-rainbow-colormap-for-visualization/).
 
 - It's often useful to **be consistent** within your reports, papers, posters and slide decks. For example, if Site A is blue and Site B is orange in your `timePlot()` but they're reversed in your `timeVariation()` plot, that will cause confusion for any readers comparing the two figures.
 
-- **Sometimes a continuous palette is better for categorical data than a categorical one** if the categories have some kind of order. For example, even though the `breaks` argument in `trendLevel()` produces discrete categories, they are still ordered from the lowest value bin to a higher value one, so `"viridis"` still makes more sense than `"Dark2"`. However, if the categories were different measurement sites, for example, using a continuous palette may *imply* order where there isn't any - in that case, `"Dark2"` is the more suitable choice.
+- **Sometimes a continuous palette is better for categorical data than a categorical one** if the categories have some kind of order. For example, even though the `breaks` argument in `trendLevel()` produces discrete categories, they are still ordered from the lowest value bin to a higher value one, so `"viridis"` still makes more sense than `"Dark2"`. However, if the categories were different measurement sites, for example, using a continuous palette may *imply* order where there isn't any --- in that case, `"Dark2"` is the more suitable choice.
 
 It is the user's responsibility to choose an accessible and appropriate palette for their plots. Some of the palettes built-in to [openair]{.pkg} have been designed to be accessible. For categorical data, consider one of Paul Tol's palettes (e.g., `"tol.bright"`) which are distinct for all people, from black and white, on screen and paper, and match well together aesthetically. For continuous data, Fabio Crameri's palettes (e.g., `"batlow"`) are designed to be perceptually uniform and ordered, colour deficiency friendly, and readable in black and white print. Also popular are the "Brewer" palettes (e.g., `"Dark2"`) and the "viridis" palettes (e.g., `"viridis"`, `"mako"`, etc.). While these palettes are designed for accessibility, using arguments like `begin`, `end`, `lightness` and `saturation` may make them less so, so tread carefully!
 
@@ -120,7 +120,7 @@ devtools::source_gist(
 )
 
 # launch in browser
-preview_openair_schemes(options = list(launch.browser = T))
+preview_openair_schemes(options = list(launch.browser = TRUE))
 ```
 
 As an alternative, this section includes a gallery of the different colour schemes available in [openair]{.pkg}, grouped by type.
@@ -157,7 +157,7 @@ seq_pals <- openSchemes("seq")$palette |> sort()
 div_pals <- openSchemes("div")$palette |> sort()
 qual_pals <- openSchemes("qual")$palette |> sort()
 
-# remove dups 
+# remove dups
 qual_pals <- qual_pals[!qual_pals %in% c("tol", "cbPalette")]
 ```
 
@@ -168,7 +168,7 @@ qual_pals <- qual_pals[!qual_pals %in% c("tol", "cbPalette")]
 #| fig-subcap: !expr 'seq_pals'
 #| fig-height: 0.75
 #| fig-width: 10
-#| out.width: "100%"
+#| out-width: "100%"
 #| fig-cap-location: top
 #| echo: false
 purrr::walk(
@@ -184,7 +184,7 @@ purrr::walk(
 #| fig-subcap: !expr 'div_pals'
 #| fig-height: 0.75
 #| fig-width: 10
-#| out.width: "100%"
+#| out-width: "100%"
 #| fig-cap-location: top
 #| echo: false
 purrr::walk(
@@ -200,7 +200,7 @@ purrr::walk(
 #| fig-subcap: !expr 'qual_pals'
 #| fig-height: 0.75
 #| fig-width: 10
-#| out.width: "100%"
+#| out-width: "100%"
 #| fig-cap-location: top
 #| echo: false
 purrr::walk(

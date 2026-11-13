@@ -2,7 +2,7 @@
 subtitle: An introduction to [openairmaps]{.pkg} and the [leaflet]{.pkg} package
 author: Jack Davison
 abstract: "The [openairmaps]{.pkg} package has been designed to create interactive HTML air quality maps. These are useful to understand the geospatial context of [openair]{.pkg}-type analysis, and to present data in an engaging way in dashboards and websites. This page gives a broad overview of [openairmaps]{.pkg} as well as [leaflet]{.pkg}, the package on which it is built."
-execute: 
+execute:
   cache: false
 ---
 
@@ -24,7 +24,7 @@ If you would like to access new features and bug fixes before they're pushed to 
 #| label: pak
 #| eval: false
 # install.packages("pak")
-pak::pak("openair-project/openairmaps") 
+pak::pak("openair-project/openairmaps")
 ```
 
 If you would like to use [openairmaps]{.pkg} in your analysis, don't forget to load it using the `library()` function.
@@ -42,7 +42,7 @@ This chapter was produced using R version `r getRversion()` and [openairmaps]{.p
 
 ## Background
 
-As the R ecosystem developed, [rmarkdown]{.pkg} and, more recently, [quarto]{.pkg} emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages have been developed to easily develop these interactive widgets, such as [plotly]{.pkg} for plots, [DT]{.pkg} for tables, and [leaflet]{.pkg} for maps. The [openairmaps]{.pkg} package concerns itself with making [leaflet]{.pkg} maps.
+As the R ecosystem developed, [rmarkdown]{.pkg} and, more recently, [quarto]{.pkg} emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages make it easy to create these interactive widgets, such as [plotly]{.pkg} for plots, [DT]{.pkg} for tables, and [leaflet]{.pkg} for maps. The [openairmaps]{.pkg} package concerns itself with making [leaflet]{.pkg} maps.
 
 Air quality data analysis --- particularly as it pertains to long term monitoring data --- naturally lends itself to being visualised spatially on a map. Monitoring networks are geographically distributed, and ignoring their geographical context may lead to incomplete insights at best and incorrect conclusions at worst! Furthermore, many air quality analysis tools are *directional*, asking questions of the data along the lines of "do elevated concentrations come from the North, South, East or West?" The natural question that follows is "well, what actually is it to the North/South/East/West that could be causing elevated concentrations?" --- a map can help answer that question straightforwardly.
 
@@ -94,7 +94,7 @@ The anatomy of a leaflet map may look a little unusual, so to unpack:
 Don't worry if you don't fully understand all of this --- the "all-in-one" functions in [openairmaps]{.pkg} deal with much of this for you! The only [leaflet]{.pkg} awareness you'll need to use these functions is knowledge of the available base map providers, which can be accessed using `leaflet::providers`. These are shown in the collapsible below (the list is very long!).
 
 ::: {.callout-note collapse="true"}
-### View providers
+## View providers
 
 ```{r}
 #| label: leafletprovidersfake
@@ -115,7 +115,7 @@ If you would like to use [openairmaps]{.pkg} in a more advanced way (for example
 
 [openairmaps]{.pkg} currently has three main families of functions --- those being network visualisation, directional analysis, and trajectory analysis --- plus a handful of "utility" functions. These are summarised in @tbl-openairmaps-overview. The functions are further divided into two categories:
 
--   **"All-in-one"** functions are most like [openair]{.pkg} functions in that they will construct a map from the ground-up. These functions provide the quickest route from data to a HTML map.
+-   **"All-in-one"** functions are most like [openair]{.pkg} functions in that they will construct a map from the ground-up. These functions provide the quickest route from data to an HTML map.
 
 -   **"Marker"** functions are most like [leaflet]{.pkg} functions in that they add layers onto pre-existing [leaflet]{.pkg} maps. These are more complicated to use, but are more powerful if you are more familiar with how [leaflet]{.pkg} works.
 

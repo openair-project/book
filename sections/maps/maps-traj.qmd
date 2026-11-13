@@ -1,8 +1,8 @@
 ---
-subtitle: Transforming static trajectory plots into interactive HTML widgets 
+subtitle: Transforming static trajectory plots into interactive HTML widgets
 author: Jack Davison
 abstract: "[openair]{.pkg} already contains functionality for visualising HYSPLIT back trajectories, but as more trajectory paths are added these static plots can become difficult to interpret. [openairmaps]{.pkg} allows for effectively the same visualisations to be mapped in [leaflet]{.pkg}, which can help untangle these complex figures."
-execute: 
+execute:
   cache: false
 ---
 
@@ -10,7 +10,7 @@ execute:
 
 ## Data
 
-[openairmaps]{.pkg} contains the `traj_data` dataset to allow users to test the trajectory analysis functions. The structure of this data set is provided below. This was obtained using the `importTraj()` function in [openair]{.pkg}; if you are using your own trajectory data, try to match this structure (including column names) so that the [openairmaps]{.pkg} functions will work correctly.
+[openairmaps]{.pkg} contains the `traj_data` data set to allow users to test the trajectory analysis functions. The structure of this data set is provided below. This was obtained using the `importTraj()` function in [openair]{.pkg}; if you are using your own trajectory data, try to match this structure (including column names) so that the [openairmaps]{.pkg} functions will work correctly.
 
 ```{r}
 #| label: glimpseTraj
@@ -38,11 +38,11 @@ By default, `trajMap()` will plot your trajectories in black on a default "OpenS
 trajMap(traj_data, colour = "date")
 ```
 
-What may be of greater interest is colouring the trajectories by the concentration of pollutant on their arrival. The `colour` argument can be used for this. When `colour` is specified, trajectory paths are plotted in order of the numeric value of the "colour" column, so the highest concentrations (which are assumed to be of most interest) are most easily accessible. Specifying `colour` also creates a legend and appends a relevant line to the popup --- explore the example in @fig-trajPM.
+What may be of greater interest is colouring the trajectories by the concentration of a pollutant on their arrival. The `colour` argument can be used for this. When `colour` is specified, trajectory paths are plotted in order of the numeric value of the "colour" column, so the highest concentrations (which are assumed to be of most interest) are most easily accessible. Specifying `colour` also creates a legend and appends a relevant line to the popup --- explore the example in @fig-trajPM.
 
 ```{r}
 #| label: fig-trajPM
-#| fig-cap: "A more thorough application of `trajMap()`, this time coloured by PM concentrations."
+#| fig-cap: "A more thorough application of `trajMap()`, this time coloured by PM~10~ concentrations."
 trajMap(
   traj_data,
   colour = "pm10",
@@ -100,7 +100,7 @@ trajLevelMap(
 )
 ```
 
-At time of writing, all of the different `trajLevel()` statistics are supported in `trajLevelMap()`.
+At the time of writing, all of the different `trajLevel()` statistics are supported in `trajLevelMap()`.
 
 ## Marker function
 
@@ -144,15 +144,15 @@ leaflet() |>
     data = france,
     color = "red",
     group = "Paris, France",
-    opacity = 0.25,
-    layerId = "france"
+    opacity = 0.25
   ) |>
   addMarkers(
     data = dplyr::slice_head(france, n = 1),
     lat = ~lat,
     lng = ~lon,
     group = "Paris, France",
-    label = "FR"
+    label = "FR",
+    layerId = "france"
   ) |>
   addLayersControl(overlayGroups = c("Paris, France", "London, UK"))
 ```

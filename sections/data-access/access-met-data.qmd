@@ -7,7 +7,7 @@ abstract: Meteorological data is key to understanding air quality measurements. 
 
 ## The [worldmet]{.pkg} package
 
-Most of the import functions described in @sec-importUKAQ return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that WSP runs to provide the data.
+The data imported using `importUKAQ()` (@sec-importUKAQ) include basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that WSP runs to provide the data.
 
 Alternatively it may be advantageous to use surface measurements. [worldmet]{.pkg} provides an easy way in which to access surface meteorological data from \>30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <https://github.com/openair-project/worldmet> and <https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly> for further information.
 
@@ -26,7 +26,7 @@ library(openair)
 library(tidyverse)
 ```
 
-To learn which monitoring stations are available, the `import_ghcn_stations()` function is provided. By default, this function returns all data as a `data.frame`, but can usefully also return it as a map using `return = "map"`. As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3).
+To learn which monitoring stations are available, the `import_ghcn_stations()` function is provided. By default, this function returns all data as a `data.frame`, but can usefully also return it as a map using `return = "map"`. As an example, we will search for sites near Dublin (latitude = 53.3, longitude = -6.3).
 
 ```{r}
 #| label: fig-worldmet
@@ -35,7 +35,7 @@ To learn which monitoring stations are available, the `import_ghcn_stations()` f
 import_ghcn_stations(lat = 53.3, lng = -6.3, return = "map")
 ```
 
-Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code.
+It is also possible to map all available stations at once, and then use the map to find a site of interest and its code.
 
 ```{r}
 #| label: ghcn-stations
@@ -58,14 +58,14 @@ Plot a wind rose.
 ```{r}
 #| label: fig-dublin-rose
 #| fig-cap: Example wind rose for Dublin Airport data.
-#| fig.width: 6
-#| fig.height: 6
+#| fig-width: 6
+#| fig-height: 6
 windRose(dublin_met)
 ```
 
 ## Linking with air quality data {#sec-link-aq}
 
-Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a `date` column in each data set that makes the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g. `ws`, `wd` and `air_temp`, as is the case with most data accessible as described in @sec-importUKAQ. In this case, the aim is to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.
+Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a `date` column in each data set that makes the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g., `ws`, `wd` and `air_temp`, as is the case with most data accessible as described in @sec-importUKAQ. In this case, the aim is to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.
 
 ```{r}
 #| label: linkaqmet

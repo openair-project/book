@@ -9,20 +9,20 @@ author: David Carslaw
 
 The Kolmogorov-Zurbenko (KZ) filter is an iterative moving-average technique that separates a time series into components operating at distinct temporal scales [@Zurbenko1986; @Yang2010]. Its defining characteristic is simplicity: a plain moving average of window length $m$ is applied $k$ times in succession. This repetition transforms a box-shaped frequency response into one that closely approximates a Gaussian, attenuating high-frequency variability while preserving long-period signals with minimal distortion. The filter is written as KZ($m$, $k$), where $m$ is the full window width in data steps (so a window of $m = 13$ hours extends 6 hours either side of each point). The effective cut-off period (below which variation is suppressed) scales roughly as $m\sqrt{k}$, where $m$ is the full window width. Increasing $k$ thus pushes the cut-off to longer periods, providing greater smoothing.
 
-The value of the KZ filter in atmospheric and air quality science lies in the decomposition step [@Rao1997; @Eskridge1997]. By applying the filter successively at five increasing window sizes — from a few hours up to one year for hourly data — and taking the *differences* between adjacent filtered series, the raw time series is partitioned into six additive components:
+The value of the KZ filter in atmospheric and air quality science lies in the decomposition step [@Rao1997; @Eskridge1997]. By applying the filter successively at five increasing window sizes --- from a few hours up to one year for hourly data --- and taking the *differences* between adjacent filtered series, the raw time series is partitioned into six additive components:
 
 | Component | Typical period | Physical interpretation |
 |----|----|----|
 | Sub-day | Hours | Brief emission pulses |
-| Diurnal | Diurnal cycles | Diel variation
-| Synoptic | \~1–10 days | Weather systems, regional scale episodes |
+| Diurnal | Diurnal cycles | Diel variation |
+| Synoptic | \~1--10 days | Weather systems, regional scale episodes |
 | Intermediate | Week to ~2 months | Sub-seasonal variability |
 | Seasonal | Months to ~1 year | Annual cycle, photochemistry |
 | Trend | Multi-year | Long-term emission changes, climate signals |
 
 : Default temporal decomposition produced by `kzFilter()` for hourly data.
 
-These components are mutually exclusive and sum to the original series, making the decomposition physically interpretable and suitable for downstream analysis.
+These components are additive and sum to the original series, making the decomposition physically interpretable and suitable for downstream analysis.
 
 The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 and @Rao1997, who showed that synoptic-scale meteorological variability can mask long-term ozone trends unless removed. The same logic extends naturally to PM~2.5~, NO~x~, and other regulated pollutants [@Wise2005].
 
@@ -30,7 +30,7 @@ By removing short-term, synoptic and seasonal variability, the KZ decomposition 
 
 ## Kolmogorov-Zurbenko adaptive filter {#sec-kza-background}
 
-The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and *shrinking* the averaging window near those discontinuities [@Zurbenko1996]. Wherever the algorithm identifies an abrupt change — a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change — it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.
+The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and *shrinking* the averaging window near those discontinuities [@Zurbenko1996]. Wherever the algorithm identifies an abrupt change --- a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change --- it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.
 
 The degree of window shrinkage is governed by the `sensitivity` argument: larger values cause more aggressive adaptation. For detecting clear, sudden shifts in air quality (e.g., the introduction of a clean-air zone, COVID-19 lockdown effects, or the commissioning of an industrial scrubber) the KZA filter will generally give a cleaner result than the standard KZ filter.
 
@@ -40,7 +40,7 @@ The default window sizes `m = c(3, 13, 107, 721, 8761)` are chosen for hourly da
 
 Different window sizes can be used for data at other time resolutions (e.g., 15-minute, daily, 1 Hz data) or to target specific temporal scales. For example, for daily data, windows of 5, 13, 41, and 365 days might be more appropriate. The key is to choose window sizes that capture the desired physical processes while ensuring sufficient data points within each window for stable averaging.
 
-Ten years of data have been uploaded for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:
+Ten years of data are provided for a background (North Kensington) and roadside site (Marylebone Road) in London for 2016 to 2025, including surface meteorological data. The data can be imported as follows:
 
 ```{r}
 #| label: kz-import
@@ -111,14 +111,14 @@ mutate(kz_out_pm25, episodes = synoptic + intermediate + trend) |>
   calendarPlot(
     pollutant = "episodes",
     year = 2020,
-    cols = colorOpts("batlow", direction = -1),
+    cols = colourOpts("batlow", direction = -1),
     windflow = windflowOpts(
       colour = "white"
     )
   )
 ```
 
-@fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g. adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
+@fig-kz-seasonal considers the seasonal component of O~3~ concentrations. The plot shows that the seasonal component of O~3~ concentrations is dominated by a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter. This is typical of O~3~ concentrations in urban areas, where photochemical production dominates in the summer and titration by NO dominates in the winter. Note that the seasonal component shown in @fig-kz-seasonal is smoothly varying because the influence of shorter-term variation has been removed. It can also be useful to combine components e.g., adding the seasonal to the trend (`mutate(kz_out_o3, seasonal = seasonal + trend)`) to show the overall seasonal variation in concentrations on top of a long-term trend.
 
 ```{r}
 #| label: fig-kz-seasonal
@@ -133,13 +133,13 @@ timePlot(
 )
 ```
 
-Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The sub-day component shows a decrease around 7.00 to 8.00 am coinciding with the short-term morning rush hour and increased emissions of NO~x~ that act to reduce concentrations of O~3~. The strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night, shows the typical diel variation of O~3~ concentrations expected at an urban background site. There is no (or very little) variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed. 
+Finally, the `timeVariation()` function can be used to show how the different components vary by hour of the day and month of the year. @fig-kz-timevariation shows the time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. @fig-kz-timevariation acts as a simple test to see which temporal variations are removed and which remain for different time scales. The sub-day component shows a decrease around 7.00 to 8.00 am coinciding with the short-term morning rush hour and increased emissions of NO~x~ that act to reduce concentrations of O~3~. The strong diurnal cycle with higher concentrations during the afternoon, and lower concentrations at night, shows the typical diel variation of O~3~ concentrations expected at an urban background site. There is no (or very little) variation in the diurnal plots for the synoptic and seasonal components because shorter-term variation has been removed.
 
 The day of the week variation (bottom-right) shows that only the synoptic component has any notable variation. In this case there are higher O~3~ concentrations on Saturdays and Sundays when traffic emissions of NO~x~ are lower leading to O~3~ concentrations that are higher. The seasonal component shows a strong annual cycle with high concentrations in the spring-summer and low concentrations in the winter, as expected for O~3~ concentrations in urban areas. Similarly, there is no variation in the month of the year plot for the short-term components. These plots confirm the expected behaviour of the KZ filtering for targeted temporal scales.
 
 ```{r}
 #| label: fig-kz-timevariation
-#| fig-cap: "Time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. "
+#| fig-cap: "Time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site."
 #| fig-width: 8
 #| fig-height: 6
 timeVariation(
@@ -159,7 +159,7 @@ timeVariation(
 - The trend component from `kzFilter()` shows a suspicious sharp feature that may be an artefact of the standard window.
 - There is a wish to detect and locate unknown discontinuities.
 
-The choice of `kzFilter()` vs `kzaFilter()` is often a matter of judgement and experimentation. If the KZ trend shows a sharp drop or rise, or rapid variations, that coincides with a known event, it is worth trying the KZA filter to see if it preserves that feature more cleanly. If the KZA trend is much smoother and more interpretable, it may be the better choice for subsequent analysis.
+The choice of `kzFilter()` vs `kzaFilter()` is often a matter of judgement and experimentation. If the KZ trend shows a sharp drop or rise, or rapid variations, that coincides with a known event, it is worth trying the KZA filter to see if it preserves that feature more cleanly. If the KZA trend captures the event more clearly and is more interpretable, it may be the better choice for subsequent analysis.
 
 In @fig-kz-kza-compare, the KZ and KZA trends for NO~2~ concentrations at the Marylebone Road site are compared. The KZA filter (red) preserves a sharp drop in NO~2~ in early 2020 that is smoothed out by the standard KZ filter (blue). This drop is related to the COVID-19 lockdown measures that were implemented in the UK in March 2020, which led to a sudden reduction in traffic emissions. The KZA filter is able to capture this abrupt change more effectively than the standard KZ filter, which smooths it out over a longer period.
 
@@ -193,9 +193,9 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
   )
 ```
 
-The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.[^1]
+The analysis above for COVID-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and some of the effects lasted a few weeks to a few months i.e., they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.[^1]
 
-[^1]: Or try the `kzaFilter()` with `sensitivity = 0.5` for more structure to capture more of the variation.
+[^1]: Or try `kzaFilter()` with `sensitivity = 0.5` for more structure to capture more of the variation.
 
 ```{r}
 #| label: kz-kza-combine

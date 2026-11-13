@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Background {#sec-SmoothTrendInfo}
 
-The `smoothTrend()` function calculates smooth trends in the monthly mean concentrations of pollutants. In its basic use it will generate a plot of monthly concentrations and fit a smooth line to the data and show the 95% confidence intervals of the fit. The smooth line is essentially determined using Generalized Additive Modelling using the [mgcv]{.pkg} package. This package provides a comprehensive and powerful set of methods for modelling data. In this case, however, the *model* is a relationship between time and pollutant concentration i.e. a trend. One of the principal advantages of this approach is that the amount of smoothness in the trend is optimised in the sense that it is neither too smooth (therefore missing important features) nor too variable (perhaps fitting 'noise' rather than real effects). Some background information on the use of this approach in an air quality setting can be found in @Carslaw2007a.
+The `smoothTrend()` function calculates smooth trends in the monthly mean concentrations of pollutants. In its basic use it will generate a plot of monthly concentrations and fit a smooth line to the data and show the 95% confidence intervals of the fit. The smooth line is essentially determined using Generalized Additive Modelling using the [mgcv]{.pkg} package. This package provides a comprehensive and powerful set of methods for modelling data. In this case, however, the *model* is a relationship between time and pollutant concentration i.e., a trend. One of the principal advantages of this approach is that the amount of smoothness in the trend is optimised in the sense that it is neither too smooth (therefore missing important features) nor too variable (perhaps fitting 'noise' rather than real effects). Some background information on the use of this approach in an air quality setting can be found in @Carslaw2007a.
 
 @sec-trends-gam considers smooth trends in more detail and considers how different models can be developed that can be quite sophisticated. Readers should consider this section if they are considering trend analysis in more depth.
 
@@ -14,7 +14,7 @@ The user can select to deseasonalise the data first to provide a clearer indicat
 
 ## Examples of trend analysis
 
-We apply the function to concentrations of O~3~ and NO~2~ using the code below. The first plot shows the smooth trend in raw O~3~ concentrations, which shows a very clear seasonal cycle. By removing the seasonal cycle of O~3~, a better indication of the trend is given, shown in the second plot. Removing the seasonal cycle is more effective for pollutants (or locations) where the seasonal cycle is stronger e.g. for ozone and background sites. @fig-smoothTrendComp shows the results of the simulations for NO~2~ without the seasonal cycle removed. It is clear from this plot that there is little evidence of a seasonal cycle. The principal advantage of the smoothing approach compared with the Theil-Sen method is also clearly shown in this plot. Concentrations of NO~2~ first decrease, then increase strongly. The trend is therefore not monotonic, violating the Theil-Sen assumptions. Finally, the last plot shows the effects of first deseasonalising the data: in this case with little effect.
+We apply the function to concentrations of O~3~ and NO~2~ using the code below. The first plot shows the smooth trend in raw O~3~ concentrations, which shows a very clear seasonal cycle. By removing the seasonal cycle of O~3~, a better indication of the trend is given, shown in the second plot. Removing the seasonal cycle is more effective for pollutants (or locations) where the seasonal cycle is stronger e.g., for ozone and background sites. @fig-smoothTrendComp shows the results of the simulations for NO~2~ without the seasonal cycle removed. It is clear from this plot that there is little evidence of a seasonal cycle. The principal advantage of the smoothing approach compared with the Theil-Sen method is also clearly shown in this plot. Concentrations of NO~2~ first decrease, then increase strongly. The trend is therefore not monotonic, violating the Theil-Sen assumptions. Finally, the last plot shows the effects of first deseasonalising the data: in this case with little effect.
 
 ```{r}
 #| label: fig-smoothTrendComp
@@ -73,11 +73,11 @@ The `smoothTrend()` function shares many of the functionalities of the `TheilSen
 smoothTrend(mydata, pollutant = "o3", deseason = TRUE, type = "wd")
 ```
 
-The `smoothTrend()` function can easily be used to gain a large amount of information on trends. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
+The `smoothTrend()` function can easily be used to gain a large amount of information on trends. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e., 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and remove the line (`linetype = 0`) to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
 
 ```{r}
 #| label: fig-smoothwdSeason
-#| fig-cap: The `smoothTrend()` function applied to three pollutants,  split by wind sector and season.
+#| fig-cap: The `smoothTrend()` function applied to three pollutants, split by wind sector and season.
 #| fig-width: 14
 #| fig-height: 12
 smoothTrend(

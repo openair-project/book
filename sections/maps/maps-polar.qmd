@@ -1,8 +1,8 @@
 ---
-subtitle: Putting polar plots on an interactive map 
+subtitle: Putting polar plots on an interactive map
 author: Jack Davison
 abstract: "One of the headline features of [openairmaps]{.pkg} is creating maps using directional analysis plots as markers. Being able to place a polar plot or similar visualisation on a map can allow us to gain additional insight from our analysis, permitting us to easily compare different sites and further understand their geographic context. This page introduces the `polarMap()` family of functions, and the suite of customisations available to users."
-execute: 
+execute:
   cache: false
 ---
 
@@ -10,7 +10,7 @@ execute:
 
 ## Data requirements
 
-[openairmaps]{.pkg} contains the `polar_data` dataset to allow users to test the directional analysis functions^[By "directional analysis", we are referring to the outputs from [openair]{.pkg} functions like `polarPlot()`.]. The structure of this data set is provided below. The important feature of this data when compared to `openair::mydata` is latitude and longitude information, which [openairmaps]{.pkg} needs to place the directional analysis markers in the correct positions.
+[openairmaps]{.pkg} contains the `polar_data` data set to allow users to test the directional analysis functions^[By "directional analysis", we are referring to the outputs from [openair]{.pkg} functions like `polarPlot()`.]. The structure of this data set is provided below. The important feature of this data when compared to `openair::mydata` is latitude and longitude information, which [openairmaps]{.pkg} needs to place the directional analysis markers in the correct positions.
 
 ```{r}
 #| label: glimpsePolar
@@ -32,12 +32,12 @@ names(sunderland)
 
 ## Overview
 
-The easiest way to get polar plots on a map is through the use of the all-in-one mapping functions. These are all named using the pattern `{function-name}Map`, where `{function-name}` is a short hand for the equivalent [openair]{.pkg} function. A reference is provided in @tbl-dirAnalysisRef.
+The easiest way to get polar plots on a map is through the use of the all-in-one mapping functions. These are all named using the pattern `{function-name}Map`, where `{function-name}` is shorthand for the equivalent [openair]{.pkg} function. A reference is provided in @tbl-dirAnalysisRef.
 
 ```{r}
 #| label: tbl-dirAnalysisRef
 #| echo: false
-#| tbl-cap: "A reference table for `openairmaps` directional analysis mapping functions."
+#| tbl-cap: "A reference table for [openairmaps]{.pkg} directional analysis mapping functions."
 dplyr::tribble(
   ~openair             , ~openairmaps        , ~`scale arguments`   , ~`unique arguments` ,
   "`polarAnnulus()`"   , "`annulusMap()`"    , "`limits`"           , "`period`"          ,
@@ -66,7 +66,7 @@ Effectively all of these functions have very similar arguments, although some ar
 
 [^maps-polar-2]: Note that maps can only have one "layer control" menu. Users should therefore only provide multiple pollutants *or* an argument to `type`, but never both. If multiple pollutants *and* `type` are specified, `type` will be ignored.
 
--   `popup`: A column to be used to create a HTML "popup" that appears when users click the markers. This would be useful to label each marker with its corresponding site name or code, although other information could be usefully included (e.g., site type, average pollutant concentrations, and so on). A more complicated popup can be created using the `buildPopup()` function.
+-   `popup`: A column to be used to create an HTML "popup" that appears when users click the markers. This would be useful to label each marker with its corresponding site name or code, although other information could be usefully included (e.g., site type, average pollutant concentrations, and so on). A more complicated popup can be created using the `buildPopup()` function.
 
 -   `label`: Much the same as "popup", but the message will appear when users hover-over the marker rather than click on it. Labels are often much shorter than popups.
 
@@ -180,11 +180,11 @@ percentileMap(
 
 As [openairmaps]{.pkg} is built using [leaflet]{.pkg}, it is easy to add to your directional analysis maps using [leaflet]{.pkg} functions. For example, you may have the latitude and longitude information of different potential nearby sources like busy roads, industrial activity, transport hubs, and so on. @fig-addmarkers shows how you can add an extra marker with an optional popup/label.
 
-Note that, here, the `sources` data frame only has one row, but there is nothing to stop you from having any number of rows corresponding to different potential sources. As long as each source has a distinct latitude and longitude, a unique marker will be placed on the map. 
+Note that, here, the `sources` data frame only has one row, but there is nothing to stop you from having any number of rows corresponding to different potential sources. As long as each source has a distinct latitude and longitude, a unique marker will be placed on the map.
 
 ```{r}
 #| label: fig-addmarkers
-#| fig-cap: "Adding a `{leaflet}` marker to show nearby sources."
+#| fig-cap: "Adding a [leaflet]{.pkg} marker to show nearby sources."
 # data frame of lat/lon
 sources <-
   data.frame(
@@ -203,7 +203,7 @@ polarMap(polar_data, "nox") |>
   )
 ```
 
-[leaflet]{.pkg} is well documented [here](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() |> addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
+[leaflet]{.pkg} has [extensive documentation](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() |> addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
 
 ## Building popups
 
@@ -251,7 +251,7 @@ The directional analysis marker function is `addPolarMarkers()`, which behaves s
 
 [^maps-polar-3]: Marker functions use "lat" and "lng" as argument names for consistency with the [leaflet]{.pkg} package.
 
-To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` function to plot multiple polar pollutant frequency plots for oxides of nitrogen. What is different about this map is that users can select the specific statistic they are interested in -- in this case, mean, median or maximum. This is achieved by using the `group` arguments and `addLayersControl()`.
+To demonstrate, @fig-polarFreqMap has been created. This uses the `polarFreq()` function to plot multiple polar pollutant frequency plots for oxides of nitrogen. What is different about this map is that users can select the specific statistic they are interested in --- in this case, mean, median or maximum. This is achieved by using the `group` arguments and `addLayersControl()`.
 
 ```{r}
 #| label: fig-polarFreqMap
@@ -289,7 +289,7 @@ leaflet(data = polar_data) |>
   )
 ```
 
-One could imagine different applications, using this approach. For example:
+One could imagine different applications of this approach. For example:
 
 -   Giving users the option to swap between different `period`s for a `polarAnnulus()` map, or different polar coordinates in a `polarPlot()` map (i.e., different `x` arguments).
 
@@ -310,7 +310,7 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 -   HTML maps use [leaflet]{.pkg}, whereas static maps use [ggplot2]{.pkg} and [ggspatial]{.pkg}. The user-facing significance of this is that the `provider` arguments are slightly different.
 
 ::: {.callout-note collapse="true"}
-### View providers
+## View providers
 
 ```{r}
 #| label: rosmproviders
@@ -325,7 +325,7 @@ rosm::osm.types()
 #| fig-width: 12
 #| fig-height: 5
 
-# use in polarMapStatic
+# static = TRUE returns a static (ggplot2) map
 polarMap(
   polar_data,
   pollutant = c("nox", "pm2.5"),

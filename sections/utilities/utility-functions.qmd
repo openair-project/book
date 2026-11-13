@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Selecting data by date {#sec-selectByDate}
 
-Selecting by date/time in R can be intimidating for new users---and time-consuming for all users. The `selectByDate()` function aims to make this easier by allowing users to select data based on the British way of expressing date i.e. d/m/y. This function should be very useful in circumstances where it is necessary to select only part of a data frame.
+Selecting by date/time in R can be intimidating for new users---and time-consuming for all users. The `selectByDate()` function aims to make this easier by allowing users to select data based on the British way of expressing date i.e., d/m/y. This function should be very useful in circumstances where it is necessary to select only part of a data frame.
 
 First load the packages we need.
 
@@ -50,9 +50,9 @@ polarPlot(selectByDate(mydata, year = 2000), pollutant = "so2")
 
 ## Making intervals --- cutData {#sec-cutData}
 
-The `cutData()` function is a utility function that is called by most other functions but is useful in its own right. Its main use is to partition data in many ways, many of which are built-in to [openair]{.pkg}
+The `cutData()` function is a utility function that is called by most other functions but is useful in its own right. Its main use is to partition data in many ways, many of which are built into [openair]{.pkg}.
 
-Note that all the date-based types e.g. month/year are derived from a column `date`. If a user already has a column with a name of one of the date-based types it will not be used.
+Note that all the date-based types e.g., month/year are derived from a column `date`. If a user already has a column with a name of one of the date-based types it will not be used.
 
 For example, to cut data into seasons:
 
@@ -64,7 +64,7 @@ head(newdata)
 
 This adds a new column `season` that is split into four seasons. There is an option `hemisphere` that can be used to use southern hemisphere seasons when set as `hemisphere = "southern"`.
 
-The `type` can also be another column in a data frame. If this column is numeric, it is divided into `n.levels` *quantiles* (defaulting to four), which is to say bins of roughly equal numbers of PM~10~ concentrations.
+The `type` can also be another column in a data frame. If this column is numeric, it is divided into `n.levels` *quantiles* (defaulting to four), which is to say bins containing roughly equal numbers of values (here, PM~10~ concentrations).
 
 ```{r}
 #| label: cutdata2
@@ -86,7 +86,7 @@ newdata <- cutData(mydata, type = c("o3", "pm10", "so2"), suffix = "_cuts")
 dplyr::glimpse(newdata)
 ```
 
-Most of the time users do not have to call `cutData()` directly because most functions have a `type` option that is used to call `cutData()` directly, e.g.,
+Most of the time users do not have to call `cutData()` directly because most functions have a `type` option that calls `cutData()` internally, e.g.,
 
 ```{r}
 #| label: polarPlot-season
@@ -94,11 +94,11 @@ Most of the time users do not have to call `cutData()` directly because most fun
 polarPlot(mydata, pollutant = "so2", type = "season")
 ```
 
-However, it can be useful to call `cutData()` *before* supplying the data to a function in a few cases. Commonly, this is to have more control over how the data is conditioned - e.g., to use the `hemisphere` or `n.levels` arguments of `cutData()` directly. More details can be found in the `cutData()` help file.
+However, it can be useful to call `cutData()` *before* supplying the data to a function in a few cases. Commonly, this is to have more control over how the data is conditioned --- e.g., to use the `hemisphere` or `n.levels` arguments of `cutData()` directly. More details can be found in the `cutData()` help file.
 
 ## Selecting run lengths of values above a threshold --- pollution episodes {#sec-selectRunning}
 
-A seemingly easy thing to do that has relevance to air pollution episodes is to select run lengths of contiguous values of a pollutant above a certain threshold. For example, one might be interested in selecting O~3~ concentrations where there are at least 8 consecutive hours above 90 ppb. In other words, a selection that combines both a threshold and *persistence*. These periods can be very important from a health perspective and it can be useful to study the conditions under which they occur. But how do you select such periods easily? The `selectRunning()` utility function has been written to do this. It could be useful for all sorts of situations e.g.
+A seemingly easy thing to do that has relevance to air pollution episodes is to select run lengths of contiguous values of a pollutant above a certain threshold. For example, one might be interested in selecting O~3~ concentrations where there are at least 8 consecutive hours above 90 ppb. In other words, a selection that combines both a threshold and *persistence*. These periods can be very important from a health perspective and it can be useful to study the conditions under which they occur. But how do you select such periods easily? The `selectRunning()` utility function has been written to do this. It could be useful for all sorts of situations e.g.,
 
 - Selecting hours when primary pollutant concentrations are persistently high --- and then applying other [openair]{.pkg} functions to analyse the data in more depth.
 
@@ -115,7 +115,7 @@ ted <- openair::importImperial(site = "td0", year = 2005:2009, meteo = TRUE)
 nrow(ted)
 ```
 
-We are going to contrast two pollution roses of O~3~ concentration. The first shows hours where the criterion is not met, and the second where it is met. The subset of hours is defined by O~3~ concentrations above 90 ppb for periods of at least 8-hours i.e. what might be considered as ozone episode conditions.
+We are going to contrast two pollution roses of O~3~ concentration. The first shows hours where the criterion is not met, and the second where it is met. The subset of hours is defined by O~3~ concentrations above 90 ppb for periods of at least 8 hours i.e., what might be considered as ozone episode conditions.
 
 ```{r}
 #| label: episodeSelect
@@ -144,9 +144,9 @@ pollutionRose(
 )
 ```
 
-The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the pollution rose when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time for the O~3~ chemistry to take place.
+The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the pollution rose when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e., lengths of at least 8 hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e., corresponding to easterly flow from continental Europe where there has been time for the O~3~ chemistry to take place.
 
-The code below shows (as an example), that the summer of 2006 had a high proportion of conditions where the criterion was met.
+The code below (not plotted) shows that the summer of 2006 had a high proportion of conditions where the criterion was met.
 
 ```{r}
 #| label: timeProp-criterion
@@ -175,7 +175,7 @@ episode <- selectRunning(
 pollutionRose(episode, pollutant = "nox", type = "criterion")
 ```
 
-Note that `selectRunning()` will fail if there are duplicate dates within the data frame. If multiple sites worth of data are contained within a single data frame, use `type = "site"` (or whatever column identifies different sites).
+Note that `selectRunning()` will fail if there are duplicate dates within the data frame. If multiple sites' worth of data are contained within a single data frame, use `type = "site"` (or whatever column identifies different sites).
 
 ## Aggregating data by different time intervals {#sec-timeAverage}
 
@@ -187,13 +187,13 @@ Aggregating data by different averaging periods is a common and important task. 
 
 - Those who make measurements during field campaigns (particularly for academic research) may have many instruments with a range of different time resolutions. It can be useful to re-calculate time series with a common averaging period; or maybe help reduce noise.
 
-- It is useful to calculate statistics other than means when aggregating e.g. percentile values, maximums etc.
+- It is useful to calculate statistics other than means when aggregating e.g., percentile values, maximums etc.
 
 - For statistical analysis there can be short-term autocorrelation present. Being able to choose a longer averaging period is sometimes a useful strategy for minimising autocorrelation.
 
 In aggregating data in this way, there are a couple of other issues that can be useful to deal with at the same time. First, the calculation of proper vector-averaged wind direction is essential. Second, sometimes it is useful to set a minimum number of data points that must be present before the averaging is done. For example, in calculating monthly averages, it may be unwise to not account for data capture if some months only have a few valid points.
 
-When a data capture threshold is set through `data.thresh` it is necessary for `timeAverage()` to know what the original time interval of the input time series is. The function will try and calculate this interval based on the most common time gap (and will print the assumed time gap to the screen). This works fine most of the time but there are occasions where it may not e.g. when very few data exist in a data frame. In this case the user can explicitly specify the interval through `interval` in the same format as `avg.time` e.g. `interval = "month"`. It may also be useful to set `start.date` and `end.date` if the time series do not span the entire period of interest. For example, if a time series ended in October and annual means are required, setting `end.date` to the end of the year will ensure that the whole period is covered and that `data.thresh` is correctly calculated. The same also goes for a time series that starts later in the year where `start.date` should be set to the beginning of the year.
+When a data capture threshold is set through `data.thresh` it is necessary for `timeAverage()` to know what the original time interval of the input time series is. The function will try and calculate this interval based on the most common time gap (and will print the assumed time gap to the screen). This works fine most of the time but there are occasions where it may not e.g., when very few data exist in a data frame. In this case the user can explicitly specify the interval through `interval` in the same format as `avg.time` e.g., `interval = "month"`. It may also be useful to set `start.date` and `end.date` if the time series do not span the entire period of interest. For example, if a time series ended in October and annual means are required, setting `end.date` to the end of the year will ensure that the whole period is covered and that `data.thresh` is correctly calculated. The same also goes for a time series that starts later in the year where `start.date` should be set to the beginning of the year.
 
 All these issues are (hopefully) dealt with by the `timeAverage()` function. The options are shown below, but as ever it is best to check the help that comes with the [openair]{.pkg} package.
 
@@ -228,7 +228,7 @@ twoweek
 
 Note that `timeAverage()` has a `type` option to allow for the splitting of variables by a grouping variable. The most common use for `type` is when data are available for different sites and the averaging needs to be done on a per site basis. That being said, unlike other data utility functions, `timeAverage()` will *warn* if there are duplicate dates in the input data frame but still allow the calculation to continue; occasionally averaging across multiple sites may be a legitimate thing to do (e.g., averaging across many low-cost air quality sensors to calculate a more accurate 'consensus' time series).
 
-First, retaining by site averages:
+First, averaging by site:
 
 ```{r}
 #| label: timeAvType
@@ -254,7 +254,7 @@ Average all data across sites (drops site and code).
 timeAverage(dat, avg.time = "year")
 ```
 
-`timeAverage()` also works the other way in that it can be used to derive higher temporal resolution data e.g. hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The `timeAverage()` function when used to 'expand' data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As it can be seen, the first line is repeated four times and so on.
+`timeAverage()` also works the other way in that it can be used to derive higher temporal resolution data e.g., hourly from daily data or 15-minute from hourly data. An example of usage would be the combining of daily mean particle data with hourly meteorological data. There are two ways these two data sets can be combined: either average the meteorological data to daily means or calculate hourly means from the particle data. The `timeAverage()` function when used to 'expand' data in this way will repeat the original values the number of times required to fill the new time scale. In the example below we calculate 15-minute data from hourly data. As can be seen, the first line is repeated four times and so on.
 
 ```{r}
 #| label: timeAvgFill
@@ -286,11 +286,11 @@ calcPercentile(
 
 Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a *correlation matrix*, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by @friendly2002 and @Sarkar2008.
 
-The `corPlot()` function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle --- imagine a 'fuzz' of points with no relationship between them.
+The `corPlot()` function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of a scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle --- imagine a 'fuzz' of points with no relationship between them.
 
-With many variables it can be difficult to see relationships between variables i.e. which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if `cluster = TRUE`.)
+With many variables it can be difficult to see relationships between variables i.e., which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if `cluster = TRUE`).
 
-An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure it can be seen the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0.84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e. for a single panel plot.
+An example of the `corPlot()` function is shown in @fig-corPlot. In this figure it can be seen that the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0.84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e., for a single panel plot.
 
 ```{r}
 #| label: fig-corPlot
@@ -301,7 +301,7 @@ An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure 
 corPlot(mydata, dendrogram = TRUE)
 ```
 
-Note also that the `corPlot()` accepts a `type` option, so it is possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
+Note also that `corPlot()` accepts a `type` option, so it is possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
 
 ```{r}
 #| label: corPlot-season

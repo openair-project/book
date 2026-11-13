@@ -4,11 +4,11 @@ author: David Carslaw
 
 # Production of HYSPLIT trajectory files {#sec-prod-hyspl-traj}
 
-As discussed in @sec-trajPlot, [openair]{.pkg} can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a WSP webserver to make it easy to import 96-hour back trajectory data. Several users have requested how they can run HYSPLIT themselves e.g. for different trajectory start heights or for many locations. It should be noted that HYSPLIT is a powerful and flexible model and to exploit its full potential, users should consider using HYSPLIT directly [@stein2015].
+As discussed in @sec-trajPlot, [openair]{.pkg} can import pre-calculated trajectory data for specified locations for whole years run at a 3-hour interval. The data are stored on a WSP webserver to make it easy to import 96-hour back trajectory data. Several users have asked how they can run HYSPLIT themselves e.g., for different trajectory start heights or for many locations. It should be noted that HYSPLIT is a powerful and flexible model and to exploit its full potential, users should consider using HYSPLIT directly [@stein2015].
 
 A well-written R package called [splitr]{.pkg} by Rich Iannone provides a lot of flexibility for working with different meteorological inputs and HYSPLIT options. Users should consider [splitr]{.pkg} if they want more control over HYSPLIT options --- especially for the detailed investigation of short time periods such as pollution episodes where higher resolution meteorological data is useful.
 
-The focus of this section is to run HYSPLIT with the Reanalysis meteorological data over periods of a year to allow for the analysis of longer-term air quality data analysis. The code below assumes that full years are run, but it could be adapted for shorter periods. There are three main parts to producing trajectory files:
+The focus of this section is to run HYSPLIT with the Reanalysis meteorological data over periods of a year to support the analysis of longer-term air quality data. The code below assumes that full years are run, but it could be adapted for shorter periods. There are three main parts to producing trajectory files:
 
 1.  Download and install the [NOAA HYSPLIT model](https://www.ready.noaa.gov/HYSPLIT.php), somewhere with write access (see below).
 
@@ -65,7 +65,7 @@ getMet <- function(
 }
 ```
 
-The function will download monthly met files (each about 120 MB) to the chosen directory. Note that the met data files only need be downloaded once. For example, to download files for 2013:
+The function will download monthly met files (each about 120 MB) to the chosen directory. Note that the met data files only need to be downloaded once. For example, to download files for 2013:
 
 ```{r}
 #| label: getMet2
@@ -85,9 +85,9 @@ source_gist(
 )
 ```
 
-Now there should be several loaded functions, including `run_hysplit()`. To run HYSPLIT, have a look at the examples [here](https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5).
+Now there should be several loaded functions, including `run_hysplit()`. To run HYSPLIT, have a look at the examples in the [GitHub gist](https://gist.github.com/davidcarslaw/c67e33a04ff6e1be0cd7357796e4bdf5).
 
-For example
+For example:
 
 ```{r}
 #| label: run_hysplit
@@ -119,7 +119,7 @@ Once run it is then advisable to store the data somewhere. Save it like:
 saveRDS(data_out, file = "~/trajProc/myTrajData.rds")
 ```
 
-Then it is easy to read in later and use e.g.
+Then it is easy to read in later and use e.g.,
 
 ```{r}
 #| label: importTrajLocal

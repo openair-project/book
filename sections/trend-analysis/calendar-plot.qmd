@@ -8,13 +8,13 @@ author: David Carslaw
 
 Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data on the time scale of days or months. The `calendarPlot()` function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, `calendarPlot()` overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.
 
-`calendarPlot()` can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g. when the daily mean concentration is greater than 50 μg m^-3^.
+`calendarPlot()` can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g., when the daily mean concentration is greater than 50 μg m^-3^.
 
-The `calendarPlot()` function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e. intervals of concentrations that are expressed in ways like 'very good', 'good', 'poor' and so on.
+The `calendarPlot()` function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e., intervals of concentrations that are expressed in ways like 'very good', 'good', 'poor' and so on.
 
 ## Calendar examples
 
-The function is called in the usual way. As a minimum, a data frame, pollutant and year is required. So to show O~3~ concentrations for each day in 2003 (@fig-calendarPlot). Note that if `year` is not supplied the full data set will be used.
+The function is called in the usual way. As a minimum, a data frame and pollutant are required. For example, @fig-calendarPlot shows O~3~ concentrations for each day in 2003. Note that if `year` is not supplied the full data set will be used.
 
 ```{r}
 #| label: fig-calendarPlot
@@ -25,11 +25,11 @@ library(openair)
 calendarPlot(mydata, pollutant = "o3", year = 2003)
 ```
 
-It is sometimes useful to annotate the plots with other information. It is possible to show the daily mean wind angle, which can also be scaled to wind speed. The idea here being to provide some information on meteorological conditions on each day. Another useful option is to set `annotate = "value"` in which case the daily concentration will be shown on each day. Furthermore, it is sometimes useful to highlight particular values more clearly. For example, to highlight daily mean PM~10~ concentrations above 50 μg m^-3^. This is where setting `lim` (a concentration limit) is useful. In setting `lim` the user can then differentiate the values below and above `lim` by colour of text, size of text and type of text e.g. plain and bold.
+It is sometimes useful to annotate the plots with other information. It is possible to show the daily mean wind angle, which can also be scaled to wind speed. The idea here being to provide some information on meteorological conditions on each day. Another useful option is to set `annotate = "value"` in which case the daily concentration will be shown on each day. Furthermore, it is sometimes useful to highlight particular values more clearly. For example, to highlight daily mean PM~10~ concentrations above 50 μg m^-3^. This is where setting `lim` (a concentration limit) is useful. In setting `lim` the user can then differentiate the values below and above `lim` by colour of text, size of text and type of text e.g., plain and bold.
 
 @fig-calendarPlotExceed highlights those days where PM~10~ concentrations exceed 50 μg m^-3^ by making the annotation for those days bigger, bold and orange. Plotting the data in this way clearly shows the days where PM~10~ \> 50 μg m^-3^.
 
-Other [openair]{.pkg} functions can be used to plot other statistics. For example, `rollingMean()` could be used to calculate rolling 8-hour mean O~3~ concentrations. Then, `calendarPlot()` could be used with `statistic = "max"` to show days where the maximum daily rolling 8-hour mean O~3~ concentration is greater than a certain threshold e.g. 100 or 120 μg m^-3^.
+Other [openair]{.pkg} functions can be used to plot other statistics. For example, `rollingMean()` could be used to calculate rolling 8-hour mean O~3~ concentrations. Then, `calendarPlot()` could be used with `statistic = "max"` to show days where the maximum daily rolling 8-hour mean O~3~ concentration is greater than a certain threshold e.g., 100 or 120 μg m^-3^.
 
 ```{r}
 #| label: fig-calendarPlotExceed
@@ -53,7 +53,7 @@ To show wind angle, scaled to wind speed (@fig-calendarPlot2).
 
 ```{r}
 #| label: fig-calendarPlot2
-#| fig-cap: A `calendarPlot()` for O~3~ concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e. the longer the arrow, the higher the wind speed. It shows for example high O~3~ concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
+#| fig-cap: A `calendarPlot()` for O~3~ concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e., the longer the arrow, the higher the wind speed. It shows for example high O~3~ concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
 #| fig-width: 8
 #| fig-height: 6
 calendarPlot(mydata, pollutant = "o3", year = 2003, windflow = TRUE)
@@ -169,11 +169,11 @@ calendarPlot(
 
 The UK has an air quality index for O~3~, NO~2~, PM~10~ and PM~2.5~ described in detail at <https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi> and @COMEAP2011. The index is most relevant to air quality forecasting, but is used widely for public information. Most other countries have similar indexes. Note that the indexes are calculated for different averaging times dependent on the pollutant: rolling 8-hour mean for O~3~, hourly means for NO~2~ and a fixed 24-hour mean for PM~10~ and PM~2.5~.
 
-In the code below the labels and breaks are defined for each pollutant to make it easier to use the index in the `calendarPlot()` function.
+In the code below, DAQI data are imported directly and the index labels defined, making it easy to use the index in the `calendarPlot()` function.
 
 ```{r}
 #| label: fig-AQIndex
-#| fig-cap: A DAQI `calendarPlot()`
+#| fig-cap: A DAQI `calendarPlot()` for PM~10~ at Port Talbot in 2021.
 #| fig-width: 8
 #| fig-height: 6
 

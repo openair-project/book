@@ -1,7 +1,7 @@
 ---
 author: David Carslaw
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -32,8 +32,8 @@ The Theil-Sen method dates back to work by Theil in 1950, later extended
 by Sen in 1968 [@theil50; @sen1968]. It is one of those methods that required the
 invention of fast computers to be practical. The basic idea is as
 follows. Given a set of $n$ $x$, $y$ pairs, the slopes between all pairs
-of points are calculated. Note, the number of slopes can increase by
-$\approx$ $n^2$ so that the number of slopes can increase rapidly as the
+of points are calculated. Note, the number of slopes grows as
+$\approx$ $n^2/2$, so it increases rapidly as the
 length of the data set increases. The Theil-Sen estimate of the slope is
 the median of all these slopes. The advantage of using the Theil-Sen
 estimator is that it tends to yield accurate confidence intervals even
@@ -92,7 +92,7 @@ pollutant concentrations over several years. However, it can be used to
 calculate the trend in any numeric variable. It calculates monthly mean
 values from daily, hourly or higher time resolution data, as well as
 working directly with monthly means. Whether it is meaningful to
-calculate trends over shorter periods of time (e.g. 2 years) depends
+calculate trends over shorter periods of time (e.g., 2 years) depends
 very much on the data. It may well be that statistically significant
 trends can be detected over relatively short periods but it is another
 matter whether it matters. Because seasonal effects can be important for
@@ -121,7 +121,7 @@ ppb/year. The $\ast\ast\ast$ show that the trend is significant to the
 
 ```{r}
 #| label: fig-TheilSen1
-#| fig-cap:  Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O3. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The '∗∗∗' show that the trend is significant to the 0.001 level.
+#| fig-cap: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O~3~. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22--0.50 ppb/year. The '∗∗∗' show that the trend is significant to the 0.001 level.
 #| fig-width: 5
 #| fig-height: 4
 #| out-width: 70%
@@ -139,8 +139,8 @@ TheilSen(
 
 Because the function runs simulations to estimate the uncertainty in the
 slope, it can take a little time for all the calculations to finish.
-These printed results show that in this case the trend in O~3~ was +0.37
-units (i.e. ppb) per year as an average over the entire period. It also
+These results show that in this case the trend in O~3~ was +0.37
+units (i.e., ppb) per year as an average over the entire period. It also
 shows the 95% confidence intervals in the trend ranged between 0.22 to
 0.50 ppb/year. Finally, the significance level in this case is very
 high; providing very strong evidence that concentrations of O~3~
@@ -153,16 +153,16 @@ code would be as follows.
 #| label: TheilSen-alpha
 #| eval: false
 TheilSen(
-  mydata, 
-  pollutant = "o3", 
-  ylab = "ozone (ppb)", 
+  mydata,
+  pollutant = "o3",
+  ylab = "ozone (ppb)",
   alpha = 0.01
   )
 ```
 
 Sometimes it is useful to consider a subset of data, perhaps by
 excluding some years. This is easy with the `filter()` function. The
-following code calculates trends for years greater than 1999 i.e. from
+following code calculates trends for years greater than 1999 i.e., from
 2000 onward.
 
 ```{r}
@@ -175,20 +175,20 @@ TheilSen(
 )
 ```
 
-It is also possible to calculate trends in many other ways e.g. by wind
+It is also possible to calculate trends in many other ways e.g., by wind
 direction. Considering how trends vary by wind direction can be
 extremely useful because the influence of different sources invariably
 depends on the direction of the wind. The `TheilSen()` function splits the
-wind direction into 8 sectors i.e. N, NE, E etc. The Theil-Sen slopes
+wind direction into 8 sectors i.e., N, NE, E etc. The Theil-Sen slopes
 are then calculated for each direction in turn. This function takes
 rather longer to run because the simulations need to be run eight times
 in total. Considering concentrations of O~3~ again, the output is shown
 in @fig-TheilSen2. Note that this plot is specifically laid out to
 assist interpretation, with each panel located at the correct point on
 the compass. This makes it easy to see immediately that there is
-essentially no trend in O~3~ for southerly winds i.e. where the road
+essentially no trend in O~3~ for southerly winds i.e., where the road
 itself has the strongest influence. On the other hand the strongest
-evidence of increasing O~3~ are for northerly winds, where the influence
+evidence of increasing O~3~ is for northerly winds, where the influence
 of the road is much less. The reason that there is no trend in O~3~ for
 southerly winds is that there is always a great excess of NO, which
 reacts with O~3~ to form NO~2~. At this particular location it will
@@ -232,9 +232,9 @@ fractions of) the time series spans.
 #| label: MannKen
 #| eval: false
 TheilSen(
-  mydata, 
-  pollutant = "o3", 
-  deseason = TRUE, 
+  mydata,
+  pollutant = "o3",
+  deseason = TRUE,
   slope.percent = TRUE
   )
 ```
@@ -278,11 +278,11 @@ into a variable:
 
 ```{r}
 #| label: MKout
-#| fig.keep: none
+#| fig-keep: none
 MKresults <- TheilSen(
-  mydata, 
-  pollutant = "o3", 
-  deseason = TRUE, 
+  mydata,
+  pollutant = "o3",
+  deseason = TRUE,
   type = "wd")
 ```
 
@@ -364,19 +364,19 @@ a reference: sites to the left show declining NO~2~, those to the right
 an increase. The resulting plot is shown in
 @fig-TheilSenSummary.
 
-The forest plot makes clear that NO~2~ declined significantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source. 
+The forest plot makes clear that NO~2~ declined significantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source.
 
 ::: callout-tip
 ## Flexibility of the `type` argument
 
 The same workflow applies to any conditioning variable recognised by
 `TheilSen()`. For example, setting `type = "wd"` splits the data into
-eight (or more) wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in `$data[[2]]` can be post-processed and visualised in the same way as shown here.
+eight wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in `$data[[2]]` can be post-processed and visualised in the same way as shown here.
 :::
 
 ```{r}
 #| label: fig-TheilSenSummary
-#| fig-cap: "Forest plot of Theil-Sen slopes for NO~2~ at 50 UK urban sites (2016--2025), split by site type. Points show the estimated annual trend (µg m^−3^ yr^−1^) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."
+#| fig-cap: "Forest plot of Theil-Sen slopes for NO~2~ at 50 UK urban sites (2016--2025), split by site type. Points show the estimated annual trend (μg m^-3^ yr^-1^) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."
 #| fig-width: 8
 #| fig-height: 10
 
@@ -415,7 +415,7 @@ ts_out <- TheilSen(
 )
 
 # --- 4. Extract slope and uncertainties ---
-ts_results <- ts_out$data[[2]] 
+ts_results <- ts_out$data[[2]]
 
 # --- 5. Summary ordered plot ---
 # Order sites within each group by slope (low to high) using a single factor
@@ -433,7 +433,7 @@ plot_data <- ts_results |>
 
 ggplot(plot_data, aes(x = slope, y = site, colour = site_type)) +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey50") +
-  geom_errorbar(aes(xmin = lower, xmax = upper), height = 0.3) +
+  geom_errorbar(aes(xmin = lower, xmax = upper), width = 0.3) +
   geom_point(size = 2) +
   facet_wrap(~ site_type, scales = "free_y", ncol = 1) +
   scale_colour_brewer(palette = "Set1", guide = "none") +
