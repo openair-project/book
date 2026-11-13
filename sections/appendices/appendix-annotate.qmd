@@ -6,7 +6,7 @@ execute:
   message: false
 ---
 
-# Customising [openair]{.pkg} plots {#sec-annotating-openair}
+# Customising `openair` plots {#sec-annotating-openair}
 
 A frequently asked question about [openair]{.pkg} and a commonly requested feature is how to annotate plots. Since all [openair]{.pkg} functions now return [ggplot2]{.pkg} objects, users have considerably more flexibility in adding annotations using the extensive set of tools available in [ggplot2]{.pkg} and its extensions. Embedding annotation options directly inside every [openair]{.pkg} function would make them unnecessarily complex and still not cover every customisation users may want. Instead, because plots are returned as standard [ggplot2]{.pkg} objects, users can build annotations incrementally, adding layers as needed.
 

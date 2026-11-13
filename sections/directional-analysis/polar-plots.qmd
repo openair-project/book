@@ -304,10 +304,10 @@ As an example of usage we will consider the relationship between PM~2.5~ and PM~
 library(worldmet) # to access met data
 library(tidyverse)
 
-har <- importUKAQ("har", year = 2013)
+har <- importUKAQ("har", source = "aurn", year = 2013)
 
 # import met data from nearby site (Benson)
-met <- import_isd_hourly(code = "036580-99999", year = 2013)
+met <- import_isd_hourly(code = "036580-99999", year = 2013, source = "fwf")
 
 # merge AQ and met but don't use modelled ws and wd
 har <- inner_join(

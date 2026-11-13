@@ -217,7 +217,7 @@ It is also possible to use hexagonal binning to gain an idea about trajectory fr
 #| fig-height: 5
 filter(traj, lat > 30, lat < 70, lon > -50, lon < 20) |>
   trajLevel(
-    method = "hexbin",
+    statistic = "hexbin",
     cols = "turbo",
     xbin = 40
   )
@@ -564,6 +564,8 @@ As an example we will consider back trajectories for London in 2011.
 ## provides traj and kc1
 rm(traj, kc1)
 load("../../assets/data/clusterData.RData")
+## the saved data use an older column name; match what importUKAQ() returns
+kc1 <- dplyr::rename(kc1, pm2.5 = pm25)
 ```
 
 First, the back trajectory data for London is imported together with the air pollution data for the North Kensington site (KC1).
@@ -572,7 +574,7 @@ First, the back trajectory data for London is imported together with the air pol
 #| label: importTrajKC1
 #| eval: false
 traj <- importTraj(site = "london", year = 2011)
-kc1 <- importUKAQ(site = "kc1", year = 2011)
+kc1 <- importUKAQ(site = "kc1", source = "aurn", year = 2011)
 ```
 
 The clusters are straightforward to calculate. In this case the back trajectory data (`traj`) is supplied and the angle-based distance matrix is used. Furthermore, we choose to calculate 6 clusters and choose a specific colour scheme. In this case we read the output from `trajCluster()` into a variable `clust` so that the results can be post-processed.
@@ -611,6 +613,7 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 
 ```{r}
 #| label: mergeClustTraj
+#| dependson: load-cluster-data
 # use inner join - so only where we have data in each
 kc1 <- inner_join(
   kc1 |> mutate(date = as.POSIXct(date, tz = "GMT")),
