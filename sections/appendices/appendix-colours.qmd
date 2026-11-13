@@ -64,7 +64,7 @@ To better control colours, you can use the `colourOpts()` function instead of a 
 
 - `begin` and `end` allow you to select a subset of the palette. For example, `begin = 0.25` and `end = 0.75` would select the middle 50% of the palette, which can be useful for avoiding very light or very dark colours.
 
-- `alpha` allows you to control the transparency of the colours. This may be useful to combat over-plotting on a particularly busy `scatterPlot()`, or many be of help if you want to, e.g., overlay plots on a map for an infographic or poster.
+- `alpha` allows you to control the transparency of the colours. This may be useful to combat over-plotting on a particularly busy `scatterPlot()`, or may be of help if you want to, e.g., overlay plots on a map for an infographic or poster.
 
 - `saturation` allows you to control the saturation of the colours. Saturation refers to the intensity of the colours, with higher saturation resulting in more vivid colours and lower saturation resulting in more muted colours. `saturation` defaults to `0.5`, with `0` being completely grey and `1` being super-saturated.
 
@@ -105,7 +105,7 @@ It is the user's responsibility to choose an accessible and appropriate palette 
 
 ## Gallery
 
-An application has been developed to preview all of the colour schemes available in [openair]{.pkg}. This has been stored in a *GitHub gist* (some code that can be shared publicly). Copy the code below and paste it into R, which will load the necessary needed to launch this application. **Note that the below chunk potentially installs or updates three new packages.**
+An application has been developed to preview all of the colour schemes available in [openair]{.pkg}. This has been stored in a *GitHub gist* (some code that can be shared publicly). Copy the code below and paste it into R, which will load the packages needed to launch this application. **Note that the below chunk potentially installs or updates three new packages.**
 
 ```{r}
 #| label: shiny

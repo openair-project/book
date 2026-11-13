@@ -36,7 +36,7 @@ scatter_object$data
 scatter_object$plot
 ```
 
- To make life easier, lets load the [ggplot2]{.pkg} package:
+To make life easier, let's load the [ggplot2]{.pkg} package:
 
 ```{r}
 #| label: load-ggplot2
@@ -282,7 +282,7 @@ multipanel +
 
 ### Assembly plots
 
-A few `openair` plots are actually multiple plots in one. You can typically tell this because the different "panels" are arranged on an irregular grid (e.g., `timeVariation()`) or are comprised of very different plot types (e.g., `conditionalEval()`). These plots are powered by the [patchwork]{.pkg} package, which makes it simple to extract and modify sub-panels. For `timeVariation()`, the "top" panel can be accessed with `[[1]]` and the "bottom" three with `[[2]]`, `[[3]]`, and `[[4]]`.^[Note that it may easier to use `variationPlot()` and use [patchwork]{.pkg} directly yourself, depending on your use-case.]
+A few `openair` plots are actually multiple plots in one. You can typically tell this because the different "panels" are arranged on an irregular grid (e.g., `timeVariation()`) or are comprised of very different plot types (e.g., `conditionalEval()`). These plots are powered by the [patchwork]{.pkg} package, which makes it simple to extract and modify sub-panels. For `timeVariation()`, the "top" panel can be accessed with `[[1]]` and the "bottom" three with `[[2]]`, `[[3]]`, and `[[4]]`.^[Note that it may be easier to use `variationPlot()` and use [patchwork]{.pkg} directly yourself, depending on your use-case.]
 
 ```{r}
 #| label: fig-timevariation-annotate
@@ -299,7 +299,7 @@ plot(timevar_no2)
 
 One of the sets of arguments passed through `...` could be described as "facet" arguments, as these influence the appearance of 'faceted' (i.e., multi-panel) plots. All of these arguments get passed straight through to either `ggplot2::facet_wrap()` or `ggplot2::facet_grid()` - see the documentation for these functions to learn more.
 
-To demonstrate, lets consider this heatmap plot:
+To demonstrate, let's consider this heatmap plot:
 
 ```{r}
 #| label: fig-heatmap-1
@@ -486,7 +486,7 @@ The package documentation for [patchwork]{.pkg} is excellent and can be found [h
 
 ```{r}
 #| label: fig-patchwork-assembly
-#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly. The `tag` argument is being used to label each one with a letter "
+#| fig-cap: "Using the patchwork package to combine multiple openair plots into one assembly. The `tag` argument is being used to label each one with a letter."
 library(patchwork)
 
 p_varplot_hour <- variationPlot(

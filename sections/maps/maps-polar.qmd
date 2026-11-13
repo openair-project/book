@@ -31,7 +31,7 @@ names(sunderland)
 
 ## Overview
 
-The easiest way to get polar plots on a map is through the use of the all-in-one mapping functions. These are all named using the pattern `{function-name}Map`, where `{function_name}` is a short hand for the equivalent [openair]{.pkg} function. A reference is provided in @tbl-dirAnalysisRef.
+The easiest way to get polar plots on a map is through the use of the all-in-one mapping functions. These are all named using the pattern `{function-name}Map`, where `{function-name}` is a short hand for the equivalent [openair]{.pkg} function. A reference is provided in @tbl-dirAnalysisRef.
 
 ```{r}
 #| label: tbl-dirAnalysisRef
@@ -73,7 +73,7 @@ Effectively all of these functions have very similar arguments, although some ar
 
 -   The "scale" arguments (e.g., `limits` for `polarMap()`). By specifying a scale, all polar markers will use the same colour scale, making them quantitatively comparable to one another. Specifying a scale will also draw a shared legend at the top-right of the plot, unless `draw.legend` is set to `FALSE`.
 
--   `alpha`: Controls the transparency of the polar markers, as sometimes making them semi-transparent may be desirable (for examples, if they are slightly overlapping, or seeing more of the basemap is useful). `alpha` should be a number between 0 and 1, where 1 is completely opaque and 0 is completely transparent.
+-   `alpha`: Controls the transparency of the polar markers, as sometimes making them semi-transparent may be desirable (for example, if they are slightly overlapping, or seeing more of the basemap is useful). `alpha` should be a number between 0 and 1, where 1 is completely opaque and 0 is completely transparent.
 
 -   The two "marker diameter" arguments, which control the size and resolution of the polar markers. It is assumed that circular markers are desired, so any number provided will be used as the marker width *and* height. If, for whatever reason, a non-circular marker is desired, a vector in the form `c(width, height)` can be provided.
 
@@ -306,7 +306,7 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 
 -   Static maps naturally do not have the `popup` and `label` arguments. However, a benefit of being based in [ggplot2]{.pkg} is that limited further customisation is possible, such as manually adding labels using `ggplot2::geom_sf_label()`.
 
--   HTML maps use [leaflet]{.pkg}, whereas static maps use [ggplot2]{.pkg} and [ggspatial]{.pkg}. The user-facing significance of this is that the `providers` arguments are slightly different.
+-   HTML maps use [leaflet]{.pkg}, whereas static maps use [ggplot2]{.pkg} and [ggspatial]{.pkg}. The user-facing significance of this is that the `provider` arguments are slightly different.
 
 ::: {.callout-note collapse="true"}
 ### View Providers

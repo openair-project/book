@@ -63,7 +63,7 @@ smoothTrend(
 )
 ```
 
-The `smoothTrend` function share many of the functionalities of the `TheilSen` function. @fig-smoothwd shows the result of applying this function to O~3~ concentrations. The code that produced @fig-smoothwd was:
+The `smoothTrend` function shares many of the functionalities of the `TheilSen` function. @fig-smoothwd shows the result of applying this function to O~3~ concentrations. The code that produced @fig-smoothwd was:
 
 ```{r}
 #| label: fig-smoothwd
@@ -73,7 +73,7 @@ The `smoothTrend` function share many of the functionalities of the `TheilSen` f
 smoothTrend(mydata, pollutant = "o3", deseason = TRUE, type = "wd")
 ```
 
-The `smoothTrend` function can easily be used to gain a large amount of information on trends easily. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
+The `smoothTrend` function can easily be used to gain a large amount of information on trends. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
 
 ```{r}
 #| label: fig-smoothwdSeason

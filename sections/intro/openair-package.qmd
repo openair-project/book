@@ -42,7 +42,7 @@ The [openair]{.pkg} package applies certain constraints on input data requiremen
 
 -   **The wind speed and wind direction should be named `ws` and `wd`**, respectively (note again, lower case). Wind directions follow the UK Met Office format and are represented as degrees from north e.g. 90 degrees is east. North is taken to be 360 degrees
 
--   Where fields should have numeric data e.g. concentrations of NO~x~, then the user should ensure that no other characters are present in the column, accept maybe something that represents missing data e.g. 'no data'.
+-   Where fields should have numeric data e.g. concentrations of NO~x~, then the user should ensure that no other characters are present in the column, except maybe something that represents missing data e.g. 'no data'.
 
 -   Other variables names can be upper/lower case *but should not start with a number*. If column names do have white spaces, R will automatically replace them with a full-stop. While `PM2.5` as a field name is perfectly acceptable, it is a pain to type it in---better just to use `pm25` ([openair]{.pkg} will recognise pollutant names like this and automatically format them as PM~2.5~ in plots).
 
@@ -50,7 +50,7 @@ The [openair]{.pkg} package applies certain constraints on input data requiremen
 
 While not specific to [openair]{.pkg}, dealing with dates and times is likely to be an issue that needs to be dealt with at some point. There is no getting away from the fact that dates and times can be complicated with issues such as time zones and daylight saving time i.e. when the clocks change for summer. This is a potentially big topic to consider and it is only considered in outline here.
 
-For a lot of [openair]{.pkg} functions this issue will not be important. While these issues can often be ignored, it is better to be explicit and set the date-time correctly. Two situations where it becomes important is when wanting to show temporal variations in local time and combining data sets that are in different time zones. The former issue can be important (for example) when considering diurnal variations in a pollutant concentration that follows a human activity (such as rush-hour traffic), which follows local time and not GMT/UTC.
+For a lot of [openair]{.pkg} functions this issue will not be important. While these issues can often be ignored, it is better to be explicit and set the date-time correctly. Two situations where it becomes important are when wanting to show temporal variations in local time and combining data sets that are in different time zones. The former issue can be important (for example) when considering diurnal variations in a pollutant concentration that follows a human activity (such as rush-hour traffic), which follows local time and not GMT/UTC.
 
 ::: callout-important
 ## Know your data!
@@ -72,7 +72,7 @@ date_time <- "2/8/2022 11:00"
 dmy_hm(date_time)
 ```
 
-When R formats a date-time correctly is will be shown from 'large to small' i.e. YYYY-MM-DD HH:MM:SS, which provides a clue that it has indeed been formatted correctly.
+When R formats a date-time correctly it will be shown from 'large to small' i.e. YYYY-MM-DD HH:MM:SS, which provides a clue that it has indeed been formatted correctly.
 
 US date time with seconds (month-day-year):
 
@@ -335,7 +335,7 @@ Users can override this option by setting `auto.text` to `FALSE`.
 
 ## Multiple plots on a page {#sec-multiple-plots-page}
 
-We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} makes this a bit easier. As [openair]{.pkg} uses the [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
+We often get asked how to combine multiple plots on one page. Recent changes to [openair]{.pkg} make this a bit easier. As [openair]{.pkg} uses the [ggplot2]{.pkg} for plotting, the [patchwork]{.pkg} extension package makes it easy to combine multiple plots together.
 
 Let's start by creating a few individual plots.
 
@@ -425,4 +425,4 @@ polarmap <- polarMap(polar_data, "nox")
 htmlwidgets::saveWidget(widget = polarmap, file = "polarmap_london_nox.html")
 ```
 
-Another way of sharing analysis produced using [openair]{.pkg} is in [Quarto](https://quarto.org/) (or [Rmarkdown](https://rmarkdown.rstudio.com/)) reports. These well documented on their respective websites.
+Another way of sharing analysis produced using [openair]{.pkg} is in [Quarto](https://quarto.org/) (or [Rmarkdown](https://rmarkdown.rstudio.com/)) reports. These are well documented on their respective websites.

@@ -33,7 +33,7 @@ polarFreq(mydata, type = "year")
 
 The `polarFreq` function can also usefully consider pollutant concentrations. @fig-polarFreqMean shows the mean concentration of SO~2~ by wind speed and wind direction and clearly highlights that SO~2~ concentrations tend to be highest for easterly winds and for 1998 in particular.
 
-By weighting the concentrations by the frequency of occasions the wind is from a certain direction and has a certain speed, gives a better indication of the conditions that dominate the overall mean concentrations. @fig-polarFreqWeightedMean shows the weighted mean concentration of SO~2~ and highlights that annual mean concentrations are dominated by south-westerly winds i.e. contributions from the road itself --- and not by the fewer higher hours of concentrations when the wind is easterly. However, 2003 looks interesting because for that year, significant contributions to the overall mean were due to easterly wind conditions.
+Weighting the concentrations by the frequency of occasions the wind is from a certain direction and has a certain speed gives a better indication of the conditions that dominate the overall mean concentrations. @fig-polarFreqWeightedMean shows the weighted mean concentration of SO~2~ and highlights that annual mean concentrations are dominated by south-westerly winds i.e. contributions from the road itself --- and not by the fewer higher hours of concentrations when the wind is easterly. However, 2003 looks interesting because for that year, significant contributions to the overall mean were due to easterly wind conditions.
 
 These plots when applied to other locations can reveal some useful features about different sources. For example, it may be that the highest concentrations measured only occur infrequently, and the weighted mean plot can help show this.
 
@@ -41,7 +41,7 @@ The code required to make @fig-polarFreqMean and @fig-polarFreqWeightedMean is s
 
 ```{r}
 #| label: fig-polarFreqMean
-#| fig-cap: Use of `polarFreq` function to plot mean SO2 concentrations (ppb) by wind speed/directions and year.
+#| fig-cap: Use of `polarFreq` function to plot mean SO~2~ concentrations (ppb) by wind speed/directions and year.
 #| fig-width: 8
 #| fig-height: 8
 polarFreq(
@@ -72,7 +72,7 @@ Users are encouraged to try out other plot options. However, one potentially use
 
 ```{r}
 #| eval: false
-# wind rose for just 2000 and 2003
+# polar frequency plot for just 2000 and 2003
 polarFreq(
   selectByDate(mydata, year = c(2000, 2003)),
   cols = "turbo",

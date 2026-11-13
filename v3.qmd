@@ -50,7 +50,7 @@ polarplot$plot +
   )
 ```
 
-Through the use of functions like `ggplot2::theme()`, nearly every individual visual element of a plot can be tweaked. For example, lets create a "minimalist" `polarPlot()` by setting a global [ggplot2]{.pkg} theme.
+Through the use of functions like `ggplot2::theme()`, nearly every individual visual element of a plot can be tweaked. For example, let's create a "minimalist" `polarPlot()` by setting a global [ggplot2]{.pkg} theme.
 
 ```{r}
 # set a global ggplot2 theme
@@ -80,7 +80,7 @@ Behind-the-scenes, [ggplot2]{.pkg} unlocks a lot of capability that was historic
 
 As with any major software update, there are some 'breaking' changes that may affect existing code. Some of the most important are:
 
-- `summaryPlot()`, `calcFno2()` and `linearRelation()` have all been removed. These functions are particularly old, behave inconsistently to the rest of the package, and haven't been promoted in some time. It is expected that new functions will replace some of their capability in a future update. Similarly, `drawOpenKey()` has been removed due to no longer being necessary.
+- `summaryPlot()`, `calcFno2()` and `linearRelation()` have all been removed. These functions are particularly old, behave inconsistently to the rest of the package, and haven't been promoted in some time. It is expected that new functions will replace some of their capability in a future update.
 
 - Any existing [lattice]{.pkg}-based annotations may no longer work, or behave unpredictably. Any annotations are likely possible using [ggplot2]{.pkg} functions such as `ggplot2::annotate()`, `ggplot2::theme()` or `ggplot2::guides()`.
 

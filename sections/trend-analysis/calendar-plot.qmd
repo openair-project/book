@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Purpose
 
-Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data for data on the time scale of days or months. The `calendarPlot` function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, `calendarPlot` overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.
+Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data on the time scale of days or months. The `calendarPlot` function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, `calendarPlot` overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.
 
 `calendarPlot` can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g. when the daily mean concentration is greater than 50 μg m^-3^.
 
@@ -33,7 +33,7 @@ Other [openair]{.pkg} functions can be used to plot other statistics. For exampl
 
 ```{r}
 #| label: fig-calendarPlotExceed
-#| fig-cap: A `calendarPlot()` for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM~10~ >50 μg m^-3^. The numbers show the PM~10~ concentration in μg m^-3^.
+#| fig-cap: A `calendarPlot()` for PM~10~ concentrations in 2003 with annotations highlighting those days where the concentration of PM~10~ >50 μg m^-3^. The numbers show the PM~10~ concentration in μg m^-3^.
 #| fig-width: 8
 #| fig-height: 6
 calendarPlot(
@@ -203,7 +203,7 @@ labels <- c(
 calendarPlot(
   # just get pm10 data
   mydata = subset(pt4_daqi, pollutant == "pm10"),
-  # out "pollutant" is the poll_index column
+  # our "pollutant" is the poll_index column
   pollutant = "poll_index",
   # our breaks - use 0.5 as the breaks need to be between indices
   breaks = seq(0.5, 10.5, 1),

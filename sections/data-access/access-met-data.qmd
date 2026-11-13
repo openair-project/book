@@ -65,7 +65,7 @@ windRose(dublin_met)
 
 ## Linking with air quality data {#sec-link-aq}
 
-Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a `date` column in each data set that make the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g. `ws`, `wd` and `air_temp`, as is the case with most data accessible as described in @sec-importUKAQ. In this case, the aim is to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.
+Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a `date` column in each data set that makes the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g. `ws`, `wd` and `air_temp`, as is the case with most data accessible as described in @sec-importUKAQ. In this case, the aim is to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.
 
 ```{r}
 #| label: linkaqmet

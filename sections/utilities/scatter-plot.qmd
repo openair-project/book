@@ -10,7 +10,7 @@ Scatter plots are extremely useful and a very commonly used analysis technique f
 
 There is less need for this function now that [ggplot2]{.pkg} is available, but it still has some benefits for interactive use.
 
--  It deals with wind speed and wind direction data correctly. For example `type = "wd"` will produce a 8 panel plot by wind sector. It can also add 'wind flow' arrows to scatter plots.
+-  It deals with wind speed and wind direction data correctly. For example `type = "wd"` will produce an 8 panel plot by wind sector. It can also add 'wind flow' arrows to scatter plots.
 
 -   A smooth fit is automatically added to help reveal the underlying relationship between two variables together with the estimated 95% confidence intervals of the fit. This is in general an extremely useful thing to do because it helps to show the (possibly) non-linear relationship between variables in a very robust way --- or indeed whether the relationship is linear.
 
@@ -50,7 +50,7 @@ Often with several years of data, points are over-plotted and it can be very dif
 
 ### Hexagonal binning {#sec-hexbin}
 
-Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that For `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. By default, `"hexbin"` is transformed using a `"log10"` transform. For a square root transform use `trans = "sqrt"`. To not apply any transformation `trans = NULL` should be used.
+Now it should be possible to make the plot by setting the method option to `method = "hexbin"`, as shown in @fig-scatterPlot2. The benefit of hexagonal binning is that it works equally well with enormous data sets e.g. several million records. In this case @fig-scatterPlot2 provides a clearer indication of the relationship between NO~x~ and NO~2~ than @fig-scatterPlot1 because it reveals where most of the points lie, which is not apparent from @fig-scatterPlot1. Note that for `method = "hexbin"` it can be useful to transform the scale if it is dominated by a few very high values. By default, `"hexbin"` is transformed using a `"log10"` transform. For a square root transform use `trans = "sqrt"`. To not apply any transformation `trans = NULL` should be used.
 
 ```{r}
 #| label: fig-scatterPlot2
@@ -101,7 +101,7 @@ scatterPlot(
 )
 ```
 
-Sometimes it is useful to consider how the relationship between two variables varies by levels of a third. In [openair]{.pkg} this approach is possible by setting the option `type`. When `type` is another numeric variables, four plots are produced for different quantiles of that variable. We illustrate this point by considering how the relationship between NO~x~ and NO~2~ varies with different levels of O~3~. We also take the opportunity to not plot the smooth line, but plot a linear fit instead and force the layout to be a 2 by 2 grid.
+Sometimes it is useful to consider how the relationship between two variables varies by levels of a third. In [openair]{.pkg} this approach is possible by setting the option `type`. When `type` is another numeric variable, four plots are produced for different quantiles of that variable. We illustrate this point by considering how the relationship between NO~x~ and NO~2~ varies with different levels of O~3~. We also take the opportunity to not plot the smooth line, but plot a linear fit instead and force the layout to be a 2 by 2 grid.
 
 ```{r}
 #| label: fig-scatterPlot3

@@ -34,9 +34,9 @@ head(modTest)
 TaylorDiagram(modTest, obs = "o3", mod = "mod", group = "group")
 ```
 
-The plots shown in @fig-TaylorPlots break the Taylor Diagrams into three components to aid interpretation. The first plot (top left) highlights the comparison of variability in for each model compared with the measurements. The variability is represented by the standard deviation of the observed and modelled values. The plot shows that the observed variability (given by the standard deviation) is about 27 (μg m^-3^) and is marked as 'observed' on the x-axis. The magnitude of the variability is measured as the **radial** distance from the origin of the plot (the red line with the arrow shows the standard deviation for model $g$, which is about 25 μg m^-3^). To aid interpretation the radial dashed line is shown from the 'observed' point. Each model is shown in this case by the position of the letters a to i. On this basis it can be seen that models 1, $a$, $b$ have more variability than the measurements (because they extend beyond the dashed line), whereas the others have less variability than the measurements. Models $a$ and $b$ are also closed to the dashed line and therefore have the closest variability compared with the observations.
+The plots shown in @fig-TaylorPlots break the Taylor Diagrams into three components to aid interpretation. The first plot (top left) highlights the comparison of variability for each model compared with the measurements. The variability is represented by the standard deviation of the observed and modelled values. The plot shows that the observed variability (given by the standard deviation) is about 27 (μg m^-3^) and is marked as 'observed' on the x-axis. The magnitude of the variability is measured as the **radial** distance from the origin of the plot (the red line with the arrow shows the standard deviation for model $g$, which is about 25 μg m^-3^). To aid interpretation the radial dashed line is shown from the 'observed' point. Each model is shown in this case by the position of the letters a to i. On this basis it can be seen that models 1, $a$, $b$ have more variability than the measurements (because they extend beyond the dashed line), whereas the others have less variability than the measurements. Models $a$ and $b$ are also close to the dashed line and therefore have the closest variability compared with the observations.
 
-The next statistic to consider is the correlation coefficient, $R$ shown by the top-right Figure in @fig-TaylorPlots. This is shown on the arc and points that lie closest to the x-axis have the highest correlation. The grey lines help to show this specific correlation coefficients. The red arc shows $R$=0.7 for model $g$. The best performing models with the highest $R$ are models $b$ and $g$ with correlation coefficients around 0.7. Two models stand out as having much worse correlations with the observations: models $e$ and $i$ (values of around 0.4).
+The next statistic to consider is the correlation coefficient, $R$ shown by the top-right Figure in @fig-TaylorPlots. This is shown on the arc and points that lie closest to the x-axis have the highest correlation. The grey lines help to show these specific correlation coefficients. The red arc shows $R$=0.7 for model $g$. The best performing models with the highest $R$ are models $b$ and $g$ with correlation coefficients around 0.7. Two models stand out as having much worse correlations with the observations: models $e$ and $i$ (values of around 0.4).
 
 Finally, the lower plot in @fig-TaylorPlots highlights the *centred* root-mean square error (RMS). It is centred because the mean values of the data (observations and predictions) are subtracted first. The concentric dashed lines emanating from the 'observed' point show the value of the RMS error --- so points furthest from the 'observed' value are the worst performing models because they have the highest RMS errors. On this basis, model $g$ has the lowest error of about 20 μg m^-3^, shown again by the red line. Models $e$ and $i$ are considerably worse because they have RMS errors of around 30 μg m^-3^.
 
@@ -47,7 +47,7 @@ Note that in cases where there is a column `site` it makes sense to use `type = 
 ```{r}
 #| label: fig-TaylorPlots
 #| echo: false
-#| fig-cap: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to read interpret each of the three statistics.
+#| fig-cap: Taylor Diagrams broken down to highlight how to interpret the three main statistics. The red line/arrow indicate how to interpret each of the three statistics.
 #| fig-subcap:
 #|   - "Standard deviation."
 #|   - "Correlation coefficient."
@@ -62,7 +62,7 @@ knitr::include_graphics(c(
 
 ## Examples of Taylor Diagrams
 
-The example used here carries on from the previous section using data from a Defra model evaluation exercise. As mentioned previously, the use of the `type` option offers enormous flexibility for comparing models. However, we will only focus on the seasonal evaluation of the models. In the call below, `group` is the column that identified the model and `type` is the conditioning variable that produces in this case four panels --- one for each season. Note that in this case we focus on a single site.
+The example used here carries on from the previous section using data from a Defra model evaluation exercise. As mentioned previously, the use of the `type` option offers enormous flexibility for comparing models. However, we will only focus on the seasonal evaluation of the models. In the call below, `group` is the column that identifies the model and `type` is the conditioning variable that produces in this case four panels --- one for each season. Note that in this case we focus on a single site.
 
 ```{r}
 #| label: fig-TaylorSeas
@@ -74,7 +74,7 @@ LH <- filter(modTest, site == "Lullington.Heath")
 TaylorDiagram(LH, obs = "o3", mod = "mod", group = "group", type = "season")
 ```
 
-@fig-TaylorSeas contains a lot of useful information. Consider the summer comparison first. All models tend to underestimate the variability of O~3~ concentrations because they all lies within the black dashed line. However, models 7 and 9 are close to the observed variability. The general underestimate of the variability for summer conditions might reflect that the models do not adequately capture regional O~3~ episodes when concentrations are high. Models 7 and 8 do best in terms of high correlation with the measurements (around 0.8) and lowest RMS error (around 20--22 μg m^-3^). Models 3, 5 and 6 tend to do worse on all three statistics during the summer.
+@fig-TaylorSeas contains a lot of useful information. Consider the summer comparison first. All models tend to underestimate the variability of O~3~ concentrations because they all lie within the black dashed line. However, models 7 and 9 are close to the observed variability. The general underestimate of the variability for summer conditions might reflect that the models do not adequately capture regional O~3~ episodes when concentrations are high. Models 7 and 8 do best in terms of high correlation with the measurements (around 0.8) and lowest RMS error (around 20--22 μg m^-3^). Models 3, 5 and 6 tend to do worse on all three statistics during the summer.
 
 By contrast, during wintertime conditions models 1 and 3 are clearly best. From an evaluation perspective it would be useful to understand why some models are better for wintertime conditions and others better in summer and this is clearly something that could be investigated further.
 

@@ -73,7 +73,7 @@ timePlot(
 
 There are numerous ways of smoothing and aggregating time series (and other data). One common and powerful technique is *Gaussian smoothing* where a Gaussian window slides along the data for each time step and smooths the data. The basic idea is that the smoothing process puts more weight on data close to the time in question and less further away with the weighting being determined by the σ value in the Gaussian equation.
 
-Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, and better preserves trends, and reduced edge artefacts. 
+Gaussian smoothing is powerful and flexible and has many advantages over simpler methods such as a moving average. Gaussian smoothing results in a smoother curve, better preserves trends, and reduces edge artefacts. 
 
 In the example shown in @fig-gauss-smooth, the data have been plotted as weekly averages to make the raw data easier to see. The smoothed line provides a clear indication of how NO~2~ concentrations have varied over many years. In this case `sigma` was set to 744, which corresponds to about one month.
 
@@ -276,7 +276,7 @@ WhittakerSmooth(
 
 As @fig-whittaker-baseline illustrates, the rolling quantile produces a stepped, discontinuous baseline that can change abruptly as observations enter or leave the rolling window. By contrast, the Whittaker baseline varies smoothly and continuously, which is more physically plausible for a background concentration and produces better-behaved increments for downstream analysis. The Whittaker approach also handles missing data naturally, whereas gaps can distort the effective window length for rolling statistics.
 
-Finally, we can use `ggplot2()` to show the increment and baseline filled, which can help to better visualise each contribution, shown in @fig-whittaker-filled.
+Finally, we can use [ggplot2]{.pkg} to show the increment and baseline filled, which can help to better visualise each contribution, shown in @fig-whittaker-filled.
 
 ```{r}
 #| label: fig-whittaker-filled

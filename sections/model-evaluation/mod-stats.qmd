@@ -12,7 +12,7 @@ There are a very wide range of evaluation statistics that can be used to assess 
 
 In the following definitions, $O_i$ represents the $i$th observed value and $M_i$ represents the $i$th modelled value for a total of $n$ observations.
 
-**Fraction of predictions within a factor or two, *FAC2***
+**Fraction of predictions within a factor of two, *FAC2***
 
 The fraction of modelled values within a factor of two of the observed values are the fraction of model predictions that satisfy:
 
@@ -22,7 +22,7 @@ $$ {#eq-FAC2}
 
 **Mean bias, *MB***
 
-The mean bias provides a good indication of the mean over or under estimate of predictions. Mean bias in the same units as the quantities being considered.
+The mean bias provides a good indication of the mean over or under estimate of predictions. Mean bias is in the same units as the quantities being considered.
 
 $$
  MB = \frac{1}{n}\sum_{i=1}^{N} M_i - O_i  
@@ -144,7 +144,7 @@ load(url(
 head(modTest)
 ```
 
-There are columns representing the receptor location (`site`), the date, measured values (`o3`), model predictions (`mod`) and the model itself (`group`). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O~3~ is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the `type` option is used to split the calculations by season and model. Finally, the statistics are grouped by the $IOA$ for each season. It is now very easy how model performance changes by season and which models perform best in each season.
+There are columns representing the receptor location (`site`), the date, measured values (`o3`), model predictions (`mod`) and the model itself (`group`). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O~3~ is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the `type` option is used to split the calculations by season and model. Finally, the statistics are grouped by the $IOA$ for each season. It is now very easy to see how model performance changes by season and which models perform best in each season.
 
 ```{r}
 #| label: modStatsDefra

@@ -88,7 +88,7 @@ windRose(
 
 The `type` option is very flexible in [openair]{.pkg} and can be used to
 quickly consider the dependencies between variables. @sec-cutData
-describes the basis of this option in [openair]{.pkg} plot. As an
+describes the basis of this option in [openair]{.pkg} plots. As an
 example, consider the question: what are the meteorological conditions
 that control high and low concentrations of PM~10~? By setting
 `type = "pm10"`, [openair]{.pkg} will split the PM~10~ concentrations
@@ -146,7 +146,7 @@ function in recent versions of [openair]{.pkg}, e.g. as in
 pollutionRose(mydata, pollutant = "nox")
 ```
 
-`pollutionRose` is *wrapper* for `windRose`. It simply replaces the wind
+`pollutionRose` is a *wrapper* for `windRose`. It simply replaces the wind
 speed data series in the supplied data set with another variable using
 the argument `pollutant` before passing that on to `windRose`. It also
 modifies `breaks` to estimate a sensible set of break points for that
@@ -155,13 +155,13 @@ right, wedge style plot) but otherwise handles arguments just like the
 parent `windRose` function.
 
 While @fig-pollutionRoseBasic indicates that higher NO~x~ concentrations
-are also associated with the SW, conditioning allows you to be much
+are also associated with the SW, conditioning allows you to be much more
 informative. For example, conditioning by SO~2~ (@fig-pollRoseNOxO2)
 demonstrates that higher NO~x~ concentrations are associated with the SW
 and much of the higher SO~2~ concentrations. However, it also highlights
 a notable NO~x~ contribution from the E, most apparent at highest SO~2~
 concentrations that is obscured in @fig-pollutionRoseBasic by a
-relatively high NO~x~ background @fig-pollRoseNOxO2.
+relatively high NO~x~ background.
 
 ```{r}
 #| label: fig-pollRoseNOxO2
@@ -249,12 +249,12 @@ be the reference data sets with which a second set of wind speed and
 wind directions are to be compared (`ws2` and `wd2`).
 
 In the next example, data from two data sets from 2024 are imported over
-the Internet. The first is hourly data measured data for a site in London and the
-second is hourly data modelled data. The data are then joined
+the Internet. The first is hourly measured data for a site in London and the
+second is hourly modelled data. The data are then joined
 together by date to create a single data frame with the two sets of wind
 speed and wind direction data. A more realistic example might be to
 compare a modelled data set with a reference data set, but the principle
-is the same. Such data can be imported using the `{worldmet}` package,
+is the same. Such data can be imported using the [worldmet]{.pkg} package,
 as described in @sec-worldmet.
 
 ```{r}
@@ -285,7 +285,7 @@ this case, the London site). The colours show whether the second data
 set (modelled) tends to be positively or negatively biased with respect
 to the reference data set (measured). It shows for example:
 
--  Modelled wind speeds tend to be lower than at measured for wind directions from the south, shown by the blue colouring in @fig-windComp.
+-  Modelled wind speeds tend to be lower than measured wind speeds for wind directions from the south, shown by the blue colouring in @fig-windComp.
 
 -  Wind speeds from the model tend to be slightly higher than measured values when the wind is from the north, shown by the red colouring in @fig-windComp.
 

@@ -4,7 +4,7 @@ author: David Carslaw
 
 # Dilution lines and pollutant ratios {#sec-runRegression}
 
-## Background {#run-regression-sec-timePropBack}
+## Background {#sec-runRegressionBack}
 
 The behaviour of pollutants in the atmosphere is highly complex, which can make it difficult to understand the influence that different sources have on concentrations. Across all time scales dispersion processes have a strong influence on how emissions dilute in the atmosphere. However, when considering two pollutants, some of these complexities can be reduced. In a dispersion plume from a single source, the ratio between two pollutant concentrations will remain constant in the absence of loss e.g. through deposition or through chemical reaction. This characteristic of constant ratios in dispersing plumes can be exploited through different analysis approaches.
 
@@ -12,7 +12,7 @@ The behaviour of pollutants in the atmosphere is highly complex, which can make 
 
 The idea is to exploit the fact that for a local dispersing plume, the ratio between two pollutants would be expected to be invariant. The main approach is to look in time series data over short periods of time where, in a dispersing plume, the ratio between two pollutants is constant. For hourly data for example, considering the relationship between two pollutants over three consecutive hours using a linear regression can be used to identify short periods where the ratio (the slope from a regression) is constant (or close to constant). By considering high R^2^ values (typically \> 0.9 to 0.95), these conditions correspond to constant ratios between two pollutants, which would be indicative of the behaviour of a diluting plume. The regression itself is a rolling regression e.g. first consider hours 1 to 3, then 2 to 4 and so on. The approach becomes clearer by considering an example.
 
-## Examples {#run-regression-sec-timePropEx}
+## Examples {#sec-runRegressionEx}
 
 As an example we will import some roadside monitoring data for 2022 and combine it with measured meteorological data rather than modelled (hence `meteo = FALSE`).
 
@@ -54,7 +54,7 @@ out <- runRegression(aq, x = x, y = y, run.len = 3)
 out
 ```
 
-The output contains all regression fits, but it is useful to filter the data to extract the good fits (R^2^ \> 0.95), as well as some other filtering. For this example, we also filter for quite large changes in NO~x~ over 3 hours (\> 100 μg m^-3^), which will be dominated by changes in concentrations due to local sources (the main interest) --- and also to make the plots below a bit clearer. The filtering of the slopes trims some extreme values and again make the plots easier to interpret.
+The output contains all regression fits, but it is useful to filter the data to extract the good fits (R^2^ \> 0.95), as well as some other filtering. For this example, we also filter for quite large changes in NO~x~ over 3 hours (\> 100 μg m^-3^), which will be dominated by changes in concentrations due to local sources (the main interest) --- and also to make the plots below a bit clearer. The filtering of the slopes trims some extreme values and again makes the plots easier to interpret.
 
 ```{r}
 #| label: selectFits
@@ -68,7 +68,7 @@ out_filter <- filter(
 )
 ```
 
-Another step that is useful is to identify the filtered data (`out_filter`) in the original data set so that can be processed in different ways. The code below identified all the 3-hour periods and combines them into a single data frame.
+Another step that is useful is to identify the filtered data (`out_filter`) in the original data set so that it can be processed in different ways. The code below identifies all the 3-hour periods and combines them into a single data frame.
 
 ```{r}
 #| label: selectaq

@@ -37,7 +37,7 @@ Also available is `importImperial()` for accessing data from the sites operated 
 ::: {.callout-tip}
 ## What about Europe?
 
-When analysing UK air quality data, it may be useful to compare it to data from the UK's neighbours in Europe. Historically, the [saqgetr]{.pkg} allowed for access to European monitoring data, and [openair]{.pkg} provided the `importEurope()` function for a simplified interface for the same data source. Unfortunately, as of February 2024, this service is no longer supported.
+When analysing UK air quality data, it may be useful to compare it to data from the UK's neighbours in Europe. Historically, the [saqgetr]{.pkg} package allowed for access to European monitoring data, and [openair]{.pkg} provided the `importEurope()` function for a simplified interface for the same data source. Unfortunately, as of February 2024, this service is no longer supported.
 
 The European Environment Agency (EEA) now provides an air quality download service (<https://eeadmz1-downloads-webapp.azurewebsites.net/>), which includes an API. The `openair` family now includes the [euroaq]{.pkg} package, which allows you to easily access this through R - see <https://openair-project.github.io/euroaq/> for more information.
 :::
@@ -50,7 +50,7 @@ Many users download hourly data from [GOV UK](https://get-air-pollution-data.ser
 
 1. The function completely avoids any need for data manipulation or setting time formats, time zones etc.
 
-Some examples of usage are shown below. First, lets load the packages we need.
+Some examples of usage are shown below. First, let's load the packages we need.
 
 ```{r}
 #| warning: false
@@ -274,7 +274,7 @@ It is also possible to return information on whether the data have been ratified
 
 ### Annual and other statistics
 
-By default, all the functions above return hourly data. However, often there is a need to return data such as annual means of a long period of time. `importUKAQ()` (but not `importImperial()`) can return data for averaging times: annual, monthly, daily and for SO~2~ 15-minute. The annual and monthly data also provide valuable information on data capture rates. The averaging statistic is selected with the `data_type` option. The values `data_type` can take include:
+By default, all the functions above return hourly data. However, often there is a need to return data such as annual means over a long period of time. `importUKAQ()` (but not `importImperial()`) can return data for averaging times: annual, monthly, daily and for SO~2~ 15-minute. The annual and monthly data also provide valuable information on data capture rates. The averaging statistic is selected with the `data_type` option. The values `data_type` can take include:
 
 -   **"hourly"** This is the default and specific site(s) must be provided.
 -   **"daily"** Daily means returned and specific site(s) must be provided. Note that in the case of PM~10~ and PM~2.5~ daily measurements can be available from those derived from hourly measurements (using instruments such as TEOM, BAM and FIDAS) and from daily gravimetric measurements such as from a Partisol. In the returned data the gravimetric daily measurements are shown as `gr_pm10` and `gr_pm2.5`, respectively.
@@ -283,7 +283,7 @@ By default, all the functions above return hourly data. However, often there is 
 -   **"15_min"** 15-minute SO~2~ concentrations returned for a specific site(s).
 -   **"8_hour"** Rolling 8-hour concentrations returned for a specific site(s) for O~3~ and CO.
 -   **"24_hour"** Rolling 24-hour concentrations returned for a specific site(s) for PM~10~ and PM~2.5~.
--   **"daily_max_8"** Maximum daily rolling 8-hour maximum for O~3~ and CO.
+-   **"daily_max_8"** Daily maximum of the rolling 8-hour mean for O~3~ and CO.
 -   **"daqi"** Daily Air Quality Index (DAQI). See [here](https://uk-air.defra.gov.uk/air-pollution/daqi?view=more-info&pollutant=ozone#pollutant) for more details of how the index is defined.
 
 Note that for annual and monthly statistics all network data is returned and the `site` option has no effect.

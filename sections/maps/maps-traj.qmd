@@ -9,7 +9,7 @@ execute:
 
 ## Data
 
-[openairmaps]{.pkg} contains the `traj_data` dataset to allow users to test the directional analysis functions. The structure of this data set is provided below. This was obtained using the `importTraj()` function in [openair]{.pkg}; if you are using your own trajectory data, try to match this structure (including column names) so that the [openairmaps]{.pkg} functions will work correctly.
+[openairmaps]{.pkg} contains the `traj_data` dataset to allow users to test the trajectory analysis functions. The structure of this data set is provided below. This was obtained using the `importTraj()` function in [openair]{.pkg}; if you are using your own trajectory data, try to match this structure (including column names) so that the [openairmaps]{.pkg} functions will work correctly.
 
 ```{r}
 #| label: glimpseTraj

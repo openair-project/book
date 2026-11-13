@@ -140,7 +140,7 @@ pollutionRose(
 )
 ```
 
-The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time to the O~3~ chemistry to take place.
+The results are shown in @fig-RunningRes. The pollution rose for the "no" criterion (left plot of @fig-RunningRes) shows that the highest O~3~ concentrations tend to occur for wind directions from the south-west, where there is a high proportion of measurements. By contrast, the pollution rose when the criterion is met (right plot of @fig-RunningRes) is very different. In this case there is a clear set of conditions where these criteria are met i.e. lengths of at least 8-hours where the O~3~ concentration is at least 90 ppb. It is clear the highest concentrations are dominated by south-easterly conditions i.e. corresponding to easterly flow from continental Europe where there has been time for the O~3~ chemistry to take place.
 
 The code below shows (as an example), that the summer of 2006 had a high proportion of conditions where the criterion was met.
 
@@ -296,14 +296,14 @@ An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure 
 corPlot(mydata, dendrogram = TRUE)
 ```
 
-Note also that the `corPlot()` accepts a `type` option, so it possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
+Note also that the `corPlot()` accepts a `type` option, so it is possible to condition the data in many flexible ways, although this may become difficult to visualise with too many panels. For example:
 
 ```{r}
 #| eval: false
 corPlot(mydata, type = "season")
 ```
 
-When there are a very large number of variables present, the `corPlot()` function is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane results from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.
+When there are a very large number of variables present, the `corPlot()` function is a very effective way of quickly gaining an idea of how variables are related. As an example (not plotted) it is useful to consider the hydrocarbons measured at Marylebone Road. There is a lot of information in the hydrocarbon plot (about 40 species), but due to the hierarchical clustering it is possible to see that isoprene, ethane and propane behave differently to most of the other hydrocarbons. This is because they have different (non-vehicle exhaust) origins. Ethane and propane result from natural gas leakage whereas isoprene is biogenic in origin (although some is from vehicle exhaust too). It is also worth considering how the relationships change between the species over the years as hydrocarbon emissions are increasingly controlled, or maybe the difference between summer and winter blends of fuels and so on.
 
 ```{r}
 #| eval: false

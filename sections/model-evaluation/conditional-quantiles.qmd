@@ -57,9 +57,9 @@ conditionalQuantile(
 )
 ```
 
-As with other [openair]{.pkg} functions, the ability to consider conditioning can really help with interpretation. For example, what do the conditional quantiles at Lullington Heath (in south-east England) look like by season? This is easily done by subsetting the data to select that site and setting `type = "season"`, as shown in @fig-conditionalSeas. These results show that winter predictions have good coverage i.e. with width of the blue 'perfect model' line is the same as the observations. However, the predictions tend to be somewhat lower than observations for most concentrations (the median line is below the blue line) --- and the width of the 10/75th and 10/90th percentiles is quite broad. However, the area where the model is less good is in summer and autumn because the predictions have low coverage (the red line only covers less than half of the observation line and the width of the percentiles is wide).
+As with other [openair]{.pkg} functions, the ability to consider conditioning can really help with interpretation. For example, what do the conditional quantiles at Lullington Heath (in south-east England) look like by season? This is easily done by subsetting the data to select that site and setting `type = "season"`, as shown in @fig-conditionalSeas. These results show that winter predictions have good coverage i.e. the width of the blue 'perfect model' line is the same as the observations. However, the predictions tend to be somewhat lower than observations for most concentrations (the median line is below the blue line) --- and the width of the 10/75th and 10/90th percentiles is quite broad. However, the area where the model is less good is in summer and autumn because the predictions have low coverage (the red line only covers less than half of the observation line and the width of the percentiles is wide).
 
-Of course, it is also easy to plot by hour of the day, day of the week, by daylight/nighttime and so on --- easily. All these approaches can help better understand *why* a model does not perform very well rather than just quantifying its performance. Also, these types of analysis are particularly useful when more than one model is involved in a comparison as in the recent Defra model evaluation exercise, which we will come back to later when some results are published.
+Of course, it is also easy to plot by hour of the day, day of the week, by daylight/nighttime and so on --- easily. All these approaches can help better understand *why* a model does not perform very well rather than just quantifying its performance. Also, these types of analysis are particularly useful when more than one model is involved in a comparison as in the Defra model evaluation exercise.
 
 ```{r}
 #| label: fig-conditionalSeas
@@ -105,7 +105,7 @@ The `conditionalEval` function can be used straightforwardly to provide informat
 
 ```{r}
 #| label: fig-condDatWS
-#| fig-cap: Conditional quantiles at for O~3~ concentrations (left plot). On the right is a plot showing how the wind speed varies across the O~3~ prediction intervals.
+#| fig-cap: Conditional quantiles for O~3~ concentrations (left plot). On the right is a plot showing how the wind speed varies across the O~3~ prediction intervals.
 #| fig-width: 10
 #| fig-height: 6
 #| fig-keep: last
@@ -125,7 +125,7 @@ In essence the `conditionalEval` function provides more information on model per
 
 ```{r}
 #| label: fig-condDat
-#| fig-cap: Conditional quantiles at for O~3~ concentrations (left plot). On the right is the model performance for wind speed and NO~x~ predictions, which in this case is for the Normalised Mean Bias.
+#| fig-cap: Conditional quantiles for O~3~ concentrations (left plot). On the right is the model performance for wind speed and NO~x~ predictions, which in this case is for the Normalised Mean Bias.
 #| fig-width: 10
 #| fig-height: 6
 #| fig-keep: last

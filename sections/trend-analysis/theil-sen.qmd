@@ -52,7 +52,7 @@ rarely the case. The issue is that neighbouring data points are similar
 to one another (correlated) and therefore not independent. Ignoring this
 dependence would tend to give an overly optimistic impression of
 uncertainties. However, taking account of it is far from simple. A
-discussion of these issues is beyond the aims of this report and readers
+discussion of these issues is beyond the aims of this book and readers
 are referred to standard statistical texts on the issue. In
 [openair]{.pkg} we follow the suggestion of @Kunsch1989 of setting the
 block length to $n^{1/3}$ where n is the length of the time series.
