@@ -140,7 +140,6 @@ It is also possible to first use `rollingMean()` to calculate statistics. For ex
 ```{r}
 #| label: CalendarAvg
 #| eval: false
-#| fig-cap: A `calendarPlot()` showing rolling 8-hour mean ozone concentrations.
 ## makes a new field 'rolling8o3'
 dat <- rollingMean(mydata, pollutant = "o3", width = 8)
 breaks <- c(0, 34, 66, 100, 121, 141, 160, 188, 214, 240, 500)

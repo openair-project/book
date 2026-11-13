@@ -159,7 +159,7 @@ There are columns representing the receptor location (`site`), the date, measure
 
 ```{r}
 #| label: modStatsDefra
-options(digits = 2) ## don't display too many decimal places
+old_options <- options(digits = 2) ## don't display too many decimal places
 modStats(
   subset(modTest, site == "Harwell"),
   obs = "o3",
@@ -167,6 +167,7 @@ modStats(
   type = c("season", "group"),
   rank = "group"
 )
+options(old_options) ## restore the previous setting
 ```
 
 Note that it is possible to read the results of the `modStats()` function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.

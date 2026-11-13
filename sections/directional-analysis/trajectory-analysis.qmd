@@ -770,4 +770,4 @@ trajMap(
 trajLevelMap(traj_data, statistic = "frequency")
 ```
 
-For more information about using [openairmaps]{.pkg} to visualise trajectories, please refer to the [Trajectory maps](../maps/maps-traj.qmd) chapter.
+For more information about using [openairmaps]{.pkg} to visualise trajectories, please refer to @sec-maps-traj.

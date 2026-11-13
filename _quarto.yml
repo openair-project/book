@@ -15,7 +15,6 @@ book:
   repo-url: https://github.com/openair-project/book/
   repo-branch: main
   repo-actions: [edit, issue]
-  sharing: [twitter, facebook, linkedin]
   date: today
   date-format: long
 

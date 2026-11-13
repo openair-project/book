@@ -1,11 +1,12 @@
 ---
-title: Trajectory maps
 subtitle: Transforming static trajectory plots into interactive HTML widgets 
 author: Jack Davison
 abstract: "[openair]{.pkg} already contains functionality for visualising HYSPLIT back trajectories, but as more trajectory paths are added these static plots can become difficult to interpret. [openairmaps]{.pkg} allows for effectively the same visualisations to be mapped in [leaflet]{.pkg}, which can help untangle these complex figures."
 execute: 
   cache: false
 ---
+
+# Trajectory maps {#sec-maps-traj}
 
 ## Data
 

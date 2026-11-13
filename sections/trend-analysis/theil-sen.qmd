@@ -361,7 +361,7 @@ intervals are displayed as a forest plot using [ggplot2]{.pkg}. Sites are
 ordered by slope within each site type, making it easy to see the
 spread of trends at a glance. A vertical dashed line at zero serves as
 a reference: sites to the left show declining NO~2~, those to the right
-a (none in this case) increase. The resulting plot is shown in
+an increase. The resulting plot is shown in
 @fig-TheilSenSummary.
 
 The forest plot makes clear that NO~2~ declined significantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source. 
@@ -447,8 +447,7 @@ ggplot(plot_data, aes(x = slope, y = site, colour = site_type)) +
   theme(
     strip.background = element_rect(fill = "grey92"),
     panel.grid.major.y = element_blank()
-  ) +
-  coord_cartesian(xlim = c(-7.5, 0.5))
+  )
 
 ```
 

@@ -93,13 +93,11 @@ The next few plots should make the purpose of this analysis clearer. @fig-nox-pm
 #| fig-width: 4.5
 #| fig-height: 4.5
 #| cache: false
-# use a light theme
-theme_set(theme_light())
-
 ggplot(aq_select, aes(.data[[x]], .data[[y]])) +
   geom_point() +
   ylab(quickText("pm2.5 (ug/m3)")) +
-  xlab(quickText("nox (ug/m3)"))
+  xlab(quickText("nox (ug/m3)")) +
+  theme_light()
 ```
 
 Next, we will plot the 'dilution lines' --- the result of the rolling regressions for the filtered data. The plot is shown in @fig-dilution-lines, which uses the **same** data as @fig-nox-pm25. What is striking about @fig-dilution-lines is that over 3-hour periods there are so many lines that have a similar slope, which changes the impression of the data shown in @fig-nox-pm25. Remember that the data were filtered for quite large changes in NO~x~, so @fig-dilution-lines shows the corresponding change in PM~2.5~ , which highlights consistent behaviour.
@@ -134,7 +132,8 @@ ggplot(
     y = quickText("pm2.5 (ug/m3)"),
     x = quickText("nox (ug/m3)"),
     colour = quickText("Background\nPM2.5")
-  )
+  ) +
+  theme_light()
 ```
 
 To get more quantitative information from @fig-dilution-lines, the slope can be extracted and plotted as a density plot distribution. Furthermore, the mode of the distribution can also be estimated, as shown in @fig-mode-plot. These results show that the mode is about 0.04 for the mass ratio of PM~2.5~/NO~x~. Given that this estimate is based on 'dilution events' when the change in NO~x~ concentrations is quite large, the value of 0.04 is an estimate of the traffic emissions ratio of PM~2.5~/NO~x~, which could consist of both direct exhaust emissions and non-exhaust emissions. Note that if a NO~x~ change of 50 μg m^-3^ had been used, the mode estimate is very similar (0.039) to the case where the change was 100 μg m^-3^. This result seems reasonable in that a change of 50 or 100μg m^-3^ are both quite large and would both be indicative of a change in concentration due to a proximate source.[^run-regression-1]
