@@ -20,7 +20,7 @@ The best place to ask for help is by posting an issue on GitHub. Don't worry if 
 
 If your problems are with R more generally rather than being specific to [openair]{.pkg}, you might also consider posting to these other communities. Users there will be much less familiar with [openair]{.pkg} and air quality, but they are much greater in number. 
 
-* [Posit Community](https://community.rstudio.com/), an R-specific forum for R users to ask any and all questions relating to R and RStudio.
+* [Posit Community](https://forum.posit.co/), an R-specific forum for R users to ask any and all questions relating to R and RStudio.
 
 * [Stack Overflow](https://stackoverflow.com/), a more general programming community for coders to ask questions. This can be a little more intimidating than the Posit Community Forum, but the user base is a lot bigger!
 
@@ -64,7 +64,7 @@ Sometimes the hardest thing about producing a reproducible example is providing 
 
 * **Write your example with `openair::mydata`, `openairmaps::polar_data` or `openairmaps::traj_data`.** These data are built in to their respective packages so are easily accessible to anyone.
 
-* **Obtain data through `openair::importUKAQ()` or `worldmet::importNOAA()`.** These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.
+* **Obtain data through `openair::importUKAQ()` or `worldmet::import_ghcn_hourly()`.** These functions pull data straight into R from online databases, so will once again make your issue reproducible on other computers.
 
 * **Attach your data (e.g., as a .csv file).** If your problem is specific to your data, you can attach your data to your GitHub issue. Remember that reproducible examples are *minimal* so you don't need to provide literally every column or row, only enough to recreate your issue. This also means you can remove private/personal data if it is a concern (e.g., we don't need real site names or locations, or even the specific species being measured).
 

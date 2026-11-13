@@ -26,7 +26,7 @@ Where code is shown in this document, function names are hyper-linked and will t
 
 ## Installation and code access
 
-[openair]{.pkg} is available on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive network) which means it can be installed easily from R. I would recommend re-starting R and then type `install.packages("openair")`. If you use [RStudio](https://rstudio.com/products/rstudio/) (which is *highly* recommended), you can just choose the 'packages' tab on the bottom-right, and then select 'Install'. Simply start typing openair and you will find the package.
+[openair]{.pkg} is available on [CRAN](https://cran.r-project.org/mirrors.html) (Comprehensive R Archive network) which means it can be installed easily from R. I would recommend re-starting R and then type `install.packages("openair")`. If you use [RStudio](https://posit.co/products/open-source/rstudio/) (which is *highly* recommended), you can just choose the 'packages' tab on the bottom-right, and then select 'Install'. Simply start typing openair and you will find the package.
 
 For [openair]{.pkg} all development is carried out using Github for version control. Users can access all code used in openair at (<https://github.com/openair-project/openair>).
 
@@ -114,7 +114,7 @@ time_local
 hour(time_local)
 ```
 
-In the above example, `date_time` and `time_local` are the same absolute time --- we are just changing how the time is displayed. In practice, given a data frame with a `date` column in GMT and there interest in making sure [openair]{.pkg} uses the local time, some formatting such as `mydata$date -> with_tz(mydata$date, tz = "Europe/London")` is what is needed.
+In the above example, `date_time` and `time_local` are the same absolute time --- we are just changing how the time is displayed. In practice, given a data frame with a `date` column in GMT and an interest in making sure [openair]{.pkg} uses the local time, some formatting such as `mydata$date <- with_tz(mydata$date, tz = "Europe/London")` is what is needed.
 
 Another scenario is you import data using a function such as `read_csv` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz` function. For example:
 
@@ -228,7 +228,7 @@ tab_type <- tibble(
     "splits data by season. Note in this case the user can also supply a `hemisphere` option that can be either 'northern' (default) or 'southern'",
     "splits data by day of the week",
     "splits data by Saturday, Sunday, weekday",
-    " splits data by nighttime/daytime. Note the user must supply a `longitude` and `latitude`",
+    "splits data by nighttime/daytime. Note the user can supply a `latitude` and `longitude` for their location (the default is London)",
     "splits data by daylight saving time and non-daylight saving time",
     "if wind direction (`wd`) is available `type = 'wd'` will split the data into 8 sectors: N, NE, E, SE, S, SW, W, NW",
     " will split the data into year-season intervals, keeping the months of a season together. For example, December 2010 is considered as part of winter 2011 (with January and February 2011). This makes it easier to consider contiguous seasons. In contrast, `type = 'season'` will just split  the data into four seasons regardless of the year."
@@ -294,7 +294,7 @@ All [openair]{.pkg} plot functions have an option `fontsize`. Users can easily v
 polarPlot(mydata, fontsize = 20)
 ```
 
-The font size will be reset to the default sizes once the plot is complete. Finer control of individual font sizes is currently not easily possible.
+The `fontsize` option only affects the plot it is supplied to. Because [openair]{.pkg} plots are [ggplot2]{.pkg} objects, finer control of individual text elements (e.g., axis titles, strip labels or legend text) is possible using `ggplot2::theme()` --- see @sec-annotating-openair for examples.
 
 ## Using colours {#colours}
 
@@ -363,7 +363,7 @@ library(patchwork)
 
 ## Saving plots and data
 
-While you'll likely be using [openair]{.pkg} in an environment like [RStudio](https://rstudio.com/products/rstudio/), you'll likely want to get the outputs of your analysis *outside* of RStudio to put into reports, papers, or other deliverables.
+While you'll likely be using [openair]{.pkg} in an environment like [RStudio](https://posit.co/products/open-source/rstudio/), you'll likely want to get the outputs of your analysis *outside* of RStudio to put into reports, papers, or other deliverables.
 
 For data, this is relatively straightforward. The `write.csv()` function will write out a dataframe to a local file path. The only arguments it really needs is `x` (the dataframe to save) and `file` (the file path to save it to). For example, the below code chunk will load annual statistics for the Marylebone Road monitoring site, and save them to the path `"my1_annual-stats_2022.csv"`. Always try to give files evocative names so you'll know what's in them in future - `"my1_annual-stats_2022.csv"` is better than `"data.csv"`.
 

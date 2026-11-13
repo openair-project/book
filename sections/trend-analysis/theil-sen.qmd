@@ -315,7 +315,7 @@ stratified sample of UK urban monitoring sites. The analysis proceeds in
 several steps.
 
 **Step 1: Select well-monitored sites.** Annual mean data are imported
-from the AURN for 2016--2025 using `importAURN` with `meta = TRUE` to
+from the AURN for 2016--2025 using `importUKAQ()` with `meta = TRUE` to
 include site metadata. Sites are then filtered to those with a complete
 ten-year record *and* at least 75% data capture in *every* year. This
 guards against trends being artefacts of uneven monitoring coverage
@@ -377,7 +377,7 @@ eight (or more) wind sectors and calculates a separate trend for each, which can
 set.seed(42)
 
 # import annual data
-aq <- importAURN(year = 2016:2025, data_type = "annual", meta = TRUE)
+aq <- importUKAQ(year = 2016:2025, source = "aurn", data_type = "annual", meta = TRUE)
 
 # --- 1. Filter sites with >=75% NO2 capture in ALL years ---
 eligible_sites <- aq |>

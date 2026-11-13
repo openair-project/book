@@ -19,7 +19,7 @@ The UK has a surprisingly large amount of air quality data that is publicly acce
 
 -   The UK "devolved" networks:
 
-    -   [Air Quality Scotland](http://www.scottishairquality.scot/) network.
+    -   [Air Quality Scotland](https://www.scottishairquality.scot/) network.
 
     -   [Air Quality Wales](https://airquality.gov.wales/) network.
 

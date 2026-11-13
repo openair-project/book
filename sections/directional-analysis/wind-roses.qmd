@@ -258,7 +258,7 @@ is the same. Such data can be imported using the `{worldmet}` package,
 as described in @sec-worldmet.
 
 ```{r}
-#| label: fig-imprtMet
+#| label: imprtMet
 ## example of comparing 2 met sites
 
 # london met data
@@ -267,7 +267,7 @@ london_met <- readr::read_rds(
 )
 
 # data from model
-mod_met <- importAURN("kc1", 2024)
+mod_met <- importUKAQ("kc1", year = 2024)
 
 # combine into one data frame and change names - only select ws, wd and date
 met_compare <- inner_join(
