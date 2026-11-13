@@ -2,7 +2,7 @@
 author: David Carslaw
 ---
 
-# Time Series Smoothing {#sec-ts-smoothing}
+# Time series smoothing {#sec-ts-smoothing}
 
 ## Calculating rolling means {#sec-rollingMean}
 

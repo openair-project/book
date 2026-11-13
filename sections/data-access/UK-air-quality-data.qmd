@@ -7,7 +7,7 @@ aliases:
   - sections/maps/maps-network.html
 ---
 
-# Accessing UK Air Quality Data {#sec-importUKAQ}
+# Accessing UK air quality data {#sec-importUKAQ}
 
 ## Accessing data
 
@@ -61,7 +61,7 @@ library(openair)
 library(tidyverse)
 ```
 
-## Site Meta Data
+## Site metadata
 
 ### National networks
 
@@ -169,7 +169,7 @@ importMeta(
 )
 ```
 
-### Plot Sites on a Map
+### Plot sites on a map
 
 To easily visualise entire monitoring networks, consider using the [openairmaps]{.pkg} R package. This package can be installed from CRAN, similar to [openair]{.pkg}.
 
@@ -212,7 +212,7 @@ As well as providing all of the functionality of `importMeta()`, `networkMap()` 
 
 - `provider`: Any number of the [leaflet]{.pkg} providers (see `leaflet::providers`). The default for this is a typical 'street map' and a satellite map, both of which can be toggled between.
 
-## Monitoring Data
+## Monitoring data
 
 ### Hourly data
 

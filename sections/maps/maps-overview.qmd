@@ -45,7 +45,7 @@ As the R ecosystem developed, [rmarkdown]{.pkg} and, more recently, [quarto]{.pk
 
 Air quality data analysis --- particularly as it pertains to long term monitoring data --- naturally lends itself to being visualised spatially on a map. Monitoring networks are geographically distributed, and ignoring their geographical context may lead to incomplete insights at best and incorrect conclusions at worst! Furthermore, many air quality analysis tools are *directional*, asking questions of the data along the lines of "do elevated concentrations come from the North, South, East or West?" The natural question that follows is "well, what actually is it to the North/South/East/West that could be causing elevated concentrations?" --- a map can help answer that question straightforwardly.
 
-## [leaflet]{.pkg} Primer
+## [leaflet]{.pkg} primer
 
 While [openairmaps]{.pkg} can be used without a thorough understanding of the [leaflet]{.pkg} package, some knowledge can definitely help! @fig-leafletdemo shows an example leaflet map. Try the following:
 
@@ -93,7 +93,7 @@ The anatomy of a leaflet map may look a little unusual, so to unpack:
 Don't worry if you don't fully understand all of this --- the "all-in-one" functions in [openairmaps]{.pkg} deal with much of this for you! The only [leaflet]{.pkg} awareness you'll need to use these functions is knowledge of the available base map providers, which can be accessed using `leaflet::providers`. These are shown in the collapsible below (the list is very long!).
 
 ::: {.callout-note collapse="true"}
-### View Providers
+### View providers
 
 ```{r}
 #| label: leafletprovidersfake

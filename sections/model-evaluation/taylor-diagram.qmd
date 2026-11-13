@@ -2,7 +2,7 @@
 author: David Carslaw
 ---
 
-# Taylor Diagram {#sec-TaylorDiagram}
+# Taylor diagram {#sec-TaylorDiagram}
 
 ## Background {#sec-TaylorBack}
 
@@ -72,7 +72,7 @@ knitr::include_graphics(c(
 ))
 ```
 
-## Examples of Taylor Diagrams
+## Examples of Taylor diagrams
 
 The example used here carries on from the previous section using data from a Defra model evaluation exercise. As mentioned previously, the use of the `type` option offers enormous flexibility for comparing models. However, we will only focus on the seasonal evaluation of the models. In the call below, `group` is the column that identifies the model and `type` is the conditioning variable that produces in this case four panels --- one for each season. Note that in this case we focus on a single site.
 

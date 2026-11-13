@@ -5,7 +5,7 @@ format:
     code-copy: false
 ---
 
-# The openair package {#openair-package}
+# The [openair]{.pkg} package {#sec-openair-package}
 
 In this book two packages are frequently used and it is a good idea to load both.
 
@@ -134,7 +134,7 @@ force_tz(date_time, tz = "Etc/GMT+8")
 
 Finally, what about combining data sets in different time zones? In @sec-worldmet it is shown how it is possible to access meteorological data from around the world (all in GMT). The interest might be in combining this data with air quality data that is in another time zone. So long as the date-times were correctly formatted in the first place, then simply joining the data sets by date is all that is needed, as R works out how the times match internally. An example of joining two data sets is shown in @sec-link-aq.
 
-## Brief overview of openair {#brief-intr-open}
+## Brief overview of [openair]{.pkg} {#sec-brief-overview}
 
 This section gives a brief overview of the functions in [openair]{.pkg}. Having read some data into a data frame it is then straightforward to run any function. Almost all functions are run as:
 
@@ -297,7 +297,7 @@ splitByDate(
 
 This code adds a new column `scenario` that is labelled `before` and `after` depending on the date. Note that the `dates` input by the user is in British format (dd/mm/YYYY) and that several dates (and labels) can be provided.
 
-## Controlling font size {#font-size}
+## Controlling font size {#sec-font-size}
 
 All [openair]{.pkg} plot functions have an option `fontsize`. Users can easily vary the size of the font for each plot e.g.
 
@@ -309,7 +309,7 @@ polarPlot(mydata, fontsize = 20)
 
 The `fontsize` option only affects the plot it is supplied to. Because [openair]{.pkg} plots are [ggplot2]{.pkg} objects, finer control of individual text elements (e.g., axis titles, strip labels or legend text) is possible using `ggplot2::theme()` --- see @sec-annotating-openair for examples.
 
-## Using colours {#colours}
+## Using colours {#sec-using-colours}
 
 Many of the functions described require that colour scales are used; particularly for plots showing surfaces. It is only necessary to consider using other colours if the user does not wish to use the default scheme. The choice of colours does seem to be a vexing issue as well as something that depends on what one is trying to show in the first place. For this reason, the colour schemes used in [openair]{.pkg} are very flexible: if you don't like them, you can change them easily. R itself can handle colours in many sophisticated ways; see for example the `RColorBrewer` package.
 
@@ -340,7 +340,7 @@ polarPlot(mydata, cols = c("yellow", "green"))
 polarPlot(mydata, cols = colorOpts("mako", begin = 0.1, end = 0.9, direction = -1))
 ```
 
-## Automatic text formatting {#quickText}
+## Automatic text formatting {#sec-quickText}
 
 [openair]{.pkg} tries to automate the process of annotating plots. It can be time-consuming (and tricky) to repetitively type in text to represent μg m^-3^ or PM~10~ (μg m^-3^) etc. in R. For this reason, an attempt is made to automatically detect strings such as `nox` or `NOx` and format them correctly. Where a user needs a y-axis label such as NO~x~ (μg m^-3^) it will only be necessary to type `ylab = "nox (ug/m3)"`. The same is also true for plot titles, subtitles, captions and tags. 
 

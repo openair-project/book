@@ -1,5 +1,5 @@
 ---
-title: Trajectory Analysis
+title: Trajectory maps
 subtitle: Transforming static trajectory plots into interactive HTML widgets 
 author: Jack Davison
 abstract: "[openair]{.pkg} already contains functionality for visualising HYSPLIT back trajectories, but as more trajectory paths are added these static plots can become difficult to interpret. [openairmaps]{.pkg} allows for effectively the same visualisations to be mapped in [leaflet]{.pkg}, which can help untangle these complex figures."
@@ -27,7 +27,7 @@ There are two all-in-one mapping functions for trajectory analysis in [openairma
 
 Both of these functions require the data to be in the structure shown in the previous section.
 
-## Mapping Trajectory Paths
+## Mapping trajectory paths
 
 By default, `trajMap()` will plot your trajectories in black on a default "OpenStreetMap" base map, but the `colour` argument allows you to colour by any column of your data. For example, @fig-trajMap shows the trajectory paths coloured by arrival date. A popup is also automatically generated --- try clicking on the points to get information about that particular air mass.
 
@@ -70,7 +70,7 @@ trajMap(
 )
 ```
 
-## Mapping Gridded Trajectories
+## Mapping gridded trajectories
 
 `trajLevelMap()` is the other all-in-one trajectory function and is, in many ways, simpler than `trajMap()`. Think of `trajLevelMap()` as you do `openair::trajLevel()` --- it has many of the same arguments and does effectively the same thing, but returns an interactive map. In @fig-trajLevel, try hovering over and clicking each of the tiles to learn more specific details about each bin.
 
@@ -101,7 +101,7 @@ trajLevelMap(
 
 At time of writing, all of the different `trajLevel()` statistics are supported in `trajLevelMap()`.
 
-## Marker Function
+## Marker function
 
 The marker function equivalent of `trajMap()` is `addTrajPaths()` which, much like `addPolarMarkers()`, allows you to customise your trajectory maps. For example, @fig-trajMarker shows a way to plot multiple sets of trajectory data on one map (in this case, one arriving in London and the other in Paris).
 

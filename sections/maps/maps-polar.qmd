@@ -1,5 +1,5 @@
 ---
-title: Directional Analysis
+title: Directional analysis maps
 subtitle: Putting polar plots on an interactive map 
 author: Jack Davison
 abstract: "One of the headline features of [openairmaps]{.pkg} is creating maps using directional analysis plots as markers. Being able to place a polar plot or similar visualisation on a map can allow us to gain additional insight from our analysis, permitting us to easily compare different sites and further understand their geographic context. This page introduces the `polarMap()` family of functions, and the suite of customisations available to users."
@@ -7,7 +7,7 @@ execute:
   cache: false
 ---
 
-## Data Requirements
+## Data requirements
 
 [openairmaps]{.pkg} contains the `polar_data` dataset to allow users to test the directional analysis functions^[By "directional analysis", we are referring to the outputs from [openair]{.pkg} functions like `polarPlot()`.]. The structure of this data set is provided below. The important feature of this data when compared to `openair::mydata` is latitude and longitude information, which [openairmaps]{.pkg} needs to place the directional analysis markers in the correct positions.
 
@@ -83,7 +83,7 @@ Effectively all of these functions have very similar arguments, although some ar
 
 -   `...`: Any additional arguments to pass to the equivalent [openair]{.pkg} function.
 
-## Simple Demonstrations
+## Simple demonstrations
 
 `polarMap()` is demonstrated in @fig-polarMap. Try clicking on each of the markers to see which sites they correspond to.
 
@@ -113,7 +113,7 @@ annulusMap(
 )
 ```
 
-## Colour Scales
+## Colour scales
 
 @fig-polarMap could be described as using `polarMap()` in a "qualitative" mode --- each site is using its own colour scale, so they cannot be easily compared quantitatively. There are two ways to use `polarMap()` in a more "quantitative" way:
 
@@ -122,7 +122,7 @@ annulusMap(
 2.  Set the `key.position` argument to be, for example, `"right"`. This will draw the colour bar next to each individual marker. This may be advantageous if one site is much more polluted compared to another one, but the individual colour bars can be confusing and difficult to read depending on the chosen base map.
 
 ::: panel-tabset
-### Shared Scale
+### Shared scale
 
 ```{r}
 #| label: fig-polarMapShare
@@ -137,7 +137,7 @@ polarMap(
 )
 ```
 
-### Distinct Scales
+### Distinct scales
 
 ```{r}
 #| label: fig-polarMapDistinct
@@ -175,7 +175,7 @@ percentileMap(
 )
 ```
 
-## Adding Extra Markers
+## Adding extra markers
 
 As [openairmaps]{.pkg} is built using [leaflet]{.pkg}, it is easy to add to your directional analysis maps using [leaflet]{.pkg} functions. For example, you may have the latitude and longitude information of different potential nearby sources like busy roads, industrial activity, transport hubs, and so on. @fig-addmarkers shows how you can add an extra marker with an optional popup/label.
 
@@ -204,7 +204,7 @@ polarMap(polar_data, "nox") |>
 
 [leaflet]{.pkg} is well documented [here](https://rstudio.github.io/leaflet/), which details many of the other elements you can add to your maps. Just think of the output of the `polarMap()` family to be like the output of `leaflet() |> addTiles()` and you'll quickly find yourself layering on more markers, shapes, and other useful map features.
 
-## Building Popups
+## Building popups
 
 So far, popups have used a single column to label the markers, but you will often want to encode more data than just the site name or type. For example, you may want to use the site name *and* type *and* the average wind speed *and* the dates it was active! To do so, you can use the `buildPopup()` function. This function has a handful of arguments:
 
@@ -244,7 +244,7 @@ polar_data |>
   )
 ```
 
-## Marker Function
+## Marker function
 
 The directional analysis marker function is `addPolarMarkers()`, which behaves similarly (but not identically) to `leaflet::addMarkers()`. You will need to define the `data` you're using, the `lat`/`lng`[^maps-polar-3] columns, a column to distinguish different sites (`type`), and an [openair]{.pkg} function (`fun`). As with `leaflet::addMarkers()` and similar functions, you can define `group` and `layerId`, which allows you to create more complex maps than can be achieved using the all-in-one [openairmaps]{.pkg} functions.
 
@@ -296,7 +296,7 @@ One could imagine different applications, using this approach. For example:
 
 The options are pretty much endless for the kinds of things you could achieve using this approach. If one of the all-in-one functions doesn't give you the flexibility you need, try to see if you can create your vision yourself from scratch using [leaflet]{.pkg} and the `addPolarMarkers()` function.
 
-## Static Maps
+## Static maps
 
 While interactive maps are useful for exploratory analysis and HTML documents/websites, there are numerous situations in which a static directional analysis map may be desired. For example, academic publications often demand submissions which compile to PDF. [openairmaps]{.pkg} provides the `static` argument to facilitate this.
 
@@ -309,7 +309,7 @@ The static maps are designed to be *almost* identical to the interactive maps, w
 -   HTML maps use [leaflet]{.pkg}, whereas static maps use [ggplot2]{.pkg} and [ggspatial]{.pkg}. The user-facing significance of this is that the `provider` arguments are slightly different.
 
 ::: {.callout-note collapse="true"}
-### View Providers
+### View providers
 
 ```{r}
 #| label: rosmproviders

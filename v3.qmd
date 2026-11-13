@@ -1,6 +1,6 @@
 ---
-title: "Openair 3.0"
-subtitle: "A major update to the openair package"
+title: "openair 3.0"
+subtitle: "A major update to the [openair]{.pkg} package"
 format: html
 author:
   - David C. Carslaw
@@ -80,7 +80,7 @@ You can learn more about annotation in the [annotation and customisation appendi
 
 Behind-the-scenes, [ggplot2]{.pkg} unlocks a lot of capability that was historically challenging to implement. For example, nearly all plotting functions now support two `type` values, meaning a 2D grid of panels can be constructed consistently across all of [openair]{.pkg}. The "polar" functions (e.g., `polarPlot()` and `windRose()`) now take advantage of native radial coordinate systems, making annotation and grid line customisation much simpler to handle without complex trigonometry. `windflow` has also found its way to `trendLevel()`, and now behaves much more consistently and flexibly across different functions. This is a taste of the many new features that will be added to the package in the coming months and years, which would have been much more difficult to implement without the switch to [ggplot2]{.pkg}.
 
-## Breaking Changes
+## Breaking changes
 
 As with any major software update, there are some 'breaking' changes that may affect existing code. Some of the most important are:
 
@@ -103,7 +103,7 @@ openairmaps::traj_data |> openair::trajPlot(pollutant = "pm10", crs = 27700)
 
 While breaking changes can be frustrating, they were necessary to support the future development and maintainability of [openair]{.pkg}.
 
-## Non-Plotting Updates
+## Non-plotting updates
 
 While the biggest changes in [openair]{.pkg} 3.0 can be seen in the plotting functions, there are a few useful utility function updates that are important to highlight:
 
@@ -115,7 +115,7 @@ While the biggest changes in [openair]{.pkg} 3.0 can be seen in the plotting fun
 
 - Many utility functions (not least `timeAverage()`) are now implemented in C++, which has increased their performance massively.
 
-## Next Steps
+## Next steps
 
 We'd encourage you to explore what [openair]{.pkg} 3.0 has to offer.
 

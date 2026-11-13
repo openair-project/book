@@ -74,7 +74,7 @@ book:
         - sections/maps/maps-polar.qmd
         - sections/maps/maps-traj.qmd
         
-    - part: "Utility functions"
+    - part: "Utility Functions"
       chapters:
         - sections/utilities/utility-functions.qmd
         - sections/utilities/scatter-plot.qmd

@@ -5,7 +5,7 @@ abstract: Meteorological data is key to understanding air quality measurements. 
 
 # Access meteorological data {#sec-worldmet}
 
-## The worldmet package
+## The [worldmet]{.pkg} package
 
 Most of the import functions described in @sec-importUKAQ return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that WSP runs to provide the data.
 

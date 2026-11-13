@@ -5,7 +5,7 @@ editor_options:
     wrap: 72
 ---
 
-# Wind and Pollution Roses {#sec-windRose}
+# Wind and pollution roses {#sec-windRose}
 
 The wind rose is a very useful way of summarising meteorological data.
 It is particularly useful for showing how wind speed and wind direction

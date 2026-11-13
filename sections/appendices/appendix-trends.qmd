@@ -124,7 +124,7 @@ M2 <- gamm(
 summary(M2$gam)
 ```
 
-The ACF plot is shown in @fig-M2ACF and shows that the autocorrelation has been dealt with and we can be rather more confident about the trend component (not plotted). Note that in this case we need to use the normalized residuals to get residuals that take account of the fitted correlation structure.
+The ACF plot is shown in @fig-M2ACF and shows that the autocorrelation has been dealt with and we can be rather more confident about the trend component (not plotted). Note that in this case we need to use the normalised residuals to get residuals that take account of the fitted correlation structure.
 
 ```{r}
 #| label: fig-M2ACF

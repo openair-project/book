@@ -98,7 +98,7 @@ IOA = \left\{
 \right.
 $$ {#eq-IOA}
 
-## Example of use {#ModEx}
+## Example of use {#sec-modStatsEx}
 
 The function can be called very simply and only requires two numeric fields to compare. To show how the function works, some synthetic data will be generated for 5 models.
 

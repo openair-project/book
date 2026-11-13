@@ -7,9 +7,9 @@ execute:
   message: false
 ---
 
-# Colour Palettes {#sec-colours}
+# Colour palettes {#sec-colours}
 
-## Using Colours
+## Using colours
 
 As well as giving users the option to define their own colours (whether hex-codes like `"#FF6347"` or built-in R colours like `"tomato"`), [openair]{.pkg} provides a great number of curated pre-defined colour schemes for users to take advantage of.
 
@@ -85,7 +85,7 @@ trendLevel(mydata, cols = colorOpts("turbo", direction = -1))
 trendLevel(mydata, cols = colorOpts("turbo", saturation = 0.25))
 ```
 
-## Choosing a Colour Palette
+## Choosing a colour palette
 
 Please remember that choosing colours is more than an aesthetic preference!
 

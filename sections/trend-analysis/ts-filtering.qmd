@@ -28,7 +28,7 @@ The approach was first demonstrated on ambient ozone data by @RaoZurbenko1994 an
 
 By removing short-term, synoptic and seasonal variability, the KZ decomposition isolates the long-term trend component, which is often the focus of regulatory and epidemiological studies. In this respect, the filters provide a way of doing meteorological normalisation in a straightforward way, which might be useful in many settings --- especially if many years of data are available. The short-term and synoptic components can be analysed separately to understand the influence of local sources and weather patterns on air quality. The intermediate component can reveal sub-seasonal phenomena such as pollution episodes or transport events.
 
-## Kolmogorov-Zurbenko Adaptive filter {#sec-kza-background}
+## Kolmogorov-Zurbenko adaptive filter {#sec-kza-background}
 
 The KZ Adaptive (KZA) filter extends the basic method by detecting structural breaks in the time series and *shrinking* the averaging window near those discontinuities [@Zurbenko1996]. Wherever the algorithm identifies an abrupt change — a step reduction in emissions following a policy intervention, a sensor replacement, or a sudden source change — it uses a shorter window to preserve the sharp feature rather than smearing it across a broad neighbourhood. Away from breaks the filter behaves identically to the standard KZ filter.
 

@@ -191,7 +191,7 @@ The uncertainties in the surface can be calculated by setting the option `uncert
 
 ```{r}
 #| label: fig-polarUncer
-#| fig-cap: 'Bivariate polar plot of SO~2~ concentrations at Marylebone Road. Three surfaces are shown: the central prediction (middle) and the lower and upper 95% estimated uncertainties. These plots help to show that in this particular case, some of the concentrations for strong easterly and south-easterly winds are rather uncertain. However, the central feature to the east remains, suggesting this feature is real and not an artifact of there being too few data.'
+#| fig-cap: 'Bivariate polar plot of SO~2~ concentrations at Marylebone Road. Three surfaces are shown: the central prediction (middle) and the lower and upper 95% estimated uncertainties. These plots help to show that in this particular case, some of the concentrations for strong easterly and south-easterly winds are rather uncertain. However, the central feature to the east remains, suggesting this feature is real and not an artefact of there being too few data.'
 #| fig-width: 8
 #| fig-height: 3.5
 polarPlot(mydata, pollutant = "so2", uncertainty = TRUE)
@@ -209,7 +209,7 @@ This plot (not shown) shows that concentrations of SO~2~ tend to be highest from
 
 One issue to be aware of is the amount of data required to generate some of these plots; particularly the hourly plots. If only a relatively short time series is available there may not be sufficient information to produce useful plots. Whether this is important or not will depend on the specific circumstances e.g. the prevalence of wind speeds and directions from the direction of interest. When used to produce many plots (e.g. `type = "hour"`), the run time can be quite long.
 
-## Nonparametric Wind Regression, NWR {#sec-polar-NWR}
+## Nonparametric wind regression (NWR) {#sec-polar-NWR}
 
 An alternative approach to modelling the surface concentrations with a GAM is to use kernel smoothers, as described by Henry et al. [-@henry2009]. In NWR, smoothing is achieved using nonparametric kernel smoothers that weight concentrations on a surface according to their proximity to defined wind speed and direction intervals. In the approach adopted in [openair]{.pkg} (which is not identical to Henry et al. [-@henry2009]), Gaussian smoothers are used for both wind direction and wind speed. Unlike the default GAM approach in [openair]{.pkg}, the NWR technique works directly with the raw (often hourly) data. It tends to provide similar results to [openair]{.pkg} but may have advantages in certain situations e.g. when there is insufficient data available to use a GAM. The width of the Gaussian kernels (𝜎) is controlled by the options `wd_spread` and `ws_spread`.
 
@@ -221,7 +221,7 @@ An example for SO~2~ concentrations is shown in @fig-polarNWR, which can be comp
 polarPlot(mydata, pollutant = "so2", statistic = "nwr")
 ```
 
-## Conditional Probability Function (CPF) plot
+## Conditional probability function (CPF) plot
 
 The conditional probability function (CPF) was described in @sec-CPF in the context of the `percentileRose()` function. The CPF was originally used to show the wind directions that dominate a (specified) high concentration of a pollutant; showing the probability of such concentrations occurring by wind direction Ashbaugh et al. [-@Ashbaugh1985]. However, these ideas can very usefully be applied to bivariate polar plots. In this case the CPF is defined as CPF = $m_{\theta,j}/n_{\theta,j}$, where $m_{\theta,j}$ is the number of samples in the wind sector $\theta$ and wind speed interval $j$ with mixing ratios greater than some 'high' concentration, and $n_{\theta, j}$ is the total number of samples in the same wind direction-speed interval. Note that $j$ does not have to be wind speed but could be any numeric variable e.g. ambient temperature. CPF analysis is very useful for showing which wind direction, wind speed intervals are dominated by high concentrations and give the probability of doing so. A full explanation of the development and use of the bivariate case of the CPF is described in Uria-Tellaetxe and Carslaw [-@Uria2014] where it is applied to monitoring data close to steelworks.
 
@@ -457,13 +457,13 @@ $$
 d_{x, y} = \left({\sum_{j=1}^{J} (x_j - y_j) ^ 2}\right)^{1/2} 
 $$ {#eq-clust-2}
 
-Where **x** and **y** are two J-dimensional vectors, which have been standardized by subtracting the mean and dividing by the standard deviation. In the current case $J$ is of length three i.e. the wind components $u$ and $v$ and the concentration $C$, each of which is standardized e.g.:
+Where **x** and **y** are two J-dimensional vectors, which have been standardised by subtracting the mean and dividing by the standard deviation. In the current case $J$ is of length three i.e. the wind components $u$ and $v$ and the concentration $C$, each of which is standardised e.g.:
 
 $$
 x_j = \left(\frac{x_j - \overline{x}}{\sigma_x}\right) 
 $$ {#eq-clust-3}
 
-Standardization is necessary because the wind components $u$ and $v$ are on different scales to the concentration. In principle, more weight could be given to the concentration rather than the $u$ and $v$ components, although this would tend to identify clusters with similar concentrations but different source origins.
+Standardisation is necessary because the wind components $u$ and $v$ are on different scales to the concentration. In principle, more weight could be given to the concentration rather than the $u$ and $v$ components, although this would tend to identify clusters with similar concentrations but different source origins.
 
 `polarCluster()` can be thought of as the 'local' version of clustering of back trajectories. Rather than using air mass origins, wind speed, wind direction and concentration are used to group similar conditions together. @sec-trajCluster-trajectory-analysis provides the details of clustering back trajectories in [openair]{.pkg}. A fuller description of the clustering approach is described in [@CarslawClust2013].
 
@@ -678,4 +678,4 @@ Note that if you are using the `importUKAQ()` function it is useful to add the o
 
 [openairmaps]{.pkg} isn't limited to just `polarMap()` --- almost any kind of "directional analysis" plot can be placed on a map. There are many similar functions which correspond to other [openair]{.pkg} plotting functions; `annulusMap()`, `freqMap()`, `percentileMap()`, `polarMap()`, `pollroseMap()`, `windroseMap()`, and `diffMap()`.
 
-For more information about using [openairmaps]{.pkg} to create maps with polar plots as markers, please refer to the [Directional Analysis Maps Page](../maps/maps-polar.qmd).
+For more information about using [openairmaps]{.pkg} to create maps with polar plots as markers, please refer to the [Directional analysis maps](../maps/maps-polar.qmd) chapter.

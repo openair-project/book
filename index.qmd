@@ -8,7 +8,7 @@ execute:
 ## Hello and welcome {.unnumbered}
 
 ::: {.callout-note}
-## [openair]{.pkg} Version 3 Released
+## [openair]{.pkg} version 3 released
 
 Version 3 of [openair]{.pkg} has been released! This major update converts all plotting functions from [lattice]{.pkg} to [ggplot2]{.pkg}, among other changes. Click [here](v3.qmd) to learn more about why this change has been made and what it means for [openair]{.pkg} users going forward.
 :::

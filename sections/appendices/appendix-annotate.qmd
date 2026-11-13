@@ -6,7 +6,7 @@ execute:
   message: false
 ---
 
-# Customising openair plots {#sec-annotating-openair}
+# Customising [openair]{.pkg} plots {#sec-annotating-openair}
 
 A frequently asked question about [openair]{.pkg} and a commonly requested feature is how to annotate plots. Since all [openair]{.pkg} functions now return [ggplot2]{.pkg} objects, users have considerably more flexibility in adding annotations using the extensive set of tools available in [ggplot2]{.pkg} and its extensions. Embedding annotation options directly inside every [openair]{.pkg} function would make them unnecessarily complex and still not cover every customisation users may want. Instead, because plots are returned as standard [ggplot2]{.pkg} objects, users can build annotations incrementally, adding layers as needed.
 
@@ -106,7 +106,7 @@ scatter_object$plot +
 
 ### Adding an arrow
 
-To add an arrow, use `geom = "path"` and supply the x and y coordinates of the start and end points, along with the `arrow` parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that `arrow(ends = "both")` creates arrowheads at both ends of the segment, and `linewidth` controls the thickness of the arrow line. The `arrow()` function also has additional parameters such as `angle` and `length` to further customize the appearance of the arrowheads.
+To add an arrow, use `geom = "path"` and supply the x and y coordinates of the start and end points, along with the `arrow` parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that `arrow(ends = "both")` creates arrowheads at both ends of the segment, and `linewidth` controls the thickness of the arrow line. The `arrow()` function also has additional parameters such as `angle` and `length` to further customise the appearance of the arrowheads.
 
 ```{r}
 #| label: fig-scatter-plot-annotate-arrow
@@ -147,7 +147,7 @@ scatter_object$plot +
 
 ### Add a reference line
 
-To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `linetype` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the color of the line.
+To add a reference line, you use `ggplot2::geom_hline()` or `ggplot2::geom_vline()`. In this example, a horizontal dashed purple line is added at y = 200, along with an annotation to label it as "Limit". The `linetype` parameter controls the line type (e.g., dashed, dotted), and `color` specifies the colour of the line.
 
 In this case, we set `x = I(0.01)`. The `I()` function tells [ggplot2]{.pkg} to ignore the data scale (e.g., 30 to 70 units of NO2) and instead use a relative scale (0 at the far left, 1 at the far right). This is really helpful - for example, you may create a lot of different `timePlot()` plots with different x-axis scales - `x = I(0.01)` will *always* mean "nudged a little bit from the far left of the plot".
 
@@ -345,7 +345,7 @@ All of `nrow`, `ncol`, `scales`, `space`, `axes`, `axis.labels`, `switch` and `s
 Note that not all of these arguments will always work in all functions. For example, plots on radial axes like `polarPlot()` fix their x-axis (radial axis) range to be from 0 to 360 to represent compass directions, so `scales = "free_x"` will not do anything.
 
 ::: {.callout-note}
-### Legacy Options
+### Legacy options
 
 Users of older versions of [openair]{.pkg} may recall the `x.relation`, `y.relation` and `layout` options. These mapped onto [lattice]{.pkg} arguments, which pre-dated [ggplot2]{.pkg} as the plotting engine for [openair]{.pkg}. These arguments are automatically remapped onto the modern ones, so old code should still work, but it is recommended to use the new arguments directly. A conversion table is provided below:
 

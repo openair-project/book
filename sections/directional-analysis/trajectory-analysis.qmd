@@ -12,19 +12,19 @@ Perhaps one of the reasons why back trajectory analysis is not carried out more 
 
 Currently these functions allow for the import of pre-calculated back trajectories at several pre-defined locations and some trajectory plotting functions. In time, all of these functions will be developed to allow more sophisticated analyses to be undertaken.
 
-The `importTraj()` function imports pre-calculated back trajectories using the Hysplit trajectory model [Hybrid Single Particle Lagrangian Integrated Trajectory Model](https://ready.arl.noaa.gov/HYSPLIT.php) [@stein2015]. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at WSP similar to that for [importUKAQ](#sec-importUKAQ), which makes it very easy to import pre-processed trajectory data for a range of locations and years. [^trajectory-analysis-1]
+The `importTraj()` function imports pre-calculated back trajectories using the HYSPLIT trajectory model [Hybrid Single Particle Lagrangian Integrated Trajectory Model](https://ready.arl.noaa.gov/HYSPLIT.php) [@stein2015]. Trajectories are run at 3-hour intervals and stored in yearly files (see below). The trajectories are started at ground-level (10m) and propagated backwards in time. The data are stored on web-servers at WSP similar to that for [importUKAQ](#sec-importUKAQ), which makes it very easy to import pre-processed trajectory data for a range of locations and years. [^trajectory-analysis-1]
 
 [^trajectory-analysis-1]: Note --- the back trajectories have been pre-calculated for specific locations and stored as .RData objects. Users should contact David Carslaw to request the addition of other locations.
 
 ::: callout-tip
 ## Generate your own back trajectories
 
-Users may for various reasons wish to run Hysplit themselves e.g. for different starting heights, longer periods or more locations. Code and instructions have been provided in @sec-prod-hyspl-traj for users wishing to do this. Users can also use different means of calculating back trajectories e.g. ECMWF and plot them in [openair]{.pkg} provided a few basic fields are present: `date` (POSIXct), `lat` (decimal latitude), `lon` (decimal longitude) and `hour.inc` the hour offset from the arrival date (i.e. from zero decreasing to the length of the back trajectories). See ?importTraj for more details.
+Users may for various reasons wish to run HYSPLIT themselves e.g. for different starting heights, longer periods or more locations. Code and instructions have been provided in @sec-prod-hyspl-traj for users wishing to do this. Users can also use different means of calculating back trajectories e.g. ECMWF and plot them in [openair]{.pkg} provided a few basic fields are present: `date` (POSIXct), `lat` (decimal latitude), `lon` (decimal longitude) and `hour.inc` the hour offset from the arrival date (i.e. from zero decreasing to the length of the back trajectories). See ?importTraj for more details.
 :::
 
-These trajectories have been calculated using the Global NOAA-NCEP/NCAR reanalysis data archives. The global data are on a latitude-longitude grid (2.5°). Note that there are many meteorological data sets that can be used to run Hysplit e.g. including ECMWF data. However, in order to make it practicable to run and store trajectories for many years and sites, the NOAA-NCEP/NCAR reanalysis data is most useful. In addition, these archives are available for use widely, which is not the case for many other data sets e.g. ECMWF. Hysplit calculated trajectories based on archive data may be distributed without permission (see <https://ready.arl.noaa.gov/HYSPLIT_agreement.php>). For those wanting, for example, to consider higher resolution meteorological data sets it may be better to run the trajectories separately.
+These trajectories have been calculated using the Global NOAA-NCEP/NCAR reanalysis data archives. The global data are on a latitude-longitude grid (2.5°). Note that there are many meteorological data sets that can be used to run HYSPLIT e.g. including ECMWF data. However, in order to make it practicable to run and store trajectories for many years and sites, the NOAA-NCEP/NCAR reanalysis data is most useful. In addition, these archives are available for use widely, which is not the case for many other data sets e.g. ECMWF. HYSPLIT calculated trajectories based on archive data may be distributed without permission (see <https://ready.arl.noaa.gov/HYSPLIT_agreement.php>). For those wanting, for example, to consider higher resolution meteorological data sets it may be better to run the trajectories separately.
 
-[openair]{.pkg} draws trajectory maps using [sf]{.pkg} and [ggplot2]{.pkg}. By default, trajectories are shown in latitude and longitude (WGS84, EPSG:4326), but any other map projection can be chosen using the `crs` argument, as described in the "Reprojecting trajectories" section below. Note that the Hysplit model itself uses one of three different projections depending on the latitude of the origin: a polar stereographic projection if the latitude is greater than 55.0 (or less than -55.0), the Mercator projection if the latitude is between -25.0 and 25.0, and the Lambert conformal projection elsewhere (the mid-latitudes).
+[openair]{.pkg} draws trajectory maps using [sf]{.pkg} and [ggplot2]{.pkg}. By default, trajectories are shown in latitude and longitude (WGS84, EPSG:4326), but any other map projection can be chosen using the `crs` argument, as described in the "Reprojecting trajectories" section below. Note that the HYSPLIT model itself uses one of three different projections depending on the latitude of the origin: a polar stereographic projection if the latitude is greater than 55.0 (or less than -55.0), the Mercator projection if the latitude is between -25.0 and 25.0, and the Lambert conformal projection elsewhere (the mid-latitudes).
 
 Users should see the help file for `importTraj()` to get an up to date list of receptors where back trajectories have been calculated. First, the packages are loaded that are needed.
 
@@ -71,7 +71,7 @@ Next, we consider how to plot back trajectories with a few simple examples. The 
 
 ```{r}
 #| label: fig-traj1
-#| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010. Note the additional option to vary the country colours using `map.cols`. By default the map colours for all countries are grey.
+#| fig-cap: 96-hour HYSPLIT back trajectories centred on London for 7 days in April 2010. Note the additional option to vary the country colours using `map.cols`. By default the map colours for all countries are grey.
 #| fig-width: 6
 #| fig-height: 6
 selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
@@ -87,7 +87,7 @@ There are a few other ways of representing the data shown in @fig-traj1. For exa
 
 ```{r}
 #| label: fig-traj2
-#| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010, shown separately for each day.
+#| fig-cap: 96-hour HYSPLIT back trajectories centred on London for 7 days in April 2010, shown separately for each day.
 #| fig-width: 15
 #| fig-height: 4
 ## make a day column
@@ -109,7 +109,7 @@ Another way of plotting the data is to group the trajectories by day and colour 
 
 ```{r}
 #| label: fig-traj3
-#| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010, shown grouped for each day and coloured accordingly.
+#| fig-cap: 96-hour HYSPLIT back trajectories centred on London for 7 days in April 2010, shown grouped for each day and coloured accordingly.
 #| fig-height: 7
 #| fig-width: 6
 selectByDate(
@@ -143,7 +143,7 @@ This time we can use the option `pollutant` in the function `trajPlot()`, which 
 
 ```{r}
 #| label: fig-traj4
-#| fig-cap: 96-hour Hysplit back trajectories centred on London for 7 days in April 2010, coloured by the concentration of PM~10~ in μg m^-3^.
+#| fig-cap: 96-hour HYSPLIT back trajectories centred on London for 7 days in April 2010, coloured by the concentration of PM~10~ in μg m^-3^.
 #| fig-height: 6
 #| fig-width: 6
 selectByDate(
@@ -198,9 +198,9 @@ selectByDate(traj, start = "15/4/2010", end = "21/4/2010") |>
 
 Which, interestingly still clearly shows elevated PM~10~ concentrations for those two days that cross Iceland. The same is also true for PM~2.5~. However, as mentioned previously, checking other sites in more rural areas would be a good idea.
 
-## Trajectory gridded frequencies {#trajectory-analysis-trajLevel}
+## Trajectory gridded frequencies {#sec-trajLevel}
 
-The Hysplit model itself contains various analysis options for gridding trajectory data. Similar capabilities are also available in [openair]{.pkg} where the analyses can be extended using other [openair]{.pkg} capabilities. It is useful to gain an idea of where trajectories come from. Over the course of a year representing trajectories as lines or points results in a lot of over-plotting. Therefore it is useful to grid the trajectory data and calculate various statistics by considering latitude-longitude intervals. The first analysis considers the number of unique trajectories in a particular grid square. This is achieved by using the `trajLevel()` function and setting the `statistic` option to "frequency". @fig-trajFreq shows the frequency of back trajectory crossings for the London data. In this case it highlights that most trajectory origins are from the west and north for 2010 at this site. Note that in this case, `pollutant` can just be the trajectory height (or another numeric field) rather than an actual pollutant because only the frequencies are considered.
+The HYSPLIT model itself contains various analysis options for gridding trajectory data. Similar capabilities are also available in [openair]{.pkg} where the analyses can be extended using other [openair]{.pkg} capabilities. It is useful to gain an idea of where trajectories come from. Over the course of a year representing trajectories as lines or points results in a lot of over-plotting. Therefore it is useful to grid the trajectory data and calculate various statistics by considering latitude-longitude intervals. The first analysis considers the number of unique trajectories in a particular grid square. This is achieved by using the `trajLevel()` function and setting the `statistic` option to "frequency". @fig-trajFreq shows the frequency of back trajectory crossings for the London data. In this case it highlights that most trajectory origins are from the west and north for 2010 at this site. Note that in this case, `pollutant` can just be the trajectory height (or another numeric field) rather than an actual pollutant because only the frequencies are considered.
 
 ```{r}
 #| label: fig-trajFreq
@@ -337,7 +337,7 @@ group_by(traj, sector) |>
   mutate(percent = 100 * n / nrow(traj))
 ```
 
-### Potential Source Contribution Function (PSCF)
+### Potential source contribution function (PSCF)
 
 If `statistic = "pscf"` then the Potential Source Contribution Function (PSCF) is plotted. The PSCF calculates the probability that a source is located at latitude $i$ and longitude $j$ [@Fleming2012; @Pekney2006]. The PSCF is somewhat analogous to the CPF function described in @sec-CPF that considers local wind direction probabilities. In fact, the two approaches have been shown to work well together [@Pekney2006]. The PSCF approach has been widely used in the analysis of air mass back trajectories. @AraBegum2005 for example assessed the method against the known locations of wildfires and found it performed well for PM~2.5~, EC (elemental carbon) and OC (organic carbon) and that other (non-fire related) species such as sulphate had different source origins. The basis of PSCF is that if a source is located at ($i$, $j$), an air parcel back trajectory passing through that location indicates that material from the source can be collected and transported along the trajectory to the receptor site. PSCF solves
 
@@ -363,7 +363,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
   )
 ```
 
-### Concentration Weighted Trajectory (CWT)
+### Concentration weighted trajectory (CWT)
 
 A limitation of the PSCF method is that grid cells can have the same PSCF value when sample concentrations are either only slightly higher or much higher than the criterion [@Hsu2003]. As a result, it can be difficult to distinguish moderate sources from strong ones. @seibert1994 computed concentration fields to identify source areas of pollutants. This approach is sometimes referred to as the CWT or CF (concentration field). A grid domain was used as in the PSCF method. For each grid cell, the mean (CWT) or logarithmic mean (used in the Residence Time Weighted Concentration (RTWC) method) concentration of a pollutant species was calculated as follows:
 
@@ -421,9 +421,9 @@ filter(traj, lat > 40 & lat < 70 & lon > -20 & lon < 20) |>
 
 It should be noted that it makes sense to analyse back trajectories for pollutants that have a large regional component --- such as particles or O~3~. It makes little sense to analyse pollutants that are known to have local impacts e.g. NO~x~. However, a species such as NO~x~ can be helpful to exclude 'fresh' emissions from the analysis.
 
-### Simplified Quantitative Transport Bias Analysis (SQTBA)
+### Simplified quantitative transport bias analysis (SQTBA)
 
-Both CWT and PSCF techniques in essence assume that the trajectory paths represent a good estimate of the centreline of the air mass origin. However, trajectory analysis is implicitly uncertain, not least because of the difficulty of accurately describing the dispersion of pollutants in the atmosphere. Hysplit has many approaches to deal with these uncertainties such as running an ensemble of trajectories with different starting locations. However, for longer term analysis it can be very time consuming to run the model to explore the influence of meteorological variation.
+Both CWT and PSCF techniques in essence assume that the trajectory paths represent a good estimate of the centreline of the air mass origin. However, trajectory analysis is implicitly uncertain, not least because of the difficulty of accurately describing the dispersion of pollutants in the atmosphere. HYSPLIT has many approaches to deal with these uncertainties such as running an ensemble of trajectories with different starting locations. However, for longer term analysis it can be very time consuming to run the model to explore the influence of meteorological variation.
 
 SQTBA is an approach that recognises the natural processes of plume dispersion and uses this understanding as part of back trajectory analysis. The approach has been used in many studies that aim to better understand source regions for PM~2.5~ (or components of PM~2.5~) e.g. @brook2004 considering PM~2.5~ in North America, @zhao2007 modelling particulate nitrate and sulphate, @zhou2004 comparing different source attribution techniques including SQTBA and the consideration of sources of ammonia in New York State [@zhou2019].
 
@@ -527,7 +527,7 @@ The results returned from multiple site analysis are normalised by each site ind
 
 ## Trajectory clustering {#sec-trajCluster-trajectory-analysis}
 
-Often it is useful to use cluster analysis on back trajectories to group similar air mass origins together. The principal purpose of clustering back trajectories is to post-process data according to cluster origin. By grouping data with similar geographic origins it is possible to gain information on pollutant species with similar chemical histories. There are several ways in which clustering can be carried out and several measures of the similarity of different clusters. A key issue is how the *distance matrix* is calculated, which determines the similarity (or dissimilarity) of different back trajectories. The simplest measure is the Euclidean distance. However, an angle-based measure is also often used. The two distance measures are defined below. In [openair]{.pkg} the distance matrices are calculated using C$++$ code because their calculation is computationally intensive. Note that these calculations can also be performed directly in the Hysplit model itself.
+Often it is useful to use cluster analysis on back trajectories to group similar air mass origins together. The principal purpose of clustering back trajectories is to post-process data according to cluster origin. By grouping data with similar geographic origins it is possible to gain information on pollutant species with similar chemical histories. There are several ways in which clustering can be carried out and several measures of the similarity of different clusters. A key issue is how the *distance matrix* is calculated, which determines the similarity (or dissimilarity) of different back trajectories. The simplest measure is the Euclidean distance. However, an angle-based measure is also often used. The two distance measures are defined below. In [openair]{.pkg} the distance matrices are calculated using C$++$ code because their calculation is computationally intensive. Note that these calculations can also be performed directly in the HYSPLIT model itself.
 
 The Euclidean distance between two trajectories is given by @eq-Euclid. Where $X_1$, $Y_1$ and $X_2$, $Y_2$ are the latitude and longitude coordinates of back trajectories $1$ and $2$, respectively. $n$ is the number of back trajectory points (96 hours in this case). Note that a simpler formula is sufficient for this calculation than the more accurate Haversine formula.
 
@@ -770,4 +770,4 @@ trajMap(
 trajLevelMap(traj_data, statistic = "frequency")
 ```
 
-For more information about using [openairmaps]{.pkg} to visualise trajectories, please refer to the [Interactive Trajectory Analysis Page](../maps/maps-traj.qmd).
+For more information about using [openairmaps]{.pkg} to visualise trajectories, please refer to the [Trajectory maps](../maps/maps-traj.qmd) chapter.

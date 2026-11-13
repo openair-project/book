@@ -2,7 +2,7 @@
 author: Jack Davison
 ---
 
-# Getting help
+# Getting help {#sec-gethelp}
 
 The [openair]{.pkg} family was written to be as easy as possible to use for people who don't necessarily know a lot of R, and much of its core functionality is outlined in this book. However, we know from experience that sometimes things don't behave as they should! Whether the issue is dodgy data, a sneaky bug in the code, or functionality that isn't yet catered for, this page should guide you through the best way to find help.
 
@@ -26,7 +26,7 @@ If your problems are with R more generally rather than being specific to [openai
 
 Regardless of where you choose to find answers, it is best to provide others with a "reproducible example". This means you need to provide code that will recreate your issue on someone else's computer.
 
-## Reproducible Examples {#sec-reprex}
+## Reproducible examples {#sec-reprex}
 
 While the [openair]{.pkg} authors can run code on our computers, we can't run *your* code on *your* computer using *your* data. To help us help you, you need to help bridge that gap - this is called providing a "reproducible example".
 

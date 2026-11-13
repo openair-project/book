@@ -11,5 +11,5 @@ It should be noted that while the aim is to keep this documentation up to date, 
 ::: callout-tip
 ## Note!
 
-The next Section contains important information on loading the [openair]{.pkg} package for the first time and the input data requirements. Users will need to consider the advice in this section to ensure that [openair]{.pkg} can be used without problems.
+@sec-openair-package contains important information on loading the [openair]{.pkg} package for the first time and the input data requirements. Users will need to consider the advice in this section to ensure that [openair]{.pkg} can be used without problems.
 :::
