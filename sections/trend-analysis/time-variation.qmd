@@ -95,7 +95,7 @@ timeVariation(
 
 In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the `polarPlot` function where a 'feature' of interest has been identified---maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available. This is an area that will be developed.
 
-The approach here is to first make a new variable called 'feature' and fill it with the value 'other'. A subset of data is defined and the associated locations in the data frame identified. The subset of data is then used to update the 'feature' field with a new description. This approach could be extended to some quite complex situations.
+The approach here is to make a new variable called 'feature' that is labelled 'easterly' for the conditions of interest (easterly winds with wind speeds \> 4 m s^-1^) and 'other' for everything else. This approach could be extended to some quite complex situations.
 
 There are a couple of things to note in @fig-timeVar4. There seems to be evidence that for easterly winds \> 4 m s^-1^ that concentrations of SO~2~ are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This *might* reflect that SO~2~ concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources. This technique will be returned to with different data sets in future.
 
@@ -104,7 +104,7 @@ There are a couple of things to note in @fig-timeVar4. There seems to be evidenc
 #| fig-cap: Example plot using the `timeVariation` function to plot SO~2~ concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds \> 4 m s^-1^ and everything else. Note that the uncertainty in the mean values for easterly winds is greater than *other*. This is mostly because the sample size is much lower for *easterly* compared  with *other*.
 #| fig-width: 12
 #| fig-height: 7
-## make a field called "feature" and fill: make all values = "other"
+## make a field called "feature": "easterly" for the conditions of interest, otherwise "other"
 mydata <- mutate(
   mydata,
   feature = ifelse(ws > 4 & wd > 0 & wd <= 180, "easterly", "other")

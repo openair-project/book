@@ -25,7 +25,7 @@ mydata <- rollingMean(
 tail(mydata)
 ```
 
-Note that calculating rolling means shortens the length of the data set. In the case of O~3~, no calculations are made for the last 7 hours.
+Note that rolling means cannot be calculated at the very start and end of the data set, where the averaging window is incomplete, so these values are returned as `NA`.
 
 Like `selectRunning()`, `rollingMean()` will fail if there are duplicate dates within the data frame; users can again use `type = "site"` or similar to calculate rolling means for different monitoring stations.
 
@@ -141,7 +141,7 @@ dplyr::glimpse(mydata_smooth)
 
 ```{r}
 #| label: fig-whittaker-smooth
-#| fig-cap: "Whittaker-Eilers smoothed NO~2~ concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of `mydata`. Lambda was set to 20."
+#| fig-cap: "Whittaker-Eilers smoothed NO~2~ concentrations (red) plotted against the raw hourly data (blue) for the first 744 hours of `mydata`. Lambda was set to 2000."
 #| fig-width: 6
 #| fig-height: 5
 mydata_smooth |>

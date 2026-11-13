@@ -102,13 +102,13 @@ An example of normalising data is shown in @fig-timePlotNorm. In this plot we ha
 
 -   Averaged the data to annual means;
 
--   Chosen to normalise to the beginning of 2008;
+-   Chosen to normalise to the beginning of 1998;
 
--   Set the line width to 4 and the line type to 1 (continuous line);
+-   Set the line width to 2 and the line type to 1 (continuous line);
 
 -   Chosen to group the data in one panel.
 
-@fig-timePlotNorm shows that concentrations of NO~2~ and O~3~ have increased over the period 1998--2005; SO~2~ and CO have shown the greatest reductions (by about 60%), whereas NO~x~ concentrations have decreased by about 20%.
+@fig-timePlotNorm shows that concentrations of NO~2~ have increased over the period 1998--2005; CO and SO~2~ have shown the greatest reductions (by about 50--60%), whereas NO~x~ concentrations have decreased by about 25% and PM~10~ shows little overall change.
 
 ```{r}
 #| label: fig-timePlotNorm

@@ -106,7 +106,7 @@ scatter_object$plot +
 
 ### Adding an arrow
 
-To add an arrow, use `geom = "segment"` and specify the coordinates of the start and end points, along with the `arrow` parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that `arrow(ends = "both")` creates arrowheads at both ends of the segment, and `linewidth` controls the thickness of the arrow line. The `arrow()` function also has additional parameters such as `angle` and `length` to further customize the appearance of the arrowheads.
+To add an arrow, use `geom = "path"` and supply the x and y coordinates of the start and end points, along with the `arrow` parameter to define the arrowhead. In this example, an arrow is added pointing from (40, 150) to (60, 250). Note that `arrow(ends = "both")` creates arrowheads at both ends of the segment, and `linewidth` controls the thickness of the arrow line. The `arrow()` function also has additional parameters such as `angle` and `length` to further customize the appearance of the arrowheads.
 
 ```{r}
 #| label: fig-scatter-plot-annotate-arrow

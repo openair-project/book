@@ -249,7 +249,7 @@ case it is best to stick with changes in absolute concentrations.
 The `TheilSen` function was written to work with hourly data, which is
 then averaged into monthly or annual data. However, it is realised that
 users may already have data that is monthly or annual. The function can
-therefore accept as input monthly or annual data directly. 
+therefore accept as input monthly or annual data directly. In this case, make sure the `date` column is a proper date. For example, if monthly dates have been read in as text in British format (dd/mm/YYYY), they can be converted as follows:
 
 ```{r}
 #| eval: false
@@ -342,7 +342,7 @@ TheilSen(
 Passing `type = c("site_type", "site")` tells `TheilSen` to condition
 on both site type and individual site, so a separate Theil-Sen slope is
 estimated for each site. Setting `plot = FALSE` and `silent = TRUE`
-suppresses graphical and console output while looping through all 50
+suppresses graphical and console output while processing all 50
 sites, which would otherwise produce a large volume of unwanted output.
 
 **Step 4: Extract the summary statistics.** As described in the
@@ -412,7 +412,7 @@ ts_out <- TheilSen(
 ts_results <- ts_out$data[[2]] 
 
 # --- 5. Summary ordered plot ---
-# Order sites within each group by slope (high to low) using a single factor
+# Order sites within each group by slope (low to high) using a single factor
 ordered_levels <- ts_results |>
   arrange(site_type, slope) |>
   pull(site)

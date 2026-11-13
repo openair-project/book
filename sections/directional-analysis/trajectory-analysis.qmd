@@ -59,7 +59,7 @@ head(traj)
 
 The `traj` data frame contains among other things the latitude and longitude of the back trajectory, the height (m) and pressure (hPa) of the trajectory. The `date` field is the *arrival* time of the air-mass and is useful for linking with ambient measurement data.
 
-The `trajPlot` function is used for plotting back trajectory lines and density plots and has the following options:
+The `trajPlot` function is used for plotting back trajectory lines, while `trajLevel` (described later) is used for gridded analyses. See `?trajPlot` and `?trajLevel` for the full set of options.
 
 ## Plotting trajectories
 
@@ -160,7 +160,7 @@ However, it is possible to account for the PM that is local to some extent by co
 
 ```{r}
 #| eval: false
-scatterPlot(kc1, x = "nox", y = "pm2.5", avg = "day", linear = TRUE)
+scatterPlot(kc1, x = "nox", y = "pm10", avg.time = "day", linear = TRUE)
 ```
 
 which suggests a gradient of 0.084. Therefore, we can remove the PM~10~ that is associated with NO~x~ in `kc1` data, making a new column `pm.new`:
@@ -198,7 +198,7 @@ The Hysplit model itself contains various analysis options for gridding trajecto
 
 ```{r}
 #| label: fig-trajFreq
-#| fig-cap: Gridded back trajectory frequencies. The `border = NA` option removes the border around each grid cell.
+#| fig-cap: Gridded back trajectory frequencies.
 #| fig-width: 8
 #| fig-height: 5
 trajLevel(traj, statistic = "frequency")
@@ -298,7 +298,7 @@ alloc <- traj |>
 traj <- left_join(traj, alloc, by = "date")
 ```
 
-Now it is possible to post-process the data. `traj` now has the angle, sector and allocation (`sector`).
+Now it is possible to post-process the data. `traj` now has the allocated sector (`sector`) and the number of trajectory points in that sector (`n`).
 
 ```{r}
 #| label: headTraj2
@@ -397,7 +397,7 @@ filter(traj, lat > 45 & lat < 60 & lon > -20 & lon < 20) |>
   )
 ```
 
-In common with most other [openair]{.pkg} functions, the flexible `type` option can be used to split the data in different ways. For example, to plot the smoothed back trajectories for PM~2.5~ concentrations by season.
+In common with most other [openair]{.pkg} functions, the flexible `type` option can be used to split the data in different ways. For example, to plot the PSCF for PM~2.5~ concentrations by season.
 
 ```{r}
 #| label: traj7

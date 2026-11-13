@@ -104,7 +104,7 @@ ggplot(aq_select, aes(.data[[x]], .data[[y]])) +
 
 Next, we will plot the 'dilution lines' --- the result of the rolling regressions for the filtered data. The plot is shown in @fig-dilution-lines, which uses the **same** data as @fig-nox-pm25. What is striking about @fig-dilution-lines is that over 3-hour periods there are so many lines that have a similar slope, which changes the impression of the data shown in @fig-nox-pm25. Remember that the data were filtered for quite large changes in NO~x~, so @fig-dilution-lines shows the corresponding change in PM~2.5~ , which highlights consistent behaviour.
 
-The dilution lines shown in @fig-dilution-lines have also been coloured by the minimum value of PM~2.5~ in each case, which can be thought of as the prevailing background concentration of PM~2.5~ (the y-intercept of the individual regressions). An interpretation of @fig-dilution-lines is that the background PM~2.5~ can vary a lot but there is a local source in addition to the background air that has a rather consistent behaviour with similar ratios of PM~2.5~ to NO~x~.
+The dilution lines shown in @fig-dilution-lines have also been coloured by the PM~2.5~ concentration at the start of each 3-hour period, which can be thought of as an indication of the prevailing background concentration of PM~2.5~. An interpretation of @fig-dilution-lines is that the background PM~2.5~ can vary a lot but there is a local source in addition to the background air that has a rather consistent behaviour with similar ratios of PM~2.5~ to NO~x~.
 
 ```{r}
 #| label: fig-dilution-lines
@@ -176,7 +176,7 @@ As a final step, we can explore the filtered data further. For example, we might
 
 ```{r}
 #| label: fig-polar-slope
-#| fig-cap: Polar plot of the slope of PM~2.5~/NO~x~ from the run-regression analysis using filtered data. Note that
+#| fig-cap: Polar plot of the slope of PM~2.5~/NO~x~ from the run-regression analysis using filtered data. Note that Nonparametric Wind Regression (NWR) is used because there are too few data to fit a GAM.
 #| cache: false
 #| fig-width: 4.5
 #| fig-height: 4.5

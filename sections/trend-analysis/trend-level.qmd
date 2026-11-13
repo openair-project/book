@@ -126,7 +126,7 @@ trendLevel(
 
 By default `trendLevel` subsamples the plotted `pollutant` data by the supplied `x`, `y` and `type` parameters and in each case calculates the mean. The option `statistic` has always let you apply other statistics. For example, `trendLevel` can also calculate the maximum via the option `statistic = "max"`. The user may also use their own statistic function.
 
-As a simple example, consider the above plot which summarises by mean. This tells us about average concentrations. It might also be useful to consider a particular percentile of concentrations. This can be done by defining one's own function as shown in @fig-trendlevel4.
+As a simple example, consider @fig-trendLevel3, which summarises by mean. This tells us about average concentrations. It might also be useful to consider a particular percentile of concentrations. This can be done by defining one's own function as shown in @fig-trendlevel4.
 
 ```{r}
 #| label: fig-trendlevel4
@@ -151,7 +151,7 @@ trendLevel(
 
 This type of flexibility really opens up the potential of the function as a screening tool for the early stages of data analysis. Increased control of `x`, `y`, `type` and `statistic` allow you to very quickly explore your data and develop an understanding of how different parameters interact. Patterns in `trendLevel` plots can also help to direct your [openair]{.pkg} analysis. For example, possible trends in data conditioned by year would suggest that functions like `smoothTrend` or `TheilSen` could provide further insight. Likewise, `windRose` or `polarPlot` could be useful next steps if wind speed and direction conditioning produces interesting features. However, perhaps most interestingly, novel conditioning or the incorporation of novel parameters in this type of highly flexible function provides a means of developing new data visualisation and analysis methods.
 
-`trendLevel` can also be used with user defined discrete colour scales as shown in @fig-trendLevelDiscete. In this case the default $x$ and $y$ variables are chosen (week and hour) split by `type` (year).
+`trendLevel` can also be used with user defined discrete colour scales as shown in @fig-trendLevelDiscete. In this case `x` is set to week of the year and the default `y` (hour of the day) is used, with the maximum NO~2~ concentration shown in each cell.
 
 ```{r}
 #| label: fig-trendLevelDiscete

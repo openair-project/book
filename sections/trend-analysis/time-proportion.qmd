@@ -40,7 +40,7 @@ An example of using `timeProp` with a continuous variable is shown in @fig-timeP
 
 ```{r}
 #| label: fig-timePropws
-#| fig-cap: '`timeProp` plot for SO~2~ concentrations in 2003. The data are categorised into 4 wind speed categories for 3-day averages.'
+#| fig-cap: '`timeProp` plot for SO~2~ concentrations in 2003. The data are categorised into 3 wind speed categories for 3-day averages.'
 #| fig-width: 15
 #| fig-height: 4
 #| column: screen-inset-right

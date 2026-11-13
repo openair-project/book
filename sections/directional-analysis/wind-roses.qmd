@@ -273,7 +273,7 @@ mod_met <- importUKAQ("kc1", year = 2024)
 met_compare <- inner_join(
   select(london_met, date, ws, wd),
   select(mod_met, date, ws, wd),
-  suffix = c("_lon", "_yor"),
+  suffix = c("_lon", "_mod"),
   by = "date"
 )
 ```
@@ -303,8 +303,8 @@ windRose(
   met_compare,
   ws = "ws_lon",
   wd = "wd_lon",
-  ws2 = "ws_yor",
-  wd2 = "wd_yor"
+  ws2 = "ws_mod",
+  wd2 = "wd_mod"
 )
 ```
 
@@ -320,8 +320,8 @@ windRose(
   met_compare,
   ws = "ws_lon",
   wd = "wd_lon",
-  ws2 = "ws_yor",
-  wd2 = "wd_yor",
+  ws2 = "ws_mod",
+  wd2 = "wd_mod",
   type = "season"
 )
 ```
