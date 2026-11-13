@@ -2,7 +2,7 @@
 title: Trajectory Analysis
 subtitle: Transforming static trajectory plots into interactive HTML widgets 
 author: Jack Davison
-abstract: "`openair` already contains functionality for visualising HYSPLIT back trajectories, but as more trajectory paths are added these static plots can become difficult to interpret. `openairmaps` allows for effectively the same visualisations to be mapped in `leaflet`, which can help untangle these complex figures."
+abstract: "[openair]{.pkg} already contains functionality for visualising HYSPLIT back trajectories, but as more trajectory paths are added these static plots can become difficult to interpret. [openairmaps]{.pkg} allows for effectively the same visualisations to be mapped in [leaflet]{.pkg}, which can help untangle these complex figures."
 execute: 
   cache: false
 ---
@@ -33,7 +33,7 @@ By default, `trajMap()` will plot your trajectories in black on a default "OpenS
 
 ```{r}
 #| label: fig-trajMap
-#| fig-cap: "A simple demonstration of `trajMap`."
+#| fig-cap: "A simple demonstration of `trajMap()`."
 trajMap(traj_data, colour = "date")
 ```
 
@@ -41,7 +41,7 @@ What may be of greater interest is colouring the trajectories by the concentrati
 
 ```{r}
 #| label: fig-trajPM
-#| fig-cap: "A more thorough application of `trajMap`, this time coloured by PM concentrations."
+#| fig-cap: "A more thorough application of `trajMap()`, this time coloured by PM concentrations."
 trajMap(
   traj_data,
   colour = "pm10",
@@ -107,7 +107,7 @@ The marker function equivalent of `trajMap()` is `addTrajPaths()` which, much li
 
 ```{r}
 #| label: fig-trajMarker
-#| fig-cap: A demonstration of the use of `addTrajPaths`.
+#| fig-cap: A demonstration of the use of `addTrajPaths()`.
 library(leaflet)
 library(openair)
 

@@ -9,7 +9,7 @@ editor_options:
 
 The wind rose is a very useful way of summarising meteorological data.
 It is particularly useful for showing how wind speed and wind direction
-conditions vary by year. The `windRose` function can plot wind roses in
+conditions vary by year. The `windRose()` function can plot wind roses in
 a variety of ways: summarising all available wind speed and wind
 direction data, plotting individual wind roses by year, and also by
 month. The latter is useful for considering how meteorological
@@ -21,14 +21,14 @@ by different width 'paddles'. The plots show the proportion (here
 represented as a percentage) of time that the wind is from a certain
 angle and wind speed range.
 
-The `windRose` function also calculates the percentage of 'calms' i.e.
+The `windRose()` function also calculates the percentage of 'calms' i.e.
 when the wind speed is zero. UK Met Office data assigns these periods to
 0 degrees wind direction with valid northerly winds being assigned to
 360$^\circ$. The option `calm.thresh` can be used to assign calms to
 non-zero wind speeds. For example `calm.thresh = 0.5` will assign wind
 speeds *below* 0.5 as calm.
 
-The `windRose` function will also correct for bias when wind directions
+The `windRose()` function will also correct for bias when wind directions
 are rounded to the nearest 10 degrees but are displayed at angles that
 10 degrees is not exactly divisible into e.g. 22.5$^\circ$. When such
 data are binned, some angles i.e. N, E, S, W will comprise three
@@ -59,7 +59,7 @@ The function is very simply called as shown for @fig-windroseBasic.
 
 ```{r}
 #| label: fig-windroseBasic
-#| fig-cap: Use of `windRose` function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies.
+#| fig-cap: Use of `windRose()` function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies.
 #| fig-width: 4
 #| fig-height: 5
 #| out-width: 60%
@@ -74,7 +74,7 @@ of how wind speed and direction vary seasonally.
 
 ```{r}
 #| label: fig-windRoseyear
-#| fig-cap: Use of `windRose` function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies.
+#| fig-cap: Use of `windRose()` function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies.
 #| fig-width: 8
 #| fig-height: 6
 windRose(
@@ -127,32 +127,32 @@ windRose(mydata, angle = 22.5, bias.corr = FALSE)
 windRose(mydata, angle = 22.5)
 ```
 
-`pollutionRose` is a variant of `windRose` that is useful for
+`pollutionRose()` is a variant of `windRose()` that is useful for
 considering pollutant concentrations by wind direction, or more
 specifically the percentage time the concentration is in a particular
 range. This type of approach can be very informative for air pollutant
 species, as demonstrated by Ronald Henry and co-authors in @henry2009.
 
-You can produce similar pollution roses using the `pollutionRose`
+You can produce similar pollution roses using the `pollutionRose()`
 function in recent versions of [openair]{.pkg}, e.g. as in
 @fig-pollutionRoseBasic:
 
 ```{r}
 #| label: fig-pollutionRoseBasic
-#| fig-cap: NO~x~ pollution rose produced using  `pollutionRose` and default `pollutionRose` settings.
+#| fig-cap: NO~x~ pollution rose produced using  `pollutionRose()` and default `pollutionRose()` settings.
 #| fig-width: 5
 #| fig-height: 4
 #| out-width: 60%
 pollutionRose(mydata, pollutant = "nox")
 ```
 
-`pollutionRose` is a *wrapper* for `windRose`. It simply replaces the wind
+`pollutionRose()` is a *wrapper* for `windRose()`. It simply replaces the wind
 speed data series in the supplied data set with another variable using
-the argument `pollutant` before passing that on to `windRose`. It also
+the argument `pollutant` before passing that on to `windRose()`. It also
 modifies `breaks` to estimate a sensible set of break points for that
 pollutant and uses a slightly different set of default options (key to
 right, wedge style plot) but otherwise handles arguments just like the
-parent `windRose` function.
+parent `windRose()` function.
 
 While @fig-pollutionRoseBasic indicates that higher NO~x~ concentrations
 are also associated with the SW, conditioning allows you to be much more
@@ -177,7 +177,7 @@ pollutionRose(
 )
 ```
 
-`pollutionRose` can also usefully be used to show which wind directions
+`pollutionRose()` can also usefully be used to show which wind directions
 dominate the overall concentrations. By supplying the option
 `statistic = "prop.mean"` (proportion contribution to the mean), a good
 idea can be gained as to which wind directions contribute most to
@@ -186,7 +186,7 @@ different concentration levels. A simple plot is shown in
 @fig-pollRoseAttr, which clearly shows the dominance of south-westerly
 winds controlling the overall mean NO~x~ concentrations at this site.
 Indeed, almost half the overall NO~x~ concentration is contributed by
-two wind sectors to the south-west. The `polarFreq` function can also
+two wind sectors to the south-west. The `polarFreq()` function can also
 show this sort of information, but the pollution rose is more effective
 because both length and colour are used to show the contribution. These
 plots are very useful for understanding which wind directions control
@@ -227,7 +227,7 @@ from the east occur with a low frequency.
 
 ```{r}
 #| label: fig-pollRoseNorm
-#| fig-cap: SO~2~ pollution rose produced using `pollutionRose` normalised by each wind sector.
+#| fig-cap: SO~2~ pollution rose produced using `pollutionRose()` normalised by each wind sector.
 #| fig-width: 5
 #| fig-height: 4
 #| out-width: 60%
@@ -240,7 +240,7 @@ pollutionRose(
 
 ## Comparing two meteorological data sets {#sec-comp-met}
 
-The `windRose` function is also useful for comparing two meteorological
+The `windRose()` function is also useful for comparing two meteorological
 data sets. In this case a 'reference' data set is compared with a second
 data set. There are many reasons for doing so e.g. to see how one site
 compares with another or for meteorological model evaluation (more on
@@ -278,7 +278,7 @@ met_compare <- inner_join(
 )
 ```
 
-The `windRose` function can then be used to compare the two data sets.
+The `windRose()` function can then be used to compare the two data sets.
 In this case, the plot shown in @fig-windComp shows the difference
 between the two data sets with respect to the reference data set (in
 this case, the London site). The colours show whether the second data

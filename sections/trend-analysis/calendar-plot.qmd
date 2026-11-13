@@ -6,11 +6,11 @@ author: David Carslaw
 
 ## Purpose
 
-Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data on the time scale of days or months. The `calendarPlot` function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, `calendarPlot` overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.
+Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data on the time scale of days or months. The `calendarPlot()` function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, `calendarPlot()` overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.
 
-`calendarPlot` can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g. when the daily mean concentration is greater than 50 μg m^-3^.
+`calendarPlot()` can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g. when the daily mean concentration is greater than 50 μg m^-3^.
 
-The `calendarPlot` function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e. intervals of concentrations that are expressed in ways like 'very good', 'good', 'poor' and so on.
+The `calendarPlot()` function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e. intervals of concentrations that are expressed in ways like 'very good', 'good', 'poor' and so on.
 
 ## Calendar examples
 
@@ -29,7 +29,7 @@ It is sometimes useful to annotate the plots with other information. It is possi
 
 @fig-calendarPlotExceed highlights those days where PM~10~ concentrations exceed 50 μg m^-3^ by making the annotation for those days bigger, bold and orange. Plotting the data in this way clearly shows the days where PM~10~ \> 50 μg m^-3^.
 
-Other [openair]{.pkg} functions can be used to plot other statistics. For example, `rollingMean` could be used to calculate rolling 8-hour mean O~3~ concentrations. Then, `calendarPlot` could be used with `statistic = "max"` to show days where the maximum daily rolling 8-hour mean O~3~ concentration is greater than a certain threshold e.g. 100 or 120 μg m^-3^.
+Other [openair]{.pkg} functions can be used to plot other statistics. For example, `rollingMean()` could be used to calculate rolling 8-hour mean O~3~ concentrations. Then, `calendarPlot()` could be used with `statistic = "max"` to show days where the maximum daily rolling 8-hour mean O~3~ concentration is greater than a certain threshold e.g. 100 or 120 μg m^-3^.
 
 ```{r}
 #| label: fig-calendarPlotExceed

@@ -4,13 +4,13 @@ author: David Carslaw
 
 # Polar plots {#sec-polarPlot}
 
-This Section considers the flexible `polarPlot` function that is used to provide information about source characteristics. The clustering of polar plots is also considered using `polarCluster`.
+This Section considers the flexible `polarPlot()` function that is used to provide information about source characteristics. The clustering of polar plots is also considered using `polarCluster()`.
 
 ## Introduction to polar plots
 
-The `polarPlot` function plots a *bivariate polar plot* of concentrations. Concentrations are shown to vary by wind speed and wind direction. In many respects they are similar to the plots shown in @sec-polarFreq but include some additional enhancements. These enhancements include: plots are shown as a continuous surface and surfaces are calculated through modelling using smoothing techniques. These plots are not entirely new as others have considered the joint wind speed-direction dependence of concentrations (see for example Yu et al. [-@Yu2004]). However, plotting the data in polar coordinates and for the purposes of source identification is new. Furthermore, the basic polar plot has since been enhanced in many ways as described below. Publications that describe or use the technique are Carslaw et al. [-@Carslaw2006a] and Westmoreland et al. [-@Westmoreland2007]. These plots have proved to be useful for quickly gaining a graphical impression of potential sources influences at a location.
+The `polarPlot()` function plots a *bivariate polar plot* of concentrations. Concentrations are shown to vary by wind speed and wind direction. In many respects they are similar to the plots shown in @sec-polarFreq but include some additional enhancements. These enhancements include: plots are shown as a continuous surface and surfaces are calculated through modelling using smoothing techniques. These plots are not entirely new as others have considered the joint wind speed-direction dependence of concentrations (see for example Yu et al. [-@Yu2004]). However, plotting the data in polar coordinates and for the purposes of source identification is new. Furthermore, the basic polar plot has since been enhanced in many ways as described below. Publications that describe or use the technique are Carslaw et al. [-@Carslaw2006a] and Westmoreland et al. [-@Westmoreland2007]. These plots have proved to be useful for quickly gaining a graphical impression of potential sources influences at a location.
 
-The `polarPlot` function is described in more detail in Carslaw et al. [-@Carslaw2006a] where it is used to triangulate sources in an airport setting, Carslaw and Beevers [-@CarslawClust2013] where it is used with a clustering technique to identify features in a polar plot with similar characteristics and Uria-Tellaetxe and Carslaw [-@Uria2014] where it is extended to include a conditional probability function to extract more information from the plots.
+The `polarPlot()` function is described in more detail in Carslaw et al. [-@Carslaw2006a] where it is used to triangulate sources in an airport setting, Carslaw and Beevers [-@CarslawClust2013] where it is used with a clustering technique to identify features in a polar plot with similar characteristics and Uria-Tellaetxe and Carslaw [-@Uria2014] where it is extended to include a conditional probability function to extract more information from the plots.
 
 For many, maybe most situations, increasing wind speed generally results in lower concentrations due to increased dilution through advection and increased mechanical turbulence. There are, however, many processes that can lead to interesting concentration-wind speed dependencies, and we will provide a more theoretical treatment of this in due course. However, below are a few reasons why concentrations can change with increasing wind speeds.
 
@@ -123,7 +123,7 @@ library(tidyverse)
 
 ```{r}
 #| label: fig-polarPlot
-#| fig-cap: Default use of the `polarPlot` function applied to Marylebone Road NO~x~ concentrations.
+#| fig-cap: Default use of the `polarPlot()` function applied to Marylebone Road NO~x~ concentrations.
 polarPlot(mydata, pollutant = "nox")
 ```
 
@@ -131,13 +131,13 @@ This produces @fig-polarPlot. The scale is automatically set using whatever unit
 
 @fig-polarPlot2 and @fig-polarPlot3 show polar plots using different defaults and for other pollutants. In the first (@fig-polarPlot2), a different colour scheme is used and some adjustments are made to the key. In @fig-polarPlot3, SO~2~ concentrations are shown. What is interesting about this plot compared with either @fig-polarPlot2 or @fig-polarPlot is that the concentration pattern is very different i.e. high concentrations with high wind speeds from the east. The most likely source of this SO~2~ are industrial sources to the east of London. The plot does still however show evidence of a source to the south-west, similar to the plot for NO~x~, which implies that road traffic sources of SO~2~ can also be detected.
 
-These plots often show interesting features at higher wind speeds. For these conditions there can be very few measurements and therefore greater uncertainty in the calculation of the surface. There are several ways in which this issue can be tackled. First, it is possible to avoid smoothing altogether and use `polarFreq`. The problem with this approach is that it is difficult to know how best to bin wind speed and direction: the choice of interval tends to be arbitrary. Second, the effect of setting a minimum number of measurements in each wind speed-direction bin can be examined through `min.bin`. It is possible that a single point at high wind speed conditions can strongly affect the surface prediction. Therefore, setting `min.bin = 3`, for example, will remove all wind speed-direction bins with fewer than 3 measurements *before* fitting the surface. This is a useful strategy for testing how sensitive the plotted surface is to the number of measurements available. While this is a useful strategy to get a feel for how the surface changes with different `min.bin` settings, it is still difficult to know how many points should be used as a minimum. Third, consider setting `uncertainty = TRUE`. This option will show the predicted surface together with upper and lower 95% confidence intervals, which take account of the frequency of measurements. The uncertainty approach ought to be the most robust and removes any arbitrary setting of other options. There is a close relationship between the amount of smoothing and the uncertainty: more smoothing will tend to reveal less detail and lower uncertainties in the fitted surface and vice-versa.
+These plots often show interesting features at higher wind speeds. For these conditions there can be very few measurements and therefore greater uncertainty in the calculation of the surface. There are several ways in which this issue can be tackled. First, it is possible to avoid smoothing altogether and use `polarFreq()`. The problem with this approach is that it is difficult to know how best to bin wind speed and direction: the choice of interval tends to be arbitrary. Second, the effect of setting a minimum number of measurements in each wind speed-direction bin can be examined through `min.bin`. It is possible that a single point at high wind speed conditions can strongly affect the surface prediction. Therefore, setting `min.bin = 3`, for example, will remove all wind speed-direction bins with fewer than 3 measurements *before* fitting the surface. This is a useful strategy for testing how sensitive the plotted surface is to the number of measurements available. While this is a useful strategy to get a feel for how the surface changes with different `min.bin` settings, it is still difficult to know how many points should be used as a minimum. Third, consider setting `uncertainty = TRUE`. This option will show the predicted surface together with upper and lower 95% confidence intervals, which take account of the frequency of measurements. The uncertainty approach ought to be the most robust and removes any arbitrary setting of other options. There is a close relationship between the amount of smoothing and the uncertainty: more smoothing will tend to reveal less detail and lower uncertainties in the fitted surface and vice-versa.
 
 The default however is to down-weight the bins with few data points when fitting a surface. Weights of 0.25, 0.5 and 0.75 are used for bins containing 1, 2 and 3 data points respectively. The advantage of this approach is that no data are actually removed (which is what happens when using `min.bin`). This approach should be robust in a very wide range of situations and is also similar to the approaches used when trying to locate sources when using back trajectories as described in @sec-trajPlot. Users can ignore the automatic weighting by supplying the option `weights = c(1, 1, 1)`.
 
 ```{r}
 #| label: fig-polarPlot2
-#| fig-cap: Example plots using the `polarPlot` function with different options for the mean concentration of NO~x~.
+#| fig-cap: Example plots using the `polarPlot()` function with different options for the mean concentration of NO~x~.
 polarPlot(
   mydata,
   pollutant = "nox",
@@ -149,7 +149,7 @@ polarPlot(
 
 ```{r}
 #| label: fig-polarPlot3
-#| fig-cap: Example plots using the `polarPlot` function for the mean concentration of SO~2~.
+#| fig-cap: Example plots using the `polarPlot()` function for the mean concentration of SO~2~.
 polarPlot(mydata, pollutant = "so2")
 ```
 
@@ -176,7 +176,7 @@ Arguably a better approach would be to calculate the ratio (slope) from a regres
 polarPlot(mydata, pollutant = "ratio", title = "so2/nox ratio")
 ```
 
-Sometimes when considering ratios it might be necessary to limit the values in some way; perhaps due to some unusually low value denominator data resulting in a few very high values for the ratio. This is easy to do with the [dplyr]{.pkg} `filter` command. The code below selects ratios less than 0.1.
+Sometimes when considering ratios it might be necessary to limit the values in some way; perhaps due to some unusually low value denominator data resulting in a few very high values for the ratio. This is easy to do with the [dplyr]{.pkg} `filter()` command. The code below selects ratios less than 0.1.
 
 ```{r}
 #| eval: false
@@ -193,7 +193,7 @@ The uncertainties in the surface can be calculated by setting the option `uncert
 polarPlot(mydata, pollutant = "so2", uncertainty = TRUE)
 ```
 
-The `polarPlot` function can also produce plots dependent on another variable (see the `type` option). For example, the variation of SO~2~ concentrations at Marylebone Road by hour of the day in the code below. The function was called as shown in below, and in this case the minimum number of points in each wind speed/direction was set to 2.
+The `polarPlot()` function can also produce plots dependent on another variable (see the `type` option). For example, the variation of SO~2~ concentrations at Marylebone Road by hour of the day in the code below. The function was called as shown in below, and in this case the minimum number of points in each wind speed/direction was set to 2.
 
 ```{r}
 #| label: polarCondSO2
@@ -201,7 +201,7 @@ The `polarPlot` function can also produce plots dependent on another variable (s
 polarPlot(mydata, pollutant = "so2", type = "hour", min.bin = 2)
 ```
 
-This plot (not shown) shows that concentrations of SO~2~ tend to be highest from the east (as also shown in @fig-polarPlot3) and for hours in the morning. Together these plots can help better understand different source types. For example, does a source only seem to be present during weekdays, or winter months etc. In the case of `type = "hour"`, the more obvious presence during the morning hours could be due to meteorological factors and this possibility should be investigated as well. In other settings where there are many sources that vary in their source emission and temporal characteristics, the `polarPlot` function should prove to be very useful.
+This plot (not shown) shows that concentrations of SO~2~ tend to be highest from the east (as also shown in @fig-polarPlot3) and for hours in the morning. Together these plots can help better understand different source types. For example, does a source only seem to be present during weekdays, or winter months etc. In the case of `type = "hour"`, the more obvious presence during the morning hours could be due to meteorological factors and this possibility should be investigated as well. In other settings where there are many sources that vary in their source emission and temporal characteristics, the `polarPlot()` function should prove to be very useful.
 
 One issue to be aware of is the amount of data required to generate some of these plots; particularly the hourly plots. If only a relatively short time series is available there may not be sufficient information to produce useful plots. Whether this is important or not will depend on the specific circumstances e.g. the prevalence of wind speeds and directions from the direction of interest. When used to produce many plots (e.g. `type = "hour"`), the run time can be quite long.
 
@@ -213,17 +213,17 @@ An example for SO~2~ concentrations is shown in @fig-polarNWR, which can be comp
 
 ```{r}
 #| label: fig-polarNWR
-#| fig-cap: '`polarPlot` of SO~2~ concentrations at Marylebone Road based on the NWR approach.'
+#| fig-cap: '`polarPlot()` of SO~2~ concentrations at Marylebone Road based on the NWR approach.'
 polarPlot(mydata, pollutant = "so2", statistic = "nwr")
 ```
 
 ## Conditional Probability Function (CPF) plot
 
-The conditional probability function (CPF) was described in @sec-CPF in the context of the `percentileRose` function. The CPF was originally used to show the wind directions that dominate a (specified) high concentration of a pollutant; showing the probability of such concentrations occurring by wind direction Ashbaugh et al. [-@Ashbaugh1985]. However, these ideas can very usefully be applied to bivariate polar plots. In this case the CPF is defined as CPF = $m_{\theta,j}/n_{\theta,j}$, where $m_{\theta,j}$ is the number of samples in the wind sector $\theta$ and wind speed interval $j$ with mixing ratios greater than some 'high' concentration, and $n_{\theta, j}$ is the total number of samples in the same wind direction-speed interval. Note that $j$ does not have to be wind speed but could be any numeric variable e.g. ambient temperature. CPF analysis is very useful for showing which wind direction, wind speed intervals are dominated by high concentrations and give the probability of doing so. A full explanation of the development and use of the bivariate case of the CPF is described in Uria-Tellaetxe and Carslaw [-@Uria2014] where it is applied to monitoring data close to steelworks.
+The conditional probability function (CPF) was described in @sec-CPF in the context of the `percentileRose()` function. The CPF was originally used to show the wind directions that dominate a (specified) high concentration of a pollutant; showing the probability of such concentrations occurring by wind direction Ashbaugh et al. [-@Ashbaugh1985]. However, these ideas can very usefully be applied to bivariate polar plots. In this case the CPF is defined as CPF = $m_{\theta,j}/n_{\theta,j}$, where $m_{\theta,j}$ is the number of samples in the wind sector $\theta$ and wind speed interval $j$ with mixing ratios greater than some 'high' concentration, and $n_{\theta, j}$ is the total number of samples in the same wind direction-speed interval. Note that $j$ does not have to be wind speed but could be any numeric variable e.g. ambient temperature. CPF analysis is very useful for showing which wind direction, wind speed intervals are dominated by high concentrations and give the probability of doing so. A full explanation of the development and use of the bivariate case of the CPF is described in Uria-Tellaetxe and Carslaw [-@Uria2014] where it is applied to monitoring data close to steelworks.
 
 ```{r}
 #| label: fig-polarPlotCPF
-#| fig-cap: '`polarPlot` of SO~2~ concentrations at Marylebone Road based on the CPF function.'
+#| fig-cap: '`polarPlot()` of SO~2~ concentrations at Marylebone Road based on the CPF function.'
 polarPlot(
   mydata,
   pollutant = "so2",
@@ -238,7 +238,7 @@ The polar CPF plot is therefore potentially very useful for source identificatio
 
 ```{r}
 #| label: fig-polarPlotCPFInt
-#| fig-cap: '`polarPlot` of SO~2~ concentrations at Marylebone Road based on the CPF function for a range of percentile intervals from 0--10, 10--20, ... , 90--100.'
+#| fig-cap: '`polarPlot()` of SO~2~ concentrations at Marylebone Road based on the CPF function for a range of percentile intervals from 0--10, 10--20, ... , 90--100.'
 #| layout-ncol: 3
 #| fig-width: 4.5
 #| fig-height: 4
@@ -267,7 +267,7 @@ polarPlot(mydata, poll = "so2", stati = "cpf", percentile = c(80, 90))
 polarPlot(mydata, poll = "so2", stati = "cpf", percentile = c(90, 100))
 ```
 
-However, even more useful information can be gained by considering *intervals* of percentiles e.g. 50--60, 60--70 etc. By considering intervals of percentiles it becomes clear that some sources only affect a limited percentile range. `polarPlot` can accept a `percentile` argument of length two e.g. `percentile =  c(80, 90)`. In this case concentrations in the range from the lower to upper percentiles will be considered. In @fig-polarPlotCPFInt for example, it is apparent that the road source to the south west is only important between the 60 to 90th percentiles. As mentioned previously, the chimney stacks to the east are important for the higher percentiles (90 to 100). What is interesting though is the emergence of what appears to be other sources at the lower percentile intervals. These potential sources are not apparent in @fig-polarPlot3. The other interesting aspect is that it does seem that specific sources tend to be prominent for specific percentile ranges. If this characteristic is shown to be the case more generally, then CPF intervals could be a powerful way in which to identify many sources. Whether these particular sources are important or not is questionable and depends on the aims of the analysis. However, there is no reason to believe that the potential sources shown in the percentile ranges 0 to 50 are artefacts. They could for example be signals from more distant point sources whose plumes have diluted more over longer distances. Such sources would be 'washed out' in an ordinary polar plot. For a fuller example of this approach see Uria-Tellaetxe and Carslaw [-@Uria2014].
+However, even more useful information can be gained by considering *intervals* of percentiles e.g. 50--60, 60--70 etc. By considering intervals of percentiles it becomes clear that some sources only affect a limited percentile range. `polarPlot()` can accept a `percentile` argument of length two e.g. `percentile =  c(80, 90)`. In this case concentrations in the range from the lower to upper percentiles will be considered. In @fig-polarPlotCPFInt for example, it is apparent that the road source to the south west is only important between the 60 to 90th percentiles. As mentioned previously, the chimney stacks to the east are important for the higher percentiles (90 to 100). What is interesting though is the emergence of what appears to be other sources at the lower percentile intervals. These potential sources are not apparent in @fig-polarPlot3. The other interesting aspect is that it does seem that specific sources tend to be prominent for specific percentile ranges. If this characteristic is shown to be the case more generally, then CPF intervals could be a powerful way in which to identify many sources. Whether these particular sources are important or not is questionable and depends on the aims of the analysis. However, there is no reason to believe that the potential sources shown in the percentile ranges 0 to 50 are artefacts. They could for example be signals from more distant point sources whose plumes have diluted more over longer distances. Such sources would be 'washed out' in an ordinary polar plot. For a fuller example of this approach see Uria-Tellaetxe and Carslaw [-@Uria2014].
 
 Note that it is easy to work out what the concentration intervals are for the percentiles shown in @fig-polarPlotCPFInt:
 
@@ -280,7 +280,7 @@ To plot the Figures on one page it is necessary to make the plot objects first a
 
 ## Pairwise statistics {#sec-polar-pairwise}
 
-Grange et al. [-@grange2016] further developed the capabilities of the `polarPlot` function by allowing pairwise statistics to be used. This method makes it possible to consider the relationship between two pollutants. The relationship between two pollutants often yields useful source apportionment information and when combined with the `polarPlot` function can provide enhanced information. The pairwise statistics that can be considered include:
+Grange et al. [-@grange2016] further developed the capabilities of the `polarPlot()` function by allowing pairwise statistics to be used. This method makes it possible to consider the relationship between two pollutants. The relationship between two pollutants often yields useful source apportionment information and when combined with the `polarPlot()` function can provide enhanced information. The pairwise statistics that can be considered include:
 
 -   The Pearson or Spearman correlation coefficient, $r$;
 
@@ -320,7 +320,7 @@ A simple scatter plot between PM~2.5~ and PM~10~ strongly suggests a 1:1 relatio
 
 ```{r}
 #| label: fig-polarPair
-#| fig-cap: Use of the `polarPlot` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the robust slope is calculated.
+#| fig-cap: Use of the `polarPlot()` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the robust slope is calculated.
 polarPlot(
   har,
   poll = c("pm2.5", "pm10"),
@@ -338,7 +338,7 @@ The York regression option requires special mention. In ordinary linear regressi
 
 ```{r}
 #| label: fig-polarPairYork
-#| fig-cap: Use of the `polarPlot` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the York regression slope is calculated.
+#| fig-cap: Use of the `polarPlot()` function to investigate the linear regression slope between PM~2.5~ and PM~10~ at Harwell in 2013. In this case the York regression slope is calculated.
 # assign simple / fixed uncertainties
 har <- mutate(har, pm10_error = 2, pm2.5_error = 2)
 
@@ -359,7 +359,7 @@ polarPlot(
 
 Polar plots can be useful for characterising the presence of different source types. Often the interest is in knowing how things have changed over time. It can be difficult from time series data alone to characterise these changes --- and especially whether there is evidence that particular sources have changed their strength.
 
-The `polarDiff` function has been written to compare polar plot surfaces between two time periods. The main purpose is to highlight whether there is evidence that source strengths may have changed. To illustrate the use of `polarDiff` data from a site close to a complex steelworks is used ([Port Talbot](https://www.google.co.uk/maps/place/Tata+Steel+Port+Talbot/@51.5696918,-3.7659959,3447m/data=!3m1!1e3!4m5!3m4!1s0x486e6716f44ca7c3:0x9eec15ac83c4648c!8m2!3d51.5679565!4d-3.7594051) in Wales). Two years will be compared as an example: 2012 and 2019. First, we need to import the air quality data for these two years:
+The `polarDiff()` function has been written to compare polar plot surfaces between two time periods. The main purpose is to highlight whether there is evidence that source strengths may have changed. To illustrate the use of `polarDiff()` data from a site close to a complex steelworks is used ([Port Talbot](https://www.google.co.uk/maps/place/Tata+Steel+Port+Talbot/@51.5696918,-3.7659959,3447m/data=!3m1!1e3!4m5!3m4!1s0x486e6716f44ca7c3:0x9eec15ac83c4648c!8m2!3d51.5679565!4d-3.7594051) in Wales). Two years will be compared as an example: 2012 and 2019. First, we need to import the air quality data for these two years:
 
 ```{r}
 #| label: import-PT4
@@ -394,15 +394,15 @@ polarDiff(
 )
 ```
 
-When selecting the periods, it is possible to refine the specific periods of interest using the `selectByDate` function described in @sec-selectByDate. For example, a comparison might usefully consider weekdays only, or certain hours of the year, and so on. Such time period selections can quickly 'home in' on specific source types by focusing on the periods they are likely to be most active.
+When selecting the periods, it is possible to refine the specific periods of interest using the `selectByDate()` function described in @sec-selectByDate. For example, a comparison might usefully consider weekdays only, or certain hours of the year, and so on. Such time period selections can quickly 'home in' on specific source types by focusing on the periods they are likely to be most active.
 
 ### Differences in probability that a concentration is exceeded
 
-The `polarDiff` function is also not restricted to comparing two time periods. Any two surfaces can be compared (provided the same pollutant is in each data set). For example, it is possible to consider the difference between two nearby sites or two co-located instruments.
+The `polarDiff()` function is also not restricted to comparing two time periods. Any two surfaces can be compared (provided the same pollutant is in each data set). For example, it is possible to consider the difference between two nearby sites or two co-located instruments.
 
 Differences between two time periods can also be considered using the `statistic = "cpf"` option, which would highlight how the probability that a concentration is exceeded between two time periods changes. This approach has also been considered for back trajectories [@masiol2019]. Some care is needed when comparing the probabilities that a specific concentration is exceeded because (for example) the 90th percentile concentration in one period will likely not be the same in another period.
 
-Using the example of SO~2~ we can consider the probability that 10 μg m^-3^ (close to the 90th percentile in 2012 --- but could be an air quality standard for example) is exceeded and how this changes over time. In this case, the percentile has length 3 (`percentile = c(10, 100, -1)`). The last negative number instructs `polarPlot` to interpret the previous two numbers in an absolute sense --- in this case that the SO~2~ concentration is more than 10 and less than 100 μg m^-3^. Note that the 100 μg m^-3^ is higher than the maximum concentration, which effectively means it provides the probability that the SO~2~ concentration is above 10 μg m^-3^; so it could be any number higher than the maximum value that exists in the data.
+Using the example of SO~2~ we can consider the probability that 10 μg m^-3^ (close to the 90th percentile in 2012 --- but could be an air quality standard for example) is exceeded and how this changes over time. In this case, the percentile has length 3 (`percentile = c(10, 100, -1)`). The last negative number instructs `polarPlot()` to interpret the previous two numbers in an absolute sense --- in this case that the SO~2~ concentration is more than 10 and less than 100 μg m^-3^. Note that the 100 μg m^-3^ is higher than the maximum concentration, which effectively means it provides the probability that the SO~2~ concentration is above 10 μg m^-3^; so it could be any number higher than the maximum value that exists in the data.
 
 ```{r}
 #| label: fig-polarPlotCPFDiff
@@ -427,7 +427,7 @@ polarDiff(
 
 ### Clustering concentrations
 
-The `polarPlot` function will often identify interesting features that would be useful to analyse further. It is possible to select areas of interest based only on a consideration of a plot. Such a selection could be based on wind direction and wind speed intervals for example e.g.
+The `polarPlot()` function will often identify interesting features that would be useful to analyse further. It is possible to select areas of interest based only on a consideration of a plot. Such a selection could be based on wind direction and wind speed intervals for example e.g.
 
 ```{r}
 #| label: selectPolar
@@ -461,11 +461,11 @@ $$ {#eq-clust-3}
 
 Standardization is necessary because the wind components $u$ and $v$ are on different scales to the concentration. In principle, more weight could be given to the concentration rather than the $u$ and $v$ components, although this would tend to identify clusters with similar concentrations but different source origins.
 
-`polarCluster` can be thought of as the 'local' version of clustering of back trajectories. Rather than using air mass origins, wind speed, wind direction and concentration are used to group similar conditions together. @sec-trajCluster-trajectory-analysis provides the details of clustering back trajectories in [openair]{.pkg}. A fuller description of the clustering approach is described in [@CarslawClust2013].
+`polarCluster()` can be thought of as the 'local' version of clustering of back trajectories. Rather than using air mass origins, wind speed, wind direction and concentration are used to group similar conditions together. @sec-trajCluster-trajectory-analysis provides the details of clustering back trajectories in [openair]{.pkg}. A fuller description of the clustering approach is described in [@CarslawClust2013].
 
-The use of the `polarCluster` is very similar to the use of all [openair]{.pkg} functions. While there are many techniques available to try and find the optimum number of clusters, it is difficult for these approaches to work in a consistent way for identifying features in bivariate polar plots. For this reason it is best to consider a range of solutions that covers a number of clusters.
+The use of the `polarCluster()` is very similar to the use of all [openair]{.pkg} functions. While there are many techniques available to try and find the optimum number of clusters, it is difficult for these approaches to work in a consistent way for identifying features in bivariate polar plots. For this reason it is best to consider a range of solutions that covers a number of clusters.
 
-Cluster analysis is computationally intensive and the `polarCluster` function can take a comparatively long time to run. The basic idea is to calculate the solution to several cluster levels and then choose one that offers the most appropriate solution for post-processing.
+Cluster analysis is computationally intensive and the `polarCluster()` function can take a comparatively long time to run. The basic idea is to calculate the solution to several cluster levels and then choose one that offers the most appropriate solution for post-processing.
 
 The example given below is for concentrations of SO~2~, shown in @fig-polarPlot3 and the aim is to identify features in that plot. A range of numbers of clusters will be calculated --- in this case from two to ten.
 
@@ -479,7 +479,7 @@ polarCluster(mydata, pollutant = "so2", n.clusters = 2:10, cols = "Set2")
 
 ```{r}
 #| label: fig-polarClustn6
-#| fig-cap: Use of the `polarCluster` function applied to SO~2~ concentrations at Marylebone Road. In this case 8 clusters have been chosen.
+#| fig-cap: Use of the `polarCluster()` function applied to SO~2~ concentrations at Marylebone Road. In this case 8 clusters have been chosen.
 results <- polarCluster(
   mydata,
   pollutant = "so2",
@@ -488,7 +488,7 @@ results <- polarCluster(
 )
 ```
 
-The real benefit of `polarCluster` is being able to identify clusters in the original data frame. To do this, the results from the analysis must be read into a new variable, as in @fig-polarClustn6, where the results are read into a data frame `results`. Now it is possible to use this new information. In the 8-cluster solution to @fig-polarClustn6, cluster 6 seems to capture the elevated SO~2~ concentrations to the east well (see @fig-polarPlot3 for comparison), while cluster 4 will strongly represent the road contribution.
+The real benefit of `polarCluster()` is being able to identify clusters in the original data frame. To do this, the results from the analysis must be read into a new variable, as in @fig-polarClustn6, where the results are read into a data frame `results`. Now it is possible to use this new information. In the 8-cluster solution to @fig-polarClustn6, cluster 6 seems to capture the elevated SO~2~ concentrations to the east well (see @fig-polarPlot3 for comparison), while cluster 4 will strongly represent the road contribution.
 
 The results are here:
 
@@ -544,9 +544,9 @@ timeVariation(
 )
 ```
 
-`polarCluster` will work on any surface that can be plotted by `polarPlot` e.g. the radial variable does not have to be wind speed but could be another variable such as temperature. While it is not always possible for `polarCluster` to identify all features in a surface it certainly makes it easier to post-process `polarPlot`s using other [openair]{.pkg} functions or indeed other analyses altogether.
+`polarCluster()` will work on any surface that can be plotted by `polarPlot()` e.g. the radial variable does not have to be wind speed but could be another variable such as temperature. While it is not always possible for `polarCluster()` to identify all features in a surface it certainly makes it easier to post-process `polarPlot()` outputs using other [openair]{.pkg} functions or indeed other analyses altogether.
 
-Another useful way of understanding the clusters is to use the `timeProp` function, which can display a time series as a bar chart split by a categorical variable (in this case the cluster). In this case it is useful to plot the time series of SO~2~ *and* show how much of the concentration is contributed to by each cluster. Such a plot is shown in @fig-timePropPolar. It is now easy to see for example that many of the peaks in SO~2~ are associated with cluster 6 (power station sources from the east), seen in @fig-polarClustn6. Cluster 6 is particularly prominent during springtime, but those sources also make important contributions through the whole year.
+Another useful way of understanding the clusters is to use the `timeProp()` function, which can display a time series as a bar chart split by a categorical variable (in this case the cluster). In this case it is useful to plot the time series of SO~2~ *and* show how much of the concentration is contributed to by each cluster. Such a plot is shown in @fig-timePropPolar. It is now easy to see for example that many of the peaks in SO~2~ are associated with cluster 6 (power station sources from the east), seen in @fig-polarClustn6. Cluster 6 is particularly prominent during springtime, but those sources also make important contributions through the whole year.
 
 ```{r}
 #| label: fig-timePropPolar
@@ -624,7 +624,7 @@ An R package called [openairmaps]{.pkg} has been developed to plot polar plots a
 install.packages("openairmaps")
 ```
 
-The function `polarMap` requires information on the site (name or code), latitude and longitude in addition to the usual information required by the `polarPlot` function. The package comes with some example data (`polar_data`) that can be used as a template for using different data. This function can plot *any* type of polar plot, e.g., with different options for `statistic`.
+The function `polarMap()` requires information on the site (name or code), latitude and longitude in addition to the usual information required by the `polarPlot()` function. The package comes with some example data (`polar_data`) that can be used as a template for using different data. This function can plot *any* type of polar plot, e.g., with different options for `statistic`.
 
 First, load the package and check out the data format.
 
@@ -651,7 +651,7 @@ polarMap(
 )
 ```
 
-The `polarMap` function allows for control of many parts of the [leaflet]{.pkg} map. For example, you can provide one (or more) different base map(s) --- there are many! You may also visualise multiple pollutants at once which can then be toggled between.
+The `polarMap()` function allows for control of many parts of the [leaflet]{.pkg} map. For example, you can provide one (or more) different base map(s) --- there are many! You may also visualise multiple pollutants at once which can then be toggled between.
 
 ```{r}
 #| label: fig-interMap2

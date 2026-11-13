@@ -6,7 +6,7 @@ author:
   - David C. Carslaw
   - Jack Davison
 abstract: |
-  Version 3 of the `openair` package has been released! This major update converts all plotting functions from `lattice` to `ggplot2`, among other changes. See a full list of changes [here](https://openair-project.github.io/openair/news/index.html). This article describes the rationale for this change and what it means for `openair` users going forward.
+  Version 3 of the [openair]{.pkg} package has been released! This major update converts all plotting functions from [lattice]{.pkg} to [ggplot2]{.pkg}, among other changes. See a full list of changes [here](https://openair-project.github.io/openair/news/index.html). This article describes the rationale for this change and what it means for [openair]{.pkg} users going forward.
 abstract-title: "Summary"
 ---
 
@@ -74,7 +74,7 @@ ggplot2::theme_set(ggplot2::theme_grey())
 
 You can learn more about annotation in the [annotation and customisation appendix](sections/appendices/appendix-annotate.qmd).
 
-Behind-the-scenes, [ggplot2]{.pkg} unlocks a lot of capability that was historically challenging to implement. For example, nearly all plotting functions now support two `type` values, meaning a 2D grid of panels can be constructed consistently across all of `openair`. The "polar" functions (e.g., `polarPlot()` and `windRose()`) now take advantage of native radial coordinate systems, making annotation and grid line customisation much simpler to handle without complex trigonometry. `windflow` has also found its way to `trendLevel()`, and now behaves much more consistently and flexibly across different functions. This is a taste of the many new features that will be added to the package in the coming months and years, which would have been much more difficult to implement without the switch to [ggplot2]{.pkg}.
+Behind-the-scenes, [ggplot2]{.pkg} unlocks a lot of capability that was historically challenging to implement. For example, nearly all plotting functions now support two `type` values, meaning a 2D grid of panels can be constructed consistently across all of [openair]{.pkg}. The "polar" functions (e.g., `polarPlot()` and `windRose()`) now take advantage of native radial coordinate systems, making annotation and grid line customisation much simpler to handle without complex trigonometry. `windflow` has also found its way to `trendLevel()`, and now behaves much more consistently and flexibly across different functions. This is a taste of the many new features that will be added to the package in the coming months and years, which would have been much more difficult to implement without the switch to [ggplot2]{.pkg}.
 
 ## Breaking Changes
 

@@ -51,16 +51,16 @@ This means that we can actually recreate and understand the problem you're havin
 > For example, an issue that states "timeaverage isn't working" isn't nearly as useful as "when `timeAverage(mydata, type = "month")` is run, the returned data isn't conditioned by month."
 
 ::: {.callout-tip}
-## The `{reprex}` package
+## The [reprex]{.pkg} package
 
-An easy way to check if your reproducible example is actually reproducible is by using the `{reprex}` package. Create your code, copy it, and then run `reprex::reprex()`. This will create a nicely formatted reproducible example that is immediately copied to your clipboard, which can then be pasted into GitHub.
+An easy way to check if your reproducible example is actually reproducible is by using the [reprex]{.pkg} package. Create your code, copy it, and then run `reprex::reprex()`. This will create a nicely formatted reproducible example that is immediately copied to your clipboard, which can then be pasted into GitHub.
 
 The package is also very strict, so if the resulting output doesn't look right your example probably isn't actually reproducible!
 :::
 
 ## Providing data
 
-Sometimes the hardest thing about producing a reproducible example is providing data. There are many different ways of doing so when getting help with `{openair}`:
+Sometimes the hardest thing about producing a reproducible example is providing data. There are many different ways of doing so when getting help with [openair]{.pkg}:
 
 * **Write your example with `openair::mydata`, `openairmaps::polar_data` or `openairmaps::traj_data`.** These data are built in to their respective packages so are easily accessible to anyone.
 

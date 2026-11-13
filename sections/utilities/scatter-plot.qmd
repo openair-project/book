@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Purpose {#sec-ScatterPurpose}
 
-Scatter plots are extremely useful and a very commonly used analysis technique for considering how variables relate to one another. R does of course have many capabilities for plotting data in this way. However, it can be tricky to add linear relationships, or split scatter plots by levels of other variables etc. The purpose of the `scatterPlot` function is to make it straightforward to consider how variables are related to one another in a way consistent with other [openair]{.pkg} functions. We have added several capabilities that can be used just by setting different options, some of which are shown below.
+Scatter plots are extremely useful and a very commonly used analysis technique for considering how variables relate to one another. R does of course have many capabilities for plotting data in this way. However, it can be tricky to add linear relationships, or split scatter plots by levels of other variables etc. The purpose of the `scatterPlot()` function is to make it straightforward to consider how variables are related to one another in a way consistent with other [openair]{.pkg} functions. We have added several capabilities that can be used just by setting different options, some of which are shown below.
 
 There is less need for this function now that [ggplot2]{.pkg} is available, but it still has some benefits for interactive use.
 
@@ -22,15 +22,15 @@ There is less need for this function now that [ggplot2]{.pkg} is available, but 
 
 -   A plot of two variables can be colour-coded by a continuous colour scale of a third variable.
 
--   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g. hourly, daily, weekly etc. using the `timeAverage` function and the argument `avg.time`.
+-   It can handle date/time x-axis formats to provide an alternative way of showing time series, which again can be colour-coded by a third variable. It is also easy to take account of different time-averaging periods e.g. hourly, daily, weekly etc. using the `timeAverage()` function and the argument `avg.time`.
 
-The `scatterPlot` function isn't really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other [openair]{.pkg} functions. Nevertheless, along with the `timePlot` function they do form an important part of [openair]{.pkg} because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.
+The `scatterPlot()` function isn't really specific to atmospheric sciences, in the same way as other plots. It is more a function for convenience, written in a style that is consistent with other [openair]{.pkg} functions. Nevertheless, along with the `timePlot()` function they do form an important part of [openair]{.pkg} because of the usefulness of understanding how variables relate to one another. Furthermore, there are many options to make it easy to explore data in an interactive way without worrying about processing data or formatting plots.
 
 ## Examples {#sec-ScatterEx}
 
 We provide a few examples of use and as usual, users are directed towards the help pages (type `?scatterPlot`) for more extensive examples.
 
-First we select a subset of data (2003) using the [openair]{.pkg} `selectByDate` function and plot NO~x~ vs. NO~2~
+First we select a subset of data (2003) using the [openair]{.pkg} `selectByDate()` function and plot NO~x~ vs. NO~2~
 
 ```{r}
 #| label: fig-scatterPlot1
@@ -84,7 +84,7 @@ scatterPlot(
 )
 ```
 
-The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in `scatterPlot` with the `method = "density"` option. Such a plot is shown in @fig-scatterPlotDens.
+The hexagonal binning and other binning methods are useful but often the choice of bin size is somewhat arbitrary. Another useful approach is to use a kernel density estimate to show where most points lie. This is possible in `scatterPlot()` with the `method = "density"` option. Such a plot is shown in @fig-scatterPlotDens.
 
 ```{r}
 #| label: fig-scatterPlotDens
@@ -225,7 +225,7 @@ scatterPlot(
 )
 ```
 
-@fig-scatterPlot5 shows that `scatterPlot` can also handle dates on the x-axis; in this case shown for SO~2~ concentrations coloured by wind direction for August 2003.
+@fig-scatterPlot5 shows that `scatterPlot()` can also handle dates on the x-axis; in this case shown for SO~2~ concentrations coloured by wind direction for August 2003.
 
 ```{r}
 #| label: fig-scatterPlot5
@@ -242,7 +242,7 @@ scatterPlot(
 )
 ```
 
-Similar to @sec-timePlot, `scatterPlot` can also plot wind vector arrows if wind speed and wind direction are available in the data frame. @fig-scatterPlotwswd shows an example of using the `windflow` option. The Figure also sets many other options including showing the concentration of O~3~ as a colour, setting the colour scale used and selecting a few days of interest using the `selectByDate` function. @fig-scatterPlotwswd shows that when the wind direction changes to northerly, the concentration of NO~2~ decreases and that of O~3~ increases.
+Similar to @sec-timePlot, `scatterPlot()` can also plot wind vector arrows if wind speed and wind direction are available in the data frame. @fig-scatterPlotwswd shows an example of using the `windflow` option. The Figure also sets many other options including showing the concentration of O~3~ as a colour, setting the colour scale used and selecting a few days of interest using the `selectByDate()` function. @fig-scatterPlotwswd shows that when the wind direction changes to northerly, the concentration of NO~2~ decreases and that of O~3~ increases.
 
 ```{r}
 #| label: fig-scatterPlotwswd

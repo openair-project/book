@@ -94,7 +94,7 @@ which actually shows the GMT offset of -8 hours.
 
 A common task might be to plot time series and temporal variations of pollutant concentrations in local time. How does one do this if the imported data are in GMT/UTC (or a fixed offset from GMT/UTC)?
 
-In this case it is necessary to know how the local time zone with daylight saving time (DST) is represented. Time zone names follow the Olson scheme --- you can list them by typing `OlsonNames()`. Given the scenario where we have imported data in GMT but want to display the data in local time (BST --- British Summer Time), we can use the `with_tz` function in [lubridate]{.pkg} to do this:
+In this case it is necessary to know how the local time zone with daylight saving time (DST) is represented. Time zone names follow the Olson scheme --- you can list them by typing `OlsonNames()`. Given the scenario where we have imported data in GMT but want to display the data in local time (BST --- British Summer Time), we can use the `with_tz()` function in [lubridate]{.pkg} to do this:
 
 ```{r}
 date_time <- "2/8/2022 11:00"
@@ -116,7 +116,7 @@ hour(time_local)
 
 In the above example, `date_time` and `time_local` are the same absolute time --- we are just changing how the time is displayed. In practice, given a data frame with a `date` column in GMT and an interest in making sure [openair]{.pkg} uses the local time, some formatting such as `mydata$date <- with_tz(mydata$date, tz = "Europe/London")` is what is needed.
 
-Another scenario is you import data using a function such as `read_csv` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz` function. For example:
+Another scenario is you import data using a function such as `read_csv()` from the [readr]{.pkg} package and it recognises a date-time in the data and by default assumes it is GMT/UTC. This might be wrong even though it is now formatted correctly in R. In this case you can *force* a new time zone using the `force_tz()` function. For example:
 
 ```{r}
 # a correctly formatted date-time that is in GMT but should be something else
@@ -137,7 +137,7 @@ This section gives a brief overview of the functions in [openair]{.pkg}. Having 
 functionName(thedata, options, ...)
 ```
 
-The usage is best illustrated through a specific example, in this case the `polarPlot` function. The details of the function are shown in @sec-polarPlot and through the help pages (type ?polarPlot). As it can be seen there are numerous options associated with `polarPlot` --- and most other functions and each of these has a default. For example, the default pollutant considered in `polarPlot` is `nox`. If the user has a data frame called `theData` then `polarPlot` could minimally be called by:
+The usage is best illustrated through a specific example, in this case the `polarPlot()` function. The details of the function are shown in @sec-polarPlot and through the help pages (type ?polarPlot). As it can be seen there are numerous options associated with `polarPlot()` --- and most other functions and each of these has a default. For example, the default pollutant considered in `polarPlot()` is `nox`. If the user has a data frame called `theData` then `polarPlot()` could minimally be called by:
 
 ```{r}
 #| eval: false
@@ -250,7 +250,7 @@ If a categorical variable is present in a data frame e.g. `site` then that vari
 
 ### Make your own type
 
-In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
+In some cases it is useful to categorise numeric variables according to one's own intervals. One example is air quality bands where concentrations might be described as "good", "fair", "bad". For this situation we can use the `cut()` function. In the example below, concentrations of NO~2~ are divided into intervals 0-50, 50-100, 100-150 and \>150 using the `breaks` option. Also shown are user-defined labels. Note there is 1 more break than label. There are a couple of things to note here. First, `include.lowest = TRUE` ensures that the lowest value is included in the lowest break (in this case 0). Second, the maximum value (1000) is set to be more than the maximum value in the data to ensure the final break encompasses all the data.
 
 ```{r}
 mydata$intervals <- cut(
@@ -271,7 +271,7 @@ head(mydata)
 
 Then it is possible to use the new `intervals` variable in most [openair]{.pkg} functions e.g. `windRose(mydata, type = "intervals")`.
 
-A special case is splitting data by date. In this scenario there might be interest in a 'before-after' situation e.g. due to an intervention. The [openair]{.pkg} function `splitByDate` should make this easy. Here is an example:
+A special case is splitting data by date. In this scenario there might be interest in a 'before-after' situation e.g. due to an intervention. The [openair]{.pkg} function `splitByDate()` should make this easy. Here is an example:
 
 ```{r}
 #| label: splitbydate
@@ -384,7 +384,7 @@ marylebone <-
 write.csv(x = marylebone, file = "my1_annual-stats_2022.csv")
 ```
 
-Plots are slightly more complicated. If you do use RStudio, the simplest way to save an openair plot is to use the plots pane, visualised in @fig-rstudiosave. This menu will allow you to copy your plot to the clipboard, or save it as an image or PDF.
+Plots are slightly more complicated. If you do use RStudio, the simplest way to save an [openair]{.pkg} plot is to use the plots pane, visualised in @fig-rstudiosave. This menu will allow you to copy your plot to the clipboard, or save it as an image or PDF.
 
 ![A screenshot of the 'Export' menu of the RStudio plots pane.](../../assets/media/rstudio-saving.png){#fig-rstudiosave}
 
@@ -425,4 +425,4 @@ polarmap <- polarMap(polar_data, "nox")
 htmlwidgets::saveWidget(widget = polarmap, file = "polarmap_london_nox.html")
 ```
 
-Another way of sharing analysis produced using [openair]{.pkg} is in [Quarto](https://quarto.org/) (or [Rmarkdown](https://rmarkdown.rstudio.com/)) reports. These are well documented on their respective websites.
+Another way of sharing analysis produced using [openair]{.pkg} is in [quarto]{.pkg} (or [rmarkdown]{.pkg}) reports. These are well documented on their respective websites.

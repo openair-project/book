@@ -4,7 +4,7 @@ author: David Carslaw
 
 # A closer look at trends {#sec-trends-gam}
 
-Understanding trends is a core component of air quality and the atmospheric sciences in general. [openair]{.pkg} provides two main functions for considering trends (`smoothTrend` and `TheilSen`; see @sec-smoothTrend and @sec-TheilSen), the latter useful for linear trend estimates. Understanding trends and quantifying them robustly is not so easy and careful analysis would treat each time series individually and consider a wide range of diagnostics. In this section we take advantage of some of the excellent capabilities that R has to consider fitting trend models. Experience with real atmospheric composition data shows that trends are rarely linear, which is unfortunate given how much of statistics has been built around the linear model.
+Understanding trends is a core component of air quality and the atmospheric sciences in general. [openair]{.pkg} provides two main functions for considering trends (`smoothTrend()` and `TheilSen()`; see @sec-smoothTrend and @sec-TheilSen), the latter useful for linear trend estimates. Understanding trends and quantifying them robustly is not so easy and careful analysis would treat each time series individually and consider a wide range of diagnostics. In this section we take advantage of some of the excellent capabilities that R has to consider fitting trend models. Experience with real atmospheric composition data shows that trends are rarely linear, which is unfortunate given how much of statistics has been built around the linear model.
 
 Generalized Additive Models (GAMs) offer a flexible approach to calculating trends and in particular, the [mgcv]{.pkg} package contains many functions that are very useful for such modelling. Some of the details of this type of model are presented in @Wood2006 and the [mgcv]{.pkg} package itself.
 
@@ -110,7 +110,7 @@ Note also that there are other diagnostic tests one should consider when compari
 acf(residuals(M1))
 ```
 
-Further tests, also considering the partial autocorrelation function (PACF) suggest that an AR1 model is suitable for modelling this short-term autocorrelation. This is where modelling using a GAMM (Generalized Additive Mixed Model) comes in because it is possible to model the short-term autocorrelation using a linear mixed model. The `gamm` function uses the package [nlme]{.pkg} and the Generalized Linear Mixed Model (GLMM) fitting routine. In the M2 model below the correlation structure is considered explicitly.
+Further tests, also considering the partial autocorrelation function (PACF) suggest that an AR1 model is suitable for modelling this short-term autocorrelation. This is where modelling using a GAMM (Generalized Additive Mixed Model) comes in because it is possible to model the short-term autocorrelation using a linear mixed model. The `gamm()` function uses the package [nlme]{.pkg} and the Generalized Linear Mixed Model (GLMM) fitting routine. In the M2 model below the correlation structure is considered explicitly.
 
 ```{r}
 #| label: M3mod
@@ -133,7 +133,7 @@ The ACF plot is shown in @fig-M2ACF and shows that the autocorrelation has been 
 acf(residuals(M2$lme, type = "normalized"))
 ```
 
-Note that model M2 assumes that the trend and seasonal terms vary independently of one another. However, if the seasonal amplitude and/or phase change over time then a model that accounts for the interaction between the two may be better. Indeed, this does seem to be the case here, as shown by the improved fit of the model below. This model uses a tensor product smooth (`te`) and the reason for doing this and not using an isotropic smooth (`s`) is that the trend and seasonal components are essentially on different scales. We would not necessarily want to apply the same level of smoothness to both components. An example of covariates on the same scale would be latitude and longitude.
+Note that model M2 assumes that the trend and seasonal terms vary independently of one another. However, if the seasonal amplitude and/or phase change over time then a model that accounts for the interaction between the two may be better. Indeed, this does seem to be the case here, as shown by the improved fit of the model below. This model uses a tensor product smooth (`te()`) and the reason for doing this and not using an isotropic smooth (`s()`) is that the trend and seasonal components are essentially on different scales. We would not necessarily want to apply the same level of smoothness to both components. An example of covariates on the same scale would be latitude and longitude.
 
 ```{r}
 #| label: M3modGAMM

@@ -13,14 +13,50 @@ figure.quarto-float div.leaflet-control {
   text-align: left;
 }
 
+// Package names, written as [openair]{.pkg}. The pkg-links.lua filter turns
+// them into links, and the box itself (rather than an underline) acts as the
+// link affordance.
+$pkg-border: #7c9393;
+
 .pkg {
-  padding: 0 2px;
-  margin: 0 1px;
-  border: 1px solid #7c9393;
-  box-shadow: 2px 2px 0px 0px rgba(124,147,147,1);
+  display: inline-block; // keeps the box whole (no wrapping mid-name) and allows transform
+  padding: 0 0.2em;
+  margin: 0 0.1em;
+  line-height: 1.25;
+  border: 1px solid $pkg-border;
+  border-radius: 2px;
+  box-shadow: 2px 2px 0 0 $pkg-border;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.pkg a:hover, .pkg a:focus {
+.pkg a {
+  color: inherit;
+  text-decoration: none;
   border: none;
-  padding: 0 2px !important;
+  transition: color 0.15s ease;
+}
+
+// hover / keyboard focus: the box turns purple and "presses in"
+.pkg:has(a:hover),
+.pkg:has(a:focus-visible) {
+  border-color: $primary;
+  box-shadow: 1px 1px 0 0 $primary;
+  transform: translate(1px, 1px);
+}
+
+.pkg a:hover,
+.pkg a:focus-visible {
+  color: $primary;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pkg,
+  .pkg a {
+    transition: none;
+  }
+
+  .pkg:has(a:hover),
+  .pkg:has(a:focus-visible) {
+    transform: none;
+  }
 }

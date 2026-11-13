@@ -1,8 +1,8 @@
 ---
 title: openairmaps primer
-subtitle: An introduction to `openairmaps` and the `leaflet` package
+subtitle: An introduction to [openairmaps]{.pkg} and the [leaflet]{.pkg} package
 author: Jack Davison
-abstract: "The `openairmaps` package has been designed to create interactive HTML air quality maps. These are useful to understand the geospatial context of `openair`-type analysis, and to present data in an engaging way in dashboards and websites. This page gives a broad overview of `openairmaps` as well as `leaflet`, the package on which it is built."
+abstract: "The [openairmaps]{.pkg} package has been designed to create interactive HTML air quality maps. These are useful to understand the geospatial context of [openair]{.pkg}-type analysis, and to present data in an engaging way in dashboards and websites. This page gives a broad overview of [openairmaps]{.pkg} as well as [leaflet]{.pkg}, the package on which it is built."
 execute: 
   cache: false
 ---
@@ -41,7 +41,7 @@ This chapter was produced using R version `r getRversion()` and [openairmaps]{.p
 
 ## Background
 
-As the R ecosystem developed, `{rmarkdown}` and, more recently, [Quarto](https://quarto.org/) emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages have been developed to easily develop these interactive widgets, such as `{plotly}` for plots, `{DT}` for tables, and `{leaflet}` for maps. The [openairmaps]{.pkg} package concerns itself with making [leaflet]{.pkg} maps.
+As the R ecosystem developed, [rmarkdown]{.pkg} and, more recently, [quarto]{.pkg} emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages have been developed to easily develop these interactive widgets, such as [plotly]{.pkg} for plots, [DT]{.pkg} for tables, and [leaflet]{.pkg} for maps. The [openairmaps]{.pkg} package concerns itself with making [leaflet]{.pkg} maps.
 
 Air quality data analysis --- particularly as it pertains to long term monitoring data --- naturally lends itself to being visualised spatially on a map. Monitoring networks are geographically distributed, and ignoring their geographical context may lead to incomplete insights at best and incorrect conclusions at worst! Furthermore, many air quality analysis tools are *directional*, asking questions of the data along the lines of "do elevated concentrations come from the North, South, East or West?" The natural question that follows is "well, what actually is it to the North/South/East/West that could be causing elevated concentrations?" --- a map can help answer that question straightforwardly.
 
@@ -116,7 +116,7 @@ If you would like to use [openairmaps]{.pkg} in a more advanced way (for example
 
 -   **"All-in-one"** functions are most like [openair]{.pkg} functions in that they will construct a map from the ground-up. These functions provide the quickest route from data to a HTML map.
 
--   **"Marker"** functions are most like [leaflet]{.pkg} functions in that they add layers onto pre-existing `leaflet` maps. These are more complicated to use, but are more powerful if you are more familiar with how [leaflet]{.pkg} works.
+-   **"Marker"** functions are most like [leaflet]{.pkg} functions in that they add layers onto pre-existing [leaflet]{.pkg} maps. These are more complicated to use, but are more powerful if you are more familiar with how [leaflet]{.pkg} works.
 
 ```{r}
 #| label: tbl-openairmaps-overview

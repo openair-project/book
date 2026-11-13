@@ -88,7 +88,7 @@ aq_met <- left_join(
 names(aq_met)
 ```
 
-With joined data, we can now create `openair` plots using measured meteorological data. For example, `polarPlot()` requires both air quality *and* meteorological data in one `data.frame`:
+With joined data, we can now create [openair]{.pkg} plots using measured meteorological data. For example, `polarPlot()` requires both air quality *and* meteorological data in one `data.frame`:
 
 ```{r}
 #| label: fig-polarplot-citymet

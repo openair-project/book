@@ -87,7 +87,7 @@ by other vehicle types? Similarly, a much more focussed trend analysis
 can be done by considering different wind direction, as this can help
 isolate different source influences.
 
-The `TheilSen` function is typically used to determine trends in
+The `TheilSen()` function is typically used to determine trends in
 pollutant concentrations over several years. However, it can be used to
 calculate the trend in any numeric variable. It calculates monthly mean
 values from daily, hourly or higher time resolution data, as well as
@@ -97,7 +97,7 @@ very much on the data. It may well be that statistically significant
 trends can be detected over relatively short periods but it is another
 matter whether it matters. Because seasonal effects can be important for
 monthly data, there is the option to deseasonalise the data first. The
-`timeVariation` function is useful to determine whether there is a
+`timeVariation()` function is useful to determine whether there is a
 seasonal cycle that should be removed.
 
 Note also that the symbols shown next to each trend estimate relate to
@@ -107,7 +107,7 @@ $<$ 0.1 = $+$.
 
 ## Example trend analysis
 
-We first show the use of the `TheilSen` function by applying it to
+We first show the use of the `TheilSen()` function by applying it to
 concentrations of O~3~. The function is called as shown in
 @fig-TheilSen1.
 
@@ -160,7 +160,7 @@ TheilSen(
 ```
 
 Sometimes it is useful to consider a subset of data, perhaps by
-excluding some years. This is easy with the `filter` function. The
+excluding some years. This is easy with the `filter()` function. The
 following code calculates trends for years greater than 1999 i.e. from
 2000 onward.
 
@@ -176,7 +176,7 @@ TheilSen(
 It is also possible to calculate trends in many other ways e.g. by wind
 direction. Considering how trends vary by wind direction can be
 extremely useful because the influence of different sources invariably
-depends on the direction of the wind. The `TheilSen` function splits the
+depends on the direction of the wind. The `TheilSen()` function splits the
 wind direction into 8 sectors i.e. N, NE, E etc. The Theil-Sen slopes
 are then calculated for each direction in turn. This function takes
 rather longer to run because the simulations need to be run eight times
@@ -196,7 +196,7 @@ always be *some* hours that do not have such high concentrations of NO.
 
 ```{r}
 #| label: fig-TheilSen2
-#| fig-cap: Trends in ozone at Marylebone Road split by eight wind sectors. The `TheilSen` function will automatically organise the separate panels by the different compass directions.
+#| fig-cap: Trends in ozone at Marylebone Road split by eight wind sectors. The `TheilSen()` function will automatically organise the separate panels by the different compass directions.
 #| fig-width: 10
 #| fig-height: 10
 TheilSen(
@@ -246,7 +246,7 @@ a negative concentration to a positive, which is problematic. In this
 case it is best to stick with changes in absolute concentrations.
 :::
 
-The `TheilSen` function was written to work with hourly data, which is
+The `TheilSen()` function was written to work with hourly data, which is
 then averaged into monthly or annual data. However, it is realised that
 users may already have data that is monthly or annual. The function can
 therefore accept as input monthly or annual data directly. In this case, make sure the `date` column is a proper date. For example, if monthly dates have been read in as text in British format (dd/mm/YYYY), they can be converted as follows:
@@ -256,7 +256,7 @@ therefore accept as input monthly or annual data directly. In this case, make su
 mydata$date <- as.Date(mydata$date, format = "%d/%m/%Y")
 ```
 
-Finally, the `TheilSen` function can consider trends at different sites,
+Finally, the `TheilSen()` function can consider trends at different sites,
 provided the input data are correctly formatted. For input, a data frame
 with three columns is required: date, pollutant and *site*. The call
 would then be, for example:
@@ -268,7 +268,7 @@ TheilSen(mydata, pollutant = "no2", type = "site")
 
 ### Output
 
-The `TheilSen` function provides lots of output data for further
+The `TheilSen()` function provides lots of output data for further
 analysis or adding to a report. To obtain it, it is necessary to read it
 into a variable:
 
@@ -303,7 +303,7 @@ chosen confidence interval using the `alpha` option) of the trend and
 
 ## Summarising trends
 
-One of the most powerful uses of `TheilSen` is to compare trends across
+One of the most powerful uses of `TheilSen()` is to compare trends across
 a large number of sites simultaneously. By supplying multiple values to
 the `type` argument, the function will run the trend analysis
 independently for each combination of conditioning variables. The
@@ -323,10 +323,10 @@ rather than genuine concentration changes.
 
 **Step 2: Stratified sample.** To keep the analysis manageable, 25
 sites are drawn at random from each of two site types --- Urban Traffic
-and Urban Background. Using `set.seed` ensures the sample is
+and Urban Background. Using `set.seed()` ensures the sample is
 reproducible.
 
-**Step 3: Run `TheilSen` across all sites.** The key call is:
+**Step 3: Run `TheilSen()` across all sites.** The key call is:
 
 ```r
 TheilSen(
@@ -339,7 +339,7 @@ TheilSen(
 )
 ```
 
-Passing `type = c("site_type", "site")` tells `TheilSen` to condition
+Passing `type = c("site_type", "site")` tells `TheilSen()` to condition
 on both site type and individual site, so a separate Theil-Sen slope is
 estimated for each site. Setting `plot = FALSE` and `silent = TRUE`
 suppresses graphical and console output while processing all 50
@@ -351,7 +351,7 @@ intervals --- are held in `$data[[2]]`. These are extracted directly for
 plotting.
 
 **Step 5: Forest plot.** The slope estimates and their confidence
-intervals are displayed as a forest plot using `ggplot2`. Sites are
+intervals are displayed as a forest plot using [ggplot2]{.pkg}. Sites are
 ordered by slope within each site type, making it easy to see the
 spread of trends at a glance. A vertical dashed line at zero serves as
 a reference: sites to the left show declining NO~2~, those to the right
@@ -364,7 +364,7 @@ The forest plot makes clear that NO~2~ declined significantly (both in a general
 ## Flexibility of the `type` argument
 
 The same workflow applies to any conditioning variable recognised by
-`TheilSen`. For example, setting `type = "wd"` splits the data into
+`TheilSen()`. For example, setting `type = "wd"` splits the data into
 eight (or more) wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in `$data[[2]]` can be post-processed and visualised in the same way as shown here.
 :::
 

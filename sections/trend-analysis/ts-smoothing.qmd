@@ -35,13 +35,13 @@ Type `?rollingMean` into R for more details.
 
 There are many reasons why it is useful to calculate a running quantile for time series data. First, it is useful to flexibly show how high or low quantile trends change over time. Second, a low quantile (such as 1 or 2%) can often be useful for determining a 'background' concentration. For example, for fast response measurements (e.g. at a 1 second resolution) such as that from mobile measurements or fixed location measurements, the background value is often identified using a low quantile rolling measurement [@Padilla2021; @Farren2024].
 
-The `rollingQuantile` function provides a fast way of calculating one or more quantiles in a time series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.
+The `rollingQuantile()` function provides a fast way of calculating one or more quantiles in a time series. The function can also take account of a data threshold so that quantiles are not calculated if there are too few data available in a particular time window.
 
 An example is shown below and plotted in @fig-rollingQuant. In this example, we choose a rolling window width of 744 (about a month) and calculate quantile levels at 0.05 and 0.95. @fig-rollingQuant shows the jump in NO~2~ concentrations at the start of 2003 for the high quantile level but not the lower one. As mentioned elsewhere, this increase in NO~2~ was related to an increase in primary NO~2~ emissions related to bus aftertreatment technology.
 
 ```{r}
 #| label: fig-rollingQuant
-#| fig-cap: Example of using the `rollingQuantile` function to calculate low (0.05) and high (0.95) rolling quantiles.
+#| fig-cap: Example of using the `rollingQuantile()` function to calculate low (0.05) and high (0.95) rolling quantiles.
 #| fig-width: 6
 #| fig-height: 4
 data(mydata) # reload the original data
@@ -77,11 +77,11 @@ Gaussian smoothing is powerful and flexible and has many advantages over simpler
 
 In the example shown in @fig-gauss-smooth, the data have been plotted as weekly averages to make the raw data easier to see. The smoothed line provides a clear indication of how NO~2~ concentrations have varied over many years. In this case `sigma` was set to 744, which corresponds to about one month.
 
-It should be noted `GaussianSmooth` will work with any time series data e.g. at 1 Hz so should be useful for processing noisy fast response data.
+It should be noted `GaussianSmooth()` will work with any time series data e.g. at 1 Hz so should be useful for processing noisy fast response data.
 
 ```{r}
 #| label: fig-gauss-smooth
-#| fig-cap: Example of using the `GaussianSmooth` function to smooth NO~2~ concentrations with sigma set at about 1 month.
+#| fig-cap: Example of using the `GaussianSmooth()` function to smooth NO~2~ concentrations with sigma set at about 1 month.
 #| fig-width: 6
 #| fig-height: 5
 data(mydata) # reload the original data

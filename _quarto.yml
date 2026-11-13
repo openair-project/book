@@ -89,7 +89,10 @@ book:
    - sections/appendices/appendix-gethelp.qmd
    - v3.qmd
 
-bibliography: 
+filters:
+  - assets/filters/pkg-links.lua
+
+bibliography:
  - assets/bib/DCC-refs.bib
  - assets/bib/packages.bib
 

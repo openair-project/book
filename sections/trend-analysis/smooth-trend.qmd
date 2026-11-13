@@ -6,11 +6,11 @@ author: David Carslaw
 
 ## Background {#sec-SmoothTrendInfo}
 
-The `smoothTrend` function calculates smooth trends in the monthly mean concentrations of pollutants. In its basic use it will generate a plot of monthly concentrations and fit a smooth line to the data and show the 95% confidence intervals of the fit. The smooth line is essentially determined using Generalized Additive Modelling using the [mgcv]{.pkg} package. This package provides a comprehensive and powerful set of methods for modelling data. In this case, however, the *model* is a relationship between time and pollutant concentration i.e. a trend. One of the principal advantages of this approach is that the amount of smoothness in the trend is optimised in the sense that it is neither too smooth (therefore missing important features) nor too variable (perhaps fitting 'noise' rather than real effects). Some background information on the use of this approach in an air quality setting can be found in @Carslaw2007a.
+The `smoothTrend()` function calculates smooth trends in the monthly mean concentrations of pollutants. In its basic use it will generate a plot of monthly concentrations and fit a smooth line to the data and show the 95% confidence intervals of the fit. The smooth line is essentially determined using Generalized Additive Modelling using the [mgcv]{.pkg} package. This package provides a comprehensive and powerful set of methods for modelling data. In this case, however, the *model* is a relationship between time and pollutant concentration i.e. a trend. One of the principal advantages of this approach is that the amount of smoothness in the trend is optimised in the sense that it is neither too smooth (therefore missing important features) nor too variable (perhaps fitting 'noise' rather than real effects). Some background information on the use of this approach in an air quality setting can be found in @Carslaw2007a.
 
 @sec-trends-gam considers smooth trends in more detail and considers how different models can be developed that can be quite sophisticated. Readers should consider this section if they are considering trend analysis in more depth.
 
-The user can select to deseasonalise the data first to provide a clearer indication of the overall trend on a monthly basis. The data are deseasonalised using the `stl` function. The user may also select to use bootstrap simulations to provide an alternative method of estimating the uncertainties in the trend. In addition, the simulated estimates of uncertainty can account for autocorrelation in the residuals using a block bootstrap approach.
+The user can select to deseasonalise the data first to provide a clearer indication of the overall trend on a monthly basis. The data are deseasonalised using the `stl()` function. The user may also select to use bootstrap simulations to provide an alternative method of estimating the uncertainties in the trend. In addition, the simulated estimates of uncertainty can account for autocorrelation in the residuals using a block bootstrap approach.
 
 ## Examples of trend analysis
 
@@ -18,7 +18,7 @@ We apply the function to concentrations of O~3~ and NO~2~ using the code below. 
 
 ```{r}
 #| label: fig-smoothTrendComp
-#| fig-cap: Examples of the `smoothTrend` function applied to Marylebone Road.
+#| fig-cap: Examples of the `smoothTrend()` function applied to Marylebone Road.
 #| fig-subcap:
 #|   - "Monthly mean O~3~."
 #|   - "Deseasonalised O~3~."
@@ -63,21 +63,21 @@ smoothTrend(
 )
 ```
 
-The `smoothTrend` function shares many of the functionalities of the `TheilSen` function. @fig-smoothwd shows the result of applying this function to O~3~ concentrations. The code that produced @fig-smoothwd was:
+The `smoothTrend()` function shares many of the functionalities of the `TheilSen()` function. @fig-smoothwd shows the result of applying this function to O~3~ concentrations. The code that produced @fig-smoothwd was:
 
 ```{r}
 #| label: fig-smoothwd
-#| fig-cap: Trends in O~3~ using the `smoothTrend` function applied to Marylebone Road. The shading shows the estimated 95% confidence intervals.
+#| fig-cap: Trends in O~3~ using the `smoothTrend()` function applied to Marylebone Road. The shading shows the estimated 95% confidence intervals.
 #| fig-width: 10
 #| fig-height: 12
 smoothTrend(mydata, pollutant = "o3", deseason = TRUE, type = "wd")
 ```
 
-The `smoothTrend` function can easily be used to gain a large amount of information on trends. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
+The `smoothTrend()` function can easily be used to gain a large amount of information on trends. For example, how do trends in NO~2~, O~3~ and PM~10~ vary by season and wind sector. There are 8 wind sectors and four seasons i.e. 32 plots. In @fig-smoothwdSeason all three pollutants are chosen and two types (season and wind direction). We also reduce the number of axis labels and the line to improve clarity. There are numerous combinations of analyses that could be produced here and it is very easy to explore the data in a wide number of ways.
 
 ```{r}
 #| label: fig-smoothwdSeason
-#| fig-cap: The `smoothTrend` function applied to three pollutants,  split by wind sector and season.
+#| fig-cap: The `smoothTrend()` function applied to three pollutants,  split by wind sector and season.
 #| fig-width: 14
 #| fig-height: 12
 smoothTrend(

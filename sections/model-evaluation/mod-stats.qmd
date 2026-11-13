@@ -6,7 +6,7 @@ author: David Carslaw
 
 ## Background {#sec-ModBack}
 
-The `modStats` function provides key model evaluation statistics for comparing models against measurements and models against other models.
+The `modStats()` function provides key model evaluation statistics for comparing models against measurements and models against other models.
 
 There are a very wide range of evaluation statistics that can be used to assess model performance. There is, however, no single statistic that encapsulates all aspects of interest. For this reason it is useful to consider several performance statistics and also to understand the sort of information or insight they might provide.
 
@@ -62,7 +62,7 @@ $$ {#eq-RMSE}
 
 **Correlation coefficient, *r***
 
-The (Pearson) correlation coefficient is a measure of the strength of the linear relationship between two variables. If there is perfect linear relationship with positive slope between the two variables, $r$ = 1. If there is a perfect linear relationship with negative slope between the two variables $r$ = -1. A correlation coefficient of 0 means that there is no linear relationship between the variables. Note that `modStats` accepts an option `method`, which can be set to "kendall" and "spearman" for alternative calculations of $r$.
+The (Pearson) correlation coefficient is a measure of the strength of the linear relationship between two variables. If there is perfect linear relationship with positive slope between the two variables, $r$ = 1. If there is a perfect linear relationship with negative slope between the two variables $r$ = -1. A correlation coefficient of 0 means that there is no linear relationship between the variables. Note that `modStats()` accepts an option `method`, which can be set to "kendall" and "spearman" for alternative calculations of $r$.
 
 $$
  r = \frac{1}{(n-1)}\sum\limits_{i=1}^{n}\left(\frac{M_i - \overline{M}}{\sigma_M}\right)\left(\frac{O_i - \overline{O}}{\sigma_O}\right)   
@@ -132,7 +132,7 @@ It is possible to rank the statistics based on the *Coefficient of Efficiency*, 
 modStats(modData, obs = "obs", mod = "mod", type = "model", rank.name = "model")
 ```
 
-The `modStats` function is however much more flexible than indicated above. While it is useful to calculate model evaluation statistics in a straightforward way it can be much more informative to consider the statistics split by different periods.
+The `modStats()` function is however much more flexible than indicated above. While it is useful to calculate model evaluation statistics in a straightforward way it can be much more informative to consider the statistics split by different periods.
 
 Data have been assembled from a Defra model evaluation exercise which consists of hourly O~3~ predictions at 15 receptor points around the UK for 2006. The aim here is not to identify a particular model that is 'best' and for this reason the models are simply referred to as `model 1`, `model 2` and so on. We will aim to make the data more widely available. However, data set has this form:
 
@@ -158,9 +158,9 @@ modStats(
 )
 ```
 
-Note that it is possible to read the results of the `modStats` function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.
+Note that it is possible to read the results of the `modStats()` function into a data frame, which then allows the results to be plotted. This is generally a good idea when there is a lot of numeric data to consider and plots will convey the information better.
 
-The `modStats` function is much more flexible than indicated above and can be used in lots of interesting ways. The `type` option in particular makes it possible to split the statistics in numerous ways. For example, to summarise the performance of models by site, model and day of the week:
+The `modStats()` function is much more flexible than indicated above and can be used in lots of interesting ways. The `type` option in particular makes it possible to split the statistics in numerous ways. For example, to summarise the performance of models by site, model and day of the week:
 
 ```{r}
 #| label: modStatsEx
