@@ -78,7 +78,7 @@ Another example is splitting the data set by time. We use the `splitByDate` func
 #| fig-cap: Example plot using the `timeVariation` function to plot NO~2~ concentrations at Marylebone Road. In this plot, the concentrations are shown before and after January 2003.
 #| fig-width: 12
 #| fig-height: 7
-## split data into two periods (see Utlities section for more details)
+## split data into two periods (see Utilities section for more details)
 mydata <- splitByDate(
   mydata,
   dates = "1/1/2003",

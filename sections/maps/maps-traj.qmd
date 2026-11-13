@@ -90,7 +90,7 @@ trajLevelMap(
 
 ```{r}
 #| label: fig-trajlevelsmooth
-#| fig-cap: A smoothed frqeuency map plotted by `trajLevelMap()`.
+#| fig-cap: A smoothed frequency map plotted by `trajLevelMap()`.
 trajLevelMap(
   traj_data,
   statistic = "sqtba",

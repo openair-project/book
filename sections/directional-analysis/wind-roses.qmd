@@ -245,7 +245,7 @@ data sets. In this case a 'reference' data set is compared with a second
 data set. There are many reasons for doing so e.g. to see how one site
 compares with another or for meteorological model evaluation (more on
 that in later sections). In this case, `ws` and `wd` are considered to
-the the reference data sets with which a second set of wind speed and
+be the reference data sets with which a second set of wind speed and
 wind directions are to be compared (`ws2` and `wd2`).
 
 In the next example, data from two data sets from 2024 are imported over

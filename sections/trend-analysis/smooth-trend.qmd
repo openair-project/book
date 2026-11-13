@@ -18,7 +18,7 @@ We apply the function to concentrations of O~3~ and NO~2~ using the code below. 
 
 ```{r}
 #| label: fig-smoothTrendComp
-#| fig-cap: Examples of the `smoothTrend` function applied to Marylebone Road.'
+#| fig-cap: Examples of the `smoothTrend` function applied to Marylebone Road.
 #| fig-subcap:
 #|   - "Monthly mean O~3~."
 #|   - "Deseasonalised O~3~."

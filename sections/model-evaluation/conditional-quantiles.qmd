@@ -168,7 +168,7 @@ traj <- importTraj("london", 2006)
 ## carry out a cluster analysis
 cl <- trajCluster(traj, method = "Angle", n.cluster = 5)
 
-## join with orginal model eval data
+## join with original model eval data
 out <- inner_join(condDat, cl$data$traj, by = "date")
 
 ## plot it

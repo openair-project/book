@@ -358,7 +358,7 @@ a reference: sites to the left show declining NO~2~, those to the right
 a (none in this case) increase. The resulting plot is shown in
 @fig-TheilSenSummary.
 
-The forest plot makes clear that NO~2~ declined signficantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source. 
+The forest plot makes clear that NO~2~ declined significantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source. 
 
 ::: callout-tip
 ## Flexibility of the `type` argument
@@ -408,7 +408,7 @@ ts_out <- TheilSen(
   silent    = TRUE
 )
 
-# --- 4. Extract slope and uncertaintiese ---
+# --- 4. Extract slope and uncertainties ---
 ts_results <- ts_out$data[[2]] 
 
 # --- 5. Summary ordered plot ---

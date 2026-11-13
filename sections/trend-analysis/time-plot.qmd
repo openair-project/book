@@ -78,7 +78,7 @@ timePlot(
   scales = "free_y"
 )
 
-## plor 95th percentile monthly concentrations
+## plot 95th percentile monthly concentrations
 timePlot(
   mydata,
   pollutant = c("o3", "no2"),

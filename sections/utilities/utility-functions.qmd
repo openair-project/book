@@ -69,7 +69,7 @@ newdata <- cutData(mydata, type = "pm10", n.levels = 5)
 head(newdata)
 ```
 
-This use of `cutData()` is quite destructive --- the PM concentraitons are no longer in the data frame. You can use either the `names` or `suffix` arguments to get around this.
+This use of `cutData()` is quite destructive --- the PM concentrations are no longer in the data frame. You can use either the `names` or `suffix` arguments to get around this.
 
 ```{r}
 #| label: cutdata3
@@ -279,13 +279,13 @@ calcPercentile(
 
 ## Correlation matrices {#sec-corPlot}
 
-Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a *correlation matrix*, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by [@friendly2002] and [@Sarkar2008].
+Understanding how different variables are related to one another is always important. However, it can be difficult to easily develop an understanding of the relationships when many different variables are present. One of the useful techniques used is to plot a *correlation matrix*, which provides the correlation between all pairs of data. The basic idea of a correlation matrix has been extended to help visualise relationships between variables by @friendly2002 and @Sarkar2008.
 
 The `corPlot()` function shows the correlation coded in three ways: by shape (ellipses), colour and the numeric value. The ellipses can be thought of as visual representations of scatter plot. With a perfect positive correlation a line at 45 degrees positive slope is drawn. For zero correlation the shape becomes a circle --- imagine a 'fuzz' of points with no relationship between them.
 
 With many variables it can be difficult to see relationships between variables i.e. which variables tend to behave most like one another. For this reason hierarchical clustering is applied to the correlation matrices to group variables that are most similar to one another (if `cluster = TRUE`.)
 
-An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure it can be seen the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0. 84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e. for a single panel plot.
+An example of the `corPlot()` function is shown in @fig-corPlot. In this Figure it can be seen the highest correlation coefficient is between PM~10~ and PM~2.5~ (r = 0.84) and that the correlations between SO~2~, NO~2~ and NO~x~ are also high. O~3~ has a negative correlation with most pollutants, which is expected due to the reaction between NO and O~3~. It is not that apparent in @fig-corPlot that the order the variables appear is due to their similarity with one another, through hierarchical cluster analysis. In this case we have chosen to also plot a *dendrogram* that appears on the right of the plot. Dendrograms provide additional information to help with visualising how groups of variables are related to one another. Note that dendrograms can only be plotted for `type = "default"` i.e. for a single panel plot.
 
 ```{r}
 #| label: fig-corPlot

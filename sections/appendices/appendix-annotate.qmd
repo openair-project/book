@@ -407,7 +407,7 @@ gt::gt_group(
 
 ## Themes
 
-With [ggplot2]{.pkg} it is simple to control the "theme" of your plot (i.e., all non-data elements) using the `ggplot2::theme()` function. There is an excellent blog post about [ggplot2]{.pkg} stlying at <https://tidyverse.org/blog/2025/10/ggplot2-styling/>, but below we demonstrate a few examples of tweaking the plot style.
+With [ggplot2]{.pkg} it is simple to control the "theme" of your plot (i.e., all non-data elements) using the `ggplot2::theme()` function. There is an excellent blog post about [ggplot2]{.pkg} styling at <https://tidyverse.org/blog/2025/10/ggplot2-styling/>, but below we demonstrate a few examples of tweaking the plot style.
 
 ```{r}
 #| label: fig-scatter-plot-theme
@@ -480,7 +480,7 @@ scatter_object$plot +
 
 There are [many `ggplot2` extensions](https://exts.ggplot2.tidyverse.org/) out there which you can take advantage of in extending your [openair]{.pkg} plots.
 
-One useful example is [patchwork]{.pkg}, which provides an elegant API for combining multiple plots together into one assembly. This is how `timeVariaiton()` works under-the-hood, but users should feel free to assemble plots however they see fit.
+One useful example is [patchwork]{.pkg}, which provides an elegant API for combining multiple plots together into one assembly. This is how `timeVariation()` works under-the-hood, but users should feel free to assemble plots however they see fit.
 
 The package documentation for [patchwork]{.pkg} is excellent and can be found [here](https://patchwork.data-imaginist.com/).
 

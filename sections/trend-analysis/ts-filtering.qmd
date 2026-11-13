@@ -129,7 +129,7 @@ The day of the week variation (bottom-right) shows that only synoptic component 
 
 ```{r}
 #| label: fig-kz-timevariation
-#| fig-cap: "Time variation plot for the sub-day, diurnal, synoptic and sesasonal components of O~3~ concentrations at the North Kensington site. "
+#| fig-cap: "Time variation plot for the sub-day, diurnal, synoptic and seasonal components of O~3~ concentrations at the North Kensington site. "
 #| fig-width: 8
 #| fig-height: 6
 timeVariation(
@@ -183,7 +183,7 @@ left_join(trend_kz, select(trend_kza, date, kza_trend), by = "date") |>
   )
 ```
 
-The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.[^1]
+The analysis above for Covid-19 lockdown effects could arguably be better analysed by combining the seasonal and trend components using the KZ filter because the lockdown effects are not a perfect step change and some of the effects lasted a few weeks to a few months i.e. they would be expected to also show up in the seasonal cycle. An alternative approach is shown below, but not plotted.[^1]
 
 [^1]: Or try the `kzaFilter` with `sensitivity = 0.5` for more structure to capture more of the variation.
 

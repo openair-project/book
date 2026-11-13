@@ -221,7 +221,7 @@ filter(traj, lat > 30, lat < 70, lon > -50, lon < 20) |>
 
 ## Trajectory source contribution functions
 
-Back trajectories offer the possibility to undertake receptor modelling to identify the location of major emission sources. When many back trajectories (over months to years) are analysed in specific ways they begin to show the geographic origin most associated with elevated concentrations. With enough (dissimilar) trajectories those locations leading to the highest concentrations begin to be revealed. When a whole year of back trajectory data is plotted the individual back trajectories can extend 1000s of km. There are many approaches using back trajectories in this way and [@Fleming2012] provide a good overview of the methods available. [openair]{.pkg} has implemented a few of these techniques and over time these will be refined and extended.
+Back trajectories offer the possibility to undertake receptor modelling to identify the location of major emission sources. When many back trajectories (over months to years) are analysed in specific ways they begin to show the geographic origin most associated with elevated concentrations. With enough (dissimilar) trajectories those locations leading to the highest concentrations begin to be revealed. When a whole year of back trajectory data is plotted the individual back trajectories can extend 1000s of km. There are many approaches using back trajectories in this way and @Fleming2012 provide a good overview of the methods available. [openair]{.pkg} has implemented a few of these techniques and over time these will be refined and extended.
 
 ### Identifying the contribution of high concentration back trajectories
 
@@ -331,7 +331,7 @@ group_by(traj, sector) |>
 
 ### Potential Source Contribution Function (PSCF)
 
-If `statistic = "pscf"` then the Potential Source Contribution Function (PSCF) is plotted. The PSCF calculates the probability that a source is located at latitude $i$ and longitude $j$ [@Fleming2012; @Pekney2006]. The PSCF is somewhat analogous to the CPF function described on @sec-CPF that considers local wind direction probabilities. In fact, the two approaches have been shown to work well together [@Pekney2006]. The PSCF approach has been widely used in the analysis of air mass back trajectories. [@AraBegum2005] for example assessed the method against the known locations of wildfires and found it performed well for PM~2.5~, EC (elemental carbon) and OC (organic carbon) and that other (non-fire related) species such as sulphate had different source origins. The basis of PSCF is that if a source is located at ($i$, $j$), an air parcel back trajectory passing through that location indicates that material from the source can be collected and transported along the trajectory to the receptor site. PSCF solves
+If `statistic = "pscf"` then the Potential Source Contribution Function (PSCF) is plotted. The PSCF calculates the probability that a source is located at latitude $i$ and longitude $j$ [@Fleming2012; @Pekney2006]. The PSCF is somewhat analogous to the CPF function described on @sec-CPF that considers local wind direction probabilities. In fact, the two approaches have been shown to work well together [@Pekney2006]. The PSCF approach has been widely used in the analysis of air mass back trajectories. @AraBegum2005 for example assessed the method against the known locations of wildfires and found it performed well for PM~2.5~, EC (elemental carbon) and OC (organic carbon) and that other (non-fire related) species such as sulphate had different source origins. The basis of PSCF is that if a source is located at ($i$, $j$), an air parcel back trajectory passing through that location indicates that material from the source can be collected and transported along the trajectory to the receptor site. PSCF solves
 
 $$
 PSCF = \frac{m_{ij}}{n_{ij}} 
@@ -357,7 +357,7 @@ filter(traj, lon > -20, lon < 20, lat > 45, lat < 60) |>
 
 ### Concentration Weighted Trajectory (CWT)
 
-A limitation of the PSCF method is that grid cells can have the same PSCF value when sample concentrations are either only slightly higher or much higher than the criterion [@Hsu2003]. As a result, it can be difficult to distinguish moderate sources from strong ones. [@seibert1994] computed concentration fields to identify source areas of pollutants. This approach is sometimes referred to as the CWT or CF (concentration field). A grid domain was used as in the PSCF method. For each grid cell, the mean (CWT) or logarithmic mean (used in the Residence Time Weighted Concentration (RTWC) method) concentration of a pollutant species was calculated as follows:
+A limitation of the PSCF method is that grid cells can have the same PSCF value when sample concentrations are either only slightly higher or much higher than the criterion [@Hsu2003]. As a result, it can be difficult to distinguish moderate sources from strong ones. @seibert1994 computed concentration fields to identify source areas of pollutants. This approach is sometimes referred to as the CWT or CF (concentration field). A grid domain was used as in the PSCF method. For each grid cell, the mean (CWT) or logarithmic mean (used in the Residence Time Weighted Concentration (RTWC) method) concentration of a pollutant species was calculated as follows:
 
 $$
   ln(\overline{C}_{ij}) = \frac{1}{\sum_{k=1}^{N}\tau_{ijk}}\sum_{k=1}^{N}ln(c_k)\tau_{ijk} 
@@ -477,7 +477,7 @@ trajLevel(
 )
 ```
 
-Some further analysis can be carried out on the TEOM FDMS measurements, which separately reports the volatile and non-volatile components of PM. @fig-SQTBA-PMv shows the plot for the volatile PM~2.5~ component, which highlights the source regions of the Benelux counties and (likely) northern Italy.
+Some further analysis can be carried out on the TEOM FDMS measurements, which separately reports the volatile and non-volatile components of PM. @fig-SQTBA-PMv shows the plot for the volatile PM~2.5~ component, which highlights the source regions of the Benelux countries and (likely) northern Italy.
 
 ```{r}
 #| label: fig-SQTBA-PMv
@@ -673,9 +673,9 @@ timeProp(
 
 Both of `trajPlot()` and `trajLevel()` contain the `crs` argument, which is passed to `ggplot2::coord_sf()` via `sf::st_crs()`. Both of these latter two functions document `crs` extensively but, in short, it is a way to define a coordinate reference system to reproject the plotted data.
 
-By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic System" (WGS84), which is associated with the globally ubiquitous "latitude and longitude" coordinate system. However, WGS84/ESPG:4326 is a geographic coordinate system — it describes positions on a sphere — rather than a projected one that flattens that sphere onto a 2D plane. This means shapes and distances can appear distorted, particularly at higher latitudes or across wide spatial extents. Choosing a projected CRS better suited to your region of interest can produce a more accurate and visually appealing map.
+By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic System" (WGS84), which is associated with the globally ubiquitous "latitude and longitude" coordinate system. However, WGS84/EPSG:4326 is a geographic coordinate system — it describes positions on a sphere — rather than a projected one that flattens that sphere onto a 2D plane. This means shapes and distances can appear distorted, particularly at higher latitudes or across wide spatial extents. Choosing a projected CRS better suited to your region of interest can produce a more accurate and visually appealing map.
 
-@fig-crs-latlng, @fig-crs-bng and @fig-crs-lambert show the same back trajectory data plotted with different CRSs. The first plot uses the default WGS84/ESPG:4326, which is a geographic coordinate system. The second plot uses the British National Grid (BNG) CRS, which is a projected coordinate system commonly used in the UK. The third plot uses the Lambert Azimuthal Equal Area (LAEA) CRS, which is a projected coordinate system often used for European data.
+@fig-crs-latlng, @fig-crs-bng and @fig-crs-lambert show the same back trajectory data plotted with different CRSs. The first plot uses the default WGS84/EPSG:4326, which is a geographic coordinate system. The second plot uses the British National Grid (BNG) CRS, which is a projected coordinate system commonly used in the UK. The third plot uses the Lambert Azimuthal Equal Area (LAEA) CRS, which is a projected coordinate system often used for European data.
 
 ::: {.callout-warning}
 `crs` can take a wide variety of arguments, including custom projections written in the PROJ string form. It's up to you to pick a suitable `crs` for your data, as poorly chosen coordinate reference systems may obscure the data or cause visual artefacts. For example, crs = 27700 (the British National Grid) is well-suited for trajectories surrounding the UK, but will produce increasing distortion for trajectories that extend far beyond it.
@@ -683,7 +683,7 @@ By default, the `crs` is [4326](https://epsg.io/4326), the "World Geodetic Syste
 
 ```{r}
 #| label: fig-crs-latlng
-#| fig-cap: Trajectories plotted in the default WGS84/ESPG:4326 coordinate reference system (CRS) using `trajLevel()`.
+#| fig-cap: Trajectories plotted in the default WGS84/EPSG:4326 coordinate reference system (CRS) using `trajLevel()`.
 trajLevel(traj, crs = 4326)
 ```
 
@@ -746,7 +746,7 @@ trajMap(
 )
 ```
 
-[openairmaps]{.pkg} also contains an equivalent to `trajLevel()`. `trajlevelMap()` takes many of the same arguments as `trajLevel()` and works with all `statistic` types, but returns an interactive map. Try hovering over and clicking on the tiles.
+[openairmaps]{.pkg} also contains an equivalent to `trajLevel()`. `trajLevelMap()` takes many of the same arguments as `trajLevel()` and works with all `statistic` types, but returns an interactive map. Try hovering over and clicking on the tiles.
 
 ```{r}
 #| label: fig-trajInterMap3
