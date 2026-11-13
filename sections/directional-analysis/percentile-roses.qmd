@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using percentileRose() to show percentile concentrations by wind direction, including conditional probability function (CPF) plots."
 ---
 
 # Percentile roses {#sec-percentileRose}

@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using rolling regressions with runRegression() to identify dilution lines and estimate pollutant ratios from local sources."
 ---
 
 # Dilution lines and pollutant ratios {#sec-runRegression}

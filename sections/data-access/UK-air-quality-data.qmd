@@ -1,8 +1,5 @@
 ---
-author:
-- David C. Carslaw
-- Jack Davison
-abstract: This section outlines the different ways users can access the abundant air quality data in the UK. The main functions provide easy access to hourly data and other statistical summaries such as annual means and data capture rates. Easy access is also provided to site metadata such as longitude, latitude, site type and details of the pollutants measured.
+description: "Importing UK air quality data and site metadata with importUKAQ() and importMeta(), including hourly data, annual statistics and DAQI."
 aliases:
   - sections/maps/maps-network.html
 ---

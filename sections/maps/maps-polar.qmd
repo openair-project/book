@@ -1,7 +1,5 @@
 ---
-subtitle: Putting polar plots on an interactive map
-author: Jack Davison
-abstract: "One of the headline features of [openairmaps]{.pkg} is creating maps using directional analysis plots as markers. Being able to place a polar plot or similar visualisation on a map can allow us to gain additional insight from our analysis, permitting us to easily compare different sites and further understand their geographic context. This page introduces the `polarMap()` family of functions, and the suite of customisations available to users."
+description: "Placing polar plots and other directional analysis plots on interactive maps with polarMap() and related openairmaps functions."
 execute:
   cache: false
 ---

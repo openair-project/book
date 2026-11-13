@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using calendarPlot() to show daily concentrations, wind conditions and air quality index categories in a calendar format."
 ---
 
 # Calendar plots {#sec-calendarPlot}

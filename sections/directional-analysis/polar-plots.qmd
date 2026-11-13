@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Bivariate polar plots with polarPlot() for source identification, including CPF, pairwise statistics, polarDiff() and polarCluster()."
 ---
 
 # Polar plots {#sec-polarPlot}

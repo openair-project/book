@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using timeVariation() to show how concentrations vary by hour of the day, day of the week and month, with uncertainty intervals."
 ---
 
 # Temporal variations {#sec-timeVariation}

@@ -1,15 +1,9 @@
 ---
-subtitle: "A major update to the [openair]{.pkg} package"
+description: "What changed in openair 3.0, including the move from lattice to ggplot2, and what it means for openair users."
 format: html
-author:
-  - David C. Carslaw
-  - Jack Davison
-abstract: |
-  Version 3 of the [openair]{.pkg} package has been released! This major update converts all plotting functions from [lattice]{.pkg} to [ggplot2]{.pkg}, among other changes. See the [full list of changes](https://openair-project.github.io/openair/news/index.html). This article describes the rationale for this change and what it means for [openair]{.pkg} users going forward.
-abstract-title: "Summary"
 ---
 
-# openair 3.0 {#sec-v3}
+# What's new in openair 3.0 {#sec-v3}
 
 ## Overview
 

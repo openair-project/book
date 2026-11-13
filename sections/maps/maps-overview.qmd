@@ -1,7 +1,5 @@
 ---
-subtitle: An introduction to [openairmaps]{.pkg} and the [leaflet]{.pkg} package
-author: Jack Davison
-abstract: "The [openairmaps]{.pkg} package has been designed to create interactive HTML air quality maps. These are useful to understand the geospatial context of [openair]{.pkg}-type analysis, and to present data in an engaging way in dashboards and websites. This page gives a broad overview of [openairmaps]{.pkg} as well as [leaflet]{.pkg}, the package on which it is built."
+description: "An introduction to the openairmaps package for interactive air quality maps, and to leaflet, the package on which it is built."
 execute:
   cache: false
 ---

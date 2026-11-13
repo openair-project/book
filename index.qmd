@@ -1,4 +1,5 @@
 ---
+description: "A free, online guide to analysing air pollution data with R and the openair family of packages."
 execute:
   cache: false
 ---

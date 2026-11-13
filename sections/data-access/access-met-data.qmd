@@ -1,6 +1,5 @@
 ---
-author: David C. Carslaw
-abstract: Meteorological data is key to understanding air quality measurements. This section describes a fast and convenient way of accessing meteorological data for sites worldwide.
+description: "Accessing surface meteorological data for sites worldwide with the worldmet package, and joining it to air quality data."
 ---
 
 # Access meteorological data {#sec-worldmet}

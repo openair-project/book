@@ -1,4 +1,5 @@
 ---
+description: "Installing openair, its input data requirements, handling dates and time zones, and the options shared by most openair functions."
 format:
   html:
     code-annotations: below

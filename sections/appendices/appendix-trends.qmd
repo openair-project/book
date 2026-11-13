@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "A closer look at modelling trends with generalized additive models (GAMs), accounting for seasonality and autocorrelation."
 ---
 
 # A closer look at trends {#sec-trends-gam}

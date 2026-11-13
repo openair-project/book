@@ -1,3 +1,7 @@
+---
+description: "An introduction to this book and to analysing air pollution data with open-source tools in R."
+---
+
 # Introduction {#sec-intro}
 
 This document provides information on the use of R to analyse air pollution data. The document supports an initiative to develop and make available a consistent set of tools for analysing and understanding air pollution data in a free, open-source environment.

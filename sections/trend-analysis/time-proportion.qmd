@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using timeProp() to show how a time series is made up of contributions from categories such as wind sector or cluster."
 ---
 
 # Time proportion plots {#sec-timeProp}

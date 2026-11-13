@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Importing and analysing HYSPLIT back trajectories with openair: plotting, gridded statistics (PSCF, CWT, SQTBA), clustering and reprojection."
 ---
 
 # Trajectory analysis {#sec-trajPlot}

@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using windRose() and pollutionRose() to summarise wind and pollutant data by direction, and to compare two meteorological data sets."
 editor_options:
   markdown:
     wrap: 72

@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Smoothing air pollution time series with rolling means and quantiles, Gaussian smoothing and Whittaker-Eilers smoothing, including baseline estimation."
 ---
 
 # Time series smoothing {#sec-ts-smoothing}

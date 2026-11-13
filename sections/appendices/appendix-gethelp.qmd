@@ -1,5 +1,5 @@
 ---
-author: Jack Davison
+description: "Where to get help with openair and how to write a good reproducible example."
 ---
 
 # Getting help {#sec-gethelp}

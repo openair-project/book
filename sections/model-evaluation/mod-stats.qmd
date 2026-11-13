@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Common model evaluation statistics and how to calculate them with modStats()."
 ---
 
 # Model evaluation {#sec-modStats}

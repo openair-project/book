@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using polarAnnulus() to show how concentrations vary by wind direction and by trend, season, day of the week and hour of the day."
 ---
 
 # Polar annulus {#sec-polarAnnulus}

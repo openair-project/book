@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Plotting air pollution time series with timePlot(), including averaging, normalising, grouping and wind vectors."
 ---
 
 # Time series plots {#sec-timePlot}

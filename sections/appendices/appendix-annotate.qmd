@@ -1,5 +1,5 @@
 ---
-author: Jack Davison
+description: "Customising and annotating openair plots with ggplot2: labels, annotations, facets, themes and extension packages."
 execute:
   warning: false
   error: false

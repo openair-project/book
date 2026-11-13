@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Estimating smooth, non-linear trends in air pollution data using smoothTrend()."
 ---
 
 # Smooth trends {#sec-smoothTrend}

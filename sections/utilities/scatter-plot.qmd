@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using scatterPlot() for scatter plots with smooth or linear fits, hexagonal binning, density estimates, colour scales and wind vectors."
 ---
 
 # Scatter plots {#sec-scatterPlot}

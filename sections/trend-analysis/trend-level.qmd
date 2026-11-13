@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using trendLevel() to produce heat maps showing how a variable varies across two other variables."
 ---
 
 # Trend heat maps {#sec-trendLevel}

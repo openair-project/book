@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "How to run the HYSPLIT trajectory model yourself to produce back trajectory files for use with openair."
 ---
 
 # Production of HYSPLIT trajectory files {#sec-prod-hyspl-traj}

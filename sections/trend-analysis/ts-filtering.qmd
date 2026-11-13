@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Separating air pollution time series into components at different time scales using Kolmogorov-Zurbenko (KZ and KZA) filters."
 ---
 
 # Kolmogorov-Zurbenko filters {#sec-ts-filtering}

@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Estimating trends in air pollution with the Theil-Sen method using TheilSen(), including trends by wind sector and across many sites."
 editor_options:
   markdown:
     wrap: 72

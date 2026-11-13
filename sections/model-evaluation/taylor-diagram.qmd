@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "How to read and use Taylor diagrams to compare model performance with TaylorDiagram()."
 ---
 
 # Taylor diagram {#sec-TaylorDiagram}

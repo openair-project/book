@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "openair utility functions for selecting data by date, cutting data into intervals, finding episodes, time averaging, percentiles and correlation matrices."
 ---
 
 # Utility functions {#sec-utility}

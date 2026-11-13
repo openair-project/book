@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Evaluating model performance across the full range of concentrations using conditionalQuantile() and conditionalEval()."
 ---
 
 # Conditional quantiles {#sec-conditionalQuantile}

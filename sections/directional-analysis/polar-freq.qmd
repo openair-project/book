@@ -1,5 +1,5 @@
 ---
-author: David C. Carslaw
+description: "Using polarFreq() to show how wind speed, wind direction and pollutant concentrations vary, including contributions to the overall mean."
 ---
 
 # Polar frequencies {#sec-polarFreq}

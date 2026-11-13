@@ -1,5 +1,5 @@
 ---
-author: Jack Davison
+description: "Choosing and controlling colour palettes in openair, with a gallery of all available schemes."
 validate-yaml: false
 execute:
   warning: false
