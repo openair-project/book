@@ -33,7 +33,7 @@ Bivariate polar plots are constructed in the following way. First, wind speed, w
 The wind components, $u$ and $v$ are calculated i.e.
 
 $$
-u = \overline{u} . sin\left(\frac{2\pi}{\theta}\right), v = \overline{u} . cos\left(\frac{2\pi}{\theta}\right) 
+u = \overline{u} . sin\left(\frac{2\pi\theta}{360}\right), v = \overline{u} . cos\left(\frac{2\pi\theta}{360}\right) 
 $$ {#eq-wind-comp}
 
 where $\overline{u}$ is the mean hourly wind speed and $\theta$ is the mean wind direction in degrees with 90$^\circ$ as being from the east.
@@ -143,7 +143,7 @@ polarPlot(
   pollutant = "nox",
   cols = "turbo",
   key.position = "bottom",
-  key.title = "mean nox (ug/m3)"
+  key.title = "mean nox (ppb)"
 )
 ```
 
@@ -563,7 +563,7 @@ timeProp(
   key.position = "top",
   key.columns = 8,
   date.breaks = 10,
-  ylab = "so2 (ug/m3)"
+  ylab = "so2 (ppb)"
 )
 ```
 

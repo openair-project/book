@@ -194,6 +194,6 @@ timePlot(
   cols = "tol.bright",
   key.position = "none",
   scales = "free_y",
-  ylab = "concentration (ug/m3)"
+  ylab = "concentration (ppb)"
 )
 ```

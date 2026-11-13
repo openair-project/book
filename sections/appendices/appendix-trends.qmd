@@ -42,7 +42,7 @@ It is *always* a good idea to plot the data first:
 
 ```{r}
 #| label: fig-MHplot
-#| fig-cap: Monthly mean O~3~ concentrations at Mace Head, Ireland (1998--2010).
+#| fig-cap: Monthly mean O~3~ concentrations at Mace Head, Ireland (1988--2010).
 #| fig-width: 10
 #| fig-height: 5
 timePlot(monthly, pollutant = "o3")

@@ -54,7 +54,7 @@ $$ {#eq-NMGE}
 
 **Root mean squared error, *RMSE***
 
-The RMSE is a commonly used statistic that provides a good overall measure of how close modelled values are to predicted values.
+The RMSE is a commonly used statistic that provides a good overall measure of how close modelled values are to observed values.
 
 $$
    RMSE = \left({\frac{\sum\limits_{i=1}^{n} (M_i - O_i)^2}{n}}\right)^{1/2}   
@@ -144,7 +144,7 @@ load(url(
 head(modTest)
 ```
 
-There are columns representing the receptor location (`site`), the date, measured values (`o3`), model predictions (`mod`) and the model itself (`group`). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O~3~ is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the `type` option is used to split the calculations by season and model. Finally, the statistics are grouped by the $IOA$ for each season. It is now very easy to see how model performance changes by season and which models perform best in each season.
+There are columns representing the receptor location (`site`), the date, measured values (`o3`), model predictions (`mod`) and the model itself (`group`). There are numerous ways in which the statistics can be calculated. However, of interest here is how the models perform at a single receptor by season. The seasonal nature of O~3~ is a very important characteristic and it is worth considering in more detail. The statistics are easy enough to calculate as shown below. In this example a subset of the data is selected to consider only the Harwell site. Second, the `type` option is used to split the calculations by season and model. Finally, the models are ranked by their $COE$ within each season. It is now very easy to see how model performance changes by season and which models perform best in each season.
 
 ```{r}
 #| label: modStatsDefra

@@ -28,8 +28,8 @@ regression including the benefits of non-parametric approaches and
 bootstrap simulations. Note also that all the regression parameters
 are estimated through bootstrap resampling.
 
-The Theil-Sen method dates back to 1950, but the basic idea pre-dates
-1950 [@theil50; @sen1968]. It is one of those methods that required the
+The Theil-Sen method dates back to work by Theil in 1950, later extended
+by Sen in 1968 [@theil50; @sen1968]. It is one of those methods that required the
 invention of fast computers to be practical. The basic idea is as
 follows. Given a set of $n$ $x$, $y$ pairs, the slopes between all pairs
 of points are calculated. Note, the number of slopes can increase by

@@ -145,7 +145,7 @@ all_aq_data <- importUKAQ(
 
 `importMeta()` can also find sites near a specific location by supplying `lat` and `lng` coordinates. The returned data will include a `distance_km` column and be sorted by distance. This is useful when assessing pollution exposure at a receptor (e.g., a school or hospital) or when looking for monitors near a potential pollution source (e.g., an industrial installation or quarry).
 
-The `max_dist` argument limits results to sites within a given radius (in km), and `max_n` caps the number of sites returned. These can be combined to find, say, the four nearest sites within 5 km. [openairmaps]{.pkg} provides the `convertPostcode()` function as a convenient way to obtain coordinates from a UK postcode. The below example finds the four closest monitoring stations within 5km of Great Ormond Street Hospital, a famous children's hospital in London.
+The `max_dist` argument limits results to sites within a given radius (in km), and `max_n` caps the number of sites returned. These can be combined to find, say, the four nearest sites within 2 km. [openairmaps]{.pkg} provides the `convertPostcode()` function as a convenient way to obtain coordinates from a UK postcode. The below example finds the four closest monitoring stations within 2 km of Great Ormond Street Hospital, a famous children's hospital in London.
 
 ```{r}
 #| eval: true

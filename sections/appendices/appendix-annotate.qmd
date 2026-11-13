@@ -51,8 +51,8 @@ A good introduction to tweaking plots is using `labs()` to change the axis label
 #| fig-cap: "Using `labs()` to change axis labels and title."
 scatter_object$plot +
   labs(
-    x = quickText("NO2 (ug/m3)"),
-    y = quickText("NOx (ug/m3)"),
+    x = quickText("NO2 (ppb)"),
+    y = quickText("NOx (ppb)"),
     title = "Scatter Plot",
     subtitle = quickText("Monthly NOx roughly correlates with NO2")
   )

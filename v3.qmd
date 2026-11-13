@@ -36,7 +36,7 @@ polarplot$plot +
     subtitle = quickText(
       "The highest NOx is seen when the wind blows from the South-West"
     ),
-    color = quickText("Average\nNOx (ug/m3)")
+    color = quickText("Average\nNOx (ppb)")
   ) +
   ggplot2::annotate(
     geom = "rect",

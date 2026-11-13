@@ -30,7 +30,7 @@ timeProp(
   date.breaks = 10,
   key.position = "top",
   key.columns = 8,
-  ylab = "so2 (ug/m3)"
+  ylab = "so2 (ppb)"
 )
 ```
 

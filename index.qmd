@@ -17,7 +17,7 @@ The [openair]{.pkg} project started with funding from the UK Natural Environment
 
 The book is split into broad sections that cover common aspects of air quality data analysis.
 
--   **Data Import** Mostly focused on the easy access of UK air quality data across national and regional networks and accessing global meteorological data.
+-   **Data Access** Mostly focused on the easy access of UK air quality data across national and regional networks and accessing global meteorological data.
 
 -   **Directional Analysis** Many common functions such as wind and pollution roses, bivariate polar plots and back trajectories.
 
