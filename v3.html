@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
-<title>Appendix F — Openair 3.0 – The openair book</title>
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="What changed in openair 3.0, including the move from lattice to ggplot2, and what it means for openair users.">
+<title>Appendix F — What’s new in openair 3.0 – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,14 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./assets/media/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -106,53 +111,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<meta property="og:title" content="Appendix F — What’s new in openair 3.0 – The openair book">
+<meta property="og:description" content="What changed in openair 3.0, including the move from lattice to ggplot2, and what it means for openair users.">
+<meta property="og:image" content="https://openair-project.github.io/book/v3_files/figure-html/fig-v3-polarPlot-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="Appendix F — What’s new in openair 3.0 – The openair book">
+<meta name="twitter:description" content="What changed in openair 3.0, including the move from lattice to ggplot2, and what it means for openair users.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/v3_files/figure-html/fig-v3-polarPlot-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="./v3.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-v3" class="quarto-section-identifier">Appendix F — What’s new in openair 3.0</span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="./assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -183,22 +175,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -211,17 +200,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -258,13 +244,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -316,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -329,13 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -345,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -358,13 +338,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -374,26 +351,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -416,23 +390,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -456,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./v3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -466,75 +437,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">F.1</span> Overview</a></li>
   <li><a href="#benefits-of-ggplot2" id="toc-benefits-of-ggplot2" class="nav-link" data-scroll-target="#benefits-of-ggplot2"><span class="header-section-number">F.2</span> Benefits of <span class="pkg">ggplot2</span></a></li>
-  <li><a href="#breaking-changes" id="toc-breaking-changes" class="nav-link" data-scroll-target="#breaking-changes"><span class="header-section-number">F.3</span> Breaking Changes</a></li>
-  <li><a href="#non-plotting-updates" id="toc-non-plotting-updates" class="nav-link" data-scroll-target="#non-plotting-updates"><span class="header-section-number">F.4</span> Non-Plotting Updates</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">F.5</span> Next Steps</a></li>
+  <li><a href="#breaking-changes" id="toc-breaking-changes" class="nav-link" data-scroll-target="#breaking-changes"><span class="header-section-number">F.3</span> Breaking changes</a></li>
+  <li><a href="#non-plotting-updates" id="toc-non-plotting-updates" class="nav-link" data-scroll-target="#non-plotting-updates"><span class="header-section-number">F.4</span> Non-plotting updates</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">F.5</span> Next steps</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/v3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sections/appendices/appendix-annotate.html">Appendices</a></li><li class="breadcrumb-item"><a href="./v3.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title">Appendix F — Openair 3.0</h1>
-<p class="subtitle lead">A major update to the openair package</p>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-v3" class="quarto-section-identifier">Appendix F — What’s new in openair 3.0</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p>David C. Carslaw </p>
-             <p>Jack Davison </p>
-          </div>
-  </div>
     
   
     
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="block-title">Summary</div>
-    <p>Version 3 of the <code>openair</code> package has been released! This major update converts all plotting functions from <code>lattice</code> to <code>ggplot2</code>, among other changes. See a full list of changes <a href="https://openair-project.github.io/openair/news/index.html">here</a>. This article describes the rationale for this change and what it means for <code>openair</code> users going forward.</p>
-  </div>
-</div>
 
 
 </header><section id="overview" class="level2" data-number="F.1"><h2 data-number="F.1" class="anchored" data-anchor-id="overview">
 <span class="header-section-number">F.1</span> Overview</h2>
-<p><span class="pkg">openair</span> 3.0 is a landmark update for the <span class="pkg">openair</span> package, which brings a more modern plotting engine that is more flexible, customisable and extensible, and will allow <span class="pkg">openair</span> to be developed at a greater pace and for many more years to come.</p>
-<p>Since its inception over 10 years ago, the package has relied on <span class="pkg">lattice</span> to produce its high quality air quality visualisations. While a very capable package, <span class="pkg">lattice</span> is a product of its time; it is verbose, not particularly intuitive, and does not easily allow users to extend the functionality of the package. It is fair to say that it has fallen out of favour in the R community compared to <span class="pkg">ggplot2</span>, which <span class="pkg">openair</span> now uses.</p>
+<p><span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> 3.0 is a landmark update for the <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> package, which brings a more modern plotting engine that is more flexible, customisable and extensible, and will allow <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> to be developed at a greater pace and for many more years to come.</p>
+<p>Since its inception over 15 years ago, the package has relied on <span class="pkg"><a href="https://CRAN.R-project.org/package=lattice">lattice</a></span> to produce its high quality air quality visualisations. While a very capable package, <span class="pkg"><a href="https://CRAN.R-project.org/package=lattice">lattice</a></span> is a product of its time; it is verbose, not particularly intuitive, and does not easily allow users to extend the functionality of the package. It is fair to say that it has fallen out of favour in the R community compared to <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span>, which <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> now uses.</p>
 <p>You will still find almost all of the functions that you are used to, with some slight visual tweaks now that the new plotting engine is being used.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polarplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="v3_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="v3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div id="fig-v3-polarPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-v3-polarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="v3_files/figure-html/fig-v3-polarPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;F.1: A default polarPlot(), now drawn using ggplot2."><img src="v3_files/figure-html/fig-v3-polarPlot-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3-polarPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.1: A default <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>, now drawn using <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span>.
+</figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="benefits-of-ggplot2" class="level2" data-number="F.2"><h2 data-number="F.2" class="anchored" data-anchor-id="benefits-of-ggplot2">
 <span class="header-section-number">F.2</span> Benefits of <span class="pkg">ggplot2</span>
 </h2>
-<p>While <span class="pkg">lattice</span> capably produced a variety of plots, once a plot was produced it was difficult to modify it after-the-fact. By comparison, <span class="pkg">ggplot2</span> uses a layer-based approach, meaning it is easy to layer on additional labels or annotations after a plot has been constructed.</p>
+<p>While <span class="pkg"><a href="https://CRAN.R-project.org/package=lattice">lattice</a></span> capably produced a variety of plots, once a plot was produced it was difficult to modify it after-the-fact. By comparison, <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> uses a layer-based approach, meaning it is easy to layer on additional labels or annotations after a plot has been constructed.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># change some of the labels and annotate with a segment</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># change some of the labels and annotate with a rectangle</span></span>
 <span><span class="va">polarplot</span><span class="op">$</span><span class="va">plot</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Polar Plot"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span></span>
 <span>      <span class="st">"The highest NOx is seen when the wind blows from the South-West"</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    color <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"Average\nNOx (ug/m3)"</span><span class="op">)</span></span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/quickText.html">quickText</a></span><span class="op">(</span><span class="st">"Average\nNOx (ppb)"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span></span>
 <span>    geom <span class="op">=</span> <span class="st">"rect"</span>,</span>
@@ -547,13 +508,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    alpha <span class="op">=</span> <span class="fl">0.2</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="v3_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="v3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div id="fig-v3-annotate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-v3-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="v3_files/figure-html/fig-v3-annotate-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;F.2: Modifying a polarPlot() after it has been created, using ggplot2 functions to change the labels and add an annotation."><img src="v3_files/figure-html/fig-v3-annotate-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3-annotate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.2: Modifying a <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> after it has been created, using <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> functions to change the labels and add an annotation.
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Through the use of functions like <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code>, nearly every individual visual element of a plot can be tweaked. For example, lets create a “minimalist” <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> by setting a global <span class="pkg">ggplot2</span> theme.</p>
+<p>Through the use of functions like <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code>, nearly every individual visual element of a plot can be tweaked. For example, let’s create a “minimalist” <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> by setting a global <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> theme.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set a global ggplot2 theme</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -568,9 +533,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    r <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html">guide_axis</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="v3_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="v3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div id="fig-v3-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-v3-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="v3_files/figure-html/fig-v3-theme-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;F.3: A ‘minimalist’ polarPlot() created by setting a global ggplot2 theme."><img src="v3_files/figure-html/fig-v3-theme-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.3: A ‘minimalist’ <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> created by setting a global <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> theme.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -578,40 +547,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># reset theme</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You can learn more about annotation in the <a href="./sections/appendices/appendix-annotate.html">annotation and customisation appendix</a>.</p>
-<p>Behind-the-scenes, <span class="pkg">ggplot2</span> unlocks a lot of capability that was historically challenging to implement. For example, nearly all plotting functions now support two <code>type</code> values, meaning a 2D grid of panels can be constructed consistently across all of <code>openair</code>. The “polar” functions (e.g., <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>) now take advantage of native radial coordinate systems, making annotation and grid line customisation much simpler to handle without complex trigonometry. <code>windflow</code> has also found its way to <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code>, and now behaves much more consistently and flexibly across different functions. This is a taste of the many new features that will be added to the package in the coming months and years, which would have been much more difficult to implement without the switch to <span class="pkg">ggplot2</span>.</p>
+<p>You can learn more about annotation in <a href="sections/appendices/appendix-annotate.html" class="quarto-xref"><span>Appendix A</span></a>.</p>
+<p>Behind-the-scenes, <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> unlocks a lot of capability that was historically challenging to implement. For example, nearly all plotting functions now support two <code>type</code> values, meaning a 2D grid of panels can be constructed consistently across all of <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>. The “polar” functions (e.g., <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>) now take advantage of native radial coordinate systems, making annotation and grid line customisation much simpler to handle without complex trigonometry. <code>windflow</code> has also found its way to <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code>, and now behaves much more consistently and flexibly across different functions. This is a taste of the many new features that will be added to the package in the coming months and years, which would have been much more difficult to implement without the switch to <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span>.</p>
 </section><section id="breaking-changes" class="level2" data-number="F.3"><h2 data-number="F.3" class="anchored" data-anchor-id="breaking-changes">
-<span class="header-section-number">F.3</span> Breaking Changes</h2>
+<span class="header-section-number">F.3</span> Breaking changes</h2>
 <p>As with any major software update, there are some ‘breaking’ changes that may affect existing code. Some of the most important are:</p>
 <ul>
-<li><p><code>summaryPlot()</code>, <code>calcFno2()</code> and <code>linearRelation()</code> have all been removed. These functions are particularly old, behave inconsistently to the rest of the package, and haven’t been promoted in some time. It is expected that new functions will replace some of their capability in a future update. Similarly, <code>drawOpenKey()</code> has been removed due to no longer being necessary.</p></li>
-<li><p>Any existing <span class="pkg">lattice</span>-based annotations may no longer work, or behave unpredictably. Any annotations are likely possible using <span class="pkg">ggplot2</span> functions such as <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">ggplot2::annotate()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">ggplot2::guides()</a></code>.</p></li>
-<li><p>As <span class="pkg">ggplot2</span> only supports a single title for its guides, <code>key.header</code> and <code>key.footer</code> are deprecated in favour of a single <code>key.title</code>. If these legacy arguments are provided, they will be appended together to form the key title with a warning. This behaviour is likely to be formally removed in future.</p></li>
-<li><p><code>drawOpenKey()</code> has been removed from <span class="pkg">openair</span> due to being <span class="pkg">lattice</span>-specific. The <code>key</code> argument has therefore also been deprecated. To remove the legend, simply set <code>key.position = "none"</code>.</p></li>
-<li><p>Some arguments throughout <span class="pkg">openair</span> have been renamed or replaced for internal consistency. For example, <code><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus()</a></code> has lost the <code>width</code> argument in favour of <code>offset</code>, making it consistent with <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/percentileRose.html">percentileRose()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq()</a></code>.</p></li>
-<li><p>Trajectory mapping functions have been extensively rewritten, including <code><a href="https://openair-project.github.io/openair/reference/trajPlot.html">trajPlot()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">trajLevel()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/trajCluster.html">trajCluster()</a></code>. The long-term home for these functions may be in <span class="pkg">openairmaps</span>, but for the time being they remain in <span class="pkg">openair</span>. The previous method of map projection has been removed and replaced with an <span class="pkg">sf</span>-powerd approach, meaning users only need to provide a “coordinate reference system” number (<code>crs</code>). For example, the British National Grid is <a href="https://epsg.io/27700">ESPG:27700</a>. As these functions no longer call <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code> has lost the <code>map</code> argument.</p></li>
+<li><p><code>summaryPlot()</code>, <code>calcFno2()</code> and <code>linearRelation()</code> have all been removed. These functions are particularly old, behave inconsistently to the rest of the package, and haven’t been promoted in some time. It is expected that new functions will replace some of their capability in a future update.</p></li>
+<li><p>Any existing <span class="pkg"><a href="https://CRAN.R-project.org/package=lattice">lattice</a></span>-based annotations may no longer work, or behave unpredictably. Any annotations are likely possible using <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> functions such as <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">ggplot2::annotate()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2::theme()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">ggplot2::guides()</a></code>.</p></li>
+<li><p>As <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span> only supports a single title for its guides, <code>key.header</code> and <code>key.footer</code> are deprecated in favour of a single <code>key.title</code>. If these legacy arguments are provided, they will be appended together to form the key title with a warning. This behaviour is likely to be formally removed in future.</p></li>
+<li><p><code>drawOpenKey()</code> has been removed from <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> due to being <span class="pkg"><a href="https://CRAN.R-project.org/package=lattice">lattice</a></span>-specific. The <code>key</code> argument has therefore also been deprecated. To remove the legend, simply set <code>key.position = "none"</code>.</p></li>
+<li><p>Some arguments throughout <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> have been renamed or replaced for internal consistency. For example, <code><a href="https://openair-project.github.io/openair/reference/polarAnnulus.html">polarAnnulus()</a></code> has lost the <code>width</code> argument in favour of <code>offset</code>, making it consistent with <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/percentileRose.html">percentileRose()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq()</a></code>.</p></li>
+<li><p>Trajectory mapping functions have been extensively rewritten, including <code><a href="https://openair-project.github.io/openair/reference/trajPlot.html">trajPlot()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/trajLevel.html">trajLevel()</a></code> and <code><a href="https://openair-project.github.io/openair/reference/trajCluster.html">trajCluster()</a></code>. The long-term home for these functions may be in <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span>, but for the time being they remain in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>. The previous method of map projection has been removed and replaced with an <span class="pkg"><a href="https://CRAN.R-project.org/package=sf">sf</a></span>-powered approach, meaning users only need to provide a “coordinate reference system” number (<code>crs</code>). For example, the British National Grid is <a href="https://epsg.io/27700">EPSG:27700</a>. As these functions no longer call <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code>, <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code> has lost the <code>map</code> argument.</p></li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">openairmaps</span><span class="fu">::</span><span class="va"><a href="https://openair-project.github.io/openairmaps/reference/traj_data.html">traj_data</a></span> <span class="op">|&gt;</span> <span class="fu">openair</span><span class="fu">::</span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trajPlot.html">trajPlot</a></span><span class="op">(</span>pollutant <span class="op">=</span> <span class="st">"pm10"</span>, crs <span class="op">=</span> <span class="fl">27700</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="v3_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="v3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div id="fig-v3-trajPlot-crs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-v3-trajPlot-crs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="v3_files/figure-html/fig-v3-trajPlot-crs-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;F.4: Trajectories plotted with trajPlot() and reprojected to the British National Grid using crs = 27700."><img src="v3_files/figure-html/fig-v3-trajPlot-crs-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3-trajPlot-crs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;F.4: Trajectories plotted with <code><a href="https://openair-project.github.io/openair/reference/trajPlot.html">trajPlot()</a></code> and reprojected to the British National Grid using <code>crs = 27700</code>.
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>While breaking changes can be frustrating, they were necessary to support the future development and maintainability of <span class="pkg">openair</span>.</p>
+<p>While breaking changes can be frustrating, they were necessary to support the future development and maintainability of <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>.</p>
 </section><section id="non-plotting-updates" class="level2" data-number="F.4"><h2 data-number="F.4" class="anchored" data-anchor-id="non-plotting-updates">
-<span class="header-section-number">F.4</span> Non-Plotting Updates</h2>
-<p>While the biggest changes in <span class="pkg">openair</span> 3.0 can be seen in the plotting functions, there are a few useful utility function updates that are important to highlight:</p>
+<span class="header-section-number">F.4</span> Non-plotting updates</h2>
+<p>While the biggest changes in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> 3.0 can be seen in the plotting functions, there are a few useful utility function updates that are important to highlight:</p>
 <ul>
-<li><p><code><a href="https://openair-project.github.io/openair/reference/cutData.html">cutData()</a></code> now possesses the <code>drop</code> argument, which better controls factor levels in the resulting vectors. For example, consider a dataset which only contains data for March, April, and July on which <code>cutData(type = "month")</code> has been applied. <code>drop = "empty"</code> will return factor levels March, April and July, <code>drop = "outside"</code> will return March, April, May, June and July, and <code>drop = "none"</code> will contain all twelve months.</p></li>
-<li><p><code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> is now but one of a small family of ‘smoothing’ approaches available in <span class="pkg">openair</span>, which now includes rolling quantiles, <strong>Gaussian smoothing</strong>, and <strong>Whittaker-Eilers smoothing</strong>. The latter is of general interest because it can be used to separate a baseline from an incremental component in a time series, which is useful for many different types of analysis e.g.&nbsp;better understanding local sources by considering the increment above a local background.</p></li>
+<li><p><code><a href="https://openair-project.github.io/openair/reference/cutData.html">cutData()</a></code> now possesses the <code>drop</code> argument, which better controls factor levels in the resulting vectors. For example, consider a data set which only contains data for March, April, and July on which <code>cutData(type = "month")</code> has been applied. <code>drop = "empty"</code> will return factor levels March, April and July, <code>drop = "outside"</code> will return March, April, May, June and July, and <code>drop = "none"</code> will contain all twelve months.</p></li>
+<li><p><code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> is now but one of a small family of ‘smoothing’ approaches available in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>, which now includes rolling quantiles, <strong>Gaussian smoothing</strong>, and <strong>Whittaker-Eilers smoothing</strong>. The latter is of general interest because it can be used to separate a baseline from an incremental component in a time series, which is useful for many different types of analysis e.g., better understanding local sources by considering the increment above a local background.</p></li>
 <li><p><code>windflow</code> is now supported by the <code><a href="https://openair-project.github.io/openair/reference/windflowOpts.html">windflowOpts()</a></code> function, which can heavily customise the appearance of windflow arrows across all functions that support them.</p></li>
 <li><p>Many utility functions (not least <code><a href="https://openair-project.github.io/openair/reference/timeAverage.html">timeAverage()</a></code>) are now implemented in C++, which has increased their performance massively.</p></li>
 </ul></section><section id="next-steps" class="level2" data-number="F.5"><h2 data-number="F.5" class="anchored" data-anchor-id="next-steps">
-<span class="header-section-number">F.5</span> Next Steps</h2>
-<p>We’d encourage you to explore what <span class="pkg">openair</span> 3.0 has to offer.</p>
+<span class="header-section-number">F.5</span> Next steps</h2>
+<p>We’d encourage you to explore what <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> 3.0 has to offer.</p>
 <ul>
 <li><p>Read the <a href="https://openair-project.github.io/openair/news/index.html">changelog</a> to learn about all of the changes going into version 3.0.</p></li>
 <li><p>Read the rest of the <a href="./index.html">openair book</a>; there are lots of examples of various plots in the new style.</p></li>
@@ -693,11 +666,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -711,8 +703,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -726,6 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -888,44 +943,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1023,7 +1088,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="./sections/appendices/appendix-gethelp.html" class="pagination-link" aria-label="Getting help">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Getting help</span></span>
       </a>          
@@ -1034,7 +1101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
-<title>5&nbsp; Wind and Pollution Roses – The openair book</title>
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Using windRose() and pollutionRose() to summarise wind and pollutant data by direction, and to compare two meteorological data sets.">
+<title>5&nbsp; Wind and pollution roses – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -60,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,14 +94,15 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -125,79 +131,41 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
+}</script>
+<meta property="og:title" content="5&nbsp; Wind and pollution roses – The openair book">
+<meta property="og:description" content="Using windRose() and pollutionRose() to summarise wind and pollutant data by direction, and to compare two meteorological data sets.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/directional-analysis/wind-roses_files/figure-html/fig-windroseBasic-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="768">
+<meta name="twitter:title" content="5&nbsp; Wind and pollution roses – The openair book">
+<meta name="twitter:description" content="Using windRose() and pollutionRose() to summarise wind and pollutant data by direction, and to compare two meteorological data sets.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/directional-analysis/wind-roses_files/figure-html/fig-windroseBasic-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/directional-analysis/wind-roses.html">Directional Analysis</a></li><li class="breadcrumb-item"><a href="../../sections/directional-analysis/wind-roses.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-windRose" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -228,22 +196,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,17 +221,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -303,13 +265,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -361,7 +320,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -374,13 +333,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -390,7 +346,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,13 +359,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -419,26 +372,23 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -461,23 +411,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -501,7 +448,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -511,7 +458,7 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#example-of-use" id="toc-example-of-use" class="nav-link active" data-scroll-target="#example-of-use"><span class="header-section-number">5.1</span> Example of use</a></li>
@@ -519,20 +466,14 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/directional-analysis/wind-roses.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/directional-analysis/wind-roses.html">Directional Analysis</a></li><li class="breadcrumb-item"><a href="../../sections/directional-analysis/wind-roses.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-windRose" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></h1>
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-windRose" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
@@ -540,12 +481,12 @@ window.Quarto = {
   
 
 
-</header><p>The wind rose is a very useful way of summarising meteorological data. It is particularly useful for showing how wind speed and wind direction conditions vary by year. The <code>windRose</code> function can plot wind roses in a variety of ways: summarising all available wind speed and wind direction data, plotting individual wind roses by year, and also by month. The latter is useful for considering how meteorological conditions vary by season.</p>
-<p>Data are summarised by direction, typically by 45 or 30<span class="math inline">\(^\circ\)</span> and by different wind speed categories. Typically, wind speeds are represented by different width ‘paddles’. The plots show the proportion (here represented as a percentage) of time that the wind is from a certain angle and wind speed range.</p>
-<p>The <code>windRose</code> function also calculates the percentage of ‘calms’ i.e. when the wind speed is zero. UK Met Office data assigns these periods to 0 degrees wind direction with valid northerly winds being assigned to 360<span class="math inline">\(^\circ\)</span>. The option <code>calm.thresh</code> can be used to assign calms to non-zero wind speeds. For example <code>calm.thresh = 0.5</code> will assign wind speeds <em>below</em> 0.5 as calm.</p>
-<p>The <code>windRose</code> function will also correct for bias when wind directions are rounded to the nearest 10 degrees but are displayed at angles that 10 degrees is not exactly divisible into e.g.&nbsp;22.5<span class="math inline">\(^\circ\)</span>. When such data are binned, some angles i.e.&nbsp;N, E, S, W will comprise three intervals whereas others will comprise two, which can lead to significant bias. This issue and its solution is discussed by <span class="citation" data-cites="droppo2008">Droppo and Napier (<a href="../references.html#ref-droppo2008" role="doc-biblioref">2008</a>)</span> and <span class="citation" data-cites="applequist2012">Applequist (<a href="../references.html#ref-applequist2012" role="doc-biblioref">2012</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="pkg">openair</span> uses a simple method to correct for the bias by globally rescaling the count in each wind direction bin by the number of directions it represents relative to the average. Thus, the primary four directions are each reduced by a factor of 0.75 and the remaining 12 directions are multiplied by 1.125.</p>
+</header><p>The wind rose is a very useful way of summarising meteorological data. It is particularly useful for showing how wind speed and wind direction conditions vary by year. The <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function can plot wind roses in a variety of ways: summarising all available wind speed and wind direction data, plotting individual wind roses by year, and also by month. The latter is useful for considering how meteorological conditions vary by season.</p>
+<p>Data are summarised by direction, typically by 45 or 30° and by different wind speed categories. Typically, wind speeds are represented by different width ‘paddles’. The plots show the proportion (here represented as a percentage) of time that the wind is from a certain angle and wind speed range.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function also calculates the percentage of ‘calms’ i.e., when the wind speed is zero. UK Met Office data assigns these periods to 0 degrees wind direction with valid northerly winds being assigned to 360°. The option <code>calm.thresh</code> can be used to assign calms to non-zero wind speeds. For example <code>calm.thresh = 0.5</code> will assign wind speeds <em>below</em> 0.5 as calm.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function will also correct for bias when wind directions are rounded to the nearest 10 degrees but are displayed at angles that 10 degrees is not exactly divisible into e.g., 22.5°. When such data are binned, some angles i.e., N, E, S, W will comprise three intervals whereas others will comprise two, which can lead to significant bias. This issue and its solution are discussed by <span class="citation" data-cites="droppo2008">Droppo and Napier (<a href="../references.html#ref-droppo2008" role="doc-biblioref">2008</a>)</span> and <span class="citation" data-cites="applequist2012">Applequist (<a href="../references.html#ref-applequist2012" role="doc-biblioref">2012</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> uses a simple method to correct for the bias by globally rescaling the count in each wind direction bin by the number of directions it represents relative to the average. Thus, the primary four directions are each reduced by a factor of 0.75 and the remaining 12 directions are multiplied by 1.125.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-droppo2008" class="csl-entry" role="listitem">
-Droppo, James G, and Bruce A Napier. 2008. <span>“Wind Direction Bias in Generating Wind Roses and Conducting Sector-Based Air Dispersion Modeling.”</span> <em>Journal of the Air &amp; Waste Management Association</em> 58 (7): 913–18.
+Droppo, J.G., Napier, B.A., 2008. Wind direction bias in generating wind roses and conducting sector-based air dispersion modeling. Journal of the Air &amp; Waste Management Association 58, 913–918.
 </div></div><section id="example-of-use" class="level2 page-columns page-full" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="example-of-use">
 <span class="header-section-number">5.1</span> Example of use</h2>
 <p>First we load the packages:</p>
@@ -559,10 +500,10 @@ Droppo, James G, and Bruce A Napier. 2008. <span>“Wind Direction Bias in Gener
 <div class="cell-output-display">
 <div id="fig-windroseBasic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-windroseBasic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wind-roses_files/figure-html/fig-windroseBasic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;5.1: Use of windRose function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies."><img src="wind-roses_files/figure-html/fig-windroseBasic-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
+<a href="wind-roses_files/figure-html/fig-windroseBasic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;5.1: Use of windRose() function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies."><img src="wind-roses_files/figure-html/fig-windroseBasic-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windroseBasic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Use of <code>windRose</code> function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies.
+Figure&nbsp;5.1: Use of <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function to plot wind speed/direction frequencies. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the % frequencies.
 </figcaption></figure>
 </div>
 </div>
@@ -579,15 +520,15 @@ Figure&nbsp;5.1: Use of <code>windRose</code> function to plot wind speed/direct
 <div class="cell-output-display">
 <div id="fig-windRoseyear" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-windRoseyear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wind-roses_files/figure-html/fig-windRoseyear-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;5.2: Use of windRose function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies."><img src="wind-roses_files/figure-html/fig-windRoseyear-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="wind-roses_files/figure-html/fig-windRoseyear-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;5.2: Use of windRose() function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies."><img src="wind-roses_files/figure-html/fig-windRoseyear-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windRoseyear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.2: Use of <code>windRose</code> function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies.
+Figure&nbsp;5.2: Use of <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function to plot wind speed/direction frequencies by year. Wind speeds are split into the intervals shown by the scale in each panel. The grey circles show the 10 and 20% frequencies.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>The <code>type</code> option is very flexible in <span class="pkg">openair</span> and can be used to quickly consider the dependencies between variables. <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a> describes the basis of this option in <span class="pkg">openair</span> plot. As an example, consider the question: what are the meteorological conditions that control high and low concentrations of PM<sub>10</sub>? By setting <code>type = "pm10"</code>, <span class="pkg">openair</span> will split the PM<sub>10</sub> concentrations into four <em>quantiles</em> i.e.&nbsp;roughly equal numbers of points in each level. The plot will then show four different wind roses for each quantile level, although the default number of levels can be set by the user — see <code><a href="https://openair-project.github.io/openair/reference/cutData.html">?cutData</a></code> for more details. <a href="#fig-windRsPM10" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> shows the results of setting <code>type = "pm10"</code>. For the lowest concentrations of PM<sub>10</sub> the wind direction is dominated by northerly winds, and relatively low wind speeds. By contrast, the highest concentrations (plot furthest right) are dominated by relatively strong winds from the south-west. It is therefore very easy to obtain a good idea about the conditions that tend to lead to high (or low) concentrations of a pollutant. Furthermore, the <code>type</code> option is available in almost all <span class="pkg">openair</span> functions.</p>
+<p>The <code>type</code> option is very flexible in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> and can be used to quickly consider the dependencies between variables. <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a> describes the basis of this option in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> plots. As an example, consider the question: what are the meteorological conditions that control high and low concentrations of PM<sub>10</sub>? By setting <code>type = "pm10"</code>, <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> will split the PM<sub>10</sub> concentrations into four <em>quantiles</em> i.e., roughly equal numbers of points in each level. The plot will then show four different wind roses for each quantile level, although the default number of levels can be set by the user — see <code><a href="https://openair-project.github.io/openair/reference/cutData.html">?cutData</a></code> for more details. <a href="#fig-windRsPM10" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> shows the results of setting <code>type = "pm10"</code>. For the lowest concentrations of PM<sub>10</sub> the wind direction is dominated by northerly winds, and relatively low wind speeds. By contrast, the highest concentrations (plot furthest right) are dominated by relatively strong winds from the south-west. It is therefore very easy to obtain a good idea about the conditions that tend to lead to high (or low) concentrations of a pollutant. Furthermore, the <code>type</code> option is available in almost all <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> functions.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, type <span class="op">=</span> <span class="st">"pm10"</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -603,7 +544,7 @@ Figure&nbsp;5.3: Wind rose for four different levels of PM<sub>10</sub> concentr
 </div>
 <p>A comparison of the effect that bias has can be seen by plotting the following. Note the prominent frequencies for W, E and N in particular that are due to the bias issue discussed by <span class="citation" data-cites="applequist2012">Applequist (<a href="../references.html#ref-applequist2012" role="doc-biblioref">2012</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-applequist2012" class="csl-entry" role="listitem">
-Applequist, Scott. 2012. <span>“Wind Rose Bias Correction.”</span> <em>Journal of Applied Meteorology and Climatology</em> 51 (7): 1305–9.
+Applequist, S., 2012. Wind rose bias correction. Journal of Applied Meteorology and Climatology 51, 1305–1309.
 </div></div><div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## no bias correction</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, angle <span class="op">=</span> <span class="fl">22.5</span>, bias.corr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -611,25 +552,25 @@ Applequist, Scott. 2012. <span>“Wind Rose Bias Correction.”</span> <em>Journ
 <span><span class="co">## bias correction (the default)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span><span class="va">mydata</span>, angle <span class="op">=</span> <span class="fl">22.5</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>pollutionRose</code> is a variant of <code>windRose</code> that is useful for considering pollutant concentrations by wind direction, or more specifically the percentage time the concentration is in a particular range. This type of approach can be very informative for air pollutant species, as demonstrated by Ronald Henry and co-authors in <span class="citation" data-cites="henry2009">Henry et al. (<a href="../references.html#ref-henry2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p><code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> is a variant of <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> that is useful for considering pollutant concentrations by wind direction, or more specifically the percentage time the concentration is in a particular range. This type of approach can be very informative for air pollutant species, as demonstrated by Ronald Henry and co-authors in <span class="citation" data-cites="henry2009">Henry et al. (<a href="../references.html#ref-henry2009" role="doc-biblioref">2009</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-henry2009" class="csl-entry" role="listitem">
-Henry, Ronald, Gary A. Norris, Ram Vedantham, and Jay R. Turner. 2009. <span>“<span>Source Region Identification Using Kernel Smoothing</span>.”</span> {Article}. <em><span>Environmental Science &amp; Technology</span></em> (<span>1155 16TH ST, NW, WASHINGTON, DC 20036 USA</span>) <span>43</span> (<span>11</span>): 4090–97. <a href="https://doi.org/{10.1021/es8011723}">https://doi.org/{10.1021/es8011723}</a>.
-</div></div><p>You can produce similar pollution roses using the <code>pollutionRose</code> function in recent versions of <span class="pkg">openair</span>, e.g.&nbsp;as in <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>:</p>
+Henry, R., Norris, G.A., Vedantham, R., Turner, J.R., 2009. <span>Source Region Identification Using Kernel Smoothing</span>. <span>Environmental Science &amp; Technology</span> <span>43</span>, 4090–4097. <a href="https://doi.org/{10.1021/es8011723}">https://doi.org/{10.1021/es8011723}</a>
+</div></div><p>You can produce similar pollution roses using the <code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> function in recent versions of <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>, e.g., as in <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"nox"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-pollutionRoseBasic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-pollutionRoseBasic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wind-roses_files/figure-html/fig-pollutionRoseBasic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;5.4: NOx pollution rose produced using pollutionRose and default pollutionRose settings."><img src="wind-roses_files/figure-html/fig-pollutionRoseBasic-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
+<a href="wind-roses_files/figure-html/fig-pollutionRoseBasic-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;5.4: NOx pollution rose produced using pollutionRose() and default pollutionRose() settings."><img src="wind-roses_files/figure-html/fig-pollutionRoseBasic-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pollutionRoseBasic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.4: NO<sub>x</sub> pollution rose produced using <code>pollutionRose</code> and default <code>pollutionRose</code> settings.
+Figure&nbsp;5.4: NO<sub>x</sub> pollution rose produced using <code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> and default <code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> settings.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p><code>pollutionRose</code> is <em>wrapper</em> for <code>windRose</code>. It simply replaces the wind speed data series in the supplied data set with another variable using the argument <code>pollutant</code> before passing that on to <code>windRose</code>. It also modifies <code>breaks</code> to estimate a sensible set of break points for that pollutant and uses a slightly different set of default options (key to right, wedge style plot) but otherwise handles arguments just like the parent <code>windRose</code> function.</p>
-<p>While <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> indicates that higher NO<sub>x</sub> concentrations are also associated with the SW, conditioning allows you to be much informative. For example, conditioning by SO<sub>2</sub> (<a href="#fig-pollRoseNOxO2" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>) demonstrates that higher NO<sub>x</sub> concentrations are associated with the SW and much of the higher SO<sub>2</sub> concentrations. However, it also highlights a notable NO<sub>x</sub> contribution from the E, most apparent at highest SO<sub>2</sub> concentrations that is obscured in <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> by a relatively high NO<sub>x</sub> background <a href="#fig-pollRoseNOxO2" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>.</p>
+<p><code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> is a <em>wrapper</em> for <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>. It simply replaces the wind speed data series in the supplied data set with another variable using the argument <code>pollutant</code> before passing that on to <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code>. It also modifies <code>breaks</code> to estimate a sensible set of break points for that pollutant and uses a slightly different set of default options (key to right, wedge style plot) but otherwise handles arguments just like the parent <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function.</p>
+<p>While <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> indicates that higher NO<sub>x</sub> concentrations are also associated with the SW, conditioning allows you to be much more informative. For example, conditioning by SO<sub>2</sub> (<a href="#fig-pollRoseNOxO2" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>) demonstrates that higher NO<sub>x</sub> concentrations are associated with the SW and much of the higher SO<sub>2</sub> concentrations. However, it also highlights a notable NO<sub>x</sub> contribution from the E, most apparent at highest SO<sub>2</sub> concentrations that is obscured in <a href="#fig-pollutionRoseBasic" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> by a relatively high NO<sub>x</sub> background.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -649,7 +590,7 @@ Figure&nbsp;5.5: NO<sub>x</sub> pollution rose conditioned by SO<sub>2</sub> con
 </div>
 </div>
 </div>
-<p><code>pollutionRose</code> can also usefully be used to show which wind directions dominate the overall concentrations. By supplying the option <code>statistic = "prop.mean"</code> (proportion contribution to the mean), a good idea can be gained as to which wind directions contribute most to overall concentrations, as well as providing information on the different concentration levels. A simple plot is shown in <a href="#fig-pollRoseAttr" class="quarto-xref">Figure&nbsp;<span>5.6</span></a>, which clearly shows the dominance of south-westerly winds controlling the overall mean NO<sub>x</sub> concentrations at this site. Indeed, almost half the overall NO<sub>x</sub> concentration is contributed by two wind sectors to the south-west. The <code>polarFreq</code> function can also show this sort of information, but the pollution rose is more effective because both length and colour are used to show the contribution. These plots are very useful for understanding which wind directions control the overall mean concentrations.</p>
+<p><code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> can also usefully be used to show which wind directions dominate the overall concentrations. By supplying the option <code>statistic = "prop.mean"</code> (proportion contribution to the mean), a good idea can be gained as to which wind directions contribute most to overall concentrations, as well as providing information on the different concentration levels. A simple plot is shown in <a href="#fig-pollRoseAttr" class="quarto-xref">Figure&nbsp;<span>5.6</span></a>, which clearly shows the dominance of south-westerly winds controlling the overall mean NO<sub>x</sub> concentrations at this site. Indeed, almost half the overall NO<sub>x</sub> concentration is contributed by two wind sectors to the south-west. The <code><a href="https://openair-project.github.io/openair/reference/polarFreq.html">polarFreq()</a></code> function can also show this sort of information, but the pollution rose is more effective because both length and colour are used to show the contribution. These plots are very useful for understanding which wind directions control the overall mean concentrations.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -681,18 +622,18 @@ Figure&nbsp;5.6: Pollution rose showing which wind directions contribute most to
 <div class="cell-output-display">
 <div id="fig-pollRoseNorm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-pollRoseNorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wind-roses_files/figure-html/fig-pollRoseNorm-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;5.7: SO2 pollution rose produced using pollutionRose normalised by each wind sector."><img src="wind-roses_files/figure-html/fig-pollRoseNorm-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
+<a href="wind-roses_files/figure-html/fig-pollRoseNorm-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;5.7: SO2 pollution rose produced using pollutionRose() normalised by each wind sector."><img src="wind-roses_files/figure-html/fig-pollRoseNorm-1.png" class="img-fluid figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pollRoseNorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.7: SO<sub>2</sub> pollution rose produced using <code>pollutionRose</code> normalised by each wind sector.
+Figure&nbsp;5.7: SO<sub>2</sub> pollution rose produced using <code><a href="https://openair-project.github.io/openair/reference/pollutionRose.html">pollutionRose()</a></code> normalised by each wind sector.
 </figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="sec-comp-met" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-comp-met">
 <span class="header-section-number">5.2</span> Comparing two meteorological data sets</h2>
-<p>The <code>windRose</code> function is also useful for comparing two meteorological data sets. In this case a ‘reference’ data set is compared with a second data set. There are many reasons for doing so e.g.&nbsp;to see how one site compares with another or for meteorological model evaluation (more on that in later sections). In this case, <code>ws</code> and <code>wd</code> are considered to the the reference data sets with which a second set of wind speed and wind directions are to be compared (<code>ws2</code> and <code>wd2</code>).</p>
-<p>In the next example, data from two data sets from 2024 are imported over the Internet. The first is hourly data measured data for a site in London and the second is hourly data modelled data. The data are then joined together by date to create a single data frame with the two sets of wind speed and wind direction data. A more realistic example might be to compare a modelled data set with a reference data set, but the principle is the same. Such data can be imported using the <a href="https://openair-project.github.io/worldmet/">worldmet</a> package, as described in <a href="../data-access/access-met-data.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function is also useful for comparing two meteorological data sets. In this case a ‘reference’ data set is compared with a second data set. There are many reasons for doing so e.g., to see how one site compares with another or for meteorological model evaluation (more on that in later sections). In this case, <code>ws</code> and <code>wd</code> are considered to be the reference data sets with which a second set of wind speed and wind directions are to be compared (<code>ws2</code> and <code>wd2</code>).</p>
+<p>In the next example, data from two data sets from 2024 are imported over the Internet. The first is hourly measured data for a site in London and the second is hourly modelled data. The data are then joined together by date to create a single data frame with the two sets of wind speed and wind direction data. The same approach can equally be used to compare two measurement sites. Measured meteorological data can be imported using the <span class="pkg"><a href="https://openair-project.github.io/worldmet/">worldmet</a></span> package, as described in <a href="../data-access/access-met-data.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## example of comparing 2 met sites</span></span>
 <span></span>
@@ -702,19 +643,19 @@ Figure&nbsp;5.7: SO<sub>2</sub> pollution rose produced using <code>pollutionRos
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># data from model</span></span>
-<span><span class="va">mod_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ-wrapper.html">importAURN</a></span><span class="op">(</span><span class="st">"kc1"</span>, <span class="fl">2024</span><span class="op">)</span></span>
+<span><span class="va">mod_met</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span><span class="st">"kc1"</span>, year <span class="op">=</span> <span class="fl">2024</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># combine into one data frame and change names - only select ws, wd and date</span></span>
 <span><span class="va">met_compare</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">london_met</span>, <span class="va">date</span>, <span class="va">ws</span>, <span class="va">wd</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mod_met</span>, <span class="va">date</span>, <span class="va">ws</span>, <span class="va">wd</span><span class="op">)</span>,</span>
-<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_lon"</span>, <span class="st">"_yor"</span><span class="op">)</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_lon"</span>, <span class="st">"_mod"</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="st">"date"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>windRose</code> function can then be used to compare the two data sets. In this case, the plot shown in <a href="#fig-windComp" class="quarto-xref">Figure&nbsp;<span>5.8</span></a> shows the difference between the two data sets with respect to the reference data set (in this case, the London site). The colours show whether the second data set (modelled) tends to be positively or negatively biased with respect to the reference data set (measured). It shows for example:</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function can then be used to compare the two data sets. In this case, the plot shown in <a href="#fig-windComp" class="quarto-xref">Figure&nbsp;<span>5.8</span></a> shows the difference between the two data sets with respect to the reference data set (in this case, the London site). The colours show whether the second data set (modelled) tends to be positively or negatively biased with respect to the reference data set (measured). It shows for example:</p>
 <ul>
-<li><p>Modelled wind speeds tend to be lower than at measured for wind directions from the south, shown by the blue colouring in <a href="#fig-windComp" class="quarto-xref">Figure&nbsp;<span>5.8</span></a>.</p></li>
+<li><p>Modelled wind speeds tend to be lower than measured wind speeds for wind directions from the south, shown by the blue colouring in <a href="#fig-windComp" class="quarto-xref">Figure&nbsp;<span>5.8</span></a>.</p></li>
 <li><p>Wind speeds from the model tend to be slightly higher than measured values when the wind is from the north, shown by the red colouring in <a href="#fig-windComp" class="quarto-xref">Figure&nbsp;<span>5.8</span></a>.</p></li>
 <li><p>Overall, the modelled wind speeds are 0.67 m s<sup>-1</sup> lower than the measured values, shown by the text on the plot.</p></li>
 <li><p>There is a bias in the wind direction of +15.9 degrees for the modelled data — shown by both the arrow on the plot and the text.</p></li>
@@ -724,8 +665,8 @@ Figure&nbsp;5.7: SO<sub>2</sub> pollution rose produced using <code>pollutionRos
 <span>  <span class="va">met_compare</span>,</span>
 <span>  ws <span class="op">=</span> <span class="st">"ws_lon"</span>,</span>
 <span>  wd <span class="op">=</span> <span class="st">"wd_lon"</span>,</span>
-<span>  ws2 <span class="op">=</span> <span class="st">"ws_yor"</span>,</span>
-<span>  wd2 <span class="op">=</span> <span class="st">"wd_yor"</span></span>
+<span>  ws2 <span class="op">=</span> <span class="st">"ws_mod"</span>,</span>
+<span>  wd2 <span class="op">=</span> <span class="st">"wd_mod"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-windComp" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -738,23 +679,23 @@ Figure&nbsp;5.8: Wind rose showing the difference between two meteorological dat
 </div>
 </div>
 </div>
-<p>Like other <span class="pkg">openair</span> functions, the <code>type</code> option can be used to compare the two data sets by other variables, as shown in <a href="#fig-windCompSeason" class="quarto-xref">Figure&nbsp;<span>5.9</span></a> for seasonal differences.</p>
+<p>Like other <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> functions, the <code>type</code> option can be used to compare the two data sets by other variables, as shown in <a href="#fig-windCompSeason" class="quarto-xref">Figure&nbsp;<span>5.9</span></a> for seasonal differences.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose</a></span><span class="op">(</span></span>
 <span>  <span class="va">met_compare</span>,</span>
 <span>  ws <span class="op">=</span> <span class="st">"ws_lon"</span>,</span>
 <span>  wd <span class="op">=</span> <span class="st">"wd_lon"</span>,</span>
-<span>  ws2 <span class="op">=</span> <span class="st">"ws_yor"</span>,</span>
-<span>  wd2 <span class="op">=</span> <span class="st">"wd_yor"</span>,</span>
+<span>  ws2 <span class="op">=</span> <span class="st">"ws_mod"</span>,</span>
+<span>  wd2 <span class="op">=</span> <span class="st">"wd_mod"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"season"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-windCompSeason" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-windCompSeason-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wind-roses_files/figure-html/fig-windCompSeason-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;5.9: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows shows the mean bias in wind direction and the text shows the value of that bias."><img src="wind-roses_files/figure-html/fig-windCompSeason-1.png" class="img-fluid figure-img" style="width:90.0%"></a>
+<a href="wind-roses_files/figure-html/fig-windCompSeason-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;5.9: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows show the mean bias in wind direction and the text shows the value of that bias."><img src="wind-roses_files/figure-html/fig-windCompSeason-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-windCompSeason-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.9: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows shows the mean bias in wind direction and the text shows the value of that bias.
+Figure&nbsp;5.9: Wind rose showing the difference between two meteorological data sets by season. The first (measured) is used to compare against the second (modelled). The colours are used to show whether data tend to be positively or negatively biased with respect to the reference data set. The arrows show the mean bias in wind direction and the text shows the value of that bias.
 </figcaption></figure>
 </div>
 </div>
@@ -839,11 +780,30 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -857,8 +817,70 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -872,6 +894,7 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1034,44 +1057,54 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1169,7 +1202,9 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/data-access/access-met-data.html" class="pagination-link" aria-label="Access meteorological data">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span>
       </a>          
@@ -1183,7 +1218,7 @@ Figure&nbsp;5.9: Wind rose showing the difference between two meteorological dat
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

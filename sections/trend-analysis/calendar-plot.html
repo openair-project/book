@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Using calendarPlot() to show daily concentrations, wind conditions and air quality index categories in a calendar format.">
 <title>13&nbsp; Calendar plots – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -60,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,14 +94,15 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -126,53 +132,40 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<meta property="og:title" content="13&nbsp; Calendar plots – The openair book">
+<meta property="og:description" content="Using calendarPlot() to show daily concentrations, wind conditions and air quality index categories in a calendar format.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/trend-analysis/calendar-plot_files/figure-html/fig-calendarPlot-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="1152">
+<meta property="og:image:width" content="1536">
+<meta name="twitter:title" content="13&nbsp; Calendar plots – The openair book">
+<meta name="twitter:description" content="Using calendarPlot() to show daily concentrations, wind conditions and air quality index categories in a calendar format.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/trend-analysis/calendar-plot_files/figure-html/fig-calendarPlot-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/calendar-plot.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-calendarPlot" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -203,22 +196,19 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -231,17 +221,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -278,13 +265,10 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -336,7 +320,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -349,13 +333,10 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -365,7 +346,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -378,13 +359,10 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -394,26 +372,23 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -436,23 +411,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -476,7 +448,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -486,7 +458,7 @@ div.csl-indent {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">13.1</span> Purpose</a></li>
@@ -494,20 +466,14 @@ div.csl-indent {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/calendar-plot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/calendar-plot.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-calendarPlot" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></span></h1>
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-calendarPlot" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calendar plots</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
@@ -517,12 +483,12 @@ div.csl-indent {
 
 </header><section id="purpose" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="purpose">
 <span class="header-section-number">13.1</span> Purpose</h2>
-<p>Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data for data on the time scale of days or months. The <code>calendarPlot</code> function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, <code>calendarPlot</code> overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.</p>
-<p><code>calendarPlot</code> can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g.&nbsp;when the daily mean concentration is greater than 50 μg m<sup>-3</sup>.</p>
-<p>The <code>calendarPlot</code> function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e.&nbsp;intervals of concentrations that are expressed in ways like ‘very good’, ‘good’, ‘poor’ and so on.</p>
+<p>Sometimes it is useful to visualise data in a familiar way. Calendars are the obvious way to represent data on the time scale of days or months. The <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function provides an effective way to visualise data in this way by showing daily concentrations laid out in a calendar format. The concentration of a species is shown by its colour. The data can be shown in different ways. By default, <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> overlays the day of the month. However, if wind speed and wind direction are available then an arrow can be shown for each day giving the vector-averaged wind direction. In addition, the arrow can be scaled according to the wind speed to highlight both the direction and strength of the wind on a particular day, which can help show the influence of meteorology on pollutant concentrations.</p>
+<p><code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> can also show the daily mean concentration as a number on each day and can be extended to highlight those conditions where daily mean (or maximum etc.) concentrations are above a particular threshold. This approach is useful for highlighting daily air quality limits e.g., when the daily mean concentration is greater than 50 μg m<sup>-3</sup>.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function can also be used to plot categorical scales. This is useful for plotting concentrations expressed as an air quality index i.e., intervals of concentrations that are expressed in ways like ‘very good’, ‘good’, ‘poor’ and so on.</p>
 </section><section id="calendar-examples" class="level2 page-columns page-full" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="calendar-examples">
 <span class="header-section-number">13.2</span> Calendar examples</h2>
-<p>The function is called in the usual way. As a minimum, a data frame, pollutant and year is required. So to show O<sub>3</sub> concentrations for each day in 2003 (<a href="#fig-calendarPlot" class="quarto-xref">Figure&nbsp;<span>13.1</span></a>). Note that if <code>year</code> is not supplied the full data set will be used.</p>
+<p>The function is called in the usual way. As a minimum, a data frame and pollutant are required. For example, <a href="#fig-calendarPlot" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> shows O<sub>3</sub> concentrations for each day in 2003. Note that if <code>year</code> is not supplied the full data set will be used.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -537,9 +503,9 @@ Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/ref
 </div>
 </div>
 </div>
-<p>It is sometimes useful to annotate the plots with other information. It is possible to show the daily mean wind angle, which can also be scaled to wind speed. The idea here being to provide some information on meteorological conditions on each day. Another useful option is to set <code>annotate = "value"</code> in which case the daily concentration will be shown on each day. Furthermore, it is sometimes useful to highlight particular values more clearly. For example, to highlight daily mean PM<sub>10</sub> concentrations above 50 μg m<sup>-3</sup>. This is where setting <code>lim</code> (a concentration limit) is useful. In setting <code>lim</code> the user can then differentiate the values below and above <code>lim</code> by colour of text, size of text and type of text e.g.&nbsp;plain and bold.</p>
+<p>It is sometimes useful to annotate the plots with other information. It is possible to show the daily mean wind angle, which can also be scaled to wind speed. The idea here being to provide some information on meteorological conditions on each day. Another useful option is to set <code>annotate = "value"</code> in which case the daily concentration will be shown on each day. Furthermore, it is sometimes useful to highlight particular values more clearly. For example, to highlight daily mean PM<sub>10</sub> concentrations above 50 μg m<sup>-3</sup>. This is where setting <code>lim</code> (a concentration limit) is useful. In setting <code>lim</code> the user can then differentiate the values below and above <code>lim</code> by colour of text, size of text and type of text e.g., plain and bold.</p>
 <p><a href="#fig-calendarPlotExceed" class="quarto-xref">Figure&nbsp;<span>13.2</span></a> highlights those days where PM<sub>10</sub> concentrations exceed 50 μg m<sup>-3</sup> by making the annotation for those days bigger, bold and orange. Plotting the data in this way clearly shows the days where PM<sub>10</sub> &gt; 50 μg m<sup>-3</sup>.</p>
-<p>Other <span class="pkg">openair</span> functions can be used to plot other statistics. For example, <code>rollingMean</code> could be used to calculate rolling 8-hour mean O<sub>3</sub> concentrations. Then, <code>calendarPlot</code> could be used with <code>statistic = "max"</code> to show days where the maximum daily rolling 8-hour mean O<sub>3</sub> concentration is greater than a certain threshold e.g.&nbsp;100 or 120 μg m<sup>-3</sup>.</p>
+<p>Other <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> functions can be used to plot other statistics. For example, <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> could be used to calculate rolling 8-hour mean O<sub>3</sub> concentrations. Then, <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> could be used with <code>statistic = "max"</code> to show days where the maximum daily rolling 8-hour mean O<sub>3</sub> concentration is greater than a certain threshold e.g., 100 or 120 μg m<sup>-3</sup>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -558,7 +524,7 @@ Figure&nbsp;13.1: A <code><a href="https://openair-project.github.io/openair/ref
 <a href="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;13.2: A calendarPlot() for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM10 >50 μg m-3. The numbers show the PM10 concentration in μg m-3."><img src="calendar-plot_files/figure-html/fig-calendarPlotExceed-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlotExceed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for PM10 concentrations in 2003 with annotations highlighting those days where the concentration of PM<sub>10</sub> &gt;50 μg m<sup>-3</sup>. The numbers show the PM<sub>10</sub> concentration in μg m<sup>-3</sup>.
+Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for PM<sub>10</sub> concentrations in 2003 with annotations highlighting those days where the concentration of PM<sub>10</sub> &gt;50 μg m<sup>-3</sup>. The numbers show the PM<sub>10</sub> concentration in μg m<sup>-3</sup>.
 </figcaption></figure>
 </div>
 </div>
@@ -569,10 +535,10 @@ Figure&nbsp;13.2: A <code><a href="https://openair-project.github.io/openair/ref
 <div class="cell-output-display">
 <div id="fig-calendarPlot2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-calendarPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;13.3: A calendarPlot() for O3 concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O3 concentrations on the 18 and 19th of April were associated with strong north-easterly winds."><img src="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;13.3: A calendarPlot() for O3 concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e., the longer the arrow, the higher the wind speed. It shows for example high O3 concentrations on the 18 and 19th of April were associated with strong north-easterly winds."><img src="calendar-plot_files/figure-html/fig-calendarPlot2-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calendarPlot2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.3: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e.&nbsp;the longer the arrow, the higher the wind speed. It shows for example high O<sub>3</sub> concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
+Figure&nbsp;13.3: A <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for O<sub>3</sub> concentrations in 2003 with annotations showing wind angle scaled to wind speed i.e., the longer the arrow, the higher the wind speed. It shows for example high O<sub>3</sub> concentrations on the 18 and 19th of April were associated with strong north-easterly winds.
 </figcaption></figure>
 </div>
 </div>
@@ -648,7 +614,7 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 <p>It is also possible to first use <code><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean()</a></code> to calculate statistics. For example, if one was interested in plotting the maximum daily rolling 8-hour mean concentration, the data could be prepared and plotted as follows.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## makes a new field 'rolling8o3'</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, hours <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/rollingMean.html">rollingMean</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"o3"</span>, width <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">34</span>, <span class="fl">66</span>, <span class="fl">100</span>, <span class="fl">121</span>, <span class="fl">141</span>, <span class="fl">160</span>, <span class="fl">188</span>, <span class="fl">214</span>, <span class="fl">240</span>, <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Low.1"</span>,</span>
@@ -673,10 +639,10 @@ Figure&nbsp;13.4: A <code><a href="https://openair-project.github.io/openair/ref
 <span>  statistic <span class="op">=</span> <span class="st">"max"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The UK has an air quality index for O<sub>3</sub>, NO<sub>2</sub>, PM<sub>10</sub> and PM<sub>2.5</sub> described in detail at <a href="http://uk-air.defra.gov.uk/air-pollution/daqi" class="uri">http://uk-air.defra.gov.uk/air-pollution/daqi</a> and <span class="citation" data-cites="COMEAP2011">COMEAP (<a href="../references.html#ref-COMEAP2011" role="doc-biblioref">2011</a>)</span>. The index is most relevant to air quality forecasting, but is used widely for public information. Most other countries have similar indexes. Note that the indexes are calculated for different averaging times dependent on the pollutant: rolling 8-hour mean for O<sub>3</sub>, hourly means for NO<sub>2</sub> and a fixed 24-hour mean for PM<sub>10</sub> and PM<sub>2.5</sub>.</p>
+<p>The UK has an air quality index for O<sub>3</sub>, NO<sub>2</sub>, PM<sub>10</sub> and PM<sub>2.5</sub> described in detail at <a href="https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi" class="uri">https://www.gov.uk/government/publications/health-effects-of-air-pollution/using-the-daily-air-quality-index-daqi</a> and <span class="citation" data-cites="COMEAP2011">COMEAP (<a href="../references.html#ref-COMEAP2011" role="doc-biblioref">2011</a>)</span>. The index is most relevant to air quality forecasting, but is used widely for public information. Most other countries have similar indexes. Note that the indexes are calculated for different averaging times dependent on the pollutant: rolling 8-hour mean for O<sub>3</sub>, hourly means for NO<sub>2</sub> and a fixed 24-hour mean for PM<sub>10</sub> and PM<sub>2.5</sub>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-COMEAP2011" class="csl-entry" role="listitem">
-COMEAP. 2011. <em>Review of the UK Air Quality Index: A Report by the Committee on the Medical Effects of Air Pollutants</em>. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html">http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html</a>.
-</div></div><p>In the code below the labels and breaks are defined for each pollutant to make it easier to use the index in the <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function.</p>
+COMEAP, 2011. <a href="http://comeap.org.uk/documents/reports/130-review-of-the-uk-air-quality-index.html">Review of the UK air quality index: A report by the committee on the medical effects of air pollutants</a>.
+</div></div><p>In the code below, DAQI data are imported directly and the index labels defined, making it easy to use the index in the <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> function.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## import UK daily air quality info</span></span>
 <span><span class="va">pt4_daqi</span> <span class="op">&lt;-</span></span>
@@ -704,7 +670,7 @@ COMEAP. 2011. <em>Review of the UK Air Quality Index: A Report by the Committee 
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot</a></span><span class="op">(</span></span>
 <span>  <span class="co"># just get pm10 data</span></span>
 <span>  mydata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">pt4_daqi</span>, <span class="va">pollutant</span> <span class="op">==</span> <span class="st">"pm10"</span><span class="op">)</span>,</span>
-<span>  <span class="co"># out "pollutant" is the poll_index column</span></span>
+<span>  <span class="co"># our "pollutant" is the poll_index column</span></span>
 <span>  pollutant <span class="op">=</span> <span class="st">"poll_index"</span>,</span>
 <span>  <span class="co"># our breaks - use 0.5 as the breaks need to be between indices</span></span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">10.5</span>, <span class="fl">1</span><span class="op">)</span>,</span>
@@ -718,10 +684,10 @@ COMEAP. 2011. <em>Review of the UK Air Quality Index: A Report by the Committee 
 <div class="cell-output-display">
 <div id="fig-AQIndex" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-AQIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;13.5: A DAQI calendarPlot()"><img src="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;13.5: A DAQI calendarPlot() for PM10 at Port Talbot in 2021."><img src="calendar-plot_files/figure-html/fig-AQIndex-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-AQIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code>
+Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openair/reference/calendarPlot.html">calendarPlot()</a></code> for PM<sub>10</sub> at Port Talbot in 2021.
 </figcaption></figure>
 </div>
 </div>
@@ -803,11 +769,30 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -821,8 +806,70 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -836,6 +883,7 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -998,44 +1046,54 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1133,7 +1191,9 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/trend-analysis/time-variation.html" class="pagination-link" aria-label="Temporal variations">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span>
       </a>          
@@ -1147,7 +1207,7 @@ Figure&nbsp;13.5: A DAQI <code><a href="https://openair-project.github.io/openai
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

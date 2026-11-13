@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Estimating trends in air pollution with the Theil-Sen method using TheilSen(), including trends by wind sector and across many sites.">
 <title>15&nbsp; Theil-Sen trends – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -60,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,14 +94,15 @@ div.csl-indent {
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -125,7 +131,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -151,53 +157,40 @@ window.Quarto = {
   typesetMath
 };
 </script>
+<meta property="og:title" content="15&nbsp; Theil-Sen trends – The openair book">
+<meta property="og:description" content="Estimating trends in air pollution with the Theil-Sen method using TheilSen(), including trends by wind sector and across many sites.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/trend-analysis/theil-sen_files/figure-html/fig-TheilSen1-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="768">
+<meta property="og:image:width" content="960">
+<meta name="twitter:title" content="15&nbsp; Theil-Sen trends – The openair book">
+<meta name="twitter:description" content="Estimating trends in air pollution with the Theil-Sen method using TheilSen(), including trends by wind sector and across many sites.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/trend-analysis/theil-sen_files/figure-html/fig-TheilSen1-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/theil-sen.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-TheilSen" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -228,22 +221,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,17 +246,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -303,13 +290,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -361,7 +345,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -374,13 +358,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -390,7 +371,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,13 +384,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -419,26 +397,23 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -461,23 +436,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -501,7 +473,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -511,7 +483,7 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#trend-estimates" id="toc-trend-estimates" class="nav-link active" data-scroll-target="#trend-estimates"><span class="header-section-number">15.1</span> Trend estimates</a></li>
@@ -525,20 +497,14 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/theil-sen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/theil-sen.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-TheilSen" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></span></h1>
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-TheilSen" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Theil-Sen trends</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
@@ -549,26 +515,26 @@ window.Quarto = {
 </header><section id="trend-estimates" class="level2 page-columns page-full" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="trend-estimates">
 <span class="header-section-number">15.1</span> Trend estimates</h2>
 <p>Calculating trends for air pollutants is one of the most important and common tasks that can be undertaken. Trends are calculated for all sorts of reasons. Sometimes it is useful to have a general idea about how concentrations might have changed. On other occasions a more definitive analysis is required; for example, to establish statistically whether a trend is significant or not. The whole area of trend calculation is a complex one and frequently trends are calculated with little consideration as to their validity. Perhaps the most common approach is to apply linear regression and not think twice about it. However, there can be many pitfalls when using ordinary linear regression, such as the assumption of normality, autocorrelation etc.</p>
-<p>One commonly used approach for trend calculation in studies of air pollution is the non-parametric <em>Mann-Kendall</em> approach <span class="citation" data-cites="Hirsch1982">(<a href="../references.html#ref-Hirsch1982" role="doc-biblioref">Hirsch et al. 1982</a>)</span>. <span class="citation" data-cites="Wilcox2010">Wilcox (<a href="../references.html#ref-Wilcox2010" role="doc-biblioref">2010</a>)</span> provides an excellent case for using ‘modern methods’ for regression including the benefits of non-parametric approaches and bootstrap simulations. Note also that all the regression parameters are estimated through bootstrap resampling.</p>
+<p>One commonly used approach for trend calculation in studies of air pollution is the non-parametric <em>Mann-Kendall</em> approach <span class="citation" data-cites="Hirsch1982">(<a href="../references.html#ref-Hirsch1982" role="doc-biblioref">Hirsch et al., 1982</a>)</span>. <span class="citation" data-cites="Wilcox2010">Wilcox (<a href="../references.html#ref-Wilcox2010" role="doc-biblioref">2010</a>)</span> provides an excellent case for using ‘modern methods’ for regression including the benefits of non-parametric approaches and bootstrap simulations. Note also that all the regression parameters are estimated through bootstrap resampling.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Hirsch1982" class="csl-entry" role="listitem">
-Hirsch, R. M., J. R. Slack, and R. A. Smith. 1982. <span>“Techniques of Trend Analysis for Monthly Water-Quality Data.”</span> <em>Water Resources Research</em> 18 (1): 107–21.
+Hirsch, R.M., Slack, J.R., Smith, R.A., 1982. Techniques of trend analysis for monthly water-quality data. Water Resources Research 18, 107–121.
 </div><div id="ref-Wilcox2010" class="csl-entry" role="listitem">
-Wilcox, Rand R. 2010. <em><span class="nocase">Fundamentals of Modern Statistical Methods: Substantially Improving Power and Accuracy</span></em>. 2nd ed. Springer New York. <a href="http://www.springerlink.com/content/978-1-4419-5524-1">http://www.springerlink.com/content/978-1-4419-5524-1</a>.
-</div><div id="ref-theil50" class="csl-entry" role="listitem">
-Theil, H. 1950. <span>“A Rank Invariant Method of Linear and Polynomial Regression Analysis, i, II, III.”</span> <em>Proceedings of the Koninklijke Nederlandse Akademie Wetenschappen, Series A – Mathematical Sciences</em> 53: 386–92, 521–25, 1397–412.
+Wilcox, R.R., 2010. <a href="http://www.springerlink.com/content/978-1-4419-5524-1"><span class="nocase">Fundamentals of Modern Statistical Methods: Substantially Improving Power and Accuracy</span></a>, 2nd ed. Springer New York.
 </div><div id="ref-sen1968" class="csl-entry" role="listitem">
-Sen, P. K. 1968. <span>“Estimates of Regression Coefficient Based on Kendall’s Tau.”</span> <em>Journal of the American Statistical Association</em> 63(324): 1379–89.
-</div></div><p>The Theil-Sen method dates back to 1950, but the basic idea pre-dates 1950 <span class="citation" data-cites="theil50 sen1968">(<a href="../references.html#ref-theil50" role="doc-biblioref">Theil 1950</a>; <a href="../references.html#ref-sen1968" role="doc-biblioref">Sen 1968</a>)</span>. It is one of those methods that required the invention of fast computers to be practical. The basic idea is as follows. Given a set of <span class="math inline">\(n\)</span> <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> pairs, the slopes between all pairs of points are calculated. Note, the number of slopes can increase by <span class="math inline">\(\approx\)</span> <span class="math inline">\(n^2\)</span> so that the number of slopes can increase rapidly as the length of the data set increases. The Theil-Sen estimate of the slope is the median of all these slopes. The advantage of using the Theil-Sen estimator is that it tends to yield accurate confidence intervals even with non-normal data and heteroscedasticity (non-constant error variance). It is also resistant to outliers — both characteristics can be important in air pollution. As previously mentioned, the estimates of these parameters can be made more robust through bootstrap-resampling, which further adds to the computational burden, but is not an issue for most time series which are expressed either as monthly or annual means. Bootstrap resampling also provides the estimate of <span class="math inline">\(p\)</span> for the slope.</p>
-<p>An issue that can be very important for time series is dependence or <em>autocorrelation</em> in the data. Normal (in the statistical sense) statistics assume that data are independent, but in time series this is rarely the case. The issue is that neighbouring data points are similar to one another (correlated) and therefore not independent. Ignoring this dependence would tend to give an overly optimistic impression of uncertainties. However, taking account of it is far from simple. A discussion of these issues is beyond the aims of this report and readers are referred to standard statistical texts on the issue. In <span class="pkg">openair</span> we follow the suggestion of <span class="citation" data-cites="Kunsch1989">Kunsch (<a href="../references.html#ref-Kunsch1989" role="doc-biblioref">1989</a>)</span> of setting the block length to <span class="math inline">\(n^{1/3}\)</span> where n is the length of the time series.</p>
+Sen, P.K., 1968. Estimates of regression coefficient based on kendall’s tau. Journal of the American Statistical Association 63(324), 1379–1389.
+</div><div id="ref-theil50" class="csl-entry" role="listitem">
+Theil, H., 1950. A rank invariant method of linear and polynomial regression analysis, i, II, III. Proceedings of the Koninklijke Nederlandse Akademie Wetenschappen, Series A – Mathematical Sciences 53, 386–392, 521–525, 1397–1412.
+</div></div><p>The Theil-Sen method dates back to work by Theil in 1950, later extended by Sen in 1968 <span class="citation" data-cites="theil50 sen1968">(<a href="../references.html#ref-sen1968" role="doc-biblioref">Sen, 1968</a>; <a href="../references.html#ref-theil50" role="doc-biblioref">Theil, 1950</a>)</span>. It is one of those methods that required the invention of fast computers to be practical. The basic idea is as follows. Given a set of <span class="math inline">\(n\)</span> <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> pairs, the slopes between all pairs of points are calculated. Note, the number of slopes grows as <span class="math inline">\(\approx\)</span> <span class="math inline">\(n^2/2\)</span>, so it increases rapidly as the length of the data set increases. The Theil-Sen estimate of the slope is the median of all these slopes. The advantage of using the Theil-Sen estimator is that it tends to yield accurate confidence intervals even with non-normal data and heteroscedasticity (non-constant error variance). It is also resistant to outliers — both characteristics can be important in air pollution. As previously mentioned, the estimates of these parameters can be made more robust through bootstrap-resampling, which further adds to the computational burden, but is not an issue for most time series which are expressed either as monthly or annual means. Bootstrap resampling also provides the estimate of <span class="math inline">\(p\)</span> for the slope.</p>
+<p>An issue that can be very important for time series is dependence or <em>autocorrelation</em> in the data. Normal (in the statistical sense) statistics assume that data are independent, but in time series this is rarely the case. The issue is that neighbouring data points are similar to one another (correlated) and therefore not independent. Ignoring this dependence would tend to give an overly optimistic impression of uncertainties. However, taking account of it is far from simple. A discussion of these issues is beyond the aims of this book and readers are referred to standard statistical texts on the issue. In <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> we follow the suggestion of <span class="citation" data-cites="Kunsch1989">Kunsch (<a href="../references.html#ref-Kunsch1989" role="doc-biblioref">1989</a>)</span> of setting the block length to <span class="math inline">\(n^{1/3}\)</span> where n is the length of the time series.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Kunsch1989" class="csl-entry" role="listitem">
-Kunsch, H. R. 1989. <span>“The Jackknife and the Bootstrap for General Stationary Observations.”</span> <em>Annals of Statistics</em> 17 (3): 1217–41.
+Kunsch, H.R., 1989. The jackknife and the bootstrap for general stationary observations. Annals of Statistics 17, 1217–1241.
 </div></div><p>There is a temptation when considering trends to use all the available data. Why? Often it is useful to consider specific periods. For example, is there any evidence that concentrations of NO<sub>x</sub> have decreased since 2000? Clearly, the time period used depends on both the data and the questions, but it is good to be aware that considering subsets of data can be very insightful.</p>
-<p>Another aspect is that almost all trends are shown as mean concentration versus time; typically by year. Such analyses are very useful for understanding how concentrations have changed through time and for comparison with air quality limits and regulations. However, if one is interested in <em>understanding</em> why trends are as they are, it can be helpful to consider how concentrations vary in other ways. The trend functions in <span class="pkg">openair</span> do just this. Trends can be plotted by day of the week, month, hour of the day, by wind direction sector and by different wind speed ranges. All these capabilities are easy to use and their effectiveness will depend on the situation in question. One of the reasons that trends are not considered in these many different ways is that there can be a considerable overhead in carrying out the analysis, which is avoided by using these functions. Few, for example, would consider a detailed trend analysis by hour of the day, ensuring that robust statistical methods were used and uncertainties calculated. However, it can be useful to consider how concentrations vary in this way. It may be, for example, that the hours around midday are dominated by heavy vehicle emissions rather than by cars — so is the trend for a pollutant different for those hours compared with say, hours dominated by other vehicle types? Similarly, a much more focussed trend analysis can be done by considering different wind direction, as this can help isolate different source influences.</p>
-<p>The <code>TheilSen</code> function is typically used to determine trends in pollutant concentrations over several years. However, it can be used to calculate the trend in any numeric variable. It calculates monthly mean values from daily, hourly or higher time resolution data, as well as working directly with monthly means. Whether it is meaningful to calculate trends over shorter periods of time (e.g.&nbsp;2 years) depends very much on the data. It may well be that statistically significant trends can be detected over relatively short periods but it is another matter whether it matters. Because seasonal effects can be important for monthly data, there is the option to deseasonalise the data first. The <code>timeVariation</code> function is useful to determine whether there is a seasonal cycle that should be removed.</p>
+<p>Another aspect is that almost all trends are shown as mean concentration versus time; typically by year. Such analyses are very useful for understanding how concentrations have changed through time and for comparison with air quality limits and regulations. However, if one is interested in <em>understanding</em> why trends are as they are, it can be helpful to consider how concentrations vary in other ways. The trend functions in <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> do just this. Trends can be plotted by day of the week, month, hour of the day, by wind direction sector and by different wind speed ranges. All these capabilities are easy to use and their effectiveness will depend on the situation in question. One of the reasons that trends are not considered in these many different ways is that there can be a considerable overhead in carrying out the analysis, which is avoided by using these functions. Few, for example, would consider a detailed trend analysis by hour of the day, ensuring that robust statistical methods were used and uncertainties calculated. However, it can be useful to consider how concentrations vary in this way. It may be, for example, that the hours around midday are dominated by heavy vehicle emissions rather than by cars — so is the trend for a pollutant different for those hours compared with say, hours dominated by other vehicle types? Similarly, a much more focussed trend analysis can be done by considering different wind direction, as this can help isolate different source influences.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function is typically used to determine trends in pollutant concentrations over several years. However, it can be used to calculate the trend in any numeric variable. It calculates monthly mean values from daily, hourly or higher time resolution data, as well as working directly with monthly means. Whether it is meaningful to calculate trends over shorter periods of time (e.g., 2 years) depends very much on the data. It may well be that statistically significant trends can be detected over relatively short periods but it is another matter whether it matters. Because seasonal effects can be important for monthly data, there is the option to deseasonalise the data first. The <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function is useful to determine whether there is a seasonal cycle that should be removed.</p>
 <p>Note also that the symbols shown next to each trend estimate relate to how statistically significant the trend estimate is: <span class="math inline">\(p\)</span> <span class="math inline">\(&lt;\)</span> 0.001 = <span class="math inline">\(\ast\ast\ast\)</span>, <span class="math inline">\(p\)</span> <span class="math inline">\(&lt;\)</span> 0.01 = <span class="math inline">\(\ast\ast\)</span>, <span class="math inline">\(p\)</span> <span class="math inline">\(&lt;\)</span> 0.05 = <span class="math inline">\(\ast\)</span> and <span class="math inline">\(p\)</span> <span class="math inline">\(&lt;\)</span> 0.1 = <span class="math inline">\(+\)</span>.</p>
 </section><section id="example-trend-analysis" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="example-trend-analysis">
 <span class="header-section-number">15.2</span> Example trend analysis</h2>
-<p>We first show the use of the <code>TheilSen</code> function by applying it to concentrations of O<sub>3</sub>. The function is called as shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>.</p>
+<p>We first show the use of the <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function by applying it to concentrations of O<sub>3</sub>. The function is called as shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>.</p>
 <p>The plot shows the deseasonalised monthly mean concentrations of O<sub>3</sub>. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The <span class="math inline">\(\ast\ast\ast\)</span> show that the trend is significant to the 0.001 level.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
@@ -584,24 +550,24 @@ Kunsch, H. R. 1989. <span>“The Jackknife and the Bootstrap for General Station
 <div class="cell-output-display">
 <div id="fig-TheilSen1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="theil-sen_files/figure-html/fig-TheilSen1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O3. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The ‘∗∗∗’ show that the trend is significant to the 0.001 level."><img src="theil-sen_files/figure-html/fig-TheilSen1-1.png" class="img-fluid figure-img" style="width:70.0%"></a>
+<a href="theil-sen_files/figure-html/fig-TheilSen1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O3. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The ‘∗∗∗’ show that the trend is significant to the 0.001 level."><img src="theil-sen_files/figure-html/fig-TheilSen1-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TheilSen1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O3. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The ‘∗∗∗’ show that the trend is significant to the 0.001 level.
+Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O<sub>3</sub>. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22–0.50 ppb/year. The ‘∗∗∗’ show that the trend is significant to the 0.001 level.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>Because the function runs simulations to estimate the uncertainty in the slope, it can take a little time for all the calculations to finish. These printed results show that in this case the trend in O<sub>3</sub> was +0.37 units (i.e.&nbsp;ppb) per year as an average over the entire period. It also shows the 95% confidence intervals in the trend ranged between 0.22 to 0.50 ppb/year. Finally, the significance level in this case is very high; providing very strong evidence that concentrations of O<sub>3</sub> increased over the period. The plot together with the summary results is shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>. Note that if one wanted to display the confidence intervals in the slope at the 99% confidence intervals, the code would be as follows.</p>
+<p>Because the function runs simulations to estimate the uncertainty in the slope, it can take a little time for all the calculations to finish. These results show that in this case the trend in O<sub>3</sub> was +0.37 units (i.e., ppb) per year as an average over the entire period. It also shows the 95% confidence intervals in the trend ranged between 0.22 to 0.50 ppb/year. Finally, the significance level in this case is very high; providing very strong evidence that concentrations of O<sub>3</sub> increased over the period. The plot together with the summary results is shown in <a href="#fig-TheilSen1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>. Note that if one wanted to display the confidence intervals in the slope at the 99% confidence intervals, the code would be as follows.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
-<span>  <span class="va">mydata</span>, </span>
-<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>, </span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.01</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Sometimes it is useful to consider a subset of data, perhaps by excluding some years. This is easy with the <code>filter</code> function. The following code calculates trends for years greater than 1999 i.e.&nbsp;from 2000 onward.</p>
+<p>Sometimes it is useful to consider a subset of data, perhaps by excluding some years. This is easy with the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function. The following code calculates trends for years greater than 1999 i.e., from 2000 onward.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1999</span><span class="op">)</span>,</span>
@@ -609,7 +575,7 @@ Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseaso
 <span>  ylab <span class="op">=</span> <span class="st">"ozone (ppb)"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>It is also possible to calculate trends in many other ways e.g.&nbsp;by wind direction. Considering how trends vary by wind direction can be extremely useful because the influence of different sources invariably depends on the direction of the wind. The <code>TheilSen</code> function splits the wind direction into 8 sectors i.e.&nbsp;N, NE, E etc. The Theil-Sen slopes are then calculated for each direction in turn. This function takes rather longer to run because the simulations need to be run eight times in total. Considering concentrations of O<sub>3</sub> again, the output is shown in <a href="#fig-TheilSen2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>. Note that this plot is specifically laid out to assist interpretation, with each panel located at the correct point on the compass. This makes it easy to see immediately that there is essentially no trend in O<sub>3</sub> for southerly winds i.e.&nbsp;where the road itself has the strongest influence. On the other hand the strongest evidence of increasing O<sub>3</sub> are for northerly winds, where the influence of the road is much less. The reason that there is no trend in O<sub>3</sub> for southerly winds is that there is always a great excess of NO, which reacts with O<sub>3</sub> to form NO<sub>2</sub>. At this particular location it will probably take many more years before O<sub>3</sub> concentrations start to increase when the wind direction is southerly. Nevertheless, there will always be <em>some</em> hours that do not have such high concentrations of NO.</p>
+<p>It is also possible to calculate trends in many other ways e.g., by wind direction. Considering how trends vary by wind direction can be extremely useful because the influence of different sources invariably depends on the direction of the wind. The <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function splits the wind direction into 8 sectors i.e., N, NE, E etc. The Theil-Sen slopes are then calculated for each direction in turn. This function takes rather longer to run because the simulations need to be run eight times in total. Considering concentrations of O<sub>3</sub> again, the output is shown in <a href="#fig-TheilSen2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>. Note that this plot is specifically laid out to assist interpretation, with each panel located at the correct point on the compass. This makes it easy to see immediately that there is essentially no trend in O<sub>3</sub> for southerly winds i.e., where the road itself has the strongest influence. On the other hand the strongest evidence of increasing O<sub>3</sub> is for northerly winds, where the influence of the road is much less. The reason that there is no trend in O<sub>3</sub> for southerly winds is that there is always a great excess of NO, which reacts with O<sub>3</sub> to form NO<sub>2</sub>. At this particular location it will probably take many more years before O<sub>3</sub> concentrations start to increase when the wind direction is southerly. Nevertheless, there will always be <em>some</em> hours that do not have such high concentrations of NO.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -622,10 +588,10 @@ Figure&nbsp;15.1: Trends in ozone at Marylebone Road. The plot shows the deseaso
 <div class="cell-output-display">
 <div id="fig-TheilSen2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSen2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="theil-sen_files/figure-html/fig-TheilSen2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;15.2: Trends in ozone at Marylebone Road split by eight wind sectors. The TheilSen function will automatically organise the separate panels by the different compass directions."><img src="theil-sen_files/figure-html/fig-TheilSen2-1.png" class="img-fluid figure-img" width="960"></a>
+<a href="theil-sen_files/figure-html/fig-TheilSen2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;15.2: Trends in ozone at Marylebone Road split by eight wind sectors. The TheilSen() function will automatically organise the separate panels by the different compass directions."><img src="theil-sen_files/figure-html/fig-TheilSen2-1.png" class="img-fluid figure-img" width="960"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TheilSen2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.2: Trends in ozone at Marylebone Road split by eight wind sectors. The <code>TheilSen</code> function will automatically organise the separate panels by the different compass directions.
+Figure&nbsp;15.2: Trends in ozone at Marylebone Road split by eight wind sectors. The <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function will automatically organise the separate panels by the different compass directions.
 </figcaption></figure>
 </div>
 </div>
@@ -639,9 +605,9 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <p>where <span class="math inline">\(C_{End}\)</span> and <span class="math inline">\(C_{Start}\)</span> are the mean concentrations for the end and start date, respectively. <span class="math inline">\(N_{years}\)</span> is the number of years (or fractions of) the time series spans.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
-<span>  <span class="va">mydata</span>, </span>
-<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  slope.percent <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -658,22 +624,22 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <p>Sometimes considering percentages can be misleading. A specific case to look out for is when the uncertainties in the slope are wide and go from a negative concentration to a positive, which is problematic. In this case it is best to stick with changes in absolute concentrations.</p>
 </div>
 </div>
-<p>The <code>TheilSen</code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function was written to work with hourly data, which is then averaged into monthly or annual data. However, it is realised that users may already have data that is monthly or annual. The function can therefore accept as input monthly or annual data directly. In this case, make sure the <code>date</code> column is a proper date. For example, if monthly dates have been read in as text in British format (dd/mm/YYYY), they can be converted as follows:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">date</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Finally, the <code>TheilSen</code> function can consider trends at different sites, provided the input data are correctly formatted. For input, a data frame with three columns is required: date, pollutant and <em>site</em>. The call would then be, for example:</p>
+<p>Finally, the <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function can consider trends at different sites, provided the input data are correctly formatted. For input, a data frame with three columns is required: date, pollutant and <em>site</em>. The call would then be, for example:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"no2"</span>, type <span class="op">=</span> <span class="st">"site"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="output" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="output">
 <span class="header-section-number">15.2.1</span> Output</h3>
-<p>The <code>TheilSen</code> function provides lots of output data for further analysis or adding to a report. To obtain it, it is necessary to read it into a variable:</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> function provides lots of output data for further analysis or adding to a report. To obtain it, it is necessary to read it into a variable:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MKresults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
-<span>  <span class="va">mydata</span>, </span>
-<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>, </span>
-<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  <span class="va">mydata</span>,</span>
+<span>  pollutant <span class="op">=</span> <span class="st">"o3"</span>,</span>
+<span>  deseason <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"wd"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This returns a list of two data frames containing all the monthly mean values and trend statistics and an aggregated summary. The first 6 lines are shown next:</p>
@@ -717,11 +683,11 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <p>In the results above the <code>lower</code> and <code>upper</code> fields provide the 95% (or chosen confidence interval using the <code>alpha</code> option) of the trend and <code>slope</code> is the trend estimate expressed in units/year.</p>
 </section></section><section id="summarising-trends" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="summarising-trends">
 <span class="header-section-number">15.3</span> Summarising trends</h2>
-<p>One of the most powerful uses of <code>TheilSen</code> is to compare trends across a large number of sites simultaneously. By supplying multiple values to the <code>type</code> argument, the function will run the trend analysis independently for each combination of conditioning variables. The results can then be extracted and visualised in whatever way is most informative for the task at hand. The example in this section can easily be adapted for a wide range of purposes.</p>
+<p>One of the most powerful uses of <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> is to compare trends across a large number of sites simultaneously. By supplying multiple values to the <code>type</code> argument, the function will run the trend analysis independently for each combination of conditioning variables. The results can then be extracted and visualised in whatever way is most informative for the task at hand. The example in this section can easily be adapted for a wide range of purposes.</p>
 <p>The example below demonstrates this workflow for NO<sub>2</sub> across a stratified sample of UK urban monitoring sites. The analysis proceeds in several steps.</p>
-<p><strong>Step 1: Select well-monitored sites.</strong> Annual mean data are imported from the AURN for 2016–2025 using <code>importAURN</code> with <code>meta = TRUE</code> to include site metadata. Sites are then filtered to those with a complete ten-year record <em>and</em> at least 75% data capture in <em>every</em> year. This guards against trends being artefacts of uneven monitoring coverage rather than genuine concentration changes.</p>
-<p><strong>Step 2: Stratified sample.</strong> To keep the analysis manageable, 25 sites are drawn at random from each of two site types — Urban Traffic and Urban Background. Using <code>set.seed</code> ensures the sample is reproducible.</p>
-<p><strong>Step 3: Run <code>TheilSen</code> across all sites.</strong> The key call is:</p>
+<p><strong>Step 1: Select well-monitored sites.</strong> Annual mean data are imported from the AURN for 2016–2025 using <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code> with <code>meta = TRUE</code> to include site metadata. Sites are then filtered to those with a complete ten-year record <em>and</em> at least 75% data capture in <em>every</em> year. This guards against trends being artefacts of uneven monitoring coverage rather than genuine concentration changes.</p>
+<p><strong>Step 2: Stratified sample.</strong> To keep the analysis manageable, 25 sites are drawn at random from each of two site types — Urban Traffic and Urban Background. Using <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> ensures the sample is reproducible.</p>
+<p><strong>Step 3: Run <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> across all sites.</strong> The key call is:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen</a></span><span class="op">(</span></span>
 <span>  <span class="va">aq_sample</span>,</span>
 <span>  pollutant <span class="op">=</span> <span class="st">"no2"</span>,</span>
@@ -730,10 +696,10 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <span>  plot      <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  silent    <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Passing <code>type = c("site_type", "site")</code> tells <code>TheilSen</code> to condition on both site type and individual site, so a separate Theil-Sen slope is estimated for each site. Setting <code>plot = FALSE</code> and <code>silent = TRUE</code> suppresses graphical and console output while looping through all 50 sites, which would otherwise produce a large volume of unwanted output.</p>
+<p>Passing <code>type = c("site_type", "site")</code> tells <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> to condition on both site type and individual site, so a separate Theil-Sen slope is estimated for each site. Setting <code>plot = FALSE</code> and <code>silent = TRUE</code> suppresses graphical and console output while processing all 50 sites, which would otherwise produce a large volume of unwanted output.</p>
 <p><strong>Step 4: Extract the summary statistics.</strong> As described in the <a href="#output">Output</a> section, the trend statistics — slope and 95% confidence intervals — are held in <code>$data[[2]]</code>. These are extracted directly for plotting.</p>
-<p><strong>Step 5: Forest plot.</strong> The slope estimates and their confidence intervals are displayed as a forest plot using <code>ggplot2</code>. Sites are ordered by slope within each site type, making it easy to see the spread of trends at a glance. A vertical dashed line at zero serves as a reference: sites to the left show declining NO<sub>2</sub>, those to the right a (none in this case) increase. The resulting plot is shown in <a href="#fig-TheilSenSummary" class="quarto-xref">Figure&nbsp;<span>15.3</span></a>.</p>
-<p>The forest plot makes clear that NO<sub>2</sub> declined signficantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source.</p>
+<p><strong>Step 5: Forest plot.</strong> The slope estimates and their confidence intervals are displayed as a forest plot using <span class="pkg"><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></span>. Sites are ordered by slope within each site type, making it easy to see the spread of trends at a glance. A vertical dashed line at zero serves as a reference: sites to the left show declining NO<sub>2</sub>, those to the right an increase. The resulting plot is shown in <a href="#fig-TheilSenSummary" class="quarto-xref">Figure&nbsp;<span>15.3</span></a>.</p>
+<p>The forest plot makes clear that NO<sub>2</sub> declined significantly (both in a general and statistical sense) at the great majority of sites over the period, but there is considerable variability between sites. Urban Traffic sites tend to show steeper reductions than Urban Background sites, consistent with improvements in vehicle exhaust emissions having the largest effect where traffic is the dominant source.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -744,14 +710,14 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The same workflow applies to any conditioning variable recognised by <code>TheilSen</code>. For example, setting <code>type = "wd"</code> splits the data into eight (or more) wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in <code>$data[[2]]</code> can be post-processed and visualised in the same way as shown here.</p>
+<p>The same workflow applies to any conditioning variable recognised by <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code>. For example, setting <code>type = "wd"</code> splits the data into eight wind sectors and calculates a separate trend for each, which can reveal how the strength and direction of a trend depends on wind direction (and hence source sector). In every case the output stored in <code>$data[[2]]</code> can be post-processed and visualised in the same way as shown here.</p>
 </div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># import annual data</span></span>
-<span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ-wrapper.html">importAURN</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2025</span>, data_type <span class="op">=</span> <span class="st">"annual"</span>, meta <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">aq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2025</span>, source <span class="op">=</span> <span class="st">"aurn"</span>, data_type <span class="op">=</span> <span class="st">"annual"</span>, meta <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># --- 1. Filter sites with &gt;=75% NO2 capture in ALL years ---</span></span>
 <span><span class="va">eligible_sites</span> <span class="op">&lt;-</span> <span class="va">aq</span> <span class="op">|&gt;</span></span>
@@ -782,11 +748,11 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <span>  silent    <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># --- 4. Extract slope and uncertaintiese ---</span></span>
-<span><span class="va">ts_results</span> <span class="op">&lt;-</span> <span class="va">ts_out</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> </span>
+<span><span class="co"># --- 4. Extract slope and uncertainties ---</span></span>
+<span><span class="va">ts_results</span> <span class="op">&lt;-</span> <span class="va">ts_out</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># --- 5. Summary ordered plot ---</span></span>
-<span><span class="co"># Order sites within each group by slope (high to low) using a single factor</span></span>
+<span><span class="co"># Order sites within each group by slope (low to high) using a single factor</span></span>
 <span><span class="va">ordered_levels</span> <span class="op">&lt;-</span> <span class="va">ts_results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">site_type</span>, <span class="va">slope</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span></span>
@@ -801,7 +767,7 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plot_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">slope</span>, y <span class="op">=</span> <span class="va">site</span>, colour <span class="op">=</span> <span class="va">site_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">lower</span>, xmax <span class="op">=</span> <span class="va">upper</span><span class="op">)</span>, height <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">lower</span>, xmax <span class="op">=</span> <span class="va">upper</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">site_type</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span>, guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -815,15 +781,14 @@ T [\%.yr^{-1}] = 100.\left(\frac{C_{End}}{C_{Start}}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
 <span>    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"grey92"</span><span class="op">)</span>,</span>
 <span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">7.5</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-TheilSenSummary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-TheilSenSummary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO2 at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (µg m−3 yr−1) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."><img src="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO2 at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (μg m-3 yr-1) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change."><img src="theil-sen_files/figure-html/fig-TheilSenSummary-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-TheilSenSummary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (µg m<sup>−3</sup> yr<sup>−1</sup>) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change.
+Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK urban sites (2016–2025), split by site type. Points show the estimated annual trend (μg m<sup>-3</sup> yr<sup>-1</sup>) and horizontal bars the 95% confidence interval. Sites are ordered by slope within each panel; the dashed line marks zero change.
 </figcaption></figure>
 </div>
 </div>
@@ -905,11 +870,30 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -923,8 +907,70 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -938,6 +984,7 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1100,44 +1147,54 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1235,7 +1292,9 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/trend-analysis/time-proportion.html" class="pagination-link" aria-label="Time proportion plots">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Time proportion plots</span></span>
       </a>          
@@ -1249,7 +1308,7 @@ Figure&nbsp;15.3: Forest plot of Theil-Sen slopes for NO<sub>2</sub> at 50 UK ur
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

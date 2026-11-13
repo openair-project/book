@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Using timeVariation() to show how concentrations vary by hour of the day, day of the week and month, with uncertainty intervals.">
 <title>12&nbsp; Temporal variations – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -106,79 +111,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
+}</script>
+<meta property="og:title" content="12&nbsp; Temporal variations – The openair book">
+<meta property="og:description" content="Using timeVariation() to show how concentrations vary by hour of the day, day of the week and month, with uncertainty intervals.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/trend-analysis/time-variation_files/figure-html/fig-timeVar1-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="1344">
+<meta property="og:image:width" content="2304">
+<meta name="twitter:title" content="12&nbsp; Temporal variations – The openair book">
+<meta name="twitter:description" content="Using timeVariation() to show how concentrations vary by hour of the day, day of the week and month, with uncertainty intervals.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/trend-analysis/time-variation_files/figure-html/fig-timeVar1-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-variation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-timeVariation" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -209,22 +176,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -237,17 +201,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,13 +245,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -342,7 +300,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -355,13 +313,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -371,7 +326,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -384,13 +339,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -400,26 +352,23 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -442,23 +391,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,7 +428,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -492,7 +438,7 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#sec-purpose-time-var" id="toc-sec-purpose-time-var" class="nav-link active" data-scroll-target="#sec-purpose-time-var"><span class="header-section-number">12.1</span> Purpose</a></li>
@@ -501,20 +447,14 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/time-variation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-variation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-timeVariation" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span></h1>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-timeVariation" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Temporal variations</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
@@ -524,34 +464,34 @@ window.Quarto = {
 
 </header><section id="sec-purpose-time-var" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="sec-purpose-time-var">
 <span class="header-section-number">12.1</span> Purpose</h2>
-<p>In air pollution, the variation of a pollutant by time of day and day of week can reveal useful information concerning the likely sources. For example, road vehicle emissions tend to follow very regular patterns both on a daily and weekly basis. By contrast some industrial emissions or pollutants from natural sources (e.g.&nbsp;sea salt aerosol) may well have very different patterns.</p>
-<p>The <code>timeVariation</code> function produces four plots: day of the week variation, mean hour of day variation and a combined hour of day – day of week plot and a monthly plot. Also shown on the plots is the 95% confidence interval in the mean. These uncertainty limits can be helpful when trying to determine whether one candidate source is different from another. The uncertainty intervals are calculated through bootstrap re-sampling, which will provide better estimates than the application of assumptions based on normality, particularly when there are few data available. The function can consider more than one input variables. In addition, there is the option of ‘normalising’ concentrations (or other quantities). Normalising is very useful for comparing the patterns of different pollutants, which often cover very different ranges in concentration. Normalising is achieved by dividing the concentration of a pollutant by its mean value. Note also that any other variables besides pollutant concentrations can be considered e.g.&nbsp;meteorological or traffic data.</p>
-<p>There is also an option <code>difference</code> which is very useful for considering the difference in two time series and how they vary over different temporal resolutions. Again, bootstrap re-sampling methods are used to estimate the uncertainty of the difference in two means.</p>
+<p>In air pollution, the variation of a pollutant by time of day and day of week can reveal useful information concerning the likely sources. For example, road vehicle emissions tend to follow very regular patterns both on a daily and weekly basis. By contrast some industrial emissions or pollutants from natural sources (e.g., sea salt aerosol) may well have very different patterns.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function produces four plots: day of the week variation, mean hour of day variation and a combined hour of day – day of week plot and a monthly plot. Also shown on the plots is the 95% confidence interval in the mean. These uncertainty limits can be helpful when trying to determine whether one candidate source is different from another. The uncertainty intervals are calculated through bootstrap resampling, which will provide better estimates than the application of assumptions based on normality, particularly when there are few data available. The function can consider more than one input variable. In addition, there is the option of ‘normalising’ concentrations (or other quantities). Normalising is very useful for comparing the patterns of different pollutants, which often cover very different ranges in concentration. Normalising is achieved by dividing the concentration of a pollutant by its mean value. Note also that any other variables besides pollutant concentrations can be considered e.g., meteorological or traffic data.</p>
+<p>There is also an option <code>difference</code> which is very useful for considering the difference in two time series and how they vary over different temporal resolutions. Again, bootstrap resampling methods are used to estimate the uncertainty of the difference in two means.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Note!
+<span class="screen-reader-only">Tip</span>Averaging wind direction
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Care has been taken to ensure that wind direction (<code>wd</code>) is vector-averaged. Less obvious though is the uncertainty in wind direction. A pragmatic approach has been adopted here that considers how wind direction <em>changes</em>. For example, consider the following wind directions: 10, 10, 10, 180, 180, 180<span class="math inline">\(^\circ\)</span> The standard deviation of these numbers is 93<span class="math inline">\(^\circ\)</span>. However, what actually occurs is the wind direction is constant at 10<span class="math inline">\(^\circ\)</span> then switches to 180<span class="math inline">\(^\circ\)</span>. In terms of changes there is a sequence of numbers: 0, 0, 170, 0, 0 with a standard deviation of 76<span class="math inline">\(^\circ\)</span>. We use the latter method as a basis of calculating the 95% confidence intervals in the mean.</p>
-<p>There are also problems with simple averaging—for example, what is the average of 20 and 200<span class="math inline">\(^\circ\)</span>. It can’t be known. In some situations where the wind direction is bi-modal with differences around 180<span class="math inline">\(^\circ\)</span>, the mean can be ‘unstable’. For example, wind that is funnelled along a valley forcing it to be either easterly or westerly. Consider for example the mean of 0<span class="math inline">\(^\circ\)</span> and 179<span class="math inline">\(^\circ\)</span> (89.5<span class="math inline">\(^\circ\)</span>), but a small change in wind direction to 181<span class="math inline">\(^\circ\)</span> gives a mean of 270.5<span class="math inline">\(^\circ\)</span>. Some care should be exercised therefore when averaging wind direction. It is always a good idea to use the<code>windRose</code>function with type set to ‘month’ or ‘hour’.</p>
+<p>Care has been taken to ensure that wind direction (<code>wd</code>) is vector-averaged. Less obvious though is the uncertainty in wind direction. A pragmatic approach has been adopted here that considers how wind direction <em>changes</em>. For example, consider the following wind directions: 10, 10, 10, 180, 180, 180°. The standard deviation of these numbers is 93°. However, what actually occurs is the wind direction is constant at 10° then switches to 180°. In terms of changes there is a sequence of numbers: 0, 0, 170, 0, 0 with a standard deviation of 76°. We use the latter method as a basis of calculating the 95% confidence intervals in the mean.</p>
+<p>There are also problems with simple averaging—for example, what is the average of 20 and 200°? It can’t be known. In some situations where the wind direction is bi-modal with differences around 180°, the mean can be ‘unstable’. For example, wind that is funnelled along a valley forcing it to be either easterly or westerly. Consider for example the mean of 0° and 179° (89.5°), but a small change in wind direction to 181° gives a mean of 270.5°. Some care should be exercised therefore when averaging wind direction. It is always a good idea to use the <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> function with type set to ‘month’ or ‘hour’.</p>
 </div>
 </div>
-<p>The <code>timeVariation</code> function is probably one of the most useful functions that can be used for the analysis of air pollution. Here are a few uses/advantages:</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function is probably one of the most useful functions that can be used for the analysis of air pollution. Here are a few uses/advantages:</p>
 <ul>
 <li><p>Variations in time are one of the most useful ways of characterising air pollution for a very wide range of pollutants including local urban pollutants and tropospheric background concentrations of ozone and the like.</p></li>
-<li><p>The function works well in conjunction with other functions such as <code>polarPlot</code> (see <a href="../directional-analysis/polar-plots.html" class="quarto-xref"><span>Chapter 8</span></a>), where the latter may identify conditions of interest (say a wind speed/direction range). By sub-setting for those conditions in <code>timeVariation</code> the temporal characteristics of a particular source could be characterised and perhaps contrasted with another subset of conditions.</p></li>
-<li><p>The function can be used to compare a wide range of variables, if available. Suggestions include meteorological e.g.&nbsp;boundary layer height and traffic flows.</p></li>
+<li><p>The function works well in conjunction with other functions such as <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> (see <a href="../directional-analysis/polar-plots.html" class="quarto-xref"><span>Chapter 8</span></a>), where the latter may identify conditions of interest (say a wind speed/direction range). By subsetting for those conditions in <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> the temporal characteristics of a particular source could be characterised and perhaps contrasted with another subset of conditions.</p></li>
+<li><p>The function can be used to compare a wide range of variables, if available. Suggestions include meteorological e.g., boundary layer height and traffic flows.</p></li>
 <li><p>The function can be used for comparing pollutants over different sites.</p></li>
-<li><p>The function can be used to compare one part of a time series with another. This is often a very powerful thing to do, particularly if concentrations are normalised. For example, there is often interest in knowing how diurnal/weekday/seasonal patterns vary with time. If a pollutant showed signs of an increase in recent years, then splitting the data set and comparing each part together can provide information on what is driving the change. Is there, for example, evidence that morning rush hour concentrations have become more important, or Sundays have become relatively more important? An example is given below using the <code>splitByDate</code> function.</p></li>
-<li><p><code>timeVariation</code> can be used to consider the differences between two time series, which will have multiple benefits. For example, for model evaluation it can be very revealing to consider the difference between observations and modelled values over different time scales. Considering such differences can help reveal the character and some reasons for why a model departs from reality.</p></li>
+<li><p>The function can be used to compare one part of a time series with another. This is often a very powerful thing to do, particularly if concentrations are normalised. For example, there is often interest in knowing how diurnal/weekday/seasonal patterns vary with time. If a pollutant showed signs of an increase in recent years, then splitting the data set and comparing each part together can provide information on what is driving the change. Is there, for example, evidence that morning rush hour concentrations have become more important, or Sundays have become relatively more important? An example is given below using the <code><a href="https://openair-project.github.io/openair/reference/splitByDate.html">splitByDate()</a></code> function.</p></li>
+<li><p><code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> can be used to consider the differences between two time series, which will have multiple benefits. For example, for model evaluation it can be very revealing to consider the difference between observations and modelled values over different time scales. Considering such differences can help reveal the character and some reasons for why a model departs from reality.</p></li>
 </ul></section><section id="applications" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="applications">
 <span class="header-section-number">12.2</span> Applications</h2>
-<p>We apply the <code>timeVariation</code> function to PM<sub>10</sub> concentrations and take the opportunity to filter the data to maximise the signal from the road. The <code>polarPlot</code> function described in Section (<a href="../directional-analysis/polar-plots.html" class="quarto-xref"><span>Chapter 8</span></a>) is very useful in this respect in highlighting the conditions under which different sources have their greatest impact. A subset of data is used filtering for wind speeds &gt; 3 m s<sup>-1</sup> and wind directions from 100–270 degrees. The code used is:</p>
+<p>We apply the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to PM<sub>10</sub> concentrations and take the opportunity to filter the data to maximise the signal from the road. The <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> function described in <a href="../directional-analysis/polar-plots.html" class="quarto-xref"><span>Chapter 8</span></a> is very useful in this respect in highlighting the conditions under which different sources have their greatest impact. A subset of data is used filtering for wind speeds &gt; 3 m s<sup>-1</sup> and wind directions from 100–270 degrees. The code used is:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -564,39 +504,39 @@ window.Quarto = {
 <div class="cell-output-display">
 <div id="fig-timeVar1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="time-variation_files/figure-html/fig-timeVar1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;12.1: Example plot using the timeVariation function to plot PM10 concentrations at Marylebone Road."><img src="time-variation_files/figure-html/fig-timeVar1-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="time-variation_files/figure-html/fig-timeVar1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;12.1: Example plot using the timeVariation() function to plot PM10 concentrations at Marylebone Road."><img src="time-variation_files/figure-html/fig-timeVar1-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeVar1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.1: Example plot using the <code>timeVariation</code> function to plot PM<sub>10</sub> concentrations at Marylebone Road.
+Figure&nbsp;12.1: Example plot using the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to plot PM<sub>10</sub> concentrations at Marylebone Road.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>The results are shown in <a href="#fig-timeVar1" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>. The plot shown at the bottom-left shows the diurnal variation of concentrations for all days. It shows for example that PM<sub>10</sub> concentrations tend to peak around 9 am. The shading shows the 95% confidence intervals of the mean. The plot at the bottom-right shows how PM<sub>10</sub> concentrations vary by day of the week. Here there is strong evidence that PM<sub>10</sub> is much lower at the weekends and that there is a significant difference compared with weekdays. It also shows that concentrations tend to increase during the weekdays. Finally, the plot at the top shows both sets of information together to provide an overview of how concentrations vary.</p>
+<p>The results are shown in <a href="#fig-timeVar1" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>. The plot shown at the bottom-left shows the diurnal variation of concentrations for all days. It shows for example that PM<sub>10</sub> concentrations tend to peak around 9 am. The shading shows the 95% confidence intervals of the mean. The plot at the bottom-middle shows the variation by month. The plot at the bottom-right shows how PM<sub>10</sub> concentrations vary by day of the week. Here there is strong evidence that PM<sub>10</sub> is much lower at the weekends and that there is a significant difference compared with weekdays. It also shows that concentrations tend to increase during the weekdays. Finally, the plot at the top shows both sets of information together to provide an overview of how concentrations vary.</p>
 <p>Note that the plot need not just consider pollutant concentrations. Other useful variables (if available) are meteorological and traffic flow or speed data. Often, the combination of several sets of data can be very revealing.</p>
-<p>The <code>filter</code> function is extremely useful in this respect. For example, if it were believed that a source had an effect under specific conditions; they can be isolated with the <code>filter</code> function. It is also useful if it is suspected that two or more sources are important that they can be isolated to some degree and compared. This is where the uncertainty intervals help — they provide an indication whether the behaviour of one source differs significantly from another.</p>
-<p><a href="#fig-timeVar2" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows the function applied to concentrations of NO<sub>x</sub>, CO, NO<sub>2</sub> and O<sub>3</sub> concentrations. In this case the concentrations have been normalised. The plot clearly shows the markedly different temporal trends in concentration. For CO, there is a very pronounced increase in concentrations during the peak pm rush hour. The other important difference is on Sundays when CO concentrations are relatively much higher than NO<sub>x</sub>. This is because flows of cars (mostly petrol) do not change that much by day of the week, but flows of vans and HGVs (diesel vehicles) are much less on Sundays. Note, however, that the monthly trend is very similar in each case — which indicates very similar source origins. Taken together, the plots highlight that traffic emissions dominate this site for CO and NO<sub>x</sub>, but there are important difference in how these emissions vary by hour of day and day of week.</p>
-<p>Also shown in the very different behaviour of O<sub>3</sub>. Because O<sub>3</sub> reacts with NO, concentrations of NO<sub>x</sub> and O<sub>3</sub> tend to be anti-correlated. Note also the clear peak in O<sub>3</sub> in April/May, which is due to higher northern hemispheric background concentrations in the spring. Even at a busy roadside site in central London this influence is clear to see.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function is extremely useful in this respect. For example, if it were believed that a source had an effect under specific conditions; they can be isolated with the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function. It is also useful if it is suspected that two or more sources are important that they can be isolated to some degree and compared. This is where the uncertainty intervals help — they provide an indication whether the behaviour of one source differs significantly from another.</p>
+<p><a href="#fig-timeVar2" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows the function applied to concentrations of NO<sub>x</sub>, CO, NO<sub>2</sub> and O<sub>3</sub> concentrations. In this case the concentrations have been normalised. The plot clearly shows the markedly different temporal trends in concentration. For CO, there is a very pronounced increase in concentrations during the peak pm rush hour. The other important difference is on Sundays when CO concentrations are relatively much higher than NO<sub>x</sub>. This is because flows of cars (mostly petrol) do not change that much by day of the week, but flows of vans and HGVs (diesel vehicles) are much less on Sundays. Note, however, that the monthly trend is very similar in each case — which indicates very similar source origins. Taken together, the plots highlight that traffic emissions dominate this site for CO and NO<sub>x</sub>, but there are important differences in how these emissions vary by hour of day and day of week.</p>
+<p>Also shown is the very different behaviour of O<sub>3</sub>. Because O<sub>3</sub> reacts with NO, concentrations of NO<sub>x</sub> and O<sub>3</sub> tend to be anti-correlated. Note also the clear peak in O<sub>3</sub> in April/May, which is due to higher northern hemispheric background concentrations in the spring. Even at a busy roadside site in central London this influence is clear to see.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nox"</span>, <span class="st">"co"</span>, <span class="st">"no2"</span>, <span class="st">"o3"</span><span class="op">)</span>, normalise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-timeVar2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="time-variation_files/figure-html/fig-timeVar2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;12.2: Example plot using the timeVariation function to plot NOx, CO, NO2 and O3 concentrations at Marylebone Road. In this plot, the concentrations are normalised."><img src="time-variation_files/figure-html/fig-timeVar2-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="time-variation_files/figure-html/fig-timeVar2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;12.2: Example plot using the timeVariation() function to plot NOx, CO, NO2 and O3 concentrations at Marylebone Road. In this plot, the concentrations are normalised."><img src="time-variation_files/figure-html/fig-timeVar2-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeVar2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.2: Example plot using the <code>timeVariation</code> function to plot NO<sub>x</sub>, CO, NO<sub>2</sub> and O<sub>3</sub> concentrations at Marylebone Road. In this plot, the concentrations are normalised.
+Figure&nbsp;12.2: Example plot using the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to plot NO<sub>x</sub>, CO, NO<sub>2</sub> and O<sub>3</sub> concentrations at Marylebone Road. In this plot, the concentrations are normalised.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>Another example is splitting the data set by time. We use the <code>splitByDate</code> function to divide up the data into dates before January 2003 and after January 2003. This time the option <code>difference</code> is used to highlight how NO<sub>2</sub> concentrations have changed over these two periods. The results are shown in <a href="#fig-timeVar3" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>. There is some indication in this plot that data after 2003 seem to show more of a double peak in the diurnal plots; particularly in the morning rush hour. Also, the difference line does more clearly highlight a more substantial change over weekdays and weekends. Given that cars are approximately constant at this site each day, the change may indicate a change in vehicle emissions from other vehicle types. Given that it is known that primary NO<sub>2</sub> emissions are known to have increased sharply from the beginning of 2003 onwards, this perhaps provides clues as to the principal cause.</p>
+<p>Another example is splitting the data set by time. We use the <code><a href="https://openair-project.github.io/openair/reference/splitByDate.html">splitByDate()</a></code> function to divide up the data into dates before January 2003 and after January 2003. This time the option <code>difference</code> is used to highlight how NO<sub>2</sub> concentrations have changed over these two periods. The results are shown in <a href="#fig-timeVar3" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>. There is some indication in this plot that data after 2003 seem to show more of a double peak in the diurnal plots; particularly in the morning rush hour. Also, the difference line does more clearly highlight a more substantial change over weekdays and weekends. Given that cars are approximately constant at this site each day, the change may indicate a change in vehicle emissions from other vehicle types. Given that primary NO<sub>2</sub> emissions are known to have increased sharply from the beginning of 2003 onwards, this perhaps provides clues as to the principal cause.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## split data into two periods (see Utlities section for more details)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## split data into two periods (see Utilities section for more details)</span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/splitByDate.html">splitByDate</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  dates <span class="op">=</span> <span class="st">"1/1/2003"</span>,</span>
-<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before Jan. 2003"</span>, <span class="st">"After Jan. 2003"</span><span class="op">)</span></span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before Jan. 2003"</span>, <span class="st">"after Jan. 2003"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span></span>
@@ -608,19 +548,19 @@ Figure&nbsp;12.2: Example plot using the <code>timeVariation</code> function to 
 <div class="cell-output-display">
 <div id="fig-timeVar3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="time-variation_files/figure-html/fig-timeVar3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;12.3: Example plot using the timeVariation function to plot NO2 concentrations at Marylebone Road. In this plot, the concentrations are shown before and after January 2003."><img src="time-variation_files/figure-html/fig-timeVar3-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="time-variation_files/figure-html/fig-timeVar3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;12.3: Example plot using the timeVariation() function to plot NO2 concentrations at Marylebone Road. In this plot, the concentrations are shown before and after January 2003."><img src="time-variation_files/figure-html/fig-timeVar3-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeVar3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.3: Example plot using the <code>timeVariation</code> function to plot NO<sub>2</sub> concentrations at Marylebone Road. In this plot, the concentrations are shown before and after January 2003.
+Figure&nbsp;12.3: Example plot using the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to plot NO<sub>2</sub> concentrations at Marylebone Road. In this plot, the concentrations are shown before and after January 2003.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the <code>polarPlot</code> function where a ‘feature’ of interest has been identified—maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available. This is an area that will be developed.</p>
-<p>The approach here is to first make a new variable called ‘feature’ and fill it with the value ‘other’. A subset of data is defined and the associated locations in the data frame identified. The subset of data is then used to update the ‘feature’ field with a new description. This approach could be extended to some quite complex situations.</p>
-<p>There are a couple of things to note in <a href="#fig-timeVar4" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>. There seems to be evidence that for easterly winds &gt; 4 m s<sup>-1</sup> that concentrations of SO<sub>2</sub> are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This <em>might</em> reflect that SO<sub>2</sub> concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources. This technique will be returned to with different data sets in future.</p>
+<p>In the next example it is shown how to compare one subset of data of interest with another. Again, there can be many reasons for wanting to do this and perhaps the data set at Marylebone Road is not the most interesting to consider. Nevertheless, the code below shows how to approach such a problem. The scenario would be that one is interested in a specific set of conditions and it would be useful to compare that set, with another set. A good example would be from an analysis using the <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> function where a ‘feature’ of interest has been identified—maybe an indication of a different source. But does this potentially different source behave differently in terms of temporal variation? If it does, then maybe that provides evidence to support that it is a different source. In a wider context, this approach could be used in many different ways depending on available data. A good example is the analysis of model output where many diagnostic meteorological data are available.</p>
+<p>The approach here is to make a new variable called ‘feature’ that is labelled ‘easterly’ for the conditions of interest (easterly winds with wind speeds &gt; 4 m s<sup>-1</sup>) and ‘other’ for everything else. This approach could be extended to some quite complex situations.</p>
+<p>There are a couple of things to note in <a href="#fig-timeVar4" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>. There seems to be evidence that for easterly winds &gt; 4 m s<sup>-1</sup> that concentrations of SO<sub>2</sub> are lower at night. Also, there is some evidence that concentrations for these conditions are also lower at weekends. This <em>might</em> reflect that SO<sub>2</sub> concentrations for these conditions tend to be dominated by tall stack emissions that have different activities to road transport sources.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make a field called "feature" and fill: make all values = "other"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## make a field called "feature": "easterly" for the conditions of interest, otherwise "other"</span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
 <span>  feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">ws</span> <span class="op">&gt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">wd</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">wd</span> <span class="op">&lt;=</span> <span class="fl">180</span>, <span class="st">"easterly"</span>, <span class="st">"other"</span><span class="op">)</span></span>
@@ -636,15 +576,15 @@ Figure&nbsp;12.3: Example plot using the <code>timeVariation</code> function to 
 <div class="cell-output-display">
 <div id="fig-timeVar4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVar4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="time-variation_files/figure-html/fig-timeVar4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;12.4: Example plot using the timeVariation function to plot SO2 concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds > 4 m s-1 and everything else. Note that the uncertainty in the mean values for easterly winds is greater than other. This is mostly because the sample size is much lower for easterly compared with other."><img src="time-variation_files/figure-html/fig-timeVar4-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="time-variation_files/figure-html/fig-timeVar4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;12.4: Example plot using the timeVariation() function to plot SO2 concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds > 4 m s-1 and everything else. Note that the uncertainty in the mean values for easterly winds is greater than other. This is mostly because the sample size is much lower for easterly compared with other."><img src="time-variation_files/figure-html/fig-timeVar4-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeVar4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.4: Example plot using the <code>timeVariation</code> function to plot SO<sub>2</sub> concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds &gt; 4 m s<sup>-1</sup> and everything else. Note that the uncertainty in the mean values for easterly winds is greater than <em>other</em>. This is mostly because the sample size is much lower for <em>easterly</em> compared with <em>other</em>.
+Figure&nbsp;12.4: Example plot using the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to plot SO<sub>2</sub> concentrations at Marylebone Road. In this plot, the concentrations are shown for a subset of easterly winds &gt; 4 m s<sup>-1</sup> and everything else. Note that the uncertainty in the mean values for easterly winds is greater than <em>other</em>. This is mostly because the sample size is much lower for <em>easterly</em> compared with <em>other</em>.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>By default <code>timeVariation</code> shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for <code>statistic</code>. When <code>statistic = "median"</code> the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown be setting the <code>conf.int</code>. For example, <code>conf.int =   c(0.25, 0.99)</code> will show the median, 25/75th and 1/99th quantile values. The <code>statistic = "median"</code> option is therefore very useful for showing how the data are distributed — somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when <code>statistic = "median"</code> is used due to potential over-plotting; although the function will display several species of required. An example is shown in <a href="#fig-timeVarMedian" class="quarto-xref">Figure&nbsp;<span>12.5</span></a> for PM<sub>10</sub> concentrations.</p>
+<p>By default <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> shows the mean variation in different temporal components and the 95% confidence interval in the mean. However, it is also possible to show how the data are distributed by using a different option for <code>statistic</code>. When <code>statistic = "median"</code> the median line is shown together with the 25/75th and 5/95th quantile values. Users can control the quantile values shown by setting the <code>conf.int</code>. For example, <code>conf.int = c(0.25, 0.99)</code> will show the median, 25/75th and 1/99th quantile values. The <code>statistic = "median"</code> option is therefore very useful for showing how the data are distributed — somewhat similar to a box and whisker plot. Note that it is expected that only one pollutant should be shown when <code>statistic = "median"</code> is used due to potential over-plotting; although the function will display several species if required. An example is shown in <a href="#fig-timeVarMedian" class="quarto-xref">Figure&nbsp;<span>12.5</span></a> for PM<sub>10</sub> concentrations.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -655,18 +595,18 @@ Figure&nbsp;12.4: Example plot using the <code>timeVariation</code> function to 
 <div class="cell-output-display">
 <div id="fig-timeVarMedian" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-timeVarMedian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="time-variation_files/figure-html/fig-timeVarMedian-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;12.5: Example plot using the timeVariation function to show the variation in the median. The shading shows the extent to the 25/75th and 5/95th quantiles."><img src="time-variation_files/figure-html/fig-timeVarMedian-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="time-variation_files/figure-html/fig-timeVarMedian-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;12.5: Example plot using the timeVariation() function to show the variation in the median. The shading shows the extent of the 25/75th and 5/95th quantiles."><img src="time-variation_files/figure-html/fig-timeVarMedian-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeVarMedian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to show the variation in the median. The shading shows the extent to the 25/75th and 5/95th quantiles.
+Figure&nbsp;12.5: Example plot using the <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function to show the variation in the median. The shading shows the extent of the 25/75th and 5/95th quantiles.
 </figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="output" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="output">
 <span class="header-section-number">12.3</span> Output</h2>
-<p>The <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and the code shows how to access them.</p>
-<p>The <code>...$plot</code> component is a list of individual panels, and the <code>...$data</code> component is a list of dataframes. Note that <code>mid</code>, <code>min</code> and <code>max</code> are the mean and upper/lower confidence intervals when <code>statistic = "mean"</code> and the median and upper/lower quantiles when <code>statistic = "median"</code>. Each part of the list is named after its respective panel.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code> function produces several outputs that can be used for further analysis or plotting. It is necessary to read the output into a variable for further processing. The code below shows the different objects that are returned and how to access them.</p>
+<p>The <code>...$plot</code> component is a list of individual panels, and the <code>...$data</code> component is a list of data frames. Note that <code>mid</code>, <code>min</code> and <code>max</code> are the mean and upper/lower confidence intervals when <code>statistic = "mean"</code> and the median and upper/lower quantiles when <code>statistic = "median"</code>. Each part of the list is named after its respective panel.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create plot</span></span>
 <span><span class="va">myOutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation</a></span><span class="op">(</span><span class="va">mydata</span>, pollutant <span class="op">=</span> <span class="st">"so2"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -685,12 +625,12 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
 <pre><code># A tibble: 6 × 8
       x type      group    ci   mid   min   max statistic
   &lt;dbl&gt; &lt;ord&gt;     &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    
-1     0 Monday    so2    0.95  2.93  2.63  3.22 mean     
-2     0 Tuesday   so2    0.95  3.21  2.94  3.51 mean     
-3     0 Wednesday so2    0.95  3.35  3.14  3.63 mean     
-4     0 Thursday  so2    0.95  3.22  2.99  3.47 mean     
-5     0 Friday    so2    0.95  3.64  3.34  3.89 mean     
-6     0 Saturday  so2    0.95  4.25  4.00  4.49 mean     </code></pre>
+1     0 Monday    so2    0.95  2.93  2.67  3.15 mean     
+2     0 Tuesday   so2    0.95  3.21  2.96  3.51 mean     
+3     0 Wednesday so2    0.95  3.35  3.13  3.60 mean     
+4     0 Thursday  so2    0.95  3.22  2.89  3.56 mean     
+5     0 Friday    so2    0.95  3.64  3.35  3.85 mean     
+6     0 Saturday  so2    0.95  4.25  3.95  4.57 mean     </code></pre>
 </div>
 </div>
 <p>It is also possible to plot any of the individual plots that make up <code><a href="https://openair-project.github.io/openair/reference/timeVariation.html">timeVariation()</a></code>.</p>
@@ -707,9 +647,13 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"season"</span>, <span class="st">"weekend"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="time-variation_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="time-variation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
+<div id="fig-variationPlot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-variationPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="time-variation_files/figure-html/fig-variationPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;12.6: The diurnal variation in SO2 concentrations at Marylebone Road plotted using variationPlot(), split by season and weekday/weekend."><img src="time-variation_files/figure-html/fig-variationPlot-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-variationPlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.6: The diurnal variation in SO<sub>2</sub> concentrations at Marylebone Road plotted using <code><a href="https://openair-project.github.io/openair/reference/variationPlot.html">variationPlot()</a></code>, split by season and weekday/weekend.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -789,11 +733,30 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -807,8 +770,70 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -822,6 +847,7 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -984,44 +1010,54 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1119,7 +1155,9 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/trend-analysis/time-plot.html" class="pagination-link" aria-label="Time series plots">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time series plots</span></span>
       </a>          
@@ -1133,7 +1171,7 @@ Figure&nbsp;12.5: Example plot using the <code>timeVariation</code> function to 
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

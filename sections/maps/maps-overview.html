@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="An introduction to the openairmaps package for interactive air quality maps, and to leaflet, the package on which it is built.">
 <title>24&nbsp; openairmaps primer – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,53 +113,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script><link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script><script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
+<meta property="og:title" content="24&nbsp; openairmaps primer – The openair book">
+<meta property="og:description" content="An introduction to the openairmaps package for interactive air quality maps, and to leaflet, the package on which it is built.">
+<meta property="og:site_name" content="The openair book">
+<meta name="twitter:title" content="24&nbsp; openairmaps primer – The openair book">
+<meta name="twitter:description" content="An introduction to the openairmaps package for interactive air quality maps, and to leaflet, the package on which it is built.">
+<meta name="twitter:card" content="summary">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html">Interactive Maps</a></li><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-maps-overview" class="quarto-section-identifier"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -185,22 +173,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,17 +198,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,13 +242,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -318,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -331,13 +310,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -347,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -360,13 +336,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link active">
@@ -376,26 +349,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -418,23 +388,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -458,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -468,58 +435,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation"><span class="header-section-number">24.1</span> Installation</a></li>
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">24.2</span> Background</a></li>
-  <li><a href="#leaflet-primer" id="toc-leaflet-primer" class="nav-link" data-scroll-target="#leaflet-primer"><span class="header-section-number">24.3</span> <span class="pkg">leaflet</span> Primer</a></li>
+  <li><a href="#leaflet-primer" id="toc-leaflet-primer" class="nav-link" data-scroll-target="#leaflet-primer"><span class="header-section-number">24.3</span> <span class="pkg">leaflet</span> primer</a></li>
   <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">24.4</span> Functions</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/maps/maps-overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html">Interactive Maps</a></li><li class="breadcrumb-item"><a href="../../sections/maps/maps-overview.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span>
-</h1>
-<p class="subtitle lead">An introduction to <code>openairmaps</code> and the <code>leaflet</code> package</p>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-maps-overview" class="quarto-section-identifier"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">openairmaps primer</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jack Davison </p>
-          </div>
-  </div>
     
   
     
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    The <code>openairmaps</code> package has been designed to create interactive HTML air quality maps. These are useful to understand the geospatial context of <code>openair</code>-type analysis, and to present data in an engaging way in dashboards and websites. This page gives a broad overview of <code>openairmaps</code> as well as <code>leaflet</code>, the package on which it is built.
-  </div>
-</div>
 
 
 </header><section id="installation" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="installation">
 <span class="header-section-number">24.1</span> Installation</h2>
-<p><span class="pkg">openairmaps</span> is on CRAN, so can be simply downloaded using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
+<p><span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> is on CRAN, so can be simply downloaded using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you would like to access new features and bug fixes before they’re pushed to CRAN, the development version of <span class="pkg">openairmaps</span> can be downloaded directly from GitHub.</p>
+<p>If you would like to access new features and bug fixes before they’re pushed to CRAN, the development version of <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> can be downloaded directly from GitHub.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"openair-project/openairmaps"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you would like to use <span class="pkg">openairmaps</span> in your analysis, don’t forget to load it using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
+<p>If you would like to use <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> in your analysis, don’t forget to load it using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -530,17 +482,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This chapter was produced using R version 4.6.1 and <span class="pkg">openairmaps</span> version 0.10.1.9000.</p>
+<p>This chapter was produced using R version 4.6.1 and <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> version 0.10.1.9000.</p>
 </div>
 </div>
 </div>
 </section><section id="background" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="background">
 <span class="header-section-number">24.2</span> Background</h2>
-<p>As the R ecosystem developed, <a href="https://github.com/rstudio/rmarkdown">rmarkdown</a> and, more recently, <a href="https://quarto.org/">Quarto</a> emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages have been developed to easily develop these interactive widgets, such as <a href="https://plotly-r.com">plotly</a> for plots, <a href="https://github.com/rstudio/DT">DT</a> for tables, and <a href="https://rstudio.github.io/leaflet/">leaflet</a> for maps. The <span class="pkg">openairmaps</span> package concerns itself with making <span class="pkg">leaflet</span> maps.</p>
+<p>As the R ecosystem developed, <span class="pkg"><a href="https://rmarkdown.rstudio.com/">rmarkdown</a></span> and, more recently, <span class="pkg"><a href="https://quarto.org/">quarto</a></span> emerged as capable tools for combining data analysis with document preparation. While these approaches can render typical .docx and .pdf outputs, one of their most common output formats is the HTML document. This format has many strengths, but a key one is interactivity; HTML widgets allow documents to be more informative and engaging. Numerous packages make it easy to create these interactive widgets, such as <span class="pkg"><a href="https://CRAN.R-project.org/package=plotly">plotly</a></span> for plots, <span class="pkg"><a href="https://CRAN.R-project.org/package=DT">DT</a></span> for tables, and <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> for maps. The <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> package concerns itself with making <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> maps.</p>
 <p>Air quality data analysis — particularly as it pertains to long term monitoring data — naturally lends itself to being visualised spatially on a map. Monitoring networks are geographically distributed, and ignoring their geographical context may lead to incomplete insights at best and incorrect conclusions at worst! Furthermore, many air quality analysis tools are <em>directional</em>, asking questions of the data along the lines of “do elevated concentrations come from the North, South, East or West?” The natural question that follows is “well, what actually is it to the North/South/East/West that could be causing elevated concentrations?” — a map can help answer that question straightforwardly.</p>
 </section><section id="leaflet-primer" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="leaflet-primer">
-<span class="header-section-number">24.3</span> <span class="pkg">leaflet</span> Primer</h2>
-<p>While <span class="pkg">openairmaps</span> can be used without a thorough understanding of the <span class="pkg">leaflet</span> package, some knowledge can definitely help! <a href="#fig-leafletdemo" class="quarto-xref">Figure&nbsp;<span>24.1</span></a> shows an example leaflet map. Try the following:</p>
+<span class="header-section-number">24.3</span> <span class="pkg">leaflet</span> primer</h2>
+<p>While <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> can be used without a thorough understanding of the <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> package, some knowledge can definitely help! <a href="#fig-leafletdemo" class="quarto-xref">Figure&nbsp;<span>24.1</span></a> shows an example leaflet map. Try the following:</p>
 <ul>
 <li><p>Click and drag to move the map around — you can go anywhere in the world!</p></li>
 <li><p>Use your scroll wheel or the +/- options (top left) to zoom in and out.</p></li>
@@ -567,8 +519,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-leafletdemo" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-ea1b35e514bb7213b0f0" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-ea1b35e514bb7213b0f0">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"Street Map",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Street Map","Satellite"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-b4d356b29292dcfa72b7" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-b4d356b29292dcfa72b7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"Street Map",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[51.5034,-0.1276,null,null,"Marker",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"This is where the UK Prime Minister lives!",null,null,null,"10 Downing Street",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Street Map","Satellite"],"Marker",{"collapsed":true,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[51.5034,51.5034],"lng":[-0.1276,-0.1276]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leafletdemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;24.1: An example of a leaflet map.
@@ -582,14 +534,14 @@ Figure&nbsp;24.1: An example of a leaflet map.
 <li><p>Markers can be added using <code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html">addMarkers()</a></code> and other similar functions. These markers can have different features such as hover labels and popups.</p></li>
 <li><p>The <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html">addLayersControl()</a></code> function creates a menu which allows users to show/hide or swap between certain features of the map.</p></li>
 </ul>
-<p>Don’t worry if you don’t fully understand all of this — the “all-in-one” functions in <span class="pkg">openairmaps</span> deal with much of this for you! The only <span class="pkg">leaflet</span> awareness you’ll need to use these functions is knowledge of the available base map providers, which can be accessed using <code><a href="https://rstudio.github.io/leaflet/reference/providers.html">leaflet::providers</a></code>. These are shown in the collapsible below (the list is very long!).</p>
+<p>Don’t worry if you don’t fully understand all of this — the “all-in-one” functions in <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> deal with much of this for you! The only <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> awareness you’ll need to use these functions is knowledge of the available base map providers, which can be accessed using <code><a href="https://rstudio.github.io/leaflet/reference/providers.html">leaflet::providers</a></code>. These are shown in the collapsible below (the list is very long!).</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>View Providers
+<span class="screen-reader-only">Note</span>View providers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -829,37 +781,37 @@ Figure&nbsp;24.1: An example of a leaflet map.
 </div>
 </div>
 </div>
-<p>If you would like to use <span class="pkg">openairmaps</span> in a more advanced way (for example, using the “marker” class of functions), you may find it useful to learn some <span class="pkg">leaflet</span>. Its authors have written an excellent free <a href="https://rstudio.github.io/leaflet/">guide</a> to help you get started.</p>
+<p>If you would like to use <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> in a more advanced way (for example, using the “marker” class of functions), you may find it useful to learn some <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span>. Its authors have written an excellent free <a href="https://rstudio.github.io/leaflet/">guide</a> to help you get started.</p>
 </section><section id="sec-functions" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="sec-functions">
 <span class="header-section-number">24.4</span> Functions</h2>
-<p><span class="pkg">openairmaps</span> currently has three main families of functions — those being network visualisation, directional analysis, and trajectory analysis — plus a handful of “utility” functions. These are summarised in <a href="#tbl-openairmaps-overview" class="quarto-xref">Table&nbsp;<span>24.1</span></a>. The functions are further divided into two categories:</p>
+<p><span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> currently has three main families of functions — those being network visualisation, directional analysis, and trajectory analysis — plus a handful of “utility” functions. These are summarised in <a href="#tbl-openairmaps-overview" class="quarto-xref">Table&nbsp;<span>24.1</span></a>. The functions are further divided into two categories:</p>
 <ul>
-<li><p><strong>“All-in-one”</strong> functions are most like <span class="pkg">openair</span> functions in that they will construct a map from the ground-up. These functions provide the quickest route from data to a HTML map.</p></li>
-<li><p><strong>“Marker”</strong> functions are most like <span class="pkg">leaflet</span> functions in that they add layers onto pre-existing <code>leaflet</code> maps. These are more complicated to use, but are more powerful if you are more familiar with how <span class="pkg">leaflet</span> works.</p></li>
+<li><p><strong>“All-in-one”</strong> functions are most like <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> functions in that they will construct a map from the ground-up. These functions provide the quickest route from data to an HTML map.</p></li>
+<li><p><strong>“Marker”</strong> functions are most like <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> functions in that they add layers onto pre-existing <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> maps. These are more complicated to use, but are more powerful if you are more familiar with how <span class="pkg"><a href="https://CRAN.R-project.org/package=leaflet">leaflet</a></span> works.</p></li>
 </ul>
 <div class="cell">
 <div id="tbl-openairmaps-overview" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-openairmaps-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
+Table&nbsp;24.1: The <span class="pkg"><a href="https://openair-project.github.io/openairmaps/">openairmaps</a></span> toolkit.
 </figcaption><div aria-describedby="tbl-openairmaps-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fnyticoket" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fnyticoket table {
+<div id="vqbrryxawl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vqbrryxawl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fnyticoket thead, #fnyticoket tbody, #fnyticoket tfoot, #fnyticoket tr, #fnyticoket td, #fnyticoket th {
+#vqbrryxawl thead, #vqbrryxawl tbody, #vqbrryxawl tfoot, #vqbrryxawl tr, #vqbrryxawl td, #vqbrryxawl th {
   border-style: none;
 }
 
-#fnyticoket p {
+#vqbrryxawl p {
   margin: 0;
   padding: 0;
 }
 
-#fnyticoket .gt_table {
+#vqbrryxawl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -885,12 +837,12 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-left-color: #D3D3D3;
 }
 
-#fnyticoket .gt_caption {
+#vqbrryxawl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fnyticoket .gt_title {
+#vqbrryxawl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -902,7 +854,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-width: 0;
 }
 
-#fnyticoket .gt_subtitle {
+#vqbrryxawl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -914,7 +866,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-width: 0;
 }
 
-#fnyticoket .gt_heading {
+#vqbrryxawl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -926,13 +878,13 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#fnyticoket .gt_bottom_border {
+#vqbrryxawl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fnyticoket .gt_col_headings {
+#vqbrryxawl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -947,7 +899,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#fnyticoket .gt_col_heading {
+#vqbrryxawl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -967,7 +919,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#fnyticoket .gt_column_spanner_outer {
+#vqbrryxawl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -979,15 +931,15 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 4px;
 }
 
-#fnyticoket .gt_column_spanner_outer:first-child {
+#vqbrryxawl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fnyticoket .gt_column_spanner_outer:last-child {
+#vqbrryxawl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fnyticoket .gt_column_spanner {
+#vqbrryxawl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -999,11 +951,11 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   width: 100%;
 }
 
-#fnyticoket .gt_spanner_row {
+#vqbrryxawl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fnyticoket .gt_group_heading {
+#vqbrryxawl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1029,7 +981,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   text-align: left;
 }
 
-#fnyticoket .gt_empty_group_heading {
+#vqbrryxawl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1044,15 +996,15 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: middle;
 }
 
-#fnyticoket .gt_from_md > :first-child {
+#vqbrryxawl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fnyticoket .gt_from_md > :last-child {
+#vqbrryxawl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fnyticoket .gt_row {
+#vqbrryxawl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1071,7 +1023,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   overflow-x: hidden;
 }
 
-#fnyticoket .gt_stub {
+#vqbrryxawl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1084,7 +1036,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#fnyticoket .gt_stub_row_group {
+#vqbrryxawl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1098,15 +1050,15 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   vertical-align: top;
 }
 
-#fnyticoket .gt_row_group_first td {
+#vqbrryxawl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fnyticoket .gt_row_group_first th {
+#vqbrryxawl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fnyticoket .gt_summary_row {
+#vqbrryxawl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1116,16 +1068,16 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#fnyticoket .gt_first_summary_row {
+#vqbrryxawl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fnyticoket .gt_first_summary_row.thick {
+#vqbrryxawl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fnyticoket .gt_last_summary_row {
+#vqbrryxawl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1135,7 +1087,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#fnyticoket .gt_grand_summary_row {
+#vqbrryxawl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1145,7 +1097,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#fnyticoket .gt_first_grand_summary_row {
+#vqbrryxawl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1155,7 +1107,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-top-color: #D3D3D3;
 }
 
-#fnyticoket .gt_last_grand_summary_row_top {
+#vqbrryxawl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1165,11 +1117,11 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#fnyticoket .gt_striped {
+#vqbrryxawl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fnyticoket .gt_table_body {
+#vqbrryxawl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1178,7 +1130,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-bottom-color: #D3D3D3;
 }
 
-#fnyticoket .gt_footnotes {
+#vqbrryxawl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1192,7 +1144,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#fnyticoket .gt_footnote {
+#vqbrryxawl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1201,7 +1153,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#fnyticoket .gt_sourcenotes {
+#vqbrryxawl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1215,7 +1167,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   border-right-color: #D3D3D3;
 }
 
-#fnyticoket .gt_sourcenote {
+#vqbrryxawl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1223,72 +1175,72 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
   padding-right: 5px;
 }
 
-#fnyticoket .gt_left {
+#vqbrryxawl .gt_left {
   text-align: left;
 }
 
-#fnyticoket .gt_center {
+#vqbrryxawl .gt_center {
   text-align: center;
 }
 
-#fnyticoket .gt_right {
+#vqbrryxawl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fnyticoket .gt_font_normal {
+#vqbrryxawl .gt_font_normal {
   font-weight: normal;
 }
 
-#fnyticoket .gt_font_bold {
+#vqbrryxawl .gt_font_bold {
   font-weight: bold;
 }
 
-#fnyticoket .gt_font_italic {
+#vqbrryxawl .gt_font_italic {
   font-style: italic;
 }
 
-#fnyticoket .gt_super {
+#vqbrryxawl .gt_super {
   font-size: 65%;
 }
 
-#fnyticoket .gt_footnote_marks {
+#vqbrryxawl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fnyticoket .gt_asterisk {
+#vqbrryxawl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fnyticoket .gt_indent_1 {
+#vqbrryxawl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fnyticoket .gt_indent_2 {
+#vqbrryxawl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fnyticoket .gt_indent_3 {
+#vqbrryxawl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fnyticoket .gt_indent_4 {
+#vqbrryxawl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fnyticoket .gt_indent_5 {
+#vqbrryxawl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fnyticoket .katex-display {
+#vqbrryxawl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fnyticoket div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vqbrryxawl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1402,11 +1354,30 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1420,8 +1391,70 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1435,6 +1468,7 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1597,44 +1631,54 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1732,21 +1776,23 @@ Table&nbsp;24.1: The <span class="pkg">openairmaps</span> toolkit.
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/model-evaluation/conditional-quantiles.html" class="pagination-link" aria-label="Conditional quantiles">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Conditional quantiles</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../sections/maps/maps-polar.html" class="pagination-link" aria-label="Directional Analysis">
-        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../sections/maps/maps-polar.html" class="pagination-link" aria-label="Directional analysis maps">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

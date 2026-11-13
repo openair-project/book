@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Using trendLevel() to produce heat maps showing how a variable varies across two other variables.">
 <title>18&nbsp; Trend heat maps – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -106,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -132,53 +137,40 @@ window.Quarto = {
   typesetMath
 };
 </script>
+<meta property="og:title" content="18&nbsp; Trend heat maps – The openair book">
+<meta property="og:description" content="Using trendLevel() to produce heat maps showing how a variable varies across two other variables.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/trend-analysis/trend-level_files/figure-html/fig-trendLevel1-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="1536">
+<meta property="og:image:width" content="1536">
+<meta name="twitter:title" content="18&nbsp; Trend heat maps – The openair book">
+<meta name="twitter:description" content="Using trendLevel() to produce heat maps showing how a variable varies across two other variables.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/trend-analysis/trend-level_files/figure-html/fig-trendLevel1-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/trend-level.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-trendLevel" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -209,22 +201,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -237,17 +226,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,13 +270,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -342,7 +325,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -355,13 +338,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -371,7 +351,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -384,13 +364,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -400,26 +377,23 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -442,23 +416,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,7 +453,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -492,7 +463,7 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#another-way-of-representing-trends" id="toc-another-way-of-representing-trends" class="nav-link active" data-scroll-target="#another-way-of-representing-trends"><span class="header-section-number">18.1</span> Another way of representing trends</a></li>
@@ -500,20 +471,14 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/trend-analysis/trend-level.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/trend-analysis/time-plot.html">Time Series and Trends</a></li><li class="breadcrumb-item"><a href="../../sections/trend-analysis/trend-level.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-trendLevel" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></h1>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-trendLevel" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Trend heat maps</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
@@ -523,12 +488,12 @@ window.Quarto = {
 
 </header><section id="another-way-of-representing-trends" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="another-way-of-representing-trends">
 <span class="header-section-number">18.1</span> Another way of representing trends</h2>
-<p>The <code>trendLevel</code> function provides a way of rapidly showing a large amount of data in a condensed way. It is particularly useful for plotting the level of a value against two categorical variables. These categorical variables can pre-exist in a data set or be made on the fly using <span class="pkg">openair</span>. By default it will show the mean value of a variable against two categorical variables but can also consider a wider range of statistics e.g.&nbsp;the maximum, frequency, or indeed a user-defined function. The function is much more flexible than this by showing temporal data and can plot ‘heat maps’ in many flexible ways. Both continuous colour scales and user-defined categorical scales can be used.</p>
-<p>The <code>trendLevel</code> function shows how the value of a variable varies according to intervals of two other variables. The <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables can be categorical (factor or character) or numeric. The third variable (<span class="math inline">\(z\)</span>) must be numeric and is coloured according to its value. Despite being called <code>trendLevel</code> the function is flexible enough to consider a wide range of plotting variables.</p>
-<p>If the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are not categorical they are made so by splitting the data into quantiles (using <code>cutData</code>). Furthermore, the user can supply as many levels as they wish for the quantile using the option <code>n.levels</code>. Remember also there are lots of built-in options for <code>x</code> or <code>y</code> based on temporal variations (see <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a>) e.g.&nbsp;“month” (the default), “week”, “daylight” and so on.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> function provides a way of rapidly showing a large amount of data in a condensed way. It is particularly useful for plotting the level of a value against two categorical variables. These categorical variables can pre-exist in a data set or be made on the fly using <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span>. By default it will show the mean value of a variable against two categorical variables but can also consider a wider range of statistics e.g., the maximum, frequency, or indeed a user-defined function. The function is much more flexible than this by showing temporal data and can plot ‘heat maps’ in many flexible ways. Both continuous colour scales and user-defined categorical scales can be used.</p>
+<p>The <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> function shows how the value of a variable varies according to intervals of two other variables. The <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables can be categorical (factor or character) or numeric. The third variable (<span class="math inline">\(z\)</span>) must be numeric and is coloured according to its value. Despite being called <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> the function is flexible enough to consider a wide range of plotting variables.</p>
+<p>If the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are not categorical they are made so by splitting the data into quantiles (using <code><a href="https://openair-project.github.io/openair/reference/cutData.html">cutData()</a></code>). Furthermore, the user can supply as many levels as they wish for the quantile using the option <code>n.levels</code>. Remember also there are lots of built-in options for <code>x</code> or <code>y</code> based on temporal variations (see <a href="../utilities/utility-functions.html#sec-cutData" class="quarto-xref"><span>Section 27.2</span></a>) e.g., “month” (the default), “week”, “daylight” and so on.</p>
 </section><section id="sec-TrendLevelEx" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="sec-TrendLevelEx">
 <span class="header-section-number">18.2</span> Examples</h2>
-<p>The standard output from <code>trendLevel</code> is shown in <a href="#fig-trendLevel1" class="quarto-xref">Figure&nbsp;<span>18.1</span></a>, which shows the variation in NO<sub>x</sub> concentrations by month and hour of the day. By default the function will use “month” for the x-axis and “hour” for the y-axis.</p>
+<p>The standard output from <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> is shown in <a href="#fig-trendLevel1" class="quarto-xref">Figure&nbsp;<span>18.1</span></a>, which shows the variation in NO<sub>x</sub> concentrations by month and hour of the day. By default the function will use “month” for the x-axis and “hour” for the y-axis.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -537,10 +502,10 @@ window.Quarto = {
 <div class="cell-output-display">
 <div id="fig-trendLevel1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevel1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendLevel1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;18.1: Example output from trendLevel."><img src="trend-level_files/figure-html/fig-trendLevel1-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="trend-level_files/figure-html/fig-trendLevel1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;18.1: Example output from trendLevel()."><img src="trend-level_files/figure-html/fig-trendLevel1-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevel1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.1: Example output from <code>trendLevel</code>.
+Figure&nbsp;18.1: Example output from <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code>.
 </figcaption></figure>
 </div>
 </div>
@@ -556,10 +521,10 @@ Figure&nbsp;18.1: Example output from <code>trendLevel</code>.
 <div class="cell-output-display">
 <div id="fig-trendLevel2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevel2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendLevel2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;18.2: trendLevel output with wind direction as y."><img src="trend-level_files/figure-html/fig-trendLevel2-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="trend-level_files/figure-html/fig-trendLevel2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;18.2: trendLevel() output with wind direction as y."><img src="trend-level_files/figure-html/fig-trendLevel2-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevel2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.2: <code>trendLevel</code> output with wind direction as <code>y</code>.
+Figure&nbsp;18.2: <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> output with wind direction as <code>y</code>.
 </figcaption></figure>
 </div>
 </div>
@@ -581,10 +546,10 @@ Figure&nbsp;18.2: <code>trendLevel</code> output with wind direction as <code>y<
 <div class="cell-output-display">
 <div id="fig-trendLevel3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevel3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendLevel3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;18.3: trendLevel output with SO2 : NOx ratio type conditioning."><img src="trend-level_files/figure-html/fig-trendLevel3-1.png" class="img-fluid figure-img" style="width:80.0%"></a>
+<a href="trend-level_files/figure-html/fig-trendLevel3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;18.3: trendLevel() output with SO2/NOx ratio type conditioning."><img src="trend-level_files/figure-html/fig-trendLevel3-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevel3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.3: <code>trendLevel</code> output with SO<sub>2</sub> : NO<sub>x</sub> ratio <code>type</code> conditioning.
+Figure&nbsp;18.3: <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> output with SO<sub>2</sub>/NO<sub>x</sub> ratio <code>type</code> conditioning.
 </figcaption></figure>
 </div>
 </div>
@@ -604,7 +569,7 @@ Figure&nbsp;18.3: <code>trendLevel</code> output with SO<sub>2</sub> : NO<sub>x<
 <span>  cols <span class="op">=</span> <span class="st">"increment"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>How about NO<sub>x</sub> versus NO<sub>2</sub> coloured by the concentration of O<sub>3</sub>? <code>scatterPlot</code> could also be used to produce such a plot. However, one interesting difference with using <code>trendLevel</code> is that the data are split into quantiles where equal numbers of data exist in each interval. This approach can make it a bit easier to see the underlying relationship between variables. A scatter plot may have too much data to be clear and also outliers (or regions with relatively few data) that make it harder to see what is going on. The plot generated by the command below makes it a bit easier to see that it is the higher quantiles of NO<sub>2</sub> that are associated with higher O<sub>3</sub> concentration (as well as low NO<sub>x</sub> and NO<sub>2</sub> concentrations).</p>
+<p>How about NO<sub>x</sub> versus NO<sub>2</sub> coloured by the concentration of O<sub>3</sub>? <code><a href="https://openair-project.github.io/openair/reference/scatterPlot.html">scatterPlot()</a></code> could also be used to produce such a plot. However, one interesting difference with using <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> is that the data are split into quantiles where equal numbers of data exist in each interval. This approach can make it a bit easier to see the underlying relationship between variables. A scatter plot may have too much data to be clear and also outliers (or regions with relatively few data) that make it harder to see what is going on. The plot generated by the command below makes it a bit easier to see that it is the higher quantiles of NO<sub>2</sub> that are associated with higher O<sub>3</sub> concentration (as well as low NO<sub>x</sub> and NO<sub>2</sub> concentrations).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -619,10 +584,10 @@ Figure&nbsp;18.3: <code>trendLevel</code> output with SO<sub>2</sub> : NO<sub>x<
 <div class="cell-output-display">
 <div id="fig-trendLevelNO2NOx" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevelNO2NOx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendLevelNO2NOx-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;18.4: trendLevel showing NOx against NO2, coloured by the concentration of O3."><img src="trend-level_files/figure-html/fig-trendLevelNO2NOx-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="trend-level_files/figure-html/fig-trendLevelNO2NOx-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;18.4: trendLevel() showing NOx against NO2, coloured by the concentration of O3."><img src="trend-level_files/figure-html/fig-trendLevelNO2NOx-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevelNO2NOx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.4: <code>trendLevel</code> showing NO<sub>x</sub> against NO<sub>2</sub>, coloured by the concentration of O<sub>3</sub>.
+Figure&nbsp;18.4: <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> showing NO<sub>x</sub> against NO<sub>2</sub>, coloured by the concentration of O<sub>3</sub>.
 </figcaption></figure>
 </div>
 </div>
@@ -641,8 +606,8 @@ Figure&nbsp;18.4: <code>trendLevel</code> showing NO<sub>x</sub> against NO<sub>
 <span>  type <span class="op">=</span> <span class="st">"wd"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>By default <code>trendLevel</code> subsamples the plotted <code>pollutant</code> data by the supplied <code>x</code>, <code>y</code> and <code>type</code> parameters and in each case calculates the mean. The option <code>statistic</code> has always let you apply other statistics. For example, <code>trendLevel</code> also calculated the maximum via the option <code>statistic = "max"</code>. The user may also use their own statistic function.</p>
-<p>As a simple example, consider the above plot which summarises by mean. This tells us about average concentrations. It might also be useful to consider a particular percentile of concentrations. This can be done by defining one’s own function as shown in <a href="#fig-trendlevel4" class="quarto-xref">Figure&nbsp;<span>18.5</span></a>.</p>
+<p>By default <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> subsamples the plotted <code>pollutant</code> data by the supplied <code>x</code>, <code>y</code> and <code>type</code> parameters and in each case calculates the mean. The option <code>statistic</code> allows other statistics to be used. For example, <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> can also calculate the maximum via the option <code>statistic = "max"</code>. The user may also use their own statistic function.</p>
+<p>As a simple example, consider <a href="#fig-trendLevel3" class="quarto-xref">Figure&nbsp;<span>18.3</span></a>, which summarises by mean. This tells us about average concentrations. It might also be useful to consider a particular percentile of concentrations. This can be done by defining one’s own function as shown in <a href="#fig-trendlevel4" class="quarto-xref">Figure&nbsp;<span>18.5</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## function to estimate 95th percentile</span></span>
 <span><span class="va">percentile</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, probs <span class="op">=</span> <span class="fl">0.95</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -660,16 +625,16 @@ Figure&nbsp;18.4: <code>trendLevel</code> showing NO<sub>x</sub> against NO<sub>
 <div class="cell-output-display">
 <div id="fig-trendlevel4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendlevel4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendlevel4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;18.5: trendLevel using locally defined statistic."><img src="trend-level_files/figure-html/fig-trendlevel4-1.png" class="img-fluid figure-img" style="width:80.0%"></a>
+<a href="trend-level_files/figure-html/fig-trendlevel4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;18.5: trendLevel() using locally defined statistic."><img src="trend-level_files/figure-html/fig-trendlevel4-1.png" class="img-fluid figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendlevel4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.5: <code>trendLevel</code> using locally defined <code>statistic</code>.
+Figure&nbsp;18.5: <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> using locally defined <code>statistic</code>.
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>This type of flexibility really opens up the potential of the function as a screening tool for the early stages of data analysis. Increased control of <code>x</code>, <code>y</code>, <code>type</code> and <code>statistic</code> allow you to very quick explore your data and develop an understanding of how different parameters interact. Patterns in <code>trendLevel</code> plots can also help to direct your <span class="pkg">openair</span> analysis. For example, possible trends in data conditioned by year would suggest that functions like <code>smoothTrend</code> or <code>TheilSen</code> could provide further insight. Likewise, <code>windRose</code> or <code>polarPlot</code> could be useful next steps if wind speed and direct conditioning produces interesting features. However, perhaps most interestingly, novel conditioning or the incorporation of novel parameters in this type of highly flexible function provides a means of developing new data visualisation and analysis methods.</p>
-<p><code>trendLevel</code> can also be used with user defined discrete colour scales as shown in <a href="#fig-trendLevelDiscete" class="quarto-xref">Figure&nbsp;<span>18.6</span></a>. In this case the default <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables are chosen (week and hour) split by <code>type</code> (year).</p>
+<p>This type of flexibility really opens up the potential of the function as a screening tool for the early stages of data analysis. Increased control of <code>x</code>, <code>y</code>, <code>type</code> and <code>statistic</code> allow you to very quickly explore your data and develop an understanding of how different parameters interact. Patterns in <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> plots can also help to direct your <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> analysis. For example, possible trends in data conditioned by year would suggest that functions like <code><a href="https://openair-project.github.io/openair/reference/smoothTrend.html">smoothTrend()</a></code> or <code><a href="https://openair-project.github.io/openair/reference/TheilSen.html">TheilSen()</a></code> could provide further insight. Likewise, <code><a href="https://openair-project.github.io/openair/reference/windRose.html">windRose()</a></code> or <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> could be useful next steps if wind speed and direction conditioning produces interesting features. However, perhaps most interestingly, novel conditioning or the incorporation of novel parameters in this type of highly flexible function provides a means of developing new data visualisation and analysis methods.</p>
+<p><code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> can also be used with user defined discrete colour scales as shown in <a href="#fig-trendLevelDiscrete" class="quarto-xref">Figure&nbsp;<span>18.6</span></a>. In this case <code>x</code> is set to week of the year and the default <code>y</code> (hour of the day) is used, with the maximum NO<sub>2</sub> concentration shown in each cell.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel</a></span><span class="op">(</span></span>
 <span>  <span class="va">mydata</span>,</span>
@@ -683,12 +648,12 @@ Figure&nbsp;18.5: <code>trendLevel</code> using locally defined <code>statistic<
 <span>  key.position <span class="op">=</span> <span class="st">"top"</span></span>
 <span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-trendLevelDiscete" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevelDiscete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="trend-level_files/figure-html/fig-trendLevelDiscete-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;18.6: trendLevel plot for maximum NO2 concentrations using a user-defined discrete colour scale."><img src="trend-level_files/figure-html/fig-trendLevelDiscete-1.png" class="img-fluid figure-img" width="768"></a>
+<div id="fig-trendLevelDiscrete" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-trendLevelDiscrete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="trend-level_files/figure-html/fig-trendLevelDiscrete-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;18.6: trendLevel() plot for maximum NO2 concentrations using a user-defined discrete colour scale."><img src="trend-level_files/figure-html/fig-trendLevelDiscrete-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevelDiscete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concentrations using a user-defined discrete colour scale.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trendLevelDiscrete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.6: <code><a href="https://openair-project.github.io/openair/reference/trendLevel.html">trendLevel()</a></code> plot for maximum NO<sub>2</sub> concentrations using a user-defined discrete colour scale.
 </figcaption></figure>
 </div>
 </div>
@@ -769,11 +734,30 @@ Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concen
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -787,8 +771,70 @@ Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concen
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -802,6 +848,7 @@ Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concen
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -964,44 +1011,54 @@ Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concen
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1099,21 +1156,23 @@ Figure&nbsp;18.6: <code>trendLevel</code> plot for maximum NO<sub>2</sub> concen
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../../sections/trend-analysis/run-regression.html" class="pagination-link" aria-label="Dilution lines and pollutant ratios">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Dilution lines and pollutant ratios</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../sections/trend-analysis/ts-smoothing.html" class="pagination-link" aria-label="Time Series Smoothing">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../sections/trend-analysis/ts-smoothing.html" class="pagination-link" aria-label="Time series smoothing">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

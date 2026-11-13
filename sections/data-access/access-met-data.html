@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Carslaw and Jack Davison">
+<meta name="author" content="David C. Carslaw and Jack Davison">
+<meta name="description" content="Accessing surface meteorological data for sites worldwide with the worldmet package, and joining it to air quality data.">
 <title>4&nbsp; Access meteorological data – The openair book</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +74,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../assets/media/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fcb9bcf7b6cc0d20166d4ec4b1b7ffd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0d94847ad2d5abf76f4e15da8d7ea39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -112,53 +117,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script><script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="../../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script><script src="../../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><link href="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.css" rel="stylesheet">
 <script src="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.min.js"></script><link href="../../site_libs/fontawesome-4.7.0/font-awesome.min.css" rel="stylesheet">
+<meta property="og:title" content="4&nbsp; Access meteorological data – The openair book">
+<meta property="og:description" content="Accessing surface meteorological data for sites worldwide with the worldmet package, and joining it to air quality data.">
+<meta property="og:image" content="https://openair-project.github.io/book/sections/data-access/access-met-data_files/figure-html/fig-dublin-rose-1.png">
+<meta property="og:site_name" content="The openair book">
+<meta property="og:image:height" content="1152">
+<meta property="og:image:width" content="1152">
+<meta name="twitter:title" content="4&nbsp; Access meteorological data – The openair book">
+<meta name="twitter:description" content="Accessing surface meteorological data for sites worldwide with the worldmet package, and joining it to air quality data.">
+<meta name="twitter:image" content="https://openair-project.github.io/book/sections/data-access/access-met-data_files/figure-html/fig-dublin-rose-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html">Data Access</a></li><li class="breadcrumb-item"><a href="../../sections/data-access/access-met-data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span id="sec-worldmet" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/media/plume.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../assets/media/plume.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The openair book</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/openair-project/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -189,22 +181,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/intro/openair-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The openair package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>openair</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Access</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Data Access</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/data-access/UK-air-quality-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -217,17 +206,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Directional Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Directional Analysis</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/directional-analysis/wind-roses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,13 +250,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Time Series and Trends</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Time Series and Trends</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/time-plot.html" class="sidebar-item-text sidebar-link">
@@ -322,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/trend-analysis/ts-smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time Series Smoothing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Time series smoothing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -335,13 +318,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Model Evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Model Evaluation</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/mod-stats.html" class="sidebar-item-text sidebar-link">
@@ -351,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/model-evaluation/taylor-diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor Diagram</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Taylor diagram</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -364,13 +344,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Interactive Maps</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Interactive Maps</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-overview.html" class="sidebar-item-text sidebar-link">
@@ -380,26 +357,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-polar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Directional analysis maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/maps/maps-traj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Trajectory maps</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Utility functions</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Utility Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/utilities/utility-functions.html" class="sidebar-item-text sidebar-link">
@@ -422,23 +396,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-annotate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising openair plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Customising <code>openair</code> plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../sections/appendices/appendix-colours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour Palettes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Colour palettes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -462,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../v3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Openair 3.0</span></span></a>
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">What’s new in openair 3.0</span></span></a>
   </div>
 </li>
       </ul>
@@ -472,46 +443,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#the-worldmet-package" id="toc-the-worldmet-package" class="nav-link active" data-scroll-target="#the-worldmet-package"><span class="header-section-number">4.1</span> The worldmet package</a></li>
+<li><a href="#the-worldmet-package" id="toc-the-worldmet-package" class="nav-link active" data-scroll-target="#the-worldmet-package"><span class="header-section-number">4.1</span> The <span class="pkg">worldmet</span> package</a></li>
   <li><a href="#sec-link-aq" id="toc-sec-link-aq" class="nav-link" data-scroll-target="#sec-link-aq"><span class="header-section-number">4.2</span> Linking with air quality data</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/openair-project/book/edit/main/sections/data-access/access-met-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openair-project/book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../sections/data-access/UK-air-quality-data.html">Data Access</a></li><li class="breadcrumb-item"><a href="../../sections/data-access/access-met-data.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-worldmet" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span></h1>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span id="sec-worldmet" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Access meteorological data</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Carslaw </p>
-          </div>
-  </div>
     
   
     
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    Meteorological data is key to understanding air quality measurements. This section describes a fast and convenient way of accessing meteorological data for sites worldwide.
-  </div>
-</div>
 
 
 </header><section id="the-worldmet-package" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="the-worldmet-package">
-<span class="header-section-number">4.1</span> The worldmet package</h2>
-<p>Most of the import functions described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a> return basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that WSP runs to provide the data.</p>
-<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg">worldmet</span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/openair-project/worldmet" class="uri">https://github.com/openair-project/worldmet</a> and <a href="https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly" class="uri">https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly</a> for further information.</p>
-<p>Access to surface meteorological data is very useful in general but is especially useful when using <span class="pkg">openair</span> and functions such as <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>. To install the package, type:</p>
+<span class="header-section-number">4.1</span> The <span class="pkg">worldmet</span> package</h2>
+<p>The data imported using <code><a href="https://openair-project.github.io/openair/reference/importUKAQ.html">importUKAQ()</a></code> (<a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a>) include basic modelled hourly meteorological data (wind speed, wind direction and surface temperature). These data are derived from the WRF model that WSP runs to provide the data.</p>
+<p>Alternatively it may be advantageous to use surface measurements. <span class="pkg"><a href="https://openair-project.github.io/worldmet/">worldmet</a></span> provides an easy way in which to access surface meteorological data from &gt;30,000 sites across the world. The package accesses the NOAA webservers to download hourly data. See <a href="https://github.com/openair-project/worldmet" class="uri">https://github.com/openair-project/worldmet</a> and <a href="https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly" class="uri">https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly</a> for further information.</p>
+<p>Access to surface meteorological data is very useful in general but is especially useful when using <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> and functions such as <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code>. To install the package, type:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"worldmet"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -520,20 +479,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/">openair</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>To learn which monitoring stations are available, the <code><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations()</a></code> function is provided. By default, this function returns all data as a <code>data.frame</code>, but can usefully also return it as a map using <code>return = "map"</code>. As an example, we will search for the 10 nearest sites to Dublin (latitude = 53.3, longitude = -6.3).</p>
+<p>To learn which monitoring stations are available, the <code><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations()</a></code> function is provided. By default, this function returns all data as a <code>data.frame</code>, but can usefully also return it as a map using <code>return = "map"</code>. As an example, we will search for sites near Dublin (latitude = 53.3, longitude = -6.3).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">53.3</span>, lng <span class="op">=</span> <span class="op">-</span><span class="fl">6.3</span>, return <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-worldmet" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-a28dc8d2b19853d3056a" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-a28dc8d2b19853d3056a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"Street Map",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.34999999999999,53.367,53.3017,53.4213,53.4333,53.586,53.51,53.149,53.84999999999999,52.84999999999999],[-6.27,-6.35,-6.451300000000001,-6.2701,-6.25,-6.161,-6.656,-6.816,-6.1,-6.9],null,null,"Stations",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU60-00108<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>7 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>5.9 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU68-00018<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>48.5 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>8.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>CASEMENT<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIME<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>97.2 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>10.1 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIDW<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>73.8 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>13.6 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN WEATHER CENTER<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIDB<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>68 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>15.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>ARDGILLAN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>UKU68-00001<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>UK<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>64 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>GB<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>33.1 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUNSANY<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU00001375<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span><span style='color: #bbb;'>N/A<\/span> m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>33.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>CURRAGH<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU72510051<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>137 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>38.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>COWDEN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>UKI0000EGXF<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>UK<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>15 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>GB<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>62.6 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>OAK PARK - CARLOW<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIM00003961<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>M<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>63 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>03961 IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>64.1 km<\/div><\/div><\/div>"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Street Map","Satellite"],["Stations","Target"],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"addAwesomeMarkers","args":[53.3,-6.3,{"icon":"circle","markerColor":"red","iconColor":"#FFFFFF","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,"Target",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<div style='font-family: Arial, sans-serif; min-width: 200px; max-width: 260px;'><div style='background: #c0392b; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold;'>Search Location<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Coordinates<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Latitude<\/span><span style='font-family: monospace;'>53.3<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Longitude<\/span><span style='font-family: monospace;'>-6.3<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>CRS<\/span><span style='font-family: monospace;'>EPSG:4326<\/span><\/div><\/div><\/div>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[52.84999999999999,53.84999999999999],"lng":[-6.9,-6.1]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-8d70e8522477110f773c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8d70e8522477110f773c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,"Street Map",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[53.34999999999999,53.367,53.3017,53.4213,53.4333,53.586,53.51,53.149,53.84999999999999,52.84999999999999],[-6.27,-6.35,-6.451300000000001,-6.2701,-6.25,-6.161,-6.656,-6.816,-6.1,-6.9],null,null,"Stations",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU60-00108<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>7 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>5.9 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU68-00018<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>48.5 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>8.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>CASEMENT<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIME<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>97.2 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>10.1 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIDW<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>73.8 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>13.6 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUBLIN WEATHER CENTER<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EII0000EIDB<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>68 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>15.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>ARDGILLAN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>UKU68-00001<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>UK<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>64 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>GB<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>33.1 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>DUNSANY<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU00001375<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span><span style='color: #bbb;'>N/A<\/span> m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>33.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>CURRAGH<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIU72510051<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>U<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>137 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>38.2 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>COWDEN<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>UKI0000EGXF<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>UK<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>I<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>15 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>GB<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>62.6 km<\/div><\/div><\/div>","<div style='font-family: Arial, sans-serif; min-width: 220px; max-width: 280px;'><div style='background: #2c7bb6; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold; margin-bottom: 4px;'>OAK PARK - CARLOW<\/div><div style='font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px;'>EIM00003961<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Geography<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Country<\/span><span>EI<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>State<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Network<\/span><span>M<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Elevation<\/span><span>63 m<\/span><\/div><\/div><div><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Station Flags<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>GSN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>HCN/CRN Flag<\/span><span><span style='color: #bbb;'>N/A<\/span><\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>WMO ID<\/span><span>03961 IE<\/span><\/div><\/div><\/div><div style='margin-top: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Distance from search<\/div><div style='font-family: monospace; font-size: 12px; background: #f4f4f4; border-left: 3px solid #c0392b; padding: 3px 8px; border-radius: 0 3px 3px 0;'>64.1 km<\/div><\/div><\/div>"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Street Map","Satellite"],["Stations","Target"],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"addAwesomeMarkers","args":[53.3,-6.3,{"icon":"circle","markerColor":"red","iconColor":"#FFFFFF","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,"Target",{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<div style='font-family: Arial, sans-serif; min-width: 200px; max-width: 260px;'><div style='background: #c0392b; color: white; padding: 8px 12px; margin: -10px -10px 10px; border-radius: 4px 4px 0 0;'><div style='font-size: 14px; font-weight: bold;'>Search Location<\/div><\/div><div style='margin-bottom: 8px;'><div style='font-size: 11px; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 2px;'>Coordinates<\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Latitude<\/span><span style='font-family: monospace;'>53.3<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>Longitude<\/span><span style='font-family: monospace;'>-6.3<\/span><\/div><div style='display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0;'><span style='color: #555; font-weight: bold;'>CRS<\/span><span style='font-family: monospace;'>EPSG:4326<\/span><\/div><\/div><\/div>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[52.84999999999999,53.84999999999999],"lng":[-6.9,-6.1]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-worldmet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Map of returned area of interest. The user can interactively select a site of interest and find its code to import data.
 </figcaption></figure>
 </div>
 </div>
-<p>Note that it is just as easy to access all the site information at once because it is quick to use the map to select the site and its code.</p>
+<p>It is also possible to map all available stations at once, and then use the map to find a site of interest and its code.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/worldmet/reference/import_ghcn_stations.html">import_ghcn_stations</a></span><span class="op">(</span>return <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -544,26 +503,26 @@ Figure&nbsp;4.1: Map of returned area of interest. The user can interactively se
 <span><span class="co"># first few lines of data</span></span>
 <span><span class="va">dublin_met</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,760 × 42
-   station_id  station_name   lat   lng  elev date                   wd    ws
-   &lt;fct&gt;       &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 00:00:00  250   5.05
- 2 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 01:00:00  245.  4.8 
- 3 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 02:00:00  250   4.05
- 4 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 03:00:00  250   4.55
- 5 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 04:00:00  255.  5.35
- 6 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 05:00:00  260   5.05
- 7 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 06:00:00  260   4.8 
- 8 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 07:00:00  256.  4.55
- 9 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 08:00:00  270   5.05
-10 EII0000EIDW DUBLIN        53.4 -6.27  73.8 2019-01-01 09:00:00  265.  4.8 
+<pre><code># A tibble: 8,760 × 38
+   station_id  station_name date                  lat   lng  elev    wd    ws
+   &lt;fct&gt;       &lt;fct&gt;        &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 EII0000EIDW DUBLIN       2019-01-01 00:00:00  53.4 -6.27  73.8  250   5.05
+ 2 EII0000EIDW DUBLIN       2019-01-01 01:00:00  53.4 -6.27  73.8  245.  4.8 
+ 3 EII0000EIDW DUBLIN       2019-01-01 02:00:00  53.4 -6.27  73.8  250   4.05
+ 4 EII0000EIDW DUBLIN       2019-01-01 03:00:00  53.4 -6.27  73.8  250   4.55
+ 5 EII0000EIDW DUBLIN       2019-01-01 04:00:00  53.4 -6.27  73.8  255.  5.35
+ 6 EII0000EIDW DUBLIN       2019-01-01 05:00:00  53.4 -6.27  73.8  260   5.05
+ 7 EII0000EIDW DUBLIN       2019-01-01 06:00:00  53.4 -6.27  73.8  260   4.8 
+ 8 EII0000EIDW DUBLIN       2019-01-01 07:00:00  53.4 -6.27  73.8  256.  4.55
+ 9 EII0000EIDW DUBLIN       2019-01-01 08:00:00  53.4 -6.27  73.8  270   5.05
+10 EII0000EIDW DUBLIN       2019-01-01 09:00:00  53.4 -6.27  73.8  265.  4.8 
 # ℹ 8,750 more rows
-# ℹ 34 more variables: air_temp &lt;dbl&gt;, atmos_pres &lt;dbl&gt;, visibility &lt;dbl&gt;,
+# ℹ 30 more variables: air_temp &lt;dbl&gt;, atmos_pres &lt;dbl&gt;, visibility &lt;dbl&gt;,
 #   dew_point &lt;dbl&gt;, rh &lt;dbl&gt;, cl &lt;dbl&gt;, cl_baseht &lt;dbl&gt;,
 #   cl_layer_1_okta &lt;dbl&gt;, cl_layer_2_okta &lt;dbl&gt;, cl_layer_3_okta &lt;dbl&gt;,
 #   cl_layer_4_okta &lt;lgl&gt;, cl_layer_baseht_1 &lt;dbl&gt;, cl_layer_baseht_2 &lt;dbl&gt;,
-#   cl_layer_baseht_3 &lt;dbl&gt;, cl_layer_baseht_4 &lt;lgl&gt;, cl_summation_1 &lt;lgl&gt;,
-#   cl_summation_2 &lt;lgl&gt;, cl_summation_3 &lt;lgl&gt;, cl_summation_4 &lt;lgl&gt;, …</code></pre>
+#   cl_layer_baseht_3 &lt;dbl&gt;, cl_layer_baseht_4 &lt;lgl&gt;,
+#   cl_summation_baseht_1 &lt;lgl&gt;, cl_summation_baseht_2 &lt;lgl&gt;, …</code></pre>
 </div>
 </div>
 <p>Plot a wind rose.</p>
@@ -582,7 +541,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 </div>
 </section><section id="sec-link-aq" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="sec-link-aq">
 <span class="header-section-number">4.2</span> Linking with air quality data</h2>
-<p>Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a <code>date</code> column in each data set that make the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g.&nbsp;<code>ws</code>, <code>wd</code> and <code>air_temp</code>, as is the case with most data accessible as described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a>. In this case, the aim to to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.</p>
+<p>Having imported some meteorological data it will often be necessary to combine it with air quality data. Quite how this is done depends on the air quality data. The important point is there should be a <code>date</code> column in each data set that makes the connection between the two. It may also depend on whether the air quality data has existing fields that also exist in the meteorological data e.g., <code>ws</code>, <code>wd</code> and <code>air_temp</code>, as is the case with most data accessible as described in <a href="UK-air-quality-data.html" class="quarto-xref"><span>Chapter 3</span></a>. In this case, the aim is to replace any existing meteorological variables in the air quality data with those in the meteorological data. An example is shown below.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># import some air quality data and check the variables that exist</span></span>
 <span><span class="co"># `meteo = FALSE` does not import the modelled met data</span></span>
@@ -609,7 +568,7 @@ Figure&nbsp;4.2: Example wind rose for Dublin Airport data.
 [13] "ws"       "wd"       "air_temp"</code></pre>
 </div>
 </div>
-<p>With joined data, we can now create <code>openair</code> plots using measured meteorological data. For example, <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> requires both air quality <em>and</em> meteorological data in one <code>data.frame</code>:</p>
+<p>With joined data, we can now create <span class="pkg"><a href="https://openair-project.github.io/openair/">openair</a></span> plots using measured meteorological data. For example, <code><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot()</a></code> requires both air quality <em>and</em> meteorological data in one <code>data.frame</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html">polarPlot</a></span><span class="op">(</span><span class="va">aq_met</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -699,11 +658,30 @@ Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/refe
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/openair-project\.github\.io\/book\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -717,8 +695,70 @@ Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/refe
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -732,6 +772,7 @@ Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/refe
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -894,44 +935,54 @@ Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/refe
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1029,21 +1080,23 @@ Figure&nbsp;4.3: A <code><a href="https://openair-project.github.io/openair/refe
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../../sections/data-access/UK-air-quality-data.html" class="pagination-link" aria-label="Accessing UK Air Quality Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK Air Quality Data</span></span>
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
+      <a href="../../sections/data-access/UK-air-quality-data.html" class="pagination-link" aria-label="Accessing UK air quality data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing UK air quality data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../sections/directional-analysis/wind-roses.html" class="pagination-link" aria-label="Wind and Pollution Roses">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and Pollution Roses</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../sections/directional-analysis/wind-roses.html" class="pagination-link" aria-label="Wind and pollution roses">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Wind and pollution roses</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a></p>
+<p>The openair book is part of the <a href="https://github.com/openair-project">openair project</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
