@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Model evaluation {#sec-modStats}

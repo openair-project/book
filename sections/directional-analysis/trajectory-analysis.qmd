@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Trajectory analysis {#sec-trajPlot}
@@ -613,7 +613,6 @@ Perhaps more useful is to merge the cluster data with measurement data. In this 
 
 ```{r}
 #| label: mergeClustTraj
-#| dependson: load-cluster-data
 # use inner join - so only where we have data in each
 kc1 <- inner_join(
   kc1 |> mutate(date = as.POSIXct(date, tz = "GMT")),
@@ -744,6 +743,7 @@ The `trajMap()` function allows for control of many parts of the [leaflet]{.pkg}
 
 ```{r}
 #| label: clustdata
+#| cache: true
 #| fig-show: hide
 clustdata <- trajCluster(traj_data)
 ```

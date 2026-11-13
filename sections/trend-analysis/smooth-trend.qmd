@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Smooth trends {#sec-smoothTrend}
@@ -18,6 +18,7 @@ We apply the function to concentrations of O~3~ and NO~2~ using the code below. 
 
 ```{r}
 #| label: fig-smoothTrendComp
+#| cache: true
 #| fig-cap: Examples of the `smoothTrend()` function applied to Marylebone Road.
 #| fig-subcap:
 #|   - "Monthly mean O~3~."
@@ -67,6 +68,7 @@ The `smoothTrend()` function shares many of the functionalities of the `TheilSen
 
 ```{r}
 #| label: fig-smoothwd
+#| cache: true
 #| fig-cap: Trends in O~3~ using the `smoothTrend()` function applied to Marylebone Road. The shading shows the estimated 95% confidence intervals.
 #| fig-width: 10
 #| fig-height: 12
@@ -77,6 +79,7 @@ The `smoothTrend()` function can easily be used to gain a large amount of inform
 
 ```{r}
 #| label: fig-smoothwdSeason
+#| cache: true
 #| fig-cap: The `smoothTrend()` function applied to three pollutants, split by wind sector and season.
 #| fig-width: 14
 #| fig-height: 12

@@ -52,22 +52,3 @@ This book was authored on `r Sys.Date()` using:
 * [deweather]{.pkg} version `r packageDescription("deweather", field = "Version")`.
 
 :::
-
-```{r}
-#| label: bibmake
-#| include: false
-
-library(tidyverse)
-library(openair)
-
-# automatically create a bib database for R packages
-knitr::write_bib(
-  c(
-    .packages(),
-    "knitr",
-    "openair",
-    "worldmet"
-  ),
-  "assets/bib/packages.bib"
-)
-```

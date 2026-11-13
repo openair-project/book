@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Kolmogorov-Zurbenko filters {#sec-ts-filtering}
@@ -66,6 +66,7 @@ Next, we calculate the KZ components for a few pollutants at the North Kensingto
 
 ```{r}
 #| label: kz-components
+#| cache: true
 kz_out_pm25 <- kzFilter(
   filter(london_aq, code == "KC1"),
   pollutant = "pm2.5"
@@ -165,6 +166,7 @@ In @fig-kz-kza-compare, the KZ and KZA trends for NO~2~ concentrations at the Ma
 
 ```{r}
 #| label: fig-kz-kza-compare
+#| cache: true
 #| fig-cap: "Comparison of KZ and KZA filters applied to NO~2~ concentrations at the Marylebone Road site. The KZA filter (red) preserves a sharp drop in NO~2~ in early 2020 that is smoothed out by the standard KZ filter (blue)."
 #| fig-width: 5
 #| fig-height: 4

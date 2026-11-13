@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 editor_options:
   markdown:
     wrap: 72

@@ -2,19 +2,23 @@ project:
   type: book
   output-dir: docs
 
+lang: en-GB
+
 book:
   title: "The openair book"
   subtitle: "A Guide to the Analysis of Air Pollution Data"
-  author: 
-  - David C Carslaw
+  author:
+  - David C. Carslaw
   - Jack Davison
   reader-mode: true
-  
+
   favicon: assets/media/favicon.png
   site-url: https://openair-project.github.io/book/
   repo-url: https://github.com/openair-project/book/
   repo-branch: main
   repo-actions: [edit, issue]
+  open-graph: true
+  twitter-card: true
   date: today
   date-format: long
 
@@ -25,7 +29,7 @@ book:
 
   page-footer:
     left: |
-      The openair book is part of the <a href='https://github.com/openair-project'>openair project</a>
+      The openair book is part of the [openair project](https://github.com/openair-project).
     right: |
       This work is licensed under a [CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/).
 
@@ -93,17 +97,12 @@ filters:
 
 bibliography:
  - assets/bib/DCC-refs.bib
- - assets/bib/packages.bib
+csl: assets/bib/atmospheric-environment.csl
 
 execute:
   warning: false
   message: false
-  echo: true
-  error: false
-  eval: true
-  prompt: false
   freeze: auto
-  cache: true
 
 format:
   html:
@@ -116,7 +115,7 @@ format:
     code-link: true
     code-copy: true
     fig-align: center
-    author-meta: "David Carslaw and Jack Davison"
+    author-meta: "David C. Carslaw and Jack Davison"
     callout-appearance: simple
     html-table-processing: none
     citation-location: margin

@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Polar plots {#sec-polarPlot}
@@ -190,6 +190,7 @@ The uncertainties in the surface can be calculated by setting the option `uncert
 
 ```{r}
 #| label: fig-polarUncer
+#| cache: true
 #| fig-cap: 'Bivariate polar plot of SO~2~ concentrations at Marylebone Road. Three surfaces are shown: the central prediction (middle) and the lower and upper 95% estimated uncertainties. These plots help to show that in this particular case, some of the concentrations for strong easterly and south-easterly winds are rather uncertain. However, the central feature to the east remains, suggesting this feature is real and not an artefact of there being too few data.'
 #| fig-width: 8
 #| fig-height: 3.5
@@ -241,6 +242,7 @@ The polar CPF plot is therefore potentially very useful for source identificatio
 
 ```{r}
 #| label: fig-polarPlotCPFInt
+#| cache: true
 #| fig-cap: '`polarPlot()` of SO~2~ concentrations at Marylebone Road based on the CPF function for a range of percentile intervals from 0--10, 10--20, ... , 90--100.'
 #| layout-ncol: 3
 #| fig-width: 4.5
@@ -474,6 +476,7 @@ The example given below is for concentrations of SO~2~, shown in @fig-polarPlot3
 
 ```{r}
 #| label: fig-polarClust
+#| cache: true
 #| fig-cap: Use of the `polarCluster` function applied to SO~2~ concentrations at Marylebone Road. In this case 2 to 10 clusters have been chosen.
 #| fig-width: 7
 #| fig-height: 7
@@ -482,6 +485,7 @@ polarCluster(mydata, pollutant = "so2", n.clusters = 2:10, cols = "Set2")
 
 ```{r}
 #| label: fig-polarClust8
+#| cache: true
 #| fig-cap: Use of the `polarCluster()` function applied to SO~2~ concentrations at Marylebone Road. In this case 8 clusters have been chosen.
 results <- polarCluster(
   mydata,

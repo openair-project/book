@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 ---
 
 # Production of HYSPLIT trajectory files {#sec-prod-hyspl-traj}

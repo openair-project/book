@@ -1,5 +1,5 @@
 ---
-author: David Carslaw
+author: David C. Carslaw
 editor_options:
   markdown:
     wrap: 72
@@ -121,6 +121,7 @@ ppb/year. The $\ast\ast\ast$ show that the trend is significant to the
 
 ```{r}
 #| label: fig-TheilSen1
+#| cache: true
 #| fig-cap: Trends in ozone at Marylebone Road. The plot shows the deseasonalised monthly mean concentrations of O~3~. The solid red line shows the trend estimate and the dashed red lines show the 95% confidence intervals for the trend based on resampling methods. The overall trend is shown at the top-left as 0.37 (ppb) per year and the 95% confidence intervals in the slope from 0.22--0.50 ppb/year. The '∗∗∗' show that the trend is significant to the 0.001 level.
 #| fig-width: 5
 #| fig-height: 4
@@ -198,6 +199,7 @@ always be *some* hours that do not have such high concentrations of NO.
 
 ```{r}
 #| label: fig-TheilSen2
+#| cache: true
 #| fig-cap: Trends in ozone at Marylebone Road split by eight wind sectors. The `TheilSen()` function will automatically organise the separate panels by the different compass directions.
 #| fig-width: 10
 #| fig-height: 10
@@ -278,6 +280,7 @@ into a variable:
 
 ```{r}
 #| label: MKout
+#| cache: true
 #| fig-keep: none
 MKresults <- TheilSen(
   mydata,
